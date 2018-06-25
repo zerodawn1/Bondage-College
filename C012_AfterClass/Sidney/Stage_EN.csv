@@ -7,6 +7,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_PlayerGagged,@Om nnnuoogn mh!,Oh yeah.  I fucking understood|what you said.  (She laughs.),0,0,0,TestUnbind()
 0,0,0,Common_PlayerGagged,(Hum a sexy song|and dance for fun.),Not now my little bitch.|(She checks her cell phone.),0,0,0,RandomSidneyDommeEvent()
 0,0,0,Common_PlayerRestrained,(Struggle in|your restrains.),"Nope, you're not getting out.|It's great to see you struggle.",0,0,0,TestUnbind()
+0,0,0,Common_PlayerChaste,Can you please help|me with this belt?,"Nope, that chastity belt|is a perfect fit for you.",0,0,0,
 0,0,0,ChatAvail,I'd like to know|more about you.,"Ok, what would like to know?",500,0,0,StartChat()
 100,0,0,,TO DO,TO DO,100,0,0,
 200,0,0,,TO DO,TO DO,200,0,0,
@@ -260,3 +261,20 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 3915,0,0,,(Nod yes.),Good bitch.  (She releases you.),0,0,0,ReleasePlayer()
 3915,0,0,,(Shake your head no.),Then you will stay grounded.|(She checks on her cell phone.),3999,0,0,"EndPunishment(""Grounded"")"
 3915,0,0,,@Aaehm!,That's a yes or a no?|I want a clear answer.,3915,0,0,
+3920,0,0,,A chastity belt?|This is torture!,You deserve it bitch!|You will be chaste.,3921,0,0,
+3920,0,0,,Mistress!  Can you|spank me instead?,Don't try to negociate.|You will be chaste.,3921,0,1,
+3920,0,0,,"No, please.|I'll be good.",You'll be good cause you'll be chaste.,3921,0,0,
+3920,0,0,,Fuck no!,(She slaps your face pretty hard.)|Bitch!  You will be chaste.,3921,-1,1,
+3920,0,0,,(Nod slowly.),"Good bitch, you will be chaste.",3921,0,-1,
+3921,0,0,,I guess it's fair.,"Yep, you're the bitch and I can|do what I want.  Open your legs.",3922,1,0,
+3921,0,0,,I don't have the|key for that belt!,You better find a locksmith then.|Now open your fucking legs.,3922,0,0,
+3921,0,0,,That's inhumane!,Cry me a river bitch!|Open your fucking legs.,3922,-1,0,
+3921,0,0,,For how long?,Until you find a way out.|Now open your fucking legs.,3922,0,0,
+3921,0,0,Common_ActorIsLover,"Sweetie, we won't be|able to make love.",I'll still be able to cum.|Now open your legs cutie.,3922,1,0,
+3922,0,0,,Yes Mistress.|(Open your legs.),Good girl.  (She circles the belt around your|waist and locks the crotch shield in place.),3923,0,-1,LockChastityBelt()
+3922,0,0,,Fine!  Fuck that.|(Open your legs.),Fuck you.  (She circles the belt around your|waist and locks the crotch shield in place.),3923,0,1,LockChastityBelt()
+3922,0,0,,(Take a deep breath|and open your legs.),Very well.  (She circles the belt around your|waist and locks the crotch shield in place.),3923,0,0,LockChastityBelt()
+3922,0,0,,No way!,(She slaps your face.)|Open your legs!,3922,0,0,
+3923,0,0,,It needs to|be so tight?,"Hell yeah, it fucking does.|(She gets her phone to text.)",3999,0,0,"EndPunishment(""Belted"")"
+3923,0,0,,This is so kinky!,Enjoy your chaste life.|(She gets her phone to text.),3999,0,0,"EndPunishment(""Belted"")"
+3923,0,0,,(Bow your head.),Enjoy your chaste life.|(She gets her phone to text.),3999,0,0,"EndPunishment(""Belted"")"

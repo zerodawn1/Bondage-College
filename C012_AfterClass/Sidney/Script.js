@@ -339,11 +339,20 @@ function C012_AfterClass_Sidney_ActorSetPose(NewPose) {
 
 // Chapter 12 After Class - Starts the punishment
 function C012_AfterClass_Sidney_StartPunishment() {
-	var PunishmentType = Math.floor(Math.random() * 1);
-	if (PunishmentType == 0) {
-		C012_AfterClass_Sidney_CurrentStage = 3910;
-		OverridenIntroText = "";
+	
+	// Pick a random punishment
+	var PunishmentType = Math.floor(Math.random() * 2);
+	OverridenIntroText = "";
+	
+	// Chastity belt (only works if the player isn't already in a belt)
+	if (PunishmentType == 1) {
+		if (!Common_PlayerChaste && PlayerHasInventory("ChastityBelt")) C012_AfterClass_Sidney_CurrentStage = 3920;
+		else C012_AfterClass_Sidney_CurrentStage = 3910;
 	}
+
+	// Grounded (default punishment)
+	if (PunishmentType == 0) C012_AfterClass_Sidney_CurrentStage = 3910;
+
 }
 
 // Chapter 12 After Class - Sidney can tie up the player with her own rope
@@ -393,4 +402,11 @@ function C012_AfterClass_Sidney_StartChat() {
 // Chapter 12 After Class - Ends the chat with Sidney
 function C012_AfterClass_Sidney_EndChat() {
 	LeaveIcon = "Leave";
+}
+
+// Chapter 12 After Class - When Sidney locks the belt on the player
+function C012_AfterClass_Sidney_LockChastityBelt() {
+	PlayerLockInventory("ChastityBelt");
+	PlayerRemoveInventory("ChastityBelt", 1);
+	CurrentTime = CurrentTime + 50000;
 }
