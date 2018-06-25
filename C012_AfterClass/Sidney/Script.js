@@ -1,5 +1,7 @@
 var C012_AfterClass_Sidney_CurrentStage = 0;
 var C012_AfterClass_Sidney_IntroText = "";
+var C012_AfterClass_Sidney_HasEgg = false;
+var C012_AfterClass_Sidney_ChatAvail = false;
 
 // In her shorts, Sidney can have many poses when she talks
 function C012_AfterClass_Sidney_SetPose() {
@@ -20,18 +22,34 @@ function C012_AfterClass_Sidney_Load() {
 	LoadInteractions();
 	ActorLoad("Sidney", "Leave");
 	LeaveScreen = "Dorm";
+	C012_AfterClass_Sidney_HasEgg = ActorHasInventory("VibratingEgg");
 	C012_AfterClass_Sidney_SetPose();
+	C012_AfterClass_Sidney_ChatAvail = !GameLogQuery(CurrentChapter, CurrentActor, "ChatDone");
 	
 	// Loads the previous text if needed
 	if (C012_AfterClass_Sidney_IntroText != "") {
 		OverridenIntroText = C012_AfterClass_Sidney_IntroText;
 		C012_AfterClass_Sidney_IntroText = "";
 	} else {
+		
+		// If the player is grounded
+		if (GameLogQuery(CurrentChapter, CurrentActor, "EventGrounded")) {
+			
+			// Skip to the punishment end phase, no talking while being grounded
+			C012_AfterClass_Sidney_AllowLeave();
+			C012_AfterClass_Sidney_CurrentStage = 3999;
+			OverridenIntroText = GetText("StillGrounded");
 
-		// Makes sure the next random event can be triggered
-		if (!GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") && Common_ActorIsOwner)
-			if (Math.floor(Math.random() * 10) == 0)
-				C012_AfterClass_Sidney_RandomSidneyDommeEvent();
+		} else {
+
+			// Makes sure the next random event can be triggered
+			if (C012_AfterClass_Sidney_CurrentStage == 0)
+				if (CurrentText != null)
+					if (!GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") && Common_ActorIsOwner)
+						if (Math.floor(Math.random() * 10) == 0)
+							C012_AfterClass_Sidney_RandomSidneyDommeEvent();
+
+		}
 
 	}
 
@@ -78,6 +96,7 @@ function C012_AfterClass_Sidney_TestLove() {
 		var LoveChance = ActorGetValue(ActorLove) + PlayerGetSkillLevel("Seduction") * 2;
 		if (((LoveChance >= 12) && !GameLogQuery(CurrentChapter, "Sidney", "EnterDormFromPub")) || (LoveChance >= 25) || Common_ActorIsLover || Common_ActorIsOwned) {
 			C012_AfterClass_Sidney_CurrentStage = 100;
+			OverridenIntroText = "";
 		}		
 	} else C012_AfterClass_Sidney_GaggedAnswer();
 }
@@ -87,6 +106,7 @@ function C012_AfterClass_Sidney_TestDomme() {
 	if (!ActorIsGagged()) {
 		if (ActorGetValue(ActorSubmission) >= 20) {
 			C012_AfterClass_Sidney_CurrentStage = 200;
+			OverridenIntroText = "";
 		}
 	} else C012_AfterClass_Sidney_GaggedAnswer();
 }
@@ -140,8 +160,8 @@ function C012_AfterClass_Sidney_PlayerStrip() {
 }
 
 // Chapter 12 After Class - The player can strip for Sidney
-function C012_AfterClass_Sidney_KneelForSidney() {
-	Common_PlayerPose = "BackKneel";
+function C012_AfterClass_Sidney_SetPlayerPose(NewPose) {
+	Common_PlayerPose = NewPose;
 }
 
 // Chapter 12 After Class - When the player gets collared
@@ -251,8 +271,15 @@ function C012_AfterClass_Sidney_TestReleaseBeforeExit() {
 // Chapter 12 After Class - Sidney can confiscate the player keys
 function C012_AfterClass_Sidney_ConfiscateKeys() {
 	PlayerRemoveInventory("CuffsKey", 99);
-	ActorSetPose("CheckCellPhone");
-	LeaveIcon = "Leave";
+	GameLogAdd("HasCuffsKey");
+	C012_AfterClass_Sidney_AllowLeave();
+}
+
+// Chapter 12 After Class - Sidney can confiscate the player crop(s)
+function C012_AfterClass_Sidney_ConfiscateCrop() {
+	PlayerRemoveInventory("Crop", 99);
+	GameLogAdd("HasCrop");
+	C012_AfterClass_Sidney_AllowLeave();
 }
 
 // Chapter 12 After Class - Sidney can confiscate the player keys
@@ -290,9 +317,18 @@ function C012_AfterClass_Sidney_TestBlockChanging() {
 function C012_AfterClass_Sidney_ReleaseBeforePunish() {
 	ActorSetPose("ReadyToPunish");
 	if (Common_PlayerRestrained || Common_PlayerGagged) {
-		OverridenIntroText = GetText("ReleaseBeforePunish");
+		if (Common_PlayerNaked) {
+			C012_AfterClass_Sidney_CurrentStage = 3903;		
+			OverridenIntroText = GetText("ReleaseBeforePunishAlreadyNaked");
+		}
+		else OverridenIntroText = GetText("ReleaseBeforePunishNotNaked");
 		PlayerReleaseBondage();
 		CurrentTime = CurrentTime + 50000;
+	} else {
+		if (Common_PlayerNaked) {
+			C012_AfterClass_Sidney_CurrentStage = 3903;		
+			OverridenIntroText = GetText("PunishSinceNaked");
+		}		
 	}
 }
 
@@ -303,6 +339,58 @@ function C012_AfterClass_Sidney_ActorSetPose(NewPose) {
 
 // Chapter 12 After Class - Starts the punishment
 function C012_AfterClass_Sidney_StartPunishment() {
-	C012_AfterClass_Sidney_CurrentStage = 3999;
+	var PunishmentType = Math.floor(Math.random() * 1);
+	if (PunishmentType == 0) {
+		C012_AfterClass_Sidney_CurrentStage = 3910;
+		OverridenIntroText = "";
+	}
+}
+
+// Chapter 12 After Class - Sidney can tie up the player with her own rope
+function C012_AfterClass_Sidney_RopePlayer() {
+	PlayerLockInventory("Rope");
+	PlayerRemoveInventory("Rope", 1);
+	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - Sidney can gag the player with her stuff
+function C012_AfterClass_Sidney_GagPlayer() {
+	PlayerRandomGag();
+	if (!Common_PlayerGagged) PlayerLockInventory("ClothGag");
+	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - Sidney can use the egg on the player
+function C012_AfterClass_Sidney_InsertEgg() {
+	PlayerLockInventory("VibratingEgg");
+	PlayerRemoveInventory("VibratingEgg", 1);
+	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - Ends the punishment and sets the duration between 30 minutes and 2 hours
+function C012_AfterClass_Sidney_EndPunishment(PunishmentType) {
+	GameLogAddTimer("Event" + PunishmentType, CurrentTime + 1800000 + Math.floor(Math.random() * 5400000));
 	C012_AfterClass_Sidney_AllowLeave();
+}
+
+// Chapter 12 After Class - Ends any bondage and resets the pose
+function C012_AfterClass_Sidney_ReleasePlayer() {
+	Common_PlayerPose = "";
+	ActorSetPose("");
+	PlayerReleaseBondage();
+	LeaveIcon = "Leave";
+	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - Flags the chat as done and doesn't allow the player to leave
+function C012_AfterClass_Sidney_StartChat() {
+	ActorSetPose("");
+	GameLogAdd("ChatDone");
+	LeaveIcon = "";
+	C012_AfterClass_Sidney_ChatAvail = false;
+}
+
+// Chapter 12 After Class - Ends the chat with Sidney
+function C012_AfterClass_Sidney_EndChat() {
+	LeaveIcon = "Leave";
 }

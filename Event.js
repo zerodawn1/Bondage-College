@@ -2,7 +2,7 @@ var EventLastRandomType = "";
 var EventActivityCurrent = "";
 var EventActivityCount = 0;
 var EventActivityMaxCount = 0;
-var EventList = ["Naked", "Underwear", "SchoolUniform", "RedBikini", "WhiteLingerie", "FullBondage", "Restrain", "Gag", "Release", "ConfiscateKeys", "Tickle", "Spank", "Masturbate"];
+var EventList = ["Naked", "Underwear", "SchoolUniform", "RedBikini", "WhiteLingerie", "FullBondage", "Restrain", "Gag", "Release", "ConfiscateKeys", "ConfiscateCrop", "VibratingEgg", "Tickle", "Spank", "Masturbate", "Crop"];
 
 // Returns TRUE if the event is accepted
 function EventRandomChance(EventChanceModifier) {
@@ -50,11 +50,14 @@ function EventRandomPlayerSubmissive() {
 			if ((EventType == "Restrain") && !Common_PlayerRestrained) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "Gag") && !Common_PlayerGagged) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "Release") && Common_PlayerRestrained) { Result = EventPlayerSubmissive(EventStage); PlayerReleaseBondage(); }
+			if ((EventType == "VibratingEgg") && PlayerHasInventory("VibratingEgg") && !PlayerHasLockedInventory("VibratingEgg") && !Common_PlayerChaste) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "ConfiscateKeys") && PlayerHasInventory("CuffsKey")) Result = EventPlayerSubmissive(EventStage);
+			if ((EventType == "ConfiscateCrop") && PlayerHasInventory("Crop")) Result = EventPlayerSubmissive(EventStage);
 			if (EventType == "Tickle") Result = EventPlayerSubmissive(EventStage);
 			if (EventType == "Spank") Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "Masturbate") && !Common_PlayerChaste) Result = EventPlayerSubmissive(EventStage);
-		
+			if ((EventType == "Crop") && (PlayerHasInventory("Crop") || GameLogQuery("", Common_PlayerOwner, "HasCrop"))) Result = EventPlayerSubmissive(EventStage);
+
 		}
 
 	}

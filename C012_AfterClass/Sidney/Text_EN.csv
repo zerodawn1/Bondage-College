@@ -9,9 +9,12 @@ EventRestrain,3110
 EventGag,3120
 EventRelease,3130
 EventConfiscateKeys,3140
+EventConfiscateCrop,3150
+EventVibratingEgg,3160
 EventTickle,3200
 EventSpank,3210
 EventMasturbate,3220
+EventCrop,3230
 GaggedAnswer1,Ummgh ngh!
 GaggedAnswer2,(She mumbles something in the gag.)
 GaggedAnswer3,Ooooomp ohm mohmm!
@@ -31,4 +34,8 @@ ReleaseBeforeExit,Let me help you before I run.|(She releases you and leaves.)
 MasturbatePlayerOrgasm,"Your wish is granted fucking bitch!  Cum slut.|(She masturbate you fiercly, making you climax.)"
 MasturbatePlayerOrgasmForced,"You will cum anyway bitch!  Cum for me slut.|(She masturbate you fiercly, making you climax.)"
 ChangingIsBlocked,"No bitch, you're not|allowed to change."
-ReleaseBeforePunish,(She releases you and stares at you.)|Alright little bitch!  Get naked.
+ReleaseBeforePunishNotNaked,(She releases you and stares at you.)|Alright little bitch!  Get naked.
+ReleaseBeforePunishAlreadyNaked,(She releases you and stares at you.)|Alright bitch!  Your punishment can begin.
+PunishSinceNaked,"Since you're already naked,|your punishment can begin."
+StillGrounded,"(Sidney ignores you and checks her phone.|You need to wait, you're still grounded.)"
+GroundingEndForLeaving,I need to go bitch.  I'll spank ya later.|You're not grounded anymore.

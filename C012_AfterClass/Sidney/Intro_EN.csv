@@ -29,6 +29,13 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 400,0,0,,I need to go.|I'll see ya later.,Door.jpg
 400,0,0,Common_ActorIsOwner,Bitch!  I need to go.|I'll spank ya later.,Door.jpg
 410,0,0,,,Door.jpg
+500,0,0,,,Dorm.jpg
+510,0,0,,,Dorm.jpg
+520,0,0,,,Dorm.jpg
+530,0,0,,,Dorm.jpg
+540,0,0,,,Dorm.jpg
+550,0,0,,,Dorm.jpg
+560,0,0,,,Dorm.jpg
 3000,0,0,,"My bitch, I want you to get naked.",Dorm.jpg
 3000,0,0,Common_ActorIsLover,My sweet little bitch.|I want you to get naked.,Dorm.jpg
 3010,0,0,,"My bitch, I want to see|you in your underwear.",Dorm.jpg
@@ -48,6 +55,11 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 3120,0,0,,"My bitch, I want to check your items|so I can gag your fucking face.",Dorm.jpg
 3130,0,0,,"My bitch, I guess I can help you.|(She releases you and laughs.)",Dorm.jpg
 3140,0,0,,A fucking bitch should not|have keys.  I'll take them.,Dorm.jpg
+3150,0,0,,"Why the hell do you carry a crop?|This is not for you, I'll take it.",Dorm.jpg
+3160,0,0,,What the fuck?  Is that a|vibrating egg in your bag?,Dorm.jpg
+3160,0,0,HasEgg,(Sidney notices the vibrating egg in your bag.)|Fuck!  This is the same egg you used on me?,Dorm.jpg
+3161,0,0,,,Dorm.jpg
+3162,0,0,,,Dorm.jpg
 3190,0,0,,,Dorm.jpg
 3191,0,0,,,Dorm.jpg
 3200,0,0,,I have a question for you.|Are you fucking ticklish?,Dorm.jpg
@@ -58,6 +70,8 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 3221,0,0,,,Dorm.jpg
 3222,0,0,,(She masturbates and you feel like you're about|to climax.)   Does my little slut wants to cum now?,Dorm.jpg
 3223,0,0,,,DormOrgasm.jpg
+3230,0,0,,I've been itching to use|this crop on your ass.,Dorm.jpg
+3231,0,0,,,Dorm.jpg
 3290,0,0,,,Dorm.jpg
 3291,0,0,,,Dorm.jpg
 3800,0,0,,(Sidney drags you by the collar.)|Bitch!  What the fuck are you doing?,Dorm.jpg
@@ -66,4 +80,10 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 3901,0,0,,,Dorm.jpg
 3902,0,0,,,Dorm.jpg
 3903,0,0,,,Dorm.jpg
+3910,0,0,,COMMON_PLAYERNAME.  You're fucking grounded.,Dorm.jpg
+3911,0,0,,,Dorm.jpg
+3912,0,0,,,Dorm.jpg
+3913,0,0,,,Dorm.jpg
+3914,0,0,,,Dorm.jpg
+3915,0,0,,"So bitch, have you learned your lesson?",Dorm.jpg
 3999,0,0,,,Dorm.jpg
