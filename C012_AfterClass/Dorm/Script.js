@@ -39,6 +39,7 @@ function C012_AfterClass_Dorm_Load() {
 	// If the player is grounded, the dorm is mostly deactivated until the timer runs out
 	C012_AfterClass_Dorm_PlayerGrounded = GameLogQuery(CurrentChapter, "", "EventGrounded");
 	Common_PlayerPose = C012_AfterClass_Dorm_PlayerGrounded ? "TwoRopesPunishment" : "";
+	if ((Common_PlayerPose == "") && GameLogQuery(CurrentChapter, "", "EventSpanked") && !Common_PlayerRestrained && !Common_PlayerGagged && Common_PlayerNaked) Common_PlayerPose = "Spanked";
 	
 	// Resets the other locations from the Dorm
 	C012_AfterClass_Pub_CurrentStage = 0;
@@ -59,9 +60,19 @@ function C012_AfterClass_Dorm_Run() {
 		SetScene(CurrentChapter, Common_PlayerOwner);
 		LeaveIcon = "";
 	}
+	
+	// If the player owner wants to talk to the player
+	if (!C012_AfterClass_Dorm_PlayerGrounded && (Common_PlayerOwner != "") && (C012_AfterClass_Dorm_Guest.indexOf(Common_PlayerOwner) >= 0) && !GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") && !GameLogQuery(CurrentChapter, CurrentActor, "EventGenericNext")) {
+		C012_AfterClass_Sidney_CurrentStage = 450;
+		SetScene(CurrentChapter, Common_PlayerOwner);
+		LeaveIcon = "";
+	}
 
 	// Make sure we are still in the dorm after the previous events
 	if (CurrentScreen == "Dorm") {
+		
+		// The "spanked" pose will fade out after time
+		if (Common_PlayerPose == "Spanked" && !GameLogQuery(CurrentChapter, "", "EventSpanked")) Common_PlayerPose = "";
 
 		// Draw the background and the actors
 		DrawImage(CurrentChapter + "/" + CurrentScreen + "/Background.jpg", 0, 0);

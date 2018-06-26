@@ -22,6 +22,7 @@ function C012_AfterClass_Sidney_Load() {
 	LoadInteractions();
 	ActorLoad("Sidney", "Leave");
 	LeaveScreen = "Dorm";
+	Common_PlayerPose = "";
 	C012_AfterClass_Sidney_HasEgg = ActorHasInventory("VibratingEgg");
 	C012_AfterClass_Sidney_SetPose();
 	C012_AfterClass_Sidney_ChatAvail = !GameLogQuery(CurrentChapter, CurrentActor, "ChatDone");
@@ -171,6 +172,7 @@ function C012_AfterClass_Sidney_PlayerCollared() {
 	Common_ActorIsOwner = true;
 	PlayerLockInventory("Collar");
 	CurrentTime = CurrentTime + 50000;
+	EventSetGenericTimer();
 }
 
 // Chapter 12 After Class - When the player gets collared
@@ -186,7 +188,7 @@ function C012_AfterClass_Sidney_RandomSidneyDommeEvent() {
 	if (!GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric")) {
 
 		// 1 event per 15 minutes maximum, the event is random and drawn from the Mistress pool
-		GameLogAddTimer("EventGeneric", CurrentTime + 300000 + Math.floor(Math.random() * 600000));
+		EventSetGenericTimer();
 		C012_AfterClass_Sidney_CurrentStage = EventRandomPlayerSubmissive();
 
 	}
@@ -221,7 +223,7 @@ function C012_AfterClass_Sidney_TestUnbind() {
 			OverridenIntroText = GetText("ReleasePlayer");
 			PlayerReleaseBondage();
 			CurrentTime = CurrentTime + 50000;
-		} else GameLogAddTimer("EventGeneric", CurrentTime + 300000 + Math.floor(Math.random() * 600000));
+		} else EventSetGenericTimer();
 		
 	}
 	
@@ -339,20 +341,7 @@ function C012_AfterClass_Sidney_ActorSetPose(NewPose) {
 
 // Chapter 12 After Class - Starts the punishment
 function C012_AfterClass_Sidney_StartPunishment() {
-	
-	// Pick a random punishment
-	var PunishmentType = Math.floor(Math.random() * 2);
-	OverridenIntroText = "";
-	
-	// Chastity belt (only works if the player isn't already in a belt)
-	if (PunishmentType == 1) {
-		if (!Common_PlayerChaste && PlayerHasInventory("ChastityBelt")) C012_AfterClass_Sidney_CurrentStage = 3920;
-		else C012_AfterClass_Sidney_CurrentStage = 3910;
-	}
-
-	// Grounded (default punishment)
-	if (PunishmentType == 0) C012_AfterClass_Sidney_CurrentStage = 3910;
-
+	C012_AfterClass_Sidney_CurrentStage = EventRandomPlayerPunishment();
 }
 
 // Chapter 12 After Class - Sidney can tie up the player with her own rope
@@ -379,15 +368,16 @@ function C012_AfterClass_Sidney_InsertEgg() {
 // Chapter 12 After Class - Ends the punishment and sets the duration between 30 minutes and 2 hours
 function C012_AfterClass_Sidney_EndPunishment(PunishmentType) {
 	GameLogAddTimer("Event" + PunishmentType, CurrentTime + 1800000 + Math.floor(Math.random() * 5400000));
+	EventSetGenericTimer();
 	C012_AfterClass_Sidney_AllowLeave();
 }
 
 // Chapter 12 After Class - Ends any bondage and resets the pose
 function C012_AfterClass_Sidney_ReleasePlayer() {
 	Common_PlayerPose = "";
-	ActorSetPose("");
+	EventSetGenericTimer();
 	PlayerReleaseBondage();
-	LeaveIcon = "Leave";
+	C012_AfterClass_Sidney_AllowLeave();
 	CurrentTime = CurrentTime + 50000;
 }
 

@@ -55,6 +55,10 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 400,0,0,,Wait!,I can't.  (She leaves your dorm.),410,0,0,
 400,0,0,!Common_ActorIsOwner,Next time I'll tie|you up so you'll stay.,Oh shit.  (She leaves your dorm.),410,0,1,
 400,0,0,,(Bow your head.),Good girl.  (She leaves your dorm.),410,0,-1,
+450,0,0,,Fun Mistress?,,0,0,0,RandomSidneyDommeEvent()
+450,0,0,,What's going on?,,0,0,0,RandomSidneyDommeEvent()
+450,0,0,,(Nod happily.),,0,0,0,RandomSidneyDommeEvent()
+450,0,0,,(Look surprised.),,0,0,0,RandomSidneyDommeEvent()
 500,0,0,,Do you have|many friends?,I have some friends and some enemies.,510,0,0,
 500,0,0,,You seem to have|lots of enemies.,"Yeah, I have some enemies.",510,0,1,
 500,0,0,,You seem to|be very popular.,I'm more popular than you but that's easy.|I have some friends and some enemies.,510,0,-1,
@@ -258,7 +262,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 3914,0,0,,(Sulk and grumble.),You will stay grounded until I say otherwise.|(She gets her cell phone and starts to text.),3999,0,0,"EndPunishment(""Grounded"")"
 3914,0,0,,(Stare at the floor.),You will stay grounded until I say otherwise.|(She gets her cell phone and starts to text.),3999,0,0,"EndPunishment(""Grounded"")"
 3914,0,0,,@Oouu lmu mpm!,You will stay grounded until I say otherwise.|(She gets her cell phone and starts to text.),3999,0,0,"EndPunishment(""Grounded"")"
-3915,0,0,,(Nod yes.),Good bitch.  (She releases you.),0,0,0,ReleasePlayer()
+3915,0,0,,(Nod yes.),Good bitch.  (She releases you|and gets her cell phone to text.),3999,0,0,ReleasePlayer()
 3915,0,0,,(Shake your head no.),Then you will stay grounded.|(She checks on her cell phone.),3999,0,0,"EndPunishment(""Grounded"")"
 3915,0,0,,@Aaehm!,That's a yes or a no?|I want a clear answer.,3915,0,0,
 3920,0,0,,A chastity belt?|This is torture!,You deserve it bitch!|You will be chaste.,3921,0,0,
@@ -278,3 +282,4 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 3923,0,0,,It needs to|be so tight?,"Hell yeah, it fucking does.|(She gets her phone to text.)",3999,0,0,"EndPunishment(""Belted"")"
 3923,0,0,,This is so kinky!,Enjoy your chaste life.|(She gets her phone to text.),3999,0,0,"EndPunishment(""Belted"")"
 3923,0,0,,(Bow your head.),Enjoy your chaste life.|(She gets her phone to text.),3999,0,0,"EndPunishment(""Belted"")"
+3930,0,0,,TO DO,TO DO,3999,0,0,"EndPunishment(""Spanked"")"

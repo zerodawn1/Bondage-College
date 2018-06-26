@@ -29,6 +29,8 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 400,0,0,,I need to go.|I'll see ya later.,Door.jpg
 400,0,0,Common_ActorIsOwner,Bitch!  I need to go.|I'll spank ya later.,Door.jpg
 410,0,0,,,Door.jpg
+450,0,0,,(Sidney grabs you by the collar.)|Hey bitch!  Time for some fun.,Dorm.jpg
+450,0,0,Common_ActorIsLover,(Sidney grabs you by the collar.)|Hey sweetie!  Time for some fun.,Dorm.jpg
 500,0,0,,,Dorm.jpg
 510,0,0,,,Dorm.jpg
 520,0,0,,,Dorm.jpg
@@ -90,4 +92,5 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 3921,0,0,,,Dorm.jpg
 3922,0,0,,,Dorm.jpg
 3923,0,0,,,Dorm.jpg
+3930,0,0,,Bitch!  You will be spanked|so fucking hard you will cry.,Dorm.jpg
 3999,0,0,,,Dorm.jpg

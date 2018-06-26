@@ -22,7 +22,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 20,0,0,,Vorherige Kapitel,"Wähle ein Kapitel,""Wähle das Kapitel, welches du Spielen willst.|Wenn du das Spiel noch nie gespielt hast, starte von Kapite 1.",10,0,0,
 20,0,0,,Hauptmenü,Willkommen zur Bondage Schule.,0,0,0,
 30,0,0,,English,,0,0,0,"SetLanguage(""EN"")"
-30,0,0,,Französich (Kapitel 1 bis 7)|Geschrieben von gottspende,,0,0,0,"SetLanguage(""FR"")"
+30,0,0,,Französich (Kapitel 1 bis 8)|Geschrieben von gottspende,,0,0,0,"SetLanguage(""FR"")"
 30,0,0,,Chinesisch (Kapitel 5)|Geschrieben von asdcvbgf,,0,0,0,"SetLanguage(""CN"")"
 30,0,0,,Spanisch (Kapitel 1)|Geschrieben von Rafael R,,0,0,0,"SetLanguage(""ES"")"
 30,0,0,,Deutsch (Kapitel 1 und 12)|Von Knife und fleisch11,,0,0,0,"SetLanguage(""DE"")"

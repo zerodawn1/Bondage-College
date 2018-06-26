@@ -3,6 +3,7 @@ var EventActivityCurrent = "";
 var EventActivityCount = 0;
 var EventActivityMaxCount = 0;
 var EventList = ["Naked", "Underwear", "SchoolUniform", "RedBikini", "WhiteLingerie", "FullBondage", "Restrain", "Gag", "Release", "ConfiscateKeys", "ConfiscateCrop", "VibratingEgg", "Tickle", "Spank", "Masturbate", "Crop"];
+var EventPunishmentList = ["Grounded", "Belted", "Spanked"];
 
 // Returns TRUE if the event is accepted
 function EventRandomChance(EventChanceModifier) {
@@ -22,6 +23,41 @@ function EventPlayerSubmissive(EventType) {
 	OverridenIntroText = "";
 	LeaveIcon = "";
 	return parseInt(EventType);
+}
+
+// Sets the timer for the next generic event
+function EventSetGenericTimer() {
+	GameLogAddTimer("EventGeneric", CurrentTime + 300000 + Math.floor(Math.random() * 600000));
+	GameLogAddTimer("EventGenericNext", CurrentTime + 1200000 + Math.floor(Math.random() * 1200000));
+}
+
+// Draws a punishment event for the player at random
+function EventRandomPlayerPunishment() {
+
+	// Until we find a proper event
+	OverridenIntroText = "";
+	var Result = 0;
+	while (Result == 0) {
+
+		// Draw a punishment type at random
+		var PunishmentType = EventPunishmentList[Math.floor(Math.random() * EventPunishmentList.length)];
+		
+		// If the event is valid for that actor
+		var PunishmentStage = GetText("Punishment" + PunishmentType);
+		if (IsNumeric(PunishmentStage)) {
+		
+			// Check if the event can be done
+			if (PunishmentType == "Grounded") Result = parseInt(PunishmentStage);
+			if ((PunishmentType == "Spanked") && !GameLogQuery(CurrentChapter, "", "EventSpanked")) Result = parseInt(PunishmentStage);
+			if ((PunishmentType == "Belted") && !Common_PlayerChaste && PlayerHasInventory("ChastityBelt")) Result = parseInt(PunishmentStage);
+
+		}
+
+	}
+
+	// Returns the punishment type which will become the dialog number
+	return Result;		
+
 }
 
 // Draws a submissive event for the player at random (Launch from a Mistress Actor)
