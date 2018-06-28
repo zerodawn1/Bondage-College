@@ -10,7 +10,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 100,0,0,,@Slide a finger|inside and out.,You slide your index in and out|while breathing faster and faster.,100,0,0,MasturbateDown()
 100,0,0,,@Explore inside.,You explore the inside of your vagina.|Reaching very sweet spots in the process.,100,0,0,MasturbateDown()
 100,0,0,,@Stop and get up.,You get up from your bed.,0,0,0,StopMasturbate()
-110,0,0,,@Let yourself|go and climax.,You let yourself go in wonderful extasy|while your fingers give you a sweet orgasm.,120,0,0,Climax()
+110,0,0,,@Let yourself|go and climax.,You let yourself go in wonderful ecstasy|while your fingers give you a sweet orgasm.,120,0,0,Climax()
 110,0,0,,@Stop masturbating.,"You calm down, take deep breathes|and stop everything before your climax.",100,0,0,StopMasturbate()
 120,0,0,,@Continue to|masturbate.,"Just to make sure you're satisfied,|you start touching yourself again.",100,0,0,
 120,0,0,,@Stop and get up.,You get up from your bed|feeling relaxed and satisfied.,0,0,0,StopMasturbate()

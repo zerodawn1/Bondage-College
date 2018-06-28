@@ -2,6 +2,7 @@ var C012_AfterClass_Sidney_CurrentStage = 0;
 var C012_AfterClass_Sidney_IntroText = "";
 var C012_AfterClass_Sidney_HasEgg = false;
 var C012_AfterClass_Sidney_ChatAvail = false;
+var C012_AfterClass_Sidney_SpankCount = 0;
 
 // In her shorts, Sidney can have many poses when she talks
 function C012_AfterClass_Sidney_SetPose() {
@@ -23,9 +24,14 @@ function C012_AfterClass_Sidney_Load() {
 	ActorLoad("Sidney", "Leave");
 	LeaveScreen = "Dorm";
 	Common_PlayerPose = "";
+	
+	// Sidney's parameters
 	C012_AfterClass_Sidney_HasEgg = ActorHasInventory("VibratingEgg");
 	C012_AfterClass_Sidney_SetPose();
 	C012_AfterClass_Sidney_ChatAvail = !GameLogQuery(CurrentChapter, CurrentActor, "ChatDone");
+	C012_AfterClass_Sidney_SpankMaxCount = 10 - Math.floor(ActorGetValue(ActorLove) / 7);
+	if (C012_AfterClass_Sidney_SpankMaxCount < 6) C012_AfterClass_Sidney_SpankMaxCount = 6;
+	if (C012_AfterClass_Sidney_SpankMaxCount > 12) C012_AfterClass_Sidney_SpankMaxCount = 12;
 	
 	// Loads the previous text if needed
 	if (C012_AfterClass_Sidney_IntroText != "") {
@@ -59,7 +65,7 @@ function C012_AfterClass_Sidney_Load() {
 // Chapter 12 After Class - Sidney Run
 function C012_AfterClass_Sidney_Run() {
 	BuildInteraction(C012_AfterClass_Sidney_CurrentStage);
-	if (C012_AfterClass_Sidney_CurrentStage != 410) {
+	if ((C012_AfterClass_Sidney_CurrentStage != 410) && (C012_AfterClass_Sidney_CurrentStage != 3931) && (C012_AfterClass_Sidney_CurrentStage != 3932) && (C012_AfterClass_Sidney_CurrentStage != 3933)) {
 		if (((C012_AfterClass_Sidney_CurrentStage >= 3090) && (C012_AfterClass_Sidney_CurrentStage <= 3099)) || ((C012_AfterClass_Sidney_CurrentStage >= 3901) && (C012_AfterClass_Sidney_CurrentStage <= 3999))) {
 			DrawActor("Player", 475, 0, 1);
 			DrawActor(CurrentActor, 750, 0, 1);
@@ -207,8 +213,14 @@ function C012_AfterClass_Sidney_ForceChangePlayer(NewCloth) {
 
 // Chapter 12 After Class - As a Domme, Sidney can force the player into some random bondage
 function C012_AfterClass_Sidney_ForceRandomBondage(BondageType) {
-	if ((BondageType == "Full") || (BondageType == "Restrain")) PlayerRandomRestrain();
-	if ((BondageType == "Full") || (BondageType == "Gag")) PlayerRandomGag();
+	if ((BondageType == "Full") || (BondageType == "Gag")) {
+		PlayerRandomGag();
+		if (!Common_PlayerGagged) OverridenIntroText = GetText("CantFindRestrain");
+	}
+	if ((BondageType == "Full") || (BondageType == "Restrain")) {
+		PlayerRandomRestrain();
+		if (!Common_PlayerRestrained) OverridenIntroText = GetText("CantFindRestrain");
+	}
 	CurrentTime = CurrentTime + 50000;
 }
 
@@ -399,4 +411,21 @@ function C012_AfterClass_Sidney_LockChastityBelt() {
 	PlayerLockInventory("ChastityBelt");
 	PlayerRemoveInventory("ChastityBelt", 1);
 	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - When Sidney spanks the player
+function C012_AfterClass_Sidney_SidneySpankPlayer() {
+	C012_AfterClass_Sidney_SpankCount++;
+	if (C012_AfterClass_Sidney_SpankCount > C012_AfterClass_Sidney_SpankMaxCount) {
+		C012_AfterClass_Sidney_CurrentStage = 3933;
+		OverridenIntroText = "";
+		OverridenIntroImage = "";
+	} else {
+		OverridenIntroText = GetText("SpankPlayer" + C012_AfterClass_Sidney_SpankCount.toString());
+		var Img = (C012_AfterClass_Sidney_SpankCount % 2).toString();
+		if ((C012_AfterClass_Sidney_SpankCount < 5) && !Common_PlayerChaste) OverridenIntroImage = "SidneySpankPlayer" + Img + ".jpg";
+		if ((C012_AfterClass_Sidney_SpankCount >= 5) && !Common_PlayerChaste) OverridenIntroImage = "SidneySpankPlayerRedButt" + Img + ".jpg";
+		if ((C012_AfterClass_Sidney_SpankCount < 5) && Common_PlayerChaste) OverridenIntroImage = "SidneySpankPlayerChastity" + Img + ".jpg";
+		if ((C012_AfterClass_Sidney_SpankCount >= 5) && Common_PlayerChaste) OverridenIntroImage = "SidneySpankPlayerChastityRedButt" + Img + ".jpg";
+	}
 }

@@ -1,5 +1,5 @@
 Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
-0,0,0,,Wait for a while.,You sit down for a while and|check who's coming or leaving.,0,0,0,Wait()
+0,0,0,,Wait for a while.,You sit down for a while and|check who is coming or leaving.,0,0,0,Wait()
 0,0,0,,Swim alone.,You swim alone for a while.|It's a good exercise and it's relaxing.,10,0,0,Swim()
 0,0,0,,Return to your dorm.,,0,0,0,Leave()
 10,0,0,,Swim alone.,You swim alone for a while.|It's a good exercise and it's relaxing.,10,0,0,Swim()

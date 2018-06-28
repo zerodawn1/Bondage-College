@@ -2,7 +2,7 @@ var EventLastRandomType = "";
 var EventActivityCurrent = "";
 var EventActivityCount = 0;
 var EventActivityMaxCount = 0;
-var EventList = ["Naked", "Underwear", "SchoolUniform", "RedBikini", "WhiteLingerie", "FullBondage", "Restrain", "Gag", "Release", "ConfiscateKeys", "ConfiscateCrop", "VibratingEgg", "Tickle", "Spank", "Masturbate", "Crop"];
+var EventList = ["Naked", "Underwear", "SchoolUniform", "RedBikini", "WhiteLingerie", "FullBondage", "Restrain", "Gag", "Release", "ConfiscateKeys", "ConfiscateCrop", "VibratingEgg", "Tickle", "Slap", "Masturbate", "Crop"];
 var EventPunishmentList = ["Grounded", "Belted", "Spanked"];
 
 // Returns TRUE if the event is accepted
@@ -25,9 +25,9 @@ function EventPlayerSubmissive(EventType) {
 	return parseInt(EventType);
 }
 
-// Sets the timer for the next generic event
+// Sets the timer for the next generic event, the next one will be available between 5 and 10 minutes, the next forced one will be between 20 and 40 minutes
 function EventSetGenericTimer() {
-	GameLogAddTimer("EventGeneric", CurrentTime + 300000 + Math.floor(Math.random() * 600000));
+	GameLogAddTimer("EventGeneric", CurrentTime + 300000 + Math.floor(Math.random() * 300000));
 	GameLogAddTimer("EventGenericNext", CurrentTime + 1200000 + Math.floor(Math.random() * 1200000));
 }
 
@@ -89,8 +89,8 @@ function EventRandomPlayerSubmissive() {
 			if ((EventType == "VibratingEgg") && PlayerHasInventory("VibratingEgg") && !PlayerHasLockedInventory("VibratingEgg") && !Common_PlayerChaste) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "ConfiscateKeys") && PlayerHasInventory("CuffsKey")) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "ConfiscateCrop") && PlayerHasInventory("Crop")) Result = EventPlayerSubmissive(EventStage);
-			if (EventType == "Tickle") Result = EventPlayerSubmissive(EventStage);
-			if (EventType == "Spank") Result = EventPlayerSubmissive(EventStage);
+			if ((EventType == "Tickle") && (ActorGetValue(ActorLove) >= 0)) Result = EventPlayerSubmissive(EventStage);
+			if ((EventType == "Slap") && (ActorGetValue(ActorLove) <= 0)) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "Masturbate") && !Common_PlayerChaste) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "Crop") && (PlayerHasInventory("Crop") || GameLogQuery("", Common_PlayerOwner, "HasCrop"))) Result = EventPlayerSubmissive(EventStage);
 
