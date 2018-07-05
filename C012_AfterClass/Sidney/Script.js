@@ -1,12 +1,17 @@
 var C012_AfterClass_Sidney_CurrentStage = 0;
 var C012_AfterClass_Sidney_IntroText = "";
 var C012_AfterClass_Sidney_HasEgg = false;
+var C012_AfterClass_Sidney_HasBelt = false;
 var C012_AfterClass_Sidney_ChatAvail = false;
 var C012_AfterClass_Sidney_SpankCount = 0;
+var C012_AfterClass_Sidney_EnslaveCount = 0;
+var	C012_AfterClass_Sidney_IsGagged = false;
+var	C012_AfterClass_Sidney_IsRoped = false;
+var	C012_AfterClass_Sidney_IsStrapped = false;
 
 // In her shorts, Sidney can have many poses when she talks
 function C012_AfterClass_Sidney_SetPose() {
-	if (ActorGetValue(ActorCloth) == "Shorts") {
+	if ((ActorGetValue(ActorCloth) == "Shorts") && !ActorIsRestrained() && !ActorIsGagged()) {
 		var Love = ActorGetValue(ActorLove);
 		var Sub = ActorGetValue(ActorSubmission);	
 		if ((Sub <= -10) && (Math.abs(Sub) >= Math.abs(Love))) ActorSetPose("Point");
@@ -14,6 +19,16 @@ function C012_AfterClass_Sidney_SetPose() {
 		if ((Love >= 10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Happy");
 		if ((Love <= -10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Mad");
 	} else ActorSetPose("");
+}
+
+// Calculate the scene parameters
+function C012_AfterClass_Sidney_CalcParams() {
+	C012_AfterClass_Sidney_HasEgg = ActorHasInventory("VibratingEgg");
+	C012_AfterClass_Sidney_HasBelt = ActorHasInventory("ChastityBelt");
+	C012_AfterClass_Sidney_IsGagged = ActorIsGagged();
+	C012_AfterClass_Sidney_IsRoped = (ActorHasInventory("Rope") || ActorHasInventory("TwoRopes"));
+	C012_AfterClass_Sidney_IsStrapped = ActorHasInventory("Armbinder");
+	C012_AfterClass_Sidney_SetPose();
 }
 
 // Chapter 12 After Class - Sidney Load
@@ -26,8 +41,7 @@ function C012_AfterClass_Sidney_Load() {
 	Common_PlayerPose = "";
 	
 	// Sidney's parameters
-	C012_AfterClass_Sidney_HasEgg = ActorHasInventory("VibratingEgg");
-	C012_AfterClass_Sidney_SetPose();
+	C012_AfterClass_Sidney_CalcParams();	
 	C012_AfterClass_Sidney_ChatAvail = !GameLogQuery(CurrentChapter, CurrentActor, "ChatDone");
 	C012_AfterClass_Sidney_SpankMaxCount = 10 - Math.floor(ActorGetValue(ActorLove) / 7);
 	if (C012_AfterClass_Sidney_SpankMaxCount < 6) C012_AfterClass_Sidney_SpankMaxCount = 6;
@@ -88,13 +102,58 @@ function C012_AfterClass_Sidney_Click() {
 		C012_AfterClass_Sidney_IntroText = OverridenIntroText;
 		InventoryClick(ClickInv, CurrentChapter, CurrentScreen);
 	}
+	
+	// Sidney can be restrained on stage 0
+	if ((C012_AfterClass_Sidney_CurrentStage == 0) && (ClickInv != "") && (ClickInv != "Player") && !Common_PlayerRestrained) {
+		
+		// Sidney becomes more submissive from the crop
+		if (ClickInv == "Crop") {			
+			if (Common_ActorIsOwned) OverridenIntroText = GetText("CropFromMistress");
+			else OverridenIntroText = GetText("Crop");
+			if (!GameLogQuery(CurrentChapter, CurrentActor, "CropDone")) {
+				ActorChangeAttitude(0, 1);
+				GameLogAdd("CropDone");
+			}
+			CurrentTime = CurrentTime + 50000;
+			return;
+		}
+
+		// Sidney will turn the tables on the player if -5 submission or less
+		if ((ActorGetValue(ActorSubmission) <= -5) && !ActorIsRestrained() && !ActorIsGagged() && (ClickInv != "CuffsKey")) {
+			PlayerRandomRestrain();
+			if (Common_PlayerRestrained) {
+				PlayerRandomGag();
+				if (Common_ActorIsOwner) {
+					EventSetGenericTimer();
+					OverridenIntroText = GetText("TurnTablesFromMistress");
+				}
+				else OverridenIntroText = GetText("TurnTables");
+				CurrentTime = CurrentTime + 50000;
+			} else OverridenIntroText = GetText("RefuseBondage");
+			return;
+		}
+
+		// Sidney will refuse any bondage if 4 submission or less
+		if ((ActorGetValue(ActorSubmission) < 5) && !ActorIsRestrained() && !ActorIsGagged() && (ClickInv != "CuffsKey")) {
+			OverridenIntroText = GetText("RefuseBondage");
+			return;
+		}
+
+		// Apply the clicked restrain
+		ActorApplyRestrain(ClickInv);
+		C012_AfterClass_Sidney_CalcParams();
+
+	}
+	
 
 }
 
 // Chapter 12 After Class - Sidney can make love with the player if (Love + seduction * 2) >= 12 or >= 25 on the next time or Sidney is the player girlfriend/submissive
 function C012_AfterClass_Sidney_GaggedAnswer() {
-	var GagTalk = Math.floor(Math.random() * 5) + 1;
-	OverridenIntroText = GetText("GaggedAnswer" + GagTalk.toString());
+	if (ActorIsGagged()) {
+		var GagTalk = Math.floor(Math.random() * 8) + 1;
+		OverridenIntroText = GetText("GaggedAnswer" + GagTalk.toString());		
+	}
 }
 
 // Chapter 12 After Class - Sidney can make love with the player if (Love + seduction * 2) >= 12 or >= 25 on the next time or Sidney is the player girlfriend/submissive
@@ -110,12 +169,20 @@ function C012_AfterClass_Sidney_TestLove() {
 
 // Chapter 12 After Class - Sidney can be dominated at +20 submission
 function C012_AfterClass_Sidney_TestDomme() {
-	if (!ActorIsGagged()) {
-		if (ActorGetValue(ActorSubmission) >= 20) {
-			C012_AfterClass_Sidney_CurrentStage = 200;
-			OverridenIntroText = "";
-		}
-	} else C012_AfterClass_Sidney_GaggedAnswer();
+	if (PlayerHasInventory("Collar")) {
+		if (!ActorIsGagged()) {
+			if (ActorGetValue(ActorSubmission) >= 20) {
+				if (!GameLogQuery(CurrentChapter, CurrentActor, "EnslaveDone")) {
+					if (ActorIsRestrained()) C012_AfterClass_Sidney_EnslaveCount = 1;
+					else C012_AfterClass_Sidney_EnslaveCount = 0;
+					C012_AfterClass_Sidney_CurrentStage = 200;
+					OverridenIntroText = "";
+					LeaveIcon = "";
+					GameLogAdd("EnslaveDone");
+				} else OverridenIntroText = GetText("EnslaveAlreadyTried");
+			}
+		} else C012_AfterClass_Sidney_GaggedAnswer();
+	} else OverridenIntroText = GetText("CollarToEnslave");
 }
 
 // Chapter 12 After Class - Sidney can become the player Mistress at -20 submission
@@ -428,4 +495,74 @@ function C012_AfterClass_Sidney_SidneySpankPlayer() {
 		if ((C012_AfterClass_Sidney_SpankCount < 5) && Common_PlayerChaste) OverridenIntroImage = "SidneySpankPlayerChastity" + Img + ".jpg";
 		if ((C012_AfterClass_Sidney_SpankCount >= 5) && Common_PlayerChaste) OverridenIntroImage = "SidneySpankPlayerChastityRedButt" + Img + ".jpg";
 	}
+}
+
+// Chapter 12 After Class - The player can ask Sidney to change clothes
+function C012_AfterClass_Sidney_TestChange() {
+	if (!ActorIsRestrained()) {
+		if ((ActorGetValue(ActorLove) >= 10) || (ActorGetValue(ActorSubmission) >= 10) || Common_ActorIsOwned || Common_ActorIsLover) {
+			if (Common_ActorIsOwned) OverridenIntroText = GetText("AcceptChangeFromMistress");
+			else 
+				if (Common_ActorIsLover) OverridenIntroText = GetText("AcceptChangeFromLover");
+				else OverridenIntroText = GetText("AcceptChange");
+			C012_AfterClass_Sidney_CurrentStage = 600;
+		}
+		C012_AfterClass_Sidney_GaggedAnswer();
+	} else OverridenIntroText = GetText("CannotActWhileRestrained");
+}
+
+// Chapter 12 After Class - Sidney can change clothes when the player asks for it
+function C012_AfterClass_Sidney_ForceChangeActor(NewCloth) {
+	if (ActorGetValue(ActorCloth) != NewCloth) {
+		ActorSetCloth(NewCloth);
+		C012_AfterClass_Sidney_SetPose();
+		CurrentTime = CurrentTime + 50000;
+	} else OverridenIntroText = GetText("NoNeedToChange");
+	C012_AfterClass_Sidney_GaggedAnswer();
+}
+
+// Chapter 12 After Class - Increases the slavery count for Sidney, 5 is required to collar her
+function C012_AfterClass_Sidney_EnslaveSidneyCount() {
+	C012_AfterClass_Sidney_EnslaveCount++;
+}
+
+// Chapter 12 After Class - Check if Sidney wants to be collared, 5 counts are required
+function C012_AfterClass_Sidney_TestEnslaveSidney() {
+	if (C012_AfterClass_Sidney_EnslaveCount >= 5) {
+		if (ActorIsRestrained()) C012_AfterClass_Sidney_CurrentStage = 285;
+		else C012_AfterClass_Sidney_CurrentStage = 290;
+		OverridenIntroText = GetText("AcceptCollar");
+	} else LeaveIcon = "";
+}
+
+// Chapter 12 After Class - When the player gives up on enslaving Sidney
+function C012_AfterClass_Sidney_EndEnslaveSidney() {
+	LeaveIcon = "";
+}
+
+// Chapter 12 After Class - Release Sidney from any restrain before her collaring
+function C012_AfterClass_Sidney_EnslaveRelease() {
+	ActorUntie();
+	if (ActorHasInventory("Cuffs")) { PlayerAddInventory("Cuffs", 1); ActorRemoveInventory("Cuffs"); }
+	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - Sidney gets naked for her collaring
+function C012_AfterClass_Sidney_EnslaveStrip() {
+	ActorSetCloth("Naked");
+	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - Sidney can be ungagged
+function C012_AfterClass_Sidney_Ungag() {
+	ActorUngag();
+	C012_AfterClass_Sidney_CalcParams();
+	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - Sidney can be untied
+function C012_AfterClass_Sidney_Untie() {
+	ActorUntie();
+	C012_AfterClass_Sidney_CalcParams();
+	CurrentTime = CurrentTime + 50000;
 }
