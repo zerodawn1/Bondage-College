@@ -175,6 +175,17 @@ function ActorSetCloth(NewCloth) {
 			Actor[A][ActorCloth] = NewCloth;
 }
 
+// Sets the owner for the current actor (collar the actor)
+function ActorSetOwner(NewOwner) {
+	for (var A = 0; A < Actor.length; A++)
+		if (Actor[A][ActorName] == CurrentActor) {
+			Actor[A][ActorOwner] = NewOwner;
+			ActorAddInventory("Collar");
+			GameLogAdd("CollaredBy" + NewOwner);
+			if (NewOwner == "Player") Common_ActorIsOwned = true;
+		}
+}
+
 // Sets the clothes for a specific actor
 function ActorSpecificSetCloth(SpecificActor, NewCloth) {
 	for (var A = 0; A < Actor.length; A++)

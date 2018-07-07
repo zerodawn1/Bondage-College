@@ -57,6 +57,7 @@ function C012_AfterClass_Pool_Click() {
 // Chapter 12 After Class - When the player leaves the Pool
 function C012_AfterClass_Pool_Leave() {
 	CurrentTime = CurrentTime + 290000;
+	C012_AfterClass_Dorm_LeavingGuest();
 	SetScene(CurrentChapter, "Dorm");
 }
 

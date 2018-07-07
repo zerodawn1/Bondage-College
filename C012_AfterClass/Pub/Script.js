@@ -68,6 +68,7 @@ function C012_AfterClass_Pub_Click() {
 // Chapter 12 After Class - When the player leaves the pub
 function C012_AfterClass_Pub_Leave() {
 	CurrentTime = CurrentTime + 290000;
+	C012_AfterClass_Dorm_LeavingGuest();
 	SetScene(CurrentChapter, "Dorm");
 }
 

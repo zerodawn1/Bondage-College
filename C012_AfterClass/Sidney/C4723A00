@@ -50,7 +50,6 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 395,0,0,,,Dorm.jpg
 400,0,0,,I need to go.|I'll see ya later.,Door.jpg
 400,0,0,Common_ActorIsOwner,Bitch!  I need to go.|I'll spank ya later.,Door.jpg
-400,0,0,Common_ActorIsOwned,I need to go Mistress.|I hope to see you later.,Door.jpg
 401,0,0,,,Door.jpg
 402,0,0,,,Door.jpg
 410,0,0,,,Door.jpg

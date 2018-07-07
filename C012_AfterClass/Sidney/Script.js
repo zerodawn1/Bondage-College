@@ -18,7 +18,10 @@ function C012_AfterClass_Sidney_SetPose() {
 		if ((Sub >= 10) && (Math.abs(Sub) >= Math.abs(Love))) ActorSetPose("Shy");
 		if ((Love >= 10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Happy");
 		if ((Love <= -10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Mad");
-	} else ActorSetPose("");
+	} else {
+		if ((ActorGetValue(ActorCloth) == "Naked") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorSubmission) >= 10)) ActorSetPose("Shy");
+		else ActorSetPose("");
+	}
 }
 
 // Calculate the scene parameters
@@ -39,6 +42,9 @@ function C012_AfterClass_Sidney_Load() {
 	ActorLoad("Sidney", "Leave");
 	LeaveScreen = "Dorm";
 	Common_PlayerPose = "";
+	
+	// At stage 400, Sidney is leaving
+	if (C012_AfterClass_Sidney_CurrentStage == 400) { ActorUngag(); LeaveIcon = ""; }
 	
 	// Sidney's parameters
 	C012_AfterClass_Sidney_CalcParams();	
@@ -136,6 +142,12 @@ function C012_AfterClass_Sidney_Click() {
 		// Sidney will refuse any bondage if 4 submission or less
 		if ((ActorGetValue(ActorSubmission) < 5) && !ActorIsRestrained() && !ActorIsGagged() && (ClickInv != "CuffsKey")) {
 			OverridenIntroText = GetText("RefuseBondage");
+			return;
+		}
+		
+		// Sidney can only wear the belt if she's naked
+		if (!ActorIsChaste() && (ActorGetValue(ActorCloth) != "Naked") && (ClickInv == "ChastityBelt")) {
+			OverridenIntroText = GetText("NakedForBelt");
 			return;
 		}
 
@@ -530,6 +542,7 @@ function C012_AfterClass_Sidney_EnslaveSidneyCount() {
 function C012_AfterClass_Sidney_TestEnslaveSidney() {
 	if (C012_AfterClass_Sidney_EnslaveCount >= 5) {
 		if (ActorIsRestrained()) C012_AfterClass_Sidney_CurrentStage = 285;
+		else if (ActorGetValue(ActorCloth) == "Naked") { C012_AfterClass_Sidney_CurrentStage = 291; ActorSetPose("Shy"); }
 		else C012_AfterClass_Sidney_CurrentStage = 290;
 		OverridenIntroText = GetText("AcceptCollar");
 	} else LeaveIcon = "";
@@ -537,19 +550,25 @@ function C012_AfterClass_Sidney_TestEnslaveSidney() {
 
 // Chapter 12 After Class - When the player gives up on enslaving Sidney
 function C012_AfterClass_Sidney_EndEnslaveSidney() {
-	LeaveIcon = "";
+	C012_AfterClass_Sidney_CalcParams();
+	LeaveIcon = "Leave";
 }
 
 // Chapter 12 After Class - Release Sidney from any restrain before her collaring
 function C012_AfterClass_Sidney_EnslaveRelease() {
 	ActorUntie();
 	if (ActorHasInventory("Cuffs")) { PlayerAddInventory("Cuffs", 1); ActorRemoveInventory("Cuffs"); }
+	if (ActorGetValue(ActorCloth) == "Naked") {
+		C012_AfterClass_Sidney_CurrentStage = 291;
+		ActorSetPose("Shy");
+	}
 	CurrentTime = CurrentTime + 50000;
 }
 
 // Chapter 12 After Class - Sidney gets naked for her collaring
 function C012_AfterClass_Sidney_EnslaveStrip() {
 	ActorSetCloth("Naked");
+	ActorSetPose("Shy");
 	CurrentTime = CurrentTime + 50000;
 }
 
@@ -565,4 +584,35 @@ function C012_AfterClass_Sidney_Untie() {
 	ActorUntie();
 	C012_AfterClass_Sidney_CalcParams();
 	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - When Sidney gets collared
+function C012_AfterClass_Sidney_LockCollarSidney() {
+	ActorSetOwner("Player");
+	PlayerRemoveInventory("Collar", 1);
+	C012_AfterClass_Sidney_CalcParams();
+	ActorSetPose("Kneel");
+	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - The player can decide how Sidney will spend her evening
+function C012_AfterClass_Sidney_SetCurfew(CurfewType) {
+	GameLogAddTimer("CurfewStay", -1);
+	GameLogAddTimer("Curfew22", -1);
+	GameLogAddTimer("Curfew24", -1);
+	GameLogAddTimer("CurfewNone", -1);
+	GameLogAdd("Curfew" + CurfewType);
+}
+
+// Chapter 12 After Class - The player can decide how Sidney will spend her evening
+function C012_AfterClass_Sidney_BackToDorm() {
+	SetScene(CurrentChapter, "Dorm");
+}
+
+// Chapter 12 After Class - Cannot review Sidney rules if she's gagged
+function C012_AfterClass_Sidney_TestReviewRules() {
+	if (C012_AfterClass_Sidney_IsGagged) {
+		C012_AfterClass_Sidney_GaggedAnswer();
+		C012_AfterClass_Sidney_CurrentStage = 0;
+	}
 }

@@ -1,6 +1,7 @@
 Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_ActorIsOwner,What's on your|mind Mistress?,Not much my little bitch.|(She checks her cell phone.),0,0,0,RandomSidneyDommeEvent()
 0,0,0,Common_ActorIsOwner,"Mistress, it's ok if|I change clothes?",Sure bitch.  Wear what you want.,0,0,0,IsChangingBlocked()
+0,0,0,Common_ActorIsOwned,Let's review|your rules.,(She seems to worry.)|Of course Mistress.,610,0,0,TestReviewRules()
 0,5,0,,Would you like to|make love with me?,"No, I don't feel like it.|Let's do something else.",0,0,0,TestLove()
 0,0,5,!Common_ActorIsOwned,"Girl, you need|my protection.",I don't need protection from anyone.|(You need +20 submission to collar Sidney.),0,0,0,TestDomme()
 0,0,-5,!Common_ActorIsOwner,Miss Sidney.|I admire you.,"Don't talk like that, you sound like a loser.|(You need -20 submission to submit to Sidney.)",0,0,0,TestSub()
@@ -43,8 +44,25 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 280,0,0,,So will you|wear my collar?,I'm sorry but I can't do that.|Let's talk about something else.,0,0,0,TestEnslaveSidney()
 280,0,0,,I've changed my mind.|I won't collar you.,(She bows her head.)  Very well Miss.|Let's talk about something else then.,0,0,0,EndEnslaveSidney()
 285,0,0,,I will help you first.|(Release her.),(You release her from her restrains.),290,0,0,EnslaveRelease()
-290,0,0,,Get naked my|little submissive.,"(She strips down slowly.)|Naked?  Mmmh, of course Miss.",291,1,0,EnslaveStrip()
-290,0,0,,Strip down slave.,"(She strips down nervously.)|Strip?  Mmmmh, of course Miss.",291,0,1,EnslaveStrip()
+290,0,0,,Get naked my|little submissive.,(She strips down slowly.)|Naked?  Of course Miss.,291,1,0,EnslaveStrip()
+290,0,0,,Strip down slave.,(She strips down nervously.)|Strip?  Now?  Of course Miss.,291,0,1,EnslaveStrip()
+291,0,0,,"From now on, you|will call me ""Mistress"".",Yes Mistress COMMON_PLAYERNAME.,292,0,0,
+291,0,0,,"You shall address|me as ""Mistress"".",Yes Mistress COMMON_PLAYERNAME.,292,0,0,
+292,0,0,,Get on your knees.,(She slowly kneel in front of you.),293,0,0,"ActorSetPose(""Kneel"")"
+292,0,0,,Will you please|kneel for me?,(She slowly kneel in front of you.),293,0,-1,"ActorSetPose(""Kneel"")"
+292,0,0,,On your knees slut.,(She slowly kneel in front of you.),293,-1,1,"ActorSetPose(""Kneel"")"
+293,0,0,,"Once this collar is locked,|you will be my property.",(She nods and looks down.)|I understand Mistress.,294,0,0,
+293,0,0,,"Once locked on your neck,|there's no turning back.",(She trembles and looks down.)|I understand Mistress.,294,0,0,
+294,0,0,,(Lock the collar|around her neck.),(You circle the leather collar around her neck|buckle it and put a padlock to lock it in place.),295,0,3,LockCollarSidney()
+295,0,0,,You are now my bitch.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,-1,0,
+295,0,0,,You are mine.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,0,0,
+295,0,0,,You are now my protege.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,1,0,
+296,0,0,,I vow to protect you.,(She nods.)  Thanks Mistress.|I know you will protect me.,297,0,0,
+296,0,0,,I vow to help you.,(She smiles.)  Thanks Mistress.|I know you will help me.,297,0,-1,
+296,0,0,,I vow to disipline you.,(She gasps.)  Thanks Mistress.|I know it will make me better.,297,0,1,
+297,0,0,,Stand up my|lovely subbie.,(She smiles and slowly stands up.)|What do you wish to do now Mistress?,0,1,0,EndEnslaveSidney()
+297,0,0,,Stand up slut.,(She frowns and slowly stands up.)|What do you wish to do now Mistress?,0,-1,0,EndEnslaveSidney()
+297,0,0,,Stand up.,(She nods and slowly stands up.)|What do you wish to do now Mistress?,0,0,0,EndEnslaveSidney()
 300,0,0,,I know!  I'm sorry.,(She sighs.)  They only way you won't get|killed is if I take you under my wing.,310,0,0,
 300,0,0,,School can be harsh.,(She sighs.)  They only way you won't get|killed is if I take you under my wing.,310,0,0,
 300,0,0,,Can you help me?,(She sighs.)  They only way you won't get|killed is if I take you under my wing.,310,0,0,
@@ -82,13 +100,19 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 395,0,0,,Very good.,Now stand up and let's do something fun.,0,0,0,PlayerStandUp()
 400,0,0,Common_PlayerGagged,@UNGN MH NUUOGH!,(She laughs and leaves your dorm.),410,0,0,TestReleaseBeforeExit()
 400,0,0,Common_PlayerRestrained,Can you help me|before you go?,"Nope, I like you like that.|(She leaves your dorm.)",410,0,0,TestReleaseBeforeExit()
-400,0,0,,Have fun!,I will.  (She leaves your dorm.),410,0,0,
-400,0,0,,That sucks!|Don't go.,Fuck that.  (She leaves your dorm.),410,-1,0,
+400,0,0,!Common_ActorIsOwned,Have fun Sidney!,I will.  (She leaves your dorm.),410,0,0,
+400,0,0,Common_ActorIsOwned,Have fun my slave!,"I will Mistress, thanks!|(She leaves your dorm.)",410,0,1,
+400,0,0,!Common_ActorIsOwned,That sucks!|Don't go.,Fuck that.  (She leaves your dorm.),410,-1,0,
 400,0,0,!Common_ActorIsOwner,Have a great|time Sidney.,Hell yeah!  (She leaves your dorm.),410,1,0,
 400,0,0,Common_ActorIsOwner,Have a great|time Mistress.,Hell yeah!  (She leaves your dorm.),410,1,0,
-400,0,0,,Wait!,I can't.  (She leaves your dorm.),410,0,0,
+400,0,0,!Common_ActorIsOwned,Wait!,I can't.  (She leaves your dorm.),410,0,0,
 400,0,0,!Common_ActorIsOwner,Next time I'll tie|you up so you'll stay.,Oh shit.  (She leaves your dorm.),410,0,1,
 400,0,0,,(Bow your head.),Good girl.  (She leaves your dorm.),410,0,-1,
+400,0,0,Common_ActorIsOwned,"My slave, you will|stay here tonight.",(She's surprised.)  Really Mistress?|I thought I could go out tonight.,401,0,0,
+401,0,0,,"No, you will stay.|(Make her stay.)","(She seems very disappointed.)|Yes Mistress, I will stay.",402,-1,-1,"SetCurfew(""Stay"")"
+401,0,0,,"Fine, have fun.|(Let her go.)",Thanks Mistress!  You're the best.|(She leaves your dorm room.),410,0,0,
+402,0,0,,(Back to your room.),,402,0,0,BackToDorm()
+410,0,0,,(Back to your room.),,410,0,0,BackToDorm()
 450,0,0,,Fun Mistress?,,0,0,0,RandomSidneyDommeEvent()
 450,0,0,,What's going on?,,0,0,0,RandomSidneyDommeEvent()
 450,0,0,,(Nod happily.),,0,0,0,RandomSidneyDommeEvent()
@@ -122,6 +146,10 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 600,0,0,!HasBelt,Get in your|underwear.,Alright.  What do you have in mind?|(She changes in her underwear for you.),0,0,0,"ForceChangeActor(""Underwear"")"
 600,0,0,,Get naked.,Really?  What do you have in mind?|(She strips naked for you.),0,0,0,"ForceChangeActor(""Naked"")"
 600,0,0,,Forget it.,(She nods.),0,0,0,
+610,0,0,,You're free to|have fun tonight.,Great!  Thanks Mistress.|You're the best.,0,0,0,"SetCurfew(""None"")"
+610,0,0,,You can have fun tonight|but you will sleep here.,"Very well, thanks Mistress.",0,0,0,"SetCurfew(""24"")"
+610,0,0,,You can have fun but|come back at twenty-two.,That's tough but fair Mistress.|I'll be back at twenty-two.,0,0,0,"SetCurfew(""22"")"
+610,0,0,,You cannot leave my|dorm room tonight.,Really?  But I had plans tonight.|(She sighs.)  I will stay here I guess.,0,0,0,"SetCurfew(""Stay"")"
 3000,0,0,,Yes Mistress.|(Strip naked.),Good girl.  (You change for Sidney.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,(Nod slowly.)|(Strip naked.),Good girl.  (You change for Sidney.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,I don't want|to do that.,"Fine, shut up then.|(She checks her phone.)",3092,0,0,TestPunish()

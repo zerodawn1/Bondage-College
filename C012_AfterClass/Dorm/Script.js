@@ -1,26 +1,31 @@
 var C012_AfterClass_Dorm_Guest = [];
 var C012_AfterClass_Dorm_PlayerPos = 0;
 var C012_AfterClass_Dorm_PlayerGrounded = false;
+var C012_AfterClass_Dorm_SidneyExitTime = 0;
+var C012_AfterClass_Dorm_SidneyReturnTime = 0;
 
 // Check if we must stop the scene for leaving guests
 function C012_AfterClass_Dorm_LeavingGuest() {
 
 	// Sidney will leave at 20:00, it ends any grounding event
-	if ((C012_AfterClass_Dorm_Guest.indexOf("Sidney") >= 0) && (CurrentTime >= 20 * 60 * 60 * 1000) && !ActorSpecificIsRestrained("Sidney")) {
+	if ((C012_AfterClass_Dorm_Guest.indexOf("Sidney") >= 0) && (CurrentTime >= C012_AfterClass_Dorm_SidneyExitTime) && (CurrentTime <= C012_AfterClass_Dorm_SidneyReturnTime) && !ActorSpecificIsRestrained("Sidney")) {
 		C012_AfterClass_Dorm_Guest.splice("Sidney");
-		C012_AfterClass_Sidney_CurrentStage = 400;
-		if (C012_AfterClass_Dorm_PlayerGrounded) GameLogSpecificAddTimer(CurrentChapter, "Sidney", "EventGrounded", 1);
-		SetScene(CurrentChapter, "Sidney");
-		if (C012_AfterClass_Dorm_PlayerGrounded) OverridenIntroText = GetText("GroundingEndForLeaving");
+		if (CurrentScreen == "Dorm") {
+			C012_AfterClass_Sidney_CurrentStage = 400;
+			if (C012_AfterClass_Dorm_PlayerGrounded) GameLogSpecificAddTimer(CurrentChapter, "Sidney", "EventGrounded", 1);
+			SetScene(CurrentChapter, "Sidney");
+			ActorSetCloth("Shorts");
+			if (C012_AfterClass_Dorm_PlayerGrounded) OverridenIntroText = GetText("GroundingEndForLeaving");
+		}
 	}
 
 }
 
 // Set the guest list in the dorm
-function C012_AfterClass_Dorm_CalGuest() {
+function C012_AfterClass_Dorm_CalGuest() {	
 	C012_AfterClass_Dorm_LeavingGuest();
 	C012_AfterClass_Dorm_Guest = [];
-	if (GameLogQuery(CurrentChapter, "Sidney", "EnterDormFromPub") && (CurrentTime <= 20 * 60 * 60 * 1000)) C012_AfterClass_Dorm_Guest.push("Sidney");
+	if (GameLogQuery(CurrentChapter, "Sidney", "EnterDormFromPub") && ((CurrentTime <= C012_AfterClass_Dorm_SidneyExitTime) || (CurrentTime >= C012_AfterClass_Dorm_SidneyReturnTime))) C012_AfterClass_Dorm_Guest.push("Sidney");
 	C012_AfterClass_Dorm_PlayerPos = 600 - C012_AfterClass_Dorm_Guest.length * 100;
 }
 
@@ -35,6 +40,14 @@ function C012_AfterClass_Dorm_Load() {
 	ActorSpecificSetPose("Jennifer", "");
 	Common_BondageAllowed = true;
 	Common_SelfBondageAllowed = true;
+	
+	// Calculates the time when Sidney will leave and return
+	C012_AfterClass_Dorm_SidneyExitTime = 20 * 60 * 60 * 1000;
+	if (GameLogQuery(CurrentChapter, "Sidney", "CurfewStay")) C012_AfterClass_Dorm_SidneyExitTime = 999 * 60 * 60 * 1000;
+	C012_AfterClass_Dorm_SidneyReturnTime = 999 * 60 * 60 * 1000;
+	if (GameLogQuery(CurrentChapter, "Sidney", "Curfew24")) C012_AfterClass_Dorm_SidneyReturnTime = 24 * 60 * 60 * 1000;
+	if (GameLogQuery(CurrentChapter, "Sidney", "Curfew22")) C012_AfterClass_Dorm_SidneyReturnTime = 22 * 60 * 60 * 1000;
+	if (GameLogQuery(CurrentChapter, "Sidney", "CurfewStay")) C012_AfterClass_Dorm_SidneyReturnTime = 12 * 60 * 60 * 1000;
 	
 	// If the player is grounded, the dorm is mostly deactivated until the timer runs out
 	C012_AfterClass_Dorm_PlayerGrounded = GameLogQuery(CurrentChapter, "", "EventGrounded");

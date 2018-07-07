@@ -49,6 +49,7 @@ function C012_AfterClass_Roommates_Click() {
 // Chapter 12 After Class - When the player leaves the roommates
 function C012_AfterClass_Roommates_Leave() {
 	CurrentTime = CurrentTime + 110000;
+	C012_AfterClass_Dorm_LeavingGuest();
 	SetScene(CurrentChapter, "Dorm");
 }
 

@@ -473,7 +473,7 @@ function DrawActor(ActorToDraw, X, Y, Zoom) {
 
 		// Third part is the collar, which only shows for certain clothes
 		var ImageCollar = "";
-		if ((ImageCloth == "Underwear") || (ImageCloth == "Naked") || (ImageCloth == "ChastityBelt") || (ImageCloth == "Damsel")) {
+		if ((ImageCloth == "Underwear") || (ImageCloth == "Naked") || (ImageCloth == "ChastityBelt") || (ImageCloth == "Damsel") || (ImageCloth == "Shorts")) {
 			if (ActorSpecificHasInventory(ActorToDraw, "Collar")) ImageCollar = "_Collar";
 		}
 
