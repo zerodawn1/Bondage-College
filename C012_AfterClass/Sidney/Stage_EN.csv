@@ -1,16 +1,20 @@
 Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_ActorIsOwner,What's on your|mind Mistress?,Not much my little bitch.|(She checks her cell phone.),0,0,0,RandomSidneyDommeEvent()
 0,0,0,Common_ActorIsOwner,"Mistress, it's ok if|I change clothes?",Sure bitch.  Wear what you want.,0,0,0,IsChangingBlocked()
-0,0,0,Common_ActorIsOwned,Let's review|your rules.,(She seems to worry.)|Of course Mistress.,610,0,0,TestReviewRules()
+0,0,0,Common_ActorIsOwned,Let's review|your rules.,(She seems to worry.)|Of course Mistress.,610,0,0,TestGagged()
 0,5,0,,Would you like to|make love with me?,"No, I don't feel like it.|Let's do something else.",0,0,0,TestLove()
 0,0,5,!Common_ActorIsOwned,"Girl, you need|my protection.",I don't need protection from anyone.|(You need +20 submission to collar Sidney.),0,0,0,TestDomme()
 0,0,-5,!Common_ActorIsOwner,Miss Sidney.|I admire you.,"Don't talk like that, you sound like a loser.|(You need -20 submission to submit to Sidney.)",0,0,0,TestSub()
 0,0,0,Common_PlayerGagged,@Om nnnuoogn mh!,Oh yeah.  I fucking understood|what you said.  (She laughs.),0,0,0,TestUnbind()
-0,0,0,Common_PlayerGagged,(Hum a sexy song|and dance for fun.),Not now my little bitch.|(She checks her cell phone.),0,0,0,RandomSidneyDommeEvent()
+0,0,0,Common_ActorIsOwner,(Hum a sexy song|and dance for fun.),Not now my little bitch.|(She checks her cell phone.),0,0,0,RandomSidneyDommeEvent()
 0,0,0,Common_PlayerRestrained,(Struggle in|your restrains.),"Nope, you're not getting out.|It's great to see you struggle.",0,0,0,TestUnbind()
-0,0,0,Common_PlayerChaste,Can you please help|me with this belt?,"Nope, that chastity belt|is a perfect fit for you.",0,0,0,
+0,0,0,Common_PlayerChaste,Can you please help|me with this belt?,"Nope, that chastity belt|is a perfect fit for you.",0,0,0,TestGagged()
 0,0,0,!Common_ActorIsOwner,You should wear|something else.,Forget it.  I'm not changing for you.,0,0,0,TestChange()
 0,0,0,ChatAvail,I'd like to know|more about you.,"Ok, what would like to know?",500,0,0,StartChat()
+0,0,0,PleasurePlayerAvail,"My submissive, you|will pleasure me now.",Pleasure you how Mistress?,630,0,0,NoLeave()
+0,0,0,PusherDealAvail,"Sidney, I've made a|deal with your pusher.",A deal with her?  What kind of deal?,620,0,0,TestGagged()
+0,5,0,!Common_PlayerGagged,(Kiss her.),(You get close to her and|kiss her sweetly on the lips.),0,0,0,Kiss()
+0,0,0,CanMasturbate,(Masturbate her.),(You get closer to masturbate|her but she pushes you away.),0,0,0,StartMasturbate()
 0,0,0,IsGagged,(Ungag her.),(You remove her gag.)|Thanks!  This is better.,0,0,0,Ungag()
 0,0,0,IsRoped,(Untie her.),(You undo the knots and remove the|ropes while she stretches slowly.),0,0,0,Untie()
 0,0,0,IsStrapped,(Unstrap her.),(You remove the straps and|unlace the binder from her arms.),0,0,0,Untie()
@@ -150,6 +154,58 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 610,0,0,,You can have fun tonight|but you will sleep here.,"Very well, thanks Mistress.",0,0,0,"SetCurfew(""24"")"
 610,0,0,,You can have fun but|come back at twenty-two.,That's tough but fair Mistress.|I'll be back at twenty-two.,0,0,0,"SetCurfew(""22"")"
 610,0,0,,You cannot leave my|dorm room tonight.,Really?  But I had plans tonight.|(She sighs.)  I will stay here I guess.,0,0,0,"SetCurfew(""Stay"")"
+620,0,0,,Until you pay your debt.|You'll wear a chastity belt.,Fuck you!  I'm not wearing a chastity belt.|I don't want to hear about that again.,0,0,0,TestBelt()
+621,0,0,,Get naked then.,I need to find a new pusher.|(She grumbles and strips down.),622,0,0,"ForceChangeActor(""Naked"")"
+621,0,0,,"It's for your own|good, now undress.",I need to find a new pusher.|(She grumbles and strips down.),622,1,-1,"ForceChangeActor(""Naked"")"
+621,0,0,,Strip slut.,I need to find a new pusher.|(She grumbles and strips down.),622,-1,1,"ForceChangeActor(""Naked"")"
+622,0,0,,Open your legs girl.|(Lock the belt on her.),(She opens her legs while you circle the belt|around her waist and lock it over her crotch.),623,0,2,LockBeltSidney()
+622,0,0,,It will teach you to behave.|(Lock the belt on her.),(She opens her legs while you circle the belt|around her waist and lock it over her crotch.),623,-1,3,LockBeltSidney()
+622,0,0,,It will be cute on you.|(Lock the belt on her.),(She opens her legs while you circle the belt|around her waist and lock it over her crotch.),623,1,1,LockBeltSidney()
+622,0,0,,"Wait, we could lie to her.|(Don't lock the belt.)",Best idea ever!  We could tell her|we did it and she will never know.,623,2,0,
+623,0,0,,Perfect!,Ok.  What would you like to do next?,0,0,0,EndEnslaveSidney()
+623,0,0,,Alright.,Ok.  What would you like to do next?,0,0,0,EndEnslaveSidney()
+630,0,0,,Get naked first.,(She nods and slowly|strips down for you.),631,0,0,"ForceChangeActor(""Naked"")"
+630,0,0,,Strip girl.,(She nods and slowly|strips down for you.),631,0,0,"ForceChangeActor(""Naked"")"
+630,0,0,,I've changed my mind.,Ok.  What would you like to do Mistress?,0,0,0,EndEnslaveSidney()
+631,0,0,,Come to my bed.|(Strip and get in bed.),(You strip down and pull her to the bed|where she kneels in front on you.),632,0,0,StartPleasurePlayer()
+631,0,0,,Get busy slave.|(Strip and get in bed.),(You strip down and pull her to the bed|where she kneels in front on you.),632,0,0,StartPleasurePlayer()
+631,0,0,,Come my lovely subbie.|(Strip and get in bed.),(You strip down and pull her to the bed|where she kneels in front on you.),632,0,0,StartPleasurePlayer()
+632,0,0,,Pleasure me|my subbie.,(She bends down near your pussy|and starts to lick it slowly.),633,0,0,
+632,0,0,,Lick slut!,(She bends down near your pussy|and starts to lick it slowly.),633,0,0,
+632,0,0,,You know|what to do.,(She bends down near your pussy|and starts to lick it slowly.),633,0,0,
+633,0,0,,(Let her pleasure you.),(You let Sidney pleasure you with her|mouth and slowly drifts away in extasy.),633,0,0,PleasurePlayer()
+633,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you had pleasure?,635,0,0,
+633,0,0,,(Force her to|go faster.),(You grab her hair and force|her to speed up the rhythm.),633,0,0,PleasurePlayerSpeed(1)
+633,0,0,,(Force her to|go slower.),(You push her head and force|her to slow down the rhythm.),633,0,0,PleasurePlayerSpeed(-1)
+634,0,0,,Aaaaah!  Stop slave!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you had pleasure?,635,0,0,
+634,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you had pleasure?,635,0,0,
+634,0,0,,Continue!,(You don't give her time to take|her breath and pull her back inside.),633,0,0,
+635,0,0,,It was wonderful.|I'm still shaking.,I'm very happy to hear you say that.|What would you like to do now?,0,0,0,"EndPleasureFromSidney(2, -1)"
+635,0,0,,It was good.,I'm happy to hear you say that.|What would you like to do now?,0,0,0,"EndPleasureFromSidney(1, 0)"
+635,0,0,,It was ok.,I'll do better next time Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromSidney(0, 0)"
+635,0,0,,With practice everyday|it will become better.,Everyday Mistress?  Oh my!|What would you like to do now?,0,0,0,"EndPleasureFromSidney(0, 1)"
+635,0,0,,I've had better.,I'm sorry to hear that Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromSidney(-1, 0)"
+635,0,0,,You need some|oral training.,I will train for you Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromSidney(-2, 1)"
+640,0,0,!Common_PlayerGagged,(Kiss her.),(You kiss her slowly while she|giggles but doesn't look very aroused.),640,0,0,Masturbate(-1)
+640,0,0,,(Massage her breast.),(She seems to be relaxing|from your gentle massage.),640,0,0,Masturbate(0)
+640,0,0,,(Pinch her nipple.),(She jumps from the pain and blushes.),640,0,0,Masturbate(0)
+640,0,0,,(Slap her butt.),(You slap her butt a few times while she|stares at you and doesn't look very aroused.),640,0,0,Masturbate(-1)
+640,0,0,,(Caress her clitoris.),(She relaxes from your gentle touch.),640,0,0,Masturbate(0)
+640,0,0,,(Play with her pussy.),(She moans and breathes a little faster.),640,0,0,Masturbate(1)
+640,0,0,,(Slide a finger|in and out.),(She moans and trembles from your touch.),640,0,0,Masturbate(1)
+640,0,0,!Common_PlayerGagged,(Eat her.),(You eat her with passion while she|moans loudly and trembles frenetically.),640,0,0,Masturbate(2)
+640,0,0,,(Fist her.),(You fit you're full hand and play in her vagina|while she moans loudly and trembles madly.),640,0,0,Masturbate(2)
+640,0,0,,(Stop everything.),(You stop everything and let her go.),0,0,0,EndEnslaveSidney()
+641,0,0,,(Make her climax.),(You continue to masturbate her and she|quickly collapses on a wonderful orgasm.),642,0,0,SidneyOrgasm()
+641,0,0,Common_ActorIsOwned,You deserve it slave.|(Make her climax.),(You continue to masturbate her and she|quickly collapses on a wonderful orgasm.),642,0,0,SidneyOrgasm()
+641,0,0,,(Stop everything.),(You stop everything and let her go.|She frowns and seems very frustrated.),0,0,0,SidneyDeniedOrgasm()
+641,0,0,Common_ActorIsOwned,You don't deserve it slave.|(Stop everything.),(You stop everything and let her go.|She frowns and seems very frustrated.),0,0,0,SidneyDeniedOrgasm()
+642,0,0,Common_ActorIsLover,I love you Sidney.,(She blushes and takes her|breath while slowly standing up.),0,1,0,EndEnslaveSidney()
+642,0,0,,You're such a slut.,(She frowns and takes her|breath while slowly standing up.),0,-1,1,EndEnslaveSidney()
+642,0,0,,I hope you liked it.,(She nods and takes her|breath while slowly standing up.),0,0,0,EndEnslaveSidney()
+642,0,0,,I control when|you cum girl.,(She nods and takes her|breath while slowly standing up.),0,0,1,EndEnslaveSidney()
+642,0,0,,(Give her a hug.),(You give her a big hug and|help her to stand up.),0,1,-1,EndEnslaveSidney()
+642,0,0,,(Help her to|stand still.),(You help her to stand up.),0,0,-1,EndEnslaveSidney()
 3000,0,0,,Yes Mistress.|(Strip naked.),Good girl.  (You change for Sidney.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,(Nod slowly.)|(Strip naked.),Good girl.  (You change for Sidney.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,I don't want|to do that.,"Fine, shut up then.|(She checks her phone.)",3092,0,0,TestPunish()

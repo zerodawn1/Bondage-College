@@ -33,6 +33,8 @@ PlayerUncollarFirst,Remove that fucking collar first.
 PlayerUnrestrainFirst,Get out of these restrains first.
 GetOnYourKnees,"Good, you'll be my bitch then.|So bitch, get on your knees."
 ReleasePlayer,"Here, I'll help you out.|(She releases you.)"
+ReleasePlayerGagged,Uuhm mnuum gm uh.|(She releases you.)
+CannotReleasePlayer,(She struggles in her|restrains and shrugs.)
 ActivityEndGood,That's enough!  That was great.|You know that I can do it any time.
 ActivityEndFair,That's enough!  That was kind of fun.|You know that I can do it any time.
 ActivityEndBad,That's enough!  That was kind of lame.|But you know that I can do it any time.
@@ -83,3 +85,12 @@ AcceptCollar,Yes Miss.  I will wear your collar.|I would love to be your slave.
 CannotActWhileRestrained,(She rolls her eyes up and|wiggles in her restrains.)
 CannotBeDoneWhileRestrained,(You cannot do it when you're restrained.)
 NakedForBelt,(Sidney must be naked to|lock a chastity belt on her.)
+AcceptPusherDeal,What kind of messed up deal is that?|Fine!  I'll do it!  I'll pay pretty soon anyway.
+OrgasmFromSidneyPleasure,(Sidney skillfully slides her tongue inside of you.|Making you tremble and moan from a great orgasm.)
+PleasureFromSidneyNoProgress,(Sidney tries to pleasure you with her mouth|but doesn't have the proper rhythm to really enjoy it.)
+KissSidneyOwner,(You bend a knee and|kiss your Mistress hand.)
+KissSidneyGagged,(You kiss her on the gag while|she gives you a curious look.)
+KissSidneySeduction,(You kiss her pationately and she responds|with a long french kiss and some moanings.)
+StartMasturbateSidney,(You get close to Sidney and|start to caress her gently.)
+ReadyForOrgasm,"(She shakes without control and moans|loudly, she's about to have a big orgasm.)"
+MasturbateNotInTheMood,(You start to touch her but it's clear|that she's not in the mood for it.)
