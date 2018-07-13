@@ -38,7 +38,7 @@ function C012_AfterClass_Sidney_CalcParams() {
 	C012_AfterClass_Sidney_IsRoped = (ActorHasInventory("Rope") || ActorHasInventory("TwoRopes"));
 	C012_AfterClass_Sidney_IsStrapped = ActorHasInventory("Armbinder");
 	C012_AfterClass_Sidney_PusherDealAvail = (!C012_AfterClass_Sidney_HasBelt && PlayerHasInventory("ChastityBelt") && GameLogQuery(CurrentChapter, "", "DebtChastityBelt") && !GameLogQuery(CurrentChapter, "", "DebtChastityBeltDone"));
-	C012_AfterClass_Sidney_PleasurePlayerAvail = (!Common_PlayerChaste && !ActorIsGagged() && !ActorIsRestrained && Common_ActorIsOwned);
+	C012_AfterClass_Sidney_PleasurePlayerAvail = (!Common_PlayerChaste && !ActorIsGagged() && !ActorIsRestrained() && Common_ActorIsOwned && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
 	C012_AfterClass_Sidney_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Sidney_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));
 	C012_AfterClass_Sidney_SetPose();
 }
@@ -74,6 +74,7 @@ function C012_AfterClass_Sidney_Load() {
 			// Skip to the punishment end phase, no talking while being grounded
 			C012_AfterClass_Sidney_AllowLeave();
 			C012_AfterClass_Sidney_CurrentStage = 3999;
+			Common_PlayerPose = "TwoRopesPunishment";
 			OverridenIntroText = GetText("StillGrounded");
 
 		} else {
@@ -272,6 +273,10 @@ function C012_AfterClass_Sidney_PlayerCollared() {
 // Chapter 12 After Class - When the player gets collared
 function C012_AfterClass_Sidney_PlayerStandUp() {
 	Common_PlayerPose = "";
+	if (ActorGetValue(ActorCloth) != "Shorts") {
+		ActorSetCloth("Shorts");
+		OverridenIntroText = GetText("ChangeAfterCollaring");
+	}
 	LeaveIcon = "Leave";
 }
 
@@ -652,9 +657,10 @@ function C012_AfterClass_Sidney_LockBeltSidney() {
 	CurrentTime = CurrentTime + 50000;
 }
 
-// Chapter 12 After Class - Doesn't allow the player to leave until the scene is over
-function C012_AfterClass_Sidney_NoLeave() {
+// Chapter 12 After Class - Starts the pleasure player scene
+function C012_AfterClass_Sidney_TestPleasurePlayer() {
 	LeaveIcon = "";
+	if (ActorGetValue(ActorCloth) == "Naked") C012_AfterClass_Sidney_CurrentStage = 631;
 }
 
 // Chapter 12 After Class - When Sidney starts pleasuring the player (starts to count at 2 with a vibrating egg)
@@ -663,7 +669,7 @@ function C012_AfterClass_Sidney_StartPleasurePlayer() {
 	if (ActorIsChaste()) OverridenIntroImage = "SidneyPleasurePlayerChastity.jpg";
 	else OverridenIntroImage = "SidneyPleasurePlayer.jpg";
 	CurrentTime = CurrentTime + 50000;
-	if (PlayerHasInventory("VibratingEgg")) C012_AfterClass_Sidney_PleasurePlayerCount = 2;
+	if (PlayerHasLockedInventory("VibratingEgg")) C012_AfterClass_Sidney_PleasurePlayerCount = 2;
 	else C012_AfterClass_Sidney_PleasurePlayerCount = 0;
 	C012_AfterClass_Sidney_PleasurePlayerSpeed = 0;
 }
@@ -682,11 +688,11 @@ function C012_AfterClass_Sidney_PleasurePlayer() {
 	if (C012_AfterClass_Sidney_PleasurePlayerCount >= 6) {
 		OverridenIntroText = GetText("OrgasmFromSidneyPleasure");
 		ActorAddOrgasm();
+		GameLogSpecificAddTimer(CurrentChapter, "Player", "NextPossibleOrgasm", PlayerHasLockedInventory("VibratingEgg") ? CurrentTime + 1800000 : CurrentTime + 3600000);
 		if (ActorIsChaste()) OverridenIntroImage = "SidneyPleasurePlayerChastityOrgasm.jpg";
 		else OverridenIntroImage = "SidneyPleasurePlayerOrgasm.jpg";
 		C012_AfterClass_Sidney_CurrentStage = 634;
-		if (PlayerHasInventory("VibratingEgg")) C012_AfterClass_Sidney_PleasurePlayerCount = 0;
-		else C012_AfterClass_Sidney_PleasurePlayerCount = -3;
+		C012_AfterClass_Sidney_PleasurePlayerCount = 0;
 		C012_AfterClass_Sidney_PleasurePlayerSpeed = 0;
 	} else {
 		if (StartCount == C012_AfterClass_Sidney_PleasurePlayerCount) OverridenIntroText = GetText("PleasureFromSidneyNoProgress");
@@ -695,10 +701,15 @@ function C012_AfterClass_Sidney_PleasurePlayer() {
 }
 
 // Chapter 12 After Class - When Sidney pleasures the player and is forced in a new position or speed
-function C012_AfterClass_Sidney_PleasurePlayerSpeed(SpeedFactor) {
+function C012_AfterClass_Sidney_PleasurePlayerSetSpeed(SpeedFactor) {
 	C012_AfterClass_Sidney_PleasurePlayerSpeed = C012_AfterClass_Sidney_PleasurePlayerSpeed + SpeedFactor;
 	if (C012_AfterClass_Sidney_PleasurePlayerSpeed < 0) C012_AfterClass_Sidney_PleasurePlayerSpeed = 0;
 	if (C012_AfterClass_Sidney_PleasurePlayerSpeed > 2) C012_AfterClass_Sidney_PleasurePlayerSpeed = 2;
+}
+
+// Chapter 12 After Class - When Sidney stops pleasuring the player
+function C012_AfterClass_Sidney_StopPleasureFromSidney() {
+	OverridenIntroImage = "";
 }
 
 // Chapter 12 After Class - When Sidney pleasures for the player ends

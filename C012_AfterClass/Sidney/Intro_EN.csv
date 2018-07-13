@@ -9,6 +9,7 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 0,0,10,Common_PlayerNaked,"Miss, you have a fabulous body.",Dorm.jpg
 0,0,0,Common_ActorIsOwner,Hey there my little bitch.|What would you like to do?,Dorm.jpg
 0,0,0,Common_ActorIsOwned,"Mistress, what would you like to do?",Dorm.jpg
+0,0,0,IsGagged,Haamh nh g gna!,Dorm.jpg
 100,0,0,,"Sure, we can fuck.|We do it right here?",Dorm.jpg
 100,0,-10,,"Sure, we can fuck.|Get in bed girl.",Dorm.jpg
 100,0,0,Common_ActorIsLover,Of course sweetie.,Dorm.jpg
@@ -47,7 +48,8 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 370,0,0,,,Dorm.jpg
 380,0,0,,,Dorm.jpg
 390,0,0,,,Dorm.jpg
-395,0,0,,,Dorm.jpg
+391,0,0,,,Dorm.jpg
+392,0,0,,,Dorm.jpg
 400,0,0,,I need to go.|I'll see ya later.,Door.jpg
 400,0,0,Common_ActorIsOwner,Bitch!  I need to go.|I'll spank ya later.,Door.jpg
 400,0,0,Common_ActorIsOwned,I need to go Mistress.|I hope to see you later.,Door.jpg
@@ -118,6 +120,8 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 3291,0,0,,,Dorm.jpg
 3800,0,0,,(Sidney drags you by the collar.)|Bitch!  What the fuck are you doing?,Dorm.jpg
 3801,0,0,,,Dorm.jpg
+3810,0,0,,(Sidney drags you by the collar.)|Bitch!  What the fuck is going on?,Dorm.jpg
+3811,0,0,,,Dorm.jpg
 3900,0,0,,That's it!  You need to be punished.,Dorm.jpg
 3901,0,0,,,Dorm.jpg
 3902,0,0,,,Dorm.jpg

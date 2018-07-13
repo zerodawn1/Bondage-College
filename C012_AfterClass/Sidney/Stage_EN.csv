@@ -11,7 +11,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_PlayerChaste,Can you please help|me with this belt?,"Nope, that chastity belt|is a perfect fit for you.",0,0,0,TestGagged()
 0,0,0,!Common_ActorIsOwner,You should wear|something else.,Forget it.  I'm not changing for you.,0,0,0,TestChange()
 0,0,0,ChatAvail,I'd like to know|more about you.,"Ok, what would like to know?",500,0,0,StartChat()
-0,0,0,PleasurePlayerAvail,"My submissive, you|will pleasure me now.",Pleasure you how Mistress?,630,0,0,NoLeave()
+0,0,0,PleasurePlayerAvail,"My submissive, you|will pleasure me now.",Pleasure you how Mistress?,630,0,0,TestPleasurePlayer()
 0,0,0,PusherDealAvail,"Sidney, I've made a|deal with your pusher.",A deal with her?  What kind of deal?,620,0,0,TestGagged()
 0,5,0,!Common_PlayerGagged,(Kiss her.),(You get close to her and|kiss her sweetly on the lips.),0,0,0,Kiss()
 0,0,0,CanMasturbate,(Masturbate her.),(You get closer to masturbate|her but she pushes you away.),0,0,0,StartMasturbate()
@@ -94,14 +94,16 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 380,0,0,!Common_ActorIsLover,I'm your bitch.,"Damn right!  (She fastens the collar and locks it.)|From now on, you will call me ""Mistress"".",390,0,-3,PlayerCollared()
 380,0,0,Common_ActorIsLover,I'm your bitch.,"Damn right!  (She fastens the collar and locks it.)|From now on my love, you will call me ""Mistress"".",390,0,-3,PlayerCollared()
 380,0,0,,Stop!  This is|going too far.,Fine.  But I won't protect you.,0,0,0,
-390,0,0,,I'm so happy!,That's pretty fucking awesome.|I'll protect you but never betray me.,395,1,0,
-390,0,0,,I know I'm|in good hands.,"You are, and that's fucking awesome.|I'll protect you but never betray me.",395,1,0,
-390,0,0,,I don't feel|very good.,You'll get used to it.  Now remember.|I'll protect you but never betray me.,395,-1,0,
-390,0,0,,(Stay silent and|look at her feet.),That's pretty fucking awesome.|I'll protect you but never betray me.,395,0,-1,
-390,0,0,,Is the collar supposed|to be that tight?,Don't complain or I'll punish you.|I'll protect you but never betray me.,395,0,1,
-395,0,0,,I will never|betray you Mistress.,Very good my sexy little bitch.|Now stand up and let's do something fun.,0,0,-1,PlayerStandUp()
-395,0,0,,Ok Sidney.,That's MISTRESS for you!  (She slaps you.)|Now stand up and let's do something fun.,0,-1,0,PlayerStandUp()
-395,0,0,,Very good.,Now stand up and let's do something fun.,0,0,0,PlayerStandUp()
+390,0,0,,I'm so happy!,That's pretty fucking awesome.|I'll protect you but never betray me.,391,1,0,
+390,0,0,,I know I'm|in good hands.,"You are, and that's fucking awesome.|I'll protect you but never betray me.",391,1,0,
+390,0,0,,I don't feel|very good.,You'll get used to it.  Now remember.|I'll protect you but never betray me.,391,-1,0,
+390,0,0,,(Stay silent and|look at her feet.),That's pretty fucking awesome.|I'll protect you but never betray me.,391,0,-1,
+390,0,0,,Is the collar supposed|to be that tight?,Don't complain or I'll punish you.|I'll protect you but never betray me.,391,0,1,
+391,0,0,,I will never|betray you Mistress.,"(She smiles.)  Very good my little bitch.|Another thing, I now control your sexuality.",392,0,-1,
+391,0,0,,Ok Sidney.,"That's MISTRESS for you!  (She slaps you.)|Another thing, I now control your sexuality.",392,-1,0,
+391,0,0,,Very good.,"(She nods.)  Alright my little bitch.|Another thing, I now control your sexuality.",392,0,0,
+392,0,0,,My sexuality Mistress?,You can't do anything sexual without asking me.|Now stand up and let's do something fun.,0,0,0,PlayerStandUp()
+392,0,0,,What does it mean?,You can't do anything sexual without asking me.|Now stand up and let's do something fun.,0,0,0,PlayerStandUp()
 400,0,0,Common_PlayerGagged,@UNGN MH NUUOGH!,(She laughs and leaves your dorm.),410,0,0,TestReleaseBeforeExit()
 400,0,0,Common_PlayerRestrained,Can you help me|before you go?,"Nope, I like you like that.|(She leaves your dorm.)",410,0,0,TestReleaseBeforeExit()
 400,0,0,!Common_ActorIsOwned,Have fun Sidney!,I will.  (She leaves your dorm.),410,0,0,
@@ -170,16 +172,16 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 631,0,0,,Come to my bed.|(Strip and get in bed.),(You strip down and pull her to the bed|where she kneels in front on you.),632,0,0,StartPleasurePlayer()
 631,0,0,,Get busy slave.|(Strip and get in bed.),(You strip down and pull her to the bed|where she kneels in front on you.),632,0,0,StartPleasurePlayer()
 631,0,0,,Come my lovely subbie.|(Strip and get in bed.),(You strip down and pull her to the bed|where she kneels in front on you.),632,0,0,StartPleasurePlayer()
+631,0,0,,I've changed my mind.,Ok.  What would you like to do Mistress?,0,0,0,EndEnslaveSidney()
 632,0,0,,Pleasure me|my subbie.,(She bends down near your pussy|and starts to lick it slowly.),633,0,0,
 632,0,0,,Lick slut!,(She bends down near your pussy|and starts to lick it slowly.),633,0,0,
 632,0,0,,You know|what to do.,(She bends down near your pussy|and starts to lick it slowly.),633,0,0,
 633,0,0,,(Let her pleasure you.),(You let Sidney pleasure you with her|mouth and slowly drifts away in extasy.),633,0,0,PleasurePlayer()
 633,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you had pleasure?,635,0,0,
-633,0,0,,(Force her to|go faster.),(You grab her hair and force|her to speed up the rhythm.),633,0,0,PleasurePlayerSpeed(1)
-633,0,0,,(Force her to|go slower.),(You push her head and force|her to slow down the rhythm.),633,0,0,PleasurePlayerSpeed(-1)
-634,0,0,,Aaaaah!  Stop slave!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you had pleasure?,635,0,0,
-634,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you had pleasure?,635,0,0,
-634,0,0,,Continue!,(You don't give her time to take|her breath and pull her back inside.),633,0,0,
+633,0,0,,(Force her to|go faster.),(You grab her hair and force|her to speed up the rhythm.),633,0,0,PleasurePlayerSetSpeed(1)
+633,0,0,,(Force her to|go slower.),(You push her head and force|her to slow down the rhythm.),633,0,0,PleasurePlayerSetSpeed(-1)
+634,0,0,,Aaaaah!  Stop slave!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you had pleasure?,635,0,0,StopPleasureFromSidney()
+634,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you had pleasure?,635,0,0,StopPleasureFromSidney()
 635,0,0,,It was wonderful.|I'm still shaking.,I'm very happy to hear you say that.|What would you like to do now?,0,0,0,"EndPleasureFromSidney(2, -1)"
 635,0,0,,It was good.,I'm happy to hear you say that.|What would you like to do now?,0,0,0,"EndPleasureFromSidney(1, 0)"
 635,0,0,,It was ok.,I'll do better next time Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromSidney(0, 0)"
@@ -352,6 +354,14 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 3801,0,0,,I'm sorry Mistress.,Fucking bitch!  I'll teach you to|follow the rules.  I'll punish you!,3900,0,0,
 3801,0,0,,(Stay silent.),Fucking bitch!  I'll teach you to|follow the rules.  I'll punish you!,3900,0,0,
 3801,0,0,,(Look remorseful.),Fucking bitch!  I'll teach you to|follow the rules.  I'll punish you!,3900,0,0,
+3810,0,0,,(Look surprised.),Admit it bitch!  You were about|to masturbate without asking me.,3811,0,0,
+3810,0,0,,I was about to|have some fun.,I'm your fucking Mistress!|You can't masturbate without asking me.,3811,0,0,
+3810,0,0,,(Bow your head.),You little bitch!  You were about|to masturbate without asking me.,3811,0,0,
+3810,0,0,,I was about to|get to sleep.,You lying bitch!  You were about|to masturbate without asking me.,3811,0,0,
+3811,0,0,,I thought it was ok.,I'll teach you who's boss!|I'll punish you right now.,3900,0,0,
+3811,0,0,,I'm sorry Mistress.,I'll teach you who's boss!|I'll punish you right now.,3900,0,0,
+3811,0,0,,(Stay silent.),I'll teach you who's boss!|I'll punish you right now.,3900,0,0,
+3811,0,0,,(Look remorseful.),I'll teach you who's boss!|I'll punish you right now.,3900,0,0,
 3900,0,0,,Punished?|For real?,That's fucking real.  Get naked!,3901,-1,0,ReleaseBeforePunish()
 3900,0,0,,Yes Mistress.,I'll teach you.  Get naked!,3901,-1,-1,ReleaseBeforePunish()
 3900,0,0,,Punished?|Alright!,Stupid bitch.  Get naked!,3901,-1,-1,ReleaseBeforePunish()
