@@ -11,6 +11,7 @@ var	C012_AfterClass_Sidney_IsStrapped = false;
 var C012_AfterClass_Sidney_CanMasturbate = false;
 var C012_AfterClass_Sidney_PusherDealAvail = false;
 var C012_AfterClass_Sidney_PleasurePlayerAvail = false;
+var C012_AfterClass_Sidney_SexAvail = false;
 var C012_AfterClass_Sidney_PleasurePlayerCount = 0;
 var C012_AfterClass_Sidney_PleasurePlayerSpeed = 0;
 var C012_AfterClass_Sidney_MasturbateCount = 0;
@@ -39,7 +40,8 @@ function C012_AfterClass_Sidney_CalcParams() {
 	C012_AfterClass_Sidney_IsStrapped = ActorHasInventory("Armbinder");
 	C012_AfterClass_Sidney_PusherDealAvail = (!C012_AfterClass_Sidney_HasBelt && PlayerHasInventory("ChastityBelt") && GameLogQuery(CurrentChapter, "", "DebtChastityBelt") && !GameLogQuery(CurrentChapter, "", "DebtChastityBeltDone"));
 	C012_AfterClass_Sidney_PleasurePlayerAvail = (!Common_PlayerChaste && !ActorIsGagged() && !ActorIsRestrained() && Common_ActorIsOwned && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
-	C012_AfterClass_Sidney_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Sidney_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));
+	C012_AfterClass_Sidney_SexAvail = (!Common_PlayerRestrained && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
+	C012_AfterClass_Sidney_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Sidney_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
 	C012_AfterClass_Sidney_SetPose();
 }
 
@@ -119,8 +121,8 @@ function C012_AfterClass_Sidney_Click() {
 		InventoryClick(ClickInv, CurrentChapter, CurrentScreen);
 	}
 	
-	// Sidney can be restrained on stage 0
-	if ((C012_AfterClass_Sidney_CurrentStage == 0) && (ClickInv != "") && (ClickInv != "Player") && !Common_PlayerRestrained) {
+	// Sidney can be restrained on stage 0 and 10
+	if ((C012_AfterClass_Sidney_CurrentStage <= 10) && (ClickInv != "") && (ClickInv != "Player") && !Common_PlayerRestrained) {
 		
 		// Sidney becomes more submissive from the crop
 		if (ClickInv == "Crop") {			
@@ -161,12 +163,17 @@ function C012_AfterClass_Sidney_Click() {
 			return;
 		}
 
+		// A second rope can be applied if Sidney isn't fully clothed
+		if ((ActorGetValue(ActorCloth) != "Naked") && (ActorGetValue(ActorCloth) != "Underwear") && (ClickInv == "Rope") && (ActorHasInventory("Rope"))) {
+			OverridenIntroText = GetText("StripForSecondRope");
+			return;
+		}
+		
 		// Apply the clicked restrain
 		ActorApplyRestrain(ClickInv);
 		C012_AfterClass_Sidney_CalcParams();
 
-	}
-	
+	}	
 
 }
 
@@ -178,14 +185,30 @@ function C012_AfterClass_Sidney_GaggedAnswer() {
 	}
 }
 
-// Chapter 12 After Class - Sidney can make love with the player if (Love + seduction * 2) >= 12 or >= 25 on the next time or Sidney is the player girlfriend/submissive
+// Chapter 12 After Class - Sidney can make love with the player if (Love + seduction * 2) >= 12 on the next time or Sidney is the player girlfriend/submissive
+function C012_AfterClass_Sidney_TestSex() {
+	if (!ActorIsGagged()) {
+		if (!ActorIsRestrained()) {
+			if (!ActorIsChaste()) {
+				var LoveChance = ActorGetValue(ActorLove) + PlayerGetSkillLevel("Seduction") * 2;
+				if ((LoveChance >= 12) || Common_ActorIsLover || Common_ActorIsOwned) {
+					C012_AfterClass_Sidney_CurrentStage = 650;
+					OverridenIntroText = "";
+				}
+			} else OverridenIntroText = GetText("UnlockBeltBeforeSex");
+		} else OverridenIntroText = GetText("ReleaseBeforeSex");
+	} else C012_AfterClass_Sidney_GaggedAnswer();
+}
+
+// Chapter 12 After Class - Sidney can be dated at +20 love
 function C012_AfterClass_Sidney_TestLove() {
 	if (!ActorIsGagged()) {
-		var LoveChance = ActorGetValue(ActorLove) + PlayerGetSkillLevel("Seduction") * 2;
-		if (((LoveChance >= 12) && !GameLogQuery(CurrentChapter, "Sidney", "EnterDormFromPub")) || (LoveChance >= 25) || Common_ActorIsLover || Common_ActorIsOwned) {
-			C012_AfterClass_Sidney_CurrentStage = 100;
-			OverridenIntroText = "";
-		}		
+		if (!ActorIsRestrained() && !Common_PlayerRestrained) {
+			if (ActorGetValue(ActorLove) >= 20) {
+				C012_AfterClass_Sidney_CurrentStage = 100;
+				OverridenIntroText = "";
+			}
+		} else OverridenIntroText = GetText("CantDateWhileRestrained");
 	} else C012_AfterClass_Sidney_GaggedAnswer();
 }
 
@@ -733,6 +756,24 @@ function C012_AfterClass_Sidney_Kiss() {
 			OverridenIntroText = GetText("KissSidneySeduction");
 		}
 	}
+}
+
+// Chapter 12 After Class - When the player spanks Sidney, with the fighting skill it can affect her submission level
+function C012_AfterClass_Sidney_Spank() {
+	CurrentTime = CurrentTime + 50000;
+	if (PlayerGetSkillLevel("Fighting") > 0) {
+		OverridenIntroText = GetText("SpankWithStrength");
+		if (!GameLogQuery(CurrentChapter, CurrentActor, "Spank")) {
+			GameLogAdd("Spank");
+			ActorChangeAttitude(0, PlayerGetSkillLevel("Fighting"));
+		}
+	}
+}
+
+// Chapter 12 After Class - When the player tickles Sidney, it doesn't affect her
+function C012_AfterClass_Sidney_Tickle() {
+	if ((Common_ActorIsOwner || (ActorGetValue(ActorSubmission) <= -5)) && !ActorIsRestrained()) OverridenIntroText = GetText("NoTickling");
+	else CurrentTime = CurrentTime + 50000;
 }
 
 // Chapter 12 After Class - When the player starts to masturbate Sidney

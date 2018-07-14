@@ -2,6 +2,7 @@ var C012_AfterClass_Bed_CurrentStage = 0;
 var C012_AfterClass_Bed_PleasureUp = 0;
 var C012_AfterClass_Bed_PleasureDown = 0;
 var C012_AfterClass_Bed_MasturbationRequired = 0;
+var C012_AfterClass_Bed_MistressApproveMasturbate = "";
 
 // Chapter 12 After Class - Bed Load
 function C012_AfterClass_Bed_Load() {
@@ -11,6 +12,7 @@ function C012_AfterClass_Bed_Load() {
 	C012_AfterClass_Bed_CurrentStage = 0;
 	C012_AfterClass_Bed_PleasureUp = 0;
 	C012_AfterClass_Bed_PleasureDown = 0;
+	C012_AfterClass_Bed_MistressApproveMasturbate = "";
 	if (PlayerHasLockedInventory("VibratingEgg")) C012_AfterClass_Bed_MasturbationRequired = 2;
 	else C012_AfterClass_Bed_MasturbationRequired = 3;
 }
@@ -48,22 +50,33 @@ function C012_AfterClass_Bed_AllRelatedGuest() {
 		}	
 	}
 	
-	// If the player Mistress is around, she might punish her for masturbating
+	// If the player Mistress is around, she might punish her for masturbating or changing clothes
 	for (var G = 0; G < C012_AfterClass_Dorm_Guest.length; G++) {
-		if (EventRandomChance("Hate") && Common_ActorIsOwner && (CurrentActor == Common_PlayerOwner)) {
-			CurrentTime = CurrentTime + 50000;
-			C012_AfterClass_Sidney_CurrentStage = 3810;
-			SetScene(CurrentChapter, Common_PlayerOwner);
-			ActorSetPose("Angry");
-			LeaveIcon = "";
-			return false;
+		if (Common_ActorIsOwner && (CurrentActor == Common_PlayerOwner)) {
+			
+			// If the player strips without being allowed, she gets punished
+			if (!Common_PlayerNaked && GameLogQuery(CurrentChapter, "", "EventBlockChanging")) {
+				CurrentTime = CurrentTime + 50000;
+				C012_AfterClass_Sidney_CurrentStage = 3800;
+				SetScene(CurrentChapter, Common_PlayerOwner);
+				ActorSetPose("Angry");
+				LeaveIcon = "";
+				return false;
+			} else {
+				
+				// Hints the player if she will get punished or not
+				if (EventRandomChance("Hate")) C012_AfterClass_Bed_MistressApproveMasturbate = "NO";
+				else C012_AfterClass_Bed_MistressApproveMasturbate = "YES";
+
+			}
+
 		}
 	}
 	
 	// No guest found, we allow the player to masturbate
-	CurrentActor = ""
+	CurrentActor = "";
 	return true;
-	
+
 }
 
 // Chapter 12 After Class - Gets in bed to masturbate
@@ -72,6 +85,8 @@ function C012_AfterClass_Bed_StartMasturbate() {
 		if (C012_AfterClass_Bed_AllRelatedGuest()) {
 			if (Common_PlayerNaked) OverridenIntroText = GetText("LayNaked");
 			else OverridenIntroText = GetText("StripNaked");
+			if (C012_AfterClass_Bed_MistressApproveMasturbate == "YES") OverridenIntroText = GetText("LayMistressApprove");
+			if (C012_AfterClass_Bed_MistressApproveMasturbate == "NO") OverridenIntroText = GetText("LayMistressDisapprove");
 			PlayerClothes("Naked");
 			C012_AfterClass_Bed_CurrentStage = 100;
 			CurrentTime = CurrentTime + 50000;			
@@ -79,11 +94,25 @@ function C012_AfterClass_Bed_StartMasturbate() {
 	}
 }
 
+// Chapter 12 After Class - Checks if the Mistress will punish the player for masturbating
+function C012_AfterClass_Bed_CheckMistress() {
+	if (C012_AfterClass_Bed_MistressApproveMasturbate == "NO") {
+		CurrentTime = CurrentTime + 50000;
+		C012_AfterClass_Sidney_CurrentStage = 3810;
+		SetScene(CurrentChapter, Common_PlayerOwner);
+		ActorSetPose("Angry");
+		LeaveIcon = "";
+		return false;
+	}
+}
+
+
 // Chapter 12 After Class - Masturbate the upper body (cannot lead to orgasm but helps)
 function C012_AfterClass_Bed_MasturbateUp() {
-	CurrentTime = CurrentTime + 50000;		
+	CurrentTime = CurrentTime + 50000;
 	if (!GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm")) C012_AfterClass_Bed_PleasureUp++;
 	else OverridenIntroText = GetText("NotInTheMood");
+	C012_AfterClass_Bed_CheckMistress();
 }
 
 // Chapter 12 After Class - Masturbate the lower body
@@ -100,7 +129,9 @@ function C012_AfterClass_Bed_MasturbateDown() {
 		}
 	}
 	else OverridenIntroText = GetText("NotInTheMood");
+	C012_AfterClass_Bed_CheckMistress();
 }
+
 
 // Chapter 12 After Class - When the player stops masturbating
 function C012_AfterClass_Bed_StopMasturbate() {

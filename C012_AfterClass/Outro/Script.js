@@ -6,9 +6,6 @@ function C012_AfterClass_Outro_Load() {
 	// Time is always 16:30:00 in the outro, reset the poses if needed
 	C012_AfterClass_Outro_Bondage = Common_PlayerRestrained;
 	StopTimer(24 * 60 * 60 * 1000);
-	PlayerReleaseBondage();
-	PlayerClothes("Clothed");
-	Common_PlayerPose = "";
 	C000_Intro_ChapterSelect_CreditTextColor = "white";
 
 }

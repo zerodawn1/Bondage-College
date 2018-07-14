@@ -2,7 +2,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_ActorIsOwner,What's on your|mind Mistress?,Not much my little bitch.|(She checks her cell phone.),0,0,0,RandomSidneyDommeEvent()
 0,0,0,Common_ActorIsOwner,"Mistress, it's ok if|I change clothes?",Sure bitch.  Wear what you want.,0,0,0,IsChangingBlocked()
 0,0,0,Common_ActorIsOwned,Let's review|your rules.,(She seems to worry.)|Of course Mistress.,610,0,0,TestGagged()
-0,5,0,,Would you like to|make love with me?,"No, I don't feel like it.|Let's do something else.",0,0,0,TestLove()
+0,5,0,!Common_ActorIsLover,You look so|pretty Sidney.,"Thanks, you don't look bad either.|(You need +20 love to date Sidney.)",0,0,0,TestLove()
 0,0,5,!Common_ActorIsOwned,"Girl, you need|my protection.",I don't need protection from anyone.|(You need +20 submission to collar Sidney.),0,0,0,TestDomme()
 0,0,-5,!Common_ActorIsOwner,Miss Sidney.|I admire you.,"Don't talk like that, you sound like a loser.|(You need -20 submission to submit to Sidney.)",0,0,0,TestSub()
 0,0,0,Common_PlayerGagged,@Om nnnuoogn mh!,Oh yeah.  I fucking understood|what you said.  (She laughs.),0,0,0,TestUnbind()
@@ -11,14 +11,19 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_PlayerChaste,Can you please help|me with this belt?,"Nope, that chastity belt|is a perfect fit for you.",0,0,0,TestGagged()
 0,0,0,!Common_ActorIsOwner,You should wear|something else.,Forget it.  I'm not changing for you.,0,0,0,TestChange()
 0,0,0,ChatAvail,I'd like to know|more about you.,"Ok, what would like to know?",500,0,0,StartChat()
+0,0,0,SexAvail,Would you like to|make love with me?,"No, I don't feel like it.|Let's do something else.",0,0,0,TestSex()
 0,0,0,PleasurePlayerAvail,"My submissive, you|will pleasure me now.",Pleasure you how Mistress?,630,0,0,TestPleasurePlayer()
 0,0,0,PusherDealAvail,"Sidney, I've made a|deal with your pusher.",A deal with her?  What kind of deal?,620,0,0,TestGagged()
-0,5,0,!Common_PlayerGagged,(Kiss her.),(You get close to her and|kiss her sweetly on the lips.),0,0,0,Kiss()
-0,0,0,CanMasturbate,(Masturbate her.),(You get closer to masturbate|her but she pushes you away.),0,0,0,StartMasturbate()
-0,0,0,IsGagged,(Ungag her.),(You remove her gag.)|Thanks!  This is better.,0,0,0,Ungag()
-0,0,0,IsRoped,(Untie her.),(You undo the knots and remove the|ropes while she stretches slowly.),0,0,0,Untie()
-0,0,0,IsStrapped,(Unstrap her.),(You remove the straps and|unlace the binder from her arms.),0,0,0,Untie()
-100,0,0,,TO DO,TO DO,100,0,0,
+0,0,0,!Common_PlayerRestrained,(Play with her.),(You take a step toward her.),10,0,0,
+10,5,0,!Common_PlayerGagged,(Kiss her.),(You get close to her and|kiss her sweetly on the lips.),10,0,0,Kiss()
+10,1,0,!Common_PlayerRestrained,(Tickle her.),(You get closer and tickle her on the|chest but she doesn't react that much.),10,0,0,Tickle()
+10,0,5,!Common_PlayerRestrained,(Spank her.),(You spank her pretty hard on the|butt while she stares at you unamused.),10,0,0,Spank()
+10,0,0,CanMasturbate,(Masturbate her.),(You get closer to masturbate|her but she pushes you away.),10,0,0,StartMasturbate()
+10,0,0,IsGagged,(Ungag her.),(You remove her gag.)|Thanks!  This is better.,10,0,0,Ungag()
+10,0,0,IsRoped,(Untie her.),(You undo the knots and remove the|ropes while she stretches slowly.),10,0,0,Untie()
+10,0,0,IsStrapped,(Unstrap her.),(You remove the straps and|unlace the binder from her arms.),10,0,0,Untie()
+10,0,0,,(Stop playing.),(You take a step back.),0,0,0,
+100,0,0,,TO DO,TO DO - NEXT VERSION,100,0,0,
 200,0,0,,You've made too|many enemies.,I agree!  But what can I do?,210,1,0,
 200,0,0,,You will fail school.,You think I care about that?|What could I do anyway?,210,0,0,
 200,0,0,,You need protection|from your temper.,I am what I am!|What can I do about that?,210,0,0,
@@ -208,6 +213,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 642,0,0,,I control when|you cum girl.,(She nods and takes her|breath while slowly standing up.),0,0,1,EndEnslaveSidney()
 642,0,0,,(Give her a hug.),(You give her a big hug and|help her to stand up.),0,1,-1,EndEnslaveSidney()
 642,0,0,,(Help her to|stand still.),(You help her to stand up.),0,0,-1,EndEnslaveSidney()
+650,0,0,,TO DO,TO DO - NEXT VERSION,650,0,0,
 3000,0,0,,Yes Mistress.|(Strip naked.),Good girl.  (You change for Sidney.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,(Nod slowly.)|(Strip naked.),Good girl.  (You change for Sidney.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,I don't want|to do that.,"Fine, shut up then.|(She checks her phone.)",3092,0,0,TestPunish()

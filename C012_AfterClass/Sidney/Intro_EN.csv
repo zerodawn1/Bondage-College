@@ -10,10 +10,10 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 0,0,0,Common_ActorIsOwner,Hey there my little bitch.|What would you like to do?,Dorm.jpg
 0,0,0,Common_ActorIsOwned,"Mistress, what would you like to do?",Dorm.jpg
 0,0,0,IsGagged,Haamh nh g gna!,Dorm.jpg
-100,0,0,,"Sure, we can fuck.|We do it right here?",Dorm.jpg
-100,0,-10,,"Sure, we can fuck.|Get in bed girl.",Dorm.jpg
-100,0,0,Common_ActorIsLover,Of course sweetie.,Dorm.jpg
-100,0,0,Common_ActorIsOwned,Of course Mistress.,Dorm.jpg
+10,0,0,,,Dorm.jpg
+100,0,0,,(She blushes)  Thanks.|You also look wonderful.,Dorm.jpg
+100,0,0,Common_ActorIsOwned,(She blushes.)  Thanks Mistress.|You also look fabulous tonight.,Dorm.jpg
+100,0,0,Common_ActorIsOwner,Thanks my little bitch.|You also look wonderful.,Dorm.jpg
 200,0,0,,Protection?  What do you mean Miss?,Dorm.jpg
 200,0,0,Common_ActorIsLover,I already have your loving arms.|Do you think I need protection?,Dorm.jpg
 210,0,0,,,Dorm.jpg
@@ -80,6 +80,10 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 640,0,0,,,Dorm.jpg
 641,0,0,,,Dorm.jpg
 642,0,0,,,DormOrgasm.jpg
+650,0,0,,"Sure, we can fuck.|We do it right here?",Dorm.jpg
+650,0,0,Common_ActorIsLover,Of course sweetie.,Dorm.jpg
+650,0,0,Common_ActorIsOwned,Of course Mistress.,Dorm.jpg
+650,0,0,Common_ActorIsOwner,"Sure bitch, we can fuck.",Dorm.jpg
 3000,0,0,,"My bitch, I want you to get naked.",Dorm.jpg
 3000,0,0,Common_ActorIsLover,My sweet little bitch.|I want you to get naked.,Dorm.jpg
 3010,0,0,,"My bitch, I want to see|you in your underwear.",Dorm.jpg
