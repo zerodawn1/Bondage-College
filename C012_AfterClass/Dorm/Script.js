@@ -25,7 +25,7 @@ function C012_AfterClass_Dorm_LeavingGuest() {
 function C012_AfterClass_Dorm_CalGuest() {	
 	C012_AfterClass_Dorm_LeavingGuest();
 	C012_AfterClass_Dorm_Guest = [];
-	if (GameLogQuery(CurrentChapter, "Sidney", "EnterDormFromPub") && ((CurrentTime <= C012_AfterClass_Dorm_SidneyExitTime) || (CurrentTime >= C012_AfterClass_Dorm_SidneyReturnTime))) C012_AfterClass_Dorm_Guest.push("Sidney");
+	if (GameLogQuery(CurrentChapter, "Sidney", "EnterDormFromPub") && ((CurrentTime <= C012_AfterClass_Dorm_SidneyExitTime) || (CurrentTime >= C012_AfterClass_Dorm_SidneyReturnTime) || ActorSpecificIsRestrained("Sidney"))) C012_AfterClass_Dorm_Guest.push("Sidney");
 	C012_AfterClass_Dorm_PlayerPos = 600 - C012_AfterClass_Dorm_Guest.length * 100;
 }
 

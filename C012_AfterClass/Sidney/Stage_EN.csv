@@ -182,7 +182,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 632,0,0,,Lick slut!,(She bends down near your pussy|and starts to lick it slowly.),633,0,0,
 632,0,0,,You know|what to do.,(She bends down near your pussy|and starts to lick it slowly.),633,0,0,
 633,0,0,,(Let her pleasure you.),(You let Sidney pleasure you with her|mouth and slowly drifts away in extasy.),633,0,0,PleasurePlayer()
-633,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you had pleasure?,635,0,0,
+633,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you had pleasure?,635,0,0,StopPleasureFromSidney()
 633,0,0,,(Force her to|go faster.),(You grab her hair and force|her to speed up the rhythm.),633,0,0,PleasurePlayerSetSpeed(1)
 633,0,0,,(Force her to|go slower.),(You push her head and force|her to slow down the rhythm.),633,0,0,PleasurePlayerSetSpeed(-1)
 634,0,0,,Aaaaah!  Stop slave!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you had pleasure?,635,0,0,StopPleasureFromSidney()
@@ -211,8 +211,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 642,0,0,,You're such a slut.,(She frowns and takes her|breath while slowly standing up.),0,-1,1,EndEnslaveSidney()
 642,0,0,,I hope you liked it.,(She nods and takes her|breath while slowly standing up.),0,0,0,EndEnslaveSidney()
 642,0,0,,I control when|you cum girl.,(She nods and takes her|breath while slowly standing up.),0,0,1,EndEnslaveSidney()
-642,0,0,,(Give her a hug.),(You give her a big hug and|help her to stand up.),0,1,-1,EndEnslaveSidney()
-642,0,0,,(Help her to|stand still.),(You help her to stand up.),0,0,-1,EndEnslaveSidney()
+642,0,0,,(Give her a hug.),(You give her a warm hug|and help her to recover.),0,1,-1,EndEnslaveSidney()
+642,0,0,,(Help her to recover.),(You help her to recover.),0,0,-1,EndEnslaveSidney()
 650,0,0,,TO DO,TO DO - NEXT VERSION,650,0,0,
 3000,0,0,,Yes Mistress.|(Strip naked.),Good girl.  (You change for Sidney.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,(Nod slowly.)|(Strip naked.),Good girl.  (You change for Sidney.),3090,0,0,"ForceChangePlayer(""Naked"")"

@@ -469,6 +469,7 @@ function DrawActor(ActorToDraw, X, Y, Zoom) {
 		if (ActorSpecificHasInventory(ActorToDraw, "Cuffs")) ImageBondage = "_Cuffs";
 		if (ActorSpecificHasInventory(ActorToDraw, "Rope")) ImageBondage = "_Rope";
 		if (ActorSpecificHasInventory(ActorToDraw, "TwoRopes")) ImageBondage = "_TwoRopes";
+		if (ActorSpecificHasInventory(ActorToDraw, "ThreeRopes")) ImageBondage = "_ThreeRopes";
 		if (ActorSpecificHasInventory(ActorToDraw, "Armbinder")) ImageBondage = "_Armbinder";
 
 		// Third part is the collar, which only shows for certain clothes
@@ -503,7 +504,7 @@ function DrawInteractionActor() {
 	if (CurrentActor == "") {
 		DrawTransparentPlayerImage(600, 0, 1);
 	} else {
-		if (ActorHasInventory("TwoRopes")) DrawActor(CurrentActor, 600, -250, 1);
+		if (ActorHasInventory("TwoRopes") || ActorHasInventory("ThreeRopes")) DrawActor(CurrentActor, 600, -250, 1);
 		else DrawActor(CurrentActor, 600, 0, 1);
 	}
 }
