@@ -31,7 +31,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 210,0,0,,You need a mentor.|Someone to nurture you.,I don't need a fucking mentor.,220,0,0,
 210,0,0,,I will help you.|I'll be your mentor.,I don't need a fucking mentor.,220,1,0,
 220,0,0,,A mentor will guide|you in your life.,A guide?  Like a tutor in school?,230,0,0,
-220,0,0,,(Slap her face.)|Be polite with me.,"(You slap her hard and she bows her head.)|I'm sorry Miss, I don't think I need a mentor.",221,-1,1,EnslaveSidneyCount()
+220,0,0,,(Slap her face.)|Be polite with me.,(You slap her hard and she bows her head.)|I'm sorry Miss.  I don't think I need a mentor.,221,-1,1,EnslaveSidneyCount()
 221,0,0,,A mentor will guide|you in your life.,A guide?  Like a tutor in school?,230,0,0,
 230,0,0,,A guide for every|step you will take.,I don't want a fucking leash.,240,0,0,
 230,0,0,,A guide that will|make choices for you.,I can make my fucking choices.,240,0,0,
@@ -43,11 +43,11 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 250,0,0,,You won't be a rebel.|You'll be my submissive.,(She frowns and looks at you.)|And what does a submissive do?,260,0,0,
 250,0,0,,You won't be a rebel.|You'll be my bitch.,(She trembles at the thought.)|And what does a bitch do?,260,0,0,EnslaveSidneyCount()
 260,0,0,,You'll obey my rules.|You'll be my lovely pet.,I obey no fucking rules!,270,1,0,
-260,0,0,,You'll follow my|every commands.,I follow no fucking commands!,270,0,0,
+260,0,0,,You'll follow my|every command.,I follow no fucking commands!,270,0,0,
 260,0,0,,You'll follow my rules and|be punished if you fail.,(She looks down and shivers.)|I follow no fucking rules!,270,0,0,EnslaveSidneyCount()
-270,0,0,,You will obey and|wear a locked collar.,Obey you?  Rules?  Locked collar?|(She seems to think out lound.),280,0,0,
+270,0,0,,You will obey and|wear a locked collar.,Obey you?  Rules?  Locked collar?|(She seems to think out loud.),280,0,0,
 270,0,0,,(Slap her face.)|You will learn manners!,"(You slap her hard and she cries a little.)|I know Miss, I need better language.",271,-1,1,EnslaveSidneyCount()
-271,0,0,,You will obey and|wear a locked collar.,Obey you?  Rules?  Locked collar?|(She seems to think out lound.),280,0,0,
+271,0,0,,You will obey and|wear a locked collar.,Obey you?  Rules?  Locked collar?|(She seems to think out loud.),280,0,0,
 280,0,0,,So what is|your decision?,I'm sorry but I can't do that.|Let's talk about something else.,0,0,0,TestEnslaveSidney()
 280,0,0,,So will you|be my slave?,I'm sorry but I can't do that.|Let's talk about something else.,0,0,0,TestEnslaveSidney()
 280,0,0,,So will you|wear my collar?,I'm sorry but I can't do that.|Let's talk about something else.,0,0,0,TestEnslaveSidney()
@@ -57,18 +57,18 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 290,0,0,,Strip down slave.,(She strips down nervously.)|Strip?  Now?  Of course Miss.,291,0,1,EnslaveStrip()
 291,0,0,,"From now on, you|will call me ""Mistress"".",Yes Mistress COMMON_PLAYERNAME.,292,0,0,
 291,0,0,,"You shall address|me as ""Mistress"".",Yes Mistress COMMON_PLAYERNAME.,292,0,0,
-292,0,0,,Get on your knees.,(She slowly kneel in front of you.),293,0,0,"ActorSetPose(""Kneel"")"
-292,0,0,,Will you please|kneel for me?,(She slowly kneel in front of you.),293,0,-1,"ActorSetPose(""Kneel"")"
-292,0,0,,On your knees slut.,(She slowly kneel in front of you.),293,-1,1,"ActorSetPose(""Kneel"")"
+292,0,0,,Get on your knees.,(She slowly kneels in front of you.),293,0,0,"ActorSetPose(""Kneel"")"
+292,0,0,,Will you please|kneel for me?,(She slowly kneels in front of you.),293,0,-1,"ActorSetPose(""Kneel"")"
+292,0,0,,On your knees slut.,(She slowly kneels in front of you.),293,-1,1,"ActorSetPose(""Kneel"")"
 293,0,0,,"Once this collar is locked,|you will be my property.",(She nods and looks down.)|I understand Mistress.,294,0,0,
 293,0,0,,"Once locked on your neck,|there's no turning back.",(She trembles and looks down.)|I understand Mistress.,294,0,0,
 294,0,0,,(Lock the collar|around her neck.),(You circle the leather collar around her neck|buckle it and put a padlock to lock it in place.),295,0,3,LockCollarSidney()
 295,0,0,,You are now my bitch.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,-1,0,
 295,0,0,,You are mine.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,0,0,
-295,0,0,,You are now my protege.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,1,0,
+295,0,0,,You are now|my submissive.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,1,0,
 296,0,0,,I vow to protect you.,(She nods.)  Thanks Mistress.|I know you will protect me.,297,0,0,
 296,0,0,,I vow to help you.,(She smiles.)  Thanks Mistress.|I know you will help me.,297,0,-1,
-296,0,0,,I vow to disipline you.,(She gasps.)  Thanks Mistress.|I know it will make me better.,297,0,1,
+296,0,0,,I vow to discipline you.,(She gasps.)  Thanks Mistress.|I know it will make me better.,297,0,1,
 297,0,0,,Stand up my|lovely subbie.,(She smiles and slowly stands up.)|What do you wish to do now Mistress?,0,1,0,EndEnslaveSidney()
 297,0,0,,Stand up slut.,(She frowns and slowly stands up.)|What do you wish to do now Mistress?,0,-1,0,EndEnslaveSidney()
 297,0,0,,Stand up.,(She nods and slowly stands up.)|What do you wish to do now Mistress?,0,0,0,EndEnslaveSidney()
@@ -181,16 +181,16 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 632,0,0,,Pleasure me|my subbie.,(She bends down near your pussy|and starts to lick it slowly.),633,0,0,
 632,0,0,,Lick slut!,(She bends down near your pussy|and starts to lick it slowly.),633,0,0,
 632,0,0,,You know|what to do.,(She bends down near your pussy|and starts to lick it slowly.),633,0,0,
-633,0,0,,(Let her pleasure you.),(You let Sidney pleasure you with her|mouth and slowly drifts away in extasy.),633,0,0,PleasurePlayer()
-633,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you had pleasure?,635,0,0,StopPleasureFromSidney()
+633,0,0,,(Let her pleasure you.),(You let Sidney pleasure you with her|mouth and slowly drift away in ecstasy.),633,0,0,PleasurePlayer()
+633,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you have pleasure?,635,0,0,StopPleasureFromSidney()
 633,0,0,,(Force her to|go faster.),(You grab her hair and force|her to speed up the rhythm.),633,0,0,PleasurePlayerSetSpeed(1)
 633,0,0,,(Force her to|go slower.),(You push her head and force|her to slow down the rhythm.),633,0,0,PleasurePlayerSetSpeed(-1)
-634,0,0,,Aaaaah!  Stop slave!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you had pleasure?,635,0,0,StopPleasureFromSidney()
-634,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you had pleasure?,635,0,0,StopPleasureFromSidney()
+634,0,0,,Aaaaah!  Stop slave!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you have pleasure?,635,0,0,StopPleasureFromSidney()
+634,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you have pleasure?,635,0,0,StopPleasureFromSidney()
 635,0,0,,It was wonderful.|I'm still shaking.,I'm very happy to hear you say that.|What would you like to do now?,0,0,0,"EndPleasureFromSidney(2, -1)"
 635,0,0,,It was good.,I'm happy to hear you say that.|What would you like to do now?,0,0,0,"EndPleasureFromSidney(1, 0)"
 635,0,0,,It was ok.,I'll do better next time Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromSidney(0, 0)"
-635,0,0,,With practice everyday|it will become better.,Everyday Mistress?  Oh my!|What would you like to do now?,0,0,0,"EndPleasureFromSidney(0, 1)"
+635,0,0,,With practice every day|it will become better.,Everyday Mistress?  Oh my!|What would you like to do now?,0,0,0,"EndPleasureFromSidney(0, 1)"
 635,0,0,,I've had better.,I'm sorry to hear that Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromSidney(-1, 0)"
 635,0,0,,You need some|oral training.,I will train for you Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromSidney(-2, 1)"
 640,0,0,!Common_PlayerGagged,(Kiss her.),(You kiss her slowly while she|giggles but doesn't look very aroused.),640,0,0,Masturbate(-1)

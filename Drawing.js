@@ -148,7 +148,8 @@ function DrawActorStats(Left, Top) {
 	if (ActorGetValue(ActorHideName)) DrawText("Unknown", Left - 200, Top + 17, "black");
 	else DrawText(CurrentActor, Left - 200, Top + 17, "black");
 	DrawImage("Icons/Heart.png", Left - 110, Top);
-	DrawImage("Icons/Submission.png", Left - 10, Top);
+	if (ActorGetValue(ActorOwner) == "Player") DrawImage("Icons/Collared.png", Left - 10, Top);
+	else DrawImage("Icons/Submission.png", Left - 10, Top);
 	DrawImage("Icons/Orgasm.png", Left + 90, Top);
 	DrawImage("Icons/Bondage.png", Left + 190, Top);
 	DrawPosNegValue(ActorGetValue(ActorLove), Left - 50, Top + 17);
