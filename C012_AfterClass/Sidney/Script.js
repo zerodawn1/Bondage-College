@@ -26,6 +26,7 @@ function C012_AfterClass_Sidney_SetPose() {
 		if ((Sub >= 10) && (Math.abs(Sub) >= Math.abs(Love))) ActorSetPose("Shy");
 		if ((Love >= 10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Happy");
 		if ((Love <= -10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Mad");
+		if (Common_ActorIsOwned) ActorSetPose("Shy");
 	} else {
 		if ((ActorGetValue(ActorCloth) == "Naked") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorSubmission) >= 10)) ActorSetPose("Shy");
 		else ActorSetPose("");
@@ -41,7 +42,7 @@ function C012_AfterClass_Sidney_CalcParams() {
 	C012_AfterClass_Sidney_IsStrapped = ActorHasInventory("Armbinder");
 	C012_AfterClass_Sidney_PusherDealAvail = (!C012_AfterClass_Sidney_HasBelt && PlayerHasInventory("ChastityBelt") && GameLogQuery(CurrentChapter, "", "DebtChastityBelt") && !GameLogQuery(CurrentChapter, "", "DebtChastityBeltDone"));
 	C012_AfterClass_Sidney_PleasurePlayerAvail = (!Common_PlayerChaste && !ActorIsGagged() && !ActorIsRestrained() && Common_ActorIsOwned && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
-	C012_AfterClass_Sidney_SexAvail = (!Common_PlayerRestrained && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
+	C012_AfterClass_Sidney_SexAvail = (!Common_PlayerRestrained && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Sidney", "NextPossibleOrgasm"));
 	C012_AfterClass_Sidney_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Sidney_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
 	C012_AfterClass_Sidney_SetPose();
 }
@@ -788,7 +789,7 @@ function C012_AfterClass_Sidney_Tickle() {
 function C012_AfterClass_Sidney_StartMasturbate() {
 	if ((ActorGetValue(ActorLove) >= 10) || (ActorGetValue(ActorSubmission) >= 10) || (ActorIsRestrained())) {
 		CurrentTime = CurrentTime + 50000;
-		if (!GameLogQuery(CurrentChapter, CurrentActor, "OrgasmFromMasturbation")) {
+		if (!GameLogQuery(CurrentChapter, CurrentActor, "NextPossibleOrgasm")) {
 			C012_AfterClass_Sidney_MasturbateCount = 0;
 			C012_AfterClass_Sidney_CurrentStage = 640;
 			OverridenIntroText = GetText("StartMasturbateSidney");
@@ -813,8 +814,8 @@ function C012_AfterClass_Sidney_Masturbate(Factor) {
 function C012_AfterClass_Sidney_SidneyOrgasm() {
 	CurrentTime = CurrentTime + 50000;
 	ActorAddOrgasm();
-	if (!GameLogQuery(CurrentChapter, CurrentActor, "OrgasmFromMasturbation")) {
-		GameLogAdd("OrgasmFromMasturbation");
+	if (!GameLogQuery(CurrentChapter, CurrentActor, "NextPossibleOrgasm")) {
+		GameLogSpecificAddTimer(CurrentChapter, CurrentActor, "NextPossibleOrgasm", ActorHasInventory("VibratingEgg") ? CurrentTime + 3600000 : CurrentTime + 7200000);
 		ActorChangeAttitude(2, -1);
 	}
 }

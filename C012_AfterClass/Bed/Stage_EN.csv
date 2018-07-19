@@ -2,7 +2,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_PlayerNaked,@Masturbate.,It's not possible to pleasure|yourself while you're restrained.,0,0,0,StartMasturbate()
 0,0,0,!Common_PlayerNaked,@Strip down|to masturbate.,It's not possible to pleasure|yourself while you're restrained.,0,0,0,StartMasturbate()
 0,0,0,,@Get to sleep.|(End the day.),Are you sure you want to sleep?|This will end the day and the game.,10,0,0,
-10,0,0,,"@Yes, get to sleep.|(End the day.)",,10,0,0,EndChapter()
+10,0,0,,"@Yes, get to sleep.|(End the day.)",,10,0,0,"EndChapter("""")"
 10,0,0,,"@No, stay awake.|(Continue.)",You seem to have some energy left.,0,0,0,
 100,0,0,,@Massage your breast.,You slowly massage your breast|with one hand and moan silently.,100,0,0,MasturbateUp()
 100,0,0,,@Pinch your nipple.,You pinch your own nipple and|whimper softly from the pain.,100,0,0,MasturbateUp()
@@ -15,5 +15,27 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 110,0,0,,@Stop masturbating.,"You calm down, take deep breathes|and stop everything before your climax.",100,0,0,StopMasturbate()
 120,0,0,,@Continue to|masturbate.,"Just to make sure you're satisfied,|you start touching yourself again.",100,0,0,
 120,0,0,,@Stop and get up.,You get up from your bed|feeling relaxed and satisfied.,0,0,0,StopMasturbate()
-200,0,0,,That's enough.|(Get up from bed.),We stop now?  That was quick.,900,0,0,LeaveBedFromSex()
+200,0,0,,(Kiss her lips.),(You gently kiss her lips but she doesn't|enjoy it much and masturbates herself.),200,0,0,"Sex(-1, 1, false)"
+200,0,0,,(Kiss her breast.),(You kiss each other breast but it|seems to pleasure you more than her.),200,0,0,"Sex(0, 1, false)"
+200,0,0,,(Massage her breast.),(You massage each other breast but it|seems to pleasure you more than her.),200,0,0,"Sex(0, 1, false)"
+200,0,0,,(Pinch her nipple.),(You pinch each other nipples and|both jump and scream from the pain.),200,0,0,"Sex(1, 1, false)"
+200,0,0,,(Play with her clitoris.),(You slowly play with each|other clitoris and moan softly.),200,0,0,"Sex(1, 1, true)"
+200,0,0,,(Caress her pussy.),(You gently caress each other|pussy lips and moan softly.),200,0,0,"Sex(1, 1, true)"
+200,0,0,,(Slide a finger in.),(You both slide a finger in to masturbate|each other and she seems to really enjoy that.),200,0,0,"Sex(2, 1, true)"
+200,0,0,,(Eat her.),(You both eat other in a 69 fashion|and she seems to really enjoy that.),200,0,0,"Sex(2, 1, true)"
+200,0,0,,(Fist her.),(You fist her while she masturbates you.|She screams and shivers from the extasy.),200,0,0,"Sex(3, 1, true)"
+200,0,0,,That's enough.|(Get up from bed.),We stop now?  That was quick.,200,0,0,LeaveBedFromSex()
+210,0,0,,(Rest close to her.),(You give each other a big hug.)|Shit!  That was fucking great!,220,0,0,AfterSex()
+210,0,0,Common_ActorIsLover,(Kiss her neck.),(You kiss her neck while she recover|her breath.)  That was great sweetie!,220,0,0,AfterSex()
+210,0,0,Common_ActorIsLover,I love you Sidney.,(She smiles and slowly recovers her breath.)|I love you sweetheart.  That was great!,220,0,0,AfterSex()
+210,0,0,,It was wonderful.,Fuck yeah!  That was great.,220,0,0,AfterSex()
+210,0,0,,You're a good fuck.,(She recovers her breath and giggles.)|Well thanks!  That was fucking great.,220,0,1,AfterSex()
+210,0,0,,I'm speechless.,I'll say it for you then.|It was fucking great!,220,0,-1,AfterSex()
+220,0,0,,All good things|must end I guess.,Yep!  (You both get up.),900,0,0,OffBed()
+220,0,0,,(Stay silent and get up.),(You both stay silent and get up.),900,0,0,OffBed()
+220,0,0,Common_ActorIsOwned,Get off the bed slave.,Yes Mistress!  (You both get up.),900,0,0,OffBed()
+220,0,0,Common_ActorIsOwner,We get up Mistress?,Yeah bitch.  (You both get up.),900,0,0,OffBed()
+220,0,0,Common_ActorIsLover,Would you like to sleep|like that with me?,Sure sweetheart.  It will be|fucking nice to sleep together.,230,0,0,
+230,0,0,,Sleep with Sidney.|(End the day.),,230,0,0,"EndChapter(""Lover"")"
+230,0,0,,Maybe later my love.|(Get up from bed.),"Yeah, sleeping is for losers anyway.",900,0,0,OffBed()
 900,0,0,,(Back to the dorm.),,900,0,0,BackToDorm()

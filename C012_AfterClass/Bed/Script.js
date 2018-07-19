@@ -4,13 +4,29 @@ var C012_AfterClass_Bed_PleasureDown = 0;
 var C012_AfterClass_Bed_MasturbationRequired = 0;
 var C012_AfterClass_Bed_MistressApproveMasturbate = "";
 var C012_AfterClass_Bed_Partner = "";
+var C012_AfterClass_Bed_SexPleasurePlayer = 0;
+var C012_AfterClass_Bed_SexPleasurePartner = 0;
+
+// Chapter 12 After Class - Prepares the bed image that will be rendered for sex scenes
+function C012_AfterClass_Bed_PrepareImage(PartnerOrgasm, PlayerOrgasm) {
+	var ImageName = "Sex" + CurrentActor;	
+	if (ActorHasInventory("Collar")) ImageName = ImageName + "Collar";
+	else ImageName = ImageName + "NoCollar";	
+	if (PartnerOrgasm) ImageName = ImageName + "Orgasm";
+	if (PlayerHasLockedInventory("Collar")) ImageName = ImageName + "PlayerCollar";
+	else ImageName = ImageName + "PlayerNoCollar";
+	if (PlayerOrgasm) ImageName = ImageName + "Orgasm";
+	OverridenIntroImage = ImageName + ".jpg";
+}
 
 // Chapter 12 After Class - Bed Load
 function C012_AfterClass_Bed_Load() {
 
-	// Alone, the player can masturbate.  With a partner, they can make love.
+	// If the player is alone in bed
 	LoadInteractions();
 	if (C012_AfterClass_Bed_Partner == "") {
+		
+		// Starts the masturbation mini game
 		LeaveIcon = "Leave";
 		LeaveScreen = "Dorm";
 		C012_AfterClass_Bed_CurrentStage = 0;
@@ -18,11 +34,22 @@ function C012_AfterClass_Bed_Load() {
 		C012_AfterClass_Bed_PleasureDown = 0;
 		C012_AfterClass_Bed_MistressApproveMasturbate = "";
 		if (PlayerHasLockedInventory("VibratingEgg")) C012_AfterClass_Bed_MasturbationRequired = 2;
-		else C012_AfterClass_Bed_MasturbationRequired = 3;		
+		else C012_AfterClass_Bed_MasturbationRequired = 3;
+		
 	} else {
+		
+		// With a partner, they can make love, some girls are a little harder to please
 		ActorLoad(C012_AfterClass_Bed_Partner, "Dorm");
 		if (C012_AfterClass_Bed_Partner == "Sidney") C012_AfterClass_Bed_CurrentStage = 200;
+		C012_AfterClass_Bed_PrepareImage(false, false);
+		C012_AfterClass_Bed_SexPleasurePartner = ActorHasInventory("VibratingEgg") ? 3 : 0;
+		C012_AfterClass_Bed_SexPleasurePlayer = PlayerHasLockedInventory("VibratingEgg") ? 3 : 0;
+		if (CurrentActor == "Amanda") C012_AfterClass_Bed_SexPleasurePlayer - 1;
+		if (CurrentActor == "Sarah") C012_AfterClass_Bed_SexPleasurePlayer + 2;		
+		if (CurrentActor == "Sidney") C012_AfterClass_Bed_SexPleasurePlayer + 1;
+		if (CurrentActor == "Jennifer") C012_AfterClass_Bed_SexPleasurePlayer - 2;
 		LeaveIcon = "";
+
 	}
 	
 }
@@ -45,7 +72,8 @@ function C012_AfterClass_Bed_Click() {
 }
 
 // Chapter 12 After Class - Fall asleep and ends the chapter
-function C012_AfterClass_Bed_EndChapter() {	
+function C012_AfterClass_Bed_EndChapter(OutroType) {
+	C012_AfterClass_Outro_Type = OutroType;
 	SetScene(CurrentChapter, "Outro");
 }
 
@@ -158,13 +186,85 @@ function C012_AfterClass_Bed_Climax() {
 	GameLogSpecificAddTimer(CurrentChapter, "Player", "NextPossibleOrgasm", PlayerHasLockedInventory("VibratingEgg") ? CurrentTime + 1800000 : CurrentTime + 3600000);
 }
 
-// Chapter 12 After Class - When the leaves the bed with a lover
+// Chapter 12 After Class - When the player wants to leave the bed with a lover
 function C012_AfterClass_Bed_LeaveBedFromSex() {
-	LeaveIcon = "Leave";
-	OverridenIntroImage = "";
+	
+	// If the actor is the owner and she didn't came, she will not let the player leave the bed
+	if (Common_ActorIsOwner && (C012_AfterClass_Bed_SexPleasurePartner > -100)) {
+		OverridenIntroText = GetText("SexStop" + CurrentActor + "Refuse");
+		return;
+	}
+	
+	// The actor will dislike the player if she didn't had her orgasm
+	if (C012_AfterClass_Bed_SexPleasurePartner > -100) ActorChangeAttitude(-1, 0);
+	if ((C012_AfterClass_Bed_SexPleasurePlayer < -100) && (C012_AfterClass_Bed_SexPleasurePartner > -100)) { ActorChangeAttitude(-1, 0); OverridenIntroText = GetText("SexStop" + CurrentActor + "PartnerNoOrgasm"); }
+	if ((C012_AfterClass_Bed_SexPleasurePlayer > -100) && (C012_AfterClass_Bed_SexPleasurePartner < -100)) OverridenIntroText = GetText("SexStop" + CurrentActor + "PlayerNoOrgasm");
+	C012_AfterClass_Bed_CurrentStage = 900;
+	C012_AfterClass_Bed_OffBed();
+
 }
 
 // Chapter 12 After Class - Go back to the dorm scene
 function C012_AfterClass_Bed_BackToDorm() {
 	SetScene(CurrentChapter, "Dorm");
+}
+
+// Chapter 12 After Class - Main sex event with the partenr, there's a pleasure factor for each and a flag to tell if an orgasm is possible or not
+function C012_AfterClass_Bed_Sex(PleasurePartner, PleasurePlayer, CanOrgasm) {
+	
+	// Raise the level for both lovers
+	CurrentTime = CurrentTime + 50000;
+	C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner + PleasurePartner;
+	C012_AfterClass_Bed_SexPleasurePlayer = C012_AfterClass_Bed_SexPleasurePlayer + PleasurePlayer;
+	
+	// if an orgasm can be achieved from the activity, we trigger both orgasms at level 10 and they can be simultaneous
+	var PartnerOrgasm = false;
+	var PlayerOrgasm = false;
+	if (CanOrgasm) {
+		
+		// When the partner achieves her orgasm
+		if (C012_AfterClass_Bed_SexPleasurePartner >= 10) { 
+			PartnerOrgasm = true; 
+			C012_AfterClass_Bed_SexPleasurePartner = -10000000; 
+			ActorChangeAttitude(1, 0);
+			OverridenIntroText = GetText("Sex" + CurrentActor + "PartnerOrgasm");
+			GameLogSpecificAddTimer(CurrentChapter, CurrentActor, "NextPossibleOrgasm", ActorHasInventory("VibratingEgg") ? CurrentTime + 3600000 : CurrentTime + 7200000);
+		}
+		
+		// When the player achieves her orgasm
+		if (C012_AfterClass_Bed_SexPleasurePlayer >= 10) { 
+			PlayerOrgasm = true; 
+			C012_AfterClass_Bed_SexPleasurePlayer = -10000000;
+			GameLogSpecificAddTimer(CurrentChapter, "Player", "NextPossibleOrgasm", PlayerHasLockedInventory("VibratingEgg") ? CurrentTime + 1800000 : CurrentTime + 3600000);
+
+			// A simultaneous orgasm gives one extra love
+			if (PartnerOrgasm) {
+				OverridenIntroText = GetText("Sex" + CurrentActor + "SimultaneousOrgasm");
+				ActorChangeAttitude(1, 0);				
+			} else OverridenIntroText = GetText("Sex" + CurrentActor + "PlayerOrgasm");
+
+		}
+		
+		// If the sex scene must end, we jump to the next stage
+		if ((C012_AfterClass_Bed_SexPleasurePlayer < -100) && (C012_AfterClass_Bed_SexPleasurePartner < -100))
+			C012_AfterClass_Bed_CurrentStage = parseInt(C012_AfterClass_Bed_CurrentStage) + 10;
+
+	}
+
+	// Prepares the final image
+	C012_AfterClass_Bed_PrepareImage(PartnerOrgasm, PlayerOrgasm);
+
+}
+
+// Chapter 12 After Class - Renders a final image after sex
+function C012_AfterClass_Bed_AfterSex() {
+	CurrentTime = CurrentTime + 50000;
+	C012_AfterClass_Bed_PrepareImage(false, false);	
+}
+
+// Chapter 12 After Class - When everyone gets off the bed
+function C012_AfterClass_Bed_OffBed() {
+	LeaveIcon = "Leave";
+	OverridenIntroImage = "";
+	ActorSetPose("");
 }
