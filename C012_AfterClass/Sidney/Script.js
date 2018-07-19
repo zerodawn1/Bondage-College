@@ -15,6 +15,7 @@ var C012_AfterClass_Sidney_SexAvail = false;
 var C012_AfterClass_Sidney_PleasurePlayerCount = 0;
 var C012_AfterClass_Sidney_PleasurePlayerSpeed = 0;
 var C012_AfterClass_Sidney_MasturbateCount = 0;
+var C012_AfterClass_Sidney_CanSetCurfew22 = false;
 
 // In her shorts, Sidney can have many poses when she talks
 function C012_AfterClass_Sidney_SetPose() {
@@ -50,8 +51,7 @@ function C012_AfterClass_Sidney_Load() {
 	
 	// Loads the scene to search in the wardrobe
 	LoadInteractions();
-	ActorLoad("Sidney", "Leave");
-	LeaveScreen = "Dorm";
+	ActorLoad("Sidney", "Dorm");
 	Common_PlayerPose = "";
 	
 	// At stage 400, Sidney is leaving
@@ -96,7 +96,12 @@ function C012_AfterClass_Sidney_Load() {
 
 // Chapter 12 After Class - Sidney Run
 function C012_AfterClass_Sidney_Run() {
+
+	// The curfew 22 option isn't available after 22
+	C012_AfterClass_Sidney_CanSetCurfew22 = (CurrentTime < 22 * 60 * 60 * 1000);
 	BuildInteraction(C012_AfterClass_Sidney_CurrentStage);
+	
+	// Draw the actor alone or with the player depending on the stage
 	if ((C012_AfterClass_Sidney_CurrentStage != 410) && (C012_AfterClass_Sidney_CurrentStage != 3931) && (C012_AfterClass_Sidney_CurrentStage != 3932) && (C012_AfterClass_Sidney_CurrentStage != 3933) && (C012_AfterClass_Sidney_CurrentStage != 632) && (C012_AfterClass_Sidney_CurrentStage != 633) && (C012_AfterClass_Sidney_CurrentStage != 634)) {
 		if (((C012_AfterClass_Sidney_CurrentStage >= 3090) && (C012_AfterClass_Sidney_CurrentStage <= 3099)) || ((C012_AfterClass_Sidney_CurrentStage >= 3901) && (C012_AfterClass_Sidney_CurrentStage <= 3999))) {
 			DrawActor("Player", 475, 0, 1);
@@ -106,6 +111,7 @@ function C012_AfterClass_Sidney_Run() {
 			if ((C012_AfterClass_Sidney_CurrentStage >= 340) && (C012_AfterClass_Sidney_CurrentStage < 400)) DrawActor("Player", 600, 100, 1);		
 		}		
 	}
+	
 }
 
 // Chapter 12 After Class - Sidney Click
@@ -196,7 +202,7 @@ function C012_AfterClass_Sidney_TestSex() {
 					OverridenIntroText = "";
 				}
 			} else OverridenIntroText = GetText("UnlockBeltBeforeSex");
-		} else OverridenIntroText = GetText("ReleaseBeforeSex");
+		} else OverridenIntroText = GetText("ReleaseBeforeTalk");
 	} else C012_AfterClass_Sidney_GaggedAnswer();
 }
 
@@ -204,10 +210,12 @@ function C012_AfterClass_Sidney_TestSex() {
 function C012_AfterClass_Sidney_TestLove() {
 	if (!ActorIsGagged()) {
 		if (!ActorIsRestrained() && !Common_PlayerRestrained) {
-			if (ActorGetValue(ActorLove) >= 20) {
-				C012_AfterClass_Sidney_CurrentStage = 100;
-				OverridenIntroText = "";
-			}
+			if (!Common_PlayerNaked && (ActorGetValue(ActorCloth) != "Naked")) {
+				if (ActorGetValue(ActorLove) >= 20) {
+					C012_AfterClass_Sidney_CurrentStage = 100;
+					OverridenIntroText = "";
+				}
+			} else OverridenIntroText = GetText("CantDateWhileNaked");
 		} else OverridenIntroText = GetText("CantDateWhileRestrained");
 	} else C012_AfterClass_Sidney_GaggedAnswer();
 }
@@ -819,4 +827,88 @@ function C012_AfterClass_Sidney_SidneyDeniedOrgasm() {
 		ActorChangeAttitude(-2, 1);
 	}
 	C012_AfterClass_Sidney_EndEnslaveSidney();
+}
+
+// Chapter 12 After Class - Tests if the player is already dating someone else
+function C012_AfterClass_Sidney_TestRelationship() {
+	if (GameLogQuery(CurrentChapter, CurrentActor, "LoverBreakUp")) {
+		OverridenIntroText = GetText("AlreadyBrokeUp");
+		C012_AfterClass_Sidney_CurrentStage = 0;
+	} else {
+		if (Common_PlayerLover != "") {
+			OverridenIntroText = GetText("AlreadyLoved");
+			C012_AfterClass_Sidney_CurrentStage = 105;
+		}
+	}
+}
+
+// Chapter 12 After Class - Start Dating Sidney
+function C012_AfterClass_Sidney_StartDating() {
+	CurrentTime = CurrentTime + 50000;
+	Common_PlayerLover = "Sidney";
+	Common_ActorIsLover = true;
+}
+
+// Chapter 12 After Class - Start Dating Sidney
+function C012_AfterClass_Sidney_BothNaked() {
+	ActorSetCloth("Naked");
+	PlayerClothes("Naked");
+	C012_AfterClass_Sidney_CalcParams();
+	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - Get in bed with Sidney to make love
+function C012_AfterClass_Sidney_MakeLove() {
+	CurrentTime = CurrentTime + 50000;
+	ActorSetCloth("Naked");
+	PlayerClothes("Naked");
+	C012_AfterClass_Bed_Partner = "Sidney";
+	SetScene(CurrentChapter, "Bed");
+}
+
+// Chapter 12 After Class - Test Sidney to go on a date with her
+function C012_AfterClass_Sidney_TestGoOnDate() {
+	if (!ActorIsGagged()) {
+		if (!ActorIsRestrained()) {
+			if (!GameLogQuery(CurrentChapter, CurrentActor, "RockShowTogether")) {
+				if (CurrentTime >= 20 * 60 * 60 * 1000) {
+					OverridenIntroText = GetText("RockShowAlreadyStarted");
+					C012_AfterClass_Sidney_CurrentStage = 185;
+				} else C012_AfterClass_Sidney_CurrentStage = 180;
+			} else OverridenIntroText = GetText("AlreadyWentOut");
+		} else OverridenIntroText = GetText("ReleaseBeforeTalk");
+	} else C012_AfterClass_Sidney_GaggedAnswer();	
+}
+
+// Chapter 12 After Class - Test if the player can start the break up dialog
+function C012_AfterClass_Sidney_TestTalkBreakUp() {
+	if (!ActorIsGagged()) {
+		if (!ActorIsRestrained()) C012_AfterClass_Sidney_CurrentStage = 190;
+		else OverridenIntroText = GetText("ReleaseBeforeTalk");
+	} else C012_AfterClass_Sidney_GaggedAnswer();	
+}
+
+// Chapter 12 After Class - When the player breaks up with Sidney
+function C012_AfterClass_Sidney_BreakUp() {
+	GameLogAdd("LoverBreakUp");
+	Common_PlayerLover = "";
+	Common_ActorIsLover = false;
+	ActorSetPose("");
+	LeaveIcon = "";
+}
+
+// Chapter 12 After Class - When Sidney leaves the room after the break up
+function C012_AfterClass_Sidney_SidneyLeave() {
+	CurrentActor = "";
+	LeaveIcon = "Leave";
+	C012_AfterClass_Dorm_Guest.splice("Sidney");
+}
+
+// Chapter 12 After Class - When Sidney and the player leaves for the rock show
+function C012_AfterClass_Sidney_LeaveForRockShow() {
+	CurrentTime = CurrentTime + 290000;
+	ActorSetCloth("Shorts");
+	PlayerClothes("BlackDress");
+	GameLogAdd("RockShowTogether");
+	SetScene(CurrentChapter, "RockShow");
 }

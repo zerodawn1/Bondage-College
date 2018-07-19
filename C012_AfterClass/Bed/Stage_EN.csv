@@ -15,3 +15,5 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 110,0,0,,@Stop masturbating.,"You calm down, take deep breathes|and stop everything before your climax.",100,0,0,StopMasturbate()
 120,0,0,,@Continue to|masturbate.,"Just to make sure you're satisfied,|you start touching yourself again.",100,0,0,
 120,0,0,,@Stop and get up.,You get up from your bed|feeling relaxed and satisfied.,0,0,0,StopMasturbate()
+200,0,0,,That's enough.|(Get up from bed.),We stop now?  That was quick.,900,0,0,LeaveBedFromSex()
+900,0,0,,(Back to the dorm.),,900,0,0,BackToDorm()

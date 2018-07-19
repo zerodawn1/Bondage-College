@@ -7,6 +7,7 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 0,10,0,Common_PlayerNaked,You're pretty without clothes.,Dorm.jpg
 0,0,-10,Common_PlayerNaked,"Girl, you're fucking kinky.",Dorm.jpg
 0,0,10,Common_PlayerNaked,"Miss, you have a fabulous body.",Dorm.jpg
+0,0,0,Common_ActorIsLover,What would you like to do sweetie?,Dorm.jpg
 0,0,0,Common_ActorIsOwner,Hey there my little bitch.|What would you like to do?,Dorm.jpg
 0,0,0,Common_ActorIsOwned,"Mistress, what would you like to do?",Dorm.jpg
 0,0,0,IsRoped,(She struggles.)  This is way too tight.|Can you help me with these ropes?,Dorm.jpg
@@ -16,6 +17,21 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 100,0,0,,(She blushes)  Thanks.|You also look wonderful.,Dorm.jpg
 100,0,0,Common_ActorIsOwned,(She blushes.)  Thanks Mistress.|You also look fabulous tonight.,Dorm.jpg
 100,0,0,Common_ActorIsOwner,Thanks my little bitch.|You also look wonderful.,Dorm.jpg
+105,0,0,,,Dorm.jpg
+106,0,0,,,Dorm.jpg
+110,0,0,,,Dorm.jpg
+115,0,0,,,Dorm.jpg
+120,0,0,,,Dorm.jpg
+130,0,0,,,Dorm.jpg
+140,0,0,,,Dorm.jpg
+150,0,0,,,Dorm.jpg
+160,0,0,,,StartDating.jpg
+170,0,0,,,Dorm.jpg
+190,0,0,,,Dorm.jpg
+191,0,0,,,Dorm.jpg
+192,0,0,,,StopDating.jpg
+193,0,0,,,StopDating.jpg
+194,0,0,,,Dorm.jpg
 200,0,0,,Protection?  What do you mean Miss?,Dorm.jpg
 200,0,0,Common_ActorIsLover,I already have your loving arms.|Do you think I need protection?,Dorm.jpg
 210,0,0,,,Dorm.jpg
@@ -55,6 +71,7 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 400,0,0,,I need to go.|I'll see ya later.,Door.jpg
 400,0,0,Common_ActorIsOwner,Bitch!  I need to go.|I'll spank ya later.,Door.jpg
 400,0,0,Common_ActorIsOwned,I need to go Mistress.|I hope to see you later.,Door.jpg
+400,0,0,Common_ActorIsLover,There's a rock show I really want to see.|Do you want to come with me sweetie?,Door.jpg
 401,0,0,,,Door.jpg
 402,0,0,,,Door.jpg
 410,0,0,,,Door.jpg

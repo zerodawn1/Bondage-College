@@ -3,18 +3,28 @@ var C012_AfterClass_Bed_PleasureUp = 0;
 var C012_AfterClass_Bed_PleasureDown = 0;
 var C012_AfterClass_Bed_MasturbationRequired = 0;
 var C012_AfterClass_Bed_MistressApproveMasturbate = "";
+var C012_AfterClass_Bed_Partner = "";
 
 // Chapter 12 After Class - Bed Load
 function C012_AfterClass_Bed_Load() {
-	LeaveIcon = "Leave";
-	LeaveScreen = "Dorm";
+
+	// Alone, the player can masturbate.  With a partner, they can make love.
 	LoadInteractions();
-	C012_AfterClass_Bed_CurrentStage = 0;
-	C012_AfterClass_Bed_PleasureUp = 0;
-	C012_AfterClass_Bed_PleasureDown = 0;
-	C012_AfterClass_Bed_MistressApproveMasturbate = "";
-	if (PlayerHasLockedInventory("VibratingEgg")) C012_AfterClass_Bed_MasturbationRequired = 2;
-	else C012_AfterClass_Bed_MasturbationRequired = 3;
+	if (C012_AfterClass_Bed_Partner == "") {
+		LeaveIcon = "Leave";
+		LeaveScreen = "Dorm";
+		C012_AfterClass_Bed_CurrentStage = 0;
+		C012_AfterClass_Bed_PleasureUp = 0;
+		C012_AfterClass_Bed_PleasureDown = 0;
+		C012_AfterClass_Bed_MistressApproveMasturbate = "";
+		if (PlayerHasLockedInventory("VibratingEgg")) C012_AfterClass_Bed_MasturbationRequired = 2;
+		else C012_AfterClass_Bed_MasturbationRequired = 3;		
+	} else {
+		ActorLoad(C012_AfterClass_Bed_Partner, "Dorm");
+		if (C012_AfterClass_Bed_Partner == "Sidney") C012_AfterClass_Bed_CurrentStage = 200;
+		LeaveIcon = "";
+	}
+	
 }
 
 // Chapter 12 After Class - Bed Run
@@ -23,6 +33,7 @@ function C012_AfterClass_Bed_Run() {
 	if (C012_AfterClass_Bed_CurrentStage == 100) { Common_PlayerPose = "LieMasturbate"; DrawTransparentPlayerImage(600, 0, 1); Common_PlayerPose = ""; }
 	if (C012_AfterClass_Bed_CurrentStage == 110) { Common_PlayerPose = "LieMasturbateOrgasm"; DrawTransparentPlayerImage(600, 0, 1); Common_PlayerPose = ""; }
 	if (C012_AfterClass_Bed_CurrentStage == 120) { Common_PlayerPose = "LieMasturbateOrgasm"; DrawTransparentPlayerImage(600, 0, 1); Common_PlayerPose = ""; }
+	if (C012_AfterClass_Bed_CurrentStage == 900) DrawActor(CurrentActor, 600, 0, 1);
 }
 
 // Chapter 12 After Class - Bed Click
@@ -145,4 +156,15 @@ function C012_AfterClass_Bed_Climax() {
 	C012_AfterClass_Bed_PleasureUp = 0;
 	C012_AfterClass_Bed_PleasureDown = 0;
 	GameLogSpecificAddTimer(CurrentChapter, "Player", "NextPossibleOrgasm", PlayerHasLockedInventory("VibratingEgg") ? CurrentTime + 1800000 : CurrentTime + 3600000);
+}
+
+// Chapter 12 After Class - When the leaves the bed with a lover
+function C012_AfterClass_Bed_LeaveBedFromSex() {
+	LeaveIcon = "Leave";
+	OverridenIntroImage = "";
+}
+
+// Chapter 12 After Class - Go back to the dorm scene
+function C012_AfterClass_Bed_BackToDorm() {
+	SetScene(CurrentChapter, "Dorm");
 }
