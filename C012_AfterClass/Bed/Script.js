@@ -44,10 +44,10 @@ function C012_AfterClass_Bed_Load() {
 		C012_AfterClass_Bed_PrepareImage(false, false);
 		C012_AfterClass_Bed_SexPleasurePartner = ActorHasInventory("VibratingEgg") ? 3 : 0;
 		C012_AfterClass_Bed_SexPleasurePlayer = PlayerHasLockedInventory("VibratingEgg") ? 3 : 0;
-		if (CurrentActor == "Amanda") C012_AfterClass_Bed_SexPleasurePlayer - 1;
-		if (CurrentActor == "Sarah") C012_AfterClass_Bed_SexPleasurePlayer + 2;		
-		if (CurrentActor == "Sidney") C012_AfterClass_Bed_SexPleasurePlayer + 1;
-		if (CurrentActor == "Jennifer") C012_AfterClass_Bed_SexPleasurePlayer - 2;
+		if (CurrentActor == "Amanda") C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner - 1;
+		if (CurrentActor == "Sarah") C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner + 2;		
+		if (CurrentActor == "Sidney") C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner + 1;
+		if (CurrentActor == "Jennifer") C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner - 2;
 		LeaveIcon = "";
 
 	}

@@ -513,7 +513,7 @@ function DrawInteractionActor() {
 
 // Draw a ramdom image of the player as transition from chapter to chapter
 function DrawPlayerTransition() {
-	var ImgRnd = (Math.round(new Date().getTime() / 5000) % 5) + 1;
+	var ImgRnd = (Math.round(new Date().getTime() / 5000) % 8) + 1;
 	DrawImage("Actors/PlayerTransition/Player0" + ImgRnd.toString() + ".png", 900, 0);
 }
 
