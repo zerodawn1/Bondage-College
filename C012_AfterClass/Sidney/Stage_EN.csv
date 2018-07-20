@@ -215,6 +215,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 560,0,0,,"Yes, try not fuck up|in the meantime.",(She frowns and nods.)|Revenge will be sweet.,0,-1,1,EndChat()
 600,0,0,,Just wear your red|shorts and black top.,Perfect!  That's what I like best.|(She changes in her shorts for you.),0,0,0,"ForceChangeActor(""Shorts"")"
 600,0,0,,Wear your|school outfit.,Fine.  But let's not go back to school.|(She changes in her school uniform.),0,0,0,"ForceChangeActor(""Clothed"")"
+600,0,0,AllowBlackLingerie,Wear your lingerie.,(She winks.)  You're so kinky.|(She changes in her lingerie for you.),0,0,0,"ForceChangeActor(""BlackLingerie"")"
 600,0,0,!HasBelt,Get in your|underwear.,Alright.  What do you have in mind?|(She changes in her underwear for you.),0,0,0,"ForceChangeActor(""Underwear"")"
 600,0,0,,Get naked.,Really?  What do you have in mind?|(She strips naked for you.),0,0,0,"ForceChangeActor(""Naked"")"
 600,0,0,,Forget it.,(She nods.),0,0,0,
@@ -277,6 +278,28 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 650,0,0,,(Get in bed.),,0,0,0,MakeLove()
 650,0,0,!Common_ActorIsOwner,(Push her on the bed.),,0,0,0,MakeLove()
 650,0,0,!Common_ActorIsOwned,(Let her carry|you in bed.),,0,0,0,MakeLove()
+660,0,0,,What is it?,Cover your eyes for a minute.,661,0,0,StartLingerieShow()
+660,0,0,,Oh!  This is exciting!|What's the surprise?,(She nods.)  Cover your eyes for a minute.,661,1,0,StartLingerieShow()
+660,0,0,,It better be good.,It will.  Cover your eyes for a minute.,661,-1,0,StartLingerieShow()
+660,0,0,!Common_ActorIsOwner,Not now sweetie.,Ok.  Very well sweetheart.|What would you like to do?,0,0,0,EndChat()
+661,0,0,,Very well.|(Cover your eyes.),(You cover your eyes with your hands.)|Keep them covered for a minute.,662,0,0,"ForceChangeActor(""Naked"")"
+661,0,0,,Alright my love.|(Cover your eyes.),(You cover your eyes with your hands.)|Keep them covered for a minute.,662,0,0,"ForceChangeActor(""Naked"")"
+661,0,0,,Ok.  Do it quick.|(Cover your eyes.),,662,0,1,"ForceChangeActor(""Naked"")"
+661,0,0,,I don't care about|your surprise.,(She looks disappointed.)  Forget it.|So what would you like to do now?,0,-2,1,EndChat()
+662,0,0,,Can I look now?,Not yet!,663,0,0,
+662,0,0,,It's fun to be blind.,Yep!  So keep them covered.,663,0,-1,
+662,0,0,,(Take a peek.),(You peek between your fingers and|can barely see Sidney changing.),663,0,0,
+662,0,0,,(Uncover your eyes.),(You uncover your eyes and see Sidney naked.)|You ruined the surprise!  Forget it then!,0,-1,0,EndChat()
+663,0,0,,Can I uncover|my eyes now?,Yes!  (You uncover your eyes.)|So?  Do you like it sweetie?,664,0,0,"ForceChangeActor(""BlackLingerie"")"
+663,0,0,,(Take a peek.),Look!  (You uncover your eyes.)|So?  Do you like it sweetie?,664,0,0,"ForceChangeActor(""BlackLingerie"")"
+663,0,0,,(Uncover your eyes.),(You uncover your eyes before she says so.)|That was a too quick but do you like it sweetie?,664,0,0,"ForceChangeActor(""BlackLingerie"")"
+664,0,0,,Lose some weight|and it will be great.,Fuck.  (She frowns.)  That's not very kind.|Anyway.  I'll wear it whenever you want it.,665,-1,1,"ActorSetPose("""")"
+664,0,0,,It's fabulous.  I wish|I had curves like you.,Someday you'll have great curves like me.|In the meantime.  I'll wear it whenever you want.,665,1,-1,
+664,0,0,,You look great.,I'm very happy to hear that.|I'll wear it whenever you want.,665,1,0,
+664,0,0,,It's ok.,I thought you would like it better.|I'll wear it whenever you want it.,665,0,0,"ActorSetPose("""")"
+664,0,0,,(Clap your hands.),I'm very happy sweetheart.|I'll wear it whenever you want.,665,1,0,
+665,0,0,,Alright!,(She nods and smiles.)|What would you like to do now?,0,0,0,UnlockBlackLingerie()
+665,0,0,,Awesome!,(She twirls happily in her lingerie.)|So what would you like to do now?,0,1,0,UnlockBlackLingerie()
 3000,0,0,,Yes Mistress.|(Strip naked.),Good girl.  (You change for Sidney.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,(Nod slowly.)|(Strip naked.),Good girl.  (You change for Sidney.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,I don't want|to do that.,"Fine, shut up then.|(She checks her phone.)",3092,0,0,TestPunish()

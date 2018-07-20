@@ -103,6 +103,13 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 650,0,0,Common_ActorIsLover,Of course sweetie.,Dorm.jpg
 650,0,0,Common_ActorIsOwned,Of course Mistress.,Dorm.jpg
 650,0,0,Common_ActorIsOwner,"Sure bitch, we can fuck.",Dorm.jpg
+660,0,0,,"My love, I have a surprise for you.",Dorm.jpg
+660,0,0,Common_ActorIsOwned,"Mistress, I have a surprise for you.",Dorm.jpg
+661,0,0,,,Dorm.jpg
+662,0,0,,,CoverEyes.jpg
+663,0,0,,,CoverEyes.jpg
+664,0,0,,,Dorm.jpg
+665,0,0,,,Dorm.jpg
 3000,0,0,,"My bitch, I want you to get naked.",Dorm.jpg
 3000,0,0,Common_ActorIsLover,My sweet little bitch.|I want you to get naked.,Dorm.jpg
 3010,0,0,,"My bitch, I want to see|you in your underwear.",Dorm.jpg

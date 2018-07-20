@@ -16,6 +16,7 @@ var C012_AfterClass_Sidney_PleasurePlayerCount = 0;
 var C012_AfterClass_Sidney_PleasurePlayerSpeed = 0;
 var C012_AfterClass_Sidney_MasturbateCount = 0;
 var C012_AfterClass_Sidney_CanSetCurfew22 = false;
+var C012_AfterClass_Sidney_AllowBlackLingerie = false;
 
 // In her shorts, Sidney can have many poses when she talks
 function C012_AfterClass_Sidney_SetPose() {
@@ -29,15 +30,17 @@ function C012_AfterClass_Sidney_SetPose() {
 		if (Common_ActorIsOwned) ActorSetPose("Shy");
 	} else {
 		if ((ActorGetValue(ActorCloth) == "Naked") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorSubmission) >= 10)) ActorSetPose("Shy");
+		if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorLove) >= 10)) ActorSetPose("Happy");
 		else ActorSetPose("");
 	}
 }
 
 // Calculate the scene parameters
 function C012_AfterClass_Sidney_CalcParams() {
+	C012_AfterClass_Sidney_AllowBlackLingerie = GameLogQuery(CurrentChapter, CurrentActor, "AllowBlackLingerie");
 	C012_AfterClass_Sidney_HasEgg = ActorHasInventory("VibratingEgg");
 	C012_AfterClass_Sidney_HasBelt = ActorHasInventory("ChastityBelt");
-	C012_AfterClass_Sidney_IsGagged = ActorIsGagged();
+	C012_AfterClass_Sidney_IsGagged = ActorIsGagged();	
 	C012_AfterClass_Sidney_IsRoped = (ActorHasInventory("Rope") || ActorHasInventory("TwoRopes") || ActorHasInventory("ThreeRopes"));
 	C012_AfterClass_Sidney_IsStrapped = ActorHasInventory("Armbinder");
 	C012_AfterClass_Sidney_PusherDealAvail = (!C012_AfterClass_Sidney_HasBelt && PlayerHasInventory("ChastityBelt") && GameLogQuery(CurrentChapter, "", "DebtChastityBelt") && !GameLogQuery(CurrentChapter, "", "DebtChastityBeltDone"));
@@ -84,10 +87,14 @@ function C012_AfterClass_Sidney_Load() {
 
 			// Makes sure the next random event can be triggered
 			if (C012_AfterClass_Sidney_CurrentStage == 0)
-				if (CurrentText != null)
-					if (!GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") && Common_ActorIsOwner)
-						if (Math.floor(Math.random() * 10) == 0)
-							C012_AfterClass_Sidney_RandomSidneyDommeEvent();
+				if (CurrentText != null) {
+					if (!GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") && Common_ActorIsOwner && (Math.floor(Math.random() * 10) == 0))
+						C012_AfterClass_Sidney_RandomSidneyDommeEvent();
+					if (!GameLogQuery(CurrentChapter, CurrentActor, "LingerieShow") && (C012_AfterClass_Sidney_CurrentStage == 0) && (Math.floor(Math.random() * 10) == 0) && Common_ActorIsLover && !Common_PlayerGagged && !Common_PlayerRestrained && !ActorIsRestrained() && !ActorIsGagged()) {
+						C012_AfterClass_Sidney_CurrentStage = 660;
+						LeaveIcon = "";
+					}
+				}
 
 		}
 
@@ -103,7 +110,7 @@ function C012_AfterClass_Sidney_Run() {
 	BuildInteraction(C012_AfterClass_Sidney_CurrentStage);
 	
 	// Draw the actor alone or with the player depending on the stage
-	if ((C012_AfterClass_Sidney_CurrentStage != 410) && (C012_AfterClass_Sidney_CurrentStage != 3931) && (C012_AfterClass_Sidney_CurrentStage != 3932) && (C012_AfterClass_Sidney_CurrentStage != 3933) && (C012_AfterClass_Sidney_CurrentStage != 632) && (C012_AfterClass_Sidney_CurrentStage != 633) && (C012_AfterClass_Sidney_CurrentStage != 634)) {
+	if ((C012_AfterClass_Sidney_CurrentStage != 410) && (C012_AfterClass_Sidney_CurrentStage != 3931) && (C012_AfterClass_Sidney_CurrentStage != 3932) && (C012_AfterClass_Sidney_CurrentStage != 3933) && (C012_AfterClass_Sidney_CurrentStage != 632) && (C012_AfterClass_Sidney_CurrentStage != 633) && (C012_AfterClass_Sidney_CurrentStage != 634) && (C012_AfterClass_Sidney_CurrentStage != 662) && (C012_AfterClass_Sidney_CurrentStage != 663)) {
 		if (((C012_AfterClass_Sidney_CurrentStage >= 3090) && (C012_AfterClass_Sidney_CurrentStage <= 3099)) || ((C012_AfterClass_Sidney_CurrentStage >= 3901) && (C012_AfterClass_Sidney_CurrentStage <= 3999))) {
 			DrawActor("Player", 475, 0, 1);
 			DrawActor(CurrentActor, 750, 0, 1);
@@ -171,7 +178,7 @@ function C012_AfterClass_Sidney_Click() {
 		}
 
 		// A second rope can be applied if Sidney isn't fully clothed
-		if ((ActorGetValue(ActorCloth) != "Naked") && (ActorGetValue(ActorCloth) != "Underwear") && (ClickInv == "Rope") && (ActorHasInventory("Rope"))) {
+		if ((ActorGetValue(ActorCloth) != "Naked") && (ActorGetValue(ActorCloth) != "Underwear") && (ActorGetValue(ActorCloth) != "BlackLingerie") && (ClickInv == "Rope") && (ActorHasInventory("Rope"))) {
 			OverridenIntroText = GetText("StripForSecondRope");
 			return;
 		}
@@ -912,4 +919,16 @@ function C012_AfterClass_Sidney_LeaveForRockShow() {
 	PlayerClothes("BlackDress");
 	GameLogAdd("RockShowTogether");
 	SetScene(CurrentChapter, "RockShow");
+}
+
+// Chapter 12 After Class - Starts the lingerie show
+function C012_AfterClass_Sidney_StartLingerieShow() {
+	GameLogAdd("LingerieShow");
+}
+
+// Chapter 12 After Class - Unlocks the black lingerie for Sidney
+function C012_AfterClass_Sidney_UnlockBlackLingerie() {
+	GameLogAdd("AllowBlackLingerie");
+	LeaveIcon = "Leave";
+	C012_AfterClass_Sidney_AllowBlackLingerie = true;
 }
