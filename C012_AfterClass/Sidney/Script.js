@@ -139,8 +139,9 @@ function C012_AfterClass_Sidney_Click() {
 	if ((C012_AfterClass_Sidney_CurrentStage <= 10) && (ClickInv != "") && (ClickInv != "Player") && !Common_PlayerRestrained) {
 		
 		// Sidney becomes more submissive from the crop
-		if (ClickInv == "Crop") {			
-			if (Common_ActorIsOwned) OverridenIntroText = GetText("CropFromMistress");
+		if (ClickInv == "Crop") {
+			if (ActorIsGagged()) OverridenIntroText = GetText("CropWhileGagged");
+			else if (Common_ActorIsOwned) OverridenIntroText = GetText("CropFromMistress");
 			else OverridenIntroText = GetText("Crop");
 			if (!GameLogQuery(CurrentChapter, CurrentActor, "CropDone")) {
 				ActorChangeAttitude(0, 1);
