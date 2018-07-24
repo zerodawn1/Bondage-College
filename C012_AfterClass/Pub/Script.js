@@ -209,3 +209,13 @@ function C012_AfterClass_Pub_WaitWithSidney() {
 		C012_AfterClass_Pub_CurrentStage = 0;
 	}
 }
+
+// Chapter 12 After Class - When the player searches, 1 crop can be found
+function C012_AfterClass_Pub_Search() {
+	CurrentTime = CurrentTime + 50000;
+	if (!GameLogQuery(CurrentChapter, "Player", "PubFindCrop")) {
+		GameLogSpecificAdd(CurrentChapter, "Player", "PubFindCrop");
+		OverridenIntroText = GetText("FindCrop");
+		PlayerAddInventory("Crop", 1);
+	}
+}

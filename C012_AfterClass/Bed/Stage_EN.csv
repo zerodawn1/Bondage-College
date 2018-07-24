@@ -23,10 +23,10 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 200,0,0,,(Caress her pussy.),(You gently caress each other|pussy lips and moan softly.),200,0,0,"Sex(1, 1, true)"
 200,0,0,,(Slide a finger in.),(You both slide a finger in to masturbate|each other and she seems to really enjoy that.),200,0,0,"Sex(2, 1, true)"
 200,0,0,,(Eat her.),(You both eat other in a 69 fashion|and she seems to really enjoy that.),200,0,0,"Sex(2, 1, true)"
-200,0,0,,(Fist her.),(You fist her while she masturbates you.|She screams and shivers from the extasy.),200,0,0,"Sex(3, 1, true)"
+200,0,0,,(Fist her.),(You fist her while she masturbates you.|She screams and shivers from the ecstasy.),200,0,0,"Sex(3, 1, true)"
 200,0,0,,That's enough.|(Get up from bed.),We stop now?  That was quick.,200,0,0,LeaveBedFromSex()
 210,0,0,,(Rest close to her.),(You give each other a big hug.)|Shit!  That was fucking great!,220,0,0,AfterSex()
-210,0,0,Common_ActorIsLover,(Kiss her neck.),(You kiss her neck while she recover|her breath.)  That was great sweetie!,220,0,0,AfterSex()
+210,0,0,Common_ActorIsLover,(Kiss her neck.),(You kiss her neck while she recovers|her breath.)  That was great sweetie!,220,0,0,AfterSex()
 210,0,0,Common_ActorIsLover,I love you Sidney.,(She smiles and slowly recovers her breath.)|I love you sweetheart.  That was great!,220,0,0,AfterSex()
 210,0,0,,It was wonderful.,Fuck yeah!  That was great.,220,0,0,AfterSex()
 210,0,0,,You're a good fuck.,(She recovers her breath and giggles.)|Well thanks!  That was fucking great.,220,0,1,AfterSex()

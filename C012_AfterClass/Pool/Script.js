@@ -78,3 +78,13 @@ function C012_AfterClass_Pool_Swim() {
 		OverridenIntroText = GetText("LearnSwim");
 	}
 }
+
+// Chapter 12 After Class - When the player searches, 2 ropes can be found
+function C012_AfterClass_Pool_Search() {
+	CurrentTime = CurrentTime + 50000;
+	if (!GameLogQuery(CurrentChapter, "Player", "PoolFindRope")) {
+		GameLogSpecificAdd(CurrentChapter, "Player", "PoolFindRope");
+		OverridenIntroText = GetText("FindRope");
+		PlayerAddInventory("Rope", 2);
+	}
+}

@@ -141,8 +141,9 @@ function C012_AfterClass_RockShow_Leave() {
 	SetScene(CurrentChapter, "Dorm");
 }
 
-// Chapter 12 After Class - When the player searches at the rock show
+// Chapter 12 After Class - When the player searches at the rock show, 1 sleeping pill can be found
 function C012_AfterClass_RockShow_Search() {
+	CurrentTime = CurrentTime + 50000;
 	if (!C012_AfterClass_RockShow_SearchDone) {
 		C012_AfterClass_RockShow_SearchDone = true;
 		OverridenIntroText = GetText("FindSleepingPill");

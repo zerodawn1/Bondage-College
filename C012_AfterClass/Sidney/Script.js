@@ -18,6 +18,12 @@ var C012_AfterClass_Sidney_MasturbateCount = 0;
 var C012_AfterClass_Sidney_CanSetCurfew22 = false;
 var C012_AfterClass_Sidney_AllowBlackLingerie = false;
 
+// Sidney can only check her cell phone if she's dressed
+function C012_AfterClass_Sidney_CheckCellPhone() {
+	if (ActorGetValue(ActorCloth) == "Shorts") ActorSetPose("CheckCellPhone");
+	LeaveIcon = "Leave";
+}
+
 // In her shorts, Sidney can have many poses when she talks
 function C012_AfterClass_Sidney_SetPose() {
 	if ((ActorGetValue(ActorCloth) == "Shorts") && !ActorIsRestrained() && !ActorIsGagged()) {
@@ -85,13 +91,17 @@ function C012_AfterClass_Sidney_Load() {
 
 		} else {
 
-			// Makes sure the next random event can be triggered
+			// A random event can be triggered when Sidney is clicked on
 			if (C012_AfterClass_Sidney_CurrentStage == 0)
-				if (CurrentText != null) {
-					if (!GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") && Common_ActorIsOwner && (Math.floor(Math.random() * 10) == 0))
+				if ((CurrentText != null) && (Math.floor(Math.random() * 8) == 0)) {
+					if (!GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") && Common_ActorIsOwner)
 						C012_AfterClass_Sidney_RandomSidneyDommeEvent();
-					if (!GameLogQuery(CurrentChapter, CurrentActor, "LingerieShow") && (C012_AfterClass_Sidney_CurrentStage == 0) && (Math.floor(Math.random() * 10) == 0) && Common_ActorIsLover && !Common_PlayerGagged && !Common_PlayerRestrained && !ActorIsRestrained() && !ActorIsGagged()) {
+					if (!GameLogQuery(CurrentChapter, CurrentActor, "LingerieShow") && (C012_AfterClass_Sidney_CurrentStage == 0) && Common_ActorIsLover && !Common_PlayerGagged && !Common_PlayerRestrained && !ActorIsRestrained() && !ActorIsGagged()) {
 						C012_AfterClass_Sidney_CurrentStage = 660;
+						LeaveIcon = "";
+					}
+					if (GameLogQuery(CurrentChapter, CurrentActor, "AllowBlackLingerie") && (C012_AfterClass_Sidney_CurrentStage == 0) && Common_ActorIsLover && Common_ActorIsOwner && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorCloth) != "BlackLingerie")) {
+						C012_AfterClass_Sidney_CurrentStage = 670;
 						LeaveIcon = "";
 					}
 				}
@@ -221,6 +231,7 @@ function C012_AfterClass_Sidney_TestLove() {
 		if (!ActorIsRestrained() && !Common_PlayerRestrained) {
 			if (!Common_PlayerNaked && (ActorGetValue(ActorCloth) != "Naked")) {
 				if (ActorGetValue(ActorLove) >= 20) {
+					ActorSetPose("");
 					C012_AfterClass_Sidney_CurrentStage = 100;
 					OverridenIntroText = "";
 				}
@@ -333,7 +344,7 @@ function C012_AfterClass_Sidney_RandomSidneyDommeEvent() {
 	}
 
 	// If Sidney doesn't respond, she checks her cell phone
-	if (C012_AfterClass_Sidney_CurrentStage == 0) ActorSetPose("CheckCellPhone");
+	if (C012_AfterClass_Sidney_CurrentStage == 0) C012_AfterClass_Sidney_CheckCellPhone();
 	
 }
 
@@ -393,8 +404,7 @@ function C012_AfterClass_Sidney_TestPunish() {
 
 	// The more love, the less chances the player will be punished
 	if (EventRandomChance("Love")) {
-		ActorSetPose("CheckCellPhone");
-		LeaveIcon = "Leave";
+		C012_AfterClass_Sidney_CheckCellPhone();
 	} else {
 		ActorSetPose("Angry");
 		OverridenIntroText = "";
@@ -405,8 +415,7 @@ function C012_AfterClass_Sidney_TestPunish() {
 
 // Chapter 12 After Class - Allows the player to leave the scene
 function C012_AfterClass_Sidney_AllowLeave() {
-	ActorSetPose("CheckCellPhone");
-	LeaveIcon = "Leave";
+	C012_AfterClass_Sidney_CheckCellPhone();
 }
 
 // Chapter 12 After Class - The player can beg Sidney to be released before she exits
@@ -916,6 +925,7 @@ function C012_AfterClass_Sidney_SidneyLeave() {
 // Chapter 12 After Class - When Sidney and the player leaves for the rock show
 function C012_AfterClass_Sidney_LeaveForRockShow() {
 	CurrentTime = CurrentTime + 290000;
+	PlayerReleaseBondage();
 	ActorSetCloth("Shorts");
 	PlayerClothes("BlackDress");
 	GameLogAdd("RockShowTogether");

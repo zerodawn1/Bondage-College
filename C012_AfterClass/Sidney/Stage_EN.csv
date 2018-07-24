@@ -30,8 +30,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 100,0,0,,Do you have|a girlfriend?,"I don't, this place is full of losers.",110,0,0,TestRelationship()
 105,0,0,,"Yes, I'm lucky.",Fuck yeah you're lucky.|Let's talk about something else.,0,0,0,
 105,0,0,,You'll find someone.,"Yeah, yeah, yeah, I know.|Let's talk about something else.",0,0,0,
-105,0,0,Common_ActorIsOwned,I would rater|date you.,"Mistress, you could break up with her.|We can't date if you're seeing someone.",106,0,0,
-105,0,0,!Common_ActorIsOwned,,Then break up with that fucking loser.|We can't date if you're seeing someone.,106,0,0,
+105,0,0,Common_ActorIsOwned,I would rather|date you.,"Mistress, you could break up with her.|We can't date if you're seeing someone.",106,0,0,
+105,0,0,!Common_ActorIsOwned,I would rather|date you.,Then break up with that fucking loser.|We can't date if you're seeing someone.,106,0,0,
 106,0,0,,"Yes, I'll do that.",Great!  Let me know when it's done.,0,0,0,
 106,0,0,,I'll think about it.,Ok.  Let me know if you did it.,0,0,0,
 106,0,0,,I can't do that.,Fine.  Let's talk about|something else then.,0,0,0,
@@ -42,7 +42,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 115,0,0,,Me of course!|Do you like me?,(She pauses for a moment.)|I... I think I do yeah.,120,0,0,
 115,0,0,,Amanda.,Are you blind or what?|She's wet for that stupid blond.,0,0,0,
 115,0,0,,Sarah.,Fuck you COMMON_PLAYERNAME.|This is not funny.,0,0,0,
-115,0,0,,Jennifer.,"She's a loser, she can be my bitch at best.",0,0,0,
+115,0,0,,Jennifer.,She's a loser.  She can be my bitch at best.,0,0,0,
 115,0,0,,It's a surprise.,"Don't tell me then, I'll wait.|Let's talk about something else.",0,0,0,
 120,0,0,,Have you dated|a girl before?,I've fucked with girls but|never dated.  And you?,130,0,0,
 120,0,0,,Do you have|lesbian desires?,I've fucked with girls before but|I've never dated any.  And you?,130,0,0,
@@ -169,9 +169,10 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 391,0,0,,Very good.,"(She nods.)  Alright my little bitch.|Another thing, I now control your sexuality.",392,0,0,
 392,0,0,,My sexuality Mistress?,You can't do anything sexual without asking me.|Now stand up and let's do something fun.,0,0,0,PlayerStandUp()
 392,0,0,,What does it mean?,You can't do anything sexual without asking me.|Now stand up and let's do something fun.,0,0,0,PlayerStandUp()
+400,0,0,Common_ActorIsLover,(Nod yes happily.)|(Go to the show.),,0,0,0,LeaveForRockShow()
+400,0,0,Common_ActorIsLover,Let's go together!|(Go to the show.),,0,0,0,LeaveForRockShow()
 400,0,0,Common_PlayerGagged,@UNGN MH NUUOGH!,(She laughs and leaves your dorm.),410,0,0,TestReleaseBeforeExit()
 400,0,0,Common_PlayerRestrained,Can you help me|before you go?,"Nope, I like you like that.|(She leaves your dorm.)",410,0,0,TestReleaseBeforeExit()
-400,0,0,Common_ActorIsLover,Let's go together!|(Go to the show.),,0,0,0,LeaveForRockShow()
 400,0,0,!Common_ActorIsOwned,Have fun Sidney!,I will.  (She leaves your dorm.),410,0,0,
 400,0,0,Common_ActorIsOwned,Have fun my slave!,"I will Mistress, thanks!|(She leaves your dorm.)",410,0,1,
 400,0,0,!Common_ActorIsOwned,That sucks!|Don't go.,Fuck that.  (She leaves your dorm.),410,-1,0,
@@ -300,6 +301,12 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 664,0,0,,(Clap your hands.),I'm very happy sweetheart.|I'll wear it whenever you want.,665,1,0,
 665,0,0,,Alright!,(She nods and smiles.)|What would you like to do now?,0,0,0,UnlockBlackLingerie()
 665,0,0,,Awesome!,(She twirls happily in her lingerie.)|So what would you like to do now?,0,1,0,UnlockBlackLingerie()
+670,0,0,,Oh yes Mistress!,(She slowly changes for you and smiles.)|Who's the prettiest Mistress in the world?,671,0,0,"ForceChangeActor(""BlackLingerie"")"
+670,0,0,Common_PlayerGagged,(Nod slowly.),(She slowly changes for you and smiles.)|Who's the prettiest Mistress in the world?,671,0,0,"ForceChangeActor(""BlackLingerie"")"
+670,0,0,,Maybe later Mistress?,"Ok, it was only a favor for you bitch.|Tell me what would you like to do?",0,0,0,EndChat()
+670,0,0,Common_PlayerGagged,(Shake your head no.),"Ok, it was only a favor for you bitch.|Tell me what would you like to do?",0,0,0,EndChat()
+671,0,0,,You are Mistress!,Good girl.  What would you like to do?,0,0,0,EndChat()
+671,0,0,Common_PlayerGagged,(Giggle in your gag.),(She laughs.)  So what would|you like to do my gagged bitch?,0,0,0,EndChat()
 3000,0,0,,Yes Mistress.|(Strip naked.),Good girl.  (You change for Sidney.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,(Nod slowly.)|(Strip naked.),Good girl.  (You change for Sidney.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,I don't want|to do that.,"Fine, shut up then.|(She checks her phone.)",3092,0,0,TestPunish()

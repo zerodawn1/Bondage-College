@@ -1,6 +1,7 @@
 Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,SidneyAvail,Meet Sidney.,,0,0,0,SidneyStart()
 0,0,0,,Wait for a while.,You wait for a little while and|check the crowd at the pub.,0,0,0,Wait()
+0,0,0,,Search the place.,You search around the pub but|don't find anything interesting.,0,0,0,Search()
 0,0,0,,Leave the pub.,,0,0,0,Leave()
 100,0,0,Common_PlayerChaste,I have the same problem.|I'll find a way out.,Fine!  But find a solution quick.|This belt is driving me insane.,101,1,0,
 100,0,8,,"Calm down girl, this belt|will come off when I decide.",(She bows her head.)  Very well Miss.|But know that this is driving me insane.,101,0,1,"SetPose(""Shy"")"

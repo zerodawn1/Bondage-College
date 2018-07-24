@@ -1,5 +1,5 @@
 Stage,LoveReq,SubReq,VarReq,IntroText,Image
-0,0,0,,You arrive at the rock show.  The place is|crowded and the band is already playing.,RockShow.jpg
+0,0,0,,You arrive at the rock show.  The place is dark|and crowded and the band is already playing.,RockShow.jpg
 10,0,0,,,RockShow.jpg
 20,0,0,,,RockShow.jpg
 30,0,0,,,RockShow.jpg

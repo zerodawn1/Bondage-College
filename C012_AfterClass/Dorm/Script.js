@@ -39,10 +39,13 @@ function C012_AfterClass_Dorm_Load() {
 	ActorSpecificSetPose("Amanda", "");
 	ActorSpecificSetPose("Sarah", "");
 	ActorSpecificSetPose("Sidney", "");
-	ActorSpecificSetPose("Jennifer", "");
+	ActorSpecificSetPose("Jennifer", "");	
 	Common_BondageAllowed = true;
 	Common_SelfBondageAllowed = true;
 	C012_AfterClass_Bed_Partner = "";
+
+	// Owners will not stay naked
+	if ((Common_PlayerOwner == "Sidney") && (ActorSpecificGetValue("Sidney", ActorCloth) == "Naked")) ActorSpecificSetCloth("Sidney", "Shorts");
 	
 	// Calculates the time when Sidney will leave and return
 	C012_AfterClass_Dorm_SidneyExitTime = 20 * 60 * 60 * 1000;
