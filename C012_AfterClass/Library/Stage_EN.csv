@@ -1,0 +1,5 @@
+Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
+0,0,0,AmandaAvail,Meet Amanda.,,0,0,0,AmandaStart()
+0,0,0,,Study for a while.,You study for a while|and do some homework.,0,0,0,Wait()
+0,0,0,,Search the place.,You search around the library but|don't find anything interesting.,0,0,0,Search()
+0,0,0,,Leave the library.,,0,0,0,Leave()

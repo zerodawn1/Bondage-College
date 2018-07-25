@@ -1,0 +1,35 @@
+Stage,LoveReq,SubReq,VarReq,IntroText,Image
+0,0,0,EmptyLibrary,The college library is pretty empty at this hour.|It might be a quiet place to do your homework.,Library.jpg
+0,0,0,!EmptyLibrary,There's a few students in the library.|Who would you like to meet?,Library.jpg
+100,0,0,,Hi girl.  (She looks at you and smirks.)|I guess you need help with an homework.,Library.jpg
+100,8,0,,It's great to see you COMMON_PLAYERNAME.|I guess you need help with an homework.,Library.jpg
+100,-8,0,,"Oh, it's you.  (She seems disappointed.)|I guess you need help with an homework.",Library.jpg
+101,0,0,,,Library.jpg
+102,0,0,,,Library.jpg
+110,0,0,,Hi Miss COMMON_PLAYERNAME.|What brings you to the library?,Library.jpg
+111,0,0,,,Library.jpg
+112,0,0,,,Library.jpg
+120,0,0,,"I'm studying, it's not|a good time to talk.",Library.jpg
+121,0,0,,,Library.jpg
+122,0,0,,,Library.jpg
+130,0,0,,It's great to see you again!|You're here for a homework?,Library.jpg
+131,0,0,,,Library.jpg
+132,0,0,,,Library.jpg
+140,0,0,,Oh my god!  COMMON_PLAYERNAME!|Can you unlock the belt now?,Library.jpg
+141,0,0,,,Library.jpg
+142,0,0,,,Library.jpg
+150,0,0,,"This is very embarrassing.  I wasn't able|to remove your egg, can you help me?",Library.jpg
+151,0,0,,,Library.jpg
+152,0,0,,,Library.jpg
+160,0,0,,(She giggles.)  Did you enjoy your|time in the locker this afternoon?,Library.jpg
+161,0,0,,,Library.jpg
+162,0,0,,,Library.jpg
+170,0,0,,I can't believe you locked me|up in that locker this afternoon.,Library.jpg
+171,0,0,,,Library.jpg
+172,0,0,,,Library.jpg
+180,0,0,,I still laugh when I think about what|happened to Miss Mildred this morning,Library.jpg
+181,0,0,,,Library.jpg
+182,0,0,,,Library.jpg
+190,0,0,,,Library.jpg
+191,0,0,,,Library.jpg
+192,0,0,,,Library.jpg
