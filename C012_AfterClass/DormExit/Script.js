@@ -33,7 +33,7 @@ function C012_AfterClass_DormExit_Click() {
 function C012_AfterClass_DormExit_LaunchKinbaku() {
 	if (!Common_PlayerRestrained && !Common_PlayerGagged) {
 		if (Common_PlayerClothed && (Common_PlayerCostume == "")) {
-			if (CurrentTime > (18  * 60 * 60 * 1000)) OverridenIntroText = GetText("ClubHasFinished");
+			if (CurrentTime > (18 * 60 * 60 * 1000)) OverridenIntroText = GetText("ClubHasFinished");
 			else {
 				CurrentTime = CurrentTime + 290000;
 				if (C101_KinbakuClub_JennaIntro_CurrentStage == 80) SetScene("C101_KinbakuClub", "ClubRoom1");
@@ -71,4 +71,16 @@ function C012_AfterClass_DormExit_LaunchPool() {
 			SetScene(CurrentChapter, "Pool");
 		} else OverridenIntroText = GetText("SwimsuitFirst");
 	} else OverridenIntroText = GetText("UnrestrainFirst");
+}
+
+// Chapter 12 After Class - Launch the library
+function C012_AfterClass_DormExit_LaunchLibrary() {
+	if (!Common_PlayerRestrained && !Common_PlayerGagged) {
+		if (Common_PlayerClothed && (Common_PlayerCostume == "")) {
+			if (CurrentTime < (20.9 * 60 * 60 * 1000)) {
+				CurrentTime = CurrentTime + 290000;
+				SetScene(CurrentChapter, "Library");				
+			} else OverridenIntroText = GetText("LibraryClosed");
+		} else OverridenIntroText = GetText("SchoolClothesFirst");
+	} else OverridenIntroText = GetText("SchoolClothesFirst");
 }

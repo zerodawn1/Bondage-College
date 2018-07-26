@@ -4,9 +4,11 @@ var C012_AfterClass_Library_EmptyLibrary = true;
 var C012_AfterClass_Library_IntroText = "";
 var C012_AfterClass_Library_CurrentActor = "";
 var C012_AfterClass_Library_HasSeduction = false;
+var C012_AfterClass_Library_HasEgg = false;
 var C012_AfterClass_Library_AmandaBelted = false;
 var C012_AfterClass_Library_StudyTimeWithAmanda = 0;
 var C012_AfterClass_Library_StudyTimeHelpedByAmanda = 0;
+var C012_AfterClass_Library_StudyTimeHelpAmanda = 0;
 
 // Calculates who's in the library depending on the time of the day
 function C012_AfterClass_Library_WhoIsInLibrary() {
@@ -25,6 +27,7 @@ function C012_AfterClass_Library_Load() {
 	Common_BondageAllowed = false;
 	Common_SelfBondageAllowed = false;
 	C012_AfterClass_Library_HasSeduction = (PlayerGetSkillLevel("Seduction") >= 1);
+	C012_AfterClass_Library_HasEgg = (PlayerHasLockedInventory("VibratingEgg"));
 	C012_AfterClass_Library_AmandaBelted = (ActorHasInventory("ChastityBelt"));
 
 	// If we must put the previous text or previous actor back
@@ -85,28 +88,28 @@ function C012_AfterClass_Library_AmandaStart() {
 	var Sub = ActorGetValue(ActorSubmission);
 	
 	// If Amanda is dominant and more so than love/hate
-	if ((Sub <= -8) && (Math.abs(Sub) >= Math.abs(Love))) {
-		ActorSetPose("Domme");
+	if ((Sub <= -10) && (Math.abs(Sub) >= Math.abs(Love))) {
+		ActorSetPose("Point");
 		C012_AfterClass_Library_CurrentStage = 100;
 		return;
 	}
 
 	// If Amanda is submissive and more so than love/hate
-	if ((Sub >= 8) && (Math.abs(Sub) >= Math.abs(Love))) {
-		ActorSetPose("Sub");
+	if ((Sub >= 10) && (Math.abs(Sub) >= Math.abs(Love))) {
+		ActorSetPose("Shy");
 		C012_AfterClass_Library_CurrentStage = 110;
 		return;
 	}
 	
 	// If Amanda hates the player
-	if (Love <= -8) {
-		ActorSetPose("Hate");
+	if (Love <= -10) {
+		ActorSetPose("Angry");
 		C012_AfterClass_Library_CurrentStage = 120;
 		return;
 	}
 
 	// If Amanda loves the player
-	if (Love >= 8) {
+	if (Love >= 10) {
 		ActorSetPose("Love");
 		C012_AfterClass_Library_CurrentStage = 130;
 		return;
@@ -114,28 +117,28 @@ function C012_AfterClass_Library_AmandaStart() {
 	
 	// If Amanda is belted
 	if (ActorHasInventory("ChastityBelt")) {
-		ActorSetPose("Hate");
+		ActorSetPose("Angry");
 		C012_AfterClass_Library_CurrentStage = 140;
 		return;
 	}
 	
 	// If Amanda has the egg
 	if (ActorHasInventory("VibratingEgg")) {
-		ActorSetPose("Sub");
+		ActorSetPose("Shy");
 		C012_AfterClass_Library_CurrentStage = 150;
 		return;
 	}
 	
 	// If the player was locked in the locker in chapter 10
 	if (GameLogQuery("C010_Revenge", "Player", "Locker")) {
-		ActorSetPose("Domme");
+		ActorSetPose("Point");
 		C012_AfterClass_Library_CurrentStage = 160;
 		return;
 	}
 
 	// If Amanda was locked in the locker in chapter 10
 	if (GameLogQuery("C010_Revenge", "Amanda", "Locker")) {
-		ActorSetPose("Sub");
+		ActorSetPose("Shy");
 		C012_AfterClass_Library_CurrentStage = 170;
 		return;
 	}

@@ -57,9 +57,9 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 140,0,0,,I don't think so.,"Fine, I don't fucking care.|Let's talk about something else.",0,0,0,
 150,0,0,,Yes!!!|(Kiss her.),(You jump into each other arms|for a long and passionate kiss.),160,3,0,StartDating()
 150,0,0,,I need time to|think about it.,"Alright then, let me know|when you make up your mind.",0,0,0,
-160,0,0,,Show me your sexy|body my love.,Of course sweetie.  (You both strip|naked and look at each other body.),170,0,1,BothNaked()
-160,0,0,,(Blush red and|start to strip.),Don't be shy my love.  (You both strip|naked and look at each other body.),170,0,-1,BothNaked()
-160,0,0,,I want to make|love with you.,Fuck yeah!  (You both strip|naked and look at each other.),170,1,0,BothNaked()
+160,0,0,AllowSexAfterDate,Show me your sexy|body my love.,Of course sweetie.  (You both strip|naked and look at each other body.),170,0,1,BothNaked()
+160,0,0,AllowSexAfterDate,(Blush red and|start to strip.),Don't be shy my love.  (You both strip|naked and look at each other body.),170,0,-1,BothNaked()
+160,0,0,AllowSexAfterDate,I want to make|love with you.,Fuck yeah!  (You both strip|naked and look at each other.),170,1,0,BothNaked()
 160,0,0,,I'm so happy!,Fuck yeah!  I'm sure we'll have fun.,0,0,0,
 160,0,0,,I can't wait to|tell my friends.,Don't brag to everyone sweetie.,0,-1,0,
 160,0,0,,We should|go out later.,Now you're talking sweetheart!|We should celebrate and get stoned.,0,1,0,

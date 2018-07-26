@@ -17,6 +17,7 @@ var C012_AfterClass_Sidney_PleasurePlayerSpeed = 0;
 var C012_AfterClass_Sidney_MasturbateCount = 0;
 var C012_AfterClass_Sidney_CanSetCurfew22 = false;
 var C012_AfterClass_Sidney_AllowBlackLingerie = false;
+var C012_AfterClass_Sidney_AllowSexAfterDate = false;
 
 // Sidney can only check her cell phone if she's dressed
 function C012_AfterClass_Sidney_CheckCellPhone() {
@@ -865,6 +866,7 @@ function C012_AfterClass_Sidney_StartDating() {
 	CurrentTime = CurrentTime + 50000;
 	Common_PlayerLover = "Sidney";
 	Common_ActorIsLover = true;
+	C012_AfterClass_Sidney_AllowSexAfterDate = (!Common_PlayerChaste && !ActorIsChaste());
 }
 
 // Chapter 12 After Class - Start Dating Sidney
