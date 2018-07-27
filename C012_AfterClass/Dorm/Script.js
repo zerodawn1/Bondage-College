@@ -22,12 +22,15 @@ function C012_AfterClass_Dorm_LeavingGuest() {
 }
 
 // Set the guest list in the dorm
-function C012_AfterClass_Dorm_CalGuest() {	
+function C012_AfterClass_Dorm_CalGuest() {
 	C012_AfterClass_Dorm_LeavingGuest();
 	C012_AfterClass_Dorm_Guest = [];
 	if (GameLogQuery(CurrentChapter, "Sidney", "EnterDormFromPub") && ((CurrentTime <= C012_AfterClass_Dorm_SidneyExitTime) || (CurrentTime >= C012_AfterClass_Dorm_SidneyReturnTime) || GameLogQuery(CurrentChapter, "Sidney", "BackFromRockShow") || ActorSpecificIsRestrained("Sidney"))) 
-		if (!GameLogQuery(CurrentChapter, "Sidney", "LoverBreakUp") || ActorSpecificGetValue("Sidney", ActorOwner) == "Player")
+		if (!GameLogQuery(CurrentChapter, "Sidney", "LoverBreakUp") || (ActorSpecificGetValue("Sidney", ActorOwner) == "Player"))
 			C012_AfterClass_Dorm_Guest.push("Sidney");
+	if (GameLogQuery(CurrentChapter, "Amanda", "EnterDormFromLibrary") && !GameLogQuery(CurrentChapter, "Amanda", "LeaveDormEarly"))
+		if (!GameLogQuery(CurrentChapter, "Amanda", "LoverBreakUp") || (ActorSpecificGetValue("Amanda", ActorOwner) == "Player"))
+			C012_AfterClass_Dorm_Guest.push("Amanda");
 	C012_AfterClass_Dorm_PlayerPos = 600 - C012_AfterClass_Dorm_Guest.length * 100;
 }
 
@@ -131,7 +134,7 @@ function C012_AfterClass_Dorm_Click() {
 	
 	}
 
-	// Loads the other actors
+	// When the player clicks on another actor
 	if ((MouseX >= C012_AfterClass_Dorm_PlayerPos + 100) && (MouseX < C012_AfterClass_Dorm_PlayerPos + 300) && (MouseY >= 0) && (MouseY <= 600) && (C012_AfterClass_Dorm_Guest.length >= 1)) SetScene(CurrentChapter, C012_AfterClass_Dorm_Guest[0]);
 	if ((MouseX >= C012_AfterClass_Dorm_PlayerPos + 300) && (MouseX < C012_AfterClass_Dorm_PlayerPos + 500) && (MouseY >= 0) && (MouseY <= 600) && (C012_AfterClass_Dorm_Guest.length >= 2)) SetScene(CurrentChapter, C012_AfterClass_Dorm_Guest[1]);
 	

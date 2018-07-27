@@ -9,12 +9,16 @@ var C012_AfterClass_Library_AmandaBelted = false;
 var C012_AfterClass_Library_StudyTimeWithAmanda = 0;
 var C012_AfterClass_Library_StudyTimeHelpedByAmanda = 0;
 var C012_AfterClass_Library_StudyTimeHelpAmanda = 0;
+var C012_AfterClass_Library_PoemAvail = false;
+var C012_AfterClass_Library_PlayerDormAvail = true;
+var C012_AfterClass_Library_AmandaDormAvail = true;
+var C012_AfterClass_Library_DinnerAvail = true;
 
 // Calculates who's in the library depending on the time of the day
 function C012_AfterClass_Library_WhoIsInLibrary() {
 
 	// Sets who's at the library at what time
-	C012_AfterClass_Library_AmandaAvail = ((CurrentTime >= 18 * 60 * 60 * 1000) && (CurrentTime <= 21 * 60 * 60 * 1000) && !GameLogQuery(CurrentChapter, "Amanda", "Library"));
+	C012_AfterClass_Library_AmandaAvail = ((CurrentTime >= 18 * 60 * 60 * 1000) && (CurrentTime <= 21 * 60 * 60 * 1000) && !GameLogQuery(CurrentChapter, "Amanda", "EnterDormFromLibrary"));
 	C012_AfterClass_Library_EmptyLibrary = (!C012_AfterClass_Library_AmandaAvail);
 
 }
@@ -41,10 +45,15 @@ function C012_AfterClass_Library_Load() {
 	
 }
 
-// Chapter 12 After Class - Library Run
+// Chapter 12 After Class - Library Run (In stage 3XX we are in study mode with both the player and Amanda)
 function C012_AfterClass_Library_Run() {
 	BuildInteraction(C012_AfterClass_Library_CurrentStage);
-	if (CurrentActor != "") DrawActor(CurrentActor, 600, 0, 1);
+	if (CurrentActor != "") {
+		if ((C012_AfterClass_Library_CurrentStage >= 300) && (C012_AfterClass_Library_CurrentStage <= 399)) {
+			DrawActor("Player", 600, 120, 0.8);
+			DrawActor(CurrentActor, 900, 120, 0.8);
+		} else DrawActor(CurrentActor, 600, 0, 1);
+	}
 }
 
 // Chapter 12 After Class - Library Click
@@ -82,10 +91,17 @@ function C012_AfterClass_Library_AmandaStart() {
 	// Load Amanda data
 	ActorLoad("Amanda", "");
 	ActorSetCloth("");
-	GameLogAdd("Library");
+	ActorSetPose("");
 	LeaveIcon = "";
 	var Love = ActorGetValue(ActorLove);
 	var Sub = ActorGetValue(ActorSubmission);
+	
+	// If the intro is already done, we jump to the study stage
+	if (GameLogQuery(CurrentChapter, "Amanda", "LibraryIntro")) {
+		if (Sub >= 10) ActorSetPose("Shy");
+		C012_AfterClass_Library_CurrentStage = 200;
+		return;
+	}
 	
 	// If Amanda is dominant and more so than love/hate
 	if ((Sub <= -10) && (Math.abs(Sub) >= Math.abs(Love))) {
@@ -180,4 +196,85 @@ function C012_AfterClass_Library_Search() {
 		OverridenIntroText = GetText("FindItem");
 		PlayerAddRandomItem();
 	}
+}
+
+// Chapter 12 After Class - Flags the Amanda intro as done so it won't trigger again
+function C012_AfterClass_Library_AmandaIntroDone() {
+	GameLogAdd("LibraryIntro");
+}
+
+// Chapter 12 After Class - When the player starts to study with Amanda
+function C012_AfterClass_Library_StartStudy() {
+	C012_AfterClass_Library_AmandaIntroDone();
+	Common_PlayerPose = "BackStudy";
+	ActorSetPose("BackStudy");
+}
+
+// Chapter 12 After Class - When the player stops to study with Amanda
+function C012_AfterClass_Library_StopStudy() {
+	ActorSetPose("");
+}
+
+// Chapter 12 After Class - Tests if Amanda will go back to the player dorm (+10 love or +10 submission or +0 love and poem required)
+function C012_AfterClass_Library_TestPlayerDorm() {
+	C012_AfterClass_Library_PlayerDormAvail = false;
+	if (ActorGetValue(ActorLove) >= 10) {
+		OverridenIntroText = GetText("GoDormLove");
+		C012_AfterClass_Library_CurrentStage = 220;
+		return;
+	}
+	if (ActorGetValue(ActorSubmission) >= 10) {
+		OverridenIntroText = GetText("GoDormDomme");
+		C012_AfterClass_Library_CurrentStage = 220;
+		return;
+	}
+	if (GameLogQuery(CurrentChapter, "Amanda", "FinishPoem") && (ActorGetValue(ActorLove) >= 0)) {
+		OverridenIntroText = GetText("GoDormPoem");
+		C012_AfterClass_Library_CurrentStage = 220;
+		return;
+	}
+}
+
+// Chapter 12 After Class - Tests if the player can go back to Amanda's dorm (always no for now)
+function C012_AfterClass_Library_TestAmandaDorm() {
+	C012_AfterClass_Library_AmandaDormAvail = false;
+}
+
+// Chapter 12 After Class - Tests if Amanda will go get dinner with the player (always no for now)
+function C012_AfterClass_Library_TestDinner() {
+	C012_AfterClass_Library_DinnerAvail = false;
+}
+
+// Chapter 12 After Class - When the player study with Amanda (raises love slowly)
+function C012_AfterClass_Library_StudyWithAmanda() {
+	C012_AfterClass_Library_StudyTimeWithAmanda++;
+	CurrentTime = CurrentTime + 290000;
+	if (C012_AfterClass_Library_StudyTimeWithAmanda % 6 == 5) ActorChangeAttitude(1, 0);
+	C012_AfterClass_Library_PoemAvail = (!GameLogQuery(CurrentChapter, "Amanda", "StartPoem") && (C012_AfterClass_Library_StudyTimeWithAmanda >= 2))
+}
+
+// Chapter 12 After Class - When the player helps Amanda (raises Amanda submission slowly)
+function C012_AfterClass_Library_HelpAmanda() {
+	C012_AfterClass_Library_StudyTimeHelpAmanda++;
+	CurrentTime = CurrentTime + 290000;
+	if (C012_AfterClass_Library_StudyTimeHelpAmanda % 6 == 5) ActorChangeAttitude(0, 1);
+}
+
+// Chapter 12 After Class - When Amanda helps the player (lowers Amanda submission slowly)
+function C012_AfterClass_Library_HelpPlayer() {
+	C012_AfterClass_Library_StudyTimeHelpedByAmanda++;
+	CurrentTime = CurrentTime + 290000;
+	if (C012_AfterClass_Library_StudyTimeHelpedByAmanda % 6 == 5) ActorChangeAttitude(0, -1);
+}
+
+// Chapter 12 After Class - When the player starts the poem, it won't be available again
+function C012_AfterClass_Library_StartPoem() {
+	GameLogAdd("StartPoem");
+	C012_AfterClass_Library_PoemAvail = false;
+}
+
+// Chapter 12 After Class - When the player finishes the poem (it raises seduction)
+function C012_AfterClass_Library_FinishPoem() {
+	GameLogAdd("FinishPoem");
+	PlayerAddSkill("Seduction", 1);
 }
