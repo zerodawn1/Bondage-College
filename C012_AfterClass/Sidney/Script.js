@@ -526,9 +526,9 @@ function C012_AfterClass_Sidney_InsertEgg() {
 	CurrentTime = CurrentTime + 50000;
 }
 
-// Chapter 12 After Class - Ends the punishment and sets the duration between 30 minutes and 2 hours
+// Chapter 12 After Class - Ends the punishment and sets the duration between 30 minutes and 1.5 hours
 function C012_AfterClass_Sidney_EndPunishment(PunishmentType) {
-	GameLogAddTimer("Event" + PunishmentType, CurrentTime + 1800000 + Math.floor(Math.random() * 5400000));
+	GameLogAddTimer("Event" + PunishmentType, CurrentTime + 1800000 + Math.floor(Math.random() * 3600000));
 	EventSetGenericTimer();
 	C012_AfterClass_Sidney_AllowLeave();
 }
@@ -544,10 +544,12 @@ function C012_AfterClass_Sidney_ReleasePlayer() {
 
 // Chapter 12 After Class - Flags the chat as done and doesn't allow the player to leave
 function C012_AfterClass_Sidney_StartChat() {
-	ActorSetPose("");
-	GameLogAdd("ChatDone");
-	LeaveIcon = "";
-	C012_AfterClass_Sidney_ChatAvail = false;
+	if (!ActorIsGagged()) {
+		ActorSetPose("");
+		GameLogAdd("ChatDone");
+		LeaveIcon = "";
+		C012_AfterClass_Sidney_ChatAvail = false;
+	} else C012_AfterClass_Sidney_GaggedAnswer();
 }
 
 // Chapter 12 After Class - Ends the chat with Sidney

@@ -2,7 +2,7 @@ var EventLastRandomType = "";
 var EventActivityCurrent = "";
 var EventActivityCount = 0;
 var EventActivityMaxCount = 0;
-var EventList = ["Naked", "Underwear", "SchoolUniform", "RedBikini", "WhiteLingerie", "FullBondage", "Restrain", "Gag", "Release", "ConfiscateKeys", "ConfiscateCrop", "VibratingEgg", "Tickle", "Slap", "Masturbate", "Crop"];
+var EventList = ["Naked", "Underwear", "SchoolUniform", "RedBikini", "BlackDress", "WhiteLingerie", "FullBondage", "Restrain", "Gag", "Release", "ConfiscateKeys", "ConfiscateCrop", "VibratingEgg", "Tickle", "Slap", "Masturbate", "Crop"];
 var EventPunishmentList = ["Grounded", "Belted", "Spanked"];
 
 // Returns TRUE if the event is accepted

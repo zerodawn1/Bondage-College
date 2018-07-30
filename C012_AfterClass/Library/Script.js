@@ -206,13 +206,13 @@ function C012_AfterClass_Library_LeaveWithAmanda() {
 	C012_AfterClass_Library_Leave();
 }
 
-// Chapter 12 After Class - When the player searches, 1 random item can be found
+// Chapter 12 After Class - When the player searches, duct tape can be found
 function C012_AfterClass_Library_Search() {
 	CurrentTime = CurrentTime + 110000;
 	if (!GameLogQuery(CurrentChapter, "Player", "LibraryFindItem")) {
-		GameLogSpecificAdd(CurrentChapter, "Player", "LibraryFindItem");
-		OverridenIntroText = GetText("FindItem");
-		PlayerAddRandomItem();
+		GameLogSpecificAdd(CurrentChapter, "Player", "LibraryFindTape");
+		OverridenIntroText = GetText("FindTape");
+		PlayerAddInventory("TapeGag", 8);
 	}
 }
 
