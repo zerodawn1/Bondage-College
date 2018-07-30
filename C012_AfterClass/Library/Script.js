@@ -18,9 +18,27 @@ var C012_AfterClass_Library_DinnerAvail = true;
 function C012_AfterClass_Library_WhoIsInLibrary() {
 
 	// Sets who's at the library at what time
+	C012_AfterClass_Library_PlayerDormAvail = true;
+	C012_AfterClass_Library_AmandaDormAvail = true;
+	C012_AfterClass_Library_DinnerAvail = true;
 	C012_AfterClass_Library_AmandaAvail = ((CurrentTime >= 18 * 60 * 60 * 1000) && (CurrentTime <= 21 * 60 * 60 * 1000) && !GameLogQuery(CurrentChapter, "Amanda", "EnterDormFromLibrary"));
 	C012_AfterClass_Library_EmptyLibrary = (!C012_AfterClass_Library_AmandaAvail);
+	C012_AfterClass_Library_PoemAvail = (!GameLogQuery(CurrentChapter, "Amanda", "StartPoem") && (C012_AfterClass_Library_StudyTimeWithAmanda + C012_AfterClass_Library_StudyTimeHelpAmanda + C012_AfterClass_Library_StudyTimeHelpedByAmanda >= 3));
+	
+	// Closing time when the player is alone
+	if ((CurrentTime >= 21 * 60 * 60 * 1000) && (CurrentActor == "")) {
+		OverridenIntroText = GetText("LibraryClosingAlone");
+		C012_AfterClass_Library_CurrentStage = 10;
+	}
 
+	// Closing time when the player is with Amanda
+	if ((CurrentTime >= 21 * 60 * 60 * 1000) && (CurrentActor == "Amanda")) {
+		if (ActorGetValue(ActorSubmission) >= 10) ActorSetPose("Shy");
+		else ActorSetPose("");
+		OverridenIntroText = GetText("LibraryClosingAmanda");
+		C012_AfterClass_Library_CurrentStage = 230;
+	}
+	
 }
 
 // Chapter 12 After Class - Library Load
@@ -50,8 +68,8 @@ function C012_AfterClass_Library_Run() {
 	BuildInteraction(C012_AfterClass_Library_CurrentStage);
 	if (CurrentActor != "") {
 		if ((C012_AfterClass_Library_CurrentStage >= 300) && (C012_AfterClass_Library_CurrentStage <= 399)) {
-			DrawActor("Player", 600, 120, 0.8);
-			DrawActor(CurrentActor, 900, 120, 0.8);
+			DrawActor("Player", 390, 100, 1.2);
+			DrawActor(CurrentActor, 680, 100, 1.2);
 		} else DrawActor(CurrentActor, 600, 0, 1);
 	}
 }
@@ -184,8 +202,8 @@ function C012_AfterClass_Library_SetPose(NewPose) {
 
 // Chapter 12 After Class - When the player leaves with Amanda
 function C012_AfterClass_Library_LeaveWithAmanda() {
-	CurrentTime = CurrentTime + 290000;
 	GameLogAdd("EnterDormFromLibrary");
+	C012_AfterClass_Library_Leave();
 }
 
 // Chapter 12 After Class - When the player searches, 1 random item can be found
@@ -250,7 +268,7 @@ function C012_AfterClass_Library_StudyWithAmanda() {
 	C012_AfterClass_Library_StudyTimeWithAmanda++;
 	CurrentTime = CurrentTime + 290000;
 	if (C012_AfterClass_Library_StudyTimeWithAmanda % 6 == 5) ActorChangeAttitude(1, 0);
-	C012_AfterClass_Library_PoemAvail = (!GameLogQuery(CurrentChapter, "Amanda", "StartPoem") && (C012_AfterClass_Library_StudyTimeWithAmanda >= 2))
+	C012_AfterClass_Library_WhoIsInLibrary();
 }
 
 // Chapter 12 After Class - When the player helps Amanda (raises Amanda submission slowly)
@@ -258,6 +276,7 @@ function C012_AfterClass_Library_HelpAmanda() {
 	C012_AfterClass_Library_StudyTimeHelpAmanda++;
 	CurrentTime = CurrentTime + 290000;
 	if (C012_AfterClass_Library_StudyTimeHelpAmanda % 6 == 5) ActorChangeAttitude(0, 1);
+	C012_AfterClass_Library_WhoIsInLibrary();
 }
 
 // Chapter 12 After Class - When Amanda helps the player (lowers Amanda submission slowly)
@@ -265,6 +284,7 @@ function C012_AfterClass_Library_HelpPlayer() {
 	C012_AfterClass_Library_StudyTimeHelpedByAmanda++;
 	CurrentTime = CurrentTime + 290000;
 	if (C012_AfterClass_Library_StudyTimeHelpedByAmanda % 6 == 5) ActorChangeAttitude(0, -1);
+	C012_AfterClass_Library_WhoIsInLibrary();
 }
 
 // Chapter 12 After Class - When the player starts the poem, it won't be available again

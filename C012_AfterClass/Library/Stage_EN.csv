@@ -67,27 +67,31 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 205,0,0,,You're already|so far ahead?,I guess I could put down on the books.|What would you like to do instead?,210,0,0,
 205,0,0,,Future classes?|Get a life girl.,I do have a life!  I'll prove it.|What would you like to do?,210,0,0,
 210,0,0,,Never mind Amanda.|Let's study together.,(You and Amanda start|to study together.),300,0,0,StartStudy()
-210,0,0,PlayerDormAvail,Come to my dorm.|We'll have fun.,"No, we don't know each other well enough.",210,0,0,TestPlayerDorm()
+210,0,0,PlayerDormAvail,Come to my dorm.|We'll have fun.,"No, it wouldn't be proper.",210,0,0,TestPlayerDorm()
 210,0,0,AmandaDormAvail,We can go|to your place.,"My place...  But what if Sar...|No, let's not go to my place.",210,0,0,TestAmandaDorm()
 210,0,0,DinnerAvail,Let's go get dinner.,"Thanks, but I've already eaten.|You can't study on an empty stomach.",210,0,0,TestDinner()
 210,0,0,,Forget it.,Very well.,200,0,0,
 220,0,0,,Time to go then!|(Bring her to your dorm.),,220,0,0,LeaveWithAmanda()
+230,0,0,PlayerDormAvail,Come to my dorm.|We'll have fun.,"No, it wouldn't be proper.",230,0,0,TestPlayerDorm()
+230,0,0,AmandaDormAvail,We can go|to your place.,"My place...  But what if Sar...|No, let's not go to my place.",230,0,0,TestAmandaDorm()
+230,0,0,DinnerAvail,Let's go get dinner.,"Thanks, but I've already eaten.|You can't study on an empty stomach.",230,0,0,TestDinner()
+230,0,0,,See you soon.|(Back to your dorm.),,230,0,0,Leave()
 300,0,0,,(Study with Amanda.),(You study with her and you both help|each other.  She seems to appreciate.),300,0,0,StudyWithAmanda()
 300,0,0,,Do you need help?,"Yes, I would appreciate some help.|(You help her to study and give her tips.)",300,0,0,HelpAmanda()
 300,0,0,,Can you help me?,"Of course, I will gladly help you.|(She helps you to study and learn.)",300,0,0,HelpPlayer()
 300,0,0,,Should we do|something else?,What would you like to do?,210,0,0,StopStudy()
 300,0,0,PoemAvail,I found a poem.  Would|you like to hear it?,"A poem?  (She nods.)|Yes, I would love that.",310,0,0,StartPoem()
 300,0,0,,I need to go.|(Leave the library.),,300,0,0,Leave()
-310,0,0,,"She walks in beauty, like the night","(She repeats every words silently.)|She walks in beauty, like the night",311,0,0,
+310,0,0,,"She walks in beauty,|like the night","(She repeats every words silently.)|She walks in beauty, like the night",311,0,0,
 310,0,0,,Forget it.|It's stupid.,"Oh!  (She seems very disappointed.)|You're right, nobody likes poetry anymore.",300,-1,0,
-311,0,0,,Of cloudless climes and starry skies;,(She repeats every words silently.)|Of cloudless climes and starry skies;,312,0,0,
+311,0,0,,Of cloudless climes|and starry skies;,(She repeats every words silently.)|Of cloudless climes and starry skies;,312,0,0,
 311,0,0,,Forget it.|It's stupid.,"Oh!  (She seems very disappointed.)|You're right, nobody likes poetry anymore.",300,-1,0,
-312,0,0,,And all that’s best of dark and bright,(She repeats every words silently.)|And all that’s best of dark and bright,313,0,0,
+312,0,0,,And all that's best of|dark and bright,(She repeats every words silently.)|And all that's best of dark and bright,313,0,0,
 312,0,0,,Forget it.|It's stupid.,"Oh!  (She seems very disappointed.)|You're right, nobody likes poetry anymore.",300,-1,0,
-313,0,0,,Meet in her aspect and her eyes;,(She repeats every words silently.)|Meet in her aspect and her eyes;,314,0,0,
+313,0,0,,Meet in her aspect|and her eyes;,(She repeats every words silently.)|Meet in her aspect and her eyes;,314,0,0,
 313,0,0,,Forget it.|It's stupid.,"Oh!  (She seems very disappointed.)|You're right, nobody likes poetry anymore.",300,-1,0,
-314,0,0,,Thus mellowed to that tender light,(She repeats every words silently.)|Thus mellowed to that tender light,315,0,0,
+314,0,0,,Thus mellowed to|that tender light,(She repeats every words silently.)|Thus mellowed to that tender light,315,0,0,
 314,0,0,,Forget it.|It's stupid.,"Oh!  (She seems very disappointed.)|You're right, nobody likes poetry anymore.",300,-1,0,
-315,0,0,,Which heaven to gaudy day denies.,(She repeats every words silently.)|Which heaven to gaudy day denies.,316,0,0,
+315,0,0,,Which heaven to|gaudy day denies.,(She repeats every words silently.)|Which heaven to gaudy day denies.,316,0,0,
 315,0,0,,Forget it.|It's stupid.,"Oh!  (She seems very disappointed.)|You're right, nobody likes poetry anymore.",300,-1,0,
 316,0,0,,Did you like it?,"I loved it!  (She checks around.)|Oops, it was loud, let's study.",300,2,0,FinishPoem()
