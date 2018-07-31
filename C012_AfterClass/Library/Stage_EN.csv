@@ -51,21 +51,21 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 180,0,0,,So you like seeing|a teacher restrained?,"(She blushes and nods.)  Yes, it was fun.|You can study here with me if you want.",200,1,0,
 180,0,0,,Now I kind|of regret it.,Don't!  It was quite memorable.|You can study with me if you want.,200,0,-1,
 180,0,0,,It was memorable.,"Yes, it should be in the yearbook.|You can study with me if you want.",200,0,0,
-190,0,0,,It was ok.,Alright.  And who's your favorite teacher?,200,0,0,
-190,0,0,,I learned a lot.,We do have great teachers.|Who's your favorite?,200,1,0,
-190,0,0,,I was bored|out of my mind.,I'm very sorry to hear that.|Did you like one of the teacher?,200,-1,0,
-190,0,0,,"Yep, I caused|plenty of trouble.",(She nods politely.)  Very well.|And who's your favorite teacher?,200,0,1,
-190,0,0,,I didn't made|any friends.,"Poor girl, I'm sure you will soon.|Did you like one of the teacher?",200,0,-1,
+190,0,0,,It was ok.,Alright.  And who's your favorite teacher?,191,0,0,
+190,0,0,,I learned a lot.,We do have great teachers.|Who's your favorite?,191,1,0,
+190,0,0,,I was bored|out of my mind.,I'm very sorry to hear that.|Did you like one of the teacher?,191,-1,0,
+190,0,0,,"Yep, I caused|plenty of trouble.",(She nods politely.)  Very well.|And who's your favorite teacher?,191,0,1,
+190,0,0,,I didn't made|any friends.,"Poor girl, I'm sure you will soon.|Did you like one of the teacher?",191,0,-1,
 191,0,0,,Mildred.,"Yes, Miss Mildred is strict but fair.|You can study here if you want.",200,0,1,
 191,0,0,,Yuki.,"Nice, I've met her here a few times.|You can study with me if you want.",200,0,0,
 191,0,0,,Julia.,Great!  Miss Julia is funny and lively.|You can study with me if you want.,200,1,0,
 191,0,0,,I don't know.,Don't be so shy girl.|You can study with me.,200,0,-1,
 200,0,0,,Let's study together.,(You and Amanda start|to study together.),300,0,0,StartStudy()
 200,0,0,,(Open your books.),(You and Amanda start|to study together.),300,0,0,StartStudy()
-200,0,0,,What are you|studying now?,My homework is done so|I'm reviewing future classes.,205,0,0,AmandaIntroDone()
-200,0,0,,(Spy in her book.),(She seems to be studying|for future math classes.),205,0,0,AmandaIntroDone()
-200,0,0,,Studying is boring.,Why are you here then?|What would you like to do?,210,0,0,AmandaIntroDone()
-200,0,0,,We should do|something else.,Oh!  What would you like to do?,210,0,0,AmandaIntroDone()
+200,0,0,,What are you|studying now?,My homework is done so|I'm reviewing future classes.,205,0,0,
+200,0,0,,(Spy in her book.),(She seems to be studying|for future math classes.),205,0,0,
+200,0,0,,Studying is boring.,Why are you here then?|What would you like to do?,210,0,0,
+200,0,0,,We should do|something else.,Oh!  What would you like to do?,210,0,0,
 200,0,0,,I need to go.|(Leave the library.),,200,0,0,Leave()
 205,0,0,,Let's study together.,(You and Amanda start|to study together.),300,0,0,StartStudy()
 205,0,0,,You're already|so far ahead?,I guess I could put down on the books.|What would you like to do instead?,210,0,0,

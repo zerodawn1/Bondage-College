@@ -48,6 +48,7 @@ function C012_AfterClass_Library_Load() {
 	LoadInteractions();
 	Common_BondageAllowed = false;
 	Common_SelfBondageAllowed = false;
+	C012_AfterClass_Library_CurrentStage = 0;
 	C012_AfterClass_Library_HasSeduction = (PlayerGetSkillLevel("Seduction") >= 1);
 	C012_AfterClass_Library_HasEgg = (PlayerHasLockedInventory("VibratingEgg"));
 	C012_AfterClass_Library_AmandaBelted = (ActorHasInventory("ChastityBelt"));
@@ -119,7 +120,7 @@ function C012_AfterClass_Library_AmandaStart() {
 		if (Sub >= 10) ActorSetPose("Shy");
 		C012_AfterClass_Library_CurrentStage = 200;
 		return;
-	}
+	} else GameLogAdd("LibraryIntro");
 	
 	// If Amanda is dominant and more so than love/hate
 	if ((Sub <= -10) && (Math.abs(Sub) >= Math.abs(Love))) {
@@ -209,21 +210,15 @@ function C012_AfterClass_Library_LeaveWithAmanda() {
 // Chapter 12 After Class - When the player searches, duct tape can be found
 function C012_AfterClass_Library_Search() {
 	CurrentTime = CurrentTime + 110000;
-	if (!GameLogQuery(CurrentChapter, "Player", "LibraryFindItem")) {
+	if (!GameLogQuery(CurrentChapter, "Player", "LibraryFindTape")) {
 		GameLogSpecificAdd(CurrentChapter, "Player", "LibraryFindTape");
 		OverridenIntroText = GetText("FindTape");
 		PlayerAddInventory("TapeGag", 8);
 	}
 }
 
-// Chapter 12 After Class - Flags the Amanda intro as done so it won't trigger again
-function C012_AfterClass_Library_AmandaIntroDone() {
-	GameLogAdd("LibraryIntro");
-}
-
 // Chapter 12 After Class - When the player starts to study with Amanda
 function C012_AfterClass_Library_StartStudy() {
-	C012_AfterClass_Library_AmandaIntroDone();
 	Common_PlayerPose = "BackStudy";
 	ActorSetPose("BackStudy");
 }

@@ -21,7 +21,7 @@ var C012_AfterClass_Sidney_AllowSexAfterDate = false;
 
 // Sidney can only check her cell phone if she's dressed
 function C012_AfterClass_Sidney_CheckCellPhone() {
-	if (ActorGetValue(ActorCloth) == "Shorts") ActorSetPose("CheckCellPhone");
+	if ((ActorGetValue(ActorCloth) == "Shorts") || (ActorGetValue(ActorCloth) == "BlackLingerie")) ActorSetPose("CheckCellPhone");
 	LeaveIcon = "Leave";
 }
 
@@ -36,9 +36,11 @@ function C012_AfterClass_Sidney_SetPose() {
 		if ((Love <= -10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Mad");
 		if (Common_ActorIsOwned) ActorSetPose("Shy");
 	} else {
+		ActorSetPose("");
 		if ((ActorGetValue(ActorCloth) == "Naked") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorSubmission) >= 10)) ActorSetPose("Shy");
-		if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorLove) >= 10)) ActorSetPose("Happy");
-		else ActorSetPose("");
+		if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorLove) >= 10) && (ActorGetValue(ActorLove) > ActorGetValue(ActorSubmission))) ActorSetPose("Happy");
+		if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorSubmission) >= 10) && (ActorGetValue(ActorLove) <= ActorGetValue(ActorSubmission))) ActorSetPose("Point");
+		if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (Common_ActorIsOwner)) ActorSetPose("Point");
 	}
 }
 
@@ -546,6 +548,7 @@ function C012_AfterClass_Sidney_ReleasePlayer() {
 function C012_AfterClass_Sidney_StartChat() {
 	if (!ActorIsGagged()) {
 		ActorSetPose("");
+		C012_AfterClass_Sidney_CurrentStage = 500;
 		GameLogAdd("ChatDone");
 		LeaveIcon = "";
 		C012_AfterClass_Sidney_ChatAvail = false;
