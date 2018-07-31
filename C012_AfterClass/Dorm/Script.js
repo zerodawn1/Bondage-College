@@ -49,6 +49,7 @@ function C012_AfterClass_Dorm_Load() {
 
 	// Owners will not stay naked
 	if ((Common_PlayerOwner == "Sidney") && (ActorSpecificGetValue("Sidney", ActorCloth) == "Naked")) ActorSpecificSetCloth("Sidney", "Shorts");
+	if ((Common_PlayerOwner == "Amanda") && (ActorSpecificGetValue("Amanda", ActorCloth) == "Naked")) ActorSpecificSetCloth("Amanda", "");
 	
 	// Calculates the time when Sidney will leave and return
 	C012_AfterClass_Dorm_SidneyExitTime = 20 * 60 * 60 * 1000;
@@ -65,8 +66,10 @@ function C012_AfterClass_Dorm_Load() {
 	
 	// Resets the other locations from the Dorm
 	C012_AfterClass_Pub_CurrentStage = 0;
+	C012_AfterClass_Pool_CurrentStage = 0;
 	C012_AfterClass_Roommates_CurrentStage = 0;
 	C012_AfterClass_Sidney_CurrentStage = 0;
+	C012_AfterClass_Amanda_CurrentStage = 0;
 	C012_AfterClass_Dorm_CalGuest();
 }
 

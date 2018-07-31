@@ -18,6 +18,7 @@ var C012_AfterClass_Sidney_MasturbateCount = 0;
 var C012_AfterClass_Sidney_CanSetCurfew22 = false;
 var C012_AfterClass_Sidney_AllowBlackLingerie = false;
 var C012_AfterClass_Sidney_AllowSexAfterDate = false;
+var C012_AfterClass_Sidney_AmandaIsOwner = false;
 
 // Sidney can only check her cell phone if she's dressed
 function C012_AfterClass_Sidney_CheckCellPhone() {
@@ -56,6 +57,7 @@ function C012_AfterClass_Sidney_CalcParams() {
 	C012_AfterClass_Sidney_PleasurePlayerAvail = (!Common_PlayerChaste && !ActorIsGagged() && !ActorIsRestrained() && Common_ActorIsOwned && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
 	C012_AfterClass_Sidney_SexAvail = (!Common_PlayerRestrained && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Sidney", "NextPossibleOrgasm"));
 	C012_AfterClass_Sidney_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Sidney_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
+	C012_AfterClass_Sidney_AmandaIsOwner = (Common_PlayerOwner == "Amanda");
 	C012_AfterClass_Sidney_SetPose();
 }
 
@@ -69,6 +71,14 @@ function C012_AfterClass_Sidney_Load() {
 	
 	// At stage 400, Sidney is leaving
 	if (C012_AfterClass_Sidney_CurrentStage == 400) { ActorUngag(); LeaveIcon = ""; }
+
+	// If there's a crossover between two actors
+	if ((C012_AfterClass_Sidney_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetAmanda") && (C012_AfterClass_Dorm_Guest.indexOf("Amanda") >= 0) && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged()) {
+		LeaveIcon = "";
+		ActorSetPose("Point");
+		C012_AfterClass_Amanda_CurrentStage = 700;
+		GameLogAdd("MetAmanda");
+	}
 	
 	// Sidney's parameters
 	C012_AfterClass_Sidney_CalcParams();	
@@ -123,7 +133,7 @@ function C012_AfterClass_Sidney_Run() {
 	BuildInteraction(C012_AfterClass_Sidney_CurrentStage);
 	
 	// Draw the actor alone or with the player depending on the stage
-	if ((C012_AfterClass_Sidney_CurrentStage != 410) && (C012_AfterClass_Sidney_CurrentStage != 3931) && (C012_AfterClass_Sidney_CurrentStage != 3932) && (C012_AfterClass_Sidney_CurrentStage != 3933) && (C012_AfterClass_Sidney_CurrentStage != 632) && (C012_AfterClass_Sidney_CurrentStage != 633) && (C012_AfterClass_Sidney_CurrentStage != 634) && (C012_AfterClass_Sidney_CurrentStage != 662) && (C012_AfterClass_Sidney_CurrentStage != 663)) {
+	if ((C012_AfterClass_Sidney_CurrentStage != 410) && (C012_AfterClass_Sidney_CurrentStage != 3931) && (C012_AfterClass_Sidney_CurrentStage != 3932) && (C012_AfterClass_Sidney_CurrentStage != 3933) && (C012_AfterClass_Sidney_CurrentStage != 632) && (C012_AfterClass_Sidney_CurrentStage != 633) && (C012_AfterClass_Sidney_CurrentStage != 634) && (C012_AfterClass_Sidney_CurrentStage != 662) && (C012_AfterClass_Sidney_CurrentStage != 663) && (C012_AfterClass_Sidney_CurrentStage != 791)) {
 		if (((C012_AfterClass_Sidney_CurrentStage >= 3090) && (C012_AfterClass_Sidney_CurrentStage <= 3099)) || ((C012_AfterClass_Sidney_CurrentStage >= 3901) && (C012_AfterClass_Sidney_CurrentStage <= 3999))) {
 			DrawActor("Player", 475, 0, 1);
 			DrawActor(CurrentActor, 750, 0, 1);
@@ -949,4 +959,25 @@ function C012_AfterClass_Sidney_UnlockBlackLingerie() {
 	GameLogAdd("AllowBlackLingerie");
 	LeaveIcon = "Leave";
 	C012_AfterClass_Sidney_AllowBlackLingerie = true;
+}
+
+// Chapter 12 After Class - When Sidney forces the player to kick someone out
+function C012_AfterClass_Sidney_KickActor(KickedActor) {
+	if (KickedActor == "Amanda") C012_AfterClass_Amanda_CurrentStage = 790;
+	SetScene(CurrentChapter, KickedActor);
+}
+
+// Chapter 12 After Class - When Sidney is kicked for another actor
+function C012_AfterClass_Sidney_KickForActor(KickedForActor) {
+	ActorSpecificChangeAttitude(KickedForActor, 2, 1);
+}
+
+// Chapter 12 After Class - When Sidney is kicked out, it can destroy the players couple
+function C012_AfterClass_Sidney_KickedOut() {
+	GameLogAdd("KickedOutFromDorm");
+	if (CurrentActor == Common_PlayerLover) {
+		ActorChangeAttitude(-5, 0);
+		C012_AfterClass_Sidney_BreakUp();
+	}
+	CurrentActor = "";
 }

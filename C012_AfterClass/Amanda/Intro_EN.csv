@@ -91,15 +91,20 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 650,0,0,Common_ActorIsLover,Of course my love.,Dorm.jpg
 650,0,0,Common_ActorIsOwned,Of course Mistress.,Dorm.jpg
 650,0,0,Common_ActorIsOwner,"Yes my subbie, we can make love.",Dorm.jpg
-660,0,0,,"My love, it's alright|if I go get my pajama?",Dorm.jpg
-660,0,0,Common_ActorIsOwned,"Mistress, it's alright|if I go get my pajama?",Dorm.jpg
+660,0,0,,"It's getting late, is it alright|if I go get my pajamas?",Dorm.jpg
+660,0,0,Common_ActorIsOwned,"Mistress, is it alright|if I go get my pajamas?",Dorm.jpg
 661,0,0,,,Dorm.jpg
-662,0,0,,,CoverEyes.jpg
-663,0,0,,,CoverEyes.jpg
-664,0,0,,,Dorm.jpg
-665,0,0,,,Dorm.jpg
-670,0,0,,"I think I would be more comfy in|my pajama, it's ok if I change here?",Dorm.jpg
+670,0,0,,"I think I would be more comfy in|my pajamas, it's ok if I change here?",Dorm.jpg
 671,0,0,,,Dorm.jpg
+700,0,0,,Why is Sidney here?,Dorm.jpg
+700,0,0,Common_ActorIsLover,"My love, why is Sidney here?",Dorm.jpg
+700,0,0,Common_ActorIsOwned,"Mistress, why is Sidney here?",Dorm.jpg
+700,0,0,Common_ActorIsOwner,"Subbie, why is Sidney here?",Dorm.jpg
+701,0,0,,,Dorm.jpg
+702,0,0,,,Dorm.jpg
+790,0,0,,You're expelling me from your dorm?,Door.jpg
+790,0,0,Common_ActorIsLover,You're expelling me from your dorm?|This is the end of our short love?,StopDating.jpg
+791,0,0,,,Door.jpg
 3000,0,0,,"My subbie, get naked now.",Dorm.jpg
 3000,0,0,Common_ActorIsLover,"My love, get naked now.",Dorm.jpg
 3010,0,0,,"My subbie, get in your underwear.",Dorm.jpg

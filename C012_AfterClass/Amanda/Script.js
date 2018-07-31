@@ -14,35 +14,36 @@ var C012_AfterClass_Amanda_SexAvail = false;
 var C012_AfterClass_Amanda_PleasurePlayerCount = 0;
 var C012_AfterClass_Amanda_PleasurePlayerSpeed = 0;
 var C012_AfterClass_Amanda_MasturbateCount = 0;
-var C012_AfterClass_Amanda_AllowBlackLingerie = false;
+var C012_AfterClass_Amanda_AllowPajamas = false;
 var C012_AfterClass_Amanda_AllowSexAfterDate = false;
+var C012_AfterClass_Amanda_SidneyIsOwner = false;
 
-// Amanda can only check her cell phone if she's dressed
-function C012_AfterClass_Amanda_CheckCellPhone() {
-	if (ActorGetValue(ActorCloth) == "Shorts") ActorSetPose("CheckCellPhone");
+// Amanda can only check her notes if she's dressed
+function C012_AfterClass_Amanda_CheckNotes() {
+	if ((ActorGetValue(ActorCloth) == "") || (ActorGetValue(ActorCloth) == "Clothed")) ActorSetPose("CheckNotes");
 	LeaveIcon = "Leave";
 }
 
 // In her shorts, Amanda can have many poses when she talks
 function C012_AfterClass_Amanda_SetPose() {
-	if ((ActorGetValue(ActorCloth) == "Shorts") && !ActorIsRestrained() && !ActorIsGagged()) {
+	if (((ActorGetValue(ActorCloth) == "") || (ActorGetValue(ActorCloth) == "Clothed")) && !ActorIsRestrained() && !ActorIsGagged()) {
 		var Love = ActorGetValue(ActorLove);
-		var Sub = ActorGetValue(ActorSubmission);	
+		var Sub = ActorGetValue(ActorSubmission);
 		if ((Sub <= -10) && (Math.abs(Sub) >= Math.abs(Love))) ActorSetPose("Point");
 		if ((Sub >= 10) && (Math.abs(Sub) >= Math.abs(Love))) ActorSetPose("Shy");
-		if ((Love >= 10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Happy");
-		if ((Love <= -10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Mad");
+		if ((Love >= 10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Love");
+		if ((Love <= -10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Angry");
 		if (Common_ActorIsOwned) ActorSetPose("Shy");
 	} else {
 		if ((ActorGetValue(ActorCloth) == "Naked") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorSubmission) >= 10)) ActorSetPose("Shy");
-		if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorLove) >= 10)) ActorSetPose("Happy");
+		if ((ActorGetValue(ActorCloth) == "Pajamas") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorLove) >= 10)) ActorSetPose("Happy");
 		else ActorSetPose("");
 	}
 }
 
 // Calculate the scene parameters
 function C012_AfterClass_Amanda_CalcParams() {
-	C012_AfterClass_Amanda_AllowBlackLingerie = GameLogQuery(CurrentChapter, CurrentActor, "AllowBlackLingerie");
+	C012_AfterClass_Amanda_AllowPajamas = GameLogQuery(CurrentChapter, CurrentActor, "AllowPajamas");
 	C012_AfterClass_Amanda_HasEgg = ActorHasInventory("VibratingEgg");
 	C012_AfterClass_Amanda_HasBelt = ActorHasInventory("ChastityBelt");
 	C012_AfterClass_Amanda_IsGagged = ActorIsGagged();	
@@ -51,6 +52,7 @@ function C012_AfterClass_Amanda_CalcParams() {
 	C012_AfterClass_Amanda_PleasurePlayerAvail = (!Common_PlayerChaste && !ActorIsGagged() && !ActorIsRestrained() && Common_ActorIsOwned && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
 	C012_AfterClass_Amanda_SexAvail = (!Common_PlayerRestrained && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Amanda", "NextPossibleOrgasm"));
 	C012_AfterClass_Amanda_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Amanda_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
+	C012_AfterClass_Amanda_SidneyIsOwner = (Common_PlayerOwner == "Sidney");
 	C012_AfterClass_Amanda_SetPose();
 }
 
@@ -61,6 +63,14 @@ function C012_AfterClass_Amanda_Load() {
 	LoadInteractions();
 	ActorLoad("Amanda", "Dorm");
 	Common_PlayerPose = "";
+	
+	// If there's a crossover between two actors
+	if ((C012_AfterClass_Amanda_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetSidney") && (C012_AfterClass_Dorm_Guest.indexOf("Sidney") >= 0)) {
+		LeaveIcon = "";
+		ActorSetPose("Angry");
+		C012_AfterClass_Amanda_CurrentStage = 700;
+		GameLogAdd("MetSidney");
+	}
 	
 	// Amanda's parameters
 	C012_AfterClass_Amanda_CalcParams();	
@@ -91,11 +101,11 @@ function C012_AfterClass_Amanda_Load() {
 				if ((CurrentText != null) && (Math.floor(Math.random() * 8) == 0)) {
 					if (!GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") && Common_ActorIsOwner)
 						C012_AfterClass_Amanda_RandomAmandaDommeEvent();
-					if (!GameLogQuery(CurrentChapter, CurrentActor, "LingerieShow") && (C012_AfterClass_Amanda_CurrentStage == 0) && Common_ActorIsLover && !Common_PlayerGagged && !Common_PlayerRestrained && !ActorIsRestrained() && !ActorIsGagged()) {
+					if (!GameLogQuery(CurrentChapter, CurrentActor, "AllowPajamas") && (CurrentTime >= 22 * 60 * 60 * 1000) && (C012_AfterClass_Amanda_CurrentStage == 0) && !Common_PlayerGagged && !Common_PlayerRestrained && !ActorIsRestrained() && !ActorIsGagged()) {
 						C012_AfterClass_Amanda_CurrentStage = 660;
 						LeaveIcon = "";
 					}
-					if (GameLogQuery(CurrentChapter, CurrentActor, "AllowBlackLingerie") && (C012_AfterClass_Amanda_CurrentStage == 0) && Common_ActorIsLover && Common_ActorIsOwner && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorCloth) != "BlackLingerie")) {
+					if (GameLogQuery(CurrentChapter, CurrentActor, "AllowPajamas") && (C012_AfterClass_Amanda_CurrentStage == 0) && Common_ActorIsOwner && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorCloth) != "Pajamas")) {
 						C012_AfterClass_Amanda_CurrentStage = 670;
 						LeaveIcon = "";
 					}
@@ -114,7 +124,7 @@ function C012_AfterClass_Amanda_Run() {
 	BuildInteraction(C012_AfterClass_Amanda_CurrentStage);
 	
 	// Draw the actor alone or with the player depending on the stage
-	if ((C012_AfterClass_Amanda_CurrentStage != 410) && (C012_AfterClass_Amanda_CurrentStage != 3931) && (C012_AfterClass_Amanda_CurrentStage != 3932) && (C012_AfterClass_Amanda_CurrentStage != 3933) && (C012_AfterClass_Amanda_CurrentStage != 632) && (C012_AfterClass_Amanda_CurrentStage != 633) && (C012_AfterClass_Amanda_CurrentStage != 634) && (C012_AfterClass_Amanda_CurrentStage != 662) && (C012_AfterClass_Amanda_CurrentStage != 663)) {
+	if ((C012_AfterClass_Amanda_CurrentStage != 410) && (C012_AfterClass_Amanda_CurrentStage != 3931) && (C012_AfterClass_Amanda_CurrentStage != 3932) && (C012_AfterClass_Amanda_CurrentStage != 3933) && (C012_AfterClass_Amanda_CurrentStage != 632) && (C012_AfterClass_Amanda_CurrentStage != 633) && (C012_AfterClass_Amanda_CurrentStage != 634) && (C012_AfterClass_Amanda_CurrentStage != 791)) {
 		if (((C012_AfterClass_Amanda_CurrentStage >= 3090) && (C012_AfterClass_Amanda_CurrentStage <= 3099)) || ((C012_AfterClass_Amanda_CurrentStage >= 3901) && (C012_AfterClass_Amanda_CurrentStage <= 3999))) {
 			DrawActor("Player", 475, 0, 1);
 			DrawActor(CurrentActor, 750, 0, 1);
@@ -183,7 +193,7 @@ function C012_AfterClass_Amanda_Click() {
 		}
 
 		// A second rope can be applied if Amanda isn't fully clothed
-		if ((ActorGetValue(ActorCloth) != "Naked") && (ActorGetValue(ActorCloth) != "Underwear") && (ActorGetValue(ActorCloth) != "BlackLingerie") && (ClickInv == "Rope") && (ActorHasInventory("Rope"))) {
+		if ((ActorGetValue(ActorCloth) != "Naked") && (ActorGetValue(ActorCloth) != "Underwear") && (ActorGetValue(ActorCloth) != "Pajamas") && (ClickInv == "Rope") && (ActorHasInventory("Rope"))) {
 			OverridenIntroText = GetText("StripForSecondRope");
 			return;
 		}
@@ -318,8 +328,8 @@ function C012_AfterClass_Amanda_PlayerCollared() {
 // Chapter 12 After Class - When the player gets collared
 function C012_AfterClass_Amanda_PlayerStandUp() {
 	Common_PlayerPose = "";
-	if (ActorGetValue(ActorCloth) != "Shorts") {
-		ActorSetCloth("Shorts");
+	if ((ActorGetValue(ActorCloth) != "") && (ActorGetValue(ActorCloth) != "Clothed")) {
+		ActorSetCloth("");
 		OverridenIntroText = GetText("ChangeAfterCollaring");
 	}
 	LeaveIcon = "Leave";
@@ -337,8 +347,8 @@ function C012_AfterClass_Amanda_RandomAmandaDommeEvent() {
 
 	}
 
-	// If Amanda doesn't respond, she checks her cell phone
-	if (C012_AfterClass_Amanda_CurrentStage == 0) C012_AfterClass_Amanda_CheckCellPhone();
+	// If Amanda doesn't respond, she checks her notes
+	if (C012_AfterClass_Amanda_CurrentStage == 0) C012_AfterClass_Amanda_CheckNotes();
 	
 }
 
@@ -398,7 +408,7 @@ function C012_AfterClass_Amanda_TestPunish() {
 
 	// The more love, the less chances the player will be punished
 	if (EventRandomChance("Love")) {
-		C012_AfterClass_Amanda_CheckCellPhone();
+		C012_AfterClass_Amanda_CheckNotes();
 	} else {
 		ActorSetPose("Angry");
 		OverridenIntroText = "";
@@ -409,7 +419,7 @@ function C012_AfterClass_Amanda_TestPunish() {
 
 // Chapter 12 After Class - Allows the player to leave the scene
 function C012_AfterClass_Amanda_AllowLeave() {
-	C012_AfterClass_Amanda_CheckCellPhone();
+	C012_AfterClass_Amanda_CheckNotes();
 }
 
 // Chapter 12 After Class - Amanda can confiscate the player keys
@@ -873,14 +883,32 @@ function C012_AfterClass_Amanda_AmandaLeave() {
 	C012_AfterClass_Dorm_Guest.splice("Amanda");
 }
 
-// Chapter 12 After Class - Starts the lingerie show
-function C012_AfterClass_Amanda_StartLingerieShow() {
-	GameLogAdd("LingerieShow");
+// Chapter 12 After Class - When Amanda go get her pajamas
+function C012_AfterClass_Amanda_FetchPajamas() {
+	GameLogAdd("AllowPajamas");
+	CurrentTime = CurrentTime + 110000;
+	ActorSetCloth("Pajamas");
+	ActorSetPose("Happy");
+	C012_AfterClass_Amanda_AllowPajamas = true;
 }
 
-// Chapter 12 After Class - Unlocks the black lingerie for Amanda
-function C012_AfterClass_Amanda_UnlockBlackLingerie() {
-	GameLogAdd("AllowBlackLingerie");
-	LeaveIcon = "Leave";
-	C012_AfterClass_Amanda_AllowBlackLingerie = true;
+// Chapter 12 After Class - When Amanda forces the player to kick someone out
+function C012_AfterClass_Amanda_KickActor(KickedActor) {
+	if (KickedActor == "Sidney") C012_AfterClass_Sidney_CurrentStage = 790;
+	SetScene(CurrentChapter, KickedActor);
+}
+
+// Chapter 12 After Class - When Amanda is kicked for another actor
+function C012_AfterClass_Amanda_KickForActor(KickedForActor) {
+	ActorSpecificChangeAttitude(KickedForActor, 2, 1);
+}
+
+// Chapter 12 After Class - When Amanda is kicked out, it can destroy the players couple
+function C012_AfterClass_Amanda_KickedOut() {
+	GameLogAdd("KickedOutFromDorm");
+	if (CurrentActor == Common_PlayerLover) {
+		ActorChangeAttitude(-5, 0);
+		C012_AfterClass_Amanda_BreakUp();
+	}
+	CurrentActor = "";
 }
