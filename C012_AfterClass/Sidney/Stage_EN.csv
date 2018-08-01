@@ -539,11 +539,11 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 3923,0,0,,It needs to|be so tight?,"Hell yeah, it fucking does.|(She gets her phone to text.)",3999,0,0,"EndPunishment(""Belted"")"
 3923,0,0,,This is so kinky!,Enjoy your chaste life.|(She gets her phone to text.),3999,0,0,"EndPunishment(""Belted"")"
 3923,0,0,,(Bow your head.),Enjoy your chaste life.|(She gets her phone to text.),3999,0,0,"EndPunishment(""Belted"")"
-3930,0,0,,Please don't spank me.|I'll be a good girl.,Fuck yeah you'll be good.  Your tummy here.|(She sits on the bed and points to her legs.),3931,0,-1,
-3930,0,0,,Please don't hurt|me too much.,I will decide when it stops.  Your tummy here.|(She sits on the bed and points to her legs.),3931,0,0,
-3930,0,0,,Forget it Sidney.,Don't force me to hurt you.  Your tummy here.|(She sits on the bed and points to her legs.),3931,0,1,
-3930,0,0,,(Nod slowly.),You'll remember this lesson.  Your tummy here.|(She sits on the bed and points to her legs.),3931,0,0,
-3930,0,0,Common_ActorIsLover,Yes my love.,It's for your own good.  Your tummy here.|(She sits on the bed and points to her legs.),3931,1,0,
+3930,0,0,,Please don't spank me.|I'll be a good girl.,Fuck yeah you'll be good.  Your tummy here.|(She sits on the bed and points to her legs.),3931,0,-1,ChangeBackToShort()
+3930,0,0,,Please don't hurt|me too much.,I will decide when it stops.  Your tummy here.|(She sits on the bed and points to her legs.),3931,0,0,ChangeBackToShort()
+3930,0,0,,Forget it Sidney.,Don't force me to hurt you.  Your tummy here.|(She sits on the bed and points to her legs.),3931,0,1,ChangeBackToShort()
+3930,0,0,,(Nod slowly.),You'll remember this lesson.  Your tummy here.|(She sits on the bed and points to her legs.),3931,0,0,ChangeBackToShort()
+3930,0,0,Common_ActorIsLover,Yes my love.,It's for your own good.  Your tummy here.|(She sits on the bed and points to her legs.),3931,1,0,ChangeBackToShort()
 3931,0,0,,(Stay silent and lie|on her knees.),,3932,0,0,SidneySpankPlayer()
 3931,0,0,,Fuck that shit!|(Lie on her knees.),,3932,-1,0,SidneySpankPlayer()
 3931,0,0,,Yes Mistress.|(Lie on her knees.),,3932,0,0,SidneySpankPlayer()

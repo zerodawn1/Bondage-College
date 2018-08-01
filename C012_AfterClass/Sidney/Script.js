@@ -86,7 +86,7 @@ function C012_AfterClass_Sidney_Load() {
 	} else {
 		
 		// If the player is grounded
-		if (GameLogQuery(CurrentChapter, CurrentActor, "EventGrounded")) {
+		if (GameLogQuery(CurrentChapter, CurrentActor, "EventGrounded") && Common_ActorIsOwner) {
 			
 			// Skip to the punishment end phase, no talking while being grounded
 			C012_AfterClass_Sidney_AllowLeave();
@@ -981,4 +981,13 @@ function C012_AfterClass_Sidney_KickedOut() {
 		C012_AfterClass_Sidney_BreakUp();
 	}
 	CurrentActor = "";
+}
+
+// Chapter 12 After Class - When Sidney is kicked out, it can destroy the players couple
+function C012_AfterClass_Sidney_ChangeBackToShort() {
+	if (ActorGetValue(ActorCloth) != "Shorts") {
+		ActorSetCloth("Shorts");
+		CurrentTime = CurrentTime + 50000;
+		OverridenIntroText = GetText("SpankInShorts");
+	}
 }

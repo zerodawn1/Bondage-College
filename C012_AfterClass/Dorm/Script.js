@@ -61,7 +61,9 @@ function C012_AfterClass_Dorm_Load() {
 	
 	// If the player is grounded, the dorm is mostly deactivated until the timer runs out
 	C012_AfterClass_Dorm_PlayerGrounded = GameLogQuery(CurrentChapter, "", "EventGrounded");
-	Common_PlayerPose = C012_AfterClass_Dorm_PlayerGrounded ? "TwoRopesPunishment" : "";
+	Common_PlayerPose = "";
+	if (C012_AfterClass_Dorm_PlayerGrounded && (Common_PlayerOwner == "Sidney")) Common_PlayerPose = "TwoRopesPunishment";
+	if (C012_AfterClass_Dorm_PlayerGrounded && (Common_PlayerOwner == "Amanda")) Common_PlayerPose = "HogtiePunishment";
 	if ((Common_PlayerPose == "") && GameLogQuery(CurrentChapter, "", "EventSpanked") && !Common_PlayerRestrained && !Common_PlayerGagged && Common_PlayerNaked) Common_PlayerPose = "Spanked";
 	
 	// Resets the other locations from the Dorm

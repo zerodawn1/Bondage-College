@@ -78,12 +78,12 @@ function C012_AfterClass_Amanda_Load() {
 	} else {
 		
 		// If the player is grounded
-		if (GameLogQuery(CurrentChapter, CurrentActor, "EventGrounded")) {
+		if (GameLogQuery(CurrentChapter, CurrentActor, "EventGrounded") && Common_ActorIsOwner) {
 			
 			// Skip to the punishment end phase, no talking while being grounded
 			C012_AfterClass_Amanda_AllowLeave();
 			C012_AfterClass_Amanda_CurrentStage = 3999;
-			Common_PlayerPose = "TwoRopesPunishment";
+			Common_PlayerPose = "HogtiePunishment";
 			OverridenIntroText = GetText("StillGrounded");
 
 		} else {

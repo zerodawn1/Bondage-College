@@ -9,7 +9,7 @@ var C012_AfterClass_Bed_SexPleasurePartner = 0;
 
 // Chapter 12 After Class - Prepares the bed image that will be rendered for sex scenes
 function C012_AfterClass_Bed_PrepareImage(PartnerOrgasm, PlayerOrgasm) {
-	var ImageName = "Sex" + CurrentActor;	
+	var ImageName = "Sex" + CurrentActor;
 	if (ActorHasInventory("Collar")) ImageName = ImageName + "Collar";
 	else ImageName = ImageName + "NoCollar";	
 	if (PartnerOrgasm) ImageName = ImageName + "Orgasm";
