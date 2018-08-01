@@ -72,14 +72,6 @@ function C012_AfterClass_Sidney_Load() {
 	// At stage 400, Sidney is leaving
 	if (C012_AfterClass_Sidney_CurrentStage == 400) { ActorUngag(); LeaveIcon = ""; }
 
-	// If there's a crossover between two actors
-	if ((C012_AfterClass_Sidney_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetAmanda") && (C012_AfterClass_Dorm_Guest.indexOf("Amanda") >= 0) && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged()) {
-		LeaveIcon = "";
-		ActorSetPose("Point");
-		C012_AfterClass_Amanda_CurrentStage = 700;
-		GameLogAdd("MetAmanda");
-	}
-	
 	// Sidney's parameters
 	C012_AfterClass_Sidney_CalcParams();	
 	C012_AfterClass_Sidney_ChatAvail = !GameLogQuery(CurrentChapter, CurrentActor, "ChatDone");
@@ -104,6 +96,15 @@ function C012_AfterClass_Sidney_Load() {
 
 		} else {
 
+			// If there's a crossover between two actors
+			if ((C012_AfterClass_Sidney_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetAmanda") && (C012_AfterClass_Dorm_Guest.indexOf("Amanda") >= 0) && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged()) {
+				LeaveIcon = "";
+				if (ActorGetValue(ActorCloth) == "Shorts") ActorSetPose("Point");
+				else ActorSetPose("");
+				C012_AfterClass_Sidney_CurrentStage = 700;
+				GameLogAdd("MetAmanda");
+			}
+		
 			// A random event can be triggered when Sidney is clicked on
 			if (C012_AfterClass_Sidney_CurrentStage == 0)
 				if ((CurrentText != null) && (Math.floor(Math.random() * 8) == 0)) {

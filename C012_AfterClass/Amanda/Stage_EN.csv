@@ -258,11 +258,12 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 670,0,0,Common_PlayerGagged,(Shake your head no.),(She changes anyway.)  It's not up to you|to decide.  Soon I will get you a matching PJ.,671,0,0,"ForceChangeActor(""Pajamas"")"
 671,0,0,,Thanks Mistress.,It's my pleasure my subbie.|So what could we do now?,0,0,0,EndChat()
 671,0,0,Common_PlayerGagged,(Nod happily.),It's my pleasure my subbie.|So what could we do now?,0,0,0,EndChat()
+700,0,0,Common_ActorIsOwned,"Slave, I can bring|whoever I want.",(She jumps.)  Of course Mistress.|What would you like to do?,0,-1,1,EndChat()
 700,0,0,!Common_ActorIsOwner,Sidney is a good friend.|Don't fight with her.,(She frowns.)  Well she's not a friend|of mine.  Can you ask her to leave?,701,-2,0,
 700,0,0,Common_ActorIsOwner,Sidney is a good friend.|Please don't fight Mistress.,(She frowns.)  You should find better friends|my submissive.  Can you ask her to leave?,701,-2,0,
-700,0,0,,You two are|in a feud?,Yes.  Can you ask her to leave?,701,-1,0,
+700,0,0,,You two are in a feud?,Yes.  Can you ask her to leave?,701,-1,0,
 700,0,0,,Why are you|two fighting?,I'm in a crossfire.  My best friend|Sarah and Sidney can't stand each other.,701,-1,0,
-700,0,0,!SidneyIsOwner,I can tell|her to go.,Yes.  Ask her politely to leave.,701,0,0,
+700,0,0,!SidneyIsOwner,I can tell her to go.,Yes.  Ask her politely to leave.,701,0,0,
 701,0,0,SidneyIsOwner,I can't do that.|She's my Mistress.,"Fine, she can stay.  But I|don't want to fight with her.",702,-1,-1,
 701,0,0,SidneyIsOwner,Oh please Amanda!|She's my Mistress.,"Don't cry, she can stay.  But I|don't want to fight with her.",702,0,-2,
 701,0,0,,Can you two|make peace?,I guess she can stay.  But I|don't want to fight with her.,702,-1,0,

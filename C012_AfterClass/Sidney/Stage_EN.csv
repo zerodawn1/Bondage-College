@@ -307,11 +307,12 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 670,0,0,Common_PlayerGagged,(Shake your head no.),"Ok, it was only a favor for you bitch.|Tell me what would you like to do?",0,0,0,EndChat()
 671,0,0,,You are Mistress!,Good girl.  What would you like to do?,0,0,0,EndChat()
 671,0,0,Common_PlayerGagged,(Giggle in your gag.),(She laughs.)  So what would|you like to do my gagged bitch?,0,0,0,EndChat()
+700,0,0,Common_ActorIsOwned,"Slave, I can bring|whoever I want.",(She gulps.)  Oh!  Yes Mistress.|What would you like to do?,0,-1,1,EndChat()
 700,0,0,!Common_ActorIsOwner,Amanda is a good friend.|Don't fight with her.,Fuck that!  She's a loser.|Can you force her to go?,701,-2,0,
 700,0,0,Common_ActorIsOwner,Amanda is a good friend.|Please don't fight Mistress.,Fuck that!  She's a loser.|Tell her to leave bitch.,701,-2,0,
-700,0,0,,Are you two|in a feud?,Hell yeah.  Can you tell her to go?,701,-1,0,
+700,0,0,,Are you two in a feud?,Hell yeah.  Can you tell her to go?,701,-1,0,
 700,0,0,,Why are you|two fighting?,Cause of her stupid friend.|Can you tell her to go?,701,-1,0,
-700,0,0,!AmandaIsOwner,I can tell|her to go.,"Hell yeah, tell her to go now.",701,0,0,
+700,0,0,!AmandaIsOwner,I can tell her to go.,"Hell yeah, tell her to go now.",701,0,0,
 701,0,0,AmandaIsOwner,I can't do that.|She's my Mistress.,"Ok, tell your fucking Mistress to stay.|But I'll punch her if she stares at me.",702,-1,-1,
 701,0,0,AmandaIsOwner,Oh please Sidney!|She's my Mistress.,Strop crying bitch and tell her to stay.|But I'll punch her if she stares at me.,702,0,-2,
 701,0,0,,Can you two|make peace?,"Alright, tell the fucking nerd to stay.|But I'll punch her if she stares at me.",702,-1,0,

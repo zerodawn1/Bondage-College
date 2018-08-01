@@ -64,21 +64,13 @@ function C012_AfterClass_Amanda_Load() {
 	ActorLoad("Amanda", "Dorm");
 	Common_PlayerPose = "";
 	
-	// If there's a crossover between two actors
-	if ((C012_AfterClass_Amanda_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetSidney") && (C012_AfterClass_Dorm_Guest.indexOf("Sidney") >= 0)) {
-		LeaveIcon = "";
-		ActorSetPose("Angry");
-		C012_AfterClass_Amanda_CurrentStage = 700;
-		GameLogAdd("MetSidney");
-	}
-	
 	// Amanda's parameters
 	C012_AfterClass_Amanda_CalcParams();	
 	C012_AfterClass_Amanda_ChatAvail = !GameLogQuery(CurrentChapter, CurrentActor, "ChatDone");
 	C012_AfterClass_Amanda_SpankMaxCount = 10 - Math.floor(ActorGetValue(ActorLove) / 7);
 	if (C012_AfterClass_Amanda_SpankMaxCount < 6) C012_AfterClass_Amanda_SpankMaxCount = 6;
 	if (C012_AfterClass_Amanda_SpankMaxCount > 12) C012_AfterClass_Amanda_SpankMaxCount = 12;
-	
+
 	// Loads the previous text if needed
 	if (C012_AfterClass_Amanda_IntroText != "") {
 		OverridenIntroText = C012_AfterClass_Amanda_IntroText;
@@ -95,6 +87,15 @@ function C012_AfterClass_Amanda_Load() {
 			OverridenIntroText = GetText("StillGrounded");
 
 		} else {
+
+			// If there's a crossover between two actors
+			if ((C012_AfterClass_Amanda_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetSidney") && (C012_AfterClass_Dorm_Guest.indexOf("Sidney") >= 0)) {
+				LeaveIcon = "";
+				if ((ActorGetValue(ActorCloth) == "") || (ActorGetValue(ActorCloth) == "Clothed")) ActorSetPose("Angry");
+				else ActorSetPose("");
+				C012_AfterClass_Amanda_CurrentStage = 700;
+				GameLogAdd("MetSidney");
+			}
 
 			// A random event can be triggered when Amanda is clicked on
 			if (C012_AfterClass_Amanda_CurrentStage == 0)
