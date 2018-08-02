@@ -198,7 +198,7 @@ function C012_AfterClass_Amanda_Click() {
 			OverridenIntroText = GetText("StripForSecondRope");
 			return;
 		}
-		
+
 		// Apply the clicked restrain
 		ActorApplyRestrain(ClickInv);
 		C012_AfterClass_Amanda_CalcParams();
