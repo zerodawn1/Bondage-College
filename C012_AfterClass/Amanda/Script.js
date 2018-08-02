@@ -17,6 +17,7 @@ var C012_AfterClass_Amanda_MasturbateCount = 0;
 var C012_AfterClass_Amanda_AllowPajamas = false;
 var C012_AfterClass_Amanda_AllowSexAfterDate = false;
 var C012_AfterClass_Amanda_SidneyIsOwner = false;
+var C012_AfterClass_Amanda_CanKickOut = false;
 
 // Amanda can only check her notes if she's dressed
 function C012_AfterClass_Amanda_CheckNotes() {
@@ -52,6 +53,7 @@ function C012_AfterClass_Amanda_CalcParams() {
 	C012_AfterClass_Amanda_PleasurePlayerAvail = (!Common_PlayerChaste && !ActorIsGagged() && !ActorIsRestrained() && Common_ActorIsOwned && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
 	C012_AfterClass_Amanda_SexAvail = (!Common_PlayerRestrained && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Amanda", "NextPossibleOrgasm"));
 	C012_AfterClass_Amanda_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Amanda_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
+	C012_AfterClass_Amanda_CanKickOut = (!Common_ActorIsOwner && !Common_ActorIsLover);
 	C012_AfterClass_Amanda_SidneyIsOwner = (Common_PlayerOwner == "Sidney");
 	C012_AfterClass_Amanda_SetPose();
 }
@@ -673,14 +675,6 @@ function C012_AfterClass_Amanda_BackToDorm() {
 	SetScene(CurrentChapter, "Dorm");
 }
 
-// Chapter 12 After Class - Many parts of Amanda interactions are not accessible if she's gagged
-function C012_AfterClass_Amanda_TestGagged() {
-	if (C012_AfterClass_Amanda_IsGagged) {
-		C012_AfterClass_Amanda_GaggedAnswer();
-		C012_AfterClass_Amanda_CurrentStage = 0;
-	}
-}
-
 // Chapter 12 After Class - Starts the pleasure player scene
 function C012_AfterClass_Amanda_TestPleasurePlayer() {
 	LeaveIcon = "";
@@ -861,9 +855,9 @@ function C012_AfterClass_Amanda_MakeLove() {
 }
 
 // Chapter 12 After Class - Test if the player can start the break up dialog
-function C012_AfterClass_Amanda_TestTalkBreakUp() {
+function C012_AfterClass_Amanda_TestTalk() {
 	if (!ActorIsGagged()) {
-		if (!ActorIsRestrained()) C012_AfterClass_Amanda_CurrentStage = 190;
+		if (!ActorIsRestrained()) C012_AfterClass_Amanda_CurrentStage = 20;
 		else OverridenIntroText = GetText("ReleaseBeforeTalk");
 	} else C012_AfterClass_Amanda_GaggedAnswer();	
 }

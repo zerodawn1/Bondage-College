@@ -19,6 +19,7 @@ var C012_AfterClass_Sidney_CanSetCurfew22 = false;
 var C012_AfterClass_Sidney_AllowBlackLingerie = false;
 var C012_AfterClass_Sidney_AllowSexAfterDate = false;
 var C012_AfterClass_Sidney_AmandaIsOwner = false;
+var C012_AfterClass_Sidney_CanKickOut = false;
 
 // Sidney can only check her cell phone if she's dressed
 function C012_AfterClass_Sidney_CheckCellPhone() {
@@ -57,6 +58,7 @@ function C012_AfterClass_Sidney_CalcParams() {
 	C012_AfterClass_Sidney_PleasurePlayerAvail = (!Common_PlayerChaste && !ActorIsGagged() && !ActorIsRestrained() && Common_ActorIsOwned && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
 	C012_AfterClass_Sidney_SexAvail = (!Common_PlayerRestrained && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Sidney", "NextPossibleOrgasm"));
 	C012_AfterClass_Sidney_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Sidney_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
+	C012_AfterClass_Sidney_CanKickOut = (!Common_ActorIsOwner && !Common_ActorIsLover);
 	C012_AfterClass_Sidney_AmandaIsOwner = (Common_PlayerOwner == "Amanda");
 	C012_AfterClass_Sidney_SetPose();
 }
@@ -695,14 +697,6 @@ function C012_AfterClass_Sidney_BackToDorm() {
 	SetScene(CurrentChapter, "Dorm");
 }
 
-// Chapter 12 After Class - Many parts of Sidney interactions are not accessible if she's gagged
-function C012_AfterClass_Sidney_TestGagged() {
-	if (C012_AfterClass_Sidney_IsGagged) {
-		C012_AfterClass_Sidney_GaggedAnswer();
-		C012_AfterClass_Sidney_CurrentStage = 0;
-	}
-}
-
 // Chapter 12 After Class - Sidney will accept the chastity belt deal if she's not too dominant (-5 and up)
 function C012_AfterClass_Sidney_TestBelt() {
 	ActorChangeAttitude(0, 1);
@@ -916,10 +910,10 @@ function C012_AfterClass_Sidney_TestGoOnDate() {
 	} else C012_AfterClass_Sidney_GaggedAnswer();	
 }
 
-// Chapter 12 After Class - Test if the player can start the break up dialog
-function C012_AfterClass_Sidney_TestTalkBreakUp() {
+// Chapter 12 After Class - Test if the player can start the serious dialog
+function C012_AfterClass_Sidney_TestTalk() {
 	if (!ActorIsGagged()) {
-		if (!ActorIsRestrained()) C012_AfterClass_Sidney_CurrentStage = 190;
+		if (!ActorIsRestrained()) C012_AfterClass_Sidney_CurrentStage = 20;
 		else OverridenIntroText = GetText("ReleaseBeforeTalk");
 	} else C012_AfterClass_Sidney_GaggedAnswer();	
 }

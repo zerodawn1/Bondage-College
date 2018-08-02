@@ -1,21 +1,17 @@
 Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_ActorIsOwner,What's on your|mind Mistress?,Not much my little bitch.|(She checks her cell phone.),0,0,0,RandomSidneyDommeEvent()
 0,0,0,Common_ActorIsOwner,"Mistress, it's ok if|I change clothes?",Sure bitch.  Wear what you want.,0,0,0,IsChangingBlocked()
-0,0,0,Common_ActorIsOwned,Let's review|your rules.,(She seems to worry.)|Of course Mistress.,610,0,0,TestGagged()
 0,5,0,!Common_ActorIsLover,You look so|pretty Sidney.,"Thanks, you don't look bad either.|(You need +20 love to date Sidney.)",0,0,0,TestLove()
 0,0,0,Common_ActorIsLover,Should we go|out my love?,There's a rock show that starts at twenty.|Will you go with me sweetheart?,0,0,0,TestGoOnDate()
-0,0,0,Common_ActorIsLover,"My love, we|need to talk.",What's on your mind sweetie?,0,0,0,TestTalkBreakUp()
+0,0,0,Common_ActorIsLover,We need to talk.,Yeah?  What's on your mind?,0,0,0,TestTalk()
 0,0,5,!Common_ActorIsOwned,"Girl, you need|my protection.",I don't need protection from anyone.|(You need +20 submission to collar Sidney.),0,0,0,TestDomme()
 0,0,-5,!Common_ActorIsOwner,Miss Sidney.|I admire you.,"Don't talk like that, you sound like a loser.|(You need -20 submission to submit to Sidney.)",0,0,0,TestSub()
 0,0,0,Common_PlayerGagged,@Om nnnuoogn mh!,Oh yeah.  I fucking understood|what you said.  (She laughs.),0,0,0,TestUnbind()
 0,0,0,Common_ActorIsOwner,(Hum a sexy song|and dance for fun.),Not now my little bitch.|(She checks her cell phone.),0,0,0,RandomSidneyDommeEvent()
 0,0,0,Common_PlayerRestrained,(Struggle in|your restrains.),"Nope, you're not getting out.|It's great to see you struggle.",0,0,0,TestUnbind()
-0,0,0,Common_PlayerChaste,Can you please help|me with this belt?,"Nope, that chastity belt|is a perfect fit for you.",0,0,0,TestGagged()
 0,0,0,!Common_ActorIsOwner,You should wear|something else.,Forget it.  I'm not changing for you.,0,0,0,TestChange()
-0,0,0,ChatAvail,I'd like to know|more about you.,"Ok, what would like to know?",0,0,0,StartChat()
 0,0,0,SexAvail,Would you like to|make love with me?,"No, I don't feel like it.|Let's do something else.",0,0,0,TestSex()
 0,0,0,PleasurePlayerAvail,"My submissive, you|will pleasure me now.",Pleasure you how Mistress?,630,0,0,TestPleasurePlayer()
-0,0,0,PusherDealAvail,"Sidney, I've made a|deal with your pusher.",A deal with her?  What kind of deal?,620,0,0,TestGagged()
 0,0,0,!Common_PlayerRestrained,(Play with her.),(You take a step toward her.),10,0,0,
 10,5,0,!Common_PlayerGagged,(Kiss her.),(You get close to her and|kiss her sweetly on the lips.),10,0,0,Kiss()
 10,1,0,!Common_PlayerRestrained,(Tickle her.),(You get closer and tickle her on the|chest but she doesn't react that much.),10,0,0,Tickle()
@@ -25,6 +21,13 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 10,0,0,IsRoped,(Untie her.),(You undo the knots and remove the|ropes while she stretches slowly.),10,0,0,Untie()
 10,0,0,IsStrapped,(Unstrap her.),(You remove the straps and|unlace the binder from her arms.),10,0,0,Untie()
 10,0,0,,(Stop playing.),(You take a step back.),0,0,0,
+20,0,0,ChatAvail,I'd like to know|more about you.,"Ok, what would like to know?",0,0,0,StartChat()
+20,0,0,Common_ActorIsOwned,Let's review|your rules.,(She seems to worry.)|Of course Mistress.,610,0,0,
+20,0,0,PusherDealAvail,"Sidney, I've made a|deal with your pusher.",A deal with her?  What kind of deal?,620,0,0,
+20,0,0,Common_PlayerChaste,Can you please help|me with this belt?,"Nope, that chastity belt|is a perfect fit for you.",0,0,0,
+20,0,0,Common_ActorIsLover,About our relationship...,What's going on sweetie?,190,0,0,
+20,0,0,CanKickOut,It's time for you|to leave my place.,You're fucking kicking me out?,790,-1,1,
+20,0,0,,Never mind.,Alright.  So what could|we do to have some fun?,0,0,0,
 100,0,0,,Do you have|a loved one?,"I don't, this place is full of losers.",110,0,0,TestRelationship()
 100,0,0,,Do you have|a boyfriend?,"I don't, there's barely|any boys around here.",110,0,0,TestRelationship()
 100,0,0,,Do you have|a girlfriend?,"I don't, this place is full of losers.",110,0,0,TestRelationship()
@@ -325,9 +328,10 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 702,0,0,,If it happens.|I'll kick her butt.,That would be fucking awesome!|So what would you like to do now?,0,0,1,EndChat()
 702,0,0,,If it happens.|You can kick her butt.,Oh hell yeah!  So what|would you like to do now?,0,1,0,EndChat()
 702,0,0,,If it happens.|We'll talk about it.,"Yeah, talk shit.  Whatever.|What would you like to do?",0,0,-1,EndChat()
+790,0,0,,Come back another day.|I need to study tonight.,That's a fucking lame excuse.|(She walks out and slams the door.),791,-2,0,KickedOut()
 790,0,0,,You need to go.|We'll talk later.,"Fine, I'll go then.|(She walks out.)",791,-1,0,KickedOut()
-790,0,0,,Don't be mad.|I'm sorry.,"It's fine, I'll go study.|(She sighs and walks out.)",791,-1,-1,KickedOut()
-790,0,0,,Pack your shit|and go girl.,I...  I...  Of course.|(She runs out quickly.),791,-2,1,KickedOut()
+790,0,0,,Don't be mad.|I'm sorry.,"Fuck that, I'll go smoke.|(She grumbles and walks out.)",791,-1,-1,KickedOut()
+790,0,0,,Pack your shit|and go girl.,Fuck you COMMON_PLAYERNAME!|(She walks away and slams the door.),791,-2,1,KickedOut()
 791,0,0,,(Back to your dorm.),,791,0,0,BackToDorm()
 3000,0,0,,Yes Mistress.|(Strip naked.),Good girl.  (You change for Sidney.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,(Nod slowly.)|(Strip naked.),Good girl.  (You change for Sidney.),3090,0,0,"ForceChangePlayer(""Naked"")"

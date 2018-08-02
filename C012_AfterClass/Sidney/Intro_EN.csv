@@ -14,6 +14,7 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 0,0,0,IsStrapped,(She struggles.)  This is way too tight.|Can you help me out of that thing?,Dorm.jpg
 0,0,0,IsGagged,Haamh nh g gna!,Dorm.jpg
 10,0,0,,,Dorm.jpg
+20,0,0,,,Dorm.jpg
 100,0,0,,(She blushes)  Thanks.|You also look wonderful.,Dorm.jpg
 100,0,0,Common_ActorIsOwned,(She blushes.)  Thanks Mistress.|You also look fabulous tonight.,Dorm.jpg
 100,0,0,Common_ActorIsOwner,Thanks my little bitch.|You also look wonderful.,Dorm.jpg
