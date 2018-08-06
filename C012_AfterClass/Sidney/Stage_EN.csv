@@ -3,7 +3,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_ActorIsOwner,"Mistress, it's ok if|I change clothes?",Sure bitch.  Wear what you want.,0,0,0,IsChangingBlocked()
 0,5,0,!Common_ActorIsLover,You look so|pretty Sidney.,"Thanks, you don't look bad either.|(You need +20 love to date Sidney.)",0,0,0,TestLove()
 0,0,0,Common_ActorIsLover,Should we go|out my love?,There's a rock show that starts at twenty.|Will you go with me sweetheart?,0,0,0,TestGoOnDate()
-0,0,0,Common_ActorIsLover,We need to talk.,Yeah?  What's on your mind?,0,0,0,TestTalk()
+0,0,0,,We need to talk.,Yeah?  What's on your mind?,0,0,0,TestTalk()
 0,0,5,!Common_ActorIsOwned,"Girl, you need|my protection.",I don't need protection from anyone.|(You need +20 submission to collar Sidney.),0,0,0,TestDomme()
 0,0,-5,!Common_ActorIsOwner,Miss Sidney.|I admire you.,"Don't talk like that, you sound like a loser.|(You need -20 submission to submit to Sidney.)",0,0,0,TestSub()
 0,0,0,Common_PlayerGagged,@Om nnnuoogn mh!,Oh yeah.  I fucking understood|what you said.  (She laughs.),0,0,0,TestUnbind()

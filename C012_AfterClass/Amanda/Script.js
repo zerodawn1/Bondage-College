@@ -4,10 +4,10 @@ var C012_AfterClass_Amanda_HasEgg = false;
 var C012_AfterClass_Amanda_HasBelt = false;
 var C012_AfterClass_Amanda_ChatAvail = false;
 var C012_AfterClass_Amanda_SpankCount = 0;
-var C012_AfterClass_Amanda_EnslaveCount = 0;
 var	C012_AfterClass_Amanda_IsGagged = false;
 var	C012_AfterClass_Amanda_IsRoped = false;
 var	C012_AfterClass_Amanda_IsStrapped = false;
+var C012_AfterClass_Amanda_IsRestrained = false;
 var C012_AfterClass_Amanda_CanMasturbate = false;
 var C012_AfterClass_Amanda_PleasurePlayerAvail = false;
 var C012_AfterClass_Amanda_SexAvail = false;
@@ -50,6 +50,7 @@ function C012_AfterClass_Amanda_CalcParams() {
 	C012_AfterClass_Amanda_IsGagged = ActorIsGagged();	
 	C012_AfterClass_Amanda_IsRoped = (ActorHasInventory("Rope") || ActorHasInventory("TwoRopes") || ActorHasInventory("ThreeRopes"));
 	C012_AfterClass_Amanda_IsStrapped = ActorHasInventory("Armbinder");
+	C012_AfterClass_Amanda_IsRestrained = ActorIsRestrained();
 	C012_AfterClass_Amanda_PleasurePlayerAvail = (!Common_PlayerChaste && !ActorIsGagged() && !ActorIsRestrained() && Common_ActorIsOwned && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
 	C012_AfterClass_Amanda_SexAvail = (!Common_PlayerRestrained && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Amanda", "NextPossibleOrgasm"));
 	C012_AfterClass_Amanda_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Amanda_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
@@ -196,7 +197,7 @@ function C012_AfterClass_Amanda_Click() {
 		}
 
 		// A second rope can be applied if Amanda isn't fully clothed
-		if ((ActorGetValue(ActorCloth) != "Naked") && (ActorGetValue(ActorCloth) != "Underwear") && (ActorGetValue(ActorCloth) != "Pajamas") && (ClickInv == "Rope") && (ActorHasInventory("Rope"))) {
+		if ((ActorGetValue(ActorCloth) != "Naked") && (ActorGetValue(ActorCloth) != "Underwear") && (ClickInv == "Rope") && (ActorHasInventory("Rope"))) {
 			OverridenIntroText = GetText("StripForSecondRope");
 			return;
 		}
@@ -253,8 +254,6 @@ function C012_AfterClass_Amanda_TestDomme() {
 		if (!ActorIsGagged()) {
 			if (ActorGetValue(ActorSubmission) >= 20) {
 				if (!GameLogQuery(CurrentChapter, CurrentActor, "EnslaveDone")) {
-					if (ActorIsRestrained()) C012_AfterClass_Amanda_EnslaveCount = 1;
-					else C012_AfterClass_Amanda_EnslaveCount = 0;
 					C012_AfterClass_Amanda_CurrentStage = 200;
 					OverridenIntroText = "";
 					LeaveIcon = "";
@@ -599,19 +598,12 @@ function C012_AfterClass_Amanda_ForceChangeActor(NewCloth) {
 	C012_AfterClass_Amanda_GaggedAnswer();
 }
 
-// Chapter 12 After Class - Increases the slavery count for Amanda, 5 is required to collar her
-function C012_AfterClass_Amanda_EnslaveAmandaCount() {
-	C012_AfterClass_Amanda_EnslaveCount++;
-}
-
 // Chapter 12 After Class - Check if Amanda wants to be collared, 5 counts are required
 function C012_AfterClass_Amanda_TestEnslaveAmanda() {
-	if (C012_AfterClass_Amanda_EnslaveCount >= 5) {
-		if (ActorIsRestrained()) C012_AfterClass_Amanda_CurrentStage = 285;
-		else if (ActorGetValue(ActorCloth) == "Naked") { C012_AfterClass_Amanda_CurrentStage = 291; ActorSetPose("Shy"); }
-		else C012_AfterClass_Amanda_CurrentStage = 290;
-		OverridenIntroText = GetText("AcceptCollar");
-	} else LeaveIcon = "";
+	if (ActorIsRestrained()) C012_AfterClass_Amanda_CurrentStage = 285;
+	else if (ActorGetValue(ActorCloth) == "Naked") { C012_AfterClass_Amanda_CurrentStage = 291; ActorSetPose("Shy"); }
+	else C012_AfterClass_Amanda_CurrentStage = 290;
+	OverridenIntroText = GetText("AcceptCollar");
 }
 
 // Chapter 12 After Class - When the player gives up on enslaving Amanda

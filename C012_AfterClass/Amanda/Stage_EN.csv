@@ -2,8 +2,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_ActorIsOwner,What's on your|mind Mistress?,"Nothing my subbie, I'm reviewing my notes.|(She reviews and studies her school notes.)",0,0,0,RandomAmandaDommeEvent()
 0,0,0,Common_ActorIsOwner,"Mistress, it's ok if|I change clothes?","Absolutely, you can wear|anything you want my subbie.",0,0,0,IsChangingBlocked()
 0,5,0,!Common_ActorIsLover,You look so|pretty Amanda.,"Thanks, I love your looks also.|(You need +20 love to date Amanda.)",0,0,0,TestLove()
-0,0,0,Common_ActorIsLover,We need to talk.,What would you like to talk about?,0,0,0,TestTalk()
-0,0,5,!Common_ActorIsOwned,"Girl, you need|my protection.",Protection on school ground?  Don't be silly.|(You need +20 submission to collar Amanda.),0,0,0,TestDomme()
+0,0,0,,We need to talk.,What would you like to talk about?,0,0,0,TestTalk()
+0,0,5,IsRestrained,You really enjoy being|restrained don't you girl?,(She winks.)  I'll never admit that Miss.|(You need +20 submission to collar Amanda.),0,0,0,TestDomme()
 0,0,-5,!Common_ActorIsOwner,Miss Amanda.|I admire you.,That's very flattering of you to say that.|(You need -20 submission to submit to Amanda.),0,0,0,TestSub()
 0,0,0,Common_PlayerGagged,@Om nnnuoogn mh!,Let me get my English-Mumble|dictionary.  (She laughs out loud.),0,0,0,TestUnbind()
 0,0,0,Common_ActorIsOwner,(Hum a sexy song|and dance for fun.),"Not now my subbie, I'm reviewing my notes.|(She reviews and studies her school notes.)",0,0,0,RandomAmandaDommeEvent()
@@ -54,7 +54,10 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 193,0,0,,You're not|in my league.,(She grumbles.)  Fine.  I get it.|(She runs away from the room.),194,-1,1,AmandaLeave()
 193,0,0,,It was a mistake|from the start,"Maybe you're right, fuck that!|(She runs away from the room.)",194,0,0,AmandaLeave()
 193,0,0,,You'll find someone|perfect for you.,I thought I already did.  Fuck that.|(She runs away from the room.),194,1,0,AmandaLeave()
-200,0,0,,TO DO,TO DO - DOMME,210,0,0,
+200,0,0,,You like losing control.|It turns you on girl.,,210,0,1,
+200,0,0,,You're all wet|when tied up.,,210,0,0,
+200,0,0,,Bondage is a strong|sexual fantasy of yours?,,210,0,0,
+210,0,0,,TO DO,TO DO = DOMME,210,0,0,
 300,0,0,,TO DO,TO DO - SUBMIT,310,0,0,
 450,0,0,,Fun Mistress?,,0,0,0,RandomAmandaDommeEvent()
 450,0,0,,What's going on?,,0,0,0,RandomAmandaDommeEvent()

@@ -27,8 +27,9 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 192,0,0,,,StopDating.jpg
 193,0,0,,,StopDating.jpg
 194,0,0,,,Dorm.jpg
-200,0,0,,Someone to take care of me?|What do you mean Miss?,Dorm.jpg
-200,0,0,Common_ActorIsLover,I already have you.|I need someone else?,Dorm.jpg
+200,0,0,,I...  I...  I admit I kind of enjoy it.|(She blushes red and looks down.),Dorm.jpg
+200,0,0,Common_ActorIsLover,You know me too well my love.|(She blushes red and looks down.),Dorm.jpg
+210,0,0,,,Dorm.jpg
 300,0,0,,"Our college has strict rules, you will need|someone to help you learn and enforce them.",Dorm.jpg
 450,0,0,,(Amanda tickles you for fun and laughs.)|Alright my subbie.  It's time to have fun.,Dorm.jpg
 450,0,0,Common_ActorIsLover,(Amanda tickles you for fun and laughs.)|Alright my subbie.  It's time to have fun.,Dorm.jpg
