@@ -18,6 +18,8 @@ var C012_AfterClass_Amanda_AllowPajamas = false;
 var C012_AfterClass_Amanda_AllowSexAfterDate = false;
 var C012_AfterClass_Amanda_SidneyIsOwner = false;
 var C012_AfterClass_Amanda_CanKickOut = false;
+var C012_AfterClass_Amanda_HaveCuffs = false;
+var C012_AfterClass_Amanda_CuffsGameAvail = false;
 
 // Amanda can only check her notes if she's dressed
 function C012_AfterClass_Amanda_CheckNotes() {
@@ -56,6 +58,8 @@ function C012_AfterClass_Amanda_CalcParams() {
 	C012_AfterClass_Amanda_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Amanda_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
 	C012_AfterClass_Amanda_CanKickOut = (!Common_ActorIsOwner && !Common_ActorIsLover);
 	C012_AfterClass_Amanda_SidneyIsOwner = (Common_PlayerOwner == "Sidney");
+	C012_AfterClass_Amanda_HaveCuffs = (PlayerHasInventory("Cuffs"));
+	C012_AfterClass_Amanda_CuffsGameAvail = (PlayerHasInventory("Cuffs") && !Common_PlayerRestrained && !ActorIsRestrained() && !C012_AfterClass_Amanda_ChatAvail);
 	C012_AfterClass_Amanda_SetPose();
 }
 
@@ -291,14 +295,8 @@ function C012_AfterClass_Amanda_TestSubmit() {
 					if (Common_PlayerRestrained) {
 						OverridenIntroText = GetText("PlayerUnrestrainFirst");
 					} else {
-						if (Common_PlayerNaked) {
-							OverridenIntroText = GetText("GetOnYourKnees");
-							C012_AfterClass_Amanda_PlayerStrip();
-							C012_AfterClass_Amanda_CurrentStage = 340;
-						} else {
-							C012_AfterClass_Amanda_CurrentStage = 330;						
-						}
-					}					
+						C012_AfterClass_Amanda_CurrentStage = 330;
+					}
 				}
 			}
 		}
@@ -310,6 +308,7 @@ function C012_AfterClass_Amanda_PlayerStrip() {
 	ActorSetPose("");
 	PlayerClothes("Naked");
 	Common_PlayerPose = "BackShy";
+	CurrentTime = CurrentTime + 50000;
 }
 
 // Chapter 12 After Class - The player can strip for Amanda
@@ -521,7 +520,8 @@ function C012_AfterClass_Amanda_InsertEgg() {
 
 // Chapter 12 After Class - Ends the punishment and sets the duration between 30 minutes and 1.5 hours
 function C012_AfterClass_Amanda_EndPunishment(PunishmentType) {
-	GameLogAddTimer("Event" + PunishmentType, CurrentTime + 1800000 + Math.floor(Math.random() * 3600000));
+	if (PunishmentType == "SleepBoundAndGagged") GameLogAdd("Event" + PunishmentType);
+	else GameLogAddTimer("Event" + PunishmentType, CurrentTime + 1800000 + Math.floor(Math.random() * 3600000));
 	EventSetGenericTimer();
 	C012_AfterClass_Amanda_AllowLeave();
 }
@@ -547,6 +547,7 @@ function C012_AfterClass_Amanda_StartChat() {
 
 // Chapter 12 After Class - Ends the chat with Amanda
 function C012_AfterClass_Amanda_EndChat() {
+	if (ActorGetValue(ActorPose) == "Kneel") ActorSetPose("Shy");
 	LeaveIcon = "Leave";
 }
 
@@ -617,7 +618,7 @@ function C012_AfterClass_Amanda_EnslaveRelease() {
 	ActorUntie();
 	if (ActorHasInventory("Cuffs")) { PlayerAddInventory("Cuffs", 1); ActorRemoveInventory("Cuffs"); }
 	if (ActorGetValue(ActorCloth) == "Naked") {
-		C012_AfterClass_Amanda_CurrentStage = 291;
+		C012_AfterClass_Amanda_CurrentStage = 293;
 		ActorSetPose("Shy");
 	}
 	CurrentTime = CurrentTime + 50000;
@@ -898,4 +899,24 @@ function C012_AfterClass_Amanda_KickedOut() {
 		C012_AfterClass_Amanda_BreakUp();
 	}
 	CurrentActor = "";
+}
+
+// Chapter 12 After Class - When Amanda and the player plays a cuff game (50% chance of winning at 0 sub, 100% at 15, 0% at -16)
+function C012_AfterClass_Amanda_CuffsGame() {
+	var WinGame = ActorGetValue(ActorSubmission) - 15 + (Math.floor(Math.random() * 31) == 0);
+	CurrentTime = CurrentTime + 110000;
+	PlayerRemoveInventory("Cuffs", 1);
+	if (WinGame >= 0) PlayerLockInventory("Cuffs");
+	else ActorAddInventory("Cuffs");
+	if (WinGame < 0) OverridenIntroText = GetText("LoseCuffsGame");
+	if (Common_ActorIsOwner && (WinGame < 0)) PlayerRemoveInventory("CuffsKey", 99);
+}
+
+// Chapter 12 After Class - Tests if the player is already naked
+function C012_AfterClass_Amanda_TestNaked() {
+	if (Common_PlayerNaked) {
+		C012_AfterClass_Amanda_CurrentStage = 392;
+		OverridenIntroText = "";
+		Common_PlayerPose = "BackShy";
+	}
 }

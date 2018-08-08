@@ -3,7 +3,7 @@ var EventActivityCurrent = "";
 var EventActivityCount = 0;
 var EventActivityMaxCount = 0;
 var EventList = ["Naked", "Underwear", "SchoolUniform", "RedBikini", "BlackDress", "WhiteLingerie", "FullBondage", "Restrain", "Gag", "Release", "ConfiscateKeys", "ConfiscateCrop", "VibratingEgg", "Tickle", "Slap", "Masturbate", "Crop"];
-var EventPunishmentList = ["Grounded", "Belted", "Spanked"];
+var EventPunishmentList = ["Grounded", "Belted", "Spanked", "SleepBoundAndGagged"];
 
 // Returns TRUE if the event is accepted
 function EventRandomChance(EventChanceModifier) {
@@ -50,6 +50,7 @@ function EventRandomPlayerPunishment() {
 			if (PunishmentType == "Grounded") Result = parseInt(PunishmentStage);
 			if ((PunishmentType == "Spanked") && !GameLogQuery(CurrentChapter, "", "EventSpanked")) Result = parseInt(PunishmentStage);
 			if ((PunishmentType == "Belted") && !Common_PlayerChaste && PlayerHasInventory("ChastityBelt")) Result = parseInt(PunishmentStage);
+			if ((PunishmentType == "SleepBoundAndGagged") && !GameLogQuery(CurrentChapter, "", "EventSleepBoundAndGagged")) Result = parseInt(PunishmentStage);
 
 		}
 

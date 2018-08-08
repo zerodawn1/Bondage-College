@@ -16,6 +16,7 @@ EventMasturbate,3220
 PunishmentGrounded,3910
 PunishmentBelted,3920
 PunishmentSpanked,3930
+PunishmentSleepBoundAndGagged,3940
 GaggedAnswer1,Noomgn mo gnom!
 GaggedAnswer2,(She mumbles something|in the gag and giggles.)
 GaggedAnswer3,Eeeph!
@@ -24,11 +25,11 @@ GaggedAnswer5,(She bows her head and remain quiet.)
 GaggedAnswer6,Aaac cgan niac mnaim.
 GaggedAnswer7,Ommphm og ngo maoophh.
 GaggedAnswer8,Mmmh!  (She struggles with the gag.)
-AlreadyOwned,You're already owned.|That would not be proper.
+AlreadyOwned,It's possible with training and discipline.|But you will need to ask your owner.
 UnrestrainFirst,Can you help me out first?
 UnchasteFirst,Can you help me with the belt first?
-PlayerUncollarFirst,Before we do anything.|You need to remove this collar.
-PlayerUnrestrainFirst,Get out of these restrains first.
+PlayerUncollarFirst,It's possible with training and discipline.|But first you need to remove this collar.
+PlayerUnrestrainFirst,It's possible with training and discipline.|But first you need to get out of these restrains.
 GetOnYourKnees,"Very well, I could take you as my submissive.|First, you will need to get on your knees."
 ReleasePlayer,"Here, let me help you.|(She releases you.)"
 ReleasePlayerGagged,Oohogm nagn momp.|(She releases you.)
@@ -101,3 +102,4 @@ StripForSecondRope,(You could use that second|rope if she had fewer clothes.)
 DoubleTickling,(You tickle each other and|she seems to enjoy it a lot.)
 AlreadyLoved,I don't.  Sometimes I wish I had|someone in my life like you do.
 AlreadyBrokeUp,I don't want to talk about that with you.
+LoseCuffsGame,You both giggle and struggle with the cuffs but|she's able to lock them around your wrists.
