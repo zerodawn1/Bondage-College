@@ -14,17 +14,32 @@ function C012_AfterClass_Outro_Load() {
 // Chapter 12 - After Class Outro Run
 function C012_AfterClass_Outro_Run() {
 
+	// Special outro if the player got the "Sleep bound and gagged" punishment
 	if (C012_AfterClass_Outro_Type == "SleepBoundAndGagged") {
 
-		DrawImage("SleepBoundAndGagged" + TextPhase.toString(), 0, 0);
-		C012_AfterClass_Outro_Type
+		// Prepares the background image
+		Common_PlayerRestrained = true;
+		var ImageName = "C012_AfterClass/Outro/SleepBoundAndGagged";
+		if (Common_PlayerChaste) ImageName = ImageName + "Belt";
+		if ((TextPhase == 0) || (TextPhase == 1)) ImageName = ImageName + "1.jpg";
+		if (TextPhase == 2) ImageName = ImageName + "2.jpg";
+		if (TextPhase == 3) ImageName = ImageName + "3.jpg";
+		if ((TextPhase == 4) || (TextPhase == 5)) ImageName = ImageName + "4.jpg";	
+		DrawImage(ImageName, 0, 0);
 
-		// Shows the text
-		DrawText(GetText("SleepBoundAndGagged1"), x, 100, "White");
-		if (TextPhase >= 1) DrawText(GetText("SleepBoundAndGagged2"), x, 200, "White");
-		if (TextPhase >= 2) DrawText(GetText("SleepBoundAndGagged3"), x, 300, "White");
-		if (TextPhase >= 3) DrawText(GetText("SleepBoundAndGagged4"), x, 400, "White");
-		if (TextPhase >= 4) DrawText(GetText("SleepBoundAndGagged5"), x, 500, "White");
+		// Shows the text in the bottom
+		if (TextPhase == 0) DrawText(GetText("SleepBoundAndGagged1"), 599, 549, "White");
+		if (TextPhase == 0) DrawText(GetText("SleepBoundAndGagged1"), 600, 550, "Black");
+		if (TextPhase == 1) DrawText(GetText("SleepBoundAndGagged2"), 599, 549, "White");
+		if (TextPhase == 1) DrawText(GetText("SleepBoundAndGagged2"), 600, 550, "Black");
+		if (TextPhase == 2) DrawText(GetText("SleepBoundAndGagged3"), 599, 549, "White");
+		if (TextPhase == 2) DrawText(GetText("SleepBoundAndGagged3"), 600, 550, "Black");
+		if (TextPhase == 3) DrawText(GetText("SleepBoundAndGagged4"), 599, 549, "White");
+		if (TextPhase == 3) DrawText(GetText("SleepBoundAndGagged4"), 600, 550, "Black");
+		if (TextPhase == 4) DrawText(GetText("SleepBoundAndGagged5"), 599, 549, "White");
+		if (TextPhase == 4) DrawText(GetText("SleepBoundAndGagged5"), 600, 550, "Black");
+		if (TextPhase == 5) DrawText(GetText("SleepBoundAndGagged6"), 599, 549, "White");
+		if (TextPhase == 5) DrawText(GetText("SleepBoundAndGagged6"), 600, 550, "Black");
 		
 	} else {
 
@@ -45,7 +60,7 @@ function C012_AfterClass_Outro_Run() {
 		if (TextPhase >= 2) DrawText(GetText("Outro3"), x, 300, "White");
 		if (TextPhase >= 3) DrawText(GetText("Outro4"), x, 400, "White");
 		if (TextPhase >= 4) DrawText(GetText("Outro5"), x, 500, "White");
-	
+
 	}
 
 }
@@ -55,10 +70,9 @@ function C012_AfterClass_Outro_Click() {
 
 	// Jump to the next animation
 	TextPhase++;
-	if ((TextPhase >= 5) && (C012_AfterClass_Outro_Type == "SleepBoundAndGagged")) {
+	if ((TextPhase >= 6) && (C012_AfterClass_Outro_Type == "SleepBoundAndGagged")) {
 		C012_AfterClass_Outro_Type = "Bondage";
-		TextPhase = 1;
+		TextPhase = 0;
 	}
-	//if (TextPhase >= 3) SaveMenu("C012_AfterClass", "Intro");
 
 }

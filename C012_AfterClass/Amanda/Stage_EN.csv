@@ -54,10 +54,17 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 193,0,0,,You're not|in my league.,(She grumbles.)  Fine.  I get it.|(She runs away from the room.),194,-1,1,AmandaLeave()
 193,0,0,,It was a mistake|from the start,"Maybe you're right, fuck that!|(She runs away from the room.)",194,0,0,AmandaLeave()
 193,0,0,,You'll find someone|perfect for you.,I thought I already did.  Fuck that.|(She runs away from the room.),194,1,0,AmandaLeave()
-200,0,0,,You like losing control.|It turns you on girl.,,210,0,1,
-200,0,0,,You're all wet|when tied up.,,210,0,0,
-200,0,0,,Bondage is a strong|sexual fantasy of yours?,,210,0,0,
-210,0,0,,TO DO,TO DO = DOMME,210,0,0,
+200,0,0,,You like losing control.|It turns you on girl.,"I...  Errr...  Yes Miss.  I admit it.|I cannot explain why, but I love bondage.",210,0,1,
+200,0,0,,You're all wet|when tied up.,"I would not say it like that, but yes.|I cannot explain why, but I love bondage.",210,-1,0,
+200,0,0,,Bondage is a strong|sexual fantasy of yours?,"(She blushes and looks down.)  I admit it.|I cannot explain why, but I love bondage.",210,1,0,
+200,0,0,,Being restrained is a|fantasy that we share.,"Really?  You also like to be restrained?|I cannot explain why, but I love bondage.",210,0,-1,
+210,0,0,,I can explain why.|You're a submissive.,A submissive?  Me?  Really?|Like these girls that have owners?,220,0,0,
+210,0,0,,It's pretty simple.|You have slave blood.,I have Slave blood?  Me?  Really?|Like these girls that have owners?,220,0,0,
+210,0,0,,It's a very common|fantasy among subs.,Among subs?  I am a submissive?|Like these girls that have owners?,220,0,0,
+220,0,0,,"Yes, you need someone|to fulfill your fantasies.",A special someone to restrain me...|Would you be that person Miss?,230,1,-1,
+220,0,0,,"Yes, an owner would help|you with these urges.",An owner to help me with urges...|Would you be that person Miss?,230,0,0,
+220,0,0,,"Yes, only a Mistress|can train you slut.",(She gulps.)  A Mistress to train me...|Would you be that person Miss?,230,-1,1,
+230,0,0,,TO DO,TO DO - DOMME,230,0,0,
 300,0,0,,TO DO,TO DO - SUBMIT,310,0,0,
 450,0,0,,Fun Mistress?,,0,0,0,RandomAmandaDommeEvent()
 450,0,0,,What's going on?,,0,0,0,RandomAmandaDommeEvent()
