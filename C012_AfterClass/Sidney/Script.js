@@ -134,7 +134,10 @@ function C012_AfterClass_Sidney_Run() {
 	// The curfew 22 option isn't available after 22
 	C012_AfterClass_Sidney_CanSetCurfew22 = (CurrentTime < 22 * 60 * 60 * 1000);
 	BuildInteraction(C012_AfterClass_Sidney_CurrentStage);
-	
+
+	// Draw the watching actors for ceremonies
+	if (((C012_AfterClass_Sidney_CurrentStage >= 340) && (C012_AfterClass_Sidney_CurrentStage < 400)) || ((C012_AfterClass_Sidney_CurrentStage >= 291) && (C012_AfterClass_Sidney_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
+
 	// Draw the actor alone or with the player depending on the stage
 	if ((C012_AfterClass_Sidney_CurrentStage != 410) && (C012_AfterClass_Sidney_CurrentStage != 3931) && (C012_AfterClass_Sidney_CurrentStage != 3932) && (C012_AfterClass_Sidney_CurrentStage != 3933) && (C012_AfterClass_Sidney_CurrentStage != 632) && (C012_AfterClass_Sidney_CurrentStage != 633) && (C012_AfterClass_Sidney_CurrentStage != 634) && (C012_AfterClass_Sidney_CurrentStage != 662) && (C012_AfterClass_Sidney_CurrentStage != 663) && (C012_AfterClass_Sidney_CurrentStage != 791)) {
 		if (((C012_AfterClass_Sidney_CurrentStage >= 3090) && (C012_AfterClass_Sidney_CurrentStage <= 3099)) || ((C012_AfterClass_Sidney_CurrentStage >= 3901) && (C012_AfterClass_Sidney_CurrentStage <= 3999))) {

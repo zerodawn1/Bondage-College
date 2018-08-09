@@ -4,6 +4,18 @@ var C012_AfterClass_Dorm_PlayerGrounded = false;
 var C012_AfterClass_Dorm_SidneyExitTime = 0;
 var C012_AfterClass_Dorm_SidneyReturnTime = 0;
 
+// Draw the other actors that are not the current actor in he background
+function C012_AfterClass_Dorm_DrawOtherActors() {	
+	var Pos = 0;
+	for (var A = 0; A < C012_AfterClass_Dorm_Guest.length; A++)
+		if (CurrentActor != C012_AfterClass_Dorm_Guest[A]) {
+			if (Pos == 0) DrawActor(C012_AfterClass_Dorm_Guest[A], 500, 0, 0.75);
+			if (Pos == 1) DrawActor(C012_AfterClass_Dorm_Guest[A], 1000, 0, 0.75);
+			if (Pos == 2) DrawActor(C012_AfterClass_Dorm_Guest[A], 800, -30, 0.75);
+			Pos++;
+		}
+}
+
 // Check if we must stop the scene for leaving guests
 function C012_AfterClass_Dorm_LeavingGuest() {
 

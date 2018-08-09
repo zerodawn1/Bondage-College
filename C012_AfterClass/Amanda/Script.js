@@ -130,6 +130,9 @@ function C012_AfterClass_Amanda_Run() {
 
 	// Build the regular interactions
 	BuildInteraction(C012_AfterClass_Amanda_CurrentStage);
+
+	// Draw the watching actors for ceremonies
+	if (((C012_AfterClass_Amanda_CurrentStage >= 392) && (C012_AfterClass_Amanda_CurrentStage < 400)) || ((C012_AfterClass_Amanda_CurrentStage >= 293) && (C012_AfterClass_Amanda_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
 	
 	// Draw the actor alone or with the player depending on the stage
 	if ((C012_AfterClass_Amanda_CurrentStage != 410) && (C012_AfterClass_Amanda_CurrentStage != 3931) && (C012_AfterClass_Amanda_CurrentStage != 3932) && (C012_AfterClass_Amanda_CurrentStage != 3933) && (C012_AfterClass_Amanda_CurrentStage != 632) && (C012_AfterClass_Amanda_CurrentStage != 633) && (C012_AfterClass_Amanda_CurrentStage != 634) && (C012_AfterClass_Amanda_CurrentStage != 791)) {
@@ -138,7 +141,7 @@ function C012_AfterClass_Amanda_Run() {
 			DrawActor(CurrentActor, 750, 0, 1);
 		} else {
 			DrawInteractionActor();
-			if ((C012_AfterClass_Amanda_CurrentStage >= 340) && (C012_AfterClass_Amanda_CurrentStage < 400)) DrawActor("Player", 600, 100, 1);		
+			if ((C012_AfterClass_Amanda_CurrentStage >= 392) && (C012_AfterClass_Amanda_CurrentStage < 400)) DrawActor("Player", 600, 100, 1);
 		}		
 	}
 	
@@ -254,18 +257,20 @@ function C012_AfterClass_Amanda_TestLove() {
 
 // Chapter 12 After Class - Amanda can be dominated at +20 submission
 function C012_AfterClass_Amanda_TestDomme() {
-	if (PlayerHasInventory("Collar")) {
-		if (!ActorIsGagged()) {
-			if (ActorGetValue(ActorSubmission) >= 20) {
-				if (!GameLogQuery(CurrentChapter, CurrentActor, "EnslaveDone")) {
-					C012_AfterClass_Amanda_CurrentStage = 200;
-					OverridenIntroText = "";
-					LeaveIcon = "";
-					GameLogAdd("EnslaveDone");
-				} else OverridenIntroText = GetText("EnslaveAlreadyTried");
-			}
-		} else C012_AfterClass_Amanda_GaggedAnswer();
-	} else OverridenIntroText = GetText("CollarToEnslave");
+	if (!ActorIsGagged()) {
+		if (!Common_ActorIsOwned) {
+			if (PlayerHasInventory("Collar")) {
+				if (ActorGetValue(ActorSubmission) >= 20) {
+					if (!GameLogQuery(CurrentChapter, CurrentActor, "EnslaveDone")) {
+						C012_AfterClass_Amanda_CurrentStage = 200;
+						OverridenIntroText = "";
+						LeaveIcon = "";
+						GameLogAdd("EnslaveDone");
+					} else OverridenIntroText = GetText("EnslaveAlreadyTried");
+				}
+			} else OverridenIntroText = GetText("CollarToEnslave");
+		} else OverridenIntroText = GetText("SubEnjoyBondage");
+	} else C012_AfterClass_Amanda_GaggedAnswer();
 }
 
 // Chapter 12 After Class - Amanda can become the player Mistress at -20 submission
@@ -903,13 +908,14 @@ function C012_AfterClass_Amanda_KickedOut() {
 
 // Chapter 12 After Class - When Amanda and the player plays a cuff game (50% chance of winning at 0 sub, 100% at 15, 0% at -16)
 function C012_AfterClass_Amanda_CuffsGame() {
-	var WinGame = ActorGetValue(ActorSubmission) - 15 + (Math.floor(Math.random() * 31) == 0);
+	var WinGame = ((ActorGetValue(ActorSubmission) - 15 + Math.floor(Math.random() * 31)) >= 0);
 	CurrentTime = CurrentTime + 110000;
 	PlayerRemoveInventory("Cuffs", 1);
-	if (WinGame >= 0) PlayerLockInventory("Cuffs");
-	else ActorAddInventory("Cuffs");
-	if (WinGame < 0) OverridenIntroText = GetText("LoseCuffsGame");
-	if (Common_ActorIsOwner && (WinGame < 0)) PlayerRemoveInventory("CuffsKey", 99);
+	if (WinGame) ActorAddInventory("Cuffs");
+	else PlayerLockInventory("Cuffs");
+	if (!WinGame) OverridenIntroText = GetText("LoseCuffsGame");
+	if (Common_ActorIsOwner && !WinGame) PlayerRemoveInventory("CuffsKey", 99);
+	C012_AfterClass_Amanda_CalcParams();
 }
 
 // Chapter 12 After Class - Tests if the player is already naked

@@ -80,11 +80,11 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 270,0,0,,If you disobey.|I will punish you.,That sounds fair.,280,0,0,
 280,0,0,,If you're a good girl.|I will reward you.,That's nice of you Miss.,290,0,0,
 280,0,0,,When you're good.|I will satisfy your urges.,(She nods and smiles.),290,1,0,
-280,0,0,,You will get orgasms in|bondage when you please me.,(She blushes red.)  Y...  Yes Miss.,290,0,1,
+280,0,0,,You will get bondage|orgasms if you're good.,(She blushes red.)  Y...  Yes Miss.,290,0,1,
 290,0,0,,So will you be|my submissive?,Yes Miss COMMON_PLAYERNAME.|I will be your submissive.,291,1,-1,
 290,0,0,,Will you wear|my collar girl?,Yes Miss COMMON_PLAYERNAME.|I will be your submissive.,291,0,0,
 290,0,0,,"Slave, do you|want this collar?",Yes Miss COMMON_PLAYERNAME.|I will be your submissive.,291,-1,1,
-290,0,0,,You're a slave for sure.|But you're not worthy of me.,I'm really sorry to hear that Miss.|Let's not talk about collars then.,0,-2,1,EndEnslaveAmanda()
+290,0,0,,You're a slave for sure.|But not worthy of me.,I'm really sorry to hear that Miss.|Let's not talk about collars then.,0,-2,1,EndEnslaveAmanda()
 290,0,0,,On second thought.|I will not collar you.,I'm really sorry to hear that Miss.|Let's not talk about collars then.,0,-1,0,EndEnslaveAmanda()
 291,0,0,,Very good Amanda.|I will release you first.,"(You release her, she seems pretty febrile.)|First Miss?  Is there some kind of ceremony?",292,0,0,EnslaveRelease()
 291,0,0,,Let me release|you first girl.,"(You release her, she seems pretty febrile.)|First Miss?  Is there some kind of ceremony?",292,0,0,EnslaveRelease()
@@ -137,8 +137,20 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 390,0,0,,I cannot do that.|(Don't get collared.),"Very well, I won't force you girl.|Let me know if you change your mind.",0,0,0,EndChat()
 391,0,0,,(Nod and strip naked.),"(You strip down while she smiles.)|Very good, now you will kneel for me.",392,0,0,PlayerStrip()
 391,0,0,,Yes Mistress.|(Strip naked.),"(You strip down while she smiles.)|Very good, now you will kneel for me.",392,0,0,PlayerStrip()
-391,0,0,,Very well.|(Strip naked.),"(You strip down while she smiles.)|Very good, now you will kneel for me.",392,0,0,PlayerStrip()
-392,0,0,,TO DO,TO DO - COLLARED,392,0,0,
+391,0,0,,My pleasure!|(Strip naked.),"(You strip down while she smiles.)|Very good, now you will kneel for me.",392,0,0,PlayerStrip()
+392,0,0,,If I must.|(Kneel slowly.),Last chance to turn back.  Do you agree to be|my submissive and have this collar locked on you?,393,0,0,"SetPlayerPose(""BackKneel"")"
+392,0,0,,Very well.|(Kneel for her.),Last chance to turn back.  Do you agree to be|my submissive and have this collar locked on you?,393,0,0,"SetPlayerPose(""BackKneel"")"
+392,0,0,,It's a honor.|(Kneel promptly.),Last chance to turn back.  Do you agree to be|my submissive and have this collar locked on you?,393,0,0,"SetPlayerPose(""BackKneel"")"
+393,0,0,,Yes Mistress.|(Get collared.),(She carefully adjusts the collar around your|neck and locks it.)  You are now my subbie.,394,0,-3,PlayerCollared()
+393,0,0,,I cannot do that.|(Don't get collared.),"Very well, I won't force you girl.|Let me know if you change your mind.",0,0,0,EndChat()
+394,0,0,,I'm so happy!,I'm also very happy.  Be loyal and I|will train you to become a perfect student.,395,1,0,
+394,0,0,,I know I'm|in good hands.,You are in good hands.  Be loyal and I|will train you to become a perfect student.,395,0,-1,
+394,0,0,,I don't feel|very good.,You will get used to it.  Be loyal and I|will train you to become a perfect student.,395,-1,0,
+394,0,0,,(Stay silent and|look at her feet.),Be loyal and I will train you|to become a perfect student.,395,0,0,
+394,0,0,,Is the collar supposed|to be that tight?,You will get used to it.  Be loyal and I|will train you to become a perfect student.,395,0,1,
+395,0,0,,It will be fun.,It certainly will be fun.|Now stand up my subbie.,0,0,0,PlayerStandUp()
+395,0,0,,I can't wait to|start training.,I will prepare your training schedule|pretty soon.  Now stand up my subbie.,0,1,-1,PlayerStandUp()
+395,0,0,,Training can wait.,It will begin when your schedule is|ready.  Now stand up my subbie.,0,-1,1,PlayerStandUp()
 450,0,0,,Fun Mistress?,,0,0,0,RandomAmandaDommeEvent()
 450,0,0,,What's going on?,,0,0,0,RandomAmandaDommeEvent()
 450,0,0,,(Nod happily.),,0,0,0,RandomAmandaDommeEvent()
@@ -158,7 +170,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 532,0,0,Common_PlayerRestrained,Fun game isn't it?|(Struggle in the cuffs.),"Yes, we have to play it more often.|(She looks at you struggling and laughs.)",0,0,-1,EndChat()
 532,0,0,!Common_PlayerRestrained,Fun game isn't it?|(Watch her struggle.),"Yes, we have to play it more often.|(She struggles in the cuffs for fun.)",0,0,1,EndChat()
 540,0,0,,It's quite a thrill?,"Absolutely, but it's not easy|to tie yourself up properly.",541,0,0,
-540,0,0,,When you do self-bondage.|Warn me for satefy.,Oh yes Miss.  Good idea.|Or maybe you can help me.,541,0,1,
+540,0,0,,When you tie yourself.|Warn me for satefy.,Oh yes Miss.  Good idea.|Or maybe you can help me.,541,0,1,
 540,0,0,,I also do some|self-bondage.,Remember to be careful.|Maybe we could help each other.,541,0,-1,
 541,0,0,!Common_ActorIsOwned,"Awesome, I can't|wait to be tied up.",You're such a kinky girl.|Do you have some rope now?,0,0,-1,EndChat()
 541,0,0,,Our next self-bondage|game might be together.,I would love that COMMON_PLAYERNAME.|Do you have some rope now?,0,1,0,EndChat()
