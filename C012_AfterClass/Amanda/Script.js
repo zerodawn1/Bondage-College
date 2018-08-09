@@ -20,6 +20,7 @@ var C012_AfterClass_Amanda_SidneyIsOwner = false;
 var C012_AfterClass_Amanda_CanKickOut = false;
 var C012_AfterClass_Amanda_HaveCuffs = false;
 var C012_AfterClass_Amanda_CuffsGameAvail = false;
+var C012_AfterClass_Amanda_DateSarahAvail = false;
 
 // Amanda can only check her notes if she's dressed
 function C012_AfterClass_Amanda_CheckNotes() {
@@ -60,6 +61,7 @@ function C012_AfterClass_Amanda_CalcParams() {
 	C012_AfterClass_Amanda_SidneyIsOwner = (Common_PlayerOwner == "Sidney");
 	C012_AfterClass_Amanda_HaveCuffs = (PlayerHasInventory("Cuffs"));
 	C012_AfterClass_Amanda_CuffsGameAvail = (PlayerHasInventory("Cuffs") && !Common_PlayerRestrained && !ActorIsRestrained() && !C012_AfterClass_Amanda_ChatAvail);
+	C012_AfterClass_Amanda_DateSarahAvail = (!GameLogQuery(CurrentChapter, CurrentActor, "DatingSarah") && (Common_PlayerLover != "Amanda") && (Common_PlayerLover != "Sarah"));
 	C012_AfterClass_Amanda_SetPose();
 }
 
@@ -744,29 +746,29 @@ function C012_AfterClass_Amanda_Kiss() {
 	else if (C012_AfterClass_Amanda_IsGagged) OverridenIntroText = GetText("KissAmandaGagged");
 	else if (!GameLogQuery(CurrentChapter, CurrentActor, "Kiss")) {
 		GameLogAdd("Kiss");
-		if (PlayerGetSkillLevel("Seduction") > 0) {
-			ActorChangeAttitude(PlayerGetSkillLevel("Seduction"), 0);
-			OverridenIntroText = GetText("KissAmandaSeduction");
-		}
+		ActorChangeAttitude(1 + PlayerGetSkillLevel("Seduction"), 0);
+		if (PlayerGetSkillLevel("Seduction") > 0) OverridenIntroText = GetText("KissAmandaSeduction");
 	}
 }
 
 // Chapter 12 After Class - When the player spanks Amanda, with the fighting skill it can affect her submission level
 function C012_AfterClass_Amanda_Spank() {
 	CurrentTime = CurrentTime + 50000;
-	if (PlayerGetSkillLevel("Fighting") > 0) {
-		OverridenIntroText = GetText("SpankWithStrength");
-		if (!GameLogQuery(CurrentChapter, CurrentActor, "Spank")) {
-			GameLogAdd("Spank");
-			ActorChangeAttitude(0, PlayerGetSkillLevel("Fighting"));
-		}
+	if (!GameLogQuery(CurrentChapter, CurrentActor, "Spank")) {
+		GameLogAdd("Spank");
+		ActorChangeAttitude(-1, 1 + PlayerGetSkillLevel("Fighting"));
 	}
+	if (PlayerGetSkillLevel("Fighting") > 0) GetText("SpankWithStrength");
 }
 
 // Chapter 12 After Class - When the player tickles Amanda, it doesn't affect her
 function C012_AfterClass_Amanda_Tickle() {
+	CurrentTime = CurrentTime + 50000;
+	if (!GameLogQuery(CurrentChapter, CurrentActor, "Tickle")) {
+		GameLogAdd("Tickle");
+		ActorChangeAttitude(1, 0);
+	}
 	if ((Common_ActorIsOwner || (ActorGetValue(ActorSubmission) <= -5)) && !ActorIsRestrained()) OverridenIntroText = GetText("DoubleTickling");
-	else CurrentTime = CurrentTime + 50000;
 }
 
 // Chapter 12 After Class - When the player starts to masturbate Amanda
@@ -783,12 +785,12 @@ function C012_AfterClass_Amanda_StartMasturbate() {
 	}
 }
 
-// Chapter 12 After Class - When the player masturbates Amanda
-function C012_AfterClass_Amanda_Masturbate(Factor) {
+// Chapter 12 After Class - When the player masturbates Amanda, she can only climax if she's restrained
+function C012_AfterClass_Amanda_Masturbate(Factor, CanClimax) {
 	CurrentTime = CurrentTime + 50000;
 	C012_AfterClass_Amanda_MasturbateCount = C012_AfterClass_Amanda_MasturbateCount + Factor;
 	if (C012_AfterClass_Amanda_MasturbateCount < 0) C012_AfterClass_Amanda_MasturbateCount = 0;
-	if (C012_AfterClass_Amanda_MasturbateCount >= 5) {
+	if ((C012_AfterClass_Amanda_MasturbateCount >= ActorHasInventory("VibratingEgg") ? 5 : 7) && CanClimax && ActorIsRestrained()) {
 		C012_AfterClass_Amanda_CurrentStage = 641;
 		OverridenIntroText = GetText("ReadyForOrgasm");
 	}
@@ -816,13 +818,23 @@ function C012_AfterClass_Amanda_AmandaDeniedOrgasm() {
 
 // Chapter 12 After Class - Tests if the player is already dating someone else
 function C012_AfterClass_Amanda_TestRelationship() {
-	if (GameLogQuery(CurrentChapter, CurrentActor, "LoverBreakUp")) {
-		OverridenIntroText = GetText("AlreadyBrokeUp");
+	if (GameLogQuery(CurrentChapter, CurrentActor, "DatingSarah")) {
+		OverridenIntroText = GetText("AlreadyDatingSarah");
 		C012_AfterClass_Amanda_CurrentStage = 0;
 	} else {
-		if (Common_PlayerLover != "") {
-			OverridenIntroText = GetText("AlreadyLoved");
-			C012_AfterClass_Amanda_CurrentStage = 105;
+		if (GameLogQuery(CurrentChapter, CurrentActor, "LoverBreakUp")) {
+			OverridenIntroText = GetText("AlreadyBrokeUp");
+			C012_AfterClass_Amanda_CurrentStage = 0;
+		} else {
+			if (Common_PlayerLover != "") {
+				if (Common_PlayerLover == "Sarah") {
+					OverridenIntroText = GetText("AlreadyLovedBySarah");
+					C012_AfterClass_Amanda_CurrentStage = 0;
+				} else {
+					OverridenIntroText = GetText("AlreadyLoved");
+					C012_AfterClass_Amanda_CurrentStage = 105;
+				}
+			}
 		}
 	}
 }

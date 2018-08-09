@@ -1,7 +1,7 @@
 Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_ActorIsOwner,What's on your|mind Mistress?,"Nothing my subbie, I'm reviewing my notes.|(She reviews and studies her school notes.)",0,0,0,RandomAmandaDommeEvent()
 0,0,0,Common_ActorIsOwner,"Mistress, it's ok if|I change clothes?","Absolutely, you can wear|anything you want my subbie.",0,0,0,IsChangingBlocked()
-0,5,0,!Common_ActorIsLover,You look so|pretty Amanda.,"Thanks, I love your looks also.|(You need +20 love to date Amanda.)",0,0,0,TestLove()
+0,5,0,!Common_ActorIsLover,You look so|pretty Amanda.,"Thanks, I also love your looks.|(You need +20 love to date Amanda.)",0,0,0,TestLove()
 0,0,0,,We need to talk.,What would you like to talk about?,0,0,0,TestTalk()
 0,0,5,IsRestrained,You really enjoy being|restrained don't you girl?,(She winks.)  I'll never admit that Miss.|(You need +20 submission to collar Amanda.),0,0,0,TestDomme()
 0,0,-5,!Common_ActorIsOwner,Miss Amanda.|I admire you.,That's very flattering of you to say that.|(You need -20 submission to submit to Amanda.),0,0,0,TestSub()
@@ -21,40 +21,79 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 10,0,0,IsStrapped,(Unstrap her.),(You remove the straps and|unlace the binder from her arms.),10,0,0,Untie()
 10,0,0,,(Stop playing.),(You take a step back.),0,0,0,
 20,0,0,Common_ActorIsOwned,Let's review|your rules.,Oh my god.  Yes Mistress.,610,0,0,
+20,0,0,DateSarahAvail,Is there something|between you and Sarah?,Yes...  No...  I guess everyone knows but her.|I love her so much but I cannot admit it to her.,120,0,0,
 20,0,0,ChatAvail,I'd like to know|more about you.,"Fair enough, what would|like to know about me?",500,0,0,StartChat()
 20,0,0,CuffsGameAvail,Would you like to try a|cuffs challenge with me?,You both giggle and struggle with the cuffs but|you're able to lock them around her wrists.,0,0,0,CuffsGame()
 20,0,0,Common_PlayerChaste,Can you please help|me with this belt?,I cannot help you.|I don't have the key.,0,0,0,
 20,0,0,Common_ActorIsLover,About our relationship...,Y...  Yes my love?|(She seems nervous.),190,0,0,
 20,0,0,,It's time for you|to leave my place.,You're expelling me from your dorm?,790,-1,1,
 20,0,0,,Never mind.,Very well.  What would you like to do?,0,0,0,
-100,0,0,,Do you have|a loved one?,"I don't, this place is full of losers.",110,0,0,TestRelationship()
-100,0,0,,Do you have|a boyfriend?,"I don't, there's barely|any boys around here.",110,0,0,TestRelationship()
-100,0,0,,Do you have|a girlfriend?,"I don't, this place is full of losers.",110,0,0,TestRelationship()
-105,0,0,,"Yes, I'm lucky.",Fuck yeah you're lucky.|Let's talk about something else.,0,0,0,
-105,0,0,,You'll find someone.,"Yeah, yeah, yeah, I know.|Let's talk about something else.",0,0,0,
+100,0,0,,Do you have|a loved one?,I do...  I mean I don't...|I don't have a loved one.,110,0,0,TestRelationship()
+100,0,0,,Do you have|a boyfriend?,"A girl...  A boy...  Boyfriend?|No, I don't have a boyfriend.",110,0,0,TestRelationship()
+100,0,0,,Do you have|a girlfriend?,I do...  I mean I don't...|I don't have a girlfriend.,110,0,0,TestRelationship()
+105,0,0,,"Yes, I'm lucky.","Yes, you're very lucky.  If only she|could understand what she means to me.",107,0,0,
+105,0,0,,You'll find someone.,Maybe I will.  If only she could|understand what she means to me.,107,0,0,
 105,0,0,Common_ActorIsOwned,I would rather|date you.,"Mistress, you could break up with her.|We can't date if you're seeing someone.",106,0,0,
-105,0,0,!Common_ActorIsOwned,I would rather|date you.,Then break up with that fucking loser.|We can't date if you're seeing someone.,106,0,0,
+105,0,0,!Common_ActorIsOwned,I would rather|date you.,Then be honest and break up first.|We can't date if you're seeing someone.,106,0,0,
 106,0,0,,"Yes, I'll do that.",Great!  Let me know when it's done.,0,0,0,
-106,0,0,,I'll think about it.,Ok.  Let me know if you did it.,0,0,0,
-106,0,0,,I can't do that.,Fine.  Let's talk about|something else then.,0,0,0,
-110,0,0,,TO DO,TO DO - DATE,110,0,0,
-180,0,0,,(Get in bed.),,0,0,0,MakeLove()
-180,0,0,!Common_ActorIsOwner,(Push her on the bed.),,0,0,1,MakeLove()
-180,0,0,!Common_ActorIsOwned,(Let her carry|you in bed.),,0,0,-1,MakeLove()
-190,0,0,,I... I... I lost my|train of thought.,(She laughs at you.)|Are you stone sweetie?,0,0,0,
-190,0,0,,I don't think it's|working between us.,(She gives you an angry look.)|You want to break up with me?,191,0,0,
-190,0,0,,I want to break up.,(She gives you an angry look.)|Really?  You're breaking up?,191,0,0,
-191,0,0,,"No, let's stay together.",(She stares at you and frowns.)|You had me scared my love.,0,0,0,
-191,0,0,Common_ActorIsOwned,We'll break up but I'll|keep you as my slave.,"(She cries and looks devastated.)|Yes Mistress, I understand.",192,-5,0,BreakUp()
-191,0,0,!Common_ActorIsOwned,"Yes, I want to break up.",Fuck you then!  I hate you!|You think you can toy with me?,193,-5,0,BreakUp()
-192,0,0,,I'm sorry.|Don't cry.,It's fucking fine alright?|Let's talk about something else.,0,0,-1,EndChat()
-192,0,0,,You're not|in my league.,(She grumbles.)  Fine.  I get it.|Let's talk about something else.,0,-1,1,EndChat()
+106,0,0,,I'll think about it.,Very well.  Let me know when it's done.,0,0,0,
+106,0,0,,I can't do that.,"It's fine, I think I understand.|Let's talk about something else.",0,0,0,
+107,0,0,,Who are you|talking about?,(She blushes and looks down.)  Sarah.|I love her so much but I can't tell her.,120,0,0,
+107,0,0,,Who?  Sarah?,(She blushes and looks down.)  Yes.|I love her so much but I can't tell her.,120,0,0,
+107,0,0,,Are you in love?,"(She nods and looks down.)  Yes, with Sarah.|I love her so much but I cannot tell her.",120,0,0,
+110,0,0,,You seem confused.,"I am confused.  I've had eyes on Sarah|for a long time, but today I met you.",111,0,0,
+110,0,0,,Are you thorn?,"Yes, I'm thorn.  I've had eyes on Sarah|for a long time, but today I met you.",111,0,0,
+110,0,0,,Explain yourself.,"(She looks at you.)  I've had eyes on Sarah|for a long time, but today I met you.",111,0,0,
+110,0,0,,(Nod and listen.),"(She looks at you.)  I've had eyes on Sarah|for a long time, but today I met you.",111,0,0,
+111,0,0,,So you love|both of us?,"Yes, I do love both of you.|And I don't know what to do.",112,0,0,
+111,0,0,,You need to|make your mind.,"I know, I can't love both of you.|I really don't know what to do.",112,0,0,
+111,0,0,,Listen to|your heart.,"I know, I can't love both of you.|I really don't know what to do.",112,0,0,
+112,0,0,,Kiss me Amanda.|(Try to kiss her.),(You surprise her with a kiss on the lips.)|I love you COMMON_PLAYERNAME.,130,0,0,
+112,0,0,,I love you also.,I love you COMMON_PLAYERNAME.,130,0,0,
+112,0,0,,Date Sarah.  Tell|her you love her.,I've tried before.  Trust me.|But there's never a good moment.,121,0,0,
+112,0,0,,Shut up and|go see Sarah.,I've tried to date her but I can't tell her.|There's never a good moment for that.,121,0,0,
+112,0,0,,Stay single.,"Maybe that's the best plan out there.|I'm young, there's no need to rush it.",0,0,0,
+120,0,0,,Why can't|you tell her?,I've tried before.  Trust me.|But there's never a good moment.,121,0,0,
+120,0,0,,Tell her!,I've tried before.  Trust me.|But there's never a good moment.,121,0,0,
+120,0,0,,Forget her.,I know...  I can't...  I'm sorry.|Let's talk about something else.,0,0,0,
+121,0,0,,What if I create|that perfect moment?,You would do that for me?|For us?  What is your plan?,122,0,0,
+121,0,0,,Create that moment!,How can I do that?|What would you do?,122,0,0,
+121,0,0,,You're hopeless.,I know...  I'm hopeless...  I'm sorry.|Let's talk about something else.,0,0,0,
+122,0,0,,I will invite|her here first.,(She trembles and breathes faster.)|You will do that?  Wow!  I can't wait.,0,0,0,
+122,0,0,,I'll bring her|ass in here.,(She trembles and breathes faster.)|You will do that?  Wow!  I can't wait.,0,0,0,
+122,0,0,,I'll handcuff|you two together.,(She trembles and breathes faster.)|You will do that?  Wow!  I can't wait.,0,0,0,
+122,0,0,,I'll think of a plan.,Great!  Please let me know|if you find a good plan.,0,0,0,
+122,0,0,,This is hopeless.,(She sighs.)  Maybe you're right.|Let's talk about something else.,0,0,0,
+130,0,0,,I want to see|you happy.,I'm happy when you're around.|You make me laugh and smile.,140,0,0,
+130,0,0,,I want to make|you happy.,I'm happy when you're around.|You make me laugh and smile.,140,0,0,
+140,0,0,,Will you be|my girlfriend?,Yes!  I will!  I love you!,150,0,0,
+140,0,0,,Will you date me?,Yes!  I will!  I love you!,150,0,0,
+140,0,0,,Be my girlfriend.,Yes!  I will!  I love you!,150,0,0,
+150,0,0,,I love you.|(Kiss her.),(You join in a loving embrace for a long|and pationate kiss to celebrate your love.),160,3,0,StartDating()
+150,0,0,,Wait!  I need some|more time to think.,(She looks pretty disappointed.)  Very well.|Let's talk about something else then.,0,0,0,
+160,0,0,AllowSexAfterDate,Show me your sexy|body my love.,Oh yes my love.  (You both strip|naked and look at each other body.),170,0,1,BothNaked()
+160,0,0,AllowSexAfterDate,(Blush red and|start to strip.),Don't be shy my love.  (You both strip|naked and look at each other body.),170,0,-1,BothNaked()
+160,0,0,AllowSexAfterDate,I want to make|love with you.,Oh yes my love.  (You both strip|naked and look at each other body.),170,1,0,BothNaked()
+160,0,0,,I'm so happy!,I'm also very happy my love.|What should we do now?,0,1,0,
+160,0,0,,I can't wait to|tell my friends.,Please let me talk to Sarah first.|What should we do now?,0,-1,0,
+160,0,0,,We should|go out later.,We also could stay here for a nice|romantic evening.  That's up to you.,0,0,0,
+170,0,0,,(Get in bed.),,0,0,0,MakeLove()
+170,0,0,!Common_ActorIsOwner,(Push her on the bed.),,0,0,1,MakeLove()
+170,0,0,!Common_ActorIsOwned,(Let her carry|you in bed.),,0,0,-1,MakeLove()
+190,0,0,,I... I... I lost my|train of thought.,(She still seems to worry.)|It's perfectly fine my love.,0,0,0,
+190,0,0,,I don't think it's|working between us.,(She gives you a sad look.)|Do you want to break up?,191,0,0,
+190,0,0,,I want to break up.,(She gives you a sad look.)|Really my love?  It's the end?,191,0,0,
+191,0,0,,"No, let's stay together.",(She trembles and slowly recovers.)|Please don't toy with me COMMON_PLAYERNAME.,0,0,0,
+191,0,0,Common_ActorIsOwned,We'll break up but I'll|keep you as my slave.,"(She cries and looks devastated.)|Yes Mistress, it's...  it's...  it's fine.",192,-5,0,BreakUp()
+191,0,0,!Common_ActorIsOwned,"Yes, I want to break up.",Why are you doing that?|Don't play with my heart!,193,-5,0,BreakUp()
+192,0,0,,I'm sorry.|Don't cry.,I will be alright Mistress.|Let's talk about something else.,0,0,-1,EndChat()
+192,0,0,,You're not|in my league.,"Please Mistress, it hurts so much.|Let's talk about something else.",0,-1,1,EndChat()
 192,0,0,,It was a mistake|from the start,"Maybe you're right, I don't know.|Let's talk about something else.",0,0,0,EndChat()
-192,0,0,,You'll find someone|perfect for you.,I thought I already did.  Fuck that.|Let's talk about something else.,0,1,0,EndChat()
-193,0,0,,I'm sorry.|Don't cry.,I'm not fucking crying!|(She runs away from the room.),194,0,-1,AmandaLeave()
-193,0,0,,You're not|in my league.,(She grumbles.)  Fine.  I get it.|(She runs away from the room.),194,-1,1,AmandaLeave()
-193,0,0,,It was a mistake|from the start,"Maybe you're right, fuck that!|(She runs away from the room.)",194,0,0,AmandaLeave()
-193,0,0,,You'll find someone|perfect for you.,I thought I already did.  Fuck that.|(She runs away from the room.),194,1,0,AmandaLeave()
+192,0,0,,You'll find someone|perfect for you.,"Yes, and there is someone else that's perfect.|Thanks but let's talk about something else.",0,1,0,EndChat()
+193,0,0,,I'm sorry.|Don't cry.,Oh god!  It hurts so much!|(She runs away from the room.),194,0,-1,AmandaLeave()
+193,0,0,,You're not|in my league.,No need to dig in the wound.|(She runs away from the room.),194,-1,1,AmandaLeave()
+193,0,0,,It was a mistake|from the start,Yes!  A huge and horrible mistake.|(She runs away from the room.),194,0,0,AmandaLeave()
+193,0,0,,You'll find someone|perfect for you.,I know!  And I will have her someday.|(She runs away from the room.),194,1,0,AmandaLeave()
 200,0,0,,You like losing control.|It turns you on girl.,"I...  Errr...  Yes Miss.  I admit it.|I cannot explain why, but I love bondage.",210,0,1,
 200,0,0,,You're all wet|when tied up.,"I would not say it like that, but yes.|I cannot explain why, but I love bondage.",210,-1,0,
 200,0,0,,Bondage is a strong|sexual fantasy of yours?,"(She blushes and looks down.)  I admit it.|I cannot explain why, but I love bondage.",210,1,0,
@@ -206,20 +245,20 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 635,0,0,,With practice every day|it will become better.,Everyday Mistress?  Oh my!|What would you like to do now?,0,0,0,"EndPleasureFromAmanda(0, 1)"
 635,0,0,,I've had better.,I'm sorry to hear that Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromAmanda(-1, 0)"
 635,0,0,,You need some|oral training.,I will train for you Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromAmanda(-2, 1)"
-640,0,0,!Common_PlayerGagged,(Kiss her.),(You kiss her slowly while she|giggles but doesn't look very aroused.),640,0,0,Masturbate(-1)
-640,0,0,,(Massage her breast.),(She seems to be relaxing|from your gentle massage.),640,0,0,Masturbate(0)
-640,0,0,,(Pinch her nipple.),(She jumps from the pain and blushes.),640,0,0,Masturbate(0)
-640,0,0,,(Slap her butt.),(You slap her butt a few times while she|stares at you and doesn't look very aroused.),640,0,0,Masturbate(-1)
-640,0,0,,(Caress her clitoris.),(She relaxes from your gentle touch.),640,0,0,Masturbate(0)
-640,0,0,,(Play with her pussy.),(She moans and breathes a little faster.),640,0,0,Masturbate(1)
-640,0,0,,(Slide a finger|in and out.),(She moans and trembles from your touch.),640,0,0,Masturbate(1)
-640,0,0,!Common_PlayerGagged,(Eat her.),(You eat her with passion while she|moans loudly and trembles frenetically.),640,0,0,Masturbate(2)
-640,0,0,,(Fist her.),(You fit you're full hand and play in her vagina|while she moans loudly and trembles madly.),640,0,0,Masturbate(2)
+640,0,0,!Common_PlayerGagged,(Kiss her.),(You kiss her lovingly while she|closes her eyes and moans slowly.),640,0,0,"Masturbate(1, false)"
+640,0,0,,(Massage her breast.),(She closes her eyes and shivers while|you cup and slowly massage her breast.),640,0,0,"Masturbate(1, false)"
+640,0,0,,(Pinch her nipple.),(She jumps from the pain and whimpers.|She shakes her head from left to right.),640,0,0,"Masturbate(-1, false)"
+640,0,0,,(Slap her butt.),(You slap her butt a few times while|she whimpers and tries to avoid you.),640,0,0,"Masturbate(-1, false)"
+640,0,0,,(Caress her clitoris.),(She trembles without much control|while you play with her soft clitoris.),640,0,0,"Masturbate(2, true)"
+640,0,0,,(Play with her pussy.),(She moans and breathes faster.|Slowly losing control of herself.),640,0,0,"Masturbate(2, true)"
+640,0,0,,(Slide a finger|in and out.),(She moans and trembles from your touch.),640,0,0,"Masturbate(1, true)"
+640,0,0,!Common_PlayerGagged,(Eat her.),(You eat her lovingly while she|moans slowly and seems to enjoy.),640,0,0,"Masturbate(1, true)"
+640,0,0,,(Fist her.),(You try to fit a full hand but cannot|make it and only end up hurting her.),640,0,0,"Masturbate(-1, true)"
 640,0,0,,(Stop everything.),(You stop everything and let her go.),0,0,0,EndEnslaveAmanda()
 641,0,0,,(Make her climax.),(You continue to masturbate her and she|quickly collapses on a wonderful orgasm.),642,0,0,AmandaOrgasm()
 641,0,0,Common_ActorIsOwned,You deserve it slave.|(Make her climax.),(You continue to masturbate her and she|quickly collapses on a wonderful orgasm.),642,0,0,AmandaOrgasm()
-641,0,0,,(Stop everything.),(You stop everything and let her go.|She frowns and seems very frustrated.),0,0,0,AmandaDeniedOrgasm()
-641,0,0,Common_ActorIsOwned,You don't deserve it slave.|(Stop everything.),(You stop everything and let her go.|She frowns and seems very frustrated.),0,0,0,AmandaDeniedOrgasm()
+641,0,0,,(Stop everything.),(You stop everything and let her go.|She sighs and seems embarrassed.),0,0,0,AmandaDeniedOrgasm()
+641,0,0,Common_ActorIsOwned,You don't deserve it slave.|(Stop everything.),(You stop everything and let her go.|She sighs and seems embarrassed.),0,0,0,AmandaDeniedOrgasm()
 642,0,0,Common_ActorIsLover,I love you Amanda.,(She blushes and takes her|breath while slowly standing up.),0,1,0,EndEnslaveAmanda()
 642,0,0,,You're such a slut.,(She frowns and takes her|breath while slowly standing up.),0,-1,1,EndEnslaveAmanda()
 642,0,0,,I hope you liked it.,(She nods and takes her|breath while slowly standing up.),0,0,0,EndEnslaveAmanda()
