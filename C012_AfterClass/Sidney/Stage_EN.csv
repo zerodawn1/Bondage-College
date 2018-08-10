@@ -397,20 +397,6 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 3190,0,0,Common_PlayerRestrained,Do you like to|see me restrained?,Fuck yeah.  Now shut up for a second.|(She gets back on her phone to text.),3191,0,0,AllowLeave()
 3190,0,0,Common_PlayerGagged,@Niighn mhim!,It's kind of great to have a bitch.|(She gets back on her phone to text.),3191,0,0,AllowLeave()
 3190,0,0,,(Bow your head.),It's kind of great to have a bitch.|(She gets back on her phone to text.),3191,0,0,AllowLeave()
-3200,0,0,,"Oh yes, I love|being tickled.",That's fucking great my little bitch.|(She pounces and starts to tickle you.),3201,0,0,"DoActivity(""Tickle"", 1, 0)"
-3200,0,0,,Not really.,We'll see about that my little bitch.|(She pounces and starts to tickle you.),3201,0,0,"DoActivity(""Tickle"", -1, 0)"
-3200,0,0,,Yes Mistress.|I'm ticklish.,That's fucking alright my little bitch.|(She pounces and starts to tickle you.),3201,0,0,"DoActivity(""Tickle"", 0, 0)"
-3200,0,0,,I don't want|to be tickled.,"Fine, shut up then.|(She checks her phone.)",3291,0,0,TestPunish()
-3200,0,0,,(Nod happily.),That's fucking great my little bitch.|(She pounces and starts to tickle you.),3201,0,0,"DoActivity(""Tickle"", 1, 0)"
-3200,0,0,,(Nod slowly.),That's fucking alright my little bitch.|(She pounces and starts to tickle you.),3201,0,0,"DoActivity(""Tickle"", 0, 0)"
-3200,0,0,,(Shake your head no.),We'll see about that my little bitch.|(She pounces and starts to tickle you.),3201,0,0,"DoActivity(""Tickle"", -1, 0)"
-3201,0,0,,Hheeeaaahhaha!,You're a great victim my bitch.|(She tickles you some more and laughs.),3201,0,0,"DoActivity(""Tickle"", 1, 0)"
-3201,0,0,,You're pretty|bad at this.,(She frowns and tickles you harder.),3201,0,0,"DoActivity(""Tickle"", -1, 0)"
-3201,0,0,,(Laugh out loud.),You're a great victim my bitch.|(She tickles you some more and laughs.),3201,0,0,"DoActivity(""Tickle"", 1, 0)"
-3201,0,0,,(Giggle lightly.),(She laughs and tickles you some.),3201,0,0,"DoActivity(""Tickle"", 0, 0)"
-3201,0,0,,(Pretend you|don't care.),(She frowns and tickles you harder.),3201,0,0,"DoActivity(""Tickle"", -1, 0)"
-3201,0,0,,Stop it now!,Fuck you then little bitch!|(She lets you go and checks her phone.),3291,0,0,TestPunish()
-3201,0,0,,(Grumble and|try to resist.),Fuck you then little bitch!|(She lets you go and checks her phone.),3291,0,0,TestPunish()
 3210,0,0,,Yes Mistress.|I'm ok with it.,That's good my little bitch.|(She slaps you on the breast.),3211,0,0,"DoActivity(""Slap"", 0, 0)"
 3210,0,0,,Not really.,You'll have to learn to love it my little bitch.|(She slaps you pretty hard on the breast.),3211,0,0,"DoActivity(""Slap"", -1, 0)"
 3210,0,0,,"Oh yes, I'm|a pain slut.",That's fucking great my little bitch.|(She slaps you hard on the breast.),3211,0,0,"DoActivity(""Slap"", 1, 0)"

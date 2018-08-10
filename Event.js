@@ -90,8 +90,8 @@ function EventRandomPlayerSubmissive() {
 			if ((EventType == "VibratingEgg") && PlayerHasInventory("VibratingEgg") && !PlayerHasLockedInventory("VibratingEgg") && !Common_PlayerChaste) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "ConfiscateKeys") && PlayerHasInventory("CuffsKey")) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "ConfiscateCrop") && PlayerHasInventory("Crop")) Result = EventPlayerSubmissive(EventStage);
-			if ((EventType == "Tickle") && (ActorGetValue(ActorLove) >= 0)) Result = EventPlayerSubmissive(EventStage);
-			if ((EventType == "Slap") && (ActorGetValue(ActorLove) <= 0)) Result = EventPlayerSubmissive(EventStage);
+			if ((EventType == "Tickle") && (ActorGetValue(ActorLove) >= -5)) Result = EventPlayerSubmissive(EventStage);
+			if ((EventType == "Slap") && (ActorGetValue(ActorLove) <= 5)) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "Masturbate") && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm")) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "Crop") && (PlayerHasInventory("Crop") || GameLogQuery("", Common_PlayerOwner, "HasCrop"))) Result = EventPlayerSubmissive(EventStage);
 

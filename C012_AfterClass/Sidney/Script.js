@@ -139,7 +139,7 @@ function C012_AfterClass_Sidney_Run() {
 	if (((C012_AfterClass_Sidney_CurrentStage >= 340) && (C012_AfterClass_Sidney_CurrentStage < 400)) || ((C012_AfterClass_Sidney_CurrentStage >= 291) && (C012_AfterClass_Sidney_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
 
 	// Draw the actor alone or with the player depending on the stage
-	if ((C012_AfterClass_Sidney_CurrentStage != 410) && (C012_AfterClass_Sidney_CurrentStage != 3931) && (C012_AfterClass_Sidney_CurrentStage != 3932) && (C012_AfterClass_Sidney_CurrentStage != 3933) && (C012_AfterClass_Sidney_CurrentStage != 632) && (C012_AfterClass_Sidney_CurrentStage != 633) && (C012_AfterClass_Sidney_CurrentStage != 634) && (C012_AfterClass_Sidney_CurrentStage != 662) && (C012_AfterClass_Sidney_CurrentStage != 663) && (C012_AfterClass_Sidney_CurrentStage != 791)) {
+	if ((C012_AfterClass_Sidney_CurrentStage != 410) && (C012_AfterClass_Sidney_CurrentStage != 3931) && (C012_AfterClass_Sidney_CurrentStage != 3932) && (C012_AfterClass_Sidney_CurrentStage != 3933) && (C012_AfterClass_Sidney_CurrentStage != 632) && (C012_AfterClass_Sidney_CurrentStage != 633) && (C012_AfterClass_Sidney_CurrentStage != 634) && (C012_AfterClass_Sidney_CurrentStage != 662) && (C012_AfterClass_Sidney_CurrentStage != 663) && (C012_AfterClass_Sidney_CurrentStage != 791) && (C012_AfterClass_Sidney_CurrentStage != 194)) {
 		if (((C012_AfterClass_Sidney_CurrentStage >= 3090) && (C012_AfterClass_Sidney_CurrentStage <= 3099)) || ((C012_AfterClass_Sidney_CurrentStage >= 3901) && (C012_AfterClass_Sidney_CurrentStage <= 3999))) {
 			DrawActor("Player", 475, 0, 1);
 			DrawActor(CurrentActor, 750, 0, 1);
@@ -636,7 +636,7 @@ function C012_AfterClass_Sidney_TestEnslaveSidney() {
 		else if (ActorGetValue(ActorCloth) == "Naked") { C012_AfterClass_Sidney_CurrentStage = 291; ActorSetPose("Shy"); }
 		else C012_AfterClass_Sidney_CurrentStage = 290;
 		OverridenIntroText = GetText("AcceptCollar");
-	} else LeaveIcon = "";
+	} else LeaveIcon = "Leave";
 }
 
 // Chapter 12 After Class - When the player gives up on enslaving Sidney

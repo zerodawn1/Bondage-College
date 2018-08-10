@@ -24,7 +24,7 @@ var C012_AfterClass_Amanda_DateSarahAvail = false;
 
 // Amanda can only check her notes if she's dressed
 function C012_AfterClass_Amanda_CheckNotes() {
-	if ((ActorGetValue(ActorCloth) == "") || (ActorGetValue(ActorCloth) == "Clothed")) ActorSetPose("CheckNotes");
+	if ((ActorGetValue(ActorCloth) == "") || (ActorGetValue(ActorCloth) == "Clothed") || (ActorGetValue(ActorCloth) == "Pajamas")) ActorSetPose("CheckNotes");
 	LeaveIcon = "Leave";
 }
 
@@ -137,7 +137,7 @@ function C012_AfterClass_Amanda_Run() {
 	if (((C012_AfterClass_Amanda_CurrentStage >= 392) && (C012_AfterClass_Amanda_CurrentStage < 400)) || ((C012_AfterClass_Amanda_CurrentStage >= 293) && (C012_AfterClass_Amanda_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
 	
 	// Draw the actor alone or with the player depending on the stage
-	if ((C012_AfterClass_Amanda_CurrentStage != 410) && (C012_AfterClass_Amanda_CurrentStage != 3931) && (C012_AfterClass_Amanda_CurrentStage != 3932) && (C012_AfterClass_Amanda_CurrentStage != 3933) && (C012_AfterClass_Amanda_CurrentStage != 632) && (C012_AfterClass_Amanda_CurrentStage != 633) && (C012_AfterClass_Amanda_CurrentStage != 634) && (C012_AfterClass_Amanda_CurrentStage != 791)) {
+	if ((C012_AfterClass_Amanda_CurrentStage != 410) && (C012_AfterClass_Amanda_CurrentStage != 3931) && (C012_AfterClass_Amanda_CurrentStage != 3932) && (C012_AfterClass_Amanda_CurrentStage != 3933) && (C012_AfterClass_Amanda_CurrentStage != 632) && (C012_AfterClass_Amanda_CurrentStage != 633) && (C012_AfterClass_Amanda_CurrentStage != 634) && (C012_AfterClass_Amanda_CurrentStage != 791) && (C012_AfterClass_Amanda_CurrentStage != 194)) {
 		if (((C012_AfterClass_Amanda_CurrentStage >= 3090) && (C012_AfterClass_Amanda_CurrentStage <= 3099)) || ((C012_AfterClass_Amanda_CurrentStage >= 3901) && (C012_AfterClass_Amanda_CurrentStage <= 3999))) {
 			DrawActor("Player", 475, 0, 1);
 			DrawActor(CurrentActor, 750, 0, 1);
@@ -780,7 +780,6 @@ function C012_AfterClass_Amanda_StartMasturbate() {
 			C012_AfterClass_Amanda_CurrentStage = 640;
 			OverridenIntroText = GetText("StartMasturbateAmanda");
 			LeaveIcon = "";
-			if (!ActorIsGagged() && !ActorIsRestrained()) ActorSetPose("StandPleasure");
 		} else OverridenIntroText = GetText("MasturbateNotInTheMood");
 	}
 }
@@ -790,7 +789,7 @@ function C012_AfterClass_Amanda_Masturbate(Factor, CanClimax) {
 	CurrentTime = CurrentTime + 50000;
 	C012_AfterClass_Amanda_MasturbateCount = C012_AfterClass_Amanda_MasturbateCount + Factor;
 	if (C012_AfterClass_Amanda_MasturbateCount < 0) C012_AfterClass_Amanda_MasturbateCount = 0;
-	if ((C012_AfterClass_Amanda_MasturbateCount >= ActorHasInventory("VibratingEgg") ? 5 : 7) && CanClimax && ActorIsRestrained()) {
+	if ((C012_AfterClass_Amanda_MasturbateCount >= (ActorHasInventory("VibratingEgg") ? 5 : 7)) && CanClimax && ActorIsRestrained()) {
 		C012_AfterClass_Amanda_CurrentStage = 641;
 		OverridenIntroText = GetText("ReadyForOrgasm");
 	}
@@ -844,6 +843,7 @@ function C012_AfterClass_Amanda_StartDating() {
 	CurrentTime = CurrentTime + 50000;
 	Common_PlayerLover = "Amanda";
 	Common_ActorIsLover = true;
+	C012_AfterClass_Amanda_CalcParams();
 	C012_AfterClass_Amanda_AllowSexAfterDate = (!Common_PlayerChaste && !ActorIsChaste());
 }
 

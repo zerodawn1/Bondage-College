@@ -49,7 +49,8 @@ function C012_AfterClass_Wardrobe_Change(NewCloth) {
 			// Changing might be blocked by the player Mistress, if so we jump to a very angry Owner
 			if (GameLogQuery(CurrentChapter, "", "EventBlockChanging") && (C012_AfterClass_Dorm_Guest.indexOf(Common_PlayerOwner) >= 0)) {
 				CurrentTime = CurrentTime + 50000;
-				C012_AfterClass_Sidney_CurrentStage = 3800;
+				if (Common_PlayerOwner == "Sidney") C012_AfterClass_Sidney_CurrentStage = 3800;
+				if (Common_PlayerOwner == "Amanda") C012_AfterClass_Amanda_CurrentStage = 3800;
 				SetScene(CurrentChapter, Common_PlayerOwner);
 				ActorSetPose("Angry");
 				LeaveIcon = "";

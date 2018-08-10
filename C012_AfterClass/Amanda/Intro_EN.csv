@@ -27,9 +27,10 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 120,0,0,,,Dorm.jpg
 121,0,0,,,Dorm.jpg
 122,0,0,,,Dorm.jpg
+123,0,0,,,Dorm.jpg
 130,0,0,,,Dorm.jpg
 140,0,0,,,Dorm.jpg
-150,0,0,,,StartDating.jpg
+150,0,0,,,Dorm.jpg
 160,0,0,,,StartDating.jpg
 170,0,0,,,Dorm.jpg
 190,0,0,,,Dorm.jpg
@@ -128,8 +129,8 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 3110,0,0,,I will look in your items to|find something to restrain you.,Dorm.jpg
 3120,0,0,,I will look in your items to|find something to silence you.,Dorm.jpg
 3130,0,0,,"Yes, let me help you my subbie.|(She releases you and smiles.)",Dorm.jpg
-3140,0,0,,A good subbie doesn't need keys.|So you understand why I'll take them.,Dorm.jpg
-3150,0,0,,A good subbie doesn't need a crop.|So you understand why I'll take it.,Dorm.jpg
+3140,0,0,,A good subbie doesn't need keys.|So you understand why I'll take them?,Dorm.jpg
+3150,0,0,,A good subbie doesn't need a crop.|So you understand why I'll take it?,Dorm.jpg
 3160,0,0,,What is that pink object in your bag?|Is that a vibrating egg my subbie?,Dorm.jpg
 3160,0,0,HasEgg,What is that pink object in your bag?|Is it the same type of egg you used on me?,Dorm.jpg
 3161,0,0,,,Dorm.jpg
