@@ -88,13 +88,12 @@ function C012_AfterClass_Sidney_Load() {
 	} else {
 		
 		// If the player is grounded
-		if (GameLogQuery(CurrentChapter, CurrentActor, "EventGrounded") && Common_ActorIsOwner) {
+		if (GameLogQuery(CurrentChapter, "", "EventGrounded")) {
 			
 			// Skip to the punishment end phase, no talking while being grounded
 			C012_AfterClass_Sidney_AllowLeave();
 			C012_AfterClass_Sidney_CurrentStage = 3999;
-			Common_PlayerPose = "TwoRopesPunishment";
-			OverridenIntroText = GetText("StillGrounded");
+			C012_AfterClass_Dorm_SetPunishmentPose();
 
 		} else {
 

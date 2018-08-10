@@ -4,8 +4,20 @@ var C012_AfterClass_Dorm_PlayerGrounded = false;
 var C012_AfterClass_Dorm_SidneyExitTime = 0;
 var C012_AfterClass_Dorm_SidneyReturnTime = 0;
 
+// Sets the correct punishment pose depending on the player Mistess
+function C012_AfterClass_Dorm_SetPunishmentPose() {
+	if (GameLogQuery(CurrentChapter, "", "EventGrounded")) {
+		if (Common_PlayerOwner == "Sidney") Common_PlayerPose = "TwoRopesPunishment";
+		if (Common_PlayerOwner == "Amanda") Common_PlayerPose = "HogtiePunishment";
+		if (CurrentScreen != "Dorm") {
+			if (CurrentScreen == Common_PlayerOwner) OverridenIntroText = GetText("StillGrounded");
+			else OverridenIntroText = GetText("StillGroundedByOther");
+		}
+	}
+}
+
 // Draw the other actors that are not the current actor in he background
-function C012_AfterClass_Dorm_DrawOtherActors() {	
+function C012_AfterClass_Dorm_DrawOtherActors() {
 	var Pos = 0;
 	for (var A = 0; A < C012_AfterClass_Dorm_Guest.length; A++)
 		if (CurrentActor != C012_AfterClass_Dorm_Guest[A]) {
@@ -59,6 +71,10 @@ function C012_AfterClass_Dorm_Load() {
 	Common_SelfBondageAllowed = true;
 	C012_AfterClass_Bed_Partner = "";
 
+	// Loads the actor CSV text in advance
+	ReadCSV("CurrentText", CurrentChapter, "Sidney", "Text", GetWorkingLanguage());
+	ReadCSV("CurrentText", CurrentChapter, "Amanda", "Text", GetWorkingLanguage());
+
 	// Owners will not stay naked
 	if ((Common_PlayerOwner == "Sidney") && (ActorSpecificGetValue("Sidney", ActorCloth) == "Naked")) ActorSpecificSetCloth("Sidney", "Shorts");
 	if ((Common_PlayerOwner == "Amanda") && (ActorSpecificGetValue("Amanda", ActorCloth) == "Naked")) ActorSpecificSetCloth("Amanda", "");
@@ -74,9 +90,8 @@ function C012_AfterClass_Dorm_Load() {
 	// If the player is grounded, the dorm is mostly deactivated until the timer runs out
 	C012_AfterClass_Dorm_PlayerGrounded = GameLogQuery(CurrentChapter, "", "EventGrounded");
 	Common_PlayerPose = "";
-	if (C012_AfterClass_Dorm_PlayerGrounded && (Common_PlayerOwner == "Sidney")) Common_PlayerPose = "TwoRopesPunishment";
-	if (C012_AfterClass_Dorm_PlayerGrounded && (Common_PlayerOwner == "Amanda")) Common_PlayerPose = "HogtiePunishment";
 	if ((Common_PlayerPose == "") && GameLogQuery(CurrentChapter, "", "EventSpanked") && !Common_PlayerRestrained && !Common_PlayerGagged && Common_PlayerNaked) Common_PlayerPose = "Spanked";
+	C012_AfterClass_Dorm_SetPunishmentPose();
 	
 	// Resets the other locations from the Dorm
 	C012_AfterClass_Pub_CurrentStage = 0;
@@ -95,14 +110,16 @@ function C012_AfterClass_Dorm_Run() {
 	
 	// If grounding is over, we go to the owner
 	if (C012_AfterClass_Dorm_PlayerGrounded && !GameLogQuery(CurrentChapter, "", "EventGrounded") && (C012_AfterClass_Sidney_CurrentStage != 400)) {
-		C012_AfterClass_Sidney_CurrentStage = 3915;
+		if (Common_PlayerOwner == "Sidney") C012_AfterClass_Sidney_CurrentStage = 3915;
+		if (Common_PlayerOwner == "Amanda") C012_AfterClass_Amanda_CurrentStage = 3915;
 		SetScene(CurrentChapter, Common_PlayerOwner);
 		LeaveIcon = "";
 	}
 	
 	// If the player owner wants to talk to the player
 	if (!C012_AfterClass_Dorm_PlayerGrounded && (Common_PlayerOwner != "") && (C012_AfterClass_Dorm_Guest.indexOf(Common_PlayerOwner) >= 0) && !GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") && !GameLogQuery(CurrentChapter, CurrentActor, "EventGenericNext")) {
-		C012_AfterClass_Sidney_CurrentStage = 450;
+		if (Common_PlayerOwner == "Sidney") C012_AfterClass_Sidney_CurrentStage = 450;
+		if (Common_PlayerOwner == "Amanda") C012_AfterClass_Amanda_CurrentStage = 450;
 		SetScene(CurrentChapter, Common_PlayerOwner);
 		LeaveIcon = "";
 	}
