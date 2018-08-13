@@ -72,6 +72,7 @@ function C012_AfterClass_Amanda_Load() {
 	LoadInteractions();
 	ActorLoad("Amanda", "Dorm");
 	Common_PlayerPose = "";
+	if (C012_AfterClass_Amanda_CurrentStage == 3915) Common_PlayerPose = "HogtiePunishment";
 	
 	// Amanda's parameters
 	C012_AfterClass_Amanda_CalcParams();	
@@ -136,7 +137,7 @@ function C012_AfterClass_Amanda_Run() {
 	if (((C012_AfterClass_Amanda_CurrentStage >= 392) && (C012_AfterClass_Amanda_CurrentStage < 400)) || ((C012_AfterClass_Amanda_CurrentStage >= 293) && (C012_AfterClass_Amanda_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
 	
 	// Draw the actor alone or with the player depending on the stage
-	if ((C012_AfterClass_Amanda_CurrentStage != 410) && (C012_AfterClass_Amanda_CurrentStage != 3931) && (C012_AfterClass_Amanda_CurrentStage != 3932) && (C012_AfterClass_Amanda_CurrentStage != 3933) && (C012_AfterClass_Amanda_CurrentStage != 632) && (C012_AfterClass_Amanda_CurrentStage != 633) && (C012_AfterClass_Amanda_CurrentStage != 634) && (C012_AfterClass_Amanda_CurrentStage != 791) && (C012_AfterClass_Amanda_CurrentStage != 194)) {
+	if ((C012_AfterClass_Amanda_CurrentStage != 410) && (C012_AfterClass_Amanda_CurrentStage != 3932) && (C012_AfterClass_Amanda_CurrentStage != 632) && (C012_AfterClass_Amanda_CurrentStage != 633) && (C012_AfterClass_Amanda_CurrentStage != 634) && (C012_AfterClass_Amanda_CurrentStage != 791) && (C012_AfterClass_Amanda_CurrentStage != 194)) {
 		if (((C012_AfterClass_Amanda_CurrentStage >= 3090) && (C012_AfterClass_Amanda_CurrentStage <= 3099)) || ((C012_AfterClass_Amanda_CurrentStage >= 3901) && (C012_AfterClass_Amanda_CurrentStage <= 3999))) {
 			DrawActor("Player", 475, 0, 1);
 			DrawActor(CurrentActor, 750, 0, 1);
@@ -368,13 +369,13 @@ function C012_AfterClass_Amanda_ForceChangePlayer(NewCloth) {
 
 // Chapter 12 After Class - As a Domme, Amanda can force the player into some random bondage
 function C012_AfterClass_Amanda_ForceRandomBondage(BondageType) {
-	if ((BondageType == "Full") || (BondageType == "Gag")) {
+	if ((BondageType == "Full") || (BondageType == "Hug") || (BondageType == "Gag")) {
 		PlayerRandomGag();
-		if (!Common_PlayerGagged) OverridenIntroText = GetText("CantFindRestrain");
+		if (!Common_PlayerGagged && (BondageType == "Gag")) OverridenIntroText = GetText("CantFindRestrain" + (BondageType == "Hug") ? "ForHug" : "");
 	}
-	if ((BondageType == "Full") || (BondageType == "Restrain")) {
+	if ((BondageType == "Full") || (BondageType == "Hug") || (BondageType == "Restrain")) {
 		PlayerRandomRestrain();
-		if (!Common_PlayerRestrained) OverridenIntroText = GetText("CantFindRestrain");
+		if (!Common_PlayerRestrained) OverridenIntroText = GetText("CantFindRestrain" + (BondageType == "Hug") ? "ForHug" : "");
 	}
 	CurrentTime = CurrentTime + 50000;
 }
@@ -936,4 +937,14 @@ function C012_AfterClass_Amanda_TestNaked() {
 		OverridenIntroText = "";
 		Common_PlayerPose = "BackShy";
 	}
+}
+
+// Chapter 12 After Class - Tests if Amanda will release the player after the bondage hug
+function C012_AfterClass_Amanda_ReleaseAfterBondageHug() {
+	if (EventRandomChance("Love")) {
+		OverridenIntroText = GetText("ReleasePlayerFromBondageHug");
+		PlayerReleaseBondage();
+		CurrentTime = CurrentTime + 50000;
+	}
+	C012_AfterClass_Amanda_AllowLeave();
 }

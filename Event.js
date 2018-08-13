@@ -2,7 +2,7 @@ var EventLastRandomType = "";
 var EventActivityCurrent = "";
 var EventActivityCount = 0;
 var EventActivityMaxCount = 0;
-var EventList = ["Naked", "Underwear", "SchoolUniform", "RedBikini", "BlackDress", "WhiteLingerie", "FullBondage", "Restrain", "Gag", "Release", "ConfiscateKeys", "ConfiscateCrop", "VibratingEgg", "Tickle", "Slap", "Masturbate", "Crop"];
+var EventList = ["Naked", "Underwear", "SchoolUniform", "RedBikini", "BlackDress", "WhiteLingerie", "FullBondage", "BondageHug", "Restrain", "Gag", "Release", "ConfiscateKeys", "ConfiscateCrop", "VibratingEgg", "Tickle", "Slap", "Masturbate", "Crop"];
 var EventPunishmentList = ["Grounded", "Belted", "Spanked", "SleepBoundAndGagged"];
 
 // Returns TRUE if the event is accepted
@@ -83,6 +83,7 @@ function EventRandomPlayerSubmissive() {
 			if ((EventType == "SchoolUniform") && !Common_PlayerRestrained && (!Common_PlayerClothed || (Common_PlayerCostume != ""))) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "RedBikini") && !Common_PlayerRestrained && (Common_PlayerCostume != "RedBikini") && !Common_PlayerChaste) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "WhiteLingerie") && !Common_PlayerRestrained && (Common_PlayerCostume != "WhiteLingerie") && !Common_PlayerChaste) Result = EventPlayerSubmissive(EventStage);
+			if ((EventType == "BlackDress") && !Common_PlayerRestrained && (Common_PlayerCostume != "BlackDress")) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "FullBondage") && !Common_PlayerRestrained && !Common_PlayerGagged) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "Restrain") && !Common_PlayerRestrained) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "Gag") && !Common_PlayerGagged) Result = EventPlayerSubmissive(EventStage);
@@ -90,8 +91,9 @@ function EventRandomPlayerSubmissive() {
 			if ((EventType == "VibratingEgg") && PlayerHasInventory("VibratingEgg") && !PlayerHasLockedInventory("VibratingEgg") && !Common_PlayerChaste) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "ConfiscateKeys") && PlayerHasInventory("CuffsKey")) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "ConfiscateCrop") && PlayerHasInventory("Crop")) Result = EventPlayerSubmissive(EventStage);
-			if ((EventType == "Tickle") && (ActorGetValue(ActorLove) >= -5)) Result = EventPlayerSubmissive(EventStage);
-			if ((EventType == "Slap") && (ActorGetValue(ActorLove) <= 5)) Result = EventPlayerSubmissive(EventStage);
+			if (EventType == "BondageHug") Result = EventPlayerSubmissive(EventStage);
+			if (EventType == "Tickle") Result = EventPlayerSubmissive(EventStage);
+			if (EventType == "Slap") Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "Masturbate") && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm")) Result = EventPlayerSubmissive(EventStage);
 			if ((EventType == "Crop") && (PlayerHasInventory("Crop") || GameLogQuery("", Common_PlayerOwner, "HasCrop"))) Result = EventPlayerSubmissive(EventStage);
 

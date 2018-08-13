@@ -70,6 +70,7 @@ function C012_AfterClass_Sidney_Load() {
 	LoadInteractions();
 	ActorLoad("Sidney", "Dorm");
 	Common_PlayerPose = "";
+	if (C012_AfterClass_Sidney_CurrentStage == 3915) Common_PlayerPose = "TwoRopesPunishment";
 	
 	// At stage 400, Sidney is leaving
 	if (C012_AfterClass_Sidney_CurrentStage == 400) { ActorUngag(); LeaveIcon = ""; }
@@ -377,7 +378,7 @@ function C012_AfterClass_Sidney_ForceChangePlayer(NewCloth) {
 function C012_AfterClass_Sidney_ForceRandomBondage(BondageType) {
 	if ((BondageType == "Full") || (BondageType == "Gag")) {
 		PlayerRandomGag();
-		if (!Common_PlayerGagged) OverridenIntroText = GetText("CantFindRestrain");
+		if (!Common_PlayerGagged && (BondageType == "Gag")) OverridenIntroText = GetText("CantFindRestrain");
 	}
 	if ((BondageType == "Full") || (BondageType == "Restrain")) {
 		PlayerRandomRestrain();
