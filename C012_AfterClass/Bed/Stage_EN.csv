@@ -15,15 +15,15 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 110,0,0,,@Stop masturbating.,"You calm down, take deep breathes|and stop everything before your climax.",100,0,0,StopMasturbate()
 120,0,0,,@Continue to|masturbate.,"Just to make sure you're satisfied,|you start touching yourself again.",100,0,0,
 120,0,0,,@Stop and get up.,You get up from your bed|feeling relaxed and satisfied.,0,0,0,StopMasturbate()
-200,0,0,,(Kiss her lips.),(You gently kiss her lips but she doesn't|enjoy it much and masturbates herself.),200,0,0,"Sex(-1, 1, false)"
-200,0,0,,(Kiss her breast.),(You kiss each other breast but it|seems to pleasure you more than her.),200,0,0,"Sex(0, 1, false)"
-200,0,0,,(Massage her breast.),(You massage each other breast but it|seems to pleasure you more than her.),200,0,0,"Sex(0, 1, false)"
-200,0,0,,(Pinch her nipple.),(You pinch each other nipples and|both jump and scream from the pain.),200,0,0,"Sex(1, 1, false)"
-200,0,0,,(Play with her clitoris.),(You slowly play with each|other clitoris and moan softly.),200,0,0,"Sex(1, 1, true)"
-200,0,0,,(Caress her pussy.),(You gently caress each other|pussy lips and moan softly.),200,0,0,"Sex(1, 1, true)"
-200,0,0,,(Slide a finger in.),(You both slide a finger in to masturbate|each other and she seems to really enjoy that.),200,0,0,"Sex(2, 1, true)"
-200,0,0,,(Eat her.),(You both eat other in a 69 fashion|and she seems to really enjoy that.),200,0,0,"Sex(2, 1, true)"
-200,0,0,,(Fist her.),(You fist her while she masturbates you.|She screams and shivers from the ecstasy.),200,0,0,"Sex(3, 1, true)"
+200,0,0,,(Kiss her lips.),(You gently kiss her lips but she doesn't|enjoy it much and masturbates herself.),200,0,0,"Sex(-1, 1, false, false)"
+200,0,0,,(Kiss her breast.),(You kiss each other breast but it|seems to pleasure you more than her.),200,0,0,"Sex(0, 1, false, false)"
+200,0,0,,(Massage her breast.),(You massage each other breast but it|seems to pleasure you more than her.),200,0,0,"Sex(0, 1, false, false)"
+200,0,0,,(Pinch her nipple.),(You pinch each other nipples and|both jump and scream from the pain.),200,0,0,"Sex(1, 1, false, false)"
+200,0,0,,(Play with her clitoris.),(You slowly play with each|other clitoris and moan softly.),200,0,0,"Sex(1, 1, true, false)"
+200,0,0,,(Caress her pussy.),(You gently caress each other|pussy lips and moan softly.),200,0,0,"Sex(1, 1, true, false)"
+200,0,0,,(Slide a finger in.),(You both slide a finger in to masturbate|each other and she seems to really enjoy that.),200,0,0,"Sex(2, 1, true, false)"
+200,0,0,,(Eat her.),(You both eat other in a 69 fashion|and she seems to really enjoy that.),200,0,0,"Sex(2, 1, true, false)"
+200,0,0,,(Fist her.),(You fist her while she masturbates you.|She screams and shivers from the ecstasy.),200,0,0,"Sex(3, 1, true, false)"
 200,0,0,,That's enough.|(Get up from bed.),We stop now?  That was quick.,200,0,0,LeaveBedFromSex()
 210,0,0,,(Rest close to her.),(You give each other a big hug.)|Shit!  That was fucking great!,220,0,0,AfterSex()
 210,0,0,Common_ActorIsLover,(Kiss her neck.),(You kiss her neck while she recovers|her breath.)  That was great sweetie!,220,0,0,AfterSex()
@@ -38,4 +38,27 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 220,0,0,Common_ActorIsLover,Would you like to sleep|like that with me?,Sure sweetheart.  It will be|fucking nice to sleep together.,230,0,0,
 230,0,0,,Sleep with Sidney.|(End the day.),,230,0,0,"EndChapter(""Lover"")"
 230,0,0,,Maybe later my love.|(Get up from bed.),"Yeah, sleeping is for losers anyway.",900,0,0,OffBed()
+300,0,0,,(Caress her legs.),(You slowly caresses each other|her legs in a loving embrace.),300,0,0,"Sex(0, 1, false, false)"
+300,0,0,,(Kiss her legs.),(You kiss each other legs slowly.|She moans silently with each contact.),300,0,0,"Sex(1, 1, false, false)"
+300,0,0,,(Kiss her pussy.),(You kiss each other pussy lips.|Humidity seems to be rising.),300,0,0,"Sex(1, 1, false, true)"
+300,0,0,,(Nuzzle her clitoris.),(She laughs and shivers as|you nuzzle each other clitoris.),300,0,0,"Sex(1, 1, false, true)"
+300,0,0,,(Caress her pussy.),(She moans loudly as you both|caress each other's pussy.),300,0,0,"Sex(2, 1, true, false)"
+300,0,0,,(Lick her pussy.),(She shivers strongly as you|both lick each other's pussy.),300,0,0,"Sex(2, 1, true, true)"
+300,0,0,,(Slide a finger in.),(You slide a finger inside each other|and enjoy some kinky exploration.),300,0,0,"Sex(1, 1, false, false)"
+300,0,0,,(Eat her.),(She moans and gets tremendous sexual|spasms as you eat each other lovingly.),300,0,0,"Sex(3, 1, true, true)"
+300,0,0,,(Fist her.),(You try to insert your fist|but only end up hurting her.),300,0,0,"Sex(-1, 1, false, false)"
+300,0,0,,That's enough.|(Get up from bed.),We finish right now?|It was kind of fast.,300,0,0,LeaveBedFromSex()
+310,0,0,,(Rest on her.),(You rest on her while you hug each other.)|Sexual heaven is such a wonderful place. ,320,0,0,AfterSex()
+310,0,0,,(Kiss her feet.),(You kiss her feet gently while she giggles.)|Sexual heaven is such a wonderful place. ,320,0,-1,AfterSex()
+310,0,0,Common_ActorIsLover,I love you Amanda.,(She smiles and hugs you close.)|I love you COMMON_PLAYERNAME.,320,1,0,AfterSex()
+310,0,0,,It was wonderful.,(She nods and hugs you tightly.)|Sexual heaven is such a great place. ,320,1,0,AfterSex()
+310,0,0,,You're a good fuck.,(She sighs.)  I understand what you mean|but there are much better ways to say it.,320,-1,1,AfterSex()
+310,0,0,,I'm speechless.,Same here.  Sexual heaven|is such a wonderful place. ,320,0,0,AfterSex()
+320,0,0,,All good things|must end I guess.,"Yes, well said.  (You both get up.)",900,0,0,OffBed()
+320,0,0,,(Stay silent and get up.),(You both stay silent and get up.),900,0,0,OffBed()
+320,0,0,Common_ActorIsOwned,Get off the bed slave.,"Yes Mistress, of course.|(You both get up promptly.)",900,0,0,OffBed()
+320,0,0,Common_ActorIsOwner,We get up Mistress?,Yes my subbie.  (You both get up.),900,0,0,OffBed()
+320,0,0,Common_ActorIsLover,Would you like to sleep|like that with me?,"Yes my love, it's a wonderful idea.|I would sleep like an angel in your arms.",330,0,0,
+330,0,0,,Sleep with Amanda.|(End the day.),,330,0,0,"EndChapter(""Lover"")"
+330,0,0,,Maybe later my love.|(Get up from bed.),"Yes, let's enjoy our first|night together some more.",900,0,0,OffBed()
 900,0,0,,(Back to the dorm.),,900,0,0,BackToDorm()

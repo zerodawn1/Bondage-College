@@ -15,8 +15,8 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 0,0,0,IsGagged,Uuuumph!,Dorm.jpg
 10,0,0,,,Dorm.jpg
 20,0,0,,,Dorm.jpg
-100,0,0,,(She blushes.)  Thanks a lot.|You also look magnificient.,Dorm.jpg
-100,0,0,Common_ActorIsOwned,(She blushes.)  Thanks Mistress.|You also look magnificient tonight.,Dorm.jpg
+100,0,0,,(She blushes.)  Thanks a lot.|You also look magnificent.,Dorm.jpg
+100,0,0,Common_ActorIsOwned,(She blushes.)  Thanks Mistress.|You also look magnificent tonight.,Dorm.jpg
 100,0,0,Common_ActorIsOwner,Thanks my submissive.|You also look wonderful.,Dorm.jpg
 105,0,0,,,Dorm.jpg
 106,0,0,,,Dorm.jpg
@@ -97,10 +97,10 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 650,0,0,Common_ActorIsLover,Of course my love.,Dorm.jpg
 650,0,0,Common_ActorIsOwned,Of course Mistress.,Dorm.jpg
 650,0,0,Common_ActorIsOwner,"Yes my subbie, we can make love.",Dorm.jpg
-660,0,0,,"It's getting late, is it alright|if I go get my pajamas?",Dorm.jpg
+660,0,0,,It's getting late.  Is it alright|if I go get my pajamas?,Dorm.jpg
 660,0,0,Common_ActorIsOwned,"Mistress, is it alright|if I go get my pajamas?",Dorm.jpg
 661,0,0,,,Dorm.jpg
-670,0,0,,"I think I would be more comfy in|my pajamas, it's ok if I change here?",Dorm.jpg
+670,0,0,,I think I would be more comfy in|my pajamas.  It's ok if I change here?,Dorm.jpg
 671,0,0,,,Dorm.jpg
 700,0,0,,Why is Sidney here?,Dorm.jpg
 700,0,0,Common_ActorIsLover,"My love, why is Sidney here?",Dorm.jpg

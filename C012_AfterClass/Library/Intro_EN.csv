@@ -1,12 +1,12 @@
 Stage,LoveReq,SubReq,VarReq,IntroText,Image
 0,0,0,EmptyLibrary,The college library is pretty empty at this hour.|It might be a quiet place to do your homework.,Library.jpg
-0,0,0,!EmptyLibrary,There's a few students in the library.|Who would you like to meet?,Library.jpg
-100,0,0,,Hi girl.  (She looks at you and smirks.)|I guess you need help with an homework.,Chair.jpg
-100,10,0,,It's great to see you COMMON_PLAYERNAME.|I guess you need help with an homework.,Chair.jpg
-100,-10,0,,"Oh, it's you.  (She seems disappointed.)|I guess you need help with an homework.",Chair.jpg
+0,0,0,!EmptyLibrary,There are a few students in the library.|Who would you like to meet?,Library.jpg
+100,0,0,,Hi girl.  (She looks at you and smirks.)|I guess you need help with homework.,Chair.jpg
+100,10,0,,It's great to see you COMMON_PLAYERNAME.|I guess you need help with homework.,Chair.jpg
+100,-10,0,,"Oh, it's you.  (She seems disappointed.)|I guess you need help with homework.",Chair.jpg
 110,0,0,,Hi Miss COMMON_PLAYERNAME.|What brings you to the library?,Chair.jpg
-120,0,0,,"I'm studying, it's not|a good time to talk.",Chair.jpg
-130,0,0,,It's great to see you again!|You're here for a homework?,Chair.jpg
+120,0,0,,I'm studying.  It's not|a good time to talk.,Chair.jpg
+130,0,0,,It's great to see you again!|You're here for homework?,Chair.jpg
 140,0,0,,Oh my god!  COMMON_PLAYERNAME!|Can you unlock the belt now?,Chair.jpg
 150,0,0,,"This is very embarrassing.  I wasn't able|to remove your egg, can you help me?",Chair.jpg
 160,0,0,,(She giggles.)  Did you enjoy your|time in the locker this afternoon?,Chair.jpg

@@ -4,18 +4,25 @@ var C012_AfterClass_Bed_PleasureDown = 0;
 var C012_AfterClass_Bed_MasturbationRequired = 0;
 var C012_AfterClass_Bed_MistressApproveMasturbate = "";
 var C012_AfterClass_Bed_Partner = "";
+var C012_AfterClass_Bed_ShowCollar = false;
 var C012_AfterClass_Bed_SexPleasurePlayer = 0;
 var C012_AfterClass_Bed_SexPleasurePartner = 0;
 
 // Chapter 12 After Class - Prepares the bed image that will be rendered for sex scenes
-function C012_AfterClass_Bed_PrepareImage(PartnerOrgasm, PlayerOrgasm) {
+function C012_AfterClass_Bed_PrepareImage(PartnerOrgasm, PlayerOrgasm, WorkAnim) {
 	var ImageName = "Sex" + CurrentActor;
-	if (ActorHasInventory("Collar")) ImageName = ImageName + "Collar";
-	else ImageName = ImageName + "NoCollar";	
+	if (C012_AfterClass_Bed_ShowCollar) {
+		if (ActorHasInventory("Collar")) ImageName = ImageName + "Collar";
+		else ImageName = ImageName + "NoCollar";
+	}
 	if (PartnerOrgasm) ImageName = ImageName + "Orgasm";
-	if (PlayerHasLockedInventory("Collar")) ImageName = ImageName + "PlayerCollar";
-	else ImageName = ImageName + "PlayerNoCollar";
+	ImageName = ImageName + "Player";
+	if (C012_AfterClass_Bed_ShowCollar) {
+		if (PlayerHasLockedInventory("Collar") && (CurrentActor != "Amanda")) ImageName = ImageName + "Collar";
+		else ImageName = ImageName + "NoCollar";
+	}
 	if (PlayerOrgasm) ImageName = ImageName + "Orgasm";
+	if (WorkAnim && !PlayerOrgasm && !PartnerOrgasm) ImageName = ImageName + "Work";
 	OverridenIntroImage = ImageName + ".jpg";
 }
 
@@ -41,6 +48,8 @@ function C012_AfterClass_Bed_Load() {
 		// With a partner, they can make love, some girls are a little harder to please
 		ActorLoad(C012_AfterClass_Bed_Partner, "Dorm");
 		if (C012_AfterClass_Bed_Partner == "Sidney") C012_AfterClass_Bed_CurrentStage = 200;
+		if (C012_AfterClass_Bed_Partner == "Amanda") C012_AfterClass_Bed_CurrentStage = 300;
+		C012_AfterClass_Bed_ShowCollar = (C012_AfterClass_Bed_Partner == "Sidney");
 		C012_AfterClass_Bed_PrepareImage(false, false);
 		C012_AfterClass_Bed_SexPleasurePartner = ActorHasInventory("VibratingEgg") ? 3 : 0;
 		C012_AfterClass_Bed_SexPleasurePlayer = PlayerHasLockedInventory("VibratingEgg") ? 3 : 0;
@@ -96,7 +105,8 @@ function C012_AfterClass_Bed_AllRelatedGuest() {
 			// If the player strips without being allowed, she gets punished
 			if (!Common_PlayerNaked && GameLogQuery(CurrentChapter, "", "EventBlockChanging")) {
 				CurrentTime = CurrentTime + 50000;
-				C012_AfterClass_Sidney_CurrentStage = 3800;
+				if (Common_PlayerOwner == "Sidney") C012_AfterClass_Sidney_CurrentStage = 3800;
+				if (Common_PlayerOwner == "Amanda") C012_AfterClass_Amanda_CurrentStage = 3800;
 				SetScene(CurrentChapter, Common_PlayerOwner);
 				ActorSetPose("Angry");
 				LeaveIcon = "";
@@ -137,7 +147,8 @@ function C012_AfterClass_Bed_StartMasturbate() {
 function C012_AfterClass_Bed_CheckMistress() {
 	if (C012_AfterClass_Bed_MistressApproveMasturbate == "NO") {
 		CurrentTime = CurrentTime + 50000;
-		C012_AfterClass_Sidney_CurrentStage = 3810;
+		if (Common_PlayerOwner == "Sidney") C012_AfterClass_Sidney_CurrentStage = 3810;
+		if (Common_PlayerOwner == "Amanda") C012_AfterClass_Amanda_CurrentStage = 3810;
 		SetScene(CurrentChapter, Common_PlayerOwner);
 		ActorSetPose("Angry");
 		LeaveIcon = "";
@@ -210,7 +221,7 @@ function C012_AfterClass_Bed_BackToDorm() {
 }
 
 // Chapter 12 After Class - Main sex event with the partenr, there's a pleasure factor for each and a flag to tell if an orgasm is possible or not
-function C012_AfterClass_Bed_Sex(PleasurePartner, PleasurePlayer, CanOrgasm) {
+function C012_AfterClass_Bed_Sex(PleasurePartner, PleasurePlayer, CanOrgasm, WorkAnim) {
 	
 	// Raise the level for both lovers
 	CurrentTime = CurrentTime + 50000;
@@ -252,7 +263,7 @@ function C012_AfterClass_Bed_Sex(PleasurePartner, PleasurePlayer, CanOrgasm) {
 	}
 
 	// Prepares the final image
-	C012_AfterClass_Bed_PrepareImage(PartnerOrgasm, PlayerOrgasm);
+	C012_AfterClass_Bed_PrepareImage(PartnerOrgasm, PlayerOrgasm, WorkAnim);
 
 }
 
