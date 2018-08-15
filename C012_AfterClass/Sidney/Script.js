@@ -101,7 +101,7 @@ function C012_AfterClass_Sidney_Load() {
 			// If there's a crossover between two actors
 			if ((C012_AfterClass_Sidney_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetAmanda") && (C012_AfterClass_Dorm_Guest.indexOf("Amanda") >= 0) && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged()) {
 				LeaveIcon = "";
-				if (ActorGetValue(ActorCloth) == "Shorts") ActorSetPose("Point");
+				if ((ActorGetValue(ActorCloth) == "Shorts") && !Common_ActorIsOwned) ActorSetPose("Point");
 				else ActorSetPose("");
 				C012_AfterClass_Sidney_CurrentStage = 700;
 				GameLogAdd("MetAmanda");

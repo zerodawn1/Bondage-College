@@ -137,7 +137,7 @@ function C012_AfterClass_Amanda_Run() {
 	if (((C012_AfterClass_Amanda_CurrentStage >= 392) && (C012_AfterClass_Amanda_CurrentStage < 400)) || ((C012_AfterClass_Amanda_CurrentStage >= 293) && (C012_AfterClass_Amanda_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
 	
 	// Draw the actor alone or with the player depending on the stage
-	if ((C012_AfterClass_Amanda_CurrentStage != 410) && (C012_AfterClass_Amanda_CurrentStage != 3932) && (C012_AfterClass_Amanda_CurrentStage != 632) && (C012_AfterClass_Amanda_CurrentStage != 633) && (C012_AfterClass_Amanda_CurrentStage != 634) && (C012_AfterClass_Amanda_CurrentStage != 791) && (C012_AfterClass_Amanda_CurrentStage != 194)) {
+	if ((C012_AfterClass_Amanda_CurrentStage != 410) && (C012_AfterClass_Amanda_CurrentStage != 3932) && (C012_AfterClass_Amanda_CurrentStage != 635) && (C012_AfterClass_Amanda_CurrentStage != 636) && (C012_AfterClass_Amanda_CurrentStage != 791) && (C012_AfterClass_Amanda_CurrentStage != 194)) {
 		if (((C012_AfterClass_Amanda_CurrentStage >= 3090) && (C012_AfterClass_Amanda_CurrentStage <= 3099)) || ((C012_AfterClass_Amanda_CurrentStage >= 3901) && (C012_AfterClass_Amanda_CurrentStage <= 3999))) {
 			DrawActor("Player", 475, 0, 1);
 			DrawActor(CurrentActor, 750, 0, 1);
@@ -217,6 +217,15 @@ function C012_AfterClass_Amanda_Click() {
 
 	}	
 
+	// Amanda can be restrained to pleasure the player on stage 633
+	if ((C012_AfterClass_Amanda_CurrentStage <= 633) && (ClickInv != "") && (ClickInv != "Player") && !Common_PlayerRestrained && !ActorIsRestrained()) {
+		if ((ClickInv == "Rope") || (ClickInv == "Cuffs") || (ClickInv == "Armbinder")) {
+			ActorApplyRestrain(ClickInv);
+			C012_AfterClass_Amanda_CalcParams();
+			C012_AfterClass_Amanda_CurrentStage = 634;
+		}
+	}
+	
 }
 
 // Chapter 12 After Class - Amanda can make love with the player if (Love + seduction * 2) >= 12 or >= 25 on the next time or Amanda is the player girlfriend/submissive
@@ -684,7 +693,9 @@ function C012_AfterClass_Amanda_TestPleasurePlayer() {
 // Chapter 12 After Class - When Amanda starts pleasuring the player (starts to count at 2 with a vibrating egg)
 function C012_AfterClass_Amanda_StartPleasurePlayer() {
 	PlayerClothes("Naked");
-	if (ActorIsChaste()) OverridenIntroImage = "AmandaPleasurePlayerChastity.jpg";
+	if (ActorHasInventory("Rope")) OverridenIntroImage = "AmandaRopePleasurePlayer.jpg";
+	else if (ActorHasInventory("Cuffs")) OverridenIntroImage = "AmandaCuffsPleasurePlayer.jpg";
+	else if (ActorHasInventory("Armbinder")) OverridenIntroImage = "AmandaArmbinderPleasurePlayer.jpg";
 	else OverridenIntroImage = "AmandaPleasurePlayer.jpg";
 	CurrentTime = CurrentTime + 50000;
 	if (PlayerHasLockedInventory("VibratingEgg")) C012_AfterClass_Amanda_PleasurePlayerCount = 2;
@@ -707,9 +718,9 @@ function C012_AfterClass_Amanda_PleasurePlayer() {
 		OverridenIntroText = GetText("OrgasmFromAmandaPleasure");
 		ActorAddOrgasm();
 		GameLogSpecificAddTimer(CurrentChapter, "Player", "NextPossibleOrgasm", PlayerHasLockedInventory("VibratingEgg") ? CurrentTime + 1800000 : CurrentTime + 3600000);
-		if (ActorIsChaste()) OverridenIntroImage = "AmandaPleasurePlayerChastityOrgasm.jpg";
-		else OverridenIntroImage = "AmandaPleasurePlayerOrgasm.jpg";
-		C012_AfterClass_Amanda_CurrentStage = 634;
+		if (PlayerHasLockedInventory("Collar")) OverridenIntroImage = "PlayerCollarCloseUpOrgasm.jpg";
+		else OverridenIntroImage = "PlayerCloseUpOrgasm.jpg";
+		C012_AfterClass_Amanda_CurrentStage = 636;
 		C012_AfterClass_Amanda_PleasurePlayerCount = 0;
 		C012_AfterClass_Amanda_PleasurePlayerSpeed = 0;
 	} else {
