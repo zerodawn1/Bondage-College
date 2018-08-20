@@ -52,7 +52,7 @@ function C012_AfterClass_Dorm_CalGuest() {
 	if (GameLogQuery(CurrentChapter, "Sidney", "EnterDormFromPub") && !GameLogQuery(CurrentChapter, "Sidney", "KickedOutFromDorm") && ((CurrentTime <= C012_AfterClass_Dorm_SidneyExitTime) || (CurrentTime >= C012_AfterClass_Dorm_SidneyReturnTime) || GameLogQuery(CurrentChapter, "Sidney", "BackFromRockShow") || ActorSpecificIsRestrained("Sidney"))) 
 		if (!GameLogQuery(CurrentChapter, "Sidney", "LoverBreakUp") || (ActorSpecificGetValue("Sidney", ActorOwner) == "Player"))
 			C012_AfterClass_Dorm_Guest.push("Sidney");
-	if (GameLogQuery(CurrentChapter, "Amanda", "EnterDormFromLibrary") && !GameLogQuery(CurrentChapter, "Amanda", "KickedOutFromDorm") && !GameLogQuery(CurrentChapter, "Amanda", "LeaveDormEarly"))
+	if ((GameLogQuery(CurrentChapter, "Amanda", "EnterDormFromLibrary") || GameLogQuery(CurrentChapter, "Amanda", "EnterDormFromRoommates")) && !GameLogQuery(CurrentChapter, "Amanda", "KickedOutFromDorm") && !GameLogQuery(CurrentChapter, "Amanda", "LeaveDormEarly"))
 		if (!GameLogQuery(CurrentChapter, "Amanda", "LoverBreakUp") || (ActorSpecificGetValue("Amanda", ActorOwner) == "Player"))
 			C012_AfterClass_Dorm_Guest.push("Amanda");
 	C012_AfterClass_Dorm_PlayerPos = 600 - C012_AfterClass_Dorm_Guest.length * 100;

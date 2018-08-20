@@ -1,3 +1,23 @@
 Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,,Knock at the door.,You knock at the door|but nobody answers.,0,0,0,Knock()
 0,0,0,,Return to your dorm.,,0,0,0,Leave()
+100,0,0,,How are you?,I'm doing well.  I'm relaxing at home.|What about you?  What's going on?,110,0,0,
+100,0,0,,What's going on?,"Not much, I'm relaxing at home.|And you?  What's going on tonight?",110,0,0,
+100,0,0,,Cute pajamas.,(She checks her pajamas and nods.)|So what's going on tonight?,110,0,0,
+100,0,0,,Sarah is here?,"No, I think she went to a club downtown.",100,0,0,
+100,0,0,,Sidney is here?,"No, I think she's at a concert.",100,0,0,
+100,0,0,,Jennifer is here?,"No, she might be running outside|or swimming at the college pool.",100,0,0,
+100,0,0,,"Sorry, wrong door.|(Leave the place.)",,100,0,0,Leave()
+110,0,0,,(Chit-chat and relax|with Amanda.),(You chit-chat about school and|get to know each other better.),110,0,0,ChitChat()
+110,0,0,,We could do a slumber|party at my place.,It's too late to setup a party.|We should do it another day.,110,0,0,TestInviteAmanda()
+110,0,0,,Do you want to go|relax at my place?,"No thanks, I would rather stay here.",110,0,0,TestInviteAmanda()
+110,0,0,,It's quiet in my dorm.|Can I chill with you?,"Sure, we can talk about school if you want.",110,0,0,
+110,0,0,,Do you want|to go out?,It's too late to go out.|Let's stay in the dorm.,110,0,0,
+110,0,0,,"Sorry, I need to go.|(Leave the place.)",,110,0,0,Leave()
+120,0,0,,Come in your pajamas!|(Walk back with Amanda.),,120,0,0,LeaveWithAmanda()
+200,0,0,,How are you?,(Sarah will be available in the next version.),200,0,0,
+200,0,0,,What's going on?,(Sarah will be available in the next version.),200,0,0,
+200,0,0,,Amanda is here?,"No, she might be at the library.",200,0,0,
+200,0,0,,Sidney is here?,"Nope, maybe the zoo came to get her.",200,0,0,
+200,0,0,,Jennifer is here?,"JENNNNNNNNNIFER!  (She waits.)|Nope, she's not here or she's deaf.",200,0,0,
+200,0,0,,"Sorry, wrong door.|(Leave the place.)",,200,0,0,Leave()
