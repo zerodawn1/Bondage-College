@@ -7,6 +7,7 @@ var C012_AfterClass_Roommates_ChitChatCount = 0;
 var C012_AfterClass_Roommates_ModifierLove = 0;
 var C012_AfterClass_Roommates_ModifierSub = 0;
 var C012_AfterClass_Roommates_IsolationAvail = true;
+var C012_AfterClass_Roommates_IsolationVisit = false;
 
 // Chapter 12 After Class - Roommates Load
 function C012_AfterClass_Roommates_Load() {
@@ -19,6 +20,7 @@ function C012_AfterClass_Roommates_Load() {
 	Common_BondageAllowed = false;
 	Common_SelfBondageAllowed = false;
 	C012_AfterClass_Roommates_IsolationAvail = !GameLogQuery(CurrentChapter, "Sarah", "IsolationVisit");
+	C012_AfterClass_Roommates_IsolationVisit = GameLogQuery(CurrentChapter, "Sarah", "IsolationVisit")
 
 	// If we must put the previous text or previous actor back
 	if (C012_AfterClass_Roommates_IntroText != "") { OverridenIntroText = C012_AfterClass_Roommates_IntroText; C012_AfterClass_Roommates_IntroText = ""; }

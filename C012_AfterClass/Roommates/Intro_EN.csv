@@ -17,3 +17,4 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 200,0,10,,(Sarah opens the door and greets you.)|Hello Miss.  What's going on today?,
 200,0,0,Common_ActorIsLover,(Sarah opens the door and smiles.)|Hey there sexy!  What's going on?,
 200,0,0,Common_ActorIsOwned,(Sarah opens the door and greets you.)|Greetings Mistress.  What's going on?,
+200,0,0,IsolationVisit,(Sarah opens the door and smiles.)|My isolation partner!  What's going on?,
