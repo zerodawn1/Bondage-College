@@ -392,21 +392,29 @@ function C012_AfterClass_Amanda_ForceRandomBondage(BondageType) {
 // Chapter 12 After Class - Amanda can unbind the player on some events
 function C012_AfterClass_Amanda_TestUnbind() {
 
-	// Before the next event time, she will always refuse (skip is owned)
-	if (!GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") || Common_ActorIsOwned) {
-		
-		// Check if the event succeeds randomly (skip is owned)
-		if (EventRandomChance("Love") || Common_ActorIsOwned) {
+	// Bound and gagged, there's not much she can do
+	if (ActorIsGagged() && ActorIsRestrained()) {
+		C012_AfterClass_Amanda_GaggedAnswer();		
+	}
+	else {
+
+		// Before the next event time, she will always refuse (skip is owned)
+		if (!GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") || Common_ActorIsOwned) {
 			
-			// Can only release if not restrained
-			if (!ActorIsRestrained()) {
-				if (ActorIsGagged()) OverridenIntroText = GetText("ReleasePlayerGagged");
-				else OverridenIntroText = GetText("ReleasePlayer");				
-				PlayerReleaseBondage();
-				CurrentTime = CurrentTime + 50000;
-			} else OverridenIntroText = GetText("CannotReleasePlayer");
+			// Check if the event succeeds randomly (skip is owned)
+			if (EventRandomChance("Love") || Common_ActorIsOwned) {
+				
+				// Can only release if not restrained
+				if (!ActorIsRestrained()) {
+					if (ActorIsGagged()) OverridenIntroText = GetText("ReleasePlayerGagged");
+					else OverridenIntroText = GetText("ReleasePlayer");				
+					PlayerReleaseBondage();
+					CurrentTime = CurrentTime + 50000;
+				} else OverridenIntroText = GetText("CannotReleasePlayer");
+				
+			} else EventSetGenericTimer();
 			
-		} else EventSetGenericTimer();
+		}
 		
 	}
 	

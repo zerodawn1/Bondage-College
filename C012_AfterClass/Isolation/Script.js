@@ -7,6 +7,13 @@ var C012_AfterClass_Isolation_SarahOnCross = false;
 var C012_AfterClass_Isolation_SarahOnPillory = false;
 var C012_AfterClass_Isolation_SarahOnHorse = false;
 var C012_AfterClass_Isolation_SarahRestrained = false;
+var C012_AfterClass_Isolation_PlayerRestrained = false;
+var C012_AfterClass_Isolation_CuteRemarkDone = false;
+var C012_AfterClass_Isolation_WetRemarkDone = false;
+var C012_AfterClass_Isolation_DommeRemarkDone = false;
+var C012_AfterClass_Isolation_SpankDone = false;
+var C012_AfterClass_Isolation_MasturbateDone = false;
+var C012_AfterClass_Isolation_DontLikeRemarkDone = false;
 
 // Chapter 12 After Class - Isolation Load
 function C012_AfterClass_Isolation_Load() {
@@ -43,9 +50,9 @@ function C012_AfterClass_Isolation_Click() {
 	// The image can switch if Sarah is stranded
 	OverridenIntroImage = "";
 	if ((C012_AfterClass_Isolation_CurrentStage >= 20) && (C012_AfterClass_Isolation_CurrentStage < 100)) {
-		if (C012_AfterClass_Isolation_SarahOnCross) OverridenIntroImage = "IsolationSarahCross.jpg";
-		if (C012_AfterClass_Isolation_SarahOnPillory) OverridenIntroImage = "IsolationSarahPillory.jpg";
-		if (C012_AfterClass_Isolation_SarahOnHorse) OverridenIntroImage = "IsolationSarahHorse.jpg";
+		if (C012_AfterClass_Isolation_SarahOnCross) OverridenIntroImage = "IsolationCrossSarah.jpg";
+		if (C012_AfterClass_Isolation_SarahOnPillory) OverridenIntroImage = "IsolationPillorySarah.jpg";
+		if (C012_AfterClass_Isolation_SarahOnHorse) OverridenIntroImage = "IsolationHorseSarah.jpg";
 	}
 
 	// The player can click on herself in most stages
@@ -63,6 +70,7 @@ function C012_AfterClass_Isolation_Leave(LeaveType) {
 	CurrentTime = CurrentTime + 290000;
 	C012_AfterClass_Dorm_LeavingGuest();
 	if (LeaveType == "Sarah") GameLogAdd("EnterDormFromRoommates");
+	if (LeaveType == "Stranded") GameLogAdd("StrandedInIsolation");
 	SetScene(CurrentChapter, "Dorm");
 }
 
@@ -80,4 +88,79 @@ function C012_AfterClass_Isolation_Search() {
 			PlayerAddInventory("Cuffs", 1);
 		}
 	}
+}
+
+// Chapter 12 After Class - The player can cruise Sarah when she's restrained
+function C012_AfterClass_Isolation_CuteRemark() {
+	if (!C012_AfterClass_Isolation_CuteRemarkDone) {
+		C012_AfterClass_Isolation_CuteRemarkDone = true;
+		ActorChangeAttitude(1, 0);
+	}
+}
+
+// Chapter 12 After Class - The player can tell Sarah she's wet when she's restrained
+function C012_AfterClass_Isolation_WetRemark() {
+	if (!C012_AfterClass_Isolation_WetRemarkDone) {
+		C012_AfterClass_Isolation_WetRemarkDone = true;
+		ActorChangeAttitude(0, 1);
+	}
+}
+
+// Chapter 12 After Class - The player on a device can become more submissive to Sarah
+function C012_AfterClass_Isolation_DommeRemark() {
+	if (!C012_AfterClass_Isolation_DommeRemarkDone) {
+		C012_AfterClass_Isolation_DommeRemarkDone = true;
+		ActorChangeAttitude(0, -1);
+	}
+}
+
+// Chapter 12 After Class - When the player is negative
+function C012_AfterClass_Isolation_DontLikeRemark() {
+	if (!C012_AfterClass_Isolation_DontLikeRemarkDone) {
+		C012_AfterClass_Isolation_DontLikeRemarkDone = true;
+		ActorChangeAttitude(-1, 0);
+	}	
+}
+
+// Chapter 12 After Class - The player can spank Sarah on the Pillory
+function C012_AfterClass_Isolation_Spank() {
+	if (!C012_AfterClass_Isolation_SpankDone) {
+		C012_AfterClass_Isolation_SpankDone = true;
+		ActorChangeAttitude(1, 1);
+	}
+}
+
+// Chapter 12 After Class - The player can spank Sarah on the Pillory
+function C012_AfterClass_Isolation_Masturbate() {
+	if (!C012_AfterClass_Isolation_MasturbateDone) {
+		C012_AfterClass_Isolation_MasturbateDone = true;
+		ActorChangeAttitude(1, -1);
+	}
+}
+
+// Chapter 12 After Class - The player can lock up Sarah
+function C012_AfterClass_Isolation_LockSarah(LockType) {
+	C012_AfterClass_Isolation_SarahRestrained = (LockType != "");
+	C012_AfterClass_Isolation_SarahOnCross = (LockType == "Cross");
+	C012_AfterClass_Isolation_SarahOnPillory = (LockType == "Pillory");
+	C012_AfterClass_Isolation_SarahOnHorse = (LockType == "Horse");
+	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - The player can be locked up
+function C012_AfterClass_Isolation_LockPlayer(LockType) {
+	C012_AfterClass_Isolation_PlayerRestrained = (LockType != "");
+	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - Wait for 15 minutes
+function C012_AfterClass_Isolation_Wait() {
+	CurrentTime = CurrentTime + 900000;
+}
+
+// Chapter 12 After Class - The player can check on Sarah
+function C012_AfterClass_Isolation_Wait() {
+	if (C012_AfterClass_Isolation_SarahOnCross) OverridenIntroImage = "CrossSarah.jpg";
+	if (C012_AfterClass_Isolation_SarahOnPillory) OverridenIntroImage = "PillorySarah.jpg";
+	if (C012_AfterClass_Isolation_SarahOnHorse) OverridenIntroImage = "HorseSarah.jpg";
 }

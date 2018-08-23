@@ -6,6 +6,7 @@ function C012_AfterClass_Outro_Load() {
 	// Time is always 16:30:00 in the outro, reset the poses if needed
 	if (Common_PlayerRestrained && (C012_AfterClass_Dorm_Guest.length == 0)) C012_AfterClass_Outro_Type = "Bondage";
 	if (GameLogQuery(CurrentChapter, "", "EventSleepBoundAndGagged")) C012_AfterClass_Outro_Type = "SleepBoundAndGagged";
+	if (C012_AfterClass_Isolation_SarahRestrained && C012_AfterClass_Isolation_PlayerRestrained) C012_AfterClass_Outro_Type = "Isolation";
 	StopTimer(24 * 60 * 60 * 1000);
 	C000_Intro_ChapterSelect_CreditTextColor = "white";
 
