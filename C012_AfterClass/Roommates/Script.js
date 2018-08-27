@@ -81,17 +81,18 @@ function C012_AfterClass_Roommates_Knock() {
 	}
 
 	// Sarah is available before 20:00
-	if ((CurrentTime < 20 * 60 * 60 * 1000) && !GameLogQuery(CurrentChapter, "Sarah", "EnterDormFromRoommates")) {
-		OverridenIntroText = "";
-		ActorLoad("Sarah", "Dorm");
-		LeaveIcon = "";
-		/*if (ActorGetValue(ActorLove) >= 10) ActorSetPose("Happy");
-		if (ActorGetValue(ActorLove) <= -10) ActorSetPose("Angry");
-		if (ActorGetValue(ActorSubmission) >= 10) ActorSetPose("Shy");
-		if (ActorGetValue(ActorSubmission) <= -10) ActorSetPose("Cocky");
-		ActorSetCloth("StreetClothes");*/
-		C012_AfterClass_Roommates_CurrentStage = 200;
-	}
+	if ((CurrentTime < 20 * 60 * 60 * 1000) && !GameLogQuery(CurrentChapter, "Sarah", "EnterDormFromRoommates"))
+		if (!GameLogQuery(CurrentChapter, "Sarah", "IsolationStranded") || GameLogQuery(CurrentChapter, "Sarah", "IsolationRescue")) {
+			OverridenIntroText = "";
+			ActorLoad("Sarah", "Dorm");
+			LeaveIcon = "";
+			if (ActorGetValue(ActorLove) >= 10) ActorSetPose("Happy");
+			if (ActorGetValue(ActorLove) <= -10) ActorSetPose("Angry");
+			if (ActorGetValue(ActorSubmission) >= 10) ActorSetPose("Shy");
+			if (ActorGetValue(ActorSubmission) <= -10) ActorSetPose("Cocky");
+			ActorSetCloth("BrownDress");
+			C012_AfterClass_Roommates_CurrentStage = 200;
+		}
 	
 }
 
@@ -148,7 +149,7 @@ function C012_AfterClass_Roommates_TestInviteSarah() {
 		OverridenIntroText = GetText("GoDormDommeSarah");
 		C012_AfterClass_Roommates_CurrentStage = 211;
 	}
-	if (GameLogQuery(CurrentChapter, "Sarah", "IsolationVisit")) {
+	if (GameLogQuery(CurrentChapter, "Sarah", "IsolationVisit") && (ActorGetValue(ActorLove) >= 0)) {
 		OverridenIntroText = GetText("GoDormIsolationSarah");
 		C012_AfterClass_Roommates_CurrentStage = 211;
 	}
@@ -164,6 +165,7 @@ function C012_AfterClass_Roommates_LeaveWithSarah() {
 function C012_AfterClass_Roommates_EnterIsolation() {
 	CurrentTime = CurrentTime + 290000;
 	GameLogAdd("IsolationVisit");
+	ActorSetCloth("Clothed");
 	SetScene(CurrentChapter, "Isolation");
 }
 

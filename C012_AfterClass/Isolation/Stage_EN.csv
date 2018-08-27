@@ -23,7 +23,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 30,0,0,,I'm going to my place.|Do you want to come?,Sure!  Let's go see your place.,50,0,0,
 30,0,0,,I'm going to my place.|See you later Sarah.,Alright!  It was fun.  Take care.,60,0,0,
 30,0,0,,Maybe we can stay|here a little longer.,Cool!  That's the spirit!|Which device should we check?,20,0,0,
-40,0,0,,Have fun struggling!|(Leave her stranded.),,40,-3,2,"Leave(""Stranded"")"
+40,0,0,,Have fun struggling!|(Leave her stranded.),,40,-2,2,"Leave(""Stranded"")"
 40,0,0,,I was only kidding.|(Stay in the room.),(She sighs and stops struggling.|Which device do you want to see?),20,0,0,
 50,0,0,,(Go back to your|dorm with Sarah.),,50,1,0,"Leave(""Sarah"")"
 60,0,0,,(Back to your dorm.),,60,0,0,"Leave("""")"
@@ -95,3 +95,14 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 320,0,0,SarahRestrained,(Check Sarah.),(Sarah appears to be in a|similar predicament as you are.),320,0,0,CheckSarah()
 320,0,0,SarahRestrained,(Scream for help.),(You both scream for help but|nobody comes to the rescue.),320,0,0,Wait()
 320,0,0,SarahRestrained,(Wait for help.),(You wait with Sarah but nobody comes.)|This is not funny!  I have plans for the night.,320,0,0,Wait()
+400,0,0,,Are you alright?,"Yes, I'm fine.  It was kind of|scary to be left alone in here.",410,1,0,
+400,0,0,,Nobody came|to help you?,No!  But thanks for coming back.|It was scary to be left alone here.,410,0,0,
+400,0,0,,Have you learned|your lesson girl?,I think I did Miss.|I should be more careful.,410,-1,1,
+400,0,0,,I'm sorry Sarah.,It's alright now.  It was kind of|scary to be left alone in here.,410,2,-1,
+410,0,0,,Come back with me.|(Go back with Sarah.),,410,0,0,"Leave(""Sarah"")"
+410,0,0,,Go home girl.|(Go back alone.),,410,0,0,"Leave("""")"
+500,0,0,,Are you alright?,"Yes I'm alright, but I need to run.|I'm late for my evening downtown.",510,0,0,
+500,0,0,,Nobody came|to help you?,No!  And now I need to run quick.|I'm late for my evening downtown.,510,-1,0,
+500,0,0,,Have you learned|your lesson girl?,"Yes, I should be more careful.|And now I'm late, I need to run.",510,-1,1,
+500,0,0,,I'm sorry Sarah.,It's alright now.  But I need to run.|I'm late for my evening downtown.,510,1,-1,
+510,0,0,,Run Sarah run!|(Go back alone.),,510,0,0,"Leave("""")"

@@ -45,10 +45,10 @@ function C012_AfterClass_Isolation_Run() {
 function C012_AfterClass_Isolation_Click() {	
 
 	// Regular interactions
+	OverridenIntroImage = "";
 	ClickInteraction(C012_AfterClass_Isolation_CurrentStage);
 
 	// The image can switch if Sarah is stranded
-	OverridenIntroImage = "";
 	if ((C012_AfterClass_Isolation_CurrentStage >= 20) && (C012_AfterClass_Isolation_CurrentStage < 100)) {
 		if (C012_AfterClass_Isolation_SarahOnCross) OverridenIntroImage = "IsolationCrossSarah.jpg";
 		if (C012_AfterClass_Isolation_SarahOnPillory) OverridenIntroImage = "IsolationPillorySarah.jpg";
@@ -70,7 +70,7 @@ function C012_AfterClass_Isolation_Leave(LeaveType) {
 	CurrentTime = CurrentTime + 290000;
 	C012_AfterClass_Dorm_LeavingGuest();
 	if (LeaveType == "Sarah") GameLogAdd("EnterDormFromRoommates");
-	if (LeaveType == "Stranded") GameLogAdd("StrandedInIsolation");
+	if (LeaveType == "Stranded") GameLogAdd("IsolationStranded");
 	SetScene(CurrentChapter, "Dorm");
 }
 
@@ -159,7 +159,7 @@ function C012_AfterClass_Isolation_Wait() {
 }
 
 // Chapter 12 After Class - The player can check on Sarah
-function C012_AfterClass_Isolation_Wait() {
+function C012_AfterClass_Isolation_CheckSarah() {
 	if (C012_AfterClass_Isolation_SarahOnCross) OverridenIntroImage = "CrossSarah.jpg";
 	if (C012_AfterClass_Isolation_SarahOnPillory) OverridenIntroImage = "PillorySarah.jpg";
 	if (C012_AfterClass_Isolation_SarahOnHorse) OverridenIntroImage = "HorseSarah.jpg";

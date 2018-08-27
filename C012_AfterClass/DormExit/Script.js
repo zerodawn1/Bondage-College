@@ -12,8 +12,9 @@ function C012_AfterClass_DormExit_Load() {
 	
 	// The player can go to clubs if she heard about them
 	C012_AfterClass_DormExit_KnowKinbakuClub = (GameLogQuery("C007_LunchBreak", "Natalie", "Lunch") || GameLogQuery("", "", "KinbakuClubInfo"));
-	C012_AfterClass_DormExit_KnowBondageClub = GameLogQuery("", "", "BondageClubInvitation");	
-	
+	C012_AfterClass_DormExit_KnowBondageClub = GameLogQuery("", "", "BondageClubInvitation");
+	C012_AfterClass_DormExit_RescueSarahAvail = (GameLogQuery(CurrentChapter, "Sarah", "IsolationStranded") && !GameLogQuery(CurrentChapter, "Sarah", "IsolationRescue"));
+
 }
 
 // Chapter 12 After Class - Dorm Exit  Run
@@ -82,5 +83,19 @@ function C012_AfterClass_DormExit_LaunchLibrary() {
 				SetScene(CurrentChapter, "Library");				
 			} else OverridenIntroText = GetText("LibraryClosed");
 		} else OverridenIntroText = GetText("SchoolClothesFirst");
-	} else OverridenIntroText = GetText("SchoolClothesFirst");
+	} else OverridenIntroText = GetText("UnrestrainFirst");
+}
+
+// Chapter 12 After Class - Launch the rescue mission for Sarah
+function C012_AfterClass_DormExit_LaunchRescueSarah() {
+	if (!Common_PlayerRestrained && !Common_PlayerGagged) {
+		if (Common_PlayerClothed && (Common_PlayerCostume == "")) {
+			CurrentTime = CurrentTime + 290000;
+			if (CurrentTime >= 20 * 60 * 60 * 1000) C012_AfterClass_Isolation_CurrentStage = 500;
+			else C012_AfterClass_Isolation_CurrentStage = 400;
+			SetScene(CurrentChapter, "Isolation");
+			C012_AfterClass_Isolation_LockSarah("");
+			GameLogAdd("IsolationRescue");
+		} else OverridenIntroText = GetText("SchoolClothesFirst");
+	} else OverridenIntroText = GetText("UnrestrainFirst");
 }
