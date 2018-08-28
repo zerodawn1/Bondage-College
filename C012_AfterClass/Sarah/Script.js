@@ -21,6 +21,8 @@ var C012_AfterClass_Sarah_CanKickOut = false;
 var C012_AfterClass_Sarah_HaveCuffs = false;
 var C012_AfterClass_Sarah_CuffsGameAvail = false;
 var C012_AfterClass_Sarah_DateSarahAvail = false;
+var	C012_AfterClass_Sarah_AllowDamsel = false;
+var C012_AfterClass_Sarah_AllowHeroine = false;
 
 // Sarah can only check her notes if she's dressed
 function C012_AfterClass_Sarah_CheckNotes() {
@@ -62,6 +64,8 @@ function C012_AfterClass_Sarah_CalcParams() {
 	C012_AfterClass_Sarah_HaveCuffs = (PlayerHasInventory("Cuffs"));
 	C012_AfterClass_Sarah_CuffsGameAvail = (PlayerHasInventory("Cuffs") && !Common_PlayerRestrained && !ActorIsRestrained() && !C012_AfterClass_Sarah_ChatAvail);
 	C012_AfterClass_Sarah_DateSarahAvail = (!GameLogQuery(CurrentChapter, CurrentActor, "DatingSarah") && (Common_PlayerLover != "Sarah") && (Common_PlayerLover != "Sarah"));
+	C012_AfterClass_Sarah_AllowDamsel = (GameLogQuery("C008_DramaClass", "Player", "RoleVillain") || GameLogQuery("C008_DramaClass", "Player", "RoleHeroine"));
+	C012_AfterClass_Sarah_AllowHeroine = GameLogQuery("C008_DramaClass", "Player", "RoleDamsel");
 	C012_AfterClass_Sarah_SetPose();
 }
 
@@ -209,6 +213,12 @@ function C012_AfterClass_Sarah_Click() {
 		if ((ActorGetValue(ActorCloth) != "Naked") && (ActorGetValue(ActorCloth) != "Underwear") && (ClickInv == "Rope") && (ActorHasInventory("Rope"))) {
 			OverridenIntroText = GetText("StripForSecondRope");
 			return;
+		}
+		
+		// Cannot use rope or armbinder in the school play costumes
+		if (((ActorGetValue(ActorCloth) == "Villain") || (ActorGetValue(ActorCloth) == "Heroine") || (ActorGetValue(ActorCloth) == "Damsel")) && ((ClickInv == "Rope") || (ClickInv == "Armbinder"))) {
+			OverridenIntroText = GetText("NoRestrainInCostume");
+			return;			
 		}
 
 		// Apply the clicked restrain

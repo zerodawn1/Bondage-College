@@ -21,6 +21,8 @@ var C012_AfterClass_Amanda_CanKickOut = false;
 var C012_AfterClass_Amanda_HaveCuffs = false;
 var C012_AfterClass_Amanda_CuffsGameAvail = false;
 var C012_AfterClass_Amanda_DateSarahAvail = false;
+var C012_AfterClass_Amanda_AllowVillain = false;
+var C012_AfterClass_Amanda_AllowHeroine = false;
 
 // Amanda can only check her notes if she's dressed
 function C012_AfterClass_Amanda_CheckNotes() {
@@ -62,6 +64,8 @@ function C012_AfterClass_Amanda_CalcParams() {
 	C012_AfterClass_Amanda_HaveCuffs = (PlayerHasInventory("Cuffs"));
 	C012_AfterClass_Amanda_CuffsGameAvail = (PlayerHasInventory("Cuffs") && !Common_PlayerRestrained && !ActorIsRestrained() && !C012_AfterClass_Amanda_ChatAvail);
 	C012_AfterClass_Amanda_DateSarahAvail = (!GameLogQuery(CurrentChapter, CurrentActor, "DatingSarah") && (Common_PlayerLover != "Amanda") && (Common_PlayerLover != "Sarah"));
+	C012_AfterClass_Amanda_AllowVillain = (GameLogQuery("C008_DramaClass", "Player", "RoleDamsel") || GameLogQuery("C008_DramaClass", "Player", "RoleHeroine"));
+	C012_AfterClass_Amanda_AllowHeroine = GameLogQuery("C008_DramaClass", "Player", "RoleVillain");
 	C012_AfterClass_Amanda_SetPose();
 }
 
@@ -211,6 +215,12 @@ function C012_AfterClass_Amanda_Click() {
 			return;
 		}
 
+		// Cannot use rope or armbinder in the school play costumes
+		if (((ActorGetValue(ActorCloth) == "Villain") || (ActorGetValue(ActorCloth) == "Heroine") || (ActorGetValue(ActorCloth) == "Damsel")) && ((ClickInv == "Rope") || (ClickInv == "Armbinder"))) {
+			OverridenIntroText = GetText("NoRestrainInCostume");
+			return;			
+		}
+		
 		// Apply the clicked restrain
 		ActorApplyRestrain(ClickInv);
 		C012_AfterClass_Amanda_CalcParams();

@@ -221,6 +221,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 541,0,0,!Common_ActorIsOwner,Perfect!  It will be|fun to tie you up.,Absolutely.  Do you have some rope now?,0,0,1,EndChat()
 600,0,0,,Wear your|school outfit.,I'm always proud to represent the college.|(She changes in her school uniform.),0,0,0,"ForceChangeActor(""Clothed"")"
 600,0,0,AllowPajamas,Wear your pajamas.,(She smiles.)  Great idea!|It's time for a slumber party.,0,0,0,"ForceChangeActor(""Pajamas"")"
+600,0,0,AllowHeroine,Wear your heroine|armor from the play.,That's a funny idea!  (She changes.)|I do need to bring it back tomorrow.,0,0,0,"ForceChangeActor(""Heroine"")"
+600,0,0,AllowVillain,Wear your villain|armor from the play.,That's a funny idea!  (She changes.)|I do need to bring it back tomorrow.,0,0,0,"ForceChangeActor(""Villain"")"
 600,0,0,!HasBelt,Get in your|underwear.,I'm curious to see where this will lead.|(She giggles and changes in her underwear.),0,0,0,"ForceChangeActor(""Underwear"")"
 600,0,0,,Get naked.,Oh my!  Should I be nervous?|(She slowly strips naked for you.),0,0,0,"ForceChangeActor(""Naked"")"
 600,0,0,,Forget it.,(She nods.),0,0,0,
