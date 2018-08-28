@@ -4,7 +4,6 @@ var C012_AfterClass_Dorm_PlayerGrounded = false;
 var C012_AfterClass_Dorm_SidneyExitTime = 0;
 var C012_AfterClass_Dorm_SidneyReturnTime = 0;
 var C012_AfterClass_Dorm_SarahExitTime = 0;
-var C012_AfterClass_Dorm_SarahReturnTime = 0;
 
 // Sets the correct punishment pose depending on the player Mistess
 function C012_AfterClass_Dorm_SetPunishmentPose() {
@@ -45,8 +44,8 @@ function C012_AfterClass_Dorm_LeavingGuest() {
 		}
 	}
 
-	// Sarah will leave at 20:30
-	if ((C012_AfterClass_Dorm_Guest.indexOf("Sarah") >= 0) && (CurrentTime >= C012_AfterClass_Dorm_SarahExitTime) && (CurrentTime <= C012_AfterClass_Dorm_SarahReturnTime) && !GameLogQuery(CurrentChapter, "Sarah", "BackFromBondageClub") && !ActorSpecificIsRestrained("Sarah") && !GameLogQuery(CurrentChapter, "Sarah", "KickedOutFromDorm")) {
+	// Sarah will leave at 21:00
+	if ((C012_AfterClass_Dorm_Guest.indexOf("Sarah") >= 0) && (CurrentTime >= C012_AfterClass_Dorm_SarahExitTime) && !GameLogQuery(CurrentChapter, "Sarah", "BackFromBondageClub") && !ActorSpecificIsRestrained("Sarah") && !GameLogQuery(CurrentChapter, "Sarah", "KickedOutFromDorm")) {
 		C012_AfterClass_Dorm_Guest.splice("Sarah");
 		if (CurrentScreen == "Dorm") {
 			C012_AfterClass_Sarah_CurrentStage = 400;
@@ -67,7 +66,7 @@ function C012_AfterClass_Dorm_CalGuest() {
 	if ((GameLogQuery(CurrentChapter, "Amanda", "EnterDormFromLibrary") || GameLogQuery(CurrentChapter, "Amanda", "EnterDormFromRoommates")) && !GameLogQuery(CurrentChapter, "Amanda", "KickedOutFromDorm") && !GameLogQuery(CurrentChapter, "Amanda", "LeaveDormEarly"))
 		if (!GameLogQuery(CurrentChapter, "Amanda", "LoverBreakUp") || (ActorSpecificGetValue("Amanda", ActorOwner) == "Player"))
 			C012_AfterClass_Dorm_Guest.push("Amanda");
-	if (GameLogQuery(CurrentChapter, "Sarah", "EnterDormFromRoommates") && !GameLogQuery(CurrentChapter, "Sarah", "KickedOutFromDorm") && ((CurrentTime <= C012_AfterClass_Dorm_SarahExitTime) || (CurrentTime >= C012_AfterClass_Dorm_SarahReturnTime) || GameLogQuery(CurrentChapter, "Sarah", "BackFromBondageClub") || ActorSpecificIsRestrained("Sarah"))) 
+	if (GameLogQuery(CurrentChapter, "Sarah", "EnterDormFromRoommates") && !GameLogQuery(CurrentChapter, "Sarah", "KickedOutFromDorm") && ((CurrentTime <= C012_AfterClass_Dorm_SarahExitTime) || GameLogQuery(CurrentChapter, "Sarah", "BackFromBondageClub") || ActorSpecificIsRestrained("Sarah"))) 
 		if (!GameLogQuery(CurrentChapter, "Sarah", "LoverBreakUp") || (ActorSpecificGetValue("Sarah", ActorOwner) == "Player"))
 			C012_AfterClass_Dorm_Guest.push("Sarah");
 	C012_AfterClass_Dorm_PlayerPos = 525 - C012_AfterClass_Dorm_Guest.length * 100;
@@ -94,7 +93,7 @@ function C012_AfterClass_Dorm_Load() {
 	// Owners will not stay naked
 	if ((Common_PlayerOwner == "Sidney") && (ActorSpecificGetValue("Sidney", ActorCloth) == "Naked")) ActorSpecificSetCloth("Sidney", "Shorts");
 	if ((Common_PlayerOwner == "Amanda") && (ActorSpecificGetValue("Amanda", ActorCloth) == "Naked")) ActorSpecificSetCloth("Amanda", "");
-	
+
 	// Calculates the time when Sidney will leave and return
 	C012_AfterClass_Dorm_SidneyExitTime = 20 * 60 * 60 * 1000;
 	if (GameLogQuery(CurrentChapter, "Sidney", "CurfewStay")) C012_AfterClass_Dorm_SidneyExitTime = 999 * 60 * 60 * 1000;
@@ -102,21 +101,17 @@ function C012_AfterClass_Dorm_Load() {
 	if (GameLogQuery(CurrentChapter, "Sidney", "Curfew24")) C012_AfterClass_Dorm_SidneyReturnTime = 24 * 60 * 60 * 1000;
 	if (GameLogQuery(CurrentChapter, "Sidney", "Curfew22")) C012_AfterClass_Dorm_SidneyReturnTime = 22 * 60 * 60 * 1000;
 	if (GameLogQuery(CurrentChapter, "Sidney", "CurfewStay")) C012_AfterClass_Dorm_SidneyReturnTime = 12 * 60 * 60 * 1000;
-	
-	// Calculates the time when Sarah will leave and return
-	C012_AfterClass_Dorm_SarahExitTime = 20.5 * 60 * 60 * 1000;
+
+	// Sarah never returns from the Bondage Club on her own
+	C012_AfterClass_Dorm_SarahExitTime = 21 * 60 * 60 * 1000;
 	if (GameLogQuery(CurrentChapter, "Sarah", "CurfewStay")) C012_AfterClass_Dorm_SarahExitTime = 999 * 60 * 60 * 1000;
-	C012_AfterClass_Dorm_SarahReturnTime = 999 * 60 * 60 * 1000;
-	if (GameLogQuery(CurrentChapter, "Sarah", "Curfew24")) C012_AfterClass_Dorm_SarahReturnTime = 24 * 60 * 60 * 1000;
-	if (GameLogQuery(CurrentChapter, "Sarah", "Curfew22")) C012_AfterClass_Dorm_SarahReturnTime = 22 * 60 * 60 * 1000;
-	if (GameLogQuery(CurrentChapter, "Sarah", "CurfewStay")) C012_AfterClass_Dorm_SarahReturnTime = 12 * 60 * 60 * 1000;
-	
+
 	// If the player is grounded, the dorm is mostly deactivated until the timer runs out
 	C012_AfterClass_Dorm_PlayerGrounded = GameLogQuery(CurrentChapter, "", "EventGrounded");
 	Common_PlayerPose = "";
 	if ((Common_PlayerPose == "") && GameLogQuery(CurrentChapter, "", "EventSpanked") && !Common_PlayerRestrained && !Common_PlayerGagged && Common_PlayerNaked) Common_PlayerPose = "Spanked";
 	C012_AfterClass_Dorm_SetPunishmentPose();
-	
+
 	// Resets the other locations from the Dorm
 	C012_AfterClass_Pub_CurrentStage = 0;
 	C012_AfterClass_Pool_CurrentStage = 0;

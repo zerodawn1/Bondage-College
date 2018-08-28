@@ -70,7 +70,7 @@ function C012_AfterClass_Roommates_Knock() {
 	
 	// Amanda is available after 21:00
 	CurrentTime = CurrentTime + 50000;
-	if ((CurrentTime >= 21 * 60 * 60 * 1000) && !GameLogQuery(CurrentChapter, "Amanda", "EnterDormFromPub") && !GameLogQuery(CurrentChapter, "Amanda", "EnterDormFromRoommates")) {
+	if ((CurrentTime >= 21 * 60 * 60 * 1000) && !GameLogQuery(CurrentChapter, "Amanda", "EnterDormFromLibrary") && !GameLogQuery(CurrentChapter, "Amanda", "EnterDormFromRoommates")) {
 		OverridenIntroText = "";
 		ActorLoad("Amanda", "Dorm");
 		LeaveIcon = "";
