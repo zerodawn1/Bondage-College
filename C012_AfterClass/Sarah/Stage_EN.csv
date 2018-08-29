@@ -1,5 +1,4 @@
 Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
-0,5,0,!Common_ActorIsLover,You look so|pretty Sarah.,"Thanks, I also love your looks.|(You need +20 love to date Sarah.)",0,0,0,TestLove()
 0,0,0,,We need to talk.,What would you like to talk about?,0,0,0,TestTalk()
 0,0,5,IsRestrained,You really enjoy being|restrained don't you girl?,(She winks.)  I'll never admit that Miss.|(You need +20 submission to collar Sarah.),0,0,0,TestDomme()
 0,0,-10,!BondageClubInvitationBySarah,Miss Sarah.|I admire you.,I think I know what you need girl.,0,0,0,TestSub()
@@ -7,7 +6,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_PlayerGagged,@Om nnnuoogn mh!,Let me get my English-Mumble|dictionary.  (She laughs out loud.),0,0,0,TestUnbind()
 0,0,0,Common_PlayerRestrained,(Struggle in|your restrains.),You're not getting out soon.|I love to see you struggle.,0,0,0,TestUnbind()
 0,0,0,,You should wear|something else.,I prefer to stay like that.,0,0,0,TestChange()
-0,0,0,SexAvail,Would you like to|make love with me?,"You're very direct.  No, I'll pass.|Let's do something else alright?",0,0,0,TestSex()
+0,0,0,SexAvail,Would you like to|make love with me?,"No, I'm not in the mood for sex.|Let's do something else ok?",0,0,0,TestSex()
 0,0,0,PleasurePlayerAvail,"My submissive, you|will pleasure me now.",Pleasure you how Mistress?|(She gives you a curious look.),630,0,0,TestPleasurePlayer()
 0,0,0,!Common_PlayerRestrained,(Play with her.),(You take a step toward her.),10,0,0,
 10,5,0,!Common_PlayerGagged,(Kiss her.),(You get close to her and kiss her|on the lips while she moans silently.),10,0,0,Kiss()
@@ -26,63 +25,57 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 20,0,0,Common_ActorIsLover,About our relationship...,Y...  Yes my love?|(She seems nervous.),190,0,0,
 20,0,0,,It's time for you|to leave my place.,You're expelling me from your dorm?,790,-1,1,
 20,0,0,,Never mind.,Very well.  What would you like to do?,0,0,0,
-30,0,0,,Yes!  Let's go!|(Go to the club.),"(Sorry, the Bondage Club isn't ready yet.)",30,0,0,
+30,0,0,,Yes!  Let's go!|(Go to the club.),(The Bondage Club will be available|in another version of the game.),30,0,0,
 30,0,0,,"Not yet, let me|pack my stuff.","Ok, but be quick, we might|get punished if we're late.",0,0,0,
-100,0,0,,Do you have|a loved one?,I do...  I mean I don't...|I don't have a loved one.,110,0,0,TestRelationship()
-100,0,0,,Do you have|a boyfriend?,"A girl...  A boy...  Boyfriend?|No, I don't have a boyfriend.",110,0,0,TestRelationship()
-100,0,0,,Do you have|a girlfriend?,I do...  I mean I don't...|I don't have a girlfriend.,110,0,0,TestRelationship()
-105,0,0,,"Yes, I'm lucky.","Yes, you're very lucky.  If only she|could understand what she means to me.",107,0,0,
-105,0,0,,You'll find someone.,Maybe I will.  If only she could|understand what she means to me.,107,0,0,
-105,0,0,Common_ActorIsOwned,I would rather|date you.,"Mistress, you could break up with her.|We can't date if you're seeing someone.",106,0,0,
-105,0,0,!Common_ActorIsOwned,I would rather|date you.,Then be honest and break up first.|We can't date if you're seeing someone.,106,0,0,
-106,0,0,,"Yes, I'll do that.",Great!  Let me know when it's done.,0,0,0,
-106,0,0,,I'll think about it.,Very well.  Let me know when it's done.,0,0,0,
-106,0,0,,I can't do that.,"It's fine, I think I understand.|Let's talk about something else.",0,0,0,
-107,0,0,,Who are you|talking about?,(She blushes and looks down.)  Sarah.|I love her so much but I can't tell her.,120,0,0,
-107,0,0,,Who?  Sarah?,(She blushes and looks down.)  Yes.|I love her so much but I can't tell her.,120,0,0,
-107,0,0,,Are you in love?,"(She nods and looks down.)  Yes, with Sarah.|I love her so much but I cannot tell her.",120,0,0,
-110,0,0,,You seem confused.,"I am confused.  I've had eyes on Sarah|for a long time, but today I've met you.",111,0,0,
-110,0,0,,Are you thorn?,"Yes, I'm thorn.  I've had eyes on Sarah|for a long time, but today I've met you.",111,0,0,
-110,0,0,,Explain yourself.,"(She looks at you.)  I've had eyes on Sarah|for a long time, but today I've met you.",111,0,0,
-110,0,0,,(Nod and listen.),"(She looks at you.)  I've had eyes on Sarah|for a long time, but today I've met you.",111,0,0,
-111,0,0,,So you love|both of us?,"Yes, I do love both of you.|And I don't know what to do.",112,0,0,
-111,0,0,,You need to|make your mind.,I know.  I can't love both of you.|I really don't know what to do.,112,0,0,
-111,0,0,,Listen to|your heart.,I know.  I can't love both of you.|I really don't know what to do.,112,0,0,
-112,0,0,,Kiss me Amanda.|(Try to kiss her.),(You surprise her with a kiss on the lips.)|You're so sweet COMMON_PLAYERNAME.,130,0,0,
-112,0,0,,I love you also.,You're so wonderful COMMON_PLAYERNAME.,130,0,0,
-112,0,0,,Date Sarah.  Tell|her you love her.,I've tried before.  Trust me.|But there's never a good moment.,121,0,0,
-112,0,0,,Shut up and|go see Sarah.,I've tried to date her but I can't tell her.|There's never a good moment for that.,121,0,0,
-112,0,0,,Stay single.,"Maybe that's the best plan out there.|I'm young, there's no need to rush it.",0,0,0,
-120,0,0,,Why can't|you tell her?,I've tried before.  Trust me.|But there's never a good moment.,121,0,0,
-120,0,0,,Tell her!,I've tried before.  Trust me.|But there's never a good moment.,121,0,0,
-120,0,0,,Forget her.,I know...  I can't...  I'm sorry.|Let's talk about something else.,0,0,0,
-121,0,0,,What if I create|that perfect moment?,You would do that for me?|For us?  What is your plan?,122,0,0,
-121,0,0,,Create that moment!,How can I do that?|What would you do?,122,0,0,
-121,0,0,,You're hopeless.,I know...  I'm hopeless...  I'm sorry.|Let's talk about something else.,0,0,0,
-122,0,0,,I will invite|her here first.,(She trembles and breathes faster.)|You will do that?  Wow!  I can't wait.,123,0,0,
-122,0,0,,I'll bring her|ass in here.,(She trembles and breathes faster.)|You will do that?  Wow!  I can't wait.,123,0,0,
-122,0,0,Common_ActorIsOwned,I'll handcuff|you two together.,(She trembles and breathes faster.)|You will do that?  Wow!  I can't wait.,123,0,0,
-122,0,0,,I'll think of a plan.,Great!  Please let me know|if you find a good plan.,123,0,0,
-122,0,0,,This is hopeless.,(She sighs.)  Maybe you're right.|Let's talk about something else.,0,0,0,
-123,0,0,,I'll make it happen.,Thanks!  Take your time to do it right.|What would you like to do now?,0,0,0,
-123,0,0,,It might take|a little while.,Of course.  Take your time to do it right.|What would you like to do now?,0,0,0,
-130,0,0,,I want to see|you happy.,I'm happy when you're around.|You make me laugh and smile.,140,0,0,
-130,0,0,,I want to make|you happy.,I'm happy when you're around.|You make me laugh and smile.,140,0,0,
-130,0,0,Common_ActorIsOwned,My little subbie girl.|You need to be happy.,I'm very happy with you Mistress.|You make me laugh and smile.,140,0,0,
-140,0,0,,Will you be|my girlfriend?,Yes!  I will!  I love you!,150,0,0,
-140,0,0,,Will you date me?,Yes!  I will!  I love you!,150,0,0,
-140,0,0,,Be my girlfriend.,Yes!  I will!  I love you!,150,0,0,
-150,0,0,,I love you Amanda.|(Kiss and date her.),(You join in a loving embrace for a long|and passionate kiss to celebrate your love.),160,3,0,StartDating()
-150,0,0,,Wait!  I need some|more time to think.,(She looks pretty disappointed.)  Very well.|Let's talk about something else then.,0,0,0,
-160,0,0,AllowSexAfterDate,Show me your sexy|body my love.,Oh yes my love.  (You both strip|naked and look at each other body.),170,0,1,BothNaked()
-160,0,0,AllowSexAfterDate,(Blush red and|start to strip.),Don't be shy my love.  (You both strip|naked and look at each other body.),170,0,-1,BothNaked()
-160,0,0,AllowSexAfterDate,I want to make|love with you.,Oh yes my love.  (You both strip|naked and look at each other body.),170,1,0,BothNaked()
-160,0,0,,I'm so happy!,I'm also very happy my love.|What should we do now?,0,1,0,
-160,0,0,,I can't wait to|tell my friends.,Please let me talk to Sarah first.|What should we do now?,0,-1,0,
-160,0,0,,We should|go out later.,We also could stay here for a nice|romantic evening.  That's up to you.,0,0,0,
-170,0,0,,(Get in bed.),,0,0,0,MakeLove()
-170,0,0,,(Push her on the bed.),,0,0,1,MakeLove()
-170,0,0,!Common_ActorIsOwned,(Let her carry|you in bed.),,0,0,-1,MakeLove()
+100,0,0,,(Get in bed.),,0,0,0,MakeLove()
+100,0,0,,(Push her on the bed.),,0,0,0,MakeLove()
+100,0,0,!Common_ActorIsOwned,(Let her carry|you in bed.),,0,0,0,MakeLove()
+110,0,0,,Do you have|a boyfriend?,I don't.  Amanda teases me from time|to time but I don't think she's serious.,120,0,0,
+110,0,0,,Do you have|a girlfriend?,I don't.  Amanda teases me from time|to time but I don't think she's serious.,120,0,0,
+110,0,0,,Do you have|a loved one?,I don't.  Amanda teases me from time|to time but I don't think she's serious.,120,0,0,
+120,0,0,,Do you love her?,Amy?  Sure.  She's my best friend.|But I love you also COMMON_PLAYERNAME.,130,0,0,
+120,0,0,,How come you two|are not together?,"Me and Amy?  I don't know.|I love her, just as I love you.",130,0,0,
+120,0,0,,Do you love me?,Of course I love you.|It's the same for Amanda.,130,0,0,
+120,0,0,,Amanda loves you really|much.  Go with her.,"Thanks, maybe I should ask her out.|What else could we do to have fun?",0,0,0,
+130,0,0,,So you love|both of us?,"I think so, this is confusing.",140,0,0,AmandaJoinForLove()
+130,0,0,,You need to|make your mind.,I need to choose now?|This is so confusing.,140,0,0,AmandaJoinForLove()
+130,0,0,,Listen to|your heart.,I need to choose now?|This is so confusing.,140,0,0,AmandaJoinForLove()
+130,0,0,,You don't have|to choose now.,"Very well, I'll think about that.|What else could we do to have fun?",0,0,0,
+140,0,0,,Kiss me Sarah.|(Try to kiss her.),(You surprise her with a kiss on the lips.)|You're a great kisser COMMON_PLAYERNAME.,141,0,0,
+140,0,0,,I love you Sarah.,I love you COMMON_PLAYERNAME.,141,0,0,
+140,0,0,,Date Amanda.  Tell|her you love her.,"Thanks, maybe I should ask her out.|What else could we do to have fun?",0,0,0,
+140,0,0,,Shut up and|go see Amanda.,"Thanks, maybe I should ask her out.|What else could we do to have fun?",0,0,0,
+140,0,0,,Stay single.,Single girls have way more sex anyway.|What else could we do to have fun?,0,0,0,
+141,0,0,,I want to see|you happy.,I'm happy with you sexy.|You make me all wet.,142,0,0,
+141,0,0,,I want to make|you happy.,I'm happy with you sexy.|You make me all wet.,142,0,0,
+141,0,0,Common_ActorIsOwned,My little subbie girl.|You need to be happy.,I'm happy with you Mistress.|You make me all wet.,142,0,0,
+142,0,0,,Will you be|my girlfriend?,Yes!  We can be kinky lovers.,143,0,0,
+142,0,0,,Will you date me?,Yes!  We can be kinky lovers.,143,0,0,
+142,0,0,,Be my girlfriend.,Yes!  We can be kinky lovers.,143,0,0,
+143,0,0,,I love you Sarah.|(Kiss and date her.),(You join in a long and loving kiss and grab|each other breast and pussy to celebrate.),144,3,0,StartDating()
+143,0,0,,Wait!  I need some|more time to think.,"Sure, we'll make our minds after a few|more hundred orgasms.  (She giggles.)",0,0,0,
+144,0,0,,Honey.  I'm|horny again.,There's no time like the present!,100,0,-1,
+144,0,0,,Let's fuck again!,Oh yes my sexy lover!,100,0,0,
+144,0,0,Common_ActorIsOwned,My love slave.|Get in bed now.,Oh yes my lovely Mistress!,100,0,1,
+144,0,0,,I'm so happy!,Yes!  There will be lots of love and sex.|What could we do to start our relationship?,0,1,0,
+144,0,0,,I can't wait to|tell my friends.,"Ok, but let me talk with Amanda first.|What could we do to have fun now?",0,-1,0,
+144,0,0,,We should|go out later.,Oh yeah!  Well we might have to until|tomorrow for a romantic rendezvous.,0,0,0,
+150,0,0,,Kiss me Sarah.|(Try to kiss her.),(You surprise her with a kiss on the lips.)|You're a great kisser COMMON_PLAYERNAME.,151,0,0,
+150,0,0,,I love you Sarah.,I love you COMMON_PLAYERNAME.,151,0,0,
+150,0,0,,Date Amanda.  Tell|her you love her.,,0,0,0,AmandaDatingScene()
+150,0,0,,Shut up and|go see Amanda.,,0,0,0,AmandaDatingScene()
+150,0,0,,Stay single.,Single girls have way more sex anyway.|What else could we do to have fun?,0,0,0,
+151,0,0,,Will you be|my girlfriend?,Yes!  We can be kinky lovers.|(Amanda starts to cry and leaves.),152,0,0,AmandaLeave()
+151,0,0,,Will you date me?,Yes!  We can be kinky lovers.|(Amanda starts to cry and leaves.),152,0,0,AmandaLeave()
+151,0,0,,Be my girlfriend.,Yes!  We can be kinky lovers.|(Amanda starts to cry and leaves.),152,0,0,AmandaLeave()
+152,0,0,,I love you Sarah.|(Kiss and date her.),(You join in a long and loving kiss and grab|each other breast and pussy to celebrate.),153,3,0,StartDating()
+152,0,0,,Wait!  I need some|more time to think.,"Sure, we'll make our minds after a few|more hundred orgasms.  (She giggles.)",0,0,0,
+153,0,0,,Honey.  I'm|horny again.,There's no time like the present!,100,0,-1,
+153,0,0,,Let's fuck again!,Oh yes my sexy lover!,100,0,0,
+153,0,0,Common_ActorIsOwned,My love slave.|Get in bed now.,Oh yes my lovely Mistress!,100,0,1,
+153,0,0,,I'm so happy!,Yes!  There will be lots of love and sex.|What could we do to start our relationship?,0,1,0,
+153,0,0,,I can't wait to|tell my friends.,"Ok, but let me talk with Amanda first.|What could we do to have fun now?",0,-1,0,
+153,0,0,,We should|go out later.,Oh yeah!  Well we might have to until|tomorrow for a romantic rendezvous.,0,0,0,
 190,0,0,,I... I... I lost my|train of thought.,(She still seems to worry.)|It's perfectly fine my love.,0,0,0,
 190,0,0,,I don't think it's|working between us.,(She gives you a sad look.)|Do you want to break up?,191,0,0,
 190,0,0,,I want to break up.,(She gives you a sad look.)|Really my love?  It's the end?,191,0,0,
@@ -181,8 +174,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 380,0,0,,It will be so|much fun.,Great!  That's a good attitude.|Let me know when you're ready.,0,0,0,"BondageClubInvite(""Love"")"
 380,0,0,,I hope I will|find an owner.,Great!  That's the subbie spirit.|Let me know when you're ready.,0,0,0,"BondageClubInvite(""Sub"")"
 380,0,0,,I don't think I|will go tonight.,"That's cool, we can do|something else before I go.",0,0,0,
-400,0,0,BondageClubInvitationBySarah,(Nod yes slowly.)|(Go to the club.),"(Sorry, the Bondage Club isn't ready yet.)",400,0,0,
-400,0,0,BondageClubInvitationBySarah,Yes!  Let's go!|(Go to the club.),"(Sorry, the Bondage Club isn't ready yet.)",400,0,0,
+400,0,0,BondageClubInvitationBySarah,(Nod yes slowly.)|(Go to the club.),(The Bondage Club will be available|in another version of the game.),400,0,0,
+400,0,0,BondageClubInvitationBySarah,Yes!  Let's go!|(Go to the club.),(The Bondage Club will be available|in another version of the game.),400,0,0,
 400,0,0,Common_PlayerGagged,@UNGN MH NUUOGH!,(She giggles and leaves your dorm.),410,0,0,TestReleaseBeforeExit()
 400,0,0,Common_PlayerRestrained,Can you help me|before you go?,I'm sure you will find help.|(She leaves your dorm.),410,0,0,TestReleaseBeforeExit()
 400,0,0,!Common_ActorIsOwned,Have fun Sarah!,I will.  (She leaves your dorm.),410,0,0,
@@ -276,9 +269,6 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 642,0,0,,I control when|you cum girl.,(She nods and takes her|breath while slowly standing up.),0,0,1,EndEnslaveAmanda()
 642,0,0,,(Give her a hug.),(You give her a warm hug|and help her to recover.),0,1,-1,EndEnslaveAmanda()
 642,0,0,,(Help her to recover.),(You help her to recover.),0,0,-1,EndEnslaveAmanda()
-650,0,0,,(Get in bed.),,0,0,0,MakeLove()
-650,0,0,,(Push her on the bed.),,0,0,0,MakeLove()
-650,0,0,!Common_ActorIsOwned,(Let her carry|you in bed.),,0,0,0,MakeLove()
 700,0,0,Common_ActorIsOwned,"Slave, I can bring|whoever I want.",(She jumps.)  Of course Mistress.|What would you like to do?,0,-1,1,EndChat()
 700,0,0,,Sidney is a good friend.|Don't fight with her.,(She frowns.)  Well she's not a friend|of mine.  Can you ask her to leave?,701,-2,0,
 700,0,0,,You two are in a feud?,Yes.  Can you ask her to leave?,701,-1,0,

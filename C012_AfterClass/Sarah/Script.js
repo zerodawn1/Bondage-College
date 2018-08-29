@@ -231,26 +231,11 @@ function C012_AfterClass_Sarah_TestSex() {
 			if (!ActorIsChaste()) {
 				var LoveChance = ActorGetValue(ActorLove) + PlayerGetSkillLevel("Seduction") * 2;
 				if ((LoveChance >= 12) || Common_ActorIsLover || Common_ActorIsOwned) {
-					C012_AfterClass_Sarah_CurrentStage = 650;
+					C012_AfterClass_Sarah_CurrentStage = 100;
 					OverridenIntroText = "";
 				}
 			} else OverridenIntroText = GetText("UnlockBeltBeforeSex");
 		} else OverridenIntroText = GetText("ReleaseBeforeTalk");
-	} else C012_AfterClass_Sarah_GaggedAnswer();
-}
-
-// Chapter 12 After Class - Sarah can be dated at +20 love
-function C012_AfterClass_Sarah_TestLove() {
-	if (!ActorIsGagged()) {
-		if (!ActorIsRestrained() && !Common_PlayerRestrained) {
-			if (!Common_PlayerNaked && (ActorGetValue(ActorCloth) != "Naked")) {
-				if (ActorGetValue(ActorLove) >= 20) {
-					ActorSetPose("");
-					C012_AfterClass_Sarah_CurrentStage = 100;
-					OverridenIntroText = "";
-				}
-			} else OverridenIntroText = GetText("CantDateWhileNaked");
-		} else OverridenIntroText = GetText("CantDateWhileRestrained");
 	} else C012_AfterClass_Sarah_GaggedAnswer();
 }
 
@@ -698,4 +683,12 @@ function C012_AfterClass_Sarah_TestBondageClub() {
 			} else OverridenIntroText = GetText("ReleaseBeforeBondageClub");
 		}
 	} else C012_AfterClass_Sarah_GaggedAnswer();
+}
+
+// Chapter 12 After Class - Test if Amanda will try to prevent the player from dating Sarah
+function C012_AfterClass_Sarah_AmandaPreventDatingSarah() {
+	if (!ActorSpecificIsRestrained("Amanda") && C012_AfterClass_Dorm_Guest.indexOf("Amanda")) {
+		C012_AfterClass_Sarah_CurrentStage = 150;
+		OverridenIntroText = GetText("AmandaPreventDatingSarah");
+	}
 }

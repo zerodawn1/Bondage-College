@@ -225,11 +225,22 @@ function ActorSpecificInBondage(SpecificActor) {
 // Returns TRUE if a specific actor (or player) is restrained
 function ActorSpecificIsRestrained(SpecificActor) {
 	if (SpecificActor == "Player") {
-		return (Common_PlayerRestrained);
+		return Common_PlayerRestrained;
 	} else {
 		for (var A = 0; A < Actor.length; A++)
 			if (Actor[A][ActorName] == SpecificActor)
 				return (ActorSpecificHasInventory(SpecificActor, "Rope") || ActorSpecificHasInventory(SpecificActor, "TwoRopes") || ActorSpecificHasInventory(SpecificActor, "ThreeRopes") || ActorSpecificHasInventory(SpecificActor, "Armbinder") || ActorSpecificHasInventory(SpecificActor, "Cuffs") || ActorSpecificHasInventory(SpecificActor, "Manacles"));
+	}
+}
+
+// Returns TRUE if a specific actor (or player) is restrained
+function ActorSpecificIsGagged(SpecificActor) {
+	if (SpecificActor == "Player") {
+		return Common_PlayerGagged;
+	} else {
+		for (var A = 0; A < Actor.length; A++)
+			if (Actor[A][ActorName] == SpecificActor)
+				return (ActorSpecificHasInventory(SpecificActor, "BallGag") || ActorSpecificHasInventory(SpecificActor, "TapeGag") || ActorSpecificHasInventory(SpecificActor, "ClothGag"));
 	}
 }
 

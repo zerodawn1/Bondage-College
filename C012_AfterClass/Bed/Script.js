@@ -7,6 +7,7 @@ var C012_AfterClass_Bed_Partner = "";
 var C012_AfterClass_Bed_ShowCollar = false;
 var C012_AfterClass_Bed_SexPleasurePlayer = 0;
 var C012_AfterClass_Bed_SexPleasurePartner = 0;
+var C012_AfterClass_Bed_CanDateSarah = false;
 
 // Chapter 12 After Class - Prepares the bed image that will be rendered for sex scenes
 function C012_AfterClass_Bed_PrepareImage(PartnerOrgasm, PlayerOrgasm, WorkAnim) {
@@ -46,9 +47,11 @@ function C012_AfterClass_Bed_Load() {
 	} else {
 		
 		// With a partner, they can make love, some girls are a little harder to please
+		C012_AfterClass_Bed_CanDateSarah = ((Common_PlayerLover == "") && !GameLogQuery(CurrentChapter, "Amanda", "DatingSarah"));
 		ActorLoad(C012_AfterClass_Bed_Partner, "Dorm");
 		if (C012_AfterClass_Bed_Partner == "Sidney") C012_AfterClass_Bed_CurrentStage = 200;
 		if (C012_AfterClass_Bed_Partner == "Amanda") C012_AfterClass_Bed_CurrentStage = 300;
+		if (C012_AfterClass_Bed_Partner == "Sarah") C012_AfterClass_Bed_CurrentStage = 400;
 		C012_AfterClass_Bed_ShowCollar = (C012_AfterClass_Bed_Partner == "Sidney");
 		C012_AfterClass_Bed_PrepareImage(false, false);
 		C012_AfterClass_Bed_SexPleasurePartner = ActorHasInventory("VibratingEgg") ? 3 : 0;
@@ -278,4 +281,12 @@ function C012_AfterClass_Bed_OffBed() {
 	LeaveIcon = "Leave";
 	OverridenIntroImage = "";
 	ActorSetPose("");
+}
+
+// Chapter 12 After Class - The dating scene with Sarah starts from the bed
+function C012_AfterClass_Bed_TestLoveSarah() {
+	if (ActorGetValue(ActorLove) >= 20) {
+		C012_AfterClass_Sarah_CurrentStage = 110;
+		SetScene(CurrentChapter, "Sarah");
+	}
 }

@@ -61,4 +61,28 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 320,0,0,Common_ActorIsLover,Would you like to sleep|like that with me?,"Yes my love, it's a wonderful idea.|I would sleep like an angel in your arms.",330,0,0,
 330,0,0,,Sleep with Amanda.|(End the day.),,330,0,0,"EndChapter(""Lover"")"
 330,0,0,,Maybe later my love.|(Get up from bed.),"Yes, let's enjoy our first|night together some more.",900,0,0,OffBed()
+400,0,0,,(Compliment her.),(You tell each other kind and loving words.|She appreciates but she's not excited by it.),400,0,0,"Sex(0, 1, false, false)"
+400,0,0,,(Insult her.),"(You call her a whore, a slut, a cunt, etc.|She blushes and becomes kind of wet.)",400,0,0,"Sex(1, 1, false, false)"
+400,0,0,,(Caress her legs.),(You slowly caresses each other her legs.|It doesn't seem to turn her on that much.),400,0,0,"Sex(0, 1, false, false)"
+400,0,0,,(Spank her butt.),(You spank her pretty hard on the butt|while she moans of pleasure from the pain.),400,0,0,"Sex(2, 1, false, false)"
+400,0,0,,(Kiss her legs.),(You kiss each other legs slowly.|She doesn't seem to like it that much.),400,0,0,"Sex(0, 1, false, false)"
+400,0,0,,(Scissor slowly.),"(You scissor each other slowly and|lovingly, feeling the ecstasy rising.)",400,0,0,"Sex(1, 1, true, false)"
+400,0,0,,(Masturbate her clitoris.),(She moans loudly and shivers|as you masturbate her clitoris.),400,0,0,"Sex(2, 1, true, false)"
+400,0,0,,(Masturbate your clitoris.),(You both masturbate and|tremble from the rising pleasure.),400,0,0,"Sex(1, 1, true, false)"
+400,0,0,,(Scissor rapidly.),(You scissor each other rapidly without pauses.|Feeling the sexual ecstasy rising quickly.),400,0,0,"Sex(2, 1, true, false)"
+400,0,0,,That's enough.|(Get up from bed.),Now?  Oh common!|That was too quick.,400,0,0,LeaveBedFromSex()
+410,0,0,,(Take your breath.),(You both take your breath and relax.)|There's nothing better than sex.,420,0,0,AfterSex()
+410,0,0,,(Kiss her feet.),(You kiss her feet gently while she giggles.)|There's nothing better than sex.,420,0,-1,AfterSex()
+410,0,0,Common_ActorIsLover,I love you Sarah.,(She smiles and looks at you.)|I love you COMMON_PLAYERNAME.,420,1,0,AfterSex()
+410,0,0,,It was wonderful.,(She nods and rubs a little more.)|There's nothing better than sex.,420,1,0,AfterSex()
+410,0,0,,You're a good fuck.,(She nods.)  I'm glad you enjoyed.|There's nothing better than sex.,420,0,1,AfterSex()
+410,0,0,,I'm speechless.,"Don't be, you can tell how you feel.|There's nothing better than sex.",420,-1,0,AfterSex()
+420,0,0,CanDateSarah,"Sarah, would you|be my girlfriend?","No, I'm a free bird, let's keep it simple.|(You need +20 love to date Sarah.)",420,0,0,TestLoveSarah()
+420,0,0,CanDateSarah,We could be more|than fuck friends.,"No, I'm a free bird, let's keep it simple.|(You need +20 love to date Sarah.)",420,0,0,TestLoveSarah()
+420,0,0,,All good things|must end I guess.,"Yeah, but we can do it again later.|(She winks at you as you both get up.)",900,0,0,OffBed()
+420,0,0,,(Stay silent and get up.),(You both stay silent and get up.),900,0,0,OffBed()
+420,0,0,Common_ActorIsOwned,Get off the bed slave.,Oh my!  Of course Mistress.|(You both get up promptly.),900,0,0,OffBed()
+420,0,0,Common_ActorIsLover,Would you like to sleep|like that with me?,"Sure sexy, it would be really|cool to sleep naked in your arms.",430,0,0,
+430,0,0,,Sleep with Sarah.|(End the day.),,430,0,0,"EndChapter(""Lover"")"
+430,0,0,,Maybe later my love.|(Get up from bed.),Oh yes!  The night is young.,900,0,0,OffBed()
 900,0,0,,(Back to the dorm.),,900,0,0,BackToDorm()

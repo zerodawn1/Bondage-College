@@ -14,23 +14,22 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 0,0,0,IsGagged,Ooogn mnog!,Dorm.jpg
 10,0,0,,,Dorm.jpg
 20,0,0,,,Dorm.jpg
-100,0,0,,(She nods happily.)|You're also so sexy.,Dorm.jpg
-100,0,0,Common_ActorIsOwned,(She nods happily.) Thanks Mistress.|And you're the sexiest woman I know.,Dorm.jpg
-105,0,0,,,Dorm.jpg
-106,0,0,,,Dorm.jpg
-107,0,0,,,Dorm.jpg
-110,0,0,,,Dorm.jpg
-111,0,0,,,Dorm.jpg
-112,0,0,,,Dorm.jpg
+100,0,0,,Oh yes!  Having sex would be great.|We do it right here in your room?,Dorm.jpg
+100,0,0,Common_ActorIsLover,Oh yes my sexy lover.,Dorm.jpg
+100,0,0,Common_ActorIsOwned,Yes Mistress.,Dorm.jpg
+110,0,0,,(You both get up from bed.)|You would like to date me?,Dorm.jpg
+110,0,0,Common_ActorIsOwned,"(You both get up from bed and stretch.)|Mistress, you would like to date me?",Dorm.jpg
 120,0,0,,,Dorm.jpg
-121,0,0,,,Dorm.jpg
-122,0,0,,,Dorm.jpg
-123,0,0,,,Dorm.jpg
 130,0,0,,,Dorm.jpg
 140,0,0,,,Dorm.jpg
+141,0,0,,,Dorm.jpg
+142,0,0,,,Dorm.jpg
+143,0,0,,,Dorm.jpg
+144,0,0,,,StartDating.jpg
 150,0,0,,,Dorm.jpg
-160,0,0,,,StartDating.jpg
-170,0,0,,,Dorm.jpg
+151,0,0,,,Dorm.jpg
+152,0,0,,,Dorm.jpg
+153,0,0,,,StartDating.jpg
 190,0,0,,,Dorm.jpg
 191,0,0,,,Dorm.jpg
 192,0,0,,,StopDating.jpg
@@ -91,9 +90,6 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 640,0,0,,,Dorm.jpg
 641,0,0,,,Dorm.jpg
 642,0,0,,,DormOrgasm.jpg
-650,0,0,,Oh yes!  Having sex would be great.|We do it right here in your room?,Dorm.jpg
-650,0,0,Common_ActorIsLover,Yes sexy.,Dorm.jpg
-650,0,0,Common_ActorIsOwned,Yes Mistress.,Dorm.jpg
 700,0,0,,Why is piggy here?|(She points at Sidney.),Dorm.jpg
 700,0,0,Common_ActorIsLover,Hey sexy.  Why is piggy here?|(She points and stares at Sidney.),Dorm.jpg
 700,0,0,Common_ActorIsOwned,"Mistress, why is piggy here?",Dorm.jpg
