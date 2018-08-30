@@ -18,11 +18,12 @@ var C012_AfterClass_Sarah_AllowSexAfterDate = false;
 var C012_AfterClass_Sarah_SidneyIsOwner = false;
 var C012_AfterClass_Sarah_CanKickOut = false;
 var C012_AfterClass_Sarah_HaveCuffs = false;
-var C012_AfterClass_Sarah_DateSarahAvail = false;
+var C012_AfterClass_Sarah_DateAmandaAvail = false;
 var	C012_AfterClass_Sarah_AllowDamsel = false;
 var C012_AfterClass_Sarah_AllowHeroine = false;
 var C012_AfterClass_Sarah_BondageClubInvitationBySarah = false;
 var C012_AfterClass_Sarah_BondageClubInvitation = false;
+var C012_AfterClass_Sarah_AmandaHeartBroken = false;
 
 // In her shorts, Sarah can have many poses when she talks
 function C012_AfterClass_Sarah_SetPose() {
@@ -31,7 +32,7 @@ function C012_AfterClass_Sarah_SetPose() {
 		var Sub = ActorGetValue(ActorSubmission);
 		if ((Sub <= -10) && (Math.abs(Sub) >= Math.abs(Love))) ActorSetPose("Cocky");
 		if ((Sub >= 10) && (Math.abs(Sub) >= Math.abs(Love))) ActorSetPose("Shy");
-		if ((Love >= 10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Love");
+		if ((Love >= 10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Happy");
 		if ((Love <= -10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Angry");
 		if (Common_ActorIsOwned) ActorSetPose("Shy");
 	} else {
@@ -54,11 +55,13 @@ function C012_AfterClass_Sarah_CalcParams() {
 	C012_AfterClass_Sarah_CanKickOut = (!Common_ActorIsOwner && !Common_ActorIsLover);
 	C012_AfterClass_Sarah_SidneyIsOwner = (Common_PlayerOwner == "Sidney");
 	C012_AfterClass_Sarah_HaveCuffs = (PlayerHasInventory("Cuffs"));
-	C012_AfterClass_Sarah_DateSarahAvail = (!GameLogQuery(CurrentChapter, CurrentActor, "DatingSarah") && (Common_PlayerLover != "Sarah") && (Common_PlayerLover != "Sarah"));
+	C012_AfterClass_Sarah_DateAmandaAvail = (!GameLogQuery(CurrentChapter, CurrentActor, "DatingSarah") && (Common_PlayerLover != "Amanda") && (Common_PlayerLover != "Sarah"));
 	C012_AfterClass_Sarah_AllowDamsel = (GameLogQuery("C008_DramaClass", "Player", "RoleVillain") || GameLogQuery("C008_DramaClass", "Player", "RoleHeroine"));
 	C012_AfterClass_Sarah_AllowHeroine = GameLogQuery("C008_DramaClass", "Player", "RoleDamsel");
 	C012_AfterClass_Sarah_BondageClubInvitationBySarah = GameLogQuery(CurrentChapter, CurrentActor, "BondageClubInvitationBySarah");
 	C012_AfterClass_Sarah_BondageClubInvitation = GameLogQuery("", "", "BondageClubInvitation");
+	C012_AfterClass_Sarah_AmandaHeartBroken = (GameLogQuery(CurrentChapter, "Sarah", "AmandaHeartBroken") && (Common_PlayerLover == "Sarah"));
+	C012_AfterClass_Sarah_AmandaAvail = ((C012_AfterClass_Dorm_Guest.indexOf("Amanda") >= 0) && !ActorSpecificIsRestrained("Amanda") && !ActorSpecificIsGagged("Amanda"));
 	C012_AfterClass_Sarah_SetPose();
 }
 
@@ -119,16 +122,21 @@ function C012_AfterClass_Sarah_Run() {
 	if (((C012_AfterClass_Sarah_CurrentStage >= 392) && (C012_AfterClass_Sarah_CurrentStage < 400)) || ((C012_AfterClass_Sarah_CurrentStage >= 293) && (C012_AfterClass_Sarah_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
 	
 	// Draw the actor alone or with the player depending on the stage
-	if ((C012_AfterClass_Sarah_CurrentStage != 410) && (C012_AfterClass_Sarah_CurrentStage != 3932) && (C012_AfterClass_Sarah_CurrentStage != 635) && (C012_AfterClass_Sarah_CurrentStage != 636) && (C012_AfterClass_Sarah_CurrentStage != 791) && (C012_AfterClass_Sarah_CurrentStage != 194)) {
-		if (((C012_AfterClass_Sarah_CurrentStage >= 3090) && (C012_AfterClass_Sarah_CurrentStage <= 3099)) || ((C012_AfterClass_Sarah_CurrentStage >= 3901) && (C012_AfterClass_Sarah_CurrentStage <= 3999))) {
-			DrawActor("Player", 475, 0, 1);
-			DrawActor(CurrentActor, 750, 0, 1);
-		} else {
-			DrawInteractionActor();
-			if ((C012_AfterClass_Sarah_CurrentStage >= 392) && (C012_AfterClass_Sarah_CurrentStage < 400)) DrawActor("Player", 600, 100, 1);
-		}		
+	if ((C012_AfterClass_Sarah_CurrentStage != 150) && (C012_AfterClass_Sarah_CurrentStage != 151)) {
+		if ((C012_AfterClass_Sarah_CurrentStage != 410) && (C012_AfterClass_Sarah_CurrentStage != 3932) && (C012_AfterClass_Sarah_CurrentStage != 635) && (C012_AfterClass_Sarah_CurrentStage != 636) && (C012_AfterClass_Sarah_CurrentStage != 791) && (C012_AfterClass_Sarah_CurrentStage != 194)) {
+			if (((C012_AfterClass_Sarah_CurrentStage >= 3090) && (C012_AfterClass_Sarah_CurrentStage <= 3099)) || ((C012_AfterClass_Sarah_CurrentStage >= 3901) && (C012_AfterClass_Sarah_CurrentStage <= 3999))) {
+				DrawActor("Player", 475, 0, 1);
+				DrawActor(CurrentActor, 750, 0, 1);
+			} else {
+				DrawInteractionActor();
+				if ((C012_AfterClass_Sarah_CurrentStage >= 392) && (C012_AfterClass_Sarah_CurrentStage < 400)) DrawActor("Player", 600, 100, 1);
+			}		
+		}
+	} else {
+		DrawActor("Sarah", 500, 0, 1);
+		DrawActor("Amanda", 800, 0, 0.8);
 	}
-	
+
 }
 
 // Chapter 12 After Class - Sarah Click
@@ -686,9 +694,30 @@ function C012_AfterClass_Sarah_TestBondageClub() {
 }
 
 // Chapter 12 After Class - Test if Amanda will try to prevent the player from dating Sarah
-function C012_AfterClass_Sarah_AmandaPreventDatingSarah() {
+function C012_AfterClass_Sarah_AmandaJoinForLove() {
 	if (!ActorSpecificIsRestrained("Amanda") && C012_AfterClass_Dorm_Guest.indexOf("Amanda")) {
 		C012_AfterClass_Sarah_CurrentStage = 150;
+		CurrentActor = "Amanda";
+		ActorUngag();
+		ActorSetCloth("Clothed");
+		ActorSetPose("Angry");
+		CurrentActor = "Sarah";
 		OverridenIntroText = GetText("AmandaPreventDatingSarah");
 	}
+}
+
+// Chapter 12 After Class - Amanda can leave if the player starts to date Sarah in front of her
+function C012_AfterClass_Sarah_AmandaLeave() {
+	GameLogSpecificAdd(CurrentChapter, "Amanda", "KickedOutFromDorm");
+	GameLogSpecificAdd(CurrentChapter, "Sarah", "AmandaHeartBroken");
+	C012_AfterClass_Sarah_AmandaHeartBroken = true;
+}
+
+// Chapter 12 After Class - The player can match Amanda and Sarah
+function C012_AfterClass_Sarah_AmandaDatingScene() {
+	C012_AfterClass_Amanda_CurrentStage = 800;
+	ActorSetPose("");
+	SetScene(CurrentChapter, "Amanda");
+	ActorSetPose("");
+	LeaveIcon = "";
 }

@@ -63,12 +63,12 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 330,0,0,,Maybe later my love.|(Get up from bed.),"Yes, let's enjoy our first|night together some more.",900,0,0,OffBed()
 400,0,0,,(Compliment her.),(You tell each other kind and loving words.|She appreciates but she's not excited by it.),400,0,0,"Sex(0, 1, false, false)"
 400,0,0,,(Insult her.),"(You call her a whore, a slut, a cunt, etc.|She blushes and becomes kind of wet.)",400,0,0,"Sex(1, 1, false, false)"
-400,0,0,,(Caress her legs.),(You slowly caresses each other her legs.|It doesn't seem to turn her on that much.),400,0,0,"Sex(0, 1, false, false)"
-400,0,0,,(Spank her butt.),(You spank her pretty hard on the butt|while she moans of pleasure from the pain.),400,0,0,"Sex(2, 1, false, false)"
+400,0,0,,(Caress her legs.),(You slowly caresses each other her legs.|It doesn't seem to turn her on that much.),400,0,0,"Sex(0, 1, false, true)"
+400,0,0,,(Spank her butt.),(You spank her pretty hard on the butt|while she moans of pleasure from the pain.),400,0,0,"Sex(2, 1, false, true)"
 400,0,0,,(Kiss her legs.),(You kiss each other legs slowly.|She doesn't seem to like it that much.),400,0,0,"Sex(0, 1, false, false)"
 400,0,0,,(Scissor slowly.),"(You scissor each other slowly and|lovingly, feeling the ecstasy rising.)",400,0,0,"Sex(1, 1, true, false)"
-400,0,0,,(Masturbate her clitoris.),(She moans loudly and shivers|as you masturbate her clitoris.),400,0,0,"Sex(2, 1, true, false)"
-400,0,0,,(Masturbate your clitoris.),(You both masturbate and|tremble from the rising pleasure.),400,0,0,"Sex(1, 1, true, false)"
+400,0,0,,(Masturbate her clitoris.),(She moans loudly and shivers|as you masturbate her clitoris.),400,0,0,"Sex(2, 1, true, true)"
+400,0,0,,(Masturbate your clitoris.),(You both masturbate and|tremble from the rising pleasure.),400,0,0,"Sex(1, 1, true, true)"
 400,0,0,,(Scissor rapidly.),(You scissor each other rapidly without pauses.|Feeling the sexual ecstasy rising quickly.),400,0,0,"Sex(2, 1, true, false)"
 400,0,0,,That's enough.|(Get up from bed.),Now?  Oh common!|That was too quick.,400,0,0,LeaveBedFromSex()
 410,0,0,,(Take your breath.),(You both take your breath and relax.)|There's nothing better than sex.,420,0,0,AfterSex()

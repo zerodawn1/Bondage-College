@@ -18,7 +18,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 10,0,0,IsStrapped,(Unstrap her.),(You remove the straps and|unlace the binder from her arms.),10,0,0,Untie()
 10,0,0,,(Stop playing.),(You take a step back.),0,0,0,
 20,0,0,Common_ActorIsOwned,Let's review|your rules.,Oh my god.  Yes Mistress.,610,0,0,
-20,0,0,DateSarahAvail,Is there something|between you and Sarah?,Yes...  No...  I guess everyone knows but her.|I love her so much but I cannot admit it to her.,120,0,0,
+20,0,0,DateAmandaAvail,Is there something|going on with Amanda?,I'm not sure actually.  She gave me a|few hints but I don't think she's serious.,160,0,0,
+20,0,0,AmandaHeartBroken,Will Amanda be ok?,Poor Amy.  I guess she will be fine.|I'll speak with her when I get home.,20,0,0,
 20,0,0,ChatAvail,I'd like to know|more about you.,"Fair enough, what would|like to know about me?",500,0,0,StartChat()
 20,0,0,CuffsGameAvail,Would you like to try a|cuffs challenge with me?,You both giggle and struggle with the cuffs but|you're able to lock them around her wrists.,0,0,0,CuffsGame()
 20,0,0,Common_PlayerChaste,Can you please help|me with this belt?,I cannot help you.|I don't have the key.,0,0,0,
@@ -62,8 +63,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 144,0,0,,We should|go out later.,Oh yeah!  Well we might have to until|tomorrow for a romantic rendezvous.,0,0,0,
 150,0,0,,Kiss me Sarah.|(Try to kiss her.),(You surprise her with a kiss on the lips.)|You're a great kisser COMMON_PLAYERNAME.,151,0,0,
 150,0,0,,I love you Sarah.,I love you COMMON_PLAYERNAME.,151,0,0,
-150,0,0,,Date Amanda.  Tell|her you love her.,,0,0,0,AmandaDatingScene()
-150,0,0,,Shut up and|go see Amanda.,,0,0,0,AmandaDatingScene()
+150,0,0,,Date Amanda girl!|(Turn to Amanda.),,0,0,1,AmandaDatingScene()
+150,0,0,,Amanda.  It's|now or never.,,0,1,0,AmandaDatingScene()
 150,0,0,,Stay single.,Single girls have way more sex anyway.|What else could we do to have fun?,0,0,0,
 151,0,0,,Will you be|my girlfriend?,Yes!  We can be kinky lovers.|(Amanda starts to cry and leaves.),152,0,0,AmandaLeave()
 151,0,0,,Will you date me?,Yes!  We can be kinky lovers.|(Amanda starts to cry and leaves.),152,0,0,AmandaLeave()
@@ -76,6 +77,14 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 153,0,0,,I'm so happy!,Yes!  There will be lots of love and sex.|What could we do to start our relationship?,0,1,0,
 153,0,0,,I can't wait to|tell my friends.,"Ok, but let me talk with Amanda first.|What could we do to have fun now?",0,-1,0,
 153,0,0,,We should|go out later.,Oh yeah!  Well we might have to until|tomorrow for a romantic rendezvous.,0,0,0,
+160,0,0,AmandaAvail,She loves you|very much.,Really?  (She seems confused.)|Well she should tell me then.,161,0,0,
+160,0,0,AmandaAvail,She's crazy|about you.,Really?  (She seems confused.)|Well she should tell me then.,161,0,0,
+160,0,0,!AmandaAvail,She loves you|very much.,Really?  (She seems confused.)|Well she should tell me then.,0,0,0,
+160,0,0,!AmandaAvail,She's crazy|about you.,Really?  (She seems confused.)|Well she should tell me then.,0,0,0,
+160,0,0,,I'm not sure it could|work between you two.,I don't know.  I don't worry|much about things like that.,0,0,0,
+161,0,0,,It's your turn Amanda.,,0,1,0,AmandaDatingScene()
+161,0,0,,"Amanda, take your|cupid arrow now.",,0,0,1,AmandaDatingScene()
+161,0,0,,Maybe she'll find|the courage someday.,(She looks at Amanda and shrugs.)|What could we do to have fun?,0,0,0,
 190,0,0,,I... I... I lost my|train of thought.,(She still seems to worry.)|It's perfectly fine my love.,0,0,0,
 190,0,0,,I don't think it's|working between us.,(She gives you a sad look.)|Do you want to break up?,191,0,0,
 190,0,0,,I want to break up.,(She gives you a sad look.)|Really my love?  It's the end?,191,0,0,
@@ -212,6 +221,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 541,0,0,,It all sounds fun.,It does.  Bondage is quite a thrill.,0,0,0,EndChat()
 541,0,0,,Perfect!  It will be|fun to tie you up.,Absolutely.  Do you have some rope now?,0,0,1,EndChat()
 600,0,0,,Wear your|school outfit.,I'm always proud to represent the college.|(She changes in her school uniform.),0,0,0,"ForceChangeActor(""Clothed"")"
+600,0,0,,Wear your|brown dress.,Alright!  It's time to relax.|(She changes to her brown dress.),0,0,0,"ForceChangeActor(""BrownDress"")"
 600,0,0,AllowHeroine,Wear your heroine|armor from the play.,That's a funny idea!  (She changes.)|I do need to bring it back tomorrow.,0,0,0,"ForceChangeActor(""Heroine"")"
 600,0,0,AllowDamsel,Wear your damsel|gown from the play.,That's a funny idea!  (She changes.)|I do need to bring it back tomorrow.,0,0,0,"ForceChangeActor(""Damsel"")"
 600,0,0,!HasBelt,Get in your|underwear.,I'm curious to see where this will lead.|(She giggles and changes in her underwear.),0,0,0,"ForceChangeActor(""Underwear"")"

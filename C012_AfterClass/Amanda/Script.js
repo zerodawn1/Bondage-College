@@ -23,6 +23,7 @@ var C012_AfterClass_Amanda_CuffsGameAvail = false;
 var C012_AfterClass_Amanda_DateSarahAvail = false;
 var C012_AfterClass_Amanda_AllowVillain = false;
 var C012_AfterClass_Amanda_AllowHeroine = false;
+var C012_AfterClass_Amanda_SarahAvail = false;
 
 // Amanda can only check her notes if she's dressed
 function C012_AfterClass_Amanda_CheckNotes() {
@@ -66,6 +67,7 @@ function C012_AfterClass_Amanda_CalcParams() {
 	C012_AfterClass_Amanda_DateSarahAvail = (!GameLogQuery(CurrentChapter, CurrentActor, "DatingSarah") && (Common_PlayerLover != "Amanda") && (Common_PlayerLover != "Sarah"));
 	C012_AfterClass_Amanda_AllowVillain = (GameLogQuery("C008_DramaClass", "Player", "RoleDamsel") || GameLogQuery("C008_DramaClass", "Player", "RoleHeroine"));
 	C012_AfterClass_Amanda_AllowHeroine = GameLogQuery("C008_DramaClass", "Player", "RoleVillain");
+	C012_AfterClass_Amanda_SarahAvail = ((C012_AfterClass_Dorm_Guest.indexOf("Sarah") >= 0) && !ActorSpecificIsRestrained("Sarah") && !ActorSpecificIsGagged("Sarah"));
 	C012_AfterClass_Amanda_SetPose();
 }
 
@@ -141,16 +143,21 @@ function C012_AfterClass_Amanda_Run() {
 	if (((C012_AfterClass_Amanda_CurrentStage >= 392) && (C012_AfterClass_Amanda_CurrentStage < 400)) || ((C012_AfterClass_Amanda_CurrentStage >= 293) && (C012_AfterClass_Amanda_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
 	
 	// Draw the actor alone or with the player depending on the stage
-	if ((C012_AfterClass_Amanda_CurrentStage != 410) && (C012_AfterClass_Amanda_CurrentStage != 3932) && (C012_AfterClass_Amanda_CurrentStage != 635) && (C012_AfterClass_Amanda_CurrentStage != 636) && (C012_AfterClass_Amanda_CurrentStage != 791) && (C012_AfterClass_Amanda_CurrentStage != 194)) {
-		if (((C012_AfterClass_Amanda_CurrentStage >= 3090) && (C012_AfterClass_Amanda_CurrentStage <= 3099)) || ((C012_AfterClass_Amanda_CurrentStage >= 3901) && (C012_AfterClass_Amanda_CurrentStage <= 3999))) {
-			DrawActor("Player", 475, 0, 1);
-			DrawActor(CurrentActor, 750, 0, 1);
-		} else {
-			DrawInteractionActor();
-			if ((C012_AfterClass_Amanda_CurrentStage >= 392) && (C012_AfterClass_Amanda_CurrentStage < 400)) DrawActor("Player", 600, 100, 1);
-		}		
+	if ((C012_AfterClass_Amanda_CurrentStage < 800) || (C012_AfterClass_Amanda_CurrentStage >= 900)) {
+		if ((C012_AfterClass_Amanda_CurrentStage != 410) && (C012_AfterClass_Amanda_CurrentStage != 3932) && (C012_AfterClass_Amanda_CurrentStage != 635) && (C012_AfterClass_Amanda_CurrentStage != 636) && (C012_AfterClass_Amanda_CurrentStage != 791) && (C012_AfterClass_Amanda_CurrentStage != 194)) {
+			if (((C012_AfterClass_Amanda_CurrentStage >= 3090) && (C012_AfterClass_Amanda_CurrentStage <= 3099)) || ((C012_AfterClass_Amanda_CurrentStage >= 3901) && (C012_AfterClass_Amanda_CurrentStage <= 3999))) {
+				DrawActor("Player", 475, 0, 1);
+				DrawActor(CurrentActor, 750, 0, 1);
+			} else {
+				DrawInteractionActor();
+				if ((C012_AfterClass_Amanda_CurrentStage >= 392) && (C012_AfterClass_Amanda_CurrentStage < 400)) DrawActor("Player", 600, 100, 1);
+			}		
+		}
+	} else {
+		DrawActor("Sarah", 475, 0, 1);
+		DrawActor("Amanda", 700, 0, 1);
 	}
-	
+
 }
 
 // Chapter 12 After Class - Amanda Click
@@ -976,4 +983,10 @@ function C012_AfterClass_Amanda_ReleaseAfterBondageHug() {
 		CurrentTime = CurrentTime + 50000;
 	}
 	C012_AfterClass_Amanda_AllowLeave();
+}
+
+// Chapter 12 After Class - Doesn't allow leaving from the scene
+function C012_AfterClass_Amanda_StartDatingSarah() {
+	LeaveIcon = "";
+	ActorSetPose("");
 }

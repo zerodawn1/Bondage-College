@@ -28,6 +28,7 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 121,0,0,,,Dorm.jpg
 122,0,0,,,Dorm.jpg
 123,0,0,,,Dorm.jpg
+124,0,0,,,Dorm.jpg
 130,0,0,,,Dorm.jpg
 140,0,0,,,Dorm.jpg
 150,0,0,,,Dorm.jpg
@@ -113,6 +114,7 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 790,0,0,,You're expelling me from your dorm?,Door.jpg
 790,0,0,Common_ActorIsLover,You're expelling me from your dorm?|This is the end of our short love?,StopDating.jpg
 791,0,0,,,Door.jpg
+800,0,0,,"(Amanda gets closer to Sarah and blushes.)|Sarah, there's something I've wanted to tell you.",Dorm.jpg
 3000,0,0,,"My subbie, get naked now.",Dorm.jpg
 3000,0,0,Common_ActorIsLover,"My love, get naked now.",Dorm.jpg
 3010,0,0,,"My subbie, get in your underwear.",Dorm.jpg

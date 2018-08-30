@@ -57,8 +57,10 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 120,0,0,,Why can't|you tell her?,I've tried before.  Trust me.|But there's never a good moment.,121,0,0,
 120,0,0,,Tell her!,I've tried before.  Trust me.|But there's never a good moment.,121,0,0,
 120,0,0,,Forget her.,I know...  I can't...  I'm sorry.|Let's talk about something else.,0,0,0,
-121,0,0,,What if I create|that perfect moment?,You would do that for me?|For us?  What is your plan?,122,0,0,
-121,0,0,,Create that moment!,How can I do that?|What would you do?,122,0,0,
+121,0,0,!SarahAvail,What if I create|that perfect moment?,You would do that for me?|For us?  What is your plan?,122,0,0,
+121,0,0,!SarahAvail,Create that moment!,How can I do that?|What would you do?,122,0,0,
+121,0,0,SarahAvail,What if I create|that perfect moment?,You would do that for me?|For us?  What is your plan?,124,0,0,
+121,0,0,SarahAvail,Create that moment!,How can I do that?|What would you do?,124,0,0,
 121,0,0,,You're hopeless.,I know...  I'm hopeless...  I'm sorry.|Let's talk about something else.,0,0,0,
 122,0,0,,I will invite|her here first.,(She trembles and breathes faster.)|You will do that?  Wow!  I can't wait.,123,0,0,
 122,0,0,,I'll bring her|ass in here.,(She trembles and breathes faster.)|You will do that?  Wow!  I can't wait.,123,0,0,
@@ -67,6 +69,9 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 122,0,0,,This is hopeless.,(She sighs.)  Maybe you're right.|Let's talk about something else.,0,0,0,
 123,0,0,,I'll make it happen.,Thanks!  Take your time to do it right.|What would you like to do now?,0,0,0,
 123,0,0,,It might take|a little while.,Of course.  Take your time to do it right.|What would you like to do now?,0,0,0,
+124,0,0,,It's easy.  Hey Sarah!|Amanda wants to talk.,"(Sarah comes closer and Amanda blushes.)|Sarah, there's something I've wanted to tell you.",800,1,0,StartDatingSarah()
+124,0,0,!Common_ActorIsOwner,This is my plan girl!|(Push Amanda to Sarah.),"(You push Amanda to Sarah and she blushes.)|Sarah, there's something I've wanted to tell you.",800,0,1,StartDatingSarah()
+124,0,0,,I'll think of a plan.,Great!  Please let me know|if you find a good plan.,123,0,0,
 130,0,0,,I want to see|you happy.,I'm happy when you're around.|You make me laugh and smile.,140,0,0,
 130,0,0,,I want to make|you happy.,I'm happy when you're around.|You make me laugh and smile.,140,0,0,
 130,0,0,Common_ActorIsOwned,My little subbie girl.|You need to be happy.,I'm very happy with you Mistress.|You make me laugh and smile.,140,0,0,
@@ -318,6 +323,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 790,0,0,,Don't be mad.|I'm sorry.,"It's fine, I'll go study.|(She sighs and walks out.)",791,-1,-1,KickedOut()
 790,0,0,,Pack your shit|and go girl.,I...  I...  Of course.|(She runs out quickly.),791,-2,1,KickedOut()
 791,0,0,,(Back to your dorm.),,791,0,0,BackToDorm()
+800,0,0,,TO DO,TO DO,800,0,0,
 3000,0,0,,Yes Mistress.|(Strip naked.),Good subbie.  (You change for Amanda.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,(Nod slowly.)|(Strip naked.),Good subbie.  (You change for Amanda.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,I don't want|to do that.,"Ok my subbie, be quiet then.|(She reviews her school notes.)",3092,0,0,TestPunish()
