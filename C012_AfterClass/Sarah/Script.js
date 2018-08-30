@@ -24,6 +24,7 @@ var C012_AfterClass_Sarah_AllowHeroine = false;
 var C012_AfterClass_Sarah_BondageClubInvitationBySarah = false;
 var C012_AfterClass_Sarah_BondageClubInvitation = false;
 var C012_AfterClass_Sarah_AmandaHeartBroken = false;
+var C012_AfterClass_Sarah_DatingAmanda = false;
 
 // In her shorts, Sarah can have many poses when she talks
 function C012_AfterClass_Sarah_SetPose() {
@@ -62,6 +63,7 @@ function C012_AfterClass_Sarah_CalcParams() {
 	C012_AfterClass_Sarah_BondageClubInvitation = GameLogQuery("", "", "BondageClubInvitation");
 	C012_AfterClass_Sarah_AmandaHeartBroken = (GameLogQuery(CurrentChapter, "Sarah", "AmandaHeartBroken") && (Common_PlayerLover == "Sarah"));
 	C012_AfterClass_Sarah_AmandaAvail = ((C012_AfterClass_Dorm_Guest.indexOf("Amanda") >= 0) && !ActorSpecificIsRestrained("Amanda") && !ActorSpecificIsGagged("Amanda"));
+	C012_AfterClass_Sarah_DatingAmanda = (GameLogQuery(CurrentChapter, "Sarah", "DatingAmanda") && (C012_AfterClass_Dorm_Guest.indexOf("Amanda") >= 0));
 	C012_AfterClass_Sarah_SetPose();
 }
 
@@ -98,7 +100,7 @@ function C012_AfterClass_Sarah_Load() {
 		} else {
 
 			// If there's a crossover between two actors
-			if ((C012_AfterClass_Sarah_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetSidney") && (C012_AfterClass_Dorm_Guest.indexOf("Sidney") >= 0) && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged()) {
+			if ((C012_AfterClass_Sarah_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetSidney") && (C012_AfterClass_Dorm_Guest.indexOf("Sidney") >= 0) && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged() && !ActorIsRestrained()) {
 				LeaveIcon = "";
 				if ((ActorGetValue(ActorCloth) == "") || (ActorGetValue(ActorCloth) == "Clothed") || (ActorGetValue(ActorCloth) == "BrownDress")) ActorSetPose("Angry");
 				else ActorSetPose("");
@@ -561,7 +563,7 @@ function C012_AfterClass_Sarah_SarahOrgasm() {
 	CurrentTime = CurrentTime + 50000;
 	ActorAddOrgasm();
 	if (!GameLogQuery(CurrentChapter, CurrentActor, "NextPossibleOrgasm")) {
-		GameLogSpecificAddTimer(CurrentChapter, CurrentActor, "NextPossibleOrgasm", ActorHasInventory("VibratingEgg") ? CurrentTime + 3600000 : CurrentTime + 7200000);
+		GameLogSpecificAddTimer(CurrentChapter, CurrentActor, "NextPossibleOrgasm", CurrentTime + 3600000);
 		ActorChangeAttitude(2, -1);
 	}
 }

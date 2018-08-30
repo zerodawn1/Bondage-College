@@ -99,7 +99,16 @@ function C012_AfterClass_Sidney_Load() {
 		} else {
 
 			// If there's a crossover between two actors
-			if ((C012_AfterClass_Sidney_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetAmanda") && (C012_AfterClass_Dorm_Guest.indexOf("Amanda") >= 0) && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged()) {
+			if ((C012_AfterClass_Sidney_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetSarah") && (C012_AfterClass_Dorm_Guest.indexOf("Sarah") >= 0) && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged() && !ActorIsRestrained()) {
+				LeaveIcon = "";
+				if ((ActorGetValue(ActorCloth) == "Shorts") && !Common_ActorIsOwned) ActorSetPose("Point");
+				else ActorSetPose("");
+				C012_AfterClass_Sidney_CurrentStage = 710;
+				GameLogAdd("MetSarah");
+			}
+
+			// If there's a crossover between two actors
+			if ((C012_AfterClass_Sidney_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetAmanda") && (C012_AfterClass_Dorm_Guest.indexOf("Amanda") >= 0) && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged() && !ActorIsRestrained()) {
 				LeaveIcon = "";
 				if ((ActorGetValue(ActorCloth) == "Shorts") && !Common_ActorIsOwned) ActorSetPose("Point");
 				else ActorSetPose("");

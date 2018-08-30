@@ -21,8 +21,9 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 10,0,0,IsStrapped,(Unstrap her.),(You remove the straps and|unlace the binder from her arms.),10,0,0,Untie()
 10,0,0,,(Stop playing.),(You take a step back.),0,0,0,
 20,0,0,Common_ActorIsOwned,Let's review|your rules.,Oh my god.  Yes Mistress.,610,0,0,
-20,0,0,DateSarahAvail,Is there something|between you and Sarah?,Yes...  No...  I guess everyone knows but her.|I love her so much but I cannot admit it to her.,120,0,0,
 20,0,0,ChatAvail,I'd like to know|more about you.,"Fair enough, what would|like to know about me?",500,0,0,StartChat()
+20,0,0,DateSarahAvail,Is there something|between you and Sarah?,Yes...  No...  I guess everyone knows but her.|I love her so much but I cannot admit it to her.,120,0,0,
+20,0,0,DatingSarah,Would you like to use|my bed with Sarah?,(She blushes a little.)  No thanks.|We'll have some fun later at home.,20,0,0,TestBedSarah()
 20,0,0,CuffsGameAvail,Would you like to try a|cuffs challenge with me?,You both giggle and struggle with the cuffs but|you're able to lock them around her wrists.,0,0,0,CuffsGame()
 20,0,0,Common_PlayerChaste,Can you please help|me with this belt?,I cannot help you.|I don't have the key.,0,0,0,
 20,0,0,Common_ActorIsLover,About our relationship...,Y...  Yes my love?|(She seems nervous.),190,0,0,
@@ -312,7 +313,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 701,0,0,,I'll make sure|everything is ok.,"Fine, I guess she can stay then.|But I don't want to fight with her.",702,-1,1,
 701,0,0,!SidneyIsOwner,I will tell her to go.|(Kick Sidney out.),,701,1,0,"KickActor(""Sidney"")"
 701,0,0,!SidneyIsOwner,I'll kick her out.|(Kick Sidney out.),,701,1,1,"KickActor(""Sidney"")"
-701,0,0,!Common_ActorIsOwner,Then go Amanda.|(Kick Amanda out.),You're expelling me from your dorm?,790,0,0,"KickForActor(""Sidney"")"
+701,0,0,!Common_ActorIsOwner,Then go Amanda.|(Kick Amanda out.),You're expelling me from your dorm?,790,-1,0,"KickForActor(""Sidney"")"
 701,0,0,!Common_ActorIsOwner,Get the fuck out then.|(Kick Amanda out.),You're expelling me from your dorm?,790,-1,1,"KickForActor(""Sidney"")"
 702,0,0,,No fights then!,Very well.  What would you like to do?,0,0,0,EndChat()
 702,0,0,,If it happens.|I'll fight for you.,Awesome.  What would you like to do?,0,0,1,EndChat()
@@ -323,7 +324,35 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 790,0,0,,Don't be mad.|I'm sorry.,"It's fine, I'll go study.|(She sighs and walks out.)",791,-1,-1,KickedOut()
 790,0,0,,Pack your shit|and go girl.,I...  I...  Of course.|(She runs out quickly.),791,-2,1,KickedOut()
 791,0,0,,(Back to your dorm.),,791,0,0,BackToDorm()
-800,0,0,,TO DO,TO DO,800,0,0,
+800,0,0,,(Listen to them.),"Sarah, you're my best friend, but|you're far more than that for me.",801,0,0,
+800,0,0,,(Enjoy the show.),"Sarah, you're my best friend, but|you're far more than that for me.",801,0,0,
+801,0,0,,(Listen to them.),"I think about you all the time, I dream|about you, I'm in love with you.",802,0,0,
+801,0,0,,(Make a heart|with your fingers.),"I think about you all the time, I dream|about you, I'm in love with you.",802,1,0,
+802,0,0,,(Listen to them.),I want to share my life with you.|Sleep with you.  Make love with you.,803,0,0,
+802,0,0,,(Snap your fingers.),I want to share my life with you.|Sleep with you.  Make love with you.,803,0,1,
+803,0,0,,(Listen to them.),"Sarah, I really love you.|Will you be my girlfriend?",804,0,0,
+803,0,0,,(Smile at them.),"Sarah, I really love you.|Will you be my girlfriend?",804,0,0,
+804,0,0,,(Listen to them.),"Amanda, I never trully realized|you had these feelings for me.",810,0,0,"LoadActor(""Sarah"")"
+804,0,0,,(Do a wolf whistle.),"Amanda, I never trully realized|you had these feelings for me.",810,-1,0,"LoadActor(""Sarah"")"
+810,0,0,,(Listen to them.),You're my best friend in the world.|You're sexy and you make me happy.,811,0,0,
+810,0,0,,(Wait patienly.),You're my best friend in the world.|You're sexy and you make me happy.,811,0,0,
+811,0,0,,(Listen to them.),Thanks to COMMON_PLAYERNAME.|We can make that step together.,812,0,0,
+811,0,0,,(Do a thumps up.),Thanks to COMMON_PLAYERNAME.|We can make that step together.,812,0,0,
+812,0,0,,(Listen to them.),Yes Amanda!  I love you!|I will be your girlfriend.,813,0,0,DateSarah()
+812,0,0,,(Blush a little.),Yes Amanda!  I love you!|I will be your girlfriend.,813,0,-1,DateSarah()
+813,0,0,,(Listen to them.),I love you Sarah!  I'm so happy!|(They fall into each others arms and kiss.),820,0,0,"LoadActor(""Amanda"")"
+813,0,0,,(Clap your hands.),I love you so much Sarah!  This is wonderful!|(They fall into each others arms and kiss.),820,0,0,"LoadActor(""Amanda"")"
+820,0,0,,Congratulations!,(They look at each and smile.)|Thanks for your help COMMON_PLAYERNAME.,821,2,0,
+820,0,0,,When is the wedding?,(They look at each and giggle.)|Thanks for your help COMMON_PLAYERNAME.,821,1,1,
+820,0,0,,You two are so cute.,(They look at each and smile.)|Thanks for your help COMMON_PLAYERNAME.,821,2,0,
+821,0,0,,My pleasure.,You've made me very happy.|(They hold each other hands.),822,0,0,
+821,0,0,,I didn't do much.,"Don't say that, you've did a lot.|(They hold each other hands.)",822,0,-1,
+821,0,0,,You needed|a little push.,"Yes, you've done the perfect push.|(They hold each other hands.)",822,0,1,
+822,0,0,,You can use my|bed if you want.,Really?  Right in your dorm room?|(They look at each other and giggle.),823,0,0,
+822,0,0,,I'm sure it will get|hot later tonight.,(She blushes red while Sarah laughs.)|Maybe.  What would you like to do now?,0,0,1,
+823,0,0,Common_ActorIsOwner,Have fun Mistress!|(Let them use your bed.),,0,0,0,BedWithSarah()
+823,0,0,!Common_ActorIsOwner,No better time than now!|(Let them use your bed.),,0,0,0,BedWithSarah()
+823,0,0,!Common_ActorIsOwner,"Not now, later.",Very well.  What would you like to do now?,0,0,0,
 3000,0,0,,Yes Mistress.|(Strip naked.),Good subbie.  (You change for Amanda.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,(Nod slowly.)|(Strip naked.),Good subbie.  (You change for Amanda.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,I don't want|to do that.,"Ok my subbie, be quiet then.|(She reviews her school notes.)",3092,0,0,TestPunish()

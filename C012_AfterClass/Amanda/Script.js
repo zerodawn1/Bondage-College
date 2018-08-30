@@ -21,6 +21,7 @@ var C012_AfterClass_Amanda_CanKickOut = false;
 var C012_AfterClass_Amanda_HaveCuffs = false;
 var C012_AfterClass_Amanda_CuffsGameAvail = false;
 var C012_AfterClass_Amanda_DateSarahAvail = false;
+var C012_AfterClass_Amanda_DatingSarah = false;
 var C012_AfterClass_Amanda_AllowVillain = false;
 var C012_AfterClass_Amanda_AllowHeroine = false;
 var C012_AfterClass_Amanda_SarahAvail = false;
@@ -68,6 +69,7 @@ function C012_AfterClass_Amanda_CalcParams() {
 	C012_AfterClass_Amanda_AllowVillain = (GameLogQuery("C008_DramaClass", "Player", "RoleDamsel") || GameLogQuery("C008_DramaClass", "Player", "RoleHeroine"));
 	C012_AfterClass_Amanda_AllowHeroine = GameLogQuery("C008_DramaClass", "Player", "RoleVillain");
 	C012_AfterClass_Amanda_SarahAvail = ((C012_AfterClass_Dorm_Guest.indexOf("Sarah") >= 0) && !ActorSpecificIsRestrained("Sarah") && !ActorSpecificIsGagged("Sarah"));
+	C012_AfterClass_Amanda_DatingSarah = (GameLogQuery(CurrentChapter, "Amanda", "DatingSarah") && (C012_AfterClass_Dorm_Guest.indexOf("Sarah") >= 0));
 	C012_AfterClass_Amanda_SetPose();
 }
 
@@ -104,7 +106,7 @@ function C012_AfterClass_Amanda_Load() {
 		} else {
 
 			// If there's a crossover between two actors
-			if ((C012_AfterClass_Amanda_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetSidney") && (C012_AfterClass_Dorm_Guest.indexOf("Sidney") >= 0) && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged()) {
+			if ((C012_AfterClass_Amanda_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetSidney") && (C012_AfterClass_Dorm_Guest.indexOf("Sidney") >= 0) && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged() && !ActorIsRestrained()) {
 				LeaveIcon = "";
 				if ((ActorGetValue(ActorCloth) == "") || (ActorGetValue(ActorCloth) == "Clothed")) ActorSetPose("Angry");
 				else ActorSetPose("");
@@ -115,16 +117,29 @@ function C012_AfterClass_Amanda_Load() {
 			// A random event can be triggered when Amanda is clicked on
 			if (C012_AfterClass_Amanda_CurrentStage == 0)
 				if ((CurrentText != null) && (Math.floor(Math.random() * 8) == 0)) {
+					
+					// Generic Domme event
 					if (!GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") && Common_ActorIsOwner)
 						C012_AfterClass_Amanda_RandomAmandaDommeEvent();
+					
+					// Amanda might ask the player to use the bed with Sarah
+					if (C012_AfterClass_Amanda_DatingSarah && (C012_AfterClass_Amanda_CurrentStage == 0) && !ActorSpecificIsRestrained("Amanda") && !ActorSpecificIsRestrained("Sarah") && !ActorSpecificIsGagged("Amanda") && !ActorSpecificIsGagged("Sarah") && !GameLogQuery(CurrentChapter, "Amanda", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Sarah", "NextPossibleOrgasm")) {
+						C012_AfterClass_Amanda_CurrentStage = 823;
+						LeaveIcon = "";
+					}
+					
+					// Unlocking Pajamas event after 22
 					if (!GameLogQuery(CurrentChapter, CurrentActor, "AllowPajamas") && (CurrentTime >= 22 * 60 * 60 * 1000) && (C012_AfterClass_Amanda_CurrentStage == 0) && !Common_PlayerGagged && !Common_PlayerRestrained && !ActorIsRestrained() && !ActorIsGagged()) {
 						C012_AfterClass_Amanda_CurrentStage = 660;
 						LeaveIcon = "";
 					}
+
+					// Random Pajamas query
 					if (GameLogQuery(CurrentChapter, CurrentActor, "AllowPajamas") && (C012_AfterClass_Amanda_CurrentStage == 0) && Common_ActorIsOwner && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorCloth) != "Pajamas")) {
 						C012_AfterClass_Amanda_CurrentStage = 670;
 						LeaveIcon = "";
 					}
+					
 				}
 
 		}
@@ -989,4 +1004,37 @@ function C012_AfterClass_Amanda_ReleaseAfterBondageHug() {
 function C012_AfterClass_Amanda_StartDatingSarah() {
 	LeaveIcon = "";
 	ActorSetPose("");
+}
+
+// Chapter 12 After Class - Load a different actor on the fly
+function C012_AfterClass_Amanda_LoadActor(ActorToLoad) {
+	ActorLoad(ActorToLoad, "Dorm");
+	LeaveIcon = "";
+}
+
+// Chapter 12 After Class - When Amanda dates Sarah
+function C012_AfterClass_Amanda_DateSarah() {
+	GameLogSpecificAdd(CurrentChapter, "Amanda", "DatingSarah");
+	GameLogSpecificAdd(CurrentChapter, "Sarah", "DatingAmanda");
+	C012_AfterClass_Amanda_DatingSarah = true;
+}
+
+// Chapter 12 After Class - When Amanda gets in bed with Sarah (they will stay for 15 to 45 minutes)
+function C012_AfterClass_Amanda_BedWithSarah() {
+	if (C012_AfterClass_Amanda_AllowPajamas) ActorSpecificSetCloth("Amanda", "Pajamas");
+	else ActorSpecificSetCloth("Amanda", "Clothed");
+	ActorSpecificSetCloth("Sarah", "BrownDress");
+	GameLogSpecificAddTimer(CurrentChapter, "Player", "AmandaAndSarahInBed", CurrentTime + 900000 + Math.floor(Math.random() * 1800000));
+	GameLogSpecificAddTimer(CurrentChapter, "Amanda", "NextPossibleOrgasm", ActorHasInventory("VibratingEgg") ? CurrentTime + 3600000 : CurrentTime + 7200000);
+	GameLogSpecificAddTimer(CurrentChapter, "Sarah", "NextPossibleOrgasm", CurrentTime + 3600000);
+	CurrentTime = CurrentTime + 50000;
+	SetScene(CurrentChapter, "Dorm");
+}
+
+// Chapter 12 After Class - Test if Amanda and Sarah are in the mood to get in bed
+function C012_AfterClass_Amanda_TestBedSarah() {
+	if (!ActorSpecificIsRestrained("Amanda") && !ActorSpecificIsRestrained("Sarah") && !ActorSpecificIsGagged("Amanda") && !ActorSpecificIsGagged("Sarah") && !GameLogQuery(CurrentChapter, "Amanda", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Sarah", "NextPossibleOrgasm")) {
+		OverridenIntroText = GetText("AcceptGoToBedWithSarah");
+		C012_AfterClass_Amanda_CurrentStage = 823;
+	}
 }

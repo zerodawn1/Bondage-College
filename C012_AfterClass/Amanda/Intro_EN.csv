@@ -115,6 +115,20 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 790,0,0,Common_ActorIsLover,You're expelling me from your dorm?|This is the end of our short love?,StopDating.jpg
 791,0,0,,,Door.jpg
 800,0,0,,"(Amanda gets closer to Sarah and blushes.)|Sarah, there's something I've wanted to tell you.",Dorm.jpg
+801,0,0,,,Dorm.jpg
+802,0,0,,,Dorm.jpg
+803,0,0,,,Dorm.jpg
+804,0,0,,,Dorm.jpg
+810,0,0,,,Dorm.jpg
+811,0,0,,,Dorm.jpg
+812,0,0,,,Dorm.jpg
+813,0,0,,,Dorm.jpg
+820,0,0,,,StartDating.jpg
+821,0,0,,,Dorm.jpg
+822,0,0,,,Dorm.jpg
+823,0,0,,,Dorm.jpg
+823,0,0,Common_ActorIsOwned,"Mistress, can I please use your|bed now to relax with Sarah?",Dorm.jpg
+823,0,0,Common_ActorIsOwner,"My subbie, I will use your bed|to relax with my girlfriend.",Dorm.jpg
 3000,0,0,,"My subbie, get naked now.",Dorm.jpg
 3000,0,0,Common_ActorIsLover,"My love, get naked now.",Dorm.jpg
 3010,0,0,,"My subbie, get in your underwear.",Dorm.jpg
