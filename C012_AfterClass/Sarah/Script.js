@@ -52,6 +52,7 @@ function C012_AfterClass_Sarah_CalcParams() {
 	C012_AfterClass_Sarah_IsRestrained = ActorIsRestrained();
 	C012_AfterClass_Sarah_PleasurePlayerAvail = (!Common_PlayerChaste && !ActorIsGagged() && !ActorIsRestrained() && Common_ActorIsOwned && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
 	C012_AfterClass_Sarah_SexAvail = (!Common_PlayerRestrained && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Sarah", "NextPossibleOrgasm"));
+	if (GameLogQuery(CurrentChapter, "", "EventBlockChanging") && (C012_AfterClass_Dorm_Guest.indexOf(Common_PlayerOwner) >= 0) && !Common_PlayerNaked) C012_AfterClass_Sarah_SexAvail = false;
 	C012_AfterClass_Sarah_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Sarah_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
 	C012_AfterClass_Sarah_CanKickOut = (!Common_ActorIsOwner && !Common_ActorIsLover);
 	C012_AfterClass_Sarah_SidneyIsOwner = (Common_PlayerOwner == "Sidney");
@@ -237,15 +238,17 @@ function C012_AfterClass_Sarah_GaggedAnswer() {
 // Chapter 12 After Class - Sarah can make love with the player if (Love + seduction * 2) >= 12 on the next time or Sarah is the player girlfriend/submissive
 function C012_AfterClass_Sarah_TestSex() {
 	if (!ActorIsGagged()) {
-		if (!ActorIsRestrained()) {
-			if (!ActorIsChaste()) {
-				var LoveChance = ActorGetValue(ActorLove) + PlayerGetSkillLevel("Seduction") * 2;
-				if ((LoveChance >= 12) || Common_ActorIsLover || Common_ActorIsOwned) {
-					C012_AfterClass_Sarah_CurrentStage = 100;
-					OverridenIntroText = "";
-				}
-			} else OverridenIntroText = GetText("UnlockBeltBeforeSex");
-		} else OverridenIntroText = GetText("ReleaseBeforeTalk");
+		if (!GameLogQuery(CurrentChapter, "Sarah", "DatingAmanda") || Common_ActorIsOwned) {
+			if (!ActorIsRestrained()) {
+				if (!ActorIsChaste()) {
+					var LoveChance = ActorGetValue(ActorLove) + PlayerGetSkillLevel("Seduction") * 2;
+					if ((LoveChance >= 12) || Common_ActorIsLover || Common_ActorIsOwned) {
+						C012_AfterClass_Sarah_CurrentStage = 100;
+						OverridenIntroText = "";
+					}
+				} else OverridenIntroText = GetText("UnlockBeltBeforeSex");
+			} else OverridenIntroText = GetText("ReleaseBeforeTalk");
+		} else OverridenIntroText = GetText("RefuseSexForLover");
 	} else C012_AfterClass_Sarah_GaggedAnswer();
 }
 

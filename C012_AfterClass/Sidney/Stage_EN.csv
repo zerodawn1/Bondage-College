@@ -334,9 +334,9 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 710,0,0,,Are you two in a feud?,"Fuck yeah, she's the worst.|Tell her to go right now.",711,-1,0,
 710,0,0,,Why are you|two fighting?,"Cause she's pretentious, vapid, stupid|and a slut.  Tell her to go right now.",711,-1,0,
 710,0,0,,I can tell her to go.,Hell yeah.  Tell her to go now.,711,0,0,
-710,0,0,,Shhhh.  We will|make her suffer.,(She nods rapidly and shuts up.)|So what would you like to do?,0,0,1,
-711,0,0,,Can you two|make peace?,No!  But the fucking slut can stay.|I'll punch her if she stares at me.,790,-2,0,
-711,0,0,,I'll make sure|everything is ok.,"Fine, tell the fucking slut to stay.|But I'll punch her if she stares at me.",790,-2,1,
+710,10,0,,Shhhh.  We will|make her suffer.,(She nods rapidly and shuts up.)|So what would you like to do?,0,0,1,EndChat()
+711,0,0,,Can you two|make peace?,No!  But the fucking slut can stay.|I'll punch her if she stares at me.,712,-2,0,
+711,0,0,,I'll make sure|everything is ok.,"Fine, tell the fucking slut to stay.|But I'll punch her if she stares at me.",712,-2,1,
 711,0,0,,I will tell her to go.|(Kick Sarah out.),,711,2,0,"KickActor(""Sarah"")"
 711,0,0,,I'll kick her out.|(Kick Sarah out.),,711,2,1,"KickActor(""Sarah"")"
 711,0,0,!Common_ActorIsOwner,Then go Sidney.|(Kick Sidney out.),You're kicking me out of your fucking dorm?,790,-2,0,"KickForActor(""Sarah"")"

@@ -285,6 +285,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 700,0,0,,You two are in a feud?,She's my worst enemy!|Tell her to leave now!,701,-1,0,
 700,0,0,,Why are you|two fighting?,"Cause she's mean, she's fat, she's a|thief and a slut.  Tell her to leave.",701,-1,0,
 700,0,0,!SidneyIsOwner,I can tell her to go.,Yes!  Kick her out!,701,0,0,
+700,0,10,,It's part of a plan.|Trust me girl.,Oh!  I love plans!  Alright then.|What could we do to have fun?,0,1,0,EndChat()
 701,0,0,SidneyIsOwner,I can't do that.|She's my Mistress.,"You've picked the worst Mistress ever.|Fine, but she stays on her side of the room.",702,-1,-1,
 701,0,0,SidneyIsOwner,Oh please Sarah!|She's my Mistress.,"You've picked the worst Mistress ever.|Fine, but she stays on her side of the room.",702,0,-2,
 701,0,0,,Can you two|make peace?,Never!  But as long as she stays on|her side of the room she can stay.,702,-2,0,

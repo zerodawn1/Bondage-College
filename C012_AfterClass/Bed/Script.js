@@ -8,6 +8,7 @@ var C012_AfterClass_Bed_ShowCollar = false;
 var C012_AfterClass_Bed_SexPleasurePlayer = 0;
 var C012_AfterClass_Bed_SexPleasurePartner = 0;
 var C012_AfterClass_Bed_CanDateSarah = false;
+var C012_AfterClass_Bed_AmandaOwner = false;
 
 // Chapter 12 After Class - Prepares the bed image that will be rendered for sex scenes
 function C012_AfterClass_Bed_PrepareImage(PartnerOrgasm, PlayerOrgasm, WorkAnim) {
@@ -32,36 +33,53 @@ function C012_AfterClass_Bed_Load() {
 
 	// If the player is alone in bed
 	LoadInteractions();
-	if (C012_AfterClass_Bed_Partner == "") {
-		
-		// Starts the masturbation mini game
-		LeaveIcon = "Leave";
-		LeaveScreen = "Dorm";
-		C012_AfterClass_Bed_CurrentStage = 0;
-		C012_AfterClass_Bed_PleasureUp = 0;
-		C012_AfterClass_Bed_PleasureDown = 0;
-		C012_AfterClass_Bed_MistressApproveMasturbate = "";
-		if (PlayerHasLockedInventory("VibratingEgg")) C012_AfterClass_Bed_MasturbationRequired = 2;
-		else C012_AfterClass_Bed_MasturbationRequired = 3;
-		
-	} else {
-		
-		// With a partner, they can make love, some girls are a little harder to please
-		C012_AfterClass_Bed_CanDateSarah = ((Common_PlayerLover == "") && !GameLogQuery(CurrentChapter, "Amanda", "DatingSarah"));
-		ActorLoad(C012_AfterClass_Bed_Partner, "Dorm");
-		if (C012_AfterClass_Bed_Partner == "Sidney") C012_AfterClass_Bed_CurrentStage = 200;
-		if (C012_AfterClass_Bed_Partner == "Amanda") C012_AfterClass_Bed_CurrentStage = 300;
-		if (C012_AfterClass_Bed_Partner == "Sarah") C012_AfterClass_Bed_CurrentStage = 400;
-		C012_AfterClass_Bed_ShowCollar = (C012_AfterClass_Bed_Partner == "Sidney");
-		C012_AfterClass_Bed_PrepareImage(false, false);
-		C012_AfterClass_Bed_SexPleasurePartner = ActorHasInventory("VibratingEgg") ? 3 : 0;
-		C012_AfterClass_Bed_SexPleasurePlayer = PlayerHasLockedInventory("VibratingEgg") ? 3 : 0;
-		if (CurrentActor == "Amanda") C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner - 1;
-		if (CurrentActor == "Sarah") C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner + 2;		
-		if (CurrentActor == "Sidney") C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner + 1;
-		if (CurrentActor == "Jennifer") C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner - 2;
-		LeaveIcon = "";
 
+	// If Amanda and Sarah are in bed
+	if (GameLogQuery(CurrentChapter, "Player", "AmandaAndSarahInBed")) {
+
+		// Interrupts the lovers
+		ActorLoad("Sarah", "Dorm");
+		C012_AfterClass_Bed_AmandaOwner = (Common_PlayerOwner == "Amanda");
+		if (ActorSpecificHasInventory("Amanda", "ChastityBelt") || ActorSpecificHasInventory("Sarah", "ChastityBelt")) C012_AfterClass_Bed_CurrentStage = 810;
+		else C012_AfterClass_Bed_CurrentStage = 800;
+		if (ActorSpecificHasInventory("Amanda", "ChastityBelt")) OverridenIntroImage = "AmandaChastityBeltSarahBed.jpg";
+		else OverridenIntroImage = "AmandaSarahBed.jpg";
+	
+	} else {
+
+		// If there's no partner in bed
+		if (C012_AfterClass_Bed_Partner == "") {
+			
+			// Starts the masturbation mini game
+			LeaveIcon = "Leave";
+			LeaveScreen = "Dorm";
+			C012_AfterClass_Bed_CurrentStage = 0;
+			C012_AfterClass_Bed_PleasureUp = 0;
+			C012_AfterClass_Bed_PleasureDown = 0;
+			C012_AfterClass_Bed_MistressApproveMasturbate = "";
+			if (PlayerHasLockedInventory("VibratingEgg")) C012_AfterClass_Bed_MasturbationRequired = 2;
+			else C012_AfterClass_Bed_MasturbationRequired = 3;
+			
+		} else {
+			
+			// With a partner, they can make love, some girls are a little harder to please
+			C012_AfterClass_Bed_CanDateSarah = ((Common_PlayerLover == "") && !GameLogQuery(CurrentChapter, "Amanda", "DatingSarah"));
+			ActorLoad(C012_AfterClass_Bed_Partner, "Dorm");
+			if (C012_AfterClass_Bed_Partner == "Sidney") C012_AfterClass_Bed_CurrentStage = 200;
+			if (C012_AfterClass_Bed_Partner == "Amanda") C012_AfterClass_Bed_CurrentStage = 300;
+			if (C012_AfterClass_Bed_Partner == "Sarah") C012_AfterClass_Bed_CurrentStage = 400;
+			C012_AfterClass_Bed_ShowCollar = (C012_AfterClass_Bed_Partner == "Sidney");
+			C012_AfterClass_Bed_PrepareImage(false, false);
+			C012_AfterClass_Bed_SexPleasurePartner = ActorHasInventory("VibratingEgg") ? 3 : 0;
+			C012_AfterClass_Bed_SexPleasurePlayer = PlayerHasLockedInventory("VibratingEgg") ? 3 : 0;
+			if (CurrentActor == "Amanda") C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner - 1;
+			if (CurrentActor == "Sarah") C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner + 2;		
+			if (CurrentActor == "Sidney") C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner + 1;
+			if (CurrentActor == "Jennifer") C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner - 2;
+			LeaveIcon = "";
+
+		}
+		
 	}
 	
 }
@@ -289,4 +307,12 @@ function C012_AfterClass_Bed_TestLoveSarah() {
 		C012_AfterClass_Sarah_CurrentStage = 110;
 		SetScene(CurrentChapter, "Sarah");
 	}
+}
+
+// Chapter 12 After Class - When Amanda and Sarah are forced to get out of the bed
+function C012_AfterClass_Bed_LoversOffBed() {
+	CurrentActor = "";
+	ActorSpecificChangeAttitude("Amanda", -1, 0);
+	ActorSpecificChangeAttitude("Sarah", -1, 0);
+	GameLogSpecificAddTimer(CurrentChapter, "Player", "AmandaAndSarahInBed", 1);
 }

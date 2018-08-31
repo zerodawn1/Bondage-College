@@ -60,6 +60,7 @@ function C012_AfterClass_Amanda_CalcParams() {
 	C012_AfterClass_Amanda_IsRestrained = ActorIsRestrained();
 	C012_AfterClass_Amanda_PleasurePlayerAvail = (!Common_PlayerChaste && !ActorIsGagged() && !ActorIsRestrained() && Common_ActorIsOwned && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
 	C012_AfterClass_Amanda_SexAvail = (!Common_PlayerRestrained && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Amanda", "NextPossibleOrgasm"));
+	if (GameLogQuery(CurrentChapter, "", "EventBlockChanging") && (C012_AfterClass_Dorm_Guest.indexOf(Common_PlayerOwner) >= 0) && !Common_PlayerNaked) C012_AfterClass_Amanda_SexAvail = false;
 	C012_AfterClass_Amanda_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Amanda_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
 	C012_AfterClass_Amanda_CanKickOut = (!Common_ActorIsOwner && !Common_ActorIsLover);
 	C012_AfterClass_Amanda_SidneyIsOwner = (Common_PlayerOwner == "Sidney");
@@ -271,15 +272,17 @@ function C012_AfterClass_Amanda_GaggedAnswer() {
 // Chapter 12 After Class - Amanda can make love with the player if (Love + seduction * 2) >= 12 on the next time or Amanda is the player girlfriend/submissive
 function C012_AfterClass_Amanda_TestSex() {
 	if (!ActorIsGagged()) {
-		if (!ActorIsRestrained()) {
-			if (!ActorIsChaste()) {
-				var LoveChance = ActorGetValue(ActorLove) + PlayerGetSkillLevel("Seduction") * 2;
-				if ((LoveChance >= 12) || Common_ActorIsLover || Common_ActorIsOwned) {
-					C012_AfterClass_Amanda_CurrentStage = 650;
-					OverridenIntroText = "";
-				}
-			} else OverridenIntroText = GetText("UnlockBeltBeforeSex");
-		} else OverridenIntroText = GetText("ReleaseBeforeTalk");
+		if (!GameLogQuery(CurrentChapter, "Amanda", "DatingSarah") || Common_ActorIsOwned) {
+			if (!ActorIsRestrained()) {
+				if (!ActorIsChaste()) {
+					var LoveChance = ActorGetValue(ActorLove) + PlayerGetSkillLevel("Seduction") * 2;
+					if ((LoveChance >= 12) || Common_ActorIsLover || Common_ActorIsOwned) {
+						C012_AfterClass_Amanda_CurrentStage = 650;
+						OverridenIntroText = "";
+					}
+				} else OverridenIntroText = GetText("UnlockBeltBeforeSex");
+			} else OverridenIntroText = GetText("ReleaseBeforeTalk");
+		} else OverridenIntroText = GetText("RefuseSexForLover");
 	} else C012_AfterClass_Amanda_GaggedAnswer();
 }
 

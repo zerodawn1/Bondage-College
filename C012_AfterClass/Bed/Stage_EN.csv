@@ -85,4 +85,14 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 420,0,0,Common_ActorIsLover,Would you like to sleep|like that with me?,"Sure sexy, it would be really|cool to sleep naked in your arms.",430,0,0,
 430,0,0,,Sleep with Sarah.|(End the day.),,430,0,0,"EndChapter(""Lover"")"
 430,0,0,,Maybe later my love.|(Get up from bed.),Oh yes!  The night is young.,900,0,0,OffBed()
+800,0,0,,You two are|so adorable.,Thanks!  I'm so happy that we're together.|(Amanda cuddles in her arms and smiles.),800,0,0,
+800,0,0,,Let me know if|you need something.,We already have everything we need.|(Amanda speaks.)  We have each other.,800,0,0,
+800,0,0,,I'm happy you've|found each other.,It's all thanks to you COMMON_PLAYERNAME.|(Amanda nods and kisses Sarah.),800,0,0,
+800,0,0,,Can I join in?,"A threesome?  That's a wild idea!|Not now though, this is our first day.",800,0,0,
+800,0,0,!AmandaOwner,That's enough girls.|Get out of my bed.,"(They sigh, get up and dress back up.)",900,0,0,LoversOffBed()
+800,0,0,,(Give them a|thumbs up.),(They share a long and loving|kiss and hug each other tenderly.),800,0,0,
+810,0,0,!AmandaOwner,Nope.  This belt is|there to protect you.,This is so unfair!  Our first day is chaste.|Thanks for letting use your bed though.,800,0,0,
+810,0,0,,I don't have the|key for the belt.,This is a huge problem!  Our first day is chaste.|Thanks for letting use your bed though.,800,0,0,
+810,0,0,!AmandaOwner,Not now.  Maybe later.,Really soon I hope!  Chaste love isn't great.|Thanks for letting use your bed though.,800,0,0,
+810,0,0,,(Shake your head no.),This is so unfair!  Our first day is chaste.|Thanks for letting use your bed though.,800,0,0,
 900,0,0,,(Back to the dorm.),,900,0,0,BackToDorm()

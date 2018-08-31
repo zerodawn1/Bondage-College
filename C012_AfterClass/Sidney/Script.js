@@ -56,7 +56,8 @@ function C012_AfterClass_Sidney_CalcParams() {
 	C012_AfterClass_Sidney_IsStrapped = ActorHasInventory("Armbinder");
 	C012_AfterClass_Sidney_PusherDealAvail = (!C012_AfterClass_Sidney_HasBelt && PlayerHasInventory("ChastityBelt") && GameLogQuery(CurrentChapter, "", "DebtChastityBelt") && !GameLogQuery(CurrentChapter, "", "DebtChastityBeltDone"));
 	C012_AfterClass_Sidney_PleasurePlayerAvail = (!Common_PlayerChaste && !ActorIsGagged() && !ActorIsRestrained() && Common_ActorIsOwned && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
-	C012_AfterClass_Sidney_SexAvail = (!Common_PlayerRestrained && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Sidney", "NextPossibleOrgasm"));
+	C012_AfterClass_Sidney_SexAvail = (!Common_PlayerRestrained && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Sidney", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Player", "AmandaAndSarahInBed"));
+	if (GameLogQuery(CurrentChapter, "", "EventBlockChanging") && (C012_AfterClass_Dorm_Guest.indexOf(Common_PlayerOwner) >= 0) && !Common_PlayerNaked) C012_AfterClass_Sidney_SexAvail = false;
 	C012_AfterClass_Sidney_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Sidney_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
 	C012_AfterClass_Sidney_CanKickOut = (!Common_ActorIsOwner && !Common_ActorIsLover);
 	C012_AfterClass_Sidney_AmandaIsOwner = (Common_PlayerOwner == "Amanda");
@@ -979,6 +980,7 @@ function C012_AfterClass_Sidney_UnlockBlackLingerie() {
 // Chapter 12 After Class - When Sidney forces the player to kick someone out
 function C012_AfterClass_Sidney_KickActor(KickedActor) {
 	if (KickedActor == "Amanda") C012_AfterClass_Amanda_CurrentStage = 790;
+	if (KickedActor == "Sarah") C012_AfterClass_Sarah_CurrentStage = 790;
 	SetScene(CurrentChapter, KickedActor);
 }
 
