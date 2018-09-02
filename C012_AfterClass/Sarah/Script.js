@@ -205,11 +205,17 @@ function C012_AfterClass_Sarah_Click() {
 		}
 		
 		// Cannot use rope or armbinder in the school play costumes
-		if (((ActorGetValue(ActorCloth) == "Villain") || (ActorGetValue(ActorCloth) == "Heroine") || (ActorGetValue(ActorCloth) == "Damsel")) && ((ClickInv == "Rope") || (ClickInv == "Armbinder"))) {
+		if ((ActorGetValue(ActorCloth) == "Heroine") && ((ClickInv == "Rope") || (ClickInv == "Armbinder"))) {
 			OverridenIntroText = GetText("NoRestrainInCostume");
 			return;			
 		}
 
+		// Cannot bondage items in the damsel gown
+		if ((ActorGetValue(ActorCloth) == "Damsel") && ((ClickInv == "Rope") || (ClickInv == "Armbinder") || (ClickInv == "Cuffs") || (ClickInv == "BallGag") || (ClickInv == "TapeGag") || (ClickInv == "ClothGag"))) {
+			OverridenIntroText = GetText("NoRestrainInCostume");
+			return;			
+		}
+		
 		// Apply the clicked restrain
 		ActorApplyRestrain(ClickInv);
 		C012_AfterClass_Sarah_CalcParams();

@@ -64,7 +64,7 @@ function C012_AfterClass_Amanda_CalcParams() {
 	C012_AfterClass_Amanda_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Amanda_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
 	C012_AfterClass_Amanda_CanKickOut = (!Common_ActorIsOwner && !Common_ActorIsLover);
 	C012_AfterClass_Amanda_SidneyIsOwner = (Common_PlayerOwner == "Sidney");
-	C012_AfterClass_Amanda_HaveCuffs = (PlayerHasInventory("Cuffs"));
+	C012_AfterClass_Amanda_HaveCuffs = (PlayerHasInventory("Cuffs") && !Common_PlayerRestrained);
 	C012_AfterClass_Amanda_CuffsGameAvail = (PlayerHasInventory("Cuffs") && !Common_PlayerRestrained && !ActorIsRestrained() && !C012_AfterClass_Amanda_ChatAvail);
 	C012_AfterClass_Amanda_DateSarahAvail = (!GameLogQuery(CurrentChapter, CurrentActor, "DatingSarah") && (Common_PlayerLover != "Amanda") && (Common_PlayerLover != "Sarah"));
 	C012_AfterClass_Amanda_AllowVillain = (GameLogQuery("C008_DramaClass", "Player", "RoleDamsel") || GameLogQuery("C008_DramaClass", "Player", "RoleHeroine"));

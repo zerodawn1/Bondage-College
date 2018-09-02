@@ -200,12 +200,12 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 402,0,0,,(Back to your room.),,402,0,0,BackToDorm()
 410,0,0,,(Back to your room.),,410,0,0,BackToDorm()
 500,0,0,,TO DO,TO DO,500,0,0,EndChat()
-600,0,0,,Wear your|school outfit.,I'm always proud to represent the college.|(She changes in her school uniform.),0,0,0,"ForceChangeActor(""Clothed"")"
+600,0,0,,Wear your|school outfit.,This is pretty boring.  We wore that oufit all day.|(She pouts and changes to her school uniform.),0,0,0,"ForceChangeActor(""Clothed"")"
 600,0,0,,Wear your|brown dress.,Alright!  It's time to relax.|(She changes to her brown dress.),0,0,0,"ForceChangeActor(""BrownDress"")"
-600,0,0,AllowHeroine,Wear your heroine|armor from the play.,That's a funny idea!  (She changes.)|I do need to bring it back tomorrow.,0,0,0,"ForceChangeActor(""Heroine"")"
-600,0,0,AllowDamsel,Wear your damsel|gown from the play.,That's a funny idea!  (She changes.)|I do need to bring it back tomorrow.,0,0,0,"ForceChangeActor(""Damsel"")"
-600,0,0,!HasBelt,Get in your|underwear.,I'm curious to see where this will lead.|(She giggles and changes in her underwear.),0,0,0,"ForceChangeActor(""Underwear"")"
-600,0,0,,Get naked.,Oh my!  Should I be nervous?|(She slowly strips naked for you.),0,0,0,"ForceChangeActor(""Naked"")"
+600,0,0,AllowHeroine,Wear your heroine|armor from the play.,Good idea!  I love costumes.|I'm sure Julia won't mind.,0,0,0,"ForceChangeActor(""Heroine"")"
+600,0,0,AllowDamsel,Wear your damsel|gown from the play.,Good idea!  I love costumes.|I'm sure Julia won't mind.,0,0,0,"ForceChangeActor(""Damsel"")"
+600,0,0,!HasBelt,Get in your|underwear.,It might be the first step to a kinky scenario.|(She giggles and changes to her underwear.),0,0,0,"ForceChangeActor(""Underwear"")"
+600,0,0,,Get naked.,Alright!  Are we going to have sex?|(She slowly strips naked for you.),0,0,0,"ForceChangeActor(""Naked"")"
 600,0,0,,Forget it.,(She nods.),0,0,0,
 610,0,0,,You're free to|have fun tonight.,Thanks a lot!  But I would|rather stay with you Mistress.,0,0,0,"SetCurfew(""None"")"
 610,0,0,,You can have fun tonight|but you will sleep here.,"Here?  But there's only one bed.|Very well Mistress, I'm curious.",0,0,0,"SetCurfew(""24"")"
