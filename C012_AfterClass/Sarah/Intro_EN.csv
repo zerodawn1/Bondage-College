@@ -35,8 +35,7 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 192,0,0,,,StopDating.jpg
 193,0,0,,,StopDating.jpg
 194,0,0,,,Dorm.jpg
-200,0,0,,,Dorm.jpg
-200,0,0,Common_ActorIsLover,,Dorm.jpg
+200,0,0,,I don't.  I'm a free subbie.  I guess I'm too|much trouble for Dominants to consider me.,Dorm.jpg
 210,0,0,,,Dorm.jpg
 220,0,0,,,Dorm.jpg
 230,0,0,,,Dorm.jpg
@@ -70,13 +69,6 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 402,0,0,,,Door.jpg
 410,0,0,,,Door.jpg
 500,0,0,,,Dorm.jpg
-510,0,0,,,Dorm.jpg
-520,0,0,,,Dorm.jpg
-530,0,0,,,Dorm.jpg
-531,0,0,,,Dorm.jpg
-532,0,0,,,Dorm.jpg
-540,0,0,,,Dorm.jpg
-541,0,0,,,Dorm.jpg
 600,0,0,,,Dorm.jpg
 610,0,0,,,Dorm.jpg
 630,0,0,,,Dorm.jpg

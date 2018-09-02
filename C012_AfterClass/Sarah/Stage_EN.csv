@@ -1,6 +1,6 @@
 Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,,We need to talk.,What would you like to talk about?,0,0,0,TestTalk()
-0,0,5,IsRestrained,You really enjoy being|restrained don't you girl?,(She winks.)  I'll never admit that Miss.|(You need +20 submission to collar Sarah.),0,0,0,TestDomme()
+0,0,5,!Common_ActorIsOwned,"Girl, do you|have an owner?","I don't, I'm a free and a happy subbie.|(You need +20 submission to collar Sarah.)",0,0,0,TestDomme()
 0,0,-10,!BondageClubInvitationBySarah,Miss Sarah.|I admire you.,I think I know what you need girl.,0,0,0,TestSub()
 0,0,0,BondageClubInvitationBySarah,Are we going to the|Bondage Club now?,"(She checks the time.)  No, it's too early.|Let's do something else before we go.",0,0,0,TestBondageClub()
 0,0,0,Common_PlayerGagged,@Om nnnuoogn mh!,Let me get my English-Mumble|dictionary.  (She laughs out loud.),0,0,0,TestUnbind()
@@ -18,11 +18,10 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 10,0,0,IsStrapped,(Unstrap her.),(You remove the straps and|unlace the binder from her arms.),10,0,0,Untie()
 10,0,0,,(Stop playing.),(You take a step back.),0,0,0,
 20,0,0,Common_ActorIsOwned,Let's review|your rules.,Oh my god.  Yes Mistress.,610,0,0,
-20,0,0,ChatAvail,I'd like to know|more about you.,"Fair enough, what would|like to know about me?",500,0,0,StartChat()
+20,0,0,ChatAvail,I'd like to know|more about you.,Cool!  What do you want to know?,500,0,0,StartChat()
 20,0,0,DateAmandaAvail,Is there something|going on with Amanda?,I'm not sure actually.  She gave me a|few hints but I don't think she's serious.,160,0,0,
 20,0,0,DatingAmanda,Would you like to use|my bed with Amanda?,"(She smiles.)  Of course I would!|But ask her first, she's the shy one.",20,0,0,
 20,0,0,AmandaHeartBroken,Will Amanda be ok?,Poor Amy.  I guess she will be fine.|I'll speak with her when I get home.,20,0,0,
-20,0,0,CuffsGameAvail,Would you like to try a|cuffs challenge with me?,You both giggle and struggle with the cuffs but|you're able to lock them around her wrists.,0,0,0,CuffsGame()
 20,0,0,Common_PlayerChaste,Can you please help|me with this belt?,I cannot help you.|I don't have the key.,0,0,0,
 20,0,0,Common_ActorIsLover,About our relationship...,Y...  Yes my love?|(She seems nervous.),190,0,0,
 20,0,0,,It's time for you|to leave my place.,You're expelling me from your dorm?,790,-1,1,
@@ -200,27 +199,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 401,0,0,,"Fine, have fun.|(Let her go.)",Oh yes!  Thank you Mistress!|(She leaves your dorm room.),410,0,0,
 402,0,0,,(Back to your room.),,402,0,0,BackToDorm()
 410,0,0,,(Back to your room.),,410,0,0,BackToDorm()
-500,0,0,,You're a nerd|aren't you?,(She frowns.)  Don't call me a nerd!|I simply study a little more than most.,510,-1,0,
-500,0,0,,You study a lot?,"Yes, I study a little more than most.",510,0,0,
-500,0,0,,You seem very|serious in class.,"Absolutely, I want to have good grades.|I also study a little more than most.",510,1,0,
-510,0,0,,Don't you want|to have fun?,I do have fun!  I have a wonderful friend|and I also play chess and video games.,520,0,0,
-510,0,0,,That sounds|pretty boring.,Succeeding in school isn't boring!|I also play chess and video games.,520,-1,0,
-510,0,0,,Do you play games?,Yes!  I play chess and video games.,520,1,0,
-520,0,0,HaveCuffs,I have another|game for you.,Oh?  What game?,530,0,0,
-520,0,0,,Did you ever try a|self-bondage game?,Self-bondage?  (She blushes red.)|Well...  Maybe I did a few times.,540,0,0,
-530,0,0,,"The game is called:|""Try to escape"".",That sounds like a fun game.|And how do you play it?,531,0,0,
-530,0,0,,"The game is called:|""Stuck in cuffs"".",That sounds like a fun game.|And how do you play it?,531,0,1,
-530,0,0,,"The game is called:|""Cuff me up"".",That sounds like a fun game.|And how do you play it?,531,0,-1,
-531,0,0,,It's pretty easy.|(Try to cuff her.),You both giggle and struggle with the cuffs but|you're able to lock them around her wrists.,532,0,0,CuffsGame()
-532,0,0,Common_PlayerRestrained,Fun game isn't it?|(Struggle in the cuffs.),"Yes, we have to play it more often.|(She looks at you struggling and laughs.)",0,0,-1,EndChat()
-532,0,0,!Common_PlayerRestrained,Fun game isn't it?|(Watch her struggle.),"Yes, we have to play it more often.|(She struggles in the cuffs for fun.)",0,0,1,EndChat()
-540,0,0,,It's quite a thrill?,"Absolutely, but it's not easy|to tie yourself up properly.",541,0,0,
-540,0,0,,When you tie yourself.|Warn me for safety.,Oh yes Miss.  Good idea.|Or maybe you can help me.,541,0,1,
-540,0,0,,I also do some|self-bondage.,Remember to be careful.|Maybe we could help each other.,541,0,-1,
-541,0,0,!Common_ActorIsOwned,"Awesome, I can't|wait to be tied up.",You're such a kinky girl.|Do you have some rope now?,0,0,-1,EndChat()
-541,0,0,,Our next self-bondage|game might be together.,I would love that COMMON_PLAYERNAME.|Do you have some rope now?,0,1,0,EndChat()
-541,0,0,,It all sounds fun.,It does.  Bondage is quite a thrill.,0,0,0,EndChat()
-541,0,0,,Perfect!  It will be|fun to tie you up.,Absolutely.  Do you have some rope now?,0,0,1,EndChat()
+500,0,0,,TO DO,TO DO,500,0,0,EndChat()
 600,0,0,,Wear your|school outfit.,I'm always proud to represent the college.|(She changes in her school uniform.),0,0,0,"ForceChangeActor(""Clothed"")"
 600,0,0,,Wear your|brown dress.,Alright!  It's time to relax.|(She changes to her brown dress.),0,0,0,"ForceChangeActor(""BrownDress"")"
 600,0,0,AllowHeroine,Wear your heroine|armor from the play.,That's a funny idea!  (She changes.)|I do need to bring it back tomorrow.,0,0,0,"ForceChangeActor(""Heroine"")"

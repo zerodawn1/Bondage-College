@@ -150,6 +150,7 @@ function DrawActorStats(Left, Top) {
 	if (CurrentActor == Common_PlayerLover) DrawImage("Icons/Lover.png", Left - 110, Top);
 	else DrawImage("Icons/Heart.png", Left - 110, Top);
 	if (ActorGetValue(ActorOwner) == "Player") DrawImage("Icons/Collared.png", Left - 10, Top);
+	else if (CurrentActor == Common_PlayerOwner) DrawImage("Icons/Owner.png", Left - 10, Top);
 	else DrawImage("Icons/Submission.png", Left - 10, Top);
 	DrawImage("Icons/Orgasm.png", Left + 90, Top);
 	DrawImage("Icons/Bondage.png", Left + 190, Top);

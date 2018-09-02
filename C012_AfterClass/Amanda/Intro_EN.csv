@@ -73,6 +73,10 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 393,0,0,,,Dorm.jpg
 394,0,0,,,Dorm.jpg
 395,0,0,,,Dorm.jpg
+400,0,0,,So you and Sarah are dating?,Dorm.jpg
+410,0,0,,,Dorm.jpg
+420,0,0,,,Dorm.jpg
+430,0,0,,,Dorm.jpg
 450,0,0,,(Amanda tickles you for fun and laughs.)|Alright my subbie.  It's time to have fun.,Dorm.jpg
 450,0,0,Common_ActorIsLover,(Amanda tickles you for fun and laughs.)|Alright my subbie.  It's time to have fun.,Dorm.jpg
 500,0,0,,,Dorm.jpg
@@ -126,7 +130,7 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 820,0,0,,,StartDating.jpg
 821,0,0,,,Dorm.jpg
 822,0,0,,,Dorm.jpg
-823,0,0,,,Dorm.jpg
+823,0,0,,Do you mind if I relax with|my girlfriend on your bed?,Dorm.jpg
 823,0,0,Common_ActorIsOwned,"Mistress, can I please use your|bed now to relax with Sarah?",Dorm.jpg
 823,0,0,Common_ActorIsOwner,"My subbie, I will use your bed|to relax with my girlfriend.",Dorm.jpg
 3000,0,0,,"My subbie, get naked now.",Dorm.jpg

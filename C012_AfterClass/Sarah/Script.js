@@ -255,18 +255,13 @@ function C012_AfterClass_Sarah_TestSex() {
 // Chapter 12 After Class - Sarah can be dominated at +20 submission
 function C012_AfterClass_Sarah_TestDomme() {
 	if (!ActorIsGagged()) {
-		if (!Common_ActorIsOwned) {
-			if (PlayerHasInventory("Collar")) {
-				if (ActorGetValue(ActorSubmission) >= 20) {
-					if (!GameLogQuery(CurrentChapter, CurrentActor, "EnslaveDone")) {
-						C012_AfterClass_Sarah_CurrentStage = 200;
-						OverridenIntroText = "";
-						LeaveIcon = "";
-						GameLogAdd("EnslaveDone");
-					} else OverridenIntroText = GetText("EnslaveAlreadyTried");
-				}
-			} else OverridenIntroText = GetText("CollarToEnslave");
-		} else OverridenIntroText = GetText("SubEnjoyBondage");
+		if (PlayerHasInventory("Collar")) {
+			if (ActorGetValue(ActorSubmission) >= 20) {
+				C012_AfterClass_Sarah_CurrentStage = 200;
+				OverridenIntroText = "";
+				LeaveIcon = "";
+			}
+		} else OverridenIntroText = GetText("CollarToEnslave");
 	} else C012_AfterClass_Sarah_GaggedAnswer();
 }
 
@@ -668,6 +663,7 @@ function C012_AfterClass_Sarah_KickForActor(KickedForActor) {
 // Chapter 12 After Class - When Sarah is kicked out, it can destroy the players couple
 function C012_AfterClass_Sarah_KickedOut() {
 	GameLogAdd("KickedOutFromDorm");
+	GameLogSpecificAddTimer(CurrentChapter, "Player", "AmandaAndSarahInBed", 1);
 	if (CurrentActor == Common_PlayerLover) {
 		ActorChangeAttitude(-5, 0);
 		C012_AfterClass_Sarah_BreakUp();

@@ -2,6 +2,7 @@ var C012_AfterClass_Dorm_Guest = [];
 var C012_AfterClass_Dorm_GuestVisible = [];
 var C012_AfterClass_Dorm_PlayerPos = 0;
 var C012_AfterClass_Dorm_PlayerGrounded = false;
+var C012_AfterClass_Dorm_AmandaAndSarahInBed = false;
 var C012_AfterClass_Dorm_SidneyExitTime = 0;
 var C012_AfterClass_Dorm_SidneyReturnTime = 0;
 var C012_AfterClass_Dorm_SarahExitTime = 0;
@@ -79,7 +80,7 @@ function C012_AfterClass_Dorm_CalGuest() {
 	for (var A = 0; A < C012_AfterClass_Dorm_Guest.length; A++)
 		if (((C012_AfterClass_Dorm_Guest[A] != "Sarah") && (C012_AfterClass_Dorm_Guest[A] != "Amanda")) || !GameLogQuery(CurrentChapter, "Player", "AmandaAndSarahInBed"))
 			C012_AfterClass_Dorm_GuestVisible.push(C012_AfterClass_Dorm_Guest[A]);
-	C012_AfterClass_Dorm_GuestVisible = 525 - C012_AfterClass_Dorm_GuestVisible.length * 100;
+	C012_AfterClass_Dorm_PlayerPos = 525 - C012_AfterClass_Dorm_GuestVisible.length * 100;
 
 }
 
@@ -119,6 +120,7 @@ function C012_AfterClass_Dorm_Load() {
 
 	// If the player is grounded, the dorm is mostly deactivated until the timer runs out
 	C012_AfterClass_Dorm_PlayerGrounded = GameLogQuery(CurrentChapter, "", "EventGrounded");
+	C012_AfterClass_Dorm_AmandaAndSarahInBed = GameLogQuery(CurrentChapter, "Player", "AmandaAndSarahInBed");
 	Common_PlayerPose = "";
 	if ((Common_PlayerPose == "") && GameLogQuery(CurrentChapter, "", "EventSpanked") && !Common_PlayerRestrained && !Common_PlayerGagged && Common_PlayerNaked) Common_PlayerPose = "Spanked";
 	C012_AfterClass_Dorm_SetPunishmentPose();
@@ -138,6 +140,12 @@ function C012_AfterClass_Dorm_Run() {
 	
 	// Check if we must stop the scene for leaving guests
 	C012_AfterClass_Dorm_LeavingGuest();
+
+	// If Amanda and Sarah gets off the bed
+	if (C012_AfterClass_Dorm_AmandaAndSarahInBed && !GameLogQuery(CurrentChapter, "Player", "AmandaAndSarahInBed")) {
+		C012_AfterClass_Dorm_CalGuest();
+		C012_AfterClass_Dorm_AmandaAndSarahInBed = false;
+	}
 	
 	// If grounding is over, we go to the owner
 	if (C012_AfterClass_Dorm_PlayerGrounded && !GameLogQuery(CurrentChapter, "", "EventGrounded") && (C012_AfterClass_Sidney_CurrentStage != 400)) {
@@ -164,7 +172,7 @@ function C012_AfterClass_Dorm_Run() {
 
 		// Draw the background and the actors
 		DrawImage(CurrentChapter + "/" + CurrentScreen + "/Background.jpg", 0, 0);
-		if (GameLogQuery(CurrentChapter, "Player", "AmandaAndSarahInBed")) DrawImage(CurrentChapter + "/" + CurrentScreen + "/AmandaSarahBed.png", 150, 150);
+		if (GameLogQuery(CurrentChapter, "Player", "AmandaAndSarahInBed")) DrawImage(CurrentChapter + "/" + CurrentScreen + "/AmandaSarahBed.png", 300, 100);
 		DrawTransparentPlayerImage(C012_AfterClass_Dorm_PlayerPos - 210, 0, 0.6667);
 		for (var A = 0; A < C012_AfterClass_Dorm_GuestVisible.length; A++)
 			DrawActor(C012_AfterClass_Dorm_GuestVisible[A], C012_AfterClass_Dorm_PlayerPos - 10 + A * 200, 0, 0.6667);

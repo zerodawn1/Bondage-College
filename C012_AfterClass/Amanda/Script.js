@@ -106,6 +106,15 @@ function C012_AfterClass_Amanda_Load() {
 
 		} else {
 
+			// Amanda will talk the player if she's dating Sarah
+			if ((C012_AfterClass_Amanda_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "DatingSarahChat") && (Common_PlayerLover == "Sarah") && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged() && !ActorIsRestrained()) {
+				LeaveIcon = "";
+				if ((ActorGetValue(ActorCloth) == "") || (ActorGetValue(ActorCloth) == "Clothed")) ActorSetPose("Angry");
+				else ActorSetPose("");
+				C012_AfterClass_Amanda_CurrentStage = 400;
+				GameLogAdd("DatingSarahChat");
+			}
+
 			// If there's a crossover between two actors
 			if ((C012_AfterClass_Amanda_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetSidney") && (C012_AfterClass_Dorm_Guest.indexOf("Sidney") >= 0) && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged() && !ActorIsRestrained()) {
 				LeaveIcon = "";
@@ -160,7 +169,7 @@ function C012_AfterClass_Amanda_Run() {
 	
 	// Draw the actor alone or with the player depending on the stage
 	if ((C012_AfterClass_Amanda_CurrentStage < 800) || (C012_AfterClass_Amanda_CurrentStage >= 900)) {
-		if ((C012_AfterClass_Amanda_CurrentStage != 410) && (C012_AfterClass_Amanda_CurrentStage != 3932) && (C012_AfterClass_Amanda_CurrentStage != 635) && (C012_AfterClass_Amanda_CurrentStage != 636) && (C012_AfterClass_Amanda_CurrentStage != 791) && (C012_AfterClass_Amanda_CurrentStage != 194)) {
+		if ((C012_AfterClass_Amanda_CurrentStage != 3932) && (C012_AfterClass_Amanda_CurrentStage != 635) && (C012_AfterClass_Amanda_CurrentStage != 636) && (C012_AfterClass_Amanda_CurrentStage != 791) && (C012_AfterClass_Amanda_CurrentStage != 194)) {
 			if (((C012_AfterClass_Amanda_CurrentStage >= 3090) && (C012_AfterClass_Amanda_CurrentStage <= 3099)) || ((C012_AfterClass_Amanda_CurrentStage >= 3901) && (C012_AfterClass_Amanda_CurrentStage <= 3999))) {
 				DrawActor("Player", 475, 0, 1);
 				DrawActor(CurrentActor, 750, 0, 1);
@@ -965,6 +974,7 @@ function C012_AfterClass_Amanda_KickForActor(KickedForActor) {
 // Chapter 12 After Class - When Amanda is kicked out, it can destroy the players couple
 function C012_AfterClass_Amanda_KickedOut() {
 	GameLogAdd("KickedOutFromDorm");
+	GameLogSpecificAddTimer(CurrentChapter, "Player", "AmandaAndSarahInBed", 1);
 	if (CurrentActor == Common_PlayerLover) {
 		ActorChangeAttitude(-5, 0);
 		C012_AfterClass_Amanda_BreakUp();

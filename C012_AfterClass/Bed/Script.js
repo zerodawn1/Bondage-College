@@ -90,7 +90,7 @@ function C012_AfterClass_Bed_Run() {
 	if (C012_AfterClass_Bed_CurrentStage == 100) { Common_PlayerPose = "LieMasturbate"; DrawTransparentPlayerImage(600, 0, 1); Common_PlayerPose = ""; }
 	if (C012_AfterClass_Bed_CurrentStage == 110) { Common_PlayerPose = "LieMasturbateOrgasm"; DrawTransparentPlayerImage(600, 0, 1); Common_PlayerPose = ""; }
 	if (C012_AfterClass_Bed_CurrentStage == 120) { Common_PlayerPose = "LieMasturbateOrgasm"; DrawTransparentPlayerImage(600, 0, 1); Common_PlayerPose = ""; }
-	if (C012_AfterClass_Bed_CurrentStage == 900) DrawActor(CurrentActor, 600, 0, 1);
+	if ((C012_AfterClass_Bed_CurrentStage == 900) && (CurrentActor != "")) DrawActor(CurrentActor, 600, 0, 1);
 }
 
 // Chapter 12 After Class - Bed Click
@@ -315,4 +315,5 @@ function C012_AfterClass_Bed_LoversOffBed() {
 	ActorSpecificChangeAttitude("Amanda", -1, 0);
 	ActorSpecificChangeAttitude("Sarah", -1, 0);
 	GameLogSpecificAddTimer(CurrentChapter, "Player", "AmandaAndSarahInBed", 1);
+	OverridenIntroImage = "";
 }

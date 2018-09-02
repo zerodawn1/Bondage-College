@@ -200,6 +200,21 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 395,0,0,,It will be fun.,It certainly will be fun.|Now stand up my subbie.,0,0,0,PlayerStandUp()
 395,0,0,,I can't wait to|start training.,I will prepare your training schedule|pretty soon.  Now stand up my subbie.,0,1,-1,PlayerStandUp()
 395,0,0,,Training can wait.,It will begin when your schedule is|ready.  Now stand up my subbie.,0,-1,1,PlayerStandUp()
+400,0,0,,"Yes, we started|dating today.",(She sighs.)  Tell me COMMON_PLAYERNAME.|Do you really love her?,410,-1,0,
+400,0,0,,Yes.  Is there|somthing wrong?,(She sighs.)  Tell me COMMON_PLAYERNAME.|Do you really love her?,410,-1,-1,
+400,0,0,,Are you jealous?,"(She looks shocked.)  I'm not jealous!|Tell me, do you really love her?",410,-2,1,
+410,0,0,,"Yes, I love her.",Very well.  Please promise me something then.|Promise me you'll take care of her and cherish her.,420,0,0,
+410,0,0,,I do really love her.,Very well.  Please promise me something then.|Promise me you'll take care of her and cherish her.,420,0,0,
+410,0,0,,I don't know.,"If you don't know it means you don't love her.|And if that's the case, you should break up.",430,-1,-1,
+410,0,0,,Not really.  We both|want more pussy.,This is not a healthy relationship!|You two should break up now.,430,-2,1,
+420,0,0,,I promise I will take|care and protect her.,"Alright, maybe she's in good hands.|What would you like to do now?",0,0,1,EndChat()
+420,0,0,,I promise I will|cherish and love her.,"Good, you seem to really love her.|What would you like to do now?",0,1,0,EndChat()
+420,0,0,Common_ActorIsOwned,I promise nothing!,"Alright Mistress, I will not argue.|What would you like to do now?",0,-2,1,EndChat()
+420,0,0,!Common_ActorIsOwned,I promise nothing!,"Fine!  Do what you want, I don't care.|(She leaves your room and slams the door.)",791,-2,1,KickedOut()
+430,0,0,,"Ok, we will break up.","Very good, I'm glad you understand.|What would you like to do now?",0,1,0,EndChat()
+430,0,0,,I'll think about it.,Think about it and you'll understand.|What would you like to do now?,0,0,0,EndChat()
+430,0,0,Common_ActorIsOwned,Don't tell me|what to do slave.,"Alright Mistress, I will not argue.|What would you like to do now?",0,-1,1,EndChat()
+430,0,0,!Common_ActorIsOwned,I won't break up.,"Fine!  Do what you want, I don't care.|(She leaves your room and slams the door.)",791,-1,1,KickedOut()
 450,0,0,,Fun Mistress?,,0,0,0,RandomAmandaDommeEvent()
 450,0,0,,What's going on?,,0,0,0,RandomAmandaDommeEvent()
 450,0,0,,(Nod happily.),,0,0,0,RandomAmandaDommeEvent()
@@ -349,10 +364,10 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 821,0,0,,I didn't do much.,"Don't say that, you've did a lot.|(They hold each other hands.)",822,0,-1,
 821,0,0,,You needed|a little push.,"Yes, you've done the perfect push.|(They hold each other hands.)",822,0,1,
 822,0,0,,You can use my|bed if you want.,Really?  Right in your dorm room?|(They look at each other and giggle.),823,0,0,
-822,0,0,,I'm sure it will get|hot later tonight.,(She blushes red while Sarah laughs.)|Maybe.  What would you like to do now?,0,0,1,
+822,0,0,,I'm sure it will get|hot later tonight.,(She blushes red while Sarah laughs.)|Maybe.  What would you like to do now?,0,0,1,EndChat()
 823,0,0,Common_ActorIsOwner,Have fun Mistress!|(Let them use your bed.),,0,0,0,BedWithSarah()
 823,0,0,!Common_ActorIsOwner,No better time than now!|(Let them use your bed.),,0,0,0,BedWithSarah()
-823,0,0,!Common_ActorIsOwner,"Not now, later.",Very well.  What would you like to do now?,0,0,0,
+823,0,0,!Common_ActorIsOwner,"Not now, later.",Very well.  What would you like to do now?,0,0,0,EndChat()
 3000,0,0,,Yes Mistress.|(Strip naked.),Good subbie.  (You change for Amanda.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,(Nod slowly.)|(Strip naked.),Good subbie.  (You change for Amanda.),3090,0,0,"ForceChangePlayer(""Naked"")"
 3000,0,0,,I don't want|to do that.,"Ok my subbie, be quiet then.|(She reviews her school notes.)",3092,0,0,TestPunish()
