@@ -171,8 +171,8 @@ function C012_AfterClass_Sarah_Click() {
 			return;
 		}
 
-		// Sarah will turn the tables on the player if -5 submission or less
-		if ((ActorGetValue(ActorSubmission) <= -5) && !ActorIsRestrained() && !ActorIsGagged() && (ClickInv != "CuffsKey")) {
+		// Sarah will turn the tables on the player if -10 submission or less
+		if ((ActorGetValue(ActorSubmission) <= -10) && !ActorIsRestrained() && !ActorIsGagged() && (ClickInv != "CuffsKey")) {
 			PlayerRandomRestrain();
 			if (Common_PlayerRestrained) {
 				PlayerRandomGag();
@@ -185,19 +185,19 @@ function C012_AfterClass_Sarah_Click() {
 			} else OverridenIntroText = GetText("RefuseBondage");
 			return;
 		}
-
-		// Sarah will refuse any bondage if 4 submission or less
-		if ((ActorGetValue(ActorSubmission) < 5) && !ActorIsRestrained() && !ActorIsGagged() && (ClickInv != "CuffsKey")) {
-			OverridenIntroText = GetText("RefuseBondage");
-			return;
-		}
-		
+	
 		// Sarah can only wear the belt if she's naked
 		if (!ActorIsChaste() && (ActorGetValue(ActorCloth) != "Naked") && (ClickInv == "ChastityBelt")) {
 			OverridenIntroText = GetText("NakedForBelt");
 			return;
 		}
 
+		// Sarah will refuse the chastity belt if she's not restrained 
+		if (!ActorIsChaste() && !ActorIsRestrained() && (ActorGetValue(ActorSubmission) < 10) && (ClickInv == "ChastityBelt")) {
+			OverridenIntroText = GetText("RefuseBelt");
+			return;
+		}
+		
 		// A second rope can be applied if Sarah isn't fully clothed
 		if ((ActorGetValue(ActorCloth) != "Naked") && (ActorGetValue(ActorCloth) != "Underwear") && (ClickInv == "Rope") && (ActorHasInventory("Rope"))) {
 			OverridenIntroText = GetText("StripForSecondRope");

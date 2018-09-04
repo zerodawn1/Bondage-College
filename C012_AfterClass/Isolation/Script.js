@@ -81,12 +81,6 @@ function C012_AfterClass_Isolation_Search() {
 		GameLogSpecificAdd(CurrentChapter, "Player", "IsolationFindCollar");
 		OverridenIntroText = GetText("FindCollar");
 		PlayerAddInventory("Collar", 1);
-	} else {
-		if (!GameLogQuery(CurrentChapter, "Player", "IsolationFindCuffs")) {
-			GameLogSpecificAdd(CurrentChapter, "Player", "IsolationFindCuffs");
-			OverridenIntroText = GetText("FindCuffs");
-			PlayerAddInventory("Cuffs", 1);
-		}
 	}
 }
 

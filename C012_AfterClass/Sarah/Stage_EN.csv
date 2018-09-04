@@ -1,6 +1,6 @@
 Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,,We need to talk.,What would you like to talk about?,0,0,0,TestTalk()
-0,0,5,!Common_ActorIsOwned,"Girl, do you|have an owner?","I don't, I'm a free and a happy subbie.|(You need +20 submission to collar Sarah.)",0,0,0,TestDomme()
+0,0,5,!Common_ActorIsOwned,You're into BDSM but|you're not owned?,"I'm not, I'm a free and a happy subbie.|(You need +20 submission to collar Sarah.)",0,0,0,TestDomme()
 0,0,-10,!BondageClubInvitationBySarah,Miss Sarah.|I admire you.,I think I know what you need girl.,0,0,0,TestSub()
 0,0,0,BondageClubInvitationBySarah,Are we going to the|Bondage Club now?,"(She checks the time.)  No, it's too early.|Let's do something else before we go.",0,0,0,TestBondageClub()
 0,0,0,Common_PlayerGagged,@Om nnnuoogn mh!,Let me get my English-Mumble|dictionary.  (She laughs out loud.),0,0,0,TestUnbind()
@@ -23,7 +23,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 20,0,0,DatingAmanda,Would you like to use|my bed with Amanda?,"(She smiles.)  Of course I would!|But ask her first, she's the shy one.",20,0,0,
 20,0,0,AmandaHeartBroken,Will Amanda be ok?,Poor Amy.  I guess she will be fine.|I'll speak with her when I get home.,20,0,0,
 20,0,0,Common_PlayerChaste,Can you please help|me with this belt?,I cannot help you.|I don't have the key.,0,0,0,
-20,0,0,Common_ActorIsLover,About our relationship...,Y...  Yes my love?|(She seems nervous.),190,0,0,
+20,0,0,Common_ActorIsLover,About our relationship...,Yes my sexy lover?|(She seems nervous.),190,0,0,
 20,0,0,,It's time for you|to leave my place.,You're expelling me from your dorm?,790,-1,1,
 20,0,0,,Never mind.,Very well.  What would you like to do?,0,0,0,
 30,0,0,,Yes!  Let's go!|(Go to the club.),(The Bondage Club will be available|in another version of the game.),30,0,0,
@@ -85,24 +85,22 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 161,0,0,,It's your turn Amanda.,,0,1,0,AmandaDatingScene()
 161,0,0,,"Amanda, take your|cupid arrow now.",,0,0,1,AmandaDatingScene()
 161,0,0,,Maybe she'll find|the courage someday.,(She looks at Amanda and shrugs.)|What could we do to have fun?,0,0,0,
-190,0,0,,I... I... I lost my|train of thought.,(She still seems to worry.)|It's perfectly fine my love.,0,0,0,
-190,0,0,,I don't think it's|working between us.,(She gives you a sad look.)|Do you want to break up?,191,0,0,
-190,0,0,,I want to break up.,(She gives you a sad look.)|Really my love?  It's the end?,191,0,0,
-191,0,0,,"No, let's stay together.",(She trembles and slowly recovers.)|Please don't toy with me COMMON_PLAYERNAME.,0,0,0,
-191,0,0,Common_ActorIsOwned,We'll break up but I'll|keep you as my slave.,"(She cries and looks devastated.)|Yes Mistress, it's...  it's...  it's fine.",192,-5,0,BreakUp()
-191,0,0,!Common_ActorIsOwned,"Yes, I want to break up.",Why are you doing that?|Don't play with my heart!,193,-5,0,BreakUp()
-192,0,0,,I'm sorry.|Don't cry.,I will be alright Mistress.|Let's talk about something else.,0,0,-1,EndChat()
-192,0,0,,You're not|in my league.,"Please Mistress, it hurts so much.|Let's talk about something else.",0,-1,1,EndChat()
-192,0,0,,It was a mistake|from the start,"Maybe you're right, I don't know.|Let's talk about something else.",0,0,0,EndChat()
-192,0,0,,You'll find someone|perfect for you.,"Yes, and there is someone else that's perfect.|Thanks but let's talk about something else.",0,1,0,EndChat()
-193,0,0,,I'm sorry.|Don't cry.,Oh god!  It hurts so much!|(She runs away from the room.),194,0,-1,AmandaLeave()
-193,0,0,,You're not|in my league.,No need to dig in the wound.|(She runs away from the room.),194,-1,1,AmandaLeave()
-193,0,0,,It was a mistake|from the start,Yes!  A huge and horrible mistake.|(She runs away from the room.),194,0,0,AmandaLeave()
-193,0,0,,You'll find someone|perfect for you.,I know!  And I will have her someday.|(She runs away from the room.),194,1,0,AmandaLeave()
-200,0,0,,You like losing control.|It turns you on girl.,"I...  Errr...  Yes Miss.  I admit it.|I cannot explain why, but I love bondage.",210,0,1,
-200,0,0,,You're all wet|when tied up.,"I would not say it like that, but yes.|I cannot explain why, but I love bondage.",210,-1,0,
-200,0,0,,Bondage is a strong|sexual fantasy of yours?,"(She blushes and looks down.)  I admit it.|I cannot explain why, but I love bondage.",210,1,0,
-200,0,0,,Being restrained is a|fantasy that we share.,"Really?  You also like to be restrained?|I cannot explain why, but I love bondage.",210,0,-1,
+190,0,0,,I... I... I lost my|train of thought.,(She stops worrying.)|It's fine my sexy love.,0,0,0,
+190,0,0,,I don't think it's|working between us.,(She pouts and kicks the floor.)|You want to break up so soon?,191,0,0,
+190,0,0,,I want to break up.,(She pouts and kicks the floor.)|You want to break up so soon?,191,0,0,
+191,0,0,,"No, let's stay together.",(She looks at you in the eyes and smiles.)|You would miss the sex way too much.,0,0,0,
+191,0,0,Common_ActorIsOwned,We'll break up but I'll|keep you as my slave.,(She sighs and bows her head.)|At least I can stay as your slut.,192,-5,0,BreakUp()
+191,0,0,!Common_ActorIsOwned,"Yes, I want to break up.",(She seems angry at first but starts to think.)|We can remain fuck friends if you prefer.,192,-5,0,BreakUp()
+192,0,0,!Common_ActorIsOwned,Of course we|can still fuck.,It's not the best deal but it's a deal.|What could we do now to have fun?,0,0,1,EndChat()
+192,0,0,,You'll be able to|date someone else.,Sure!  I'm find someone else soon.|What could we do now to have fun?,0,0,0,EndChat()
+192,0,0,,Amanda will be happy.,You think she's interested?  We'll see.|What could we do now to have fun?,0,1,0,EndChat()
+192,0,0,,You're not in|my league.,Fine!  I was happy to be single anyway.|What could we do now to have fun?,0,-1,1,EndChat()
+192,0,0,,It was a mistake|to date each other.,"Don't say that, it was kind of cool.|What could we do to have fun?",0,0,-1,EndChat()
+200,0,0,,TO DO,TO DO,200,0,0,EndChat()
+201,0,0,,You like losing control.|It turns you on girl.,"I...  Errr...  Yes Miss.  I admit it.|I cannot explain why, but I love bondage.",210,0,1,
+201,0,0,,You're all wet|when tied up.,"I would not say it like that, but yes.|I cannot explain why, but I love bondage.",210,-1,0,
+201,0,0,,Bondage is a strong|sexual fantasy of yours?,"(She blushes and looks down.)  I admit it.|I cannot explain why, but I love bondage.",210,1,0,
+201,0,0,,Being restrained is a|fantasy that we share.,"Really?  You also like to be restrained?|I cannot explain why, but I love bondage.",210,0,-1,
 210,0,0,,I can explain why.|You're a submissive.,A submissive?  Me?  Really?|Like these girls that have owners?,220,0,0,
 210,0,0,,It's pretty simple.|You have slave blood.,I have Slave blood?  Me?  Really?|Like these girls that have owners?,220,0,0,
 210,0,0,,It's a very common|fantasy among subs.,Among subs?  I am a submissive?|Like these girls that have owners?,220,0,0,

@@ -72,8 +72,7 @@ function C012_AfterClass_Dorm_CalGuest() {
 		if (!GameLogQuery(CurrentChapter, "Amanda", "LoverBreakUp") || (ActorSpecificGetValue("Amanda", ActorOwner) == "Player"))
 			C012_AfterClass_Dorm_Guest.push("Amanda");
 	if (GameLogQuery(CurrentChapter, "Sarah", "EnterDormFromRoommates") && !GameLogQuery(CurrentChapter, "Sarah", "KickedOutFromDorm") && ((CurrentTime <= C012_AfterClass_Dorm_SarahExitTime) || GameLogQuery(CurrentChapter, "Sarah", "BackFromBondageClub") || ActorSpecificIsRestrained("Sarah"))) 
-		if (!GameLogQuery(CurrentChapter, "Sarah", "LoverBreakUp") || (ActorSpecificGetValue("Sarah", ActorOwner) == "Player"))
-			C012_AfterClass_Dorm_Guest.push("Sarah");
+		C012_AfterClass_Dorm_Guest.push("Sarah");
 
 	// Build an array of everyone that's visible (standing up)
 	C012_AfterClass_Dorm_GuestVisible = [];
