@@ -90,8 +90,8 @@ function C012_AfterClass_Dorm_Load() {
 	StartTimer(24 * 60 * 60 * 1000, "C012_AfterClass", "Outro");
 	ActorSpecificSetPose("Amanda", "");
 	ActorSpecificSetPose("Sarah", "");
-	ActorSpecificSetPose("Sidney", "");
-	ActorSpecificSetPose("Jennifer", "");	
+	if ((ActorSpecificGetValue(ActorPose) != "Pig") || !ActorSpecificHasInventory("TwoRopes")) ActorSpecificSetPose("Sidney", "");
+	ActorSpecificSetPose("Jennifer", "");
 	Common_BondageAllowed = true;
 	Common_SelfBondageAllowed = true;
 	C012_AfterClass_Bed_Partner = "";

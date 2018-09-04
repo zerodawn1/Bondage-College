@@ -22,6 +22,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 20,0,0,DateAmandaAvail,Is there something|going on with Amanda?,I'm not sure actually.  She gave me a|few hints but I don't think she's serious.,160,0,0,
 20,0,0,DatingAmanda,Would you like to use|my bed with Amanda?,"(She smiles.)  Of course I would!|But ask her first, she's the shy one.",20,0,0,
 20,0,0,AmandaHeartBroken,Will Amanda be ok?,Poor Amy.  I guess she will be fine.|I'll speak with her when I get home.,20,0,0,
+20,0,0,HasPigPicture,We're the pig picture.|(Share a Sidney picture.),"This is PERFECT!  She will stop pestering me.|Thank you, what else could we do for fun?",0,2,0,PigPictureDone()
 20,0,0,Common_PlayerChaste,Can you please help|me with this belt?,I cannot help you.|I don't have the key.,0,0,0,
 20,0,0,Common_ActorIsLover,About our relationship...,Yes my sexy lover?|(She seems nervous.),190,0,0,
 20,0,0,,It's time for you|to leave my place.,You're expelling me from your dorm?,790,-1,1,
@@ -197,7 +198,30 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 401,0,0,,"Fine, have fun.|(Let her go.)",Oh yes!  Thank you Mistress!|(She leaves your dorm room.),410,0,0,
 402,0,0,,(Back to your room.),,402,0,0,BackToDorm()
 410,0,0,,(Back to your room.),,410,0,0,BackToDorm()
-500,0,0,,TO DO,TO DO,500,0,0,EndChat()
+500,0,0,,What do you do|outside of shcool?,Mostly parties.  At friends|places or at my own place.,510,0,0,
+500,0,0,,You're a party|girl aren't you?,Yep!  There's always a party to go|or friends to invite at my place.,510,1,0,
+500,0,0,,Do you have|lots of friends?,"Yep, I sure do.  I love to|invite friends at my place.",510,0,0,
+500,0,0,,You seem pretty|bad at school.,I don't have good grades|but I have lots of friends.,510,-1,0,
+510,0,0,,You do way too|many parties Sarah.,Boring!  My roommates also tell me that.|Sidney keeps annoying me when I bring friends.,520,0,-1,
+510,0,0,,It doesn't bother|your roommates?,"Yeah, they complain from time to time.|Sidney keeps annoying me when I bring friends.",520,0,0,
+510,0,0,,Continue to party girl.|Nothing wrong with that.,"I agree, even if my roommates complain.|Sidney keeps annoying me when I bring friends.",520,0,1,
+520,0,0,,Don't let her|annoy you.,True!  I need to teach her a lesson.,530,0,1,
+520,0,0,,"She's strong, be|careful with her.","Yeah, she's a lot troube.|I need to teach her a lesson.",530,0,-1,
+520,0,0,,What will you|do with Sidney?,"I don't know, but I certainly|need to teach her a lesson.",530,0,0,
+530,0,0,,Do you have a plan?,"Maybe if I had an humiliating picture of her,|I could blackmail her to stop bugging me.",540,0,0,
+530,0,0,,It will only|escalate the war.,"I know, but if I had an humiliating picture of|her, I could blackmail her to stop the war.",540,-1,0,
+530,0,0,,I will help you.|Do you have a plan?,"Maybe if I had an humiliating picture of her,|I could blackmail her to stop bugging me.",540,1,0,
+530,0,0,,And how can you|teach her a lesson?,"Maybe if I had an humiliating picture of her,|I could blackmail her to stop bugging me.",540,0,0,
+540,0,0,HasPigPicture,I already have that.|(Share a pig picture.),And it's OUTSIDE!  She will stop pestering me.|I had a similar costume ready for her.,560,3,1,PigPictureDone()
+540,0,0,,What kind of picture?,(She gives you some pig ears and tail.)|A picture of her naked with these would be perfect.,550,0,0,
+540,0,0,,I'll take that|picture for you.,Cool!  (She gives you some pig ears and tail.)|A picture of her naked with these would be perfect.,550,0,1,
+540,0,0,,It seems risky.,It's risky.  (She gives you some pig ears and tail.)|But a picture of her naked with these would be perfect.,550,0,-1,
+550,0,0,,A pig costume|for piggy Sidney!,(She gives you a thumbs up.)  Absolutely!|So what could we do now to have fun?,0,1,0,GetPigCostume()
+550,0,0,,Is this too|humiliating?,"Not at all, it's perfect for you!|So what could we do now to have fun?",0,-1,0,GetPigCostume()
+550,0,0,,I'll try to get|you that picture.,(She gives you a thumbs up.)  Alright!|So what could we do now to have fun?,0,0,0,GetPigCostume()
+560,0,0,,Can I have the|costume?  (Blush.),Take it.  (She gives you some pig ears and tail.)|So what could we do now to have fun?,0,0,-1,GetPigCostume()
+560,0,0,,Give me that costume.,Take it.  (She gives you some pig ears and tail.)|So what could we do now to have fun?,0,0,1,GetPigCostume()
+560,0,0,,You don't need|the costume then.,Take it.  (She gives you some pig ears and tail.)|So what could we do now to have fun?,0,0,0,GetPigCostume()
 600,0,0,,Wear your|school outfit.,This is pretty boring.  We wore that oufit all day.|(She pouts and changes to her school uniform.),0,0,0,"ForceChangeActor(""Clothed"")"
 600,0,0,,Wear your|brown dress.,Alright!  It's time to relax.|(She changes to her brown dress.),0,0,0,"ForceChangeActor(""BrownDress"")"
 600,0,0,AllowHeroine,Wear your heroine|armor from the play.,Good idea!  I love costumes.|I'm sure Julia won't mind.,0,0,0,"ForceChangeActor(""Heroine"")"
@@ -205,9 +229,10 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 600,0,0,!HasBelt,Get in your|underwear.,It might be the first step to a kinky scenario.|(She giggles and changes to her underwear.),0,0,0,"ForceChangeActor(""Underwear"")"
 600,0,0,,Get naked.,Alright!  Are we going to have sex?|(She slowly strips naked for you.),0,0,0,"ForceChangeActor(""Naked"")"
 600,0,0,,Forget it.,(She nods.),0,0,0,
-610,0,0,,You're free to|have fun tonight.,Thanks a lot!  But I would|rather stay with you Mistress.,0,0,0,"SetCurfew(""None"")"
-610,0,0,,You can have fun tonight|but you will sleep here.,"Here?  But there's only one bed.|Very well Mistress, I'm curious.",0,0,0,"SetCurfew(""24"")"
-610,0,0,,You cannot leave my|dorm room tonight.,Not even to get my toothbrush?|(She bows her head.)  I will stay here.,0,0,0,"SetCurfew(""Stay"")"
+610,0,0,,You're free to|have fun tonight.,Cool!  It will be a wild evening.,0,0,0,"SetCurfew(""None"")"
+610,0,0,,You can have fun tonight|but you will sleep here.,Ok!  I will sleep here with you then.|I might come back pretty late though.,0,0,0,"SetCurfew(""24"")"
+610,0,0,,You must come back|at twenty-two girl.,"At twenty-two?  It's too early Mistress.|Fine, I will be back.  (She sighs and pouts.)",0,0,0,"SetCurfew(""22"")"
+610,0,0,,You cannot leave my|dorm room tonight.,"No!  Please, please, please!  I can't go out?|Fine, I will stay.  (She pouts and grumbles.)",0,0,0,"SetCurfew(""Stay"")"
 630,0,0,,Get naked first.,(She nods and slowly|strips down for you.),631,0,0,"ForceChangeActor(""Naked"")"
 630,0,0,,Strip girl.,(She nods and slowly|strips down for you.),631,0,0,"ForceChangeActor(""Naked"")"
 630,0,0,,Remove your clothes|my sexy subbie.,(She nods and slowly|strips down for you.),631,0,0,"ForceChangeActor(""Naked"")"

@@ -27,7 +27,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 140,0,0,Common_PlayerChaste,"I'm sorry, I can't.|I'm also locked.",I guess we can understand each other.|You can study here with me if you want.,200,1,-1,
 140,0,0,,I can't unlock it.,"Fine, I'll find a good locksmith.|You can study here if you want.",200,0,0,
 140,0,0,,Being chaste will help|you to concentrate.,What?   I...  But...  But...  Fine...|You can study with me if you want.,200,0,1,
-140,0,0,,If you're a good|girl I'll unlock you.,(She blushes.)  I'll be good then.|You can study with me if you want.,200,1,-1,
+140,0,0,,"If you're a good|girl, I'll unlock you.",(She blushes.)  I'll be good then.|You can study with me if you want.,200,1,-1,
 140,0,0,,A slut needs|to be locked.,Why are you so mean?  Anyway.|You can study here if you want.,200,-1,1,
 140,0,0,,Talking about such|belts turns me on.,You're so kinky COMMON_PLAYERNAME.|You can study with me if you want.,200,0,-1,
 150,0,0,HasEgg,"I have one also, it's|fun, don't remove it.",(She giggles.)  You're very kinky.|You can study with me if you want.,200,1,-1,

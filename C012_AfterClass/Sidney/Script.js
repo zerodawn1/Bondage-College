@@ -17,6 +17,7 @@ var C012_AfterClass_Sidney_PleasurePlayerSpeed = 0;
 var C012_AfterClass_Sidney_MasturbateCount = 0;
 var C012_AfterClass_Sidney_CanSetCurfew22 = false;
 var C012_AfterClass_Sidney_AllowBlackLingerie = false;
+var C012_AfterClass_Sidney_AllowPigCostume = false;
 var C012_AfterClass_Sidney_AllowSexAfterDate = false;
 var C012_AfterClass_Sidney_AmandaIsOwner = false;
 var C012_AfterClass_Sidney_CanKickOut = false;
@@ -38,17 +39,18 @@ function C012_AfterClass_Sidney_SetPose() {
 		if ((Love <= -10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Mad");
 		if (Common_ActorIsOwned) ActorSetPose("Shy");
 	} else {
-		ActorSetPose("");
-		if ((ActorGetValue(ActorCloth) == "Naked") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorSubmission) >= 10)) ActorSetPose("Shy");
-		if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorLove) >= 10) && (ActorGetValue(ActorLove) > ActorGetValue(ActorSubmission))) ActorSetPose("Happy");
-		if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorSubmission) >= 10) && (ActorGetValue(ActorLove) <= ActorGetValue(ActorSubmission))) ActorSetPose("Point");
-		if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (Common_ActorIsOwner)) ActorSetPose("Point");
+		if ((ActorGetValue(ActorPose) != "Pig") || !ActorHasInventory("TwoRopes")) {
+			ActorSetPose("");
+			if ((ActorGetValue(ActorCloth) == "Naked") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorSubmission) >= 10)) ActorSetPose("Shy");
+			if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorLove) >= 10) && (ActorGetValue(ActorLove) > ActorGetValue(ActorSubmission))) ActorSetPose("Happy");
+			if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorSubmission) >= 10) && (ActorGetValue(ActorLove) <= ActorGetValue(ActorSubmission))) ActorSetPose("Point");
+			if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (Common_ActorIsOwner)) ActorSetPose("Point");
+		}
 	}
 }
 
 // Calculate the scene parameters
 function C012_AfterClass_Sidney_CalcParams() {
-	C012_AfterClass_Sidney_AllowBlackLingerie = GameLogQuery(CurrentChapter, CurrentActor, "AllowBlackLingerie");
 	C012_AfterClass_Sidney_HasEgg = ActorHasInventory("VibratingEgg");
 	C012_AfterClass_Sidney_HasBelt = ActorHasInventory("ChastityBelt");
 	C012_AfterClass_Sidney_IsGagged = ActorIsGagged();	
@@ -61,6 +63,8 @@ function C012_AfterClass_Sidney_CalcParams() {
 	C012_AfterClass_Sidney_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Sidney_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
 	C012_AfterClass_Sidney_CanKickOut = (!Common_ActorIsOwner && !Common_ActorIsLover);
 	C012_AfterClass_Sidney_AmandaIsOwner = (Common_PlayerOwner == "Amanda");
+	C012_AfterClass_Sidney_AllowBlackLingerie = GameLogQuery(CurrentChapter, CurrentActor, "AllowBlackLingerie");
+	C012_AfterClass_Sidney_AllowPigCostume = (GameLogQuery(CurrentChapter, CurrentActor, "AllowPigCostume") && !Common_PlayerRestrained);
 	C012_AfterClass_Sidney_SetPose();
 }
 
@@ -691,6 +695,7 @@ function C012_AfterClass_Sidney_Ungag() {
 // Chapter 12 After Class - Sidney can be untied
 function C012_AfterClass_Sidney_Untie() {
 	ActorUntie();
+	if (ActorGetValue(ActorPose) == "Pig") ActorSetPose("");
 	C012_AfterClass_Sidney_CalcParams();
 	CurrentTime = CurrentTime + 50000;
 }
@@ -999,11 +1004,33 @@ function C012_AfterClass_Sidney_KickedOut() {
 	CurrentActor = "";
 }
 
-// Chapter 12 After Class - When Sidney is kicked out, it can destroy the players couple
+// Chapter 12 After Class - When Sidney changes back to her short to spank the player
 function C012_AfterClass_Sidney_ChangeBackToShort() {
 	if (ActorGetValue(ActorCloth) != "Shorts") {
 		ActorSetCloth("Shorts");
 		CurrentTime = CurrentTime + 50000;
 		OverridenIntroText = GetText("SpankInShorts");
 	}
+}
+
+// Chapter 12 After Class - Sidney can only wear the pig costume when she's in 2 or 3 ropes
+function C012_AfterClass_Sidney_TestPigCostume() {
+	
+	// Give back one rope if there's three
+	if (ActorHasInventory("ThreeRopes")) {
+		ActorRemoveInventory("ThreeRopes");
+		ActorAddInventory("TwoRopes");
+		PlayerAddInventory("Rope", 1);
+	}
+
+	// Allow the pig costume if she's tied up with two ropes
+	if (ActorHasInventory("TwoRopes")) {
+		ActorSetPose("Pig");
+		CurrentTime = CurrentTime + 50000;
+		if (!GameLogQuery(CurrentChapter, "Sidney", "Pig")) {
+			OverridenIntroText = GetText("ForcePigCostumePicture");
+			GameLogAdd("Pig");
+		} else OverridenIntroText = GetText("ForcePigCostume");
+	}
+
 }

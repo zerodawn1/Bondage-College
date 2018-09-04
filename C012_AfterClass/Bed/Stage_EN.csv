@@ -15,13 +15,13 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 110,0,0,,@Stop masturbating.,"You calm down, take deep breathes|and stop everything before your climax.",100,0,0,StopMasturbate()
 120,0,0,,@Continue to|masturbate.,"Just to make sure you're satisfied,|you start touching yourself again.",100,0,0,
 120,0,0,,@Stop and get up.,You get up from your bed|feeling relaxed and satisfied.,0,0,0,StopMasturbate()
-200,0,0,,(Kiss her lips.),(You gently kiss her lips but she doesn't|enjoy it much and masturbates herself.),200,0,0,"Sex(-1, 1, false, false)"
+200,0,0,,(Kiss her lips.),"(You gently kiss her lips, but she doesn't|enjoy it much and masturbates herself.)",200,0,0,"Sex(-1, 1, false, false)"
 200,0,0,,(Kiss her breast.),(You kiss each other breast but it|seems to pleasure you more than her.),200,0,0,"Sex(0, 1, false, false)"
 200,0,0,,(Massage her breast.),(You massage each other breast but it|seems to pleasure you more than her.),200,0,0,"Sex(0, 1, false, false)"
 200,0,0,,(Pinch her nipple.),(You pinch each other nipples and|both jump and scream from the pain.),200,0,0,"Sex(1, 1, false, false)"
 200,0,0,,(Play with her clitoris.),(You slowly play with each|other clitoris and moan softly.),200,0,0,"Sex(1, 1, true, false)"
 200,0,0,,(Caress her pussy.),(You gently caress each other|pussy lips and moan softly.),200,0,0,"Sex(1, 1, true, false)"
-200,0,0,,(Slide a finger in.),(You both slide a finger in to masturbate|each other and she seems to really enjoy that.),200,0,0,"Sex(2, 1, true, false)"
+200,0,0,,(Slide a finger in.),(You both slide a finger in to masturbate|each other and she seem to really enjoy that.),200,0,0,"Sex(2, 1, true, false)"
 200,0,0,,(Eat her.),(You both eat other in a 69 fashion|and she seems to really enjoy that.),200,0,0,"Sex(2, 1, true, false)"
 200,0,0,,(Fist her.),(You fist her while she masturbates you.|She screams and shivers from the ecstasy.),200,0,0,"Sex(3, 1, true, false)"
 200,0,0,,That's enough.|(Get up from bed.),We stop now?  That was quick.,200,0,0,LeaveBedFromSex()
@@ -38,7 +38,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 220,0,0,Common_ActorIsLover,Would you like to sleep|like that with me?,Sure sweetheart.  It will be|fucking nice to sleep together.,230,0,0,
 230,0,0,,Sleep with Sidney.|(End the day.),,230,0,0,"EndChapter(""Lover"")"
 230,0,0,,Maybe later my love.|(Get up from bed.),"Yeah, sleeping is for losers anyway.",900,0,0,OffBed()
-300,0,0,,(Caress her legs.),(You slowly caresses each other|her legs in a loving embrace.),300,0,0,"Sex(0, 1, false, false)"
+300,0,0,,(Caress her legs.),(You slowly caress each other|her legs in a loving embrace.),300,0,0,"Sex(0, 1, false, false)"
 300,0,0,,(Kiss her legs.),(You kiss each other legs slowly.|She moans silently with each contact.),300,0,0,"Sex(1, 1, false, false)"
 300,0,0,,(Kiss her pussy.),(You kiss each other pussy lips.|Humidity seems to be rising.),300,0,0,"Sex(1, 1, false, true)"
 300,0,0,,(Nuzzle her clitoris.),(She laughs and shivers as|you nuzzle each other clitoris.),300,0,0,"Sex(1, 1, false, true)"
@@ -63,7 +63,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 330,0,0,,Maybe later my love.|(Get up from bed.),"Yes, let's enjoy our first|night together some more.",900,0,0,OffBed()
 400,0,0,,(Compliment her.),(You tell each other kind and loving words.|She appreciates but she's not excited by it.),400,0,0,"Sex(0, 1, false, false)"
 400,0,0,,(Insult her.),"(You call her a whore, a slut, a cunt, etc.|She blushes and becomes kind of wet.)",400,0,0,"Sex(1, 1, false, false)"
-400,0,0,,(Caress her legs.),(You slowly caresses each other her legs.|It doesn't seem to turn her on that much.),400,0,0,"Sex(0, 1, false, true)"
+400,0,0,,(Caress her legs.),(You slowly caress each other her legs.|It doesn't seem to turn her on that much.),400,0,0,"Sex(0, 1, false, true)"
 400,0,0,,(Spank her butt.),(You spank her pretty hard on the butt|while she moans of pleasure from the pain.),400,0,0,"Sex(2, 1, false, true)"
 400,0,0,,(Kiss her legs.),(You kiss each other legs slowly.|She doesn't seem to like it that much.),400,0,0,"Sex(0, 1, false, false)"
 400,0,0,,(Scissor slowly.),"(You scissor each other slowly and|lovingly, feeling the ecstasy rising.)",400,0,0,"Sex(1, 1, true, false)"

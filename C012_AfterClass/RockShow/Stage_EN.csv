@@ -3,7 +3,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,,We found a|good spot.,"Shit yeah, we are pretty close to the band.|Have you heard them before?  They rock!",10,1,0,Wait(50000)
 0,0,0,,There's quite|a big crowd.,"Yeah, it's crowded when there's a local band.|Have you heard them before?  They rock!",10,0,0,Wait(50000)
 10,0,0,,It's my first time.,They play mostly metal and some ballads.|(She swings her head on the metal tune.),20,0,0,Wait(50000)
-10,0,0,,It's too loud.,"Don't worry, there will be some balads.|(She swings her head on the metal tune.)",20,0,-1,Wait(50000)
+10,0,0,,It's too loud.,"Don't worry, there will be some ballads.|(She swings her head on the metal tune.)",20,0,-1,Wait(50000)
 10,0,0,,They better play|some metal.,(She does the devil sign with her fingers|and swings her head on the metal tune.),20,0,1,Wait(50000)
 10,0,0,,I've seen|them before.,Great!  I've seen them two years ago.|(She swings her head on the metal tune.),20,0,0,Wait(50000)
 20,0,0,,(Enjoy the|metal tune.),"(You and Sidney enjoy the metal tune.|Right after, they switch for a slow ballad.)",30,0,0,Wait(230000)
@@ -19,7 +19,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 40,0,0,,(Listen to the song.),(You both enjoy the tune|which becomes very romantic.),50,0,0,Wait(50000)
 50,0,0,,(Enjoy the show.),(You both enjoy the show and|share a wonderful time together.),50,0,0,NextSong()
 50,0,0,CanMasturbateSidney,(Slide a hand|in her shorts.),"(Making sure no one can see you, you slide a|hand in her shorts, making her jump in surprise.)",100,0,0,StartMasturbateSidney()
-50,0,0,,(Search the place.),(You search around for a while but|you don't find anything useful.),50,0,0,Search()
+50,0,0,,(Search the place.),"(You search around for a while, but|you don't find anything useful.)",50,0,0,Search()
 50,0,0,,(Leave the show.),Do you want to leave sweetie?|Should we go back to your dorm?,60,0,0,
 60,0,0,,"Yes, let's leave.",,60,0,0,Leave()
 60,0,0,,"No, let's stay.",Rock on!  (You both watch the show.),50,0,0,

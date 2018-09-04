@@ -30,8 +30,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 112,0,0,,Don't hurt me!,You're pathetic girl.  (She pauses.)  Oh fuck!|(She checks around and ducks behind the counter.),200,0,-1,"SetPose(""Duck"")"
 112,0,0,,You want to fight?,Let's fight then!  (She pauses.)  Oh fuck!|(She checks around and ducks behind the counter.),200,0,1,"SetPose(""Duck"")"
 112,0,0,,Nice!  That was|quite a punch.,Damn right girl!  (She pauses.)  Oh fuck!|(She checks around and ducks behind the counter.),200,1,-1,"SetPose(""Duck"")"
-120,0,0,,A beer?  Fine.|(Get her a beer.),(You buy her a beer and she smiles.)|Perfect!  You can hang with me now.,121,0,0,
-120,0,0,,Of course Miss.|(Get her a beer.),(You buy her a beer and she smiles.)|Perfect!  You can hang with me now.,121,0,-1,
+120,0,0,,A beer?  Fine.|(Get her a beer.),(You buy her a beer and she smile.)|Perfect!  You can hang with me now.,121,0,0,
+120,0,0,,Of course Miss.|(Get her a beer.),(You buy her a beer and she smile.)|Perfect!  You can hang with me now.,121,0,-1,
 120,0,0,,Go get your|own beer.,You finally grown some balls?|I guess you can hang with me.,121,0,1,
 120,0,0,,Forget it!|(Leave Sidney.),You leave Sidney behind|and get back to the bar.,0,0,1,SidneyEnd()
 121,0,0,,How are you Miss?,I'm not drunk.  I'm not great.,122,0,-1,
@@ -84,7 +84,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 160,0,0,,Did you have fun?,(She nods happily.)  Mildred must|be pissed at your right now.,161,0,0,
 161,0,8,,Mildred is my|bitch now.,That is fucking awesome!|We need more girls like you.,162,1,1,
 161,0,0,,Don't worry|about her.,"I fucking don't worry for her.|Shit, we need more girls like you.",162,0,0,
-161,0,0,,I don't care|about Mildred.,"Yeah, who cares about the teachers?|Hell we need more girls like you.",162,1,0,
+161,0,0,,I don't care|about Mildred.,"Yeah, who cares about the teachers?|Hell, we need more girls like you.",162,1,0,
 161,0,0,,Don't get me in|trouble with her.,"You misunderstood what I meant.|Actually, we need more girls like you.",162,-1,0,
 162,0,0,,And we need|pretty girls like you.,That's so nice of...  (She pauses.)  Oh fuck!|(She checks around and ducks behind the counter.),200,1,0,"SetPose(""Duck"")"
 162,0,0,,And less girls|like you.,What does that...  (She pauses.)  Oh fuck!|(She checks around and ducks behind the counter.),200,-1,0,"SetPose(""Duck"")"

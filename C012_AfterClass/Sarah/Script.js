@@ -25,6 +25,7 @@ var C012_AfterClass_Sarah_BondageClubInvitationBySarah = false;
 var C012_AfterClass_Sarah_BondageClubInvitation = false;
 var C012_AfterClass_Sarah_AmandaHeartBroken = false;
 var C012_AfterClass_Sarah_DatingAmanda = false;
+var C012_AfterClass_Sarah_HasPigPicture = false;
 
 // In her shorts, Sarah can have many poses when she talks
 function C012_AfterClass_Sarah_SetPose() {
@@ -65,6 +66,7 @@ function C012_AfterClass_Sarah_CalcParams() {
 	C012_AfterClass_Sarah_AmandaHeartBroken = (GameLogQuery(CurrentChapter, "Sarah", "AmandaHeartBroken") && (Common_PlayerLover == "Sarah"));
 	C012_AfterClass_Sarah_AmandaAvail = ((C012_AfterClass_Dorm_Guest.indexOf("Amanda") >= 0) && !ActorSpecificIsRestrained("Amanda") && !ActorSpecificIsGagged("Amanda"));
 	C012_AfterClass_Sarah_DatingAmanda = (GameLogQuery(CurrentChapter, "Sarah", "DatingAmanda") && (C012_AfterClass_Dorm_Guest.indexOf("Amanda") >= 0));
+	C012_AfterClass_Sarah_HasPigPicture = (GameLogQuery("", "Sidney", "Pig") && !GameLogQuery(CurrentChapter, "Sarah", "PigPictureDone"));
 	C012_AfterClass_Sarah_SetPose();
 }
 
@@ -79,7 +81,7 @@ function C012_AfterClass_Sarah_Load() {
 	
 	// Sarah's parameters
 	C012_AfterClass_Sarah_CalcParams();	
-	C012_AfterClass_Sarah_ChatAvail = !GameLogQuery(CurrentChapter, CurrentActor, "ChatDone");
+	C012_AfterClass_Sarah_ChatAvail = !GameLogQuery(CurrentChapter, "Sidney", "AllowPigCostume");
 	C012_AfterClass_Sarah_SpankMaxCount = 10 - Math.floor(ActorGetValue(ActorLove) / 7);
 	if (C012_AfterClass_Sarah_SpankMaxCount < 6) C012_AfterClass_Sarah_SpankMaxCount = 6;
 	if (C012_AfterClass_Sarah_SpankMaxCount > 12) C012_AfterClass_Sarah_SpankMaxCount = 12;
@@ -727,4 +729,17 @@ function C012_AfterClass_Sarah_AmandaDatingScene() {
 	SetScene(CurrentChapter, "Amanda");
 	ActorSetPose("");
 	LeaveIcon = "";
+}
+
+// Chapter 12 After Class - When the player shares a Sidney pig picture with Sarah
+function C012_AfterClass_Sarah_PigPictureDone() {
+	GameLogAdd("PigPictureDone");
+	C012_AfterClass_Sarah_HasPigPicture = false;
+	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - Sarah gives the pig costume to the player
+function C012_AfterClass_Sarah_GetPigCostume() {
+	GameLogSpecificAdd(CurrentChapter, "Sidney", "AllowPigCostume");
+	CurrentTime = CurrentTime + 50000;
 }

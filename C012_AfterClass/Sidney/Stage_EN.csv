@@ -20,6 +20,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 10,0,0,IsGagged,(Ungag her.),(You remove her gag.)|Thanks!  This is better.,10,0,0,Ungag()
 10,0,0,IsRoped,(Untie her.),(You undo the knots and remove the|ropes while she stretches slowly.),10,0,0,Untie()
 10,0,0,IsStrapped,(Unstrap her.),(You remove the straps and|unlace the binder from her arms.),10,0,0,Untie()
+10,0,0,AllowPigCostume,(Make her wear|the pig costume.),(You try to put the pig ears and tail on her|but she struggles too much and they fall off.),10,0,0,TestPigCostume()
 10,0,0,,(Stop playing.),(You take a step back.),0,0,0,
 20,0,0,ChatAvail,I'd like to know|more about you.,"Ok, what would like to know?",0,0,0,StartChat()
 20,0,0,Common_ActorIsOwned,Let's review|your rules.,(She seems to worry.)|Of course Mistress.,610,0,0,
@@ -220,6 +221,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 600,0,0,,Just wear your red|shorts and black top.,Perfect!  That's what I like best.|(She changes in her shorts for you.),0,0,0,"ForceChangeActor(""Shorts"")"
 600,0,0,,Wear your|school outfit.,Fine.  But let's not go back to school.|(She changes in her school uniform.),0,0,0,"ForceChangeActor(""Clothed"")"
 600,0,0,AllowBlackLingerie,Wear your lingerie.,(She winks.)  You're so kinky.|(She changes in her lingerie for you.),0,0,0,"ForceChangeActor(""BlackLingerie"")"
+600,0,0,AllowPigCostume,Wear this pig costume.|(Show the pig costume.),Oh no!  Fuck Sarah and her costume.|There's no way in hell I'm wearing that!,0,0,0,
 600,0,0,!HasBelt,Get in your|underwear.,Alright.  What do you have in mind?|(She changes in her underwear for you.),0,0,0,"ForceChangeActor(""Underwear"")"
 600,0,0,,Get naked.,Really?  What do you have in mind?|(She strips naked for you.),0,0,0,"ForceChangeActor(""Naked"")"
 600,0,0,,Forget it.,(She nods.),0,0,0,

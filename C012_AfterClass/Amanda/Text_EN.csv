@@ -75,10 +75,10 @@ TwoRopes,"(You pick a second rope and tie|her legs, forcing her to kneel.)"
 ThreeRopes,"(You add a third rope, linking her arms to her|legs and forcing her to sit in an awkward position.)"
 Armbinder,(She blushes and slowly slides her arms|in the binder while you lace and strap it tight.)
 Cuffs,(She puts her arms back while you grab|the cuffs and restrain them securely.)
-BallGag,(She reluctantly opens her mouth so you|can push the ball inside and strap the gag.)
-TapeGag,(She reluctantly closes her mouth|so you can apply tape on it to gag her.)
-ClothGag,(She reluctantly opens her mouth so you|can push the wad inside and tie the gag.)
-CuffsKey,(She sees the key and turns|around so you can unlock her.)
+BallGag,"(She reluctantly opens her mouth, so you|can push the ball inside and strap the gag.)"
+TapeGag,"(She reluctantly closes her mouth,|so you can apply tape on it to gag her.)"
+ClothGag,"(She reluctantly opens her mouth, so you|can push the wad inside and tie the gag.)"
+CuffsKey,"(She sees the key and turns|around, so you can unlock her.)"
 VibratingEgg,(She sees the egg and seems very nervous.|She takes a deep breath while you push it in.)
 ChastityBelt,(She freaks out when she sees the belt|but you're able to lock it while she whimpers.)
 Collar,(You need +20 submission and a full|acceptance speech to collar her.)
@@ -103,7 +103,7 @@ UnlockBeltBeforeSex,Can you unlock the belt first?
 CantDateWhileRestrained,Maybe you should release me|if we need to have a serious talk.
 CantDateWhileNaked,Maybe we should both get dressed|if we need to have a serious talk.
 StripForSecondRope,(You could use that second|rope if she had fewer clothes.)
-DoubleTickling,(You tickle each other and|she seems to enjoy it a lot.)
+DoubleTickling,"(You tickle each other, and|she seems to enjoy it a lot.)"
 AlreadyLoved,I don't.  But someday I'll find love just|like you.  It must be somewhere nearby.
 AlreadyLovedBySarah,(She gives you a menacing look.)  I know that|you're dating Sarah.  Let's not speak about that.
 AlreadyDatingSarah,"Don't you remember?  I'm in love with Sarah.|The best, cutest, funniest, blondest girl in the world."
@@ -112,4 +112,4 @@ LoseCuffsGame,You both giggle and struggle with the cuffs but|she's able to lock
 SubEnjoyBondage,Yes Mistress.  I don't know why but|it turns me on when you restrain me.
 NoRestrainInCostume,(She needs to remove her|costume to use this item.)
 AcceptGoToBedWithSarah,We can use your bed right now?|(They look at each other and giggle.)
-RefuseSexForLover,"I'm sorry, I cannot do it with you.|I will be faithfull to Sarah from now."
+RefuseSexForLover,"I'm sorry, I cannot do it with you.|I will be faithful to Sarah from now."
