@@ -26,6 +26,7 @@ var C012_AfterClass_Sarah_BondageClubInvitation = false;
 var C012_AfterClass_Sarah_AmandaHeartBroken = false;
 var C012_AfterClass_Sarah_DatingAmanda = false;
 var C012_AfterClass_Sarah_HasPigPicture = false;
+var C012_AfterClass_Sarah_IsNaked = false;
 
 // In her shorts, Sarah can have many poses when she talks
 function C012_AfterClass_Sarah_SetPose() {
@@ -45,6 +46,7 @@ function C012_AfterClass_Sarah_SetPose() {
 
 // Calculate the scene parameters
 function C012_AfterClass_Sarah_CalcParams() {
+	C012_AfterClass_Sarah_IsNaked = (ActorGetValue(ActorCloth) == "Naked");
 	C012_AfterClass_Sarah_HasEgg = ActorHasInventory("VibratingEgg");
 	C012_AfterClass_Sarah_HasBelt = ActorHasInventory("ChastityBelt");
 	C012_AfterClass_Sarah_IsGagged = ActorIsGagged();	
@@ -124,8 +126,8 @@ function C012_AfterClass_Sarah_Run() {
 	BuildInteraction(C012_AfterClass_Sarah_CurrentStage);
 
 	// Draw the watching actors for ceremonies
-	if (((C012_AfterClass_Sarah_CurrentStage >= 392) && (C012_AfterClass_Sarah_CurrentStage < 400)) || ((C012_AfterClass_Sarah_CurrentStage >= 293) && (C012_AfterClass_Sarah_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
-	
+	if ((C012_AfterClass_Sarah_CurrentStage >= 250) && (C012_AfterClass_Sarah_CurrentStage < 300)) C012_AfterClass_Dorm_DrawOtherActors();
+
 	// Draw the actor alone or with the player depending on the stage
 	if ((C012_AfterClass_Sarah_CurrentStage != 150) && (C012_AfterClass_Sarah_CurrentStage != 151)) {
 		if ((C012_AfterClass_Sarah_CurrentStage != 410) && (C012_AfterClass_Sarah_CurrentStage != 3932) && (C012_AfterClass_Sarah_CurrentStage != 635) && (C012_AfterClass_Sarah_CurrentStage != 636) && (C012_AfterClass_Sarah_CurrentStage != 791) && (C012_AfterClass_Sarah_CurrentStage != 194)) {
@@ -363,7 +365,7 @@ function C012_AfterClass_Sarah_EndChat() {
 // Chapter 12 After Class - The player can ask Sarah to change clothes
 function C012_AfterClass_Sarah_TestChange() {
 	if (!ActorIsRestrained()) {
-		if ((ActorGetValue(ActorLove) >= 10) || (ActorGetValue(ActorSubmission) >= 10) || Common_ActorIsOwned || Common_ActorIsLover) {
+		if ((ActorGetValue(ActorLove) >= 5) || (ActorGetValue(ActorSubmission) >= 5) || Common_ActorIsOwned || Common_ActorIsLover) {
 			if (Common_ActorIsOwned) OverridenIntroText = GetText("AcceptChangeFromMistress");
 			else 
 				if (Common_ActorIsLover) OverridenIntroText = GetText("AcceptChangeFromLover");
@@ -542,7 +544,7 @@ function C012_AfterClass_Sarah_Tickle() {
 
 // Chapter 12 After Class - When the player starts to masturbate Sarah
 function C012_AfterClass_Sarah_StartMasturbate() {
-	if ((ActorGetValue(ActorLove) >= 10) || (ActorGetValue(ActorSubmission) >= 10) || (ActorIsRestrained())) {
+	if ((ActorGetValue(ActorLove) >= 5) || (ActorGetValue(ActorSubmission) >= 5) || (ActorIsRestrained())) {
 		CurrentTime = CurrentTime + 50000;
 		if (!GameLogQuery(CurrentChapter, CurrentActor, "NextPossibleOrgasm")) {
 			C012_AfterClass_Sarah_MasturbateCount = 0;

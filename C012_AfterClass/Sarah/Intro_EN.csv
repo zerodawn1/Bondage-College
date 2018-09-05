@@ -39,17 +39,13 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 230,0,0,,,Dorm.jpg
 240,0,0,,,Dorm.jpg
 250,0,0,,,Dorm.jpg
+251,0,0,,,Dorm.jpg
+252,0,0,,,Dorm.jpg
+253,0,0,,,Dorm.jpg
+254,0,0,,,Dorm.jpg
 260,0,0,,,Dorm.jpg
 270,0,0,,,Dorm.jpg
 280,0,0,,,Dorm.jpg
-290,0,0,,,Dorm.jpg
-291,0,0,,,Dorm.jpg
-292,0,0,,,Dorm.jpg
-293,0,0,,,Dorm.jpg
-294,0,0,,,Dorm.jpg
-295,0,0,,,Dorm.jpg
-296,0,0,,,Dorm.jpg
-297,0,0,,,Dorm.jpg
 300,0,0,,,Dorm.jpg
 310,0,0,,,Dorm.jpg
 320,0,0,,,Dorm.jpg
@@ -59,7 +55,7 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 360,0,0,,,Dorm.jpg
 370,0,0,,,Dorm.jpg
 380,0,0,,,Dorm.jpg
-400,0,0,,I going downtown.|I'll see you later.,Door.jpg
+400,0,0,,I'm going downtown.|I'll see you later.,Door.jpg
 400,0,0,Common_ActorIsLover,"Hey sexy, I need to go downtown.|I'll come back to sleep with you later.",Door.jpg
 400,0,0,Common_ActorIsOwned,"Mistress, I need to go downtown.|I hope to see you really soon.",Door.jpg
 400,0,0,BondageClubInvitationBySarah,It's time to go to the Bondage Club.|Are you ready?  It will be fun.,Door.jpg
