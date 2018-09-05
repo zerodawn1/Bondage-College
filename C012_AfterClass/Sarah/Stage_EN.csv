@@ -200,24 +200,24 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 410,0,0,,(Back to your room.),,410,0,0,BackToDorm()
 500,0,0,,What do you do|outside of shcool?,Mostly parties.  At friends|places or at my own place.,510,0,0,
 500,0,0,,You're a party|girl aren't you?,Yep!  There's always a party to go|or friends to invite at my place.,510,1,0,
-500,0,0,,Do you have|lots of friends?,"Yep, I sure do.  I love to|invite friends at my place.",510,0,0,
-500,0,0,,You seem pretty|bad at school.,I don't have good grades|but I have lots of friends.,510,-1,0,
+500,0,0,,Do you have|lots of friends?,I sure do.  I love to invite friends|over at my place to do parties.,510,0,0,
+500,0,0,,You seem pretty|bad at school.,I don't have good grades but I have|lots of friends and do many parties.,510,-1,0,
 510,0,0,,You do way too|many parties Sarah.,Boring!  My roommates also tell me that.|Sidney keeps annoying me when I bring friends.,520,0,-1,
 510,0,0,,It doesn't bother|your roommates?,"Yeah, they complain from time to time.|Sidney keeps annoying me when I bring friends.",520,0,0,
 510,0,0,,Continue to party girl.|Nothing wrong with that.,"I agree, even if my roommates complain.|Sidney keeps annoying me when I bring friends.",520,0,1,
 520,0,0,,Don't let her|annoy you.,True!  I need to teach her a lesson.,530,0,1,
 520,0,0,,"She's strong, be|careful with her.","Yeah, she's a lot troube.|I need to teach her a lesson.",530,0,-1,
 520,0,0,,What will you|do with Sidney?,"I don't know, but I certainly|need to teach her a lesson.",530,0,0,
-530,0,0,,Do you have a plan?,"Maybe if I had an humiliating picture of her,|I could blackmail her to stop bugging me.",540,0,0,
-530,0,0,,It will only|escalate the war.,"I know, but if I had an humiliating picture of|her, I could blackmail her to stop the war.",540,-1,0,
-530,0,0,,I will help you.|Do you have a plan?,"Maybe if I had an humiliating picture of her,|I could blackmail her to stop bugging me.",540,1,0,
-530,0,0,,And how can you|teach her a lesson?,"Maybe if I had an humiliating picture of her,|I could blackmail her to stop bugging me.",540,0,0,
+530,0,0,,Do you have a plan?,Maybe if I had an humiliating picture of her.|I could blackmail her to stop bugging me.,540,0,0,
+530,0,0,,It will only|escalate the war.,"I know, but if I had an humiliating picture of|her.  I could blackmail her to stop the war.",540,-1,0,
+530,0,0,,I will help you.|Do you have a plan?,Maybe if I had an humiliating picture of her.|I could blackmail her to stop bugging me.,540,1,0,
+530,0,0,,And how can you|teach her a lesson?,Maybe if I had an humiliating picture of her.|I could blackmail her to stop bugging me.,540,0,0,
 540,0,0,HasPigPicture,I already have that.|(Share a pig picture.),And it's OUTSIDE!  She will stop pestering me.|I had a similar costume ready for her.,560,3,1,PigPictureDone()
 540,0,0,,What kind of picture?,(She gives you some pig ears and tail.)|A picture of her naked with these would be perfect.,550,0,0,
 540,0,0,,I'll take that|picture for you.,Cool!  (She gives you some pig ears and tail.)|A picture of her naked with these would be perfect.,550,0,1,
 540,0,0,,It seems risky.,It's risky.  (She gives you some pig ears and tail.)|But a picture of her naked with these would be perfect.,550,0,-1,
 550,0,0,,A pig costume|for piggy Sidney!,(She gives you a thumbs up.)  Absolutely!|So what could we do now to have fun?,0,1,0,GetPigCostume()
-550,0,0,,Is this too|humiliating?,"Not at all, it's perfect for you!|So what could we do now to have fun?",0,-1,0,GetPigCostume()
+550,0,0,,Is this too|humiliating?,"Not at all, it's perfect for Sidney!|So what could we do now to have fun?",0,-1,0,GetPigCostume()
 550,0,0,,I'll try to get|you that picture.,(She gives you a thumbs up.)  Alright!|So what could we do now to have fun?,0,0,0,GetPigCostume()
 560,0,0,,Can I have the|costume?  (Blush.),Take it.  (She gives you some pig ears and tail.)|So what could we do now to have fun?,0,0,-1,GetPigCostume()
 560,0,0,,Give me that costume.,Take it.  (She gives you some pig ears and tail.)|So what could we do now to have fun?,0,0,1,GetPigCostume()

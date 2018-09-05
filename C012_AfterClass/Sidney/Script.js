@@ -1015,22 +1015,27 @@ function C012_AfterClass_Sidney_ChangeBackToShort() {
 
 // Chapter 12 After Class - Sidney can only wear the pig costume when she's in 2 or 3 ropes
 function C012_AfterClass_Sidney_TestPigCostume() {
-	
-	// Give back one rope if there's three
-	if (ActorHasInventory("ThreeRopes")) {
-		ActorRemoveInventory("ThreeRopes");
-		ActorAddInventory("TwoRopes");
-		PlayerAddInventory("Rope", 1);
-	}
 
-	// Allow the pig costume if she's tied up with two ropes
-	if (ActorHasInventory("TwoRopes")) {
-		ActorSetPose("Pig");
-		CurrentTime = CurrentTime + 50000;
-		if (!GameLogQuery(CurrentChapter, "Sidney", "Pig")) {
-			OverridenIntroText = GetText("ForcePigCostumePicture");
-			GameLogAdd("Pig");
-		} else OverridenIntroText = GetText("ForcePigCostume");
+	// Only works if naked
+	if (ActorGetValue(ActorCloth) == "Naked") {
+
+		// Give back one rope if there's three
+		if (ActorHasInventory("ThreeRopes")) {
+			ActorRemoveInventory("ThreeRopes");
+			ActorAddInventory("TwoRopes");
+			PlayerAddInventory("Rope", 1);
+		}
+
+		// Allow the pig costume if she's tied up with two ropes
+		if (ActorHasInventory("TwoRopes")) {
+			ActorSetPose("Pig");
+			CurrentTime = CurrentTime + 50000;
+			if (!GameLogQuery(CurrentChapter, "Sidney", "Pig")) {
+				OverridenIntroText = GetText("ForcePigCostumePicture");
+				GameLogAdd("Pig");
+			} else OverridenIntroText = GetText("ForcePigCostume");
+		}
+	
 	}
 
 }

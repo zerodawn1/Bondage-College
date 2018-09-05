@@ -742,4 +742,5 @@ function C012_AfterClass_Sarah_PigPictureDone() {
 function C012_AfterClass_Sarah_GetPigCostume() {
 	GameLogSpecificAdd(CurrentChapter, "Sidney", "AllowPigCostume");
 	CurrentTime = CurrentTime + 50000;
+	LeaveIcon = "Leave";
 }

@@ -24,9 +24,9 @@ function C012_AfterClass_Dorm_DrawOtherActors() {
 	var Pos = 0;
 	for (var A = 0; A < C012_AfterClass_Dorm_Guest.length; A++)
 		if (CurrentActor != C012_AfterClass_Dorm_Guest[A]) {
-			if (Pos == 0) DrawActor(C012_AfterClass_Dorm_Guest[A], 500, 0, 0.75);
-			if (Pos == 1) DrawActor(C012_AfterClass_Dorm_Guest[A], 1000, 0, 0.75);
-			if (Pos == 2) DrawActor(C012_AfterClass_Dorm_Guest[A], 800, -30, 0.75);
+			if (Pos == 0) DrawActor(C012_AfterClass_Dorm_Guest[A], 500, -30, 0.75);
+			if (Pos == 1) DrawActor(C012_AfterClass_Dorm_Guest[A], 850, -30, 0.75);
+			if (Pos == 2) DrawActor(C012_AfterClass_Dorm_Guest[A], 675, -30, 0.75);
 			Pos++;
 		}
 }
@@ -90,7 +90,7 @@ function C012_AfterClass_Dorm_Load() {
 	StartTimer(24 * 60 * 60 * 1000, "C012_AfterClass", "Outro");
 	ActorSpecificSetPose("Amanda", "");
 	ActorSpecificSetPose("Sarah", "");
-	if ((ActorSpecificGetValue(ActorPose) != "Pig") || !ActorSpecificHasInventory("TwoRopes")) ActorSpecificSetPose("Sidney", "");
+	if ((ActorSpecificGetValue("Sidney", ActorPose) != "Pig") || !ActorSpecificHasInventory("Sidney", "TwoRopes")) ActorSpecificSetPose("Sidney", "");
 	ActorSpecificSetPose("Jennifer", "");
 	Common_BondageAllowed = true;
 	Common_SelfBondageAllowed = true;
