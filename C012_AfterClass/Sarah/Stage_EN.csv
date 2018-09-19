@@ -7,7 +7,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_PlayerRestrained,(Struggle in|your restrains.),You're not getting out soon.|I love to see you struggle.,0,0,0,TestUnbind()
 0,0,0,,You should wear|something else.,I prefer to stay like that.,0,0,0,TestChange()
 0,0,0,SexAvail,Would you like to|make love with me?,"No, I'm not in the mood for sex.|Let's do something else ok?",0,0,0,TestSex()
-0,0,0,PleasurePlayerAvail,"My submissive, you|will pleasure me now.",Pleasure you how Mistress?|(She gives you a curious look.),630,0,0,TestPleasurePlayer()
+0,0,0,PleasurePlayerAvail,"My submissive, you|will pleasure me now.",Oh!  You need a quicky Mistress?|(She looks at you and smiles.),630,0,0,TestPleasurePlayer()
 0,0,0,!Common_PlayerRestrained,(Play with her.),(You take a step toward her.),10,0,0,
 10,5,0,!Common_PlayerGagged,(Kiss her.),(You get close to her and kiss her|on the lips while she moans silently.),10,0,0,Kiss()
 10,1,0,!Common_PlayerRestrained,(Tickle her.),"(You get closer and tickle her on the chest|while she laughs out loud, she seems to enjoy it.)",10,0,0,Tickle()
@@ -212,35 +212,30 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 610,0,0,,"You can have fun tonight,|but you will sleep here.",Ok!  I will sleep here with you then.|I might come back pretty late though.,0,0,0,"SetCurfew(""24"")"
 610,0,0,,You must come back|at twenty-two girl.,"At twenty-two?  It's too early Mistress.|Fine, I will be back.  (She sighs and pouts.)",0,0,0,"SetCurfew(""22"")"
 610,0,0,,You cannot leave my|dorm room tonight.,"No!  Please, please, please!  I can't go out?|Fine, I will stay.  (She pouts and grumbles.)",0,0,0,"SetCurfew(""Stay"")"
-630,0,0,,Get naked first.,(She nods and slowly|strips down for you.),631,0,0,"ForceChangeActor(""Naked"")"
-630,0,0,,Strip girl.,(She nods and slowly|strips down for you.),631,0,0,"ForceChangeActor(""Naked"")"
-630,0,0,,Remove your clothes|my sexy subbie.,(She nods and slowly|strips down for you.),631,0,0,"ForceChangeActor(""Naked"")"
-630,0,0,,I've changed my mind.,Ok.  What would you like to do Mistress?,0,0,0,EndEnslaveSarah()
-631,0,0,,You will pleasure me|here on your knees.,(She blushes.)  Yes Mistress.|But can I please ask for a favor?,632,0,0,
-631,0,0,,Kneel bitch and|get to work.,(She frowns.)  Yes Mistress.|But can I please ask for a favor?,632,0,0,
-632,0,0,,What favor?,Could you restrain me before we do it?|It's a pretty big fantasy that I have.,633,0,0,
-632,0,0,,Make it quick.,Could you restrain me before we do it?|It's a pretty big fantasy that I have.,633,0,0,
-632,0,0,,Sure my submissive.|What do you want?,Could you restrain me before we do it?|It's a pretty big fantasy that I have.,633,0,0,
-632,0,0,,No!  Get to work.,"Yes, sorry Mistress.  (Both naked, you get|her on her knees, licking your pussy.)",635,0,0,StartPleasurePlayer()
-633,0,0,,Of course I|can restrain you.,"Thanks Mistress, it means a lot to me.|(Use one of your items to restrain her.)",633,0,0,
-633,0,0,,"Sure, I can|strap your ass.","Thanks Mistress, it means a lot to me.|(Use one of your items to restrain her.)",633,0,0,
-633,0,0,,I don't want to do that.|Get on your knees girl.,"Yes, sorry Mistress.  (Both naked, you get|her on her knees, licking your pussy.)",635,0,0,StartPleasurePlayer()
-633,0,0,,"No, let's forget|the whole thing.",Oh my!  Very well Mistress.|What would you like to do?,0,0,0,EndEnslaveSarah()
-634,0,0,,You know what|to do now.,"Oh!  Yes Mistress.  (Both naked, you get|her on her knees, licking your pussy.)",635,0,0,StartPleasurePlayer()
-634,0,0,,Get busy slave.,"Oh!  Yes Mistress.  (Both naked, you get|her on her knees, licking your pussy.)",635,0,0,StartPleasurePlayer()
-634,0,0,,Get on your knees|my lovely subbie.,"Oh!  Yes Mistress.  (Both naked, you get|her on her knees, licking your pussy.)",635,0,0,StartPleasurePlayer()
-635,0,0,,(Let her pleasure you.),(You let Sarah pleasure you with her|mouth and slowly drift away in ecstasy.),635,0,0,PleasurePlayer()
-635,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy Mistress?  Did you have pleasure?,637,0,0,StopPleasureFromSarah()
-635,0,0,,(Force her to|go faster.),(You grab her hair and force|her to speed up the rhythm.),635,0,0,PleasurePlayerSetSpeed(1)
-635,0,0,,(Force her to|go slower.),(You push her head and force|her to slow down the rhythm.),635,0,0,PleasurePlayerSetSpeed(-1)
-636,0,0,,Aaaaah!  Stop slave!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy Mistress?  Did you have pleasure?,637,0,0,StopPleasureFromSarah()
-636,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy Mistress?  Did you have pleasure?,637,0,0,StopPleasureFromSarah()
-637,0,0,,It was wonderful.|I'm still shaking.,I'm very happy to hear you say that.|What would you like to do now?,0,0,0,"EndPleasureFromSarah(2, -1)"
-637,0,0,,It was good.,I'm happy to hear you say that.|What would you like to do now?,0,0,0,"EndPleasureFromSarah(1, 0)"
-637,0,0,,It was ok.,I'll do better next time Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromSarah(0, 0)"
-637,0,0,,With practice every day|it will become better.,Everyday Mistress?  Oh my!|What would you like to do now?,0,0,0,"EndPleasureFromSarah(0, 1)"
-637,0,0,,I've had better.,I'm sorry to hear that Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromSarah(-1, 0)"
-637,0,0,,You need some|oral training.,I will train for you Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromSarah(-2, 1)"
+630,0,0,,Get naked first.,Alright!  It's my pleasure Mistress!|(She quickly strips down for you.),631,0,0,"ForceChangeActor(""Naked"")"
+630,0,0,,Strip girl.,Alright!  It's my pleasure Mistress!|(She quickly strips down for you.),631,0,0,"ForceChangeActor(""Naked"")"
+630,0,0,,Remove your clothes|my sexy subbie.,Alright!  It's my pleasure Mistress!|(She quickly strips down for you.),631,0,0,"ForceChangeActor(""Naked"")"
+630,0,0,,I've changed my mind.,Really?  What could be fun then?,0,0,0,EndEnslaveSarah()
+631,0,0,!HasBelt,You will pleasure me|here on your knees.,"Mistress, can I also finger myself|while I work on you with my mouth?",632,0,0,
+631,0,0,!HasBelt,Kneel bitch and|get to work.,"Mistress, can I also finger myself|while I work on you with my mouth?",632,0,0,
+631,0,0,HasBelt,You will pleasure me|here on your knees.,(She looks down at her chastity belt and sighs.)|Yes Mistress.  (She kneels and starts to lick you.),633,0,0,StartPleasurePlayer(false)
+631,0,0,HasBelt,Kneel bitch and|get to work.,(She looks down at her chastity belt and sighs.)|Yes Mistress.  (She kneels and starts to lick you.),633,0,0,StartPleasurePlayer(false)
+632,0,0,,"Sure, pleasure yourself.",(She kneels and starts to lick|you while masturbating herself.),633,0,0,StartPleasurePlayer(true)
+632,0,0,,Fine.  But you can't|cum before I do.,(She kneels and starts to lick|you while masturbating herself.),633,0,0,StartPleasurePlayer(true)
+632,0,0,,"No, focus on me|and only me.","(She sighs, kneels and starts to lick you.)",633,0,0,StartPleasurePlayer(false)
+632,0,0,,Shut up and|get to work.,"(She sighs, kneels and starts to lick you.)",633,0,0,StartPleasurePlayer(false)
+633,0,0,,(Let her pleasure you.),(You let Sarah pleasure you with her|mouth and slowly drift away in ecstasy.),633,0,0,PleasurePlayer()
+633,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|We stop already?  Did you cum Mistress?,635,0,0,StopPleasureFromSarah()
+633,0,0,,(Force her to|go faster.),(You grab her hair and force|her to speed up the rhythm.),633,0,0,PleasurePlayerSetSpeed(1)
+633,0,0,,(Force her to|go slower.),(You push her head and force|her to slow down the rhythm.),633,0,0,PleasurePlayerSetSpeed(-1)
+634,0,0,,Aaaaah!  Stop slave!|(Stop everything.),(You push her back and stop everything.)|You're delicious Mistress.  I hope you liked it.,635,0,0,StopPleasureFromSarah()
+634,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|You're delicious Mistress.  I hope you liked it.,635,0,0,StopPleasureFromSarah()
+635,0,0,,It was wonderful.|I'm still shaking.,Pro tongue!  (She pulls out her tongue.)|What could we do to have fun now?,0,0,0,"EndPleasureFromSarah(2, -1)"
+635,0,0,,It was good.,And it will be even better next time.|What could we do to have fun now?,0,0,0,"EndPleasureFromSarah(1, 0)"
+635,0,0,,It was ok.,It will be much better next time.|What could we do to have fun now?,0,0,0,"EndPleasureFromSarah(0, 0)"
+635,0,0,,With practice every day|it will become better.,Oh yes!  We will practice everyday.|What could we do to have fun now?,0,0,0,"EndPleasureFromSarah(0, 1)"
+635,0,0,,I've had better.,It wasn't good?  You can punish me then.|What could we do to have fun now?,0,0,0,"EndPleasureFromSarah(-1, 0)"
+635,0,0,,You need some|oral training.,"Oh my, please train me Mistress.|What could we do to have fun now?",0,0,0,"EndPleasureFromSarah(-1, 1)"
 640,0,0,!Common_PlayerGagged,(Kiss her.),(You kiss her lovingly while she|closes her eyes and moans slowly.),640,0,0,"Masturbate(1, false)"
 640,0,0,,(Massage her breast.),(She closes her eyes and shivers while|you cup and slowly massage her breast.),640,0,0,"Masturbate(1, false)"
 640,0,0,,(Pinch her nipple.),(She jumps from the pain and whimpers.|She shakes her head from left to right.),640,0,0,"Masturbate(-1, false)"

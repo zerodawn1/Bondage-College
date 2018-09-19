@@ -27,6 +27,7 @@ var C012_AfterClass_Sarah_AmandaHeartBroken = false;
 var C012_AfterClass_Sarah_DatingAmanda = false;
 var C012_AfterClass_Sarah_HasPigPicture = false;
 var C012_AfterClass_Sarah_IsNaked = false;
+var C012_AfterClass_Sarah_MasturbateWhilePleasure = false;
 
 // In her shorts, Sarah can have many poses when she talks
 function C012_AfterClass_Sarah_SetPose() {
@@ -130,7 +131,7 @@ function C012_AfterClass_Sarah_Run() {
 
 	// Draw the actor alone or with the player depending on the stage
 	if ((C012_AfterClass_Sarah_CurrentStage != 150) && (C012_AfterClass_Sarah_CurrentStage != 151)) {
-		if ((C012_AfterClass_Sarah_CurrentStage != 410) && (C012_AfterClass_Sarah_CurrentStage != 3932) && (C012_AfterClass_Sarah_CurrentStage != 635) && (C012_AfterClass_Sarah_CurrentStage != 636) && (C012_AfterClass_Sarah_CurrentStage != 791) && (C012_AfterClass_Sarah_CurrentStage != 194)) {
+		if ((C012_AfterClass_Sarah_CurrentStage != 410) && (C012_AfterClass_Sarah_CurrentStage != 3932) && (C012_AfterClass_Sarah_CurrentStage != 633) && (C012_AfterClass_Sarah_CurrentStage != 634) && (C012_AfterClass_Sarah_CurrentStage != 791) && (C012_AfterClass_Sarah_CurrentStage != 194)) {
 			if (((C012_AfterClass_Sarah_CurrentStage >= 3090) && (C012_AfterClass_Sarah_CurrentStage <= 3099)) || ((C012_AfterClass_Sarah_CurrentStage >= 3901) && (C012_AfterClass_Sarah_CurrentStage <= 3999))) {
 				DrawActor("Player", 475, 0, 1);
 				DrawActor(CurrentActor, 750, 0, 1);
@@ -226,15 +227,6 @@ function C012_AfterClass_Sarah_Click() {
 
 	}	
 
-	// Sarah can be restrained to pleasure the player on stage 633
-	if ((C012_AfterClass_Sarah_CurrentStage <= 633) && (ClickInv != "") && (ClickInv != "Player") && !Common_PlayerRestrained && !ActorIsRestrained()) {
-		if ((ClickInv == "Rope") || (ClickInv == "Cuffs") || (ClickInv == "Armbinder")) {
-			ActorApplyRestrain(ClickInv);
-			C012_AfterClass_Sarah_CalcParams();
-			C012_AfterClass_Sarah_CurrentStage = 634;
-		}
-	}
-	
 }
 
 // Chapter 12 After Class - Sarah can make love with the player if (Love + seduction * 2) >= 12 or >= 25 on the next time or Sarah is the player girlfriend/submissive
@@ -451,12 +443,10 @@ function C012_AfterClass_Sarah_TestPleasurePlayer() {
 }
 
 // Chapter 12 After Class - When Sarah starts pleasuring the player (starts to count at 2 with a vibrating egg)
-function C012_AfterClass_Sarah_StartPleasurePlayer() {
+function C012_AfterClass_Sarah_StartPleasurePlayer(MasturbateWhilePleasure) {
+	C012_AfterClass_Sarah_MasturbateWhilePleasure = MasturbateWhilePleasure;
 	PlayerClothes("Naked");
-	if (ActorHasInventory("Rope")) OverridenIntroImage = "SarahRopePleasurePlayer.jpg";
-	else if (ActorHasInventory("Cuffs")) OverridenIntroImage = "SarahCuffsPleasurePlayer.jpg";
-	else if (ActorHasInventory("Armbinder")) OverridenIntroImage = "SarahArmbinderPleasurePlayer.jpg";
-	else OverridenIntroImage = "SarahPleasurePlayer.jpg";
+	OverridenIntroImage = "SarahPleasurePlayer1.jpg";
 	CurrentTime = CurrentTime + 50000;
 	if (PlayerHasLockedInventory("VibratingEgg")) C012_AfterClass_Sarah_PleasurePlayerCount = 2;
 	else C012_AfterClass_Sarah_PleasurePlayerCount = 0;
@@ -472,15 +462,23 @@ function C012_AfterClass_Sarah_PleasurePlayer() {
 	if ((C012_AfterClass_Sarah_PleasurePlayerCount >= 0) && (C012_AfterClass_Sarah_PleasurePlayerCount <= 1) && (C012_AfterClass_Sarah_PleasurePlayerSpeed == 0)) C012_AfterClass_Sarah_PleasurePlayerCount++;
 	if ((C012_AfterClass_Sarah_PleasurePlayerCount >= 2) && (C012_AfterClass_Sarah_PleasurePlayerCount <= 3) && (C012_AfterClass_Sarah_PleasurePlayerSpeed == 1)) C012_AfterClass_Sarah_PleasurePlayerCount++;
 	if ((C012_AfterClass_Sarah_PleasurePlayerCount >= 4) && (C012_AfterClass_Sarah_PleasurePlayerCount <= 9) && (C012_AfterClass_Sarah_PleasurePlayerSpeed == 2)) C012_AfterClass_Sarah_PleasurePlayerCount++;
-	
+	if (C012_AfterClass_Sarah_MasturbateWhilePleasure) OverridenIntroText = GetText("SarahPleasureMastubate");
+
+	// 3 images will rotate
+	if (OverridenIntroImage = "SarahPleasurePlayer1.jpg") OverridenIntroImage = "SarahPleasurePlayer2.jpg";
+	else if (OverridenIntroImage = "SarahPleasurePlayer2.jpg") OverridenIntroImage = "SarahPleasurePlayer3.jpg";
+	else OverridenIntroImage = "SarahPleasurePlayer1.jpg";
+
 	// At 6 counts, an orgasm is achieved, the next one will be slower
 	if (C012_AfterClass_Sarah_PleasurePlayerCount >= 6) {
-		OverridenIntroText = GetText("OrgasmFromSarahPleasure");
+		if (C012_AfterClass_Sarah_MasturbateWhilePleasure) OverridenIntroText = GetText("OrgasmFromSarahPleasureMastubate");
+		else OverridenIntroText = GetText("OrgasmFromSarahPleasure");
 		ActorAddOrgasm();
 		GameLogSpecificAddTimer(CurrentChapter, "Player", "NextPossibleOrgasm", PlayerHasLockedInventory("VibratingEgg") ? CurrentTime + 1800000 : CurrentTime + 3600000);
+		if (C012_AfterClass_Sarah_MasturbateWhilePleasure) GameLogSpecificAddTimer(CurrentChapter, CurrentActor, "NextPossibleOrgasm", CurrentTime + 3600000);
 		if (PlayerHasLockedInventory("Collar")) OverridenIntroImage = "PlayerCollarCloseUpOrgasm.jpg";
 		else OverridenIntroImage = "PlayerCloseUpOrgasm.jpg";
-		C012_AfterClass_Sarah_CurrentStage = 636;
+		C012_AfterClass_Sarah_CurrentStage = 634;
 		C012_AfterClass_Sarah_PleasurePlayerCount = 0;
 		C012_AfterClass_Sarah_PleasurePlayerSpeed = 0;
 	} else {
