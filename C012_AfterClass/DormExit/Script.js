@@ -80,6 +80,7 @@ function C012_AfterClass_DormExit_LaunchLibrary() {
 		if (Common_PlayerClothed && (Common_PlayerCostume == "")) {
 			if (CurrentTime < (20.9 * 60 * 60 * 1000)) {
 				CurrentTime = CurrentTime + 290000;
+				C012_AfterClass_Library_CurrentStage = 0;
 				SetScene(CurrentChapter, "Library");				
 			} else OverridenIntroText = GetText("LibraryClosed");
 		} else OverridenIntroText = GetText("SchoolClothesFirst");

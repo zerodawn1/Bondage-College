@@ -155,7 +155,7 @@ function C012_AfterClass_Dorm_Run() {
 	}
 
 	// If the player owner wants to start a random activity with the player
-	if (!C012_AfterClass_Dorm_PlayerGrounded && (Common_PlayerOwner != "") && (C012_AfterClass_Dorm_Guest.indexOf(Common_PlayerOwner) >= 0) && !GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") && !GameLogQuery(CurrentChapter, CurrentActor, "EventGenericNext"))
+	if (!C012_AfterClass_Dorm_PlayerGrounded && (Common_PlayerOwner != "") && (C012_AfterClass_Dorm_Guest.indexOf(Common_PlayerOwner) >= 0) && !GameLogQuery(CurrentChapter, Common_PlayerOwner, "EventGeneric") && !GameLogQuery(CurrentChapter, Common_PlayerOwner, "EventGenericNext"))
 		if ((Common_PlayerOwner != "Amanda") || !GameLogQuery(CurrentChapter, "Player", "AmandaAndSarahInBed")) {
 			if (Common_PlayerOwner == "Sidney") C012_AfterClass_Sidney_CurrentStage = 450;
 			if (Common_PlayerOwner == "Amanda") C012_AfterClass_Amanda_CurrentStage = 450;
@@ -163,6 +163,16 @@ function C012_AfterClass_Dorm_Run() {
 			LeaveIcon = "";
 		}
 
+	// If the Sarah wants to start a random activity with the player as an owner
+	if (!C012_AfterClass_Dorm_PlayerGrounded && (C012_AfterClass_Dorm_Guest.indexOf("Sarah") >= 0) && (ActorSpecificGetValue("Sarah", ActorOwner) == "Player") && !GameLogQuery(CurrentChapter, "Sarah", "EventGenericNext")) {
+		CurrentActor = "Sarah";
+		if (ActorIsGagged()) C012_AfterClass_Sarah_CurrentStage = 2200;
+		else if (ActorIsRestrained()) C012_AfterClass_Sarah_CurrentStage = 2100;
+		else C012_AfterClass_Sarah_CurrentStage = 2000;
+		SetScene(CurrentChapter, "Sarah");
+		LeaveIcon = "";
+	}
+		
 	// Make sure we are still in the dorm after the previous events
 	if (CurrentScreen == "Dorm") {
 		

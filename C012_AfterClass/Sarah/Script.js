@@ -81,6 +81,7 @@ function C012_AfterClass_Sarah_Load() {
 	ActorLoad("Sarah", "Dorm");
 	Common_PlayerPose = "";
 	if (C012_AfterClass_Sarah_CurrentStage == 3915) Common_PlayerPose = "HogtiePunishment";
+	if (Common_ActorIsOwned) GameLogAddTimer("EventGenericNext", CurrentTime + 1200000 + Math.floor(Math.random() * 1200000));
 	
 	// Sarah's parameters
 	C012_AfterClass_Sarah_CalcParams();	
@@ -285,24 +286,19 @@ function C012_AfterClass_Sarah_SetPlayerPose(NewPose) {
 
 // Chapter 12 After Class - Sarah can unbind the player on some events
 function C012_AfterClass_Sarah_TestUnbind() {
-
-	// Before the next event time, she will always refuse (skip is owned)
-	if (!GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") || Common_ActorIsOwned) {
 		
-		// Check if the event succeeds randomly (skip is owned)
-		if (EventRandomChance("Love") || Common_ActorIsOwned) {
-			
-			// Can only release if not restrained
-			if (!ActorIsRestrained()) {
-				if (ActorIsGagged()) OverridenIntroText = GetText("ReleasePlayerGagged");
-				else OverridenIntroText = GetText("ReleasePlayer");				
-				PlayerReleaseBondage();
-				CurrentTime = CurrentTime + 50000;
-			} else OverridenIntroText = GetText("CannotReleasePlayer");
-			
-		} else EventSetGenericTimer();
+	// Check if the event succeeds randomly (skip is owned)
+	if (EventRandomChance("Love") || Common_ActorIsOwned) {
 		
-	}
+		// Can only release if not restrained
+		if (!ActorIsRestrained()) {
+			if (ActorIsGagged()) OverridenIntroText = GetText("ReleasePlayerGagged");
+			else OverridenIntroText = GetText("ReleasePlayer");				
+			PlayerReleaseBondage();
+			CurrentTime = CurrentTime + 50000;
+		} else OverridenIntroText = GetText("CannotReleasePlayer");
+		
+	} else EventSetGenericTimer();
 	
 }
 
@@ -416,6 +412,7 @@ function C012_AfterClass_Sarah_Untie() {
 // Chapter 12 After Class - When Sarah gets collared
 function C012_AfterClass_Sarah_LockCollarSarah() {
 	ActorSetOwner("Player");
+	GameLogAddTimer("EventGenericNext", CurrentTime + 1200000 + Math.floor(Math.random() * 1200000));
 	PlayerRemoveInventory("Collar", 1);
 	C012_AfterClass_Sarah_CalcParams();
 	ActorSetPose("Kneel");
@@ -465,8 +462,8 @@ function C012_AfterClass_Sarah_PleasurePlayer() {
 	if (C012_AfterClass_Sarah_MasturbateWhilePleasure) OverridenIntroText = GetText("SarahPleasureMastubate");
 
 	// 3 images will rotate
-	if (OverridenIntroImage = "SarahPleasurePlayer1.jpg") OverridenIntroImage = "SarahPleasurePlayer2.jpg";
-	else if (OverridenIntroImage = "SarahPleasurePlayer2.jpg") OverridenIntroImage = "SarahPleasurePlayer3.jpg";
+	if (OverridenIntroImage == "SarahPleasurePlayer1.jpg") OverridenIntroImage = "SarahPleasurePlayer2.jpg";
+	else if (OverridenIntroImage == "SarahPleasurePlayer2.jpg") OverridenIntroImage = "SarahPleasurePlayer3.jpg";
 	else OverridenIntroImage = "SarahPleasurePlayer1.jpg";
 
 	// At 6 counts, an orgasm is achieved, the next one will be slower

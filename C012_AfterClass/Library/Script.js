@@ -48,14 +48,13 @@ function C012_AfterClass_Library_Load() {
 	LoadInteractions();
 	Common_BondageAllowed = false;
 	Common_SelfBondageAllowed = false;
-	C012_AfterClass_Library_CurrentStage = 0;
 	C012_AfterClass_Library_HasSeduction = (PlayerGetSkillLevel("Seduction") >= 1);
 	C012_AfterClass_Library_HasEgg = (PlayerHasLockedInventory("VibratingEgg"));
 	C012_AfterClass_Library_AmandaBelted = (ActorHasInventory("ChastityBelt"));
 
 	// If we must put the previous text or previous actor back
 	if (C012_AfterClass_Library_IntroText != "") { OverridenIntroText = C012_AfterClass_Library_IntroText; C012_AfterClass_Library_IntroText = ""; }
-	if (C012_AfterClass_Library_CurrentActor != "") ActorLoad(C012_AfterClass_Library_CurrentActor, "");
+	if ((C012_AfterClass_Library_CurrentActor != "") && (C012_AfterClass_Library_CurrentStage != 0)) ActorLoad(C012_AfterClass_Library_CurrentActor, "");
 	if (C012_AfterClass_Library_CurrentStage == 0) C012_AfterClass_Library_WhoIsInLibrary();
 
 	// No leaving from the library

@@ -280,3 +280,6 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 790,0,0,,Don't be mad.|I'm sorry.,"It's fine, no need to cry.|(She sighs and walks out.)",791,-1,-1,KickedOut()
 790,0,0,,Pack your shit|and go girl.,You won't tell me twice.|(She runs out quickly.),791,-2,1,KickedOut()
 791,0,0,,(Back to your dorm.),,791,0,0,BackToDorm()
+2000,0,0,,(Ignore her.),,2000,0,0,BackToDorm()
+2100,0,0,,(Ignore her.),,2100,0,0,BackToDorm()
+2200,0,0,,(Ignore her.),,2200,0,0,BackToDorm()
