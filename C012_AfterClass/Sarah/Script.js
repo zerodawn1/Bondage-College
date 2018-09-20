@@ -741,3 +741,8 @@ function C012_AfterClass_Sarah_GetPigCostume() {
 	CurrentTime = CurrentTime + 50000;
 	LeaveIcon = "Leave";
 }
+
+// Chapter 12 After Class - Sarah gives the pig costume to the player
+function C012_AfterClass_Sarah_GetPigCostume() {
+	GameLogAdd("StopEvents");
+}
