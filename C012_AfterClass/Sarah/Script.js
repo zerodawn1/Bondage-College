@@ -742,7 +742,7 @@ function C012_AfterClass_Sarah_GetPigCostume() {
 	LeaveIcon = "Leave";
 }
 
-// Chapter 12 After Class - Sarah gives the pig costume to the player
-function C012_AfterClass_Sarah_GetPigCostume() {
+// Chapter 12 After Class - The player can stop Sarah's random events
+function C012_AfterClass_Sarah_StopEvents() {
 	GameLogAdd("StopEvents");
 }
