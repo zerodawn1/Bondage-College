@@ -280,30 +280,30 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 790,0,0,,Don't be mad.|I'm sorry.,"It's fine, no need to cry.|(She sighs and walks out.)",791,-1,-1,KickedOut()
 790,0,0,,Pack your shit|and go girl.,You won't tell me twice.|(She runs out quickly.),791,-2,1,KickedOut()
 791,0,0,,(Back to your dorm.),,791,0,0,BackToDorm()
-2000,0,0,Common_PlayerGagged,@Uuumph nugm!,You're so lucky Mistress.|Can I also have a gag?,0,0,0,
-2000,0,0,,You're looking|for trouble?,"Oh yes Mistress!|Trouble, trouble, trouble.",0,0,0,
-2000,0,0,,You need some|attention my sub?,(She nods and blushes.)  Yes Mistress.|Would you like to play with me?,0,0,0,
-2000,0,0,,A good submissive|should not ask that.,"I know Mistress, but I|want to please you so much.",0,0,0,
-2000,0,0,,Are you wet?,I'm always wet for you Mistress.|What could we do to have fun?,0,0,0,
-2000,0,0,!Common_PlayerRestrained,(Play with her.),(You take a step toward her.),10,0,0,
+2000,0,0,Common_PlayerGagged,@Uuumph nugm!,You're so lucky Mistress.|Can I also have a gag?,0,0,0,AllowLeave()
+2000,0,0,,You're looking|for trouble?,"Oh yes Mistress!|Trouble, trouble, trouble.",0,0,0,AllowLeave()
+2000,0,0,,You need some|attention my sub?,(She nods and blushes.)  Yes Mistress.|Would you like to play with me?,0,0,0,AllowLeave()
+2000,0,0,,A good submissive|should not ask that.,"I know Mistress, but I|want to please you so much.",0,0,0,AllowLeave()
+2000,0,0,,Are you wet?,I'm always wet for you Mistress.|What could we do to have fun?,0,0,0,AllowLeave()
+2000,0,0,!Common_PlayerRestrained,(Play with her.),(You take a step toward her.),10,0,0,AllowLeave()
 2000,0,0,,Don't bug me slave.,,2000,0,0,BackToDorm()
 2000,0,0,,(Ignore her.),,2000,0,0,BackToDorm()
 2000,0,0,,Never disturb me|like that again.,(She bows her head in|shame and nods slowly.),2999,-1,1,StopEvents()
-2100,0,0,Common_PlayerGagged,@Uuumph nugm!,You're so lucky Mistress.|Can I also have a gag?,0,0,0,
-2100,0,0,,You're looking|for trouble?,"Oh yes Mistress!|Trouble, trouble, trouble.",0,0,0,
-2100,0,0,,You want to get out?,"Oh no, I love being restrained.|I simply want to please you Mistress.",0,0,0,
-2100,0,0,,Struggle for me girl.,(She struggles playfully in her restrains.)|I love to struggle for you Mistress.,0,0,0,
-2100,0,0,,Are you wet?,I'm always wet for you Mistress.|What could we do to have fun?,0,0,0,
-2100,0,0,!Common_PlayerRestrained,(Play with her.),(You take a step toward her.),10,0,0,
+2100,0,0,Common_PlayerGagged,@Uuumph nugm!,You're so lucky Mistress.|Can I also have a gag?,0,0,0,AllowLeave()
+2100,0,0,,You're looking|for trouble?,"Oh yes Mistress!|Trouble, trouble, trouble.",0,0,0,AllowLeave()
+2100,0,0,,You want to get out?,"Oh no, I love being restrained.|I simply want to please you Mistress.",0,0,0,AllowLeave()
+2100,0,0,,Struggle for me girl.,(She struggles playfully in her restrains.)|I love to struggle for you Mistress.,0,0,0,AllowLeave()
+2100,0,0,,Are you wet?,I'm always wet for you Mistress.|What could we do to have fun?,0,0,0,AllowLeave()
+2100,0,0,!Common_PlayerRestrained,(Play with her.),(You take a step toward her.),10,0,0,AllowLeave()
 2100,0,0,,Don't bug me slave.,,2100,0,0,BackToDorm()
 2100,0,0,,(Ignore her.),,2100,0,0,BackToDorm()
 2100,0,0,,Never disturb me|like that again.,(She bows her head in|shame and nods slowly.),2999,-1,1,StopEvents()
-2200,0,0,Common_PlayerGagged,@Uuumph nugm!,"(You try to chat with|Sarah, but fail miserably.)",0,0,0,
-2200,0,0,,You're looking|for trouble?,(She nods rapidly.),0,0,0,
-2200,0,0,,What?  I don't understand|what you're talking about.,Namgnno am nuui abm mmmhm!|(She mumbles some more and giggles.),0,0,0,
-2200,0,0,,Sing something for me.,(She hums the song: Like a Virgin|from Madonna in her gag.),0,0,0,
+2200,0,0,Common_PlayerGagged,@Uuumph nugm!,"(You try to chat with|Sarah, but fail miserably.)",0,0,0,AllowLeave()
+2200,0,0,,You're looking|for trouble?,(She nods rapidly.),0,0,0,AllowLeave()
+2200,0,0,,What?  I don't understand|what you're talking about.,Namgnno am nuui abm mmmhm!|(She mumbles some more and giggles.),0,0,0,AllowLeave()
+2200,0,0,,Sing something for me.,(She hums the song: Like a Virgin|from Madonna in her gag.),0,0,0,AllowLeave()
 2200,0,0,!Common_PlayerRestrained,Stand still my slave.|I'll remove your gag.,(You remove her gag and she smiles.)|Thanks Mistress!  What could we do now?,0,0,0,Ungag()
-2200,0,0,!Common_PlayerRestrained,(Play with her.),(You take a step toward her.),10,0,0,
+2200,0,0,!Common_PlayerRestrained,(Play with her.),(You take a step toward her.),10,0,0,AllowLeave()
 2200,0,0,,Don't bug me slave.,,2200,0,0,BackToDorm()
 2200,0,0,,(Ignore her.),,2200,0,0,BackToDorm()
 2200,0,0,,Never disturb me|like that again.,(She bows her head in|shame and nods slowly.),2999,-1,1,StopEvents()

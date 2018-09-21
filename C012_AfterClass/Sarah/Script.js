@@ -399,6 +399,7 @@ function C012_AfterClass_Sarah_EnslaveStrip() {
 function C012_AfterClass_Sarah_Ungag() {
 	ActorUngag();
 	C012_AfterClass_Sarah_CalcParams();
+	LeaveIcon = "Leave";
 	CurrentTime = CurrentTime + 50000;
 }
 
@@ -745,4 +746,5 @@ function C012_AfterClass_Sarah_GetPigCostume() {
 // Chapter 12 After Class - The player can stop Sarah's random events
 function C012_AfterClass_Sarah_StopEvents() {
 	GameLogAdd("StopEvents");
+	LeaveIcon = "Leave";
 }
