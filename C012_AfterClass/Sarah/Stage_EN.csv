@@ -7,7 +7,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_PlayerRestrained,(Struggle in|your restrains.),You're adorable when you struggle.|I also love to be restrained.,0,0,0,TestUnbind()
 0,0,0,,You should wear|something else.,I prefer to stay like that.,0,0,0,TestChange()
 0,0,0,SexAvail,Would you like to|make love with me?,"No, I'm not in the mood for sex.|Let's do something else ok?",0,0,0,TestSex()
-0,0,0,PleasurePlayerAvail,"My submissive, you|will pleasure me now.",Oh!  You need a quicky Mistress?|(She looks at you and smiles.),630,0,0,TestPleasurePlayer()
+0,0,0,PleasurePlayerAvail,"My submissive, you|will pleasure me now.",You need a quickie Mistress?|(She looks at you and smiles.),630,0,0,TestPleasurePlayer()
 0,0,0,!Common_PlayerRestrained,(Play with her.),(You take a step toward her.),10,0,0,
 10,5,0,!Common_PlayerGagged,(Kiss her.),(You get close to her and kiss her|on the lips while she moans silently.),10,0,0,Kiss()
 10,1,0,!Common_PlayerRestrained,(Tickle her.),"(You get closer and tickle her on the chest|while she laughs out loud, she seems to enjoy it.)",10,0,0,Tickle()
@@ -22,7 +22,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 20,0,0,DateAmandaAvail,Is there something|going on with Amanda?,"I'm not sure actually.  She gave me a|few hints, but I don't think she's serious.",160,0,0,
 20,0,0,DatingAmanda,Would you like to use|my bed with Amanda?,"(She smiles.)  Of course I would!|But ask her first, she's the shy one.",20,0,0,
 20,0,0,AmandaHeartBroken,Will Amanda be ok?,Poor Amy.  I guess she will be fine.|I'll speak with her when I get home.,20,0,0,
-20,0,0,HasPigPicture,We're the pig picture.|(Share a Sidney picture.),"This is PERFECT!  She will stop pestering me.|Thank you, what else could we do for fun?",0,2,0,PigPictureDone()
+20,0,0,HasPigPicture,Here's the pig picture.|(Share a Sidney picture.),"This is PERFECT!  She will stop pestering me.|Thank you, what else could we do for fun?",0,2,0,PigPictureDone()
 20,0,0,Common_PlayerChaste,Can you please help|me with this belt?,I cannot help you.|I don't have the key.,0,0,0,
 20,0,0,Common_ActorIsLover,About our relationship...,Yes my sexy lover?|(She seems nervous.),190,0,0,
 20,0,0,,It's time for you|to leave my place.,You're expelling me from your dorm?,790,-1,1,
@@ -298,11 +298,11 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 2100,0,0,,Don't bug me slave.,,2100,0,0,BackToDorm()
 2100,0,0,,(Ignore her.),,2100,0,0,BackToDorm()
 2100,0,0,,Never disturb me|like that again.,(She bows her head in|shame and nods slowly.),2999,-1,1,StopEvents()
-2200,0,0,Common_PlayerGagged,@Uuumph nugm!,"(You try to chat with|Sarah, but fail miserably.)",0,0,0,AllowLeave()
+2200,0,0,Common_PlayerGagged,@Uuumph nugm!,(You try to chat with|Sarah but fail miserably.),0,0,0,AllowLeave()
 2200,0,0,,You're looking|for trouble?,(She nods rapidly.),0,0,0,AllowLeave()
 2200,0,0,,What?  I don't understand|what you're talking about.,Namgnno am nuui abm mmmhm!|(She mumbles some more and giggles.),0,0,0,AllowLeave()
 2200,0,0,,Sing something for me.,(She hums the song: Like a Virgin|from Madonna in her gag.),0,0,0,AllowLeave()
-2200,0,0,!Common_PlayerRestrained,Stand still my slave.|I'll remove your gag.,(You remove her gag and she smiles.)|Thanks Mistress!  What could we do now?,0,0,0,Ungag()
+2200,0,0,!Common_PlayerRestrained,Stand still my slave.|I'll remove your gag.,(You remove her gag and she smile.)|Thanks Mistress!  What could we do now?,0,0,0,Ungag()
 2200,0,0,!Common_PlayerRestrained,(Play with her.),(You take a step toward her.),10,0,0,AllowLeave()
 2200,0,0,,Don't bug me slave.,,2200,0,0,BackToDorm()
 2200,0,0,,(Ignore her.),,2200,0,0,BackToDorm()

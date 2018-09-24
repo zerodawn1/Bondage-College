@@ -101,7 +101,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 230,0,0,,A guide that will|make choices for you.,I can make my fucking choices.,240,0,0,
 230,0,0,,A strict guide that|will control your life.,(She seems surprised by what you said.)|I don't need fucking control.,240,0,0,EnslaveSidneyCount()
 240,0,0,,I will give you|structure and rules.,I'm not good with rules.|I'm a born rebel.,250,0,0,
-240,0,0,,(Slap her face.)|Stop swearing!,(You slap her face and she whimpers.)|I'm very sorry Miss COMMON_PLAYERNAME.,241,-1,1,EnslaveSidneyCount()
+240,0,0,,(Slap her face.)|Stop swearing!,(You slap her face and she whimper.)|I'm very sorry Miss COMMON_PLAYERNAME.,241,-1,1,EnslaveSidneyCount()
 241,0,0,,I will give you|structure and rules.,I'm not good with rules.|I'm a born rebel.,250,0,0,
 250,0,0,,You won't be a rebel.|You'll be my slave.,(She trembles at the thought.)|And what does a slave do?,260,0,0,EnslaveSidneyCount()
 250,0,0,,You won't be a rebel.|You'll be my submissive.,(She frowns and looks at you.)|And what does a submissive do?,260,0,0,

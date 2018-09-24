@@ -37,7 +37,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 110,0,0,,Are you wet|right now?,(She nods and blushes a little.)|Oh yes.  This really turns me on.,110,0,0,WetRemark()
 110,0,0,,(Kiss her.),(She's surprised by your kiss.)|Oh!  I didn't expect that.,110,0,0,
 110,0,0,,(Tickle her.),(She laughs a little but doesn't|seem to enjoy it that much.),110,0,0,
-110,0,0,,(Help her out.),(You unlock the chains and she|gets off the cross with a smile.),100,0,0,"LockSarah("""")"
+110,0,0,,(Help her out.),(You unlock the chains and she|get off the cross with a smile.),100,0,0,"LockSarah("""")"
 110,0,0,,(Step back.),"(You step back, leaving Sarah behind.|Which device would you like to see?)",20,0,0,
 120,0,0,!SarahRestrained,This is fun!,You're looking good on that cross.|I should get one for my own room.,120,0,0,DommeRemark()
 120,0,0,SarahRestrained,This is fun!,Yes!  But make sure you can get out.|We don't want to be stuck all night.,120,0,0,DommeRemark()
@@ -64,7 +64,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 210,0,0,,(Step back.),"(You step back, leaving Sarah behind.|Which device would you like to see?)",20,0,0,
 220,0,0,!SarahRestrained,This is fun!,You're looking good on that pillory.|Next time I need to trick Sidney in one.,220,0,0,DommeRemark()
 220,0,0,SarahRestrained,This is fun!,Yes!  But make sure you can get out.|We don't want to be stuck all night.,220,0,0,DommeRemark()
-220,0,0,,They used this|in medieval times?,Yep.  If I had rotten tomatoes|you would be a mess right now.,220,0,0,
+220,0,0,,They used this|in medieval times?,"Yep.  If I had rotten tomatoes,|you would be a mess right now.",220,0,0,
 220,0,0,!SarahRestrained,(Pull your tongue.),(She pulls her tongue back at you.)|You're such a goofy slave.,220,0,0,
 220,0,0,SarahRestrained,(Pull your tongue.),"(She pulls her tongue back at you.)|Seriously, can you struggle out?",220,0,0,
 220,0,0,!SarahRestrained,Can you help me?,Yep!  Let me open that device for you.|(She opens the pillory while you step out.),200,0,0,"LockPlayer("""")"

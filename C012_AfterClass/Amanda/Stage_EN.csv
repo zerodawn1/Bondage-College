@@ -94,7 +94,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 190,0,0,,I don't think it's|working between us.,(She gives you a sad look.)|Do you want to break up?,191,0,0,
 190,0,0,,I want to break up.,(She gives you a sad look.)|Really my love?  It's the end?,191,0,0,
 191,0,0,,"No, let's stay together.",(She trembles and slowly recovers.)|Please don't toy with me COMMON_PLAYERNAME.,0,0,0,
-191,0,0,Common_ActorIsOwned,We'll break up but I'll|keep you as my slave.,"(She cries and looks devastated.)|Yes Mistress, it's...  it's...  it's fine.",192,-5,0,BreakUp()
+191,0,0,Common_ActorIsOwned,"We'll break up, but I'll|keep you as my slave.","(She cries and looks devastated.)|Yes Mistress, it's...  it's...  it's fine.",192,-5,0,BreakUp()
 191,0,0,!Common_ActorIsOwned,"Yes, I want to break up.",Why are you doing that?|Don't play with my heart!,193,-5,0,BreakUp()
 192,0,0,,I'm sorry.|Don't cry.,I will be alright Mistress.|Let's talk about something else.,0,0,-1,EndChat()
 192,0,0,,You're not|in my league.,"Please Mistress, it hurts so much.|Let's talk about something else.",0,-1,1,EndChat()
