@@ -4,10 +4,11 @@ var C012_AfterClass_Pool_IntroText = "";
 var C012_AfterClass_Pool_CurrentActor = "";
 var C012_AfterClass_Pool_HasSports = false;
 var C012_AfterClass_Pool_SwimCount = 0;
+var C012_AfterClass_Pool_JenniferAvail = false;
 
 // Chapter 12 After Class - Check who's in the Pool
 function C012_AfterClass_Pool_WhoInIsPool() {
-	
+	C012_AfterClass_Pool_JenniferAvail = (GameLogQuery(CurrentChapter, "Player", "PoolJenniferBully") && !GameLogQuery(CurrentChapter, "Jennifer", "EnterDormFromPub"));
 }
 
 // Chapter 12 After Class - Pool Load
@@ -87,4 +88,44 @@ function C012_AfterClass_Pool_Search() {
 		OverridenIntroText = GetText("FindRope");
 		PlayerAddInventory("Rope", 2);
 	}
+}
+
+// Chapter 12 After Class - When the player searches the shower, a cloth gag can be found
+function C012_AfterClass_Pool_SearchShower() {
+	if (!GameLogQuery(CurrentChapter, "Player", "PoolFindClothGag")) {
+		GameLogSpecificAdd(CurrentChapter, "Player", "PoolFindClothGag");
+		OverridenIntroText = GetText("FindClothGag");
+		PlayerAddInventory("ClothGag", 1);
+	}	
+}
+
+// Chapter 12 After Class - When the player enters the shower, it can trigger the Jennifer event between 19 and 22
+function C012_AfterClass_Pool_EnterShower() {
+	CurrentTime = CurrentTime + 50000;
+	if (!GameLogQuery(CurrentChapter, "Player", "PoolJenniferBully") && (CurrentTime >= 19 * 60 * 60 * 1000) && (CurrentTime < 22 * 60 * 60 * 1000)) {
+		GameLogSpecificAdd(CurrentChapter, "Player", "PoolJenniferBully")
+		OverridenIntroText = GetText("BullyIntro");
+		C012_AfterClass_Pool_CurrentStage = 110;
+	}
+}
+
+// Chapter 12 After Class - When the player goes back to the pool
+function C012_AfterClass_Pool_EnterPool() {
+	CurrentTime = CurrentTime + 50000;
+	C012_AfterClass_Pool_WhoInIsPool();
+}
+
+// Chapter 12 After Class - When the player showers, it adds 5 minutes
+function C012_AfterClass_Pool_Shower() {
+	CurrentTime = CurrentTime + 290000;
+}
+
+// Chapter 12 After Class - Loads Jennifer in the pool scene
+function C012_AfterClass_Pool_LoadJennifer() {
+	ActorLoad("Jennifer", "");
+}
+
+// Chapter 12 After Class - Unloads Jennifer from the pool scene
+function C012_AfterClass_Pool_UnloadJennifer() {
+	CurrentActor = "";
 }

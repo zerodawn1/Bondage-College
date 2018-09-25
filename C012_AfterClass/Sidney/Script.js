@@ -204,6 +204,7 @@ function C012_AfterClass_Sidney_Click() {
 					OverridenIntroText = GetText("TurnTablesFromMistress");
 				}
 				else OverridenIntroText = GetText("TurnTables");
+				C012_AfterClass_Sidney_CalcParams();
 				CurrentTime = CurrentTime + 50000;
 			} else OverridenIntroText = GetText("RefuseBondage");
 			return;
@@ -226,6 +227,10 @@ function C012_AfterClass_Sidney_Click() {
 			OverridenIntroText = GetText("StripForSecondRope");
 			return;
 		}
+		
+		// Sidney cannot have 3 ropes if she's wearing the pig costume
+		if ((ActorGetValue(ActorPose) == "Pig") && (ClickInv == "Rope"))
+			return;
 		
 		// Apply the clicked restrain
 		ActorApplyRestrain(ClickInv);

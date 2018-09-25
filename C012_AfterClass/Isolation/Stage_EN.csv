@@ -88,7 +88,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 320,0,0,!SarahRestrained,This is fun!,You're looking good on that horse.|Too bad I'm horrible at whipping.,320,0,0,DommeRemark()
 320,0,0,SarahRestrained,This is fun!,Yes!  But make sure you can get out.|We don't want to be stuck all night.,320,0,0,DommeRemark()
 320,0,0,,(Simulate riding|the horse.),(You simulate riding the horse.)|Giddy up!  Go cowgirl!,320,0,0,
-320,0,0,,(Masturbate.),(You rub on the horse but fail to masturbate properly.)|I see you girl!  You're such a naughty slave.,320,0,0,Masturbate()
+320,0,0,!Common_PlayerChaste,(Masturbate.),(You rub on the horse but fail to masturbate properly.)|I see you girl!  You're such a naughty slave.,320,0,0,Masturbate()
 320,0,0,!SarahRestrained,Can you help me?,Of course!  Let me help you off that horse.|(She uncuffs your legs and pulls you down.),300,0,0,"LockPlayer("""")"
 320,0,0,SarahRestrained,Can you help me?,Are you serious?  You're also stuck?|(She struggles but cannot free herself.),320,0,0,
 320,0,0,,(Try to get out.),"(You tug and pull on the ankle|cuffs, but they won't come off.)",320,0,0,

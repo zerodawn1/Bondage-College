@@ -61,7 +61,7 @@ function C012_AfterClass_Sarah_CalcParams() {
 	C012_AfterClass_Sarah_CanKickOut = (!Common_ActorIsOwner && !Common_ActorIsLover);
 	C012_AfterClass_Sarah_SidneyIsOwner = (Common_PlayerOwner == "Sidney");
 	C012_AfterClass_Sarah_HaveCuffs = (PlayerHasInventory("Cuffs"));
-	C012_AfterClass_Sarah_DateAmandaAvail = (!GameLogQuery(CurrentChapter, CurrentActor, "DatingSarah") && (Common_PlayerLover != "Amanda") && (Common_PlayerLover != "Sarah"));
+	C012_AfterClass_Sarah_DateAmandaAvail = (!GameLogQuery(CurrentChapter, CurrentActor, "DatingAmanda") && (Common_PlayerLover != "Amanda") && (Common_PlayerLover != "Sarah"));
 	C012_AfterClass_Sarah_AllowDamsel = (GameLogQuery("C008_DramaClass", "Player", "RoleVillain") || GameLogQuery("C008_DramaClass", "Player", "RoleHeroine"));
 	C012_AfterClass_Sarah_AllowHeroine = GameLogQuery("C008_DramaClass", "Player", "RoleDamsel");
 	C012_AfterClass_Sarah_BondageClubInvitationBySarah = GameLogQuery(CurrentChapter, CurrentActor, "BondageClubInvitationBySarah");
@@ -182,11 +182,8 @@ function C012_AfterClass_Sarah_Click() {
 			PlayerRandomRestrain();
 			if (Common_PlayerRestrained) {
 				PlayerRandomGag();
-				if (Common_ActorIsOwner) {
-					EventSetGenericTimer();
-					OverridenIntroText = GetText("TurnTablesFromMistress");
-				}
-				else OverridenIntroText = GetText("TurnTables");
+				OverridenIntroText = GetText("TurnTables");
+				C012_AfterClass_Sarah_CalcParams();
 				CurrentTime = CurrentTime + 50000;
 			} else OverridenIntroText = GetText("RefuseBondage");
 			return;
@@ -523,18 +520,14 @@ function C012_AfterClass_Sarah_Spank() {
 	CurrentTime = CurrentTime + 50000;
 	if (!GameLogQuery(CurrentChapter, CurrentActor, "Spank")) {
 		GameLogAdd("Spank");
-		ActorChangeAttitude(-1, 1 + PlayerGetSkillLevel("Fighting"));
+		ActorChangeAttitude(1, 1 + PlayerGetSkillLevel("Fighting"));
 	}
-	if (PlayerGetSkillLevel("Fighting") > 0) GetText("SpankWithStrength");
+	if (PlayerGetSkillLevel("Fighting") > 0) OverridenIntroText = GetText("SpankWithStrength");
 }
 
 // Chapter 12 After Class - When the player tickles Sarah, it doesn't affect her
 function C012_AfterClass_Sarah_Tickle() {
 	CurrentTime = CurrentTime + 50000;
-	if (!GameLogQuery(CurrentChapter, CurrentActor, "Tickle")) {
-		GameLogAdd("Tickle");
-		ActorChangeAttitude(1, 0);
-	}
 	if ((Common_ActorIsOwner || (ActorGetValue(ActorSubmission) <= -5)) && !ActorIsRestrained()) OverridenIntroText = GetText("DoubleTickling");
 }
 

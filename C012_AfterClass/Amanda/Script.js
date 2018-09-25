@@ -224,6 +224,7 @@ function C012_AfterClass_Amanda_Click() {
 					OverridenIntroText = GetText("TurnTablesFromMistress");
 				}
 				else OverridenIntroText = GetText("TurnTables");
+				C012_AfterClass_Amanda_CalcParams();
 				CurrentTime = CurrentTime + 50000;
 			} else OverridenIntroText = GetText("RefuseBondage");
 			return;
@@ -821,7 +822,7 @@ function C012_AfterClass_Amanda_Spank() {
 		GameLogAdd("Spank");
 		ActorChangeAttitude(-1, 1 + PlayerGetSkillLevel("Fighting"));
 	}
-	if (PlayerGetSkillLevel("Fighting") > 0) GetText("SpankWithStrength");
+	if (PlayerGetSkillLevel("Fighting") > 0) OverridenIntroText = GetText("SpankWithStrength");
 }
 
 // Chapter 12 After Class - When the player tickles Amanda, it doesn't affect her

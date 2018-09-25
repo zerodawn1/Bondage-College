@@ -101,4 +101,5 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 570,0,0,,(Tu secoues la tête|en panique.) (1 minute),"Ma pauvre petite. Viens ici, laisse-moi t'aider.|(Elle te détache délicatement et te laisse te rhabiller.)",600,0,-1,ReleasePlayer()
 600,0,0,,"Ok, une autre manche.|(Vous commencez.)",,600,0,0,StartPractice()
 600,0,0,TrainingReady,"(Tu t'entraines au combat.)|(30 minutes)",,600,0,0,TrainFighting()
+600,0,0,,"(Recherche dans le gym.)|(30 minutes)","(Tu recherches dans le gym mais|ne trouve rien d'intéressant.)",600,0,0,Search()
 600,0,0,,"Ça suffit, allons manger.|(Tu quittes le gymnase.)",,600,0,0,EndChapter()

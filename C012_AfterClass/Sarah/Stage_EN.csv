@@ -10,8 +10,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,PleasurePlayerAvail,"My submissive, you|will pleasure me now.",You need a quickie Mistress?|(She looks at you and smiles.),630,0,0,TestPleasurePlayer()
 0,0,0,!Common_PlayerRestrained,(Play with her.),(You take a step toward her.),10,0,0,
 10,5,0,!Common_PlayerGagged,(Kiss her.),(You get close to her and kiss her|on the lips while she moans silently.),10,0,0,Kiss()
-10,1,0,!Common_PlayerRestrained,(Tickle her.),"(You get closer and tickle her on the chest|while she laughs out loud, she seems to enjoy it.)",10,0,0,Tickle()
-10,0,5,!Common_PlayerRestrained,(Spank her.),(You spank her pretty hard on the|butt while she whimpers from the pain.),10,0,0,Spank()
+10,1,0,!Common_PlayerRestrained,(Tickle her.),"(You tickle her on the chest while she|laughs a little, she's not enjoying it that much.)",10,0,0,Tickle()
+10,0,5,!Common_PlayerRestrained,(Spank her.),(You spank her hard on the butt while she|whimpers from the pain and moans lovingly.),10,0,0,Spank()
 10,0,0,CanMasturbate,(Masturbate her.),"(You get closer to masturbate|her, but she pushes you away.)",10,0,0,StartMasturbate()
 10,0,0,IsGagged,(Ungag her.),(You slowly remove her gag.)|This gag was pretty effective.,10,0,0,Ungag()
 10,0,0,IsRoped,(Untie her.),(You undo the knots and remove the|ropes while she stretches happily.),10,0,0,Untie()
