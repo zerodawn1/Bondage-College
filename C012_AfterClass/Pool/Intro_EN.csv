@@ -7,4 +7,7 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 101,0,0,,,Showering.jpg
 101,0,0,,,Showering.jpg
 110,0,0,,,Showers.jpg
-200,0,0,,,PoolSwimWithJennifer.jpg
+120,0,0,,,Showers.jpg
+200,0,0,,(You start to swim with Jennifer.)|You didn't helped me with that bully.,PoolSwimWithJennifer.jpg
+210,0,0,,(You start to swim with Jennifer.)|Thanks for you help with that bully.,PoolSwimWithJennifer.jpg
+220,0,0,,(You get closer to Jennifer|and start to swim with her.),PoolSwimWithJennifer.jpg

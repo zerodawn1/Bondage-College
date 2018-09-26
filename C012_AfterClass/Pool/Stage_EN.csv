@@ -1,7 +1,7 @@
 Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,,Wait for a while.,You sit down for a while and|check who is coming or leaving.,0,0,0,Wait()
 0,0,0,,Check the showers.,The showers are empty.,100,0,0,EnterShower()
-0,0,0,JenniferAvail,Swim with Jennifer.,(You get closer to Jennifer|and start to swim with her.),200,0,0,LoadJennifer()
+0,0,0,JenniferAvail,Swim with Jennifer.,,220,0,0,SwimWithJennifer()
 0,0,0,,Swim alone.,You swim alone for a while.|It's a good exercise and it's relaxing.,10,0,0,Swim()
 0,0,0,,Search the place.,You find some lifejackets and lifebuoys|but nothing that's really interesting.,0,0,0,Search()
 0,0,0,,Return to your dorm.,,0,0,0,Leave()
@@ -17,7 +17,14 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 100,0,0,,Return to your dorm.,,100,0,0,Leave()
 101,0,0,,Shower some more.,You stay in the warm shower.,101,0,0,Shower()
 101,0,0,,Stop showering.,You step out of the shower.,100,0,0,EnterShower()
-110,0,0,,TO DO,TO DO,110,0,0,
-110,0,0,,(Leave quietly.),(You walk back quietly toward the water while|Jennifer sprints behind you and jumps in the pool.),0,0,0,EnterPool()
-200,0,0,,TO DO,TO DO,200,0,0,
-200,0,0,,(Get out of the pool.),You get out of the water.,0,0,0,UnloadJennifer()
+110,0,0,,Don't touch her!,(The girl gives you a menacing look.)|Who are you?  Get outta here!,120,0,2,FaceFront()
+110,0,0,,What's going on?,(The girl gives you an angry look.)|None of your business!  Get outta here!,120,1,1,FaceFront()
+110,0,0,,(Stay silent.),(The girl notices you.)|Get outta here girl!,120,0,0,FaceFront()
+110,0,0,,Help!  Help!  Help!|(Run and scream.),(You run back to the pool.  Jennifer|follows you and jumps in the pool.),0,0,-2,EnterPool()
+110,0,0,,(Leave quietly.),(You walk back quietly toward the water while|Jennifer sprints behind you and jumps in the pool.),0,-1,-1,EnterPool()
+120,0,0,,TO DO,TO DO,0,0,0,
+120,0,0,,Run Jennifer!|(Run away.),(You both run back to the pool|and Jennifer quickly jumps in.),0,1,-2,EnterPool()
+200,0,0,,TO DO,TO DO,220,0,0,
+210,0,0,,TO DO,TO DO,220,0,0,
+220,0,0,,TO DO,TO DO,220,0,0,
+220,0,0,,(Get out of the pool.),You get out of the water.,0,0,0,UnloadJennifer()

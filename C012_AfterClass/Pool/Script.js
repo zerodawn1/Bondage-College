@@ -5,10 +5,11 @@ var C012_AfterClass_Pool_CurrentActor = "";
 var C012_AfterClass_Pool_HasSports = false;
 var C012_AfterClass_Pool_SwimCount = 0;
 var C012_AfterClass_Pool_JenniferAvail = false;
+var C012_AfterClass_Pool_BullyPose = "BullyRight";
 
 // Chapter 12 After Class - Check who's in the Pool
 function C012_AfterClass_Pool_WhoInIsPool() {
-	C012_AfterClass_Pool_JenniferAvail = (GameLogQuery(CurrentChapter, "Player", "PoolJenniferBully") && !GameLogQuery(CurrentChapter, "Jennifer", "EnterDormFromPub"));
+	C012_AfterClass_Pool_JenniferAvail = (GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyMet") && !GameLogQuery(CurrentChapter, "Jennifer", "EnterDormFromPub") && (CurrentTime >= 19 * 60 * 60 * 1000) && (CurrentTime < 22 * 60 * 60 * 1000));
 }
 
 // Chapter 12 After Class - Pool Load
@@ -33,10 +34,24 @@ function C012_AfterClass_Pool_Load() {
 
 // Chapter 12 After Class - Pool Run
 function C012_AfterClass_Pool_Run() {
+	
+	// Standard interactions 
 	BuildInteraction(C012_AfterClass_Pool_CurrentStage);
-	if (CurrentActor != "") {
-		DrawActor(CurrentActor, 600, 0, 1);
+	
+	// Renders a different image if Jennifer is in the pool
+	if ((C012_AfterClass_Pool_CurrentStage == 0) && C012_AfterClass_Pool_JenniferAvail) OverridenIntroImage = "PoolJenniferSwim.jpg";
+	else if ((C012_AfterClass_Pool_CurrentStage >= 200) && PlayerHasLockedInventory("Collar")) OverridenIntroImage = "PoolSwimWithJenniferCollar.jpg";
+	else OverridenIntroImage = "";
+
+	// Renders the showering scene for the player
+	if (C012_AfterClass_Pool_CurrentStage == 101) DrawActor("Player", 650, -30, 0.9);
+	
+	// Renders the Jennifer/Bully scene
+	if ((C012_AfterClass_Pool_CurrentStage >= 110) && (C012_AfterClass_Pool_CurrentStage <= 199)) {
+		DrawActor("Jennifer", 725, 0, 1);
+		DrawImageZoom("C012_AfterClass/Pool/" + C012_AfterClass_Pool_BullyPose + ".png", 0, 0, 600, 900, 500, 0, 600, 900);
 	}
+
 }
 
 // Chapter 12 After Class - Pool Click
@@ -102,10 +117,14 @@ function C012_AfterClass_Pool_SearchShower() {
 // Chapter 12 After Class - When the player enters the shower, it can trigger the Jennifer event between 19 and 22
 function C012_AfterClass_Pool_EnterShower() {
 	CurrentTime = CurrentTime + 50000;
-	if (!GameLogQuery(CurrentChapter, "Player", "PoolJenniferBully") && (CurrentTime >= 19 * 60 * 60 * 1000) && (CurrentTime < 22 * 60 * 60 * 1000)) {
-		GameLogSpecificAdd(CurrentChapter, "Player", "PoolJenniferBully")
+	if (!GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyMet") && (CurrentTime >= 19 * 60 * 60 * 1000) && (CurrentTime < 22 * 60 * 60 * 1000)) {
+		GameLogSpecificAdd(CurrentChapter, "Jennifer", "PoolBullyMet")
 		OverridenIntroText = GetText("BullyIntro");
 		C012_AfterClass_Pool_CurrentStage = 110;
+		ActorLoad("Jennifer", "");
+		ActorSetCloth("Swimsuit");
+		ActorSetPose("ScaredLeft");
+		LeaveIcon = "";
 	}
 }
 
@@ -118,14 +137,27 @@ function C012_AfterClass_Pool_EnterPool() {
 // Chapter 12 After Class - When the player showers, it adds 5 minutes
 function C012_AfterClass_Pool_Shower() {
 	CurrentTime = CurrentTime + 290000;
+	Common_PlayerPose = "Showering";
 }
 
-// Chapter 12 After Class - Loads Jennifer in the pool scene
-function C012_AfterClass_Pool_LoadJennifer() {
-	ActorLoad("Jennifer", "");
+// Chapter 12 After Class - When the player starts to swim with Jennifer
+function C012_AfterClass_Pool_SwimWithJennifer() {
+	if (!GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyChat")) {
+		GameLogSpecificAdd(CurrentChapter, "Jennifer", "PoolBullyChat");
+		if (!GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyHelp")) C012_AfterClass_Pool_CurrentStage = 200;
+		else C012_AfterClass_Pool_CurrentStage = 210;
+	}
+	ActorLoad("Jennifer", "Dorm");
+	LeaveIcon = "";
 }
 
 // Chapter 12 After Class - Unloads Jennifer from the pool scene
 function C012_AfterClass_Pool_UnloadJennifer() {
 	CurrentActor = "";
+}
+
+// Chapter 12 After Class - Unloads Jennifer from the pool scene
+function C012_AfterClass_Pool_FaceFront() {
+	ActorSetPose("ScaredFront");
+	C012_AfterClass_Pool_BullyPose = "BullyFront";
 }
