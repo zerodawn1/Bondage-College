@@ -695,7 +695,7 @@ function C012_AfterClass_Sarah_TestBondageClub() {
 
 // Chapter 12 After Class - Test if Amanda will try to prevent the player from dating Sarah
 function C012_AfterClass_Sarah_AmandaJoinForLove() {
-	if (!ActorSpecificIsRestrained("Amanda") && C012_AfterClass_Dorm_Guest.indexOf("Amanda")) {
+	if (!ActorSpecificIsRestrained("Amanda") && (C012_AfterClass_Dorm_Guest.indexOf("Amanda") >= 0)) {
 		C012_AfterClass_Sarah_CurrentStage = 150;
 		CurrentActor = "Amanda";
 		ActorUngag();

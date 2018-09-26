@@ -73,6 +73,8 @@ function C012_AfterClass_Dorm_CalGuest() {
 			C012_AfterClass_Dorm_Guest.push("Amanda");
 	if (GameLogQuery(CurrentChapter, "Sarah", "EnterDormFromRoommates") && !GameLogQuery(CurrentChapter, "Sarah", "KickedOutFromDorm") && ((CurrentTime <= C012_AfterClass_Dorm_SarahExitTime) || GameLogQuery(CurrentChapter, "Sarah", "BackFromBondageClub") || ActorSpecificIsRestrained("Sarah"))) 
 		C012_AfterClass_Dorm_Guest.push("Sarah");
+	if (GameLogQuery(CurrentChapter, "Jennifer", "EnterDormFromPool") && !GameLogQuery(CurrentChapter, "Jennifer", "KickedOutFromDorm")) 
+		C012_AfterClass_Dorm_Guest.push("Jennifer");
 
 	// Build an array of everyone that's visible (standing up)
 	C012_AfterClass_Dorm_GuestVisible = [];
@@ -100,10 +102,12 @@ function C012_AfterClass_Dorm_Load() {
 	ReadCSV("CurrentText", CurrentChapter, "Sidney", "Text", GetWorkingLanguage());
 	ReadCSV("CurrentText", CurrentChapter, "Amanda", "Text", GetWorkingLanguage());
 	ReadCSV("CurrentText", CurrentChapter, "Sarah", "Text", GetWorkingLanguage());
+	ReadCSV("CurrentText", CurrentChapter, "Jennifer", "Text", GetWorkingLanguage());
 
 	// Owners will not stay naked
 	if ((Common_PlayerOwner == "Sidney") && (ActorSpecificGetValue("Sidney", ActorCloth) == "Naked")) ActorSpecificSetCloth("Sidney", "Shorts");
 	if ((Common_PlayerOwner == "Amanda") && (ActorSpecificGetValue("Amanda", ActorCloth) == "Naked")) ActorSpecificSetCloth("Amanda", "");
+	if ((Common_PlayerOwner == "Jennifer") && (ActorSpecificGetValue("Jennifer", ActorCloth) == "Naked")) ActorSpecificSetCloth("Jennifer", "");
 
 	// Calculates the time when Sidney will leave and return
 	C012_AfterClass_Dorm_SidneyExitTime = 20 * 60 * 60 * 1000;
@@ -163,7 +167,7 @@ function C012_AfterClass_Dorm_Run() {
 			LeaveIcon = "";
 		}
 
-	// If the Sarah wants to start a random activity with the player as an owner
+	// If Sarah wants to start a random activity with the player as an owner
 	if (!C012_AfterClass_Dorm_PlayerGrounded && (C012_AfterClass_Dorm_Guest.indexOf("Sarah") >= 0) && (ActorSpecificGetValue("Sarah", ActorOwner) == "Player") && !GameLogQuery(CurrentChapter, "Sarah", "EventGenericNext") && !GameLogQuery(CurrentChapter, "Sarah", "StopEvents")) {
 		CurrentActor = "Sarah";
 		if (ActorIsGagged()) C012_AfterClass_Sarah_CurrentStage = 2200;
@@ -222,5 +226,6 @@ function C012_AfterClass_Dorm_Click() {
 	if ((MouseX >= C012_AfterClass_Dorm_PlayerPos + 100) && (MouseX < C012_AfterClass_Dorm_PlayerPos + 300) && (MouseY >= 0) && (MouseY <= 600) && (C012_AfterClass_Dorm_GuestVisible.length >= 1)) SetScene(CurrentChapter, C012_AfterClass_Dorm_GuestVisible[0]);
 	if ((MouseX >= C012_AfterClass_Dorm_PlayerPos + 300) && (MouseX < C012_AfterClass_Dorm_PlayerPos + 500) && (MouseY >= 0) && (MouseY <= 600) && (C012_AfterClass_Dorm_GuestVisible.length >= 2)) SetScene(CurrentChapter, C012_AfterClass_Dorm_GuestVisible[1]);
 	if ((MouseX >= C012_AfterClass_Dorm_PlayerPos + 500) && (MouseX < C012_AfterClass_Dorm_PlayerPos + 700) && (MouseY >= 0) && (MouseY <= 600) && (C012_AfterClass_Dorm_GuestVisible.length >= 3)) SetScene(CurrentChapter, C012_AfterClass_Dorm_GuestVisible[2]);
-	
+	if ((MouseX >= C012_AfterClass_Dorm_PlayerPos + 700) && (MouseX < C012_AfterClass_Dorm_PlayerPos + 900) && (MouseY >= 0) && (MouseY <= 600) && (C012_AfterClass_Dorm_GuestVisible.length >= 4)) SetScene(CurrentChapter, C012_AfterClass_Dorm_GuestVisible[3]);
+
 }

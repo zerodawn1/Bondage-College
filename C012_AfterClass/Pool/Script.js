@@ -6,6 +6,7 @@ var C012_AfterClass_Pool_HasSports = false;
 var C012_AfterClass_Pool_SwimCount = 0;
 var C012_AfterClass_Pool_JenniferAvail = false;
 var C012_AfterClass_Pool_BullyPose = "BullyRight";
+var C012_AfterClass_Pool_SwimTimeWithJennifer = 0;
 
 // Chapter 12 After Class - Check who's in the Pool
 function C012_AfterClass_Pool_WhoInIsPool() {
@@ -144,8 +145,10 @@ function C012_AfterClass_Pool_Shower() {
 function C012_AfterClass_Pool_SwimWithJennifer() {
 	if (!GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyChat")) {
 		GameLogSpecificAdd(CurrentChapter, "Jennifer", "PoolBullyChat");
-		if (!GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyHelp")) C012_AfterClass_Pool_CurrentStage = 200;
-		else C012_AfterClass_Pool_CurrentStage = 210;
+		if (!GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyVictory") && !GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyDefeat")) C012_AfterClass_Pool_CurrentStage = 200;
+		else if (GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyDefeat")) C012_AfterClass_Pool_CurrentStage = 210;
+		else if (GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyVictory")) C012_AfterClass_Pool_CurrentStage = 220;
+		else C012_AfterClass_Pool_CurrentStage = 230;
 	}
 	ActorLoad("Jennifer", "Dorm");
 	LeaveIcon = "";
@@ -156,8 +159,45 @@ function C012_AfterClass_Pool_UnloadJennifer() {
 	CurrentActor = "";
 }
 
-// Chapter 12 After Class - Unloads Jennifer from the pool scene
+// Chapter 12 After Class - When Jennifer and the bully face the player
 function C012_AfterClass_Pool_FaceFront() {
 	ActorSetPose("ScaredFront");
 	C012_AfterClass_Pool_BullyPose = "BullyFront";
+}
+
+// Chapter 12 After Class - When Jennifer and the bully face each other
+function C012_AfterClass_Pool_FaceEachOther() {
+	ActorSetPose("ScaredLeft");
+	C012_AfterClass_Pool_BullyPose = "BullyRight";
+}
+
+// Chapter 12 After Class - When the player starts a fight with the bully
+function C012_AfterClass_Pool_Fight() {
+	SetScene(CurrentChapter, "PoolBullyFight");
+}
+
+// Chapter 12 After Class - The player can get a collar from the bully after defeating her
+function C012_AfterClass_Pool_GetCollar() {
+	PlayerAddInventory("Collar", 1);
+}
+
+// Chapter 12 After Class - When the player and Jennifer swims together
+function C012_AfterClass_Pool_SwimTogether() {
+	C012_AfterClass_Pool_SwimTimeWithJennifer++;
+	CurrentTime = CurrentTime + 290000;
+	if (C012_AfterClass_Pool_SwimTimeWithJennifer % 6 == 5) ActorChangeAttitude(1, 0);
+}
+
+// Chapter 12 After Class - Tests if Jennifer wants to go back to the player dorm
+function C012_AfterClass_Pool_TestGoDorm() {
+	if ((ActorGetValue(ActorLove) >= 1) || (ActorGetValue(ActorSubmission) >= 10) || GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyVictory")) {
+		OverridenIntroText = GetText("AcceptDorm");
+		C012_AfterClass_Library_CurrentStage = 240;
+	}
+}
+
+// Chapter 12 After Class - When the player leaves for the dorm with Jennifer
+function C012_AfterClass_Pool_LeaveWithJennifer() {
+	GameLogAdd("EnterDormFromPool");
+	C012_AfterClass_Pool_Leave();
 }

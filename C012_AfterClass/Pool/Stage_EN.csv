@@ -22,9 +22,67 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 110,0,0,,(Stay silent.),(The girl notices you.)|Get outta here girl!,120,0,0,FaceFront()
 110,0,0,,Help!  Help!  Help!|(Run and scream.),(You run back to the pool.  Jennifer|follows you and jumps in the pool.),0,0,-2,EnterPool()
 110,0,0,,(Leave quietly.),(You walk back quietly toward the water while|Jennifer sprints behind you and jumps in the pool.),0,-1,-1,EnterPool()
-120,0,0,,TO DO,TO DO,0,0,0,
+120,0,0,,Alright.  I'm leaving.|(Go back to the pool.),(You walk back while Jennifer sprints|behind you and jumps in the pool.),0,-1,-1,EnterPool()
+120,0,0,,I'm not going|anywhere girl.,Stay if you want.  She's my bitch anyway.|(She turns to Jennifer and point at her.),130,0,1,FaceEachOther()
+120,0,0,,Are you bullying her?,I can do what I want.  She's my bitch.|(She turns to Jennifer and point at her.),130,1,0,FaceEachOther()
 120,0,0,,Run Jennifer!|(Run away.),(You both run back to the pool|and Jennifer quickly jumps in.),0,1,-2,EnterPool()
-200,0,0,,TO DO,TO DO,220,0,0,
-210,0,0,,TO DO,TO DO,220,0,0,
-220,0,0,,TO DO,TO DO,220,0,0,
-220,0,0,,(Get out of the pool.),You get out of the water.,0,0,0,UnloadJennifer()
+130,0,0,,"Jennifer, are|you her bitch?","(Jennifer shakes her head no and get slapped.)|Oh yes you are, and you will wear my collar!",140,0,0,
+130,0,0,,She doesn't seem|to agree with you.,"(Jennifer shakes her head no and get slapped.)|You're my bitch, and you will wear my collar!",140,0,0,
+130,0,0,,Please let her go.|She's not consenting.,"(Jennifer shakes her head no and get slapped.)|You're my bitch, and you will wear my collar!",140,1,-1,
+130,0,0,,"If she's your bitch,|you should collar her.","(Jennifer shakes her head no and get slapped.)|Damn right bitch, you will wear my collar!",140,-1,1,
+140,0,0,,You cannot force a|collar on someone.,(The girl raises her fist at you.)|I can force my first on your face!,150,1,0,FaceFront()
+140,0,0,,She doesn't want|to be collared.,(The girl raises her fist at you.)|Get outta here or I'll crush you!,150,0,0,FaceFront()
+140,0,0,,You can't collar her.|She's my submissive.,(The girl raises her fist at you.)|Oh yeah?  You want to fight for her?,150,0,1,FaceFront()
+140,0,0,,You're in deep|trouble Jennifer.,(The girl raises her fist at you.)|Get outta here or I'll crush you!,150,-1,0,FaceFront()
+140,0,0,,(Stay silent.),(The girl raises her fist at you.)|Now get outta here or I'll crush you!,150,0,-1,FaceFront()
+150,0,0,,You wanna fight?|(Fight with her.),TO DO,150,1,1,Fight()
+150,0,0,,Fine.  I'm leaving.|(Go back to the pool.),(You walk back while Jennifer sprints|behind you and jumps in the pool.),0,-1,-1,EnterPool()
+150,0,0,,Run Jennifer!|(Run away.),(You both run back to the pool|and Jennifer quickly jumps in.),0,1,-2,EnterPool()
+160,0,0,,Fine.  I'm leaving.|(Go back to the pool.),(You walk back while Jennifer sprints|behind you and jumps in the pool.),0,-1,-1,EnterPool()
+170,0,0,,Touch her again|and I'll kill you.,"(The girl looks down and gives you a collar.)|Collar her then, so it's clear that she's yours.",180,0,1,GetCollar()
+170,0,0,,Don't bother my|friend again.,"(The girl looks down and gives you a collar.)|Collar her then, so it's clear that she's yours.",180,1,0,GetCollar()
+170,0,0,,She's my slut.,"(The girl looks down and gives you a collar.)|Collar her then, so it's clear that she's yours.",180,-1,2,GetCollar()
+180,0,0,,We'll see about that.|Everything is ok now?,(The bully grumbles and exits the building.|Jennifer smiles and goes back to the pool.),100,0,0,
+180,0,0,,Fine.  Get lost you two.|I need a good shower.,(The bully grumbles and exits the building.|Jennifer smiles and goes back to the pool.),100,0,0,
+200,0,0,,I didn't want to|start a scene.,I understand.  It's great that I'm a good runner.|What's the best way to deal with bullies?,201,0,0,
+200,0,0,,I know.  I'm sorry.,It's fine.  That's why I'm a good runner.|What's the best way to deal with bullies?,201,0,-1,
+200,0,0,,What matters is|that you escaped.,Thanks.  It's great that I'm a good runner.|What's the best way to deal with bullies?,201,1,0,
+201,0,0,,You should talk|to a teacher.,Maybe you're right.|Thanks for the advice.,230,0,-1,
+201,0,0,,You should|ambush her.,"Ambush her?  I don't know.|Well, thanks for the advice.",230,0,1,
+201,0,0,,You should|humiliate her.,It would only make things worse.|Thanks for the advice anyway.,230,-1,0,
+201,0,0,,You should make|peace with her.,"Very wise, but it won't be easy.|Thanks for the good advice.",230,1,0,
+201,0,0,,You should|ignore her.,It's not easy but it could work.|Thanks for the advice.,230,0,0,
+210,0,0,,It was a|fair fight.,You fought bravely.  I wish I had your courage.|I do martial art but I freeze in front of bullies.,211,1,0,
+210,0,0,,That bitch is|fighting dirty.,She's pretty tough.  I wish I had your courage.|I do martial art but I freeze in front of bullies.,211,-1,0,
+210,0,0,,Next time I|will crush her.,You fought bravely.  I wish I had your courage.|I do martial art but I freeze in front of bullies.,211,0,1,
+210,0,0,,Maybe it wasn't the|best idea to fight.,You fought bravely.  I wish I had your courage.|I do martial art but I freeze in front of bullies.,211,0,0,
+210,0,0,,I'm in a lot|of pain now.,I bet it must hurt.  I wish I had your courage.|I do martial art but I freeze in front of bullies.,211,0,-1,
+211,0,0,,It's never easy|to face bullies.,"I know, next time I should fight like you.",230,0,0,
+211,0,0,,We should watch and|protect each other.,That's a really good idea.|Thanks a lot COMMON_PLAYERNAME.,230,1,-1,
+211,0,0,,We should amush her|and get revenge.,It's a very dangerous idea.|It could make things worse.,230,-1,1,
+211,0,0,,You should have|faith in yourself.,"I know, next time I should fight like you.",230,0,0,
+220,0,0,,"I was lucky, we|could've got hurt.","Maybe, but you fought bravely and won.|You're a role model for me COMMON_PLAYERNAME.",221,0,-1,
+220,0,0,,You liked the fight?,I did!  You fought bravely and you won.|You're a role model for me COMMON_PLAYERNAME.,221,0,0,
+220,0,0,,I could crush|her any time.,Impressive!  You fought bravely and you won.|You're a role model for me COMMON_PLAYERNAME.,221,0,1,
+221,0,0,,Don't mention it.,You're so nice and humble.|Thanks again for your help.,230,1,0,
+221,0,0,,We should have|stolen her clothes.,Oh no!  That would be too humiliating.|Anyway.  Thanks again for your help.,230,-1,0,
+221,0,10,,I could more than|a model you know?,More than a model?  Like a sensei?,222,0,0,
+221,0,10,,Maybe I should|collar you girl.,Collar me?  What does that mean?,222,0,0,
+222,0,0,,I'll explain|everything later.,I'm really curious now Miss.|Well thanks again for helping.,230,0,0,
+222,0,0,,It's not a good place|to talk about that.,I'm really curious now Miss.|Well thanks again for helping.,230,0,0,
+230,0,0,,(Swim with her.),(You swim together and|share some good times.),230,0,0,SwimTogether()
+230,0,0,,So you swim|here all night?,I come here to relax after my running session.,231,0,0,
+230,0,0,,You come|here often?,"Everytime I go running,|I come here right after.",231,0,0,
+230,0,0,,Are you feeling|better now?,I'm fine thanks.  I think she left the place.|I know she can't swim so I'm safe in here.,235,0,0,
+230,0,0,,Is the bully|still around?,I think she left the place.  I hope so.|I know she can't swim so I'm safe in here.,235,0,0,
+230,0,0,,(Get out of the pool.),You get out of the water.,0,0,0,UnloadJennifer()
+231,0,0,,You spend your|evenings alone?,No!  Well...  Sadly yes.|I should make more friends.,232,0,0,
+231,0,0,,You don't run and|swim with friends?,I don't have many friends.|(She sighs and looks away.),232,0,0,
+232,0,0,,Don't stay alone.|Come to my place.,"No, thanks.  I want to swim some more.",230,0,0,TestGoDorm()
+232,0,0,,We could be friends.|I'm inviting you over.,Not now.  I want to swim some more.,230,0,0,TestGoDorm()
+235,0,0,,You're safe with me.,"Yes, everything is better|when you're around.",236,0,0,
+235,0,0,,Together we are safe.,"Yes, everything is better|when you're around.",236,0,0,
+235,0,0,,She's gone.|Don't worry.,"Yes, everything is better|when you're around.",236,0,0,
+236,0,0,,Come to my place|with me then.,"No, thanks.  I want to swim some more.",230,0,0,TestGoDorm()
+236,0,0,,I can escort you|back to my place.,"No, thanks.  I want to swim some more.",230,0,0,TestGoDorm()
+240,0,0,,Let's go right now!|(Back to your dorm.),,240,0,0,LeaveWithJennifer()
