@@ -8,6 +8,7 @@ var C012_AfterClass_Roommates_ModifierLove = 0;
 var C012_AfterClass_Roommates_ModifierSub = 0;
 var C012_AfterClass_Roommates_IsolationAvail = true;
 var C012_AfterClass_Roommates_IsolationVisit = false;
+var C012_AfterClass_Roommates_JenniferBelt = false;
 
 // Chapter 12 After Class - Roommates Load
 function C012_AfterClass_Roommates_Load() {
@@ -78,6 +79,7 @@ function C012_AfterClass_Roommates_Knock() {
 		if (ActorGetValue(ActorLove) <= -10) ActorSetPose("Angry");
 		ActorSetCloth("Pajamas");
 		C012_AfterClass_Roommates_CurrentStage = 100;
+		return;
 	}
 
 	// Sarah is available before 20:00
@@ -92,8 +94,12 @@ function C012_AfterClass_Roommates_Knock() {
 			if (ActorGetValue(ActorSubmission) <= -10) ActorSetPose("Cocky");
 			ActorSetCloth("BrownDress");
 			C012_AfterClass_Roommates_CurrentStage = 200;
+			return;
 		}
-	
+
+	// Jennifer is available before 19:00 but Sarah answers first if she's there
+	if ((CurrentTime < 19 * 60 * 60 * 1000) && !GameLogQuery(CurrentChapter, "Jennifer", "EnterDormFromRoommates")) C012_AfterClass_Roommates_LoadJennifer();
+
 }
 
 // Chapter 12 After Class - When the player chit-chats with the actor
@@ -176,4 +182,27 @@ function C012_AfterClass_Roommates_TestRefuseIsolation() {
 		OverridenIntroText = GetText("CannotRefuseIsolation");
 		C012_AfterClass_Roommates_CurrentStage = 225;
 	}
+}
+
+// Chapter 12 After Class - Sarah can introduce the player to Jennifer
+function C012_AfterClass_Roommates_CheckJenniferAvail() {
+	if ((CurrentTime < 19 * 60 * 60 * 1000) && !GameLogQuery(CurrentChapter, "Jennifer", "EnterDormFromPool") && !GameLogQuery(CurrentChapter, "Jennifer", "EnterDormFromRoommates")) {
+		C012_AfterClass_Roommates_CurrentStage = 202;
+		OverridenIntroText = GetText("SarahIntroduceJennifer");
+	}
+}
+
+// Chapter 12 After Class - Loads Jennifer
+function C012_AfterClass_Roommates_LoadJennifer() {
+	OverridenIntroText = "";
+	ActorLoad("Jennifer", "Dorm");
+	LeaveIcon = "";
+	C012_AfterClass_Roommates_JenniferBelt = (ActorHasInventory("ChastityBelt"));
+	/*if (ActorGetValue(ActorLove) >= 10) ActorSetPose("Happy");
+	if (ActorGetValue(ActorLove) <= -10) ActorSetPose("Angry");
+	if (ActorGetValue(ActorSubmission) >= 10) ActorSetPose("Shy");
+	if (ActorGetValue(ActorSubmission) <= -10) ActorSetPose("Cocky");*/
+	ActorSetCloth("");
+	C012_AfterClass_Roommates_CurrentStage = 300;
+	return;
 }

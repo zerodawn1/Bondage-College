@@ -19,11 +19,12 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 200,0,0,,What's going on?,"Not much, It's pretty quiet right now.|So?  Did you get in trouble in school?",220,0,0,TestIsolationSarah()
 200,0,0,,Amanda is here?,"No, she might be at the library.",200,0,0,
 200,0,0,,Sidney is here?,"Nope, maybe the zoo came to get her.",200,0,0,
-200,0,0,,Jennifer is here?,"JENNNNNNNNNIFER!  (She waits.)|Nope, she's not here or she's deaf.",200,0,0,
+200,0,0,,Jennifer is here?,"JENNNNNNNNNIFER!  (She waits.)|Nope, she's not here or she's deaf.",200,0,0,CheckJenniferAvail()
 200,0,0,,"Sorry, wrong door.|(Leave the place.)",,200,0,0,Leave()
 201,0,0,,Very well Sarah.|(Back to your dorm.),,201,0,0,Leave()
 201,0,0,,Have fun tonight!|(Back to your dorm.),,201,1,0,Leave()
 201,0,0,,Fine!  You suck.|(Back to your dorm.),,201,-1,0,Leave()
+202,0,0,,Thanks Sarah!|(Wait for Jennifer.),,300,0,0,LoadJennifer()
 210,0,0,,(Chit-chat with Sarah.),(You chit-chat about music and parties|and get to know each other better.),210,0,0,ChitChat()
 210,0,0,,We could setup a|party at my place.,That's a pretty cool idea but I|already have plans for tonight.,210,0,0,TestInviteSarah()
 210,0,0,,Do you want to|go visit my place?,"No thanks, I have a big evening to plan.",210,0,0,TestInviteSarah()
@@ -52,3 +53,5 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 224,0,0,,Yes!  Let's go now.|(Visit the basement.),,224,1,0,EnterIsolation()
 224,0,0,,No.  It's a bad idea.,(She looks disappointed.)  Very well.|We can stay here and chat if you prefer.,210,-1,0,TestRefuseIsolation()
 225,0,0,,Alright Miss.|(Visit the basement.),,225,1,-1,EnterIsolation()
+300,0,0,,TO DO,TO DO,300,0,0,
+300,0,0,,I need to go Jennifer.|(Return to your dorm.),,0,0,0,Leave()

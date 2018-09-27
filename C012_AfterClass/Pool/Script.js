@@ -1,5 +1,4 @@
 var C012_AfterClass_Pool_CurrentStage = 0;
-var C012_AfterClass_Pool_EmptyPool = true;
 var C012_AfterClass_Pool_IntroText = "";
 var C012_AfterClass_Pool_CurrentActor = "";
 var C012_AfterClass_Pool_HasSports = false;
@@ -10,7 +9,7 @@ var C012_AfterClass_Pool_SwimTimeWithJennifer = 0;
 
 // Chapter 12 After Class - Check who's in the Pool
 function C012_AfterClass_Pool_WhoInIsPool() {
-	C012_AfterClass_Pool_JenniferAvail = (GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyMet") && !GameLogQuery(CurrentChapter, "Jennifer", "EnterDormFromPool") && (CurrentTime >= 19 * 60 * 60 * 1000) && (CurrentTime < 22 * 60 * 60 * 1000));
+	C012_AfterClass_Pool_JenniferAvail = (GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyMet") && !GameLogQuery(CurrentChapter, "Jennifer", "EnterDormFromPool") && !GameLogQuery(CurrentChapter, "Jennifer", "EnterDormFromRoommates") && (CurrentTime >= 19 * 60 * 60 * 1000) && (CurrentTime < 22 * 60 * 60 * 1000));
 }
 
 // Chapter 12 After Class - Pool Load
@@ -118,7 +117,8 @@ function C012_AfterClass_Pool_SearchShower() {
 // Chapter 12 After Class - When the player enters the shower, it can trigger the Jennifer event between 19 and 22
 function C012_AfterClass_Pool_EnterShower() {
 	CurrentTime = CurrentTime + 50000;
-	if (!GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyMet") && (CurrentTime >= 19 * 60 * 60 * 1000) && (CurrentTime < 22 * 60 * 60 * 1000)) {
+	Common_PlayerPose = "";
+	if (!GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyMet") && !GameLogQuery(CurrentChapter, "Jennifer", "EnterDormFromPool") && !GameLogQuery(CurrentChapter, "Jennifer", "EnterDormFromRoommates") && (CurrentTime >= 19 * 60 * 60 * 1000) && (CurrentTime < 22 * 60 * 60 * 1000)) {
 		GameLogSpecificAdd(CurrentChapter, "Jennifer", "PoolBullyMet")
 		OverridenIntroText = GetText("BullyIntro");
 		C012_AfterClass_Pool_CurrentStage = 110;
@@ -132,6 +132,7 @@ function C012_AfterClass_Pool_EnterShower() {
 // Chapter 12 After Class - When the player goes back to the pool
 function C012_AfterClass_Pool_EnterPool() {
 	CurrentTime = CurrentTime + 50000;
+	CurrentActor = "";
 	C012_AfterClass_Pool_WhoInIsPool();
 }
 
@@ -202,5 +203,6 @@ function C012_AfterClass_Pool_LeaveWithJennifer() {
 	GameLogAdd("EnterDormFromPool");
 	C012_AfterClass_Pool_JenniferAvail = false;
 	OverridenIntroImage = "";
+	C012_AfterClass_Pool_CurrentActor = "";
 	C012_AfterClass_Pool_Leave();
 }
