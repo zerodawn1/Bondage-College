@@ -35,7 +35,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 140,0,0,,You can't collar her.|She's my submissive.,(The girl raises her fist at you.)|Oh yeah?  You want to fight for her?,150,0,1,FaceFront()
 140,0,0,,You're in deep|trouble Jennifer.,(The girl raises her fist at you.)|Get outta here or I'll crush you!,150,-1,0,FaceFront()
 140,0,0,,(Stay silent.),(The girl raises her fist at you.)|Now get outta here or I'll crush you!,150,0,-1,FaceFront()
-150,0,0,,You wanna fight?|(Fight with her.),TO DO,150,1,1,Fight()
+150,0,0,,You wanna fight?|(Fight with her.),,150,1,1,Fight()
+150,0,0,,You're fucking dead!|(Fight with her.),,150,0,2,Fight()
 150,0,0,,Fine.  I'm leaving.|(Go back to the pool.),(You walk back while Jennifer sprints|behind you and jumps in the pool.),0,-1,-1,EnterPool()
 150,0,0,,Run Jennifer!|(Run away.),(You both run back to the pool|and Jennifer quickly jumps in.),0,1,-2,EnterPool()
 160,0,0,,Fine.  I'm leaving.|(Go back to the pool.),(You walk back while Jennifer sprints|behind you and jumps in the pool.),0,-1,-1,EnterPool()
@@ -80,9 +81,11 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 231,0,0,,You don't run and|swim with friends?,I don't have many friends.|(She sighs and looks away.),232,0,0,
 232,0,0,,Don't stay alone.|Come to my place.,"No, thanks.  I want to swim some more.",230,0,0,TestGoDorm()
 232,0,0,,We could be friends.|I'm inviting you over.,Not now.  I want to swim some more.,230,0,0,TestGoDorm()
+232,0,0,,I'm sure you'll|find new friends.,Thank you.  I try not to|worry too much about that.,230,0,0,
 235,0,0,,You're safe with me.,"Yes, everything is better|when you're around.",236,0,0,
 235,0,0,,Together we are safe.,"Yes, everything is better|when you're around.",236,0,0,
 235,0,0,,She's gone.|Don't worry.,"Yes, everything is better|when you're around.",236,0,0,
 236,0,0,,Come to my place|with me then.,"No, thanks.  I want to swim some more.",230,0,0,TestGoDorm()
 236,0,0,,I can escort you|back to my place.,"No, thanks.  I want to swim some more.",230,0,0,TestGoDorm()
+236,0,0,,You will be able|to go back safely.,You think?  This is reassuring.,230,0,0,
 240,0,0,,Let's go right now!|(Back to your dorm.),,240,0,0,LeaveWithJennifer()

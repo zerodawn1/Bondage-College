@@ -20,11 +20,10 @@ function C012_AfterClass_PoolBullyFight_KeyDown() {
 
 // Chapter 12 - Pool Bully Fight End
 function C012_AfterClass_PoolBullyFight_FightEnd(Victory) {
-	LoadActor("Jennifer", "Dorm");
-	LeaveIcon = "";
+	C012_AfterClass_Pool_CurrentActor = "Jennifer";
 	if (Victory) {
 		PlayerAddSkill("Fighting", 1);
-		ActorSetPose("Cheerful");
+		ActorSpecificSetPose("Jennifer", "Cheerful");
 		C012_AfterClass_Pool_BullyPose = "BullyDefeat";
 		GameLogSpecificAdd(CurrentChapter, "Jennifer", "PoolBullyVictory");
 		C012_AfterClass_Pool_CurrentStage = 170;

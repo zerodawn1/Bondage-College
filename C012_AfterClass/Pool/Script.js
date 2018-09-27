@@ -10,7 +10,7 @@ var C012_AfterClass_Pool_SwimTimeWithJennifer = 0;
 
 // Chapter 12 After Class - Check who's in the Pool
 function C012_AfterClass_Pool_WhoInIsPool() {
-	C012_AfterClass_Pool_JenniferAvail = (GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyMet") && !GameLogQuery(CurrentChapter, "Jennifer", "EnterDormFromPub") && (CurrentTime >= 19 * 60 * 60 * 1000) && (CurrentTime < 22 * 60 * 60 * 1000));
+	C012_AfterClass_Pool_JenniferAvail = (GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyMet") && !GameLogQuery(CurrentChapter, "Jennifer", "EnterDormFromPool") && (CurrentTime >= 19 * 60 * 60 * 1000) && (CurrentTime < 22 * 60 * 60 * 1000));
 }
 
 // Chapter 12 After Class - Pool Load
@@ -190,14 +190,17 @@ function C012_AfterClass_Pool_SwimTogether() {
 
 // Chapter 12 After Class - Tests if Jennifer wants to go back to the player dorm
 function C012_AfterClass_Pool_TestGoDorm() {
-	if ((ActorGetValue(ActorLove) >= 1) || (ActorGetValue(ActorSubmission) >= 10) || GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyVictory")) {
+	if ((ActorGetValue(ActorLove) >= 5) || (ActorGetValue(ActorSubmission) >= 10) || GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyVictory")) {
 		OverridenIntroText = GetText("AcceptDorm");
-		C012_AfterClass_Library_CurrentStage = 240;
+		ActorSetCloth("");
+		C012_AfterClass_Pool_CurrentStage = 240;
 	}
 }
 
 // Chapter 12 After Class - When the player leaves for the dorm with Jennifer
 function C012_AfterClass_Pool_LeaveWithJennifer() {
 	GameLogAdd("EnterDormFromPool");
+	C012_AfterClass_Pool_JenniferAvail = false;
+	OverridenIntroImage = "";
 	C012_AfterClass_Pool_Leave();
 }
