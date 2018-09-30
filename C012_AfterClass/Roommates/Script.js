@@ -198,10 +198,10 @@ function C012_AfterClass_Roommates_LoadJennifer() {
 	ActorLoad("Jennifer", "Dorm");
 	LeaveIcon = "";
 	C012_AfterClass_Roommates_JenniferBelt = (ActorHasInventory("ChastityBelt"));
-	/*if (ActorGetValue(ActorLove) >= 10) ActorSetPose("Happy");
+	if (ActorGetValue(ActorLove) >= 10) ActorSetPose("Happy");
 	if (ActorGetValue(ActorLove) <= -10) ActorSetPose("Angry");
 	if (ActorGetValue(ActorSubmission) >= 10) ActorSetPose("Shy");
-	if (ActorGetValue(ActorSubmission) <= -10) ActorSetPose("Cocky");*/
+	if (ActorGetValue(ActorSubmission) <= -10) ActorSetPose("Cocky");
 	ActorSetCloth("");
 	C012_AfterClass_Roommates_CurrentStage = 300;
 	return;
