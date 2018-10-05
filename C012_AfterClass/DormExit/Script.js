@@ -47,7 +47,7 @@ function C012_AfterClass_DormExit_LaunchKinbaku() {
 // Chapter 12 After Class - Launch the Roommates Dorm
 function C012_AfterClass_DormExit_LaunchRoommatesDorm() {
 	if (!Common_PlayerRestrained && !Common_PlayerGagged) {
-		if (Common_PlayerClothed && ((Common_PlayerCostume == "") || (Common_PlayerCostume == "BlackDress") || (Common_PlayerCostume == "Teacher"))) {
+		if (Common_PlayerClothed && ((Common_PlayerCostume == "") || (Common_PlayerCostume == "BlackDress") || (Common_PlayerCostume == "Teacher") || (Common_PlayerCostume == "Tennis"))) {
 			CurrentTime = CurrentTime + 110000;
 			SetScene(CurrentChapter, "Roommates");
 		} else OverridenIntroText = GetText("RegularClothesFirst");

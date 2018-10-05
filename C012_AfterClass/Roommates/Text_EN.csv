@@ -11,3 +11,7 @@ CannotRefuseIsolation,(Sarah grabs your arm forcefully and frowns.)|You only liv
 SarahKickOutAfter20,I'm sorry but I can't chat anymore.|I need to go to a club downtown.
 JenniferKickOutAfter18,"I can't chat anymore, I need to go running.|You can come with me or we can talk later."
 SarahIntroduceJennifer,JENNNNNNNNN!  (You hear noises.)|Yep!  She's coming right up.
+RaceJenniferDefeat,(You both run around the track for a while.|Jennifer is much faster and does more laps.)
+RaceJenniferTie,"(You both run around the track for a while.|It's a pretty even race, nobody beats the other.)"
+RaceJenniferVictory,(You both run around the track for a while.|You're faster than Jennifer and do more laps.)
+JenniferSkipPool,I guess I can skip swimming and go|with you.  Are we going now?

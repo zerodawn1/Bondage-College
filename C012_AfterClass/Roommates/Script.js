@@ -9,6 +9,7 @@ var C012_AfterClass_Roommates_ModifierSub = 0;
 var C012_AfterClass_Roommates_IsolationAvail = true;
 var C012_AfterClass_Roommates_IsolationVisit = false;
 var C012_AfterClass_Roommates_JenniferBelt = false;
+var C012_AfterClass_Roommates_WearingTennisOutfit = false;
 
 // Chapter 12 After Class - Roommates Load
 function C012_AfterClass_Roommates_Load() {
@@ -20,6 +21,7 @@ function C012_AfterClass_Roommates_Load() {
 	C012_AfterClass_Roommates_ModifierSub = 0;
 	Common_BondageAllowed = false;
 	Common_SelfBondageAllowed = false;
+	C012_AfterClass_Roommates_WearingTennisOutfit = (Common_PlayerCloth == "Tennis");
 	C012_AfterClass_Roommates_IsolationAvail = !GameLogQuery(CurrentChapter, "Sarah", "IsolationVisit");
 	C012_AfterClass_Roommates_IsolationVisit = GameLogQuery(CurrentChapter, "Sarah", "IsolationVisit")
 
@@ -37,10 +39,10 @@ function C012_AfterClass_Roommates_Load() {
 function C012_AfterClass_Roommates_Run() {
 	BuildInteraction(C012_AfterClass_Roommates_CurrentStage);
 	if (CurrentActor != "") {
-		if (C012_AfterClass_Roommates_CurrentStage == 302) OverridenIntroImage = "RunningWithJennifer.jpg";
+		if ((C012_AfterClass_Roommates_CurrentStage >= 322) && (C012_AfterClass_Roommates_CurrentStage <= 329)) OverridenIntroImage = "RunningWithJennifer.jpg";
 		else if (CurrentTime >= 18.5 * 60 * 60 * 1000) OverridenIntroImage = "KitchenNight.jpg";
 		else OverridenIntroImage = "KitchenDay.jpg";
-		if (C012_AfterClass_Roommates_CurrentStage != 302) DrawActor(CurrentActor, 600, 0, 1);
+		if ((C012_AfterClass_Roommates_CurrentStage < 322) || (C012_AfterClass_Roommates_CurrentStage > 329)) DrawActor(CurrentActor, 600, 0, 1);
 	}
 }
 
@@ -120,7 +122,7 @@ function C012_AfterClass_Roommates_ChitChat() {
 	// Jennifer will kick the player out after 18:00
 	if ((CurrentTime >= 18 * 60 * 60 * 1000) && (CurrentActor == "Jennifer")) {
 		OverridenIntroText = GetText("JenniferKickOutAfter18");
-		C012_AfterClass_Roommates_CurrentStage = 301;
+		C012_AfterClass_Roommates_CurrentStage = 311;
 	}
 	
 }
@@ -161,13 +163,13 @@ function C012_AfterClass_Roommates_TestInviteSarah() {
 	}
 }
 
-// Chapter 12 After Class - Tests if Jennifer will go the player dorm and cancel her plans to run and swim (20+ required)
+// Chapter 12 After Class - Tests if Jennifer will go the player dorm and cancel her plans to run and swim (10+ required)
 function C012_AfterClass_Roommates_TestInviteJennifer() {
-	if (ActorGetValue(ActorLove) >= 20) {
+	if (ActorGetValue(ActorLove) >= 10) {
 		OverridenIntroText = GetText("GoDormLoveJennifer");
 		C012_AfterClass_Roommates_CurrentStage = 312;
 	}
-	if (ActorGetValue(ActorSubmission) >= 20) {
+	if (ActorGetValue(ActorSubmission) >= 10) {
 		OverridenIntroText = GetText("GoDormDommeJennifer");
 		C012_AfterClass_Roommates_CurrentStage = 312;
 	}
@@ -233,20 +235,43 @@ function C012_AfterClass_Roommates_LoadJennifer() {
 	return;
 }
 
+// Chapter 12 After Class - When both the player and Jennifer changes in their tennis clothes
+function C012_AfterClass_Roommates_WearTennisOutfit() {
+	PlayerClothes("Tennis");
+	ActorSetPose("");
+	ActorSetCloth("Tennis");
+	CurrentTime = CurrentTime + 50000;
+}
+
+// Chapter 12 After Class - When Jennifer and the player enters the running track +5 minutes
+function C012_AfterClass_Roommates_EnterTrack() {
+	CurrentTime = CurrentTime + 290000;
+}
+
 // Chapter 12 After Class - When the player goes running with Jennifer, it raises their friendship
 function C012_AfterClass_Roommates_RunWithJennifer() {
+	GameLogAdd("Running");
 	ActorChangeAttitude(PlayerGetSkillLevel("Sports") + 1, 0);
 	if (PlayerGetSkillLevel("Sports") == 0) { OverridenIntroText = GetText("RaceJenniferDefeat"); ActorChangeAttitude(0, -1); }
 	if (PlayerGetSkillLevel("Sports") == 1) { OverridenIntroText = GetText("RaceJenniferTie"); }
-	if (PlayerGetSkillLevel("Sports") >= 2) { OverridenIntroText = GetText("RaceJenniferVictory"); ActorChangeAttitude(0, 1); ]
+	if (PlayerGetSkillLevel("Sports") >= 2) { OverridenIntroText = GetText("RaceJenniferVictory"); ActorChangeAttitude(0, 1); }
 	if (CurrentTime <= 18.70 * 60 * 60 * 1000) CurrentTime = 18.75 * 60 * 60 * 1000;
 	else CurrentTime = CurrentTime + 290000;
 }
 
 // Chapter 12 After Class - When the player goes swimming with Jennifer, she changes for the bikini
-function C012_AfterClass_Roommates_SwimWithJennifer() {
+function C012_AfterClass_Roommates_PoolWithJennifer() {
 	if (CurrentTime <= 18.95 * 60 * 60 * 1000) CurrentTime = 19 * 60 * 60 * 1000;
 	else CurrentTime = CurrentTime + 290000;
 	PlayerClothes("RedBikini");
+	ActorSetCloth("Swimsuit");
 	SetScene(CurrentChapter, "Pool");
+}
+
+// Chapter 12 After Class - Test if Jennifer can skip her pool trip
+function C012_AfterClass_Roommates_TestSkipPool() {
+	if ((ActorGetValue(ActorLove) >= 10) || (ActorGetValue(ActorSubmission) >= 10)) {
+		OverridenIntroText = GetText("JenniferSkipPool");
+		C012_AfterClass_Roommates_CurrentStage = 325;
+	}
 }
