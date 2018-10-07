@@ -16,36 +16,26 @@ var C012_AfterClass_Jennifer_PleasurePlayerCount = 0;
 var C012_AfterClass_Jennifer_PleasurePlayerSpeed = 0;
 var C012_AfterClass_Jennifer_MasturbateCount = 0;
 var C012_AfterClass_Jennifer_CanSetCurfew22 = false;
-var C012_AfterClass_Jennifer_AllowBlackLingerie = false;
-var C012_AfterClass_Jennifer_AllowPigCostume = false;
+var C012_AfterClass_Jennifer_AllowTennisOutfit = false;
 var C012_AfterClass_Jennifer_AllowSexAfterDate = false;
-var C012_AfterClass_Jennifer_AmandaIsOwner = false;
 var C012_AfterClass_Jennifer_CanKickOut = false;
 
 // Jennifer can only check her cell phone if she's dressed
 function C012_AfterClass_Jennifer_CheckCellPhone() {
-	if ((ActorGetValue(ActorCloth) == "Shorts") || (ActorGetValue(ActorCloth) == "BlackLingerie")) ActorSetPose("CheckCellPhone");
 	LeaveIcon = "Leave";
 }
 
 // In her shorts, Jennifer can have many poses when she talks
 function C012_AfterClass_Jennifer_SetPose() {
-	if ((ActorGetValue(ActorCloth) == "Shorts") && !ActorIsRestrained() && !ActorIsGagged()) {
+	ActorSetPose("");
+	if (((ActorGetValue(ActorCloth) == "Clothed") || (ActorGetValue(ActorCloth) == "")) && !ActorIsRestrained() && !ActorIsGagged()) {
 		var Love = ActorGetValue(ActorLove);
 		var Sub = ActorGetValue(ActorSubmission);	
-		if ((Sub <= -10) && (Math.abs(Sub) >= Math.abs(Love))) ActorSetPose("Point");
+		if ((Sub <= -10) && (Math.abs(Sub) >= Math.abs(Love))) ActorSetPose("Cocky");
 		if ((Sub >= 10) && (Math.abs(Sub) >= Math.abs(Love))) ActorSetPose("Shy");
 		if ((Love >= 10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Happy");
-		if ((Love <= -10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Mad");
+		if ((Love <= -10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Angry");
 		if (Common_ActorIsOwned) ActorSetPose("Shy");
-	} else {
-		if ((ActorGetValue(ActorPose) != "Pig") || !ActorHasInventory("TwoRopes")) {
-			ActorSetPose("");
-			if ((ActorGetValue(ActorCloth) == "Naked") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorSubmission) >= 10)) ActorSetPose("Shy");
-			if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorLove) >= 10) && (ActorGetValue(ActorLove) > ActorGetValue(ActorSubmission))) ActorSetPose("Happy");
-			if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorSubmission) >= 10) && (ActorGetValue(ActorLove) <= ActorGetValue(ActorSubmission))) ActorSetPose("Point");
-			if ((ActorGetValue(ActorCloth) == "BlackLingerie") && !ActorIsRestrained() && !ActorIsGagged() && (Common_ActorIsOwner)) ActorSetPose("Point");
-		}
 	}
 }
 
@@ -62,9 +52,7 @@ function C012_AfterClass_Jennifer_CalcParams() {
 	if (GameLogQuery(CurrentChapter, "", "EventBlockChanging") && (C012_AfterClass_Dorm_Guest.indexOf(Common_PlayerOwner) >= 0) && !Common_PlayerNaked) C012_AfterClass_Jennifer_SexAvail = false;
 	C012_AfterClass_Jennifer_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Jennifer_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
 	C012_AfterClass_Jennifer_CanKickOut = (!Common_ActorIsOwner && !Common_ActorIsLover);
-	C012_AfterClass_Jennifer_AmandaIsOwner = (Common_PlayerOwner == "Amanda");
-	C012_AfterClass_Jennifer_AllowBlackLingerie = GameLogQuery(CurrentChapter, CurrentActor, "AllowBlackLingerie");
-	C012_AfterClass_Jennifer_AllowPigCostume = (GameLogQuery(CurrentChapter, CurrentActor, "AllowPigCostume") && !Common_PlayerRestrained);
+	C012_AfterClass_Jennifer_AllowTennisOutfit = (GameLogQuery("C007_LunchBreak", CurrentActor, "Lunch") || GameLogQuery("C012_AfterClass", CurrentActor, "Running"));
 	C012_AfterClass_Jennifer_SetPose();
 }
 
@@ -103,38 +91,11 @@ function C012_AfterClass_Jennifer_Load() {
 
 		} else {
 
-			// If there's a crossover between two actors
-			if ((C012_AfterClass_Jennifer_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetSarah") && (C012_AfterClass_Dorm_Guest.indexOf("Sarah") >= 0) && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged() && !ActorIsRestrained()) {
-				LeaveIcon = "";
-				if ((ActorGetValue(ActorCloth) == "Shorts") && !Common_ActorIsOwned) ActorSetPose("Point");
-				else ActorSetPose("");
-				C012_AfterClass_Jennifer_CurrentStage = 710;
-				GameLogAdd("MetSarah");
-			}
-
-			// If there's a crossover between two actors
-			if ((C012_AfterClass_Jennifer_CurrentStage == 0) && !GameLogQuery(CurrentChapter, CurrentActor, "MetAmanda") && (C012_AfterClass_Dorm_Guest.indexOf("Amanda") >= 0) && !Common_PlayerRestrained && !Common_PlayerGagged && !ActorIsGagged() && !ActorIsRestrained()) {
-				LeaveIcon = "";
-				if ((ActorGetValue(ActorCloth) == "Shorts") && !Common_ActorIsOwned) ActorSetPose("Point");
-				else ActorSetPose("");
-				C012_AfterClass_Jennifer_CurrentStage = 700;
-				GameLogAdd("MetAmanda");
-			}
-		
 			// A random event can be triggered when Jennifer is clicked on
 			if (C012_AfterClass_Jennifer_CurrentStage == 0)
-				if ((CurrentText != null) && (Math.floor(Math.random() * 8) == 0)) {
+				if ((CurrentText != null) && (Math.floor(Math.random() * 8) == 0))
 					if (!GameLogQuery(CurrentChapter, CurrentActor, "EventGeneric") && Common_ActorIsOwner)
 						C012_AfterClass_Jennifer_RandomJenniferDommeEvent();
-					if (!GameLogQuery(CurrentChapter, CurrentActor, "LingerieShow") && (C012_AfterClass_Jennifer_CurrentStage == 0) && Common_ActorIsLover && !Common_PlayerGagged && !Common_PlayerRestrained && !ActorIsRestrained() && !ActorIsGagged()) {
-						C012_AfterClass_Jennifer_CurrentStage = 660;
-						LeaveIcon = "";
-					}
-					if (GameLogQuery(CurrentChapter, CurrentActor, "AllowBlackLingerie") && (C012_AfterClass_Jennifer_CurrentStage == 0) && Common_ActorIsLover && Common_ActorIsOwner && !ActorIsRestrained() && !ActorIsGagged() && (ActorGetValue(ActorCloth) != "BlackLingerie")) {
-						C012_AfterClass_Jennifer_CurrentStage = 670;
-						LeaveIcon = "";
-					}
-				}
 
 		}
 
@@ -223,14 +184,10 @@ function C012_AfterClass_Jennifer_Click() {
 		}
 
 		// A second rope can be applied if Jennifer isn't fully clothed
-		if ((ActorGetValue(ActorCloth) != "Naked") && (ActorGetValue(ActorCloth) != "Underwear") && (ActorGetValue(ActorCloth) != "BlackLingerie") && (ClickInv == "Rope") && (ActorHasInventory("Rope"))) {
+		if ((ActorGetValue(ActorCloth) != "Naked") && (ActorGetValue(ActorCloth) != "Underwear") && (ClickInv == "Rope") && (ActorHasInventory("Rope"))) {
 			OverridenIntroText = GetText("StripForSecondRope");
 			return;
 		}
-		
-		// Jennifer cannot have 3 ropes if she's wearing the pig costume
-		if ((ActorGetValue(ActorPose) == "Pig") && (ClickInv == "Rope"))
-			return;
 		
 		// Apply the clicked restrain
 		ActorApplyRestrain(ClickInv);
@@ -700,7 +657,6 @@ function C012_AfterClass_Jennifer_Ungag() {
 // Chapter 12 After Class - Jennifer can be untied
 function C012_AfterClass_Jennifer_Untie() {
 	ActorUntie();
-	if (ActorGetValue(ActorPose) == "Pig") ActorSetPose("");
 	C012_AfterClass_Jennifer_CalcParams();
 	CurrentTime = CurrentTime + 50000;
 }
@@ -980,13 +936,6 @@ function C012_AfterClass_Jennifer_StartLingerieShow() {
 	GameLogAdd("LingerieShow");
 }
 
-// Chapter 12 After Class - Unlocks the black lingerie for Jennifer
-function C012_AfterClass_Jennifer_UnlockBlackLingerie() {
-	GameLogAdd("AllowBlackLingerie");
-	LeaveIcon = "Leave";
-	C012_AfterClass_Jennifer_AllowBlackLingerie = true;
-}
-
 // Chapter 12 After Class - When Jennifer forces the player to kick someone out
 function C012_AfterClass_Jennifer_KickActor(KickedActor) {
 	if (KickedActor == "Amanda") C012_AfterClass_Amanda_CurrentStage = 790;
@@ -1016,31 +965,4 @@ function C012_AfterClass_Jennifer_ChangeBackToShort() {
 		CurrentTime = CurrentTime + 50000;
 		OverridenIntroText = GetText("SpankInShorts");
 	}
-}
-
-// Chapter 12 After Class - Jennifer can only wear the pig costume when she's in 2 or 3 ropes
-function C012_AfterClass_Jennifer_TestPigCostume() {
-
-	// Only works if naked
-	if (ActorGetValue(ActorCloth) == "Naked") {
-
-		// Give back one rope if there's three
-		if (ActorHasInventory("ThreeRopes")) {
-			ActorRemoveInventory("ThreeRopes");
-			ActorAddInventory("TwoRopes");
-			PlayerAddInventory("Rope", 1);
-		}
-
-		// Allow the pig costume if she's tied up with two ropes
-		if (ActorHasInventory("TwoRopes")) {
-			ActorSetPose("Pig");
-			CurrentTime = CurrentTime + 50000;
-			if (!GameLogQuery(CurrentChapter, "Jennifer", "Pig")) {
-				OverridenIntroText = GetText("ForcePigCostumePicture");
-				GameLogAdd("Pig");
-			} else OverridenIntroText = GetText("ForcePigCostume");
-		}
-	
-	}
-
 }

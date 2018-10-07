@@ -20,7 +20,6 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 10,0,0,IsGagged,(Ungag her.),(You remove her gag.)|Thanks!  This is better.,10,0,0,Ungag()
 10,0,0,IsRoped,(Untie her.),(You undo the knots and remove the|ropes while she stretches slowly.),10,0,0,Untie()
 10,0,0,IsStrapped,(Unstrap her.),(You remove the straps and|unlace the binder from her arms.),10,0,0,Untie()
-10,0,0,AllowPigCostume,(Make her wear|the pig costume.),"(You try to put the pig ears and tail on her,|but she struggles too much, and they fall off.)",10,0,0,TestPigCostume()
 10,0,0,,(Stop playing.),(You take a step back.),0,0,0,
 20,0,0,ChatAvail,I'd like to know|more about you.,"Ok, what would like to know?",0,0,0,StartChat()
 20,0,0,Common_ActorIsOwned,Let's review|your rules.,(She seems to worry.)|Of course Mistress.,610,0,0,
@@ -218,10 +217,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 560,0,0,,I will!  But you'll|need to follow it.,Deal!  This is fucking awesome.,0,0,1,EndChat()
 560,0,0,,Very well.,Revenge will be sweet.,0,0,0,EndChat()
 560,0,0,,"Yes, try not fuck up|in the meantime.",(She frowns and nods.)|Revenge will be sweet.,0,-1,1,EndChat()
-600,0,0,,Just wear your red|shorts and black top.,Perfect!  That's what I like best.|(She changes in her shorts for you.),0,0,0,"ForceChangeActor(""Shorts"")"
 600,0,0,,Wear your|school outfit.,Fine.  But let's not go back to school.|(She changes in her school uniform.),0,0,0,"ForceChangeActor(""Clothed"")"
-600,0,0,AllowBlackLingerie,Wear your lingerie.,(She winks.)  You're so kinky.|(She changes in her lingerie for you.),0,0,0,"ForceChangeActor(""BlackLingerie"")"
-600,0,0,AllowPigCostume,Wear this pig costume.|(Show the pig costume.),Oh no!  Fuck Sarah and her costume.|There's no way in hell I'm wearing that!,600,0,0,
+600,0,0,AllowTennisOutfit,Wear your|tennis outfit.,(She nods and changes.)  Sure!|We should play a match tommorow.,0,0,0,"ForceChangeActor(""Tennis"")"
 600,0,0,!HasBelt,Get in your|underwear.,Alright.  What do you have in mind?|(She changes in her underwear for you.),0,0,0,"ForceChangeActor(""Underwear"")"
 600,0,0,,Get naked.,Really?  What do you have in mind?|(She strips naked for you.),0,0,0,"ForceChangeActor(""Naked"")"
 600,0,0,,Forget it.,(She nods.),0,0,0,
@@ -284,69 +281,6 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 650,0,0,,(Get in bed.),,0,0,0,MakeLove()
 650,0,0,!Common_ActorIsOwner,(Push her on the bed.),,0,0,0,MakeLove()
 650,0,0,!Common_ActorIsOwned,(Let her carry|you in bed.),,0,0,0,MakeLove()
-660,0,0,,What is it?,Cover your eyes for a minute.,661,0,0,StartLingerieShow()
-660,0,0,,Oh!  This is exciting!|What's the surprise?,(She nods.)  Cover your eyes for a minute.,661,1,0,StartLingerieShow()
-660,0,0,,It better be good.,It will.  Cover your eyes for a minute.,661,-1,0,StartLingerieShow()
-660,0,0,!Common_ActorIsOwner,Not now sweetie.,Ok.  Very well sweetheart.|What would you like to do?,0,0,0,EndChat()
-661,0,0,,Very well.|(Cover your eyes.),(You cover your eyes with your hands.)|Keep them covered for a minute.,662,0,0,"ForceChangeActor(""Naked"")"
-661,0,0,,Alright my love.|(Cover your eyes.),(You cover your eyes with your hands.)|Keep them covered for a minute.,662,0,0,"ForceChangeActor(""Naked"")"
-661,0,0,,Ok.  Do it quick.|(Cover your eyes.),,662,0,1,"ForceChangeActor(""Naked"")"
-661,0,0,,I don't care about|your surprise.,(She looks disappointed.)  Forget it.|So what would you like to do now?,0,-2,1,EndChat()
-662,0,0,,Can I look now?,Not yet!,663,0,0,
-662,0,0,,It's fun to be blind.,Yep!  So keep them covered.,663,0,-1,
-662,0,0,,(Take a peek.),(You peek between your fingers and|can barely see Sidney changing.),663,0,0,
-662,0,0,,(Uncover your eyes.),(You uncover your eyes and see Sidney naked.)|You ruined the surprise!  Forget it then!,0,-1,0,EndChat()
-663,0,0,,Can I uncover|my eyes now?,Yes!  (You uncover your eyes.)|So?  Do you like it sweetie?,664,0,0,"ForceChangeActor(""BlackLingerie"")"
-663,0,0,,(Take a peek.),Look!  (You uncover your eyes.)|So?  Do you like it sweetie?,664,0,0,"ForceChangeActor(""BlackLingerie"")"
-663,0,0,,(Uncover your eyes.),"(You uncover your eyes before she says so.)|That was a too quick, but do you like it sweetie?",664,0,0,"ForceChangeActor(""BlackLingerie"")"
-664,0,0,,Lose some weight|and it will be great.,Fuck.  (She frowns.)  That's not very kind.|Anyway.  I'll wear it whenever you want it.,665,-1,1,"ActorSetPose("""")"
-664,0,0,,It's fabulous.  I wish|I had curves like you.,Someday you'll have great curves like me.|In the meantime.  I'll wear it whenever you want.,665,1,-1,
-664,0,0,,You look great.,I'm very happy to hear that.|I'll wear it whenever you want.,665,1,0,
-664,0,0,,It's ok.,I thought you would like it better.|I'll wear it whenever you want it.,665,0,0,"ActorSetPose("""")"
-664,0,0,,(Clap your hands.),I'm very happy sweetheart.|I'll wear it whenever you want.,665,1,0,
-665,0,0,,Alright!,(She nods and smiles.)|What would you like to do now?,0,0,0,UnlockBlackLingerie()
-665,0,0,,Awesome!,(She twirls happily in her lingerie.)|So what would you like to do now?,0,1,0,UnlockBlackLingerie()
-670,0,0,,Oh yes Mistress!,(She slowly changes for you and smiles.)|Who's the prettiest Mistress in the world?,671,0,0,"ForceChangeActor(""BlackLingerie"")"
-670,0,0,Common_PlayerGagged,(Nod slowly.),(She slowly changes for you and smiles.)|Who's the prettiest Mistress in the world?,671,0,0,"ForceChangeActor(""BlackLingerie"")"
-670,0,0,,Maybe later Mistress?,"Ok, it was only a favor for you bitch.|Tell me what you would like to do?",0,0,0,EndChat()
-670,0,0,Common_PlayerGagged,(Shake your head no.),"Ok, it was only a favor for you bitch.|Tell me what you would like to do?",0,0,0,EndChat()
-671,0,0,,You are Mistress!,Good girl.  What would you like to do?,0,0,0,EndChat()
-671,0,0,Common_PlayerGagged,(Giggle in your gag.),(She laughs.)  So what would|you like to do my gagged bitch?,0,0,0,EndChat()
-700,0,0,Common_ActorIsOwned,"Slave, I can bring|whoever I want.",(She gulps.)  Oh!  Yes Mistress.|What would you like to do?,0,-1,1,EndChat()
-700,0,0,!Common_ActorIsOwner,Amanda is a good friend.|Don't fight with her.,Fuck that!  She's a loser.|Can you force her to go?,701,-2,0,
-700,0,0,Common_ActorIsOwner,Amanda is a good friend.|Please don't fight Mistress.,Fuck that!  She's a loser.|Tell her to leave bitch.,701,-2,0,
-700,0,0,,Are you two in a feud?,Hell yeah.  Can you tell her to go?,701,-1,0,
-700,0,0,,Why are you|two fighting?,Cause of her stupid friend.|Can you tell her to go?,701,-1,0,
-700,0,0,!AmandaIsOwner,I can tell her to go.,Hell yeah.  Tell her to go now.,701,0,0,
-701,0,0,AmandaIsOwner,I can't do that.|She's my Mistress.,"Ok, tell your fucking Mistress to stay.|But I'll punch her if she stares at me.",702,-1,-1,
-701,0,0,AmandaIsOwner,Oh please Sidney!|She's my Mistress.,Strop crying bitch and tell her to stay.|But I'll punch her if she stares at me.,702,0,-2,
-701,0,0,,Can you two|make peace?,"Alright, tell the fucking nerd to stay.|But I'll punch her if she stares at me.",702,-1,0,
-701,0,0,,I'll make sure|everything is ok.,"Fine, tell the fucking nerd to stay.|But I'll punch her if she stares at me.",702,-1,1,
-701,0,0,!AmandaIsOwner,I will tell her to go.|(Kick Amanda out.),,701,1,0,"KickActor(""Amanda"")"
-701,0,0,!AmandaIsOwner,I'll kick her out.|(Kick Amanda out.),,701,1,1,"KickActor(""Amanda"")"
-701,0,0,!Common_ActorIsOwner,Then go Sidney.|(Kick Sidney out.),You're kicking me out of your fucking dorm?,790,-1,0,"KickForActor(""Amanda"")"
-701,0,0,!Common_ActorIsOwner,Get the fuck out then.|(Kick Sidney out.),You're kicking me out of your fucking dorm?,790,-1,1,"KickForActor(""Amanda"")"
-702,0,0,,No staring then!,Fine.  What would you like to do?,0,0,0,EndChat()
-702,0,0,,If it happens.|I'll kick her butt.,That would be fucking awesome!|So what would you like to do now?,0,0,1,EndChat()
-702,0,0,,If it happens.|You can kick her butt.,Oh hell yeah!  So what|would you like to do now?,0,1,0,EndChat()
-702,0,0,,If it happens.|We'll talk about it.,"Yeah, talk shit.  Whatever.|What would you like to do?",0,0,-1,EndChat()
-710,0,0,Common_ActorIsOwned,"Slave, I can bring|whoever I want.",(She gulps.)  Oh!  Yes Mistress.|What would you like to do?,0,-1,1,EndChat()
-710,0,0,!Common_ActorIsOwner,Sarah is a good friend.|Don't fight with her.,Fuck that!  She's the worst.|Tell her to go right now.,711,-2,0,
-710,0,0,Common_ActorIsOwner,Sarah is a good friend.|Please don't fight Mistress.,Fuck that!  She's the worst.|Tell her to leave bitch.,711,-2,0,
-710,0,0,,Are you two in a feud?,"Fuck yeah, she's the worst.|Tell her to go right now.",711,-1,0,
-710,0,0,,Why are you|two fighting?,"Cause she's pretentious, vapid, stupid|and a slut.  Tell her to go right now.",711,-1,0,
-710,0,0,,I can tell her to go.,Hell yeah.  Tell her to go now.,711,0,0,
-710,10,0,,Shhhh.  We will|make her suffer.,(She nods rapidly and shuts up.)|So what would you like to do?,0,0,1,EndChat()
-711,0,0,,Can you two|make peace?,No!  But the fucking slut can stay.|I'll punch her if she stares at me.,712,-2,0,
-711,0,0,,I'll make sure|everything is ok.,"Fine, tell the fucking slut to stay.|But I'll punch her if she stares at me.",712,-2,1,
-711,0,0,,I will tell her to go.|(Kick Sarah out.),,711,2,0,"KickActor(""Sarah"")"
-711,0,0,,I'll kick her out.|(Kick Sarah out.),,711,2,1,"KickActor(""Sarah"")"
-711,0,0,!Common_ActorIsOwner,Then go Sidney.|(Kick Sidney out.),You're kicking me out of your fucking dorm?,790,-2,0,"KickForActor(""Sarah"")"
-711,0,0,!Common_ActorIsOwner,Get the fuck out then.|(Kick Sidney out.),You're kicking me out of your fucking dorm?,790,-2,1,"KickForActor(""Sarah"")"
-712,0,0,,No staring then!,Fine.  What would you like to do?,0,0,0,EndChat()
-712,0,0,,If it happens.|I'll kick her butt.,That would be fucking awesome!|So what would you like to do now?,0,0,1,EndChat()
-712,0,0,,If it happens.|You can kick her butt.,Oh hell yeah!  So what|would you like to do now?,0,1,0,EndChat()
-712,0,0,,If it happens.|We'll talk about it.,"Yeah, talk shit.  Whatever.|What would you like to do?",0,0,-1,EndChat()
 790,0,0,,Come back another day.|I need to study tonight.,That's a fucking lame excuse.|(She walks out and slams the door.),791,-2,0,KickedOut()
 790,0,0,,You need to go.|We'll talk later.,"Fine, I'll go then.|(She walks out.)",791,-1,0,KickedOut()
 790,0,0,,Don't be mad.|I'm sorry.,"Fuck that, I'll go smoke.|(She grumbles and walks out.)",791,-1,-1,KickedOut()

@@ -229,7 +229,7 @@ function C012_AfterClass_Roommates_LoadJennifer() {
 	if (ActorGetValue(ActorLove) <= -10) ActorSetPose("Angry");
 	if (ActorGetValue(ActorSubmission) >= 10) ActorSetPose("Shy");
 	if (ActorGetValue(ActorSubmission) <= -10) ActorSetPose("Cocky");
-	ActorSetCloth("");
+	ActorSetCloth("Clothed");
 	if (C012_AfterClass_Roommates_CurrentStage == 0) C012_AfterClass_Roommates_CurrentStage = 300;
 	else C012_AfterClass_Roommates_CurrentStage = 310;
 	return;

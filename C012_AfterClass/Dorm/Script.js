@@ -135,6 +135,7 @@ function C012_AfterClass_Dorm_Load() {
 	C012_AfterClass_Sidney_CurrentStage = 0;
 	C012_AfterClass_Amanda_CurrentStage = 0;
 	C012_AfterClass_Sarah_CurrentStage = 0;
+	C012_AfterClass_Jennifer_CurrentStage = 0;
 	C012_AfterClass_Dorm_CalGuest();
 }
 
@@ -223,9 +224,9 @@ function C012_AfterClass_Dorm_Click() {
 	}
 
 	// When the player clicks on another actor
-	if ((MouseX >= C012_AfterClass_Dorm_PlayerPos + 100) && (MouseX < C012_AfterClass_Dorm_PlayerPos + 300) && (MouseY >= 0) && (MouseY <= 600) && (C012_AfterClass_Dorm_GuestVisible.length >= 1) && (C012_AfterClass_Dorm_GuestVisible[0] != "Jennifer")) SetScene(CurrentChapter, C012_AfterClass_Dorm_GuestVisible[0]);
-	if ((MouseX >= C012_AfterClass_Dorm_PlayerPos + 300) && (MouseX < C012_AfterClass_Dorm_PlayerPos + 500) && (MouseY >= 0) && (MouseY <= 600) && (C012_AfterClass_Dorm_GuestVisible.length >= 2) && (C012_AfterClass_Dorm_GuestVisible[1] != "Jennifer")) SetScene(CurrentChapter, C012_AfterClass_Dorm_GuestVisible[1]);
-	if ((MouseX >= C012_AfterClass_Dorm_PlayerPos + 500) && (MouseX < C012_AfterClass_Dorm_PlayerPos + 700) && (MouseY >= 0) && (MouseY <= 600) && (C012_AfterClass_Dorm_GuestVisible.length >= 3) && (C012_AfterClass_Dorm_GuestVisible[2] != "Jennifer")) SetScene(CurrentChapter, C012_AfterClass_Dorm_GuestVisible[2]);
-	if ((MouseX >= C012_AfterClass_Dorm_PlayerPos + 700) && (MouseX < C012_AfterClass_Dorm_PlayerPos + 900) && (MouseY >= 0) && (MouseY <= 600) && (C012_AfterClass_Dorm_GuestVisible.length >= 4) && (C012_AfterClass_Dorm_GuestVisible[3] != "Jennifer")) SetScene(CurrentChapter, C012_AfterClass_Dorm_GuestVisible[3]);
+	if ((MouseX >= C012_AfterClass_Dorm_PlayerPos + 100) && (MouseX < C012_AfterClass_Dorm_PlayerPos + 300) && (MouseY >= 0) && (MouseY <= 600) && (C012_AfterClass_Dorm_GuestVisible.length >= 1)) SetScene(CurrentChapter, C012_AfterClass_Dorm_GuestVisible[0]);
+	if ((MouseX >= C012_AfterClass_Dorm_PlayerPos + 300) && (MouseX < C012_AfterClass_Dorm_PlayerPos + 500) && (MouseY >= 0) && (MouseY <= 600) && (C012_AfterClass_Dorm_GuestVisible.length >= 2)) SetScene(CurrentChapter, C012_AfterClass_Dorm_GuestVisible[1]);
+	if ((MouseX >= C012_AfterClass_Dorm_PlayerPos + 500) && (MouseX < C012_AfterClass_Dorm_PlayerPos + 700) && (MouseY >= 0) && (MouseY <= 600) && (C012_AfterClass_Dorm_GuestVisible.length >= 3)) SetScene(CurrentChapter, C012_AfterClass_Dorm_GuestVisible[2]);
+	if ((MouseX >= C012_AfterClass_Dorm_PlayerPos + 700) && (MouseX < C012_AfterClass_Dorm_PlayerPos + 900) && (MouseY >= 0) && (MouseY <= 600) && (C012_AfterClass_Dorm_GuestVisible.length >= 4)) SetScene(CurrentChapter, C012_AfterClass_Dorm_GuestVisible[3]);
 
 }

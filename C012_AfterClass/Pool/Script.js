@@ -193,7 +193,7 @@ function C012_AfterClass_Pool_SwimTogether() {
 function C012_AfterClass_Pool_TestGoDorm() {
 	if ((ActorGetValue(ActorLove) >= 5) || (ActorGetValue(ActorSubmission) >= 10) || GameLogQuery(CurrentChapter, "Jennifer", "PoolBullyVictory")) {
 		OverridenIntroText = GetText("AcceptDorm");
-		ActorSetCloth("");
+		ActorSetCloth("Clothed");
 		C012_AfterClass_Pool_CurrentStage = 240;
 	}
 }

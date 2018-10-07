@@ -61,7 +61,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 300,0,0,,"Sorry, wrong door.|(Leave the place.)",,300,0,0,Leave()
 310,0,0,,(Chit-chat with Jennifer.),(You chit-chat about sports and art|and get to know each other better.),310,0,0,ChitChat()
 310,0,0,,Do you want to|go visit my place?,"Sorry, I don't have enough time for that.",310,0,0,TestInviteJennifer()
-310,0,0,,Do you want to go|running with me?,Yes!  Lets go right now.|It will be a great exercise.,320,1,0,
+310,0,0,,Do you want to go|running with me?,Yes!  Let's go right now.|It will be a great exercise.,320,1,0,
 310,0,0,,What are you|doing tonight?,I'm going running first and I'll probably|stop at the college swimming pool.,310,0,0,
 310,0,0,JenniferBelt,I'll help you with|your belt later.,"Thanks, this is getting really annoying.",310,0,0,
 310,0,0,,It's boring in my dorm.|Can I chill with you?,Absolutely.  But I'll go running around eighteen.,310,0,0,
