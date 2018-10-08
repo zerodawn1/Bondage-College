@@ -16,8 +16,9 @@ function CheatKey() {
 		if (KeyPress == 43) CheatTime(900000);
 		if (KeyPress == 45) CheatTime(-900000);
 		
-		// Actors and inventory cheat
+		// Specific cheats by functions
 		if (CurrentActor != "") CheatActor();
+		if ((CurrentChapter == "C012_AfterClass") && (CurrentScreen == "Dorm")) CheatDorm();
 		CheatSkill();
 		CheatInventory();
 
@@ -78,4 +79,16 @@ function CheatInventory() {
 	if ((KeyPress == 83) || (KeyPress == 115)) PlayerAddInventory("SleepingPill", 1);
 	if ((KeyPress == 84) || (KeyPress == 116)) PlayerAddInventory("TapeGag", 1);
 	if ((KeyPress == 86) || (KeyPress == 118)) PlayerAddInventory("VibratingEgg", 1);
+}
+
+// Cheats that are specific to the player's dorm room
+function CheatDorm() {
+
+	// If the player isn't grounded, she can be released by using *
+	if ((KeyPress == 42) && !GameLogQuery(CurrentChapter, "", "EventGrounded")) {
+		PlayerReleaseBondage();
+		if (PlayerHasLockedInventory("ChastityBelt")) { PlayerUnlockInventory("ChastityBelt"); PlayerAddInventory("ChastityBelt", 1); }
+		if (PlayerHasLockedInventory("VibratingEgg")) { PlayerUnlockInventory("VibratingEgg"); PlayerAddInventory("VibratingEgg", 1); }		
+	}
+
 }
