@@ -86,6 +86,7 @@ function C012_AfterClass_Amanda_Load() {
 	// Amanda's parameters
 	C012_AfterClass_Amanda_CalcParams();	
 	C012_AfterClass_Amanda_ChatAvail = !GameLogQuery(CurrentChapter, CurrentActor, "ChatDone");
+	C012_AfterClass_Amanda_SpankCount = 0;
 	C012_AfterClass_Amanda_SpankMaxCount = 10 - Math.floor(ActorGetValue(ActorLove) / 7);
 	if (C012_AfterClass_Amanda_SpankMaxCount < 6) C012_AfterClass_Amanda_SpankMaxCount = 6;
 	if (C012_AfterClass_Amanda_SpankMaxCount > 12) C012_AfterClass_Amanda_SpankMaxCount = 12;

@@ -83,6 +83,7 @@ function C012_AfterClass_Sidney_Load() {
 	// Sidney's parameters
 	C012_AfterClass_Sidney_CalcParams();	
 	C012_AfterClass_Sidney_ChatAvail = !GameLogQuery(CurrentChapter, CurrentActor, "ChatDone");
+	C012_AfterClass_Sidney_SpankCount = 0;
 	C012_AfterClass_Sidney_SpankMaxCount = 10 - Math.floor(ActorGetValue(ActorLove) / 7);
 	if (C012_AfterClass_Sidney_SpankMaxCount < 6) C012_AfterClass_Sidney_SpankMaxCount = 6;
 	if (C012_AfterClass_Sidney_SpankMaxCount > 12) C012_AfterClass_Sidney_SpankMaxCount = 12;

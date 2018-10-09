@@ -9,7 +9,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,Common_PlayerGagged,@Om nnnuoogn mh!,Oh yeah.  I fucking understood|what you said.  (She laughs.),0,0,0,TestUnbind()
 0,0,0,Common_ActorIsOwner,(Hum a sexy song|and dance for fun.),Not now my little bitch.|(She checks her cell phone.),0,0,0,RandomSidneyDommeEvent()
 0,0,0,Common_PlayerRestrained,(Struggle in|your restrains.),"Nope, you're not getting out.|It's great to see you struggle.",0,0,0,TestUnbind()
-0,0,0,!Common_ActorIsOwner,You should wear|something else.,Forget it.  I'm not changing for you.,0,0,0,TestChange()
+0,0,0,!Common_ActorIsOwner,You should wear|something else.,"No, thanks.  I'm fine like that.",0,0,0,TestChange()
 0,0,0,SexAvail,Would you like to|make love with me?,"No, I don't feel like it.|Let's do something else.",0,0,0,TestSex()
 0,0,0,PleasurePlayerAvail,"My submissive, you|will pleasure me now.",Pleasure you how Mistress?,630,0,0,TestPleasurePlayer()
 0,0,0,!Common_PlayerRestrained,(Play with her.),(You take a step toward her.),10,0,0,
@@ -172,23 +172,6 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 391,0,0,,Very good.,"(She nods.)  Alright my little bitch.|Another thing, I now control your sexuality.",392,0,0,
 392,0,0,,My sexuality Mistress?,You can't do anything sexual without asking me.|Now stand up and let's do something fun.,0,0,0,PlayerStandUp()
 392,0,0,,What does it mean?,You can't do anything sexual without asking me.|Now stand up and let's do something fun.,0,0,0,PlayerStandUp()
-400,0,0,Common_ActorIsLover,(Nod yes happily.)|(Go to the show.),,0,0,0,LeaveForRockShow()
-400,0,0,Common_ActorIsLover,Let's go together!|(Go to the show.),,0,0,0,LeaveForRockShow()
-400,0,0,Common_PlayerGagged,@UNGN MH NUUOGH!,(She laughs and leaves your dorm.),410,0,0,TestReleaseBeforeExit()
-400,0,0,Common_PlayerRestrained,Can you help me|before you go?,"Nope, I like you like that.|(She leaves your dorm.)",410,0,0,TestReleaseBeforeExit()
-400,0,0,!Common_ActorIsOwned,Have fun Sidney!,I will.  (She leaves your dorm.),410,0,0,
-400,0,0,Common_ActorIsOwned,Have fun my slave!,"I will Mistress, thanks!|(She leaves your dorm.)",410,0,1,
-400,0,0,!Common_ActorIsOwned,That sucks!|Don't go.,Fuck that.  (She leaves your dorm.),410,-1,0,
-400,0,0,!Common_ActorIsOwner,Have a great|time Sidney.,Hell yeah!  (She leaves your dorm.),410,1,0,
-400,0,0,Common_ActorIsOwner,Have a great|time Mistress.,Hell yeah!  (She leaves your dorm.),410,1,0,
-400,0,0,!Common_ActorIsOwned,Wait!,I can't.  (She leaves your dorm.),410,0,0,
-400,0,0,!Common_ActorIsOwner,"Next time I'll tie|you up, so you'll stay.",Oh shit.  (She leaves your dorm.),410,0,1,
-400,0,0,,(Bow your head.),Good girl.  (She leaves your dorm.),410,0,-1,
-400,0,0,Common_ActorIsOwned,"My slave, you will|stay here tonight.",(She's surprised.)  Really Mistress?|I thought I could go out tonight.,401,0,0,
-401,0,0,,"No, you will stay.|(Make her stay.)","(She seems very disappointed.)|Yes Mistress, I will stay.",402,-1,-1,"SetCurfew(""Stay"")"
-401,0,0,,"Fine, have fun.|(Let her go.)",Thanks Mistress!  You're the best.|(She leaves your dorm room.),410,0,0,
-402,0,0,,(Back to your room.),,402,0,0,BackToDorm()
-410,0,0,,(Back to your room.),,410,0,0,BackToDorm()
 450,0,0,,Fun Mistress?,,0,0,0,RandomSidneyDommeEvent()
 450,0,0,,What's going on?,,0,0,0,RandomSidneyDommeEvent()
 450,0,0,,(Nod happily.),,0,0,0,RandomSidneyDommeEvent()
@@ -217,10 +200,11 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 560,0,0,,I will!  But you'll|need to follow it.,Deal!  This is fucking awesome.,0,0,1,EndChat()
 560,0,0,,Very well.,Revenge will be sweet.,0,0,0,EndChat()
 560,0,0,,"Yes, try not fuck up|in the meantime.",(She frowns and nods.)|Revenge will be sweet.,0,-1,1,EndChat()
-600,0,0,,Wear your|school outfit.,Fine.  But let's not go back to school.|(She changes in her school uniform.),0,0,0,"ForceChangeActor(""Clothed"")"
+600,0,0,,Wear your|school outfit.,"Very well, our college has nice uniforms.|(She changes in her school uniform.)",0,0,0,"ForceChangeActor(""Clothed"")"
 600,0,0,AllowTennisOutfit,Wear your|tennis outfit.,(She nods and changes.)  Sure!|We should play a match tommorow.,0,0,0,"ForceChangeActor(""Tennis"")"
-600,0,0,!HasBelt,Get in your|underwear.,Alright.  What do you have in mind?|(She changes in her underwear for you.),0,0,0,"ForceChangeActor(""Underwear"")"
-600,0,0,,Get naked.,Really?  What do you have in mind?|(She strips naked for you.),0,0,0,"ForceChangeActor(""Naked"")"
+600,0,0,AllowSwimsuit,Wear your swimsuit.,(She nods and changes.)  Very well.|Do you want to go back to the pool?,0,0,0,"ForceChangeActor(""Swimsuit"")"
+600,0,0,!HasBelt,Get in your|underwear.,You're planning something funky?|(She changes in her underwear for you.),0,0,0,"ForceChangeActor(""Underwear"")"
+600,0,0,,Get naked.,Please don't take pictures.|(She strips naked for you.),0,0,0,"ForceChangeActor(""Naked"")"
 600,0,0,,Forget it.,(She nods.),0,0,0,
 610,0,0,,You're free to|have fun tonight.,Great!  Thanks Mistress.|You're the best.,0,0,0,"SetCurfew(""None"")"
 610,0,0,,"You can have fun tonight,|but you will sleep here.","Very well, thanks Mistress.",0,0,0,"SetCurfew(""24"")"

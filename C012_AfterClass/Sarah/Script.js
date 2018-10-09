@@ -3,7 +3,6 @@ var C012_AfterClass_Sarah_IntroText = "";
 var C012_AfterClass_Sarah_HasEgg = false;
 var C012_AfterClass_Sarah_HasBelt = false;
 var C012_AfterClass_Sarah_ChatAvail = false;
-var C012_AfterClass_Sarah_SpankCount = 0;
 var	C012_AfterClass_Sarah_IsGagged = false;
 var	C012_AfterClass_Sarah_IsRoped = false;
 var	C012_AfterClass_Sarah_IsStrapped = false;

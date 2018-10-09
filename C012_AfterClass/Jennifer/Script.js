@@ -17,6 +17,7 @@ var C012_AfterClass_Jennifer_PleasurePlayerSpeed = 0;
 var C012_AfterClass_Jennifer_MasturbateCount = 0;
 var C012_AfterClass_Jennifer_CanSetCurfew22 = false;
 var C012_AfterClass_Jennifer_AllowTennisOutfit = false;
+var C012_AfterClass_Jennifer_AllowSwimsuit = false;
 var C012_AfterClass_Jennifer_AllowSexAfterDate = false;
 var C012_AfterClass_Jennifer_CanKickOut = false;
 
@@ -53,6 +54,7 @@ function C012_AfterClass_Jennifer_CalcParams() {
 	C012_AfterClass_Jennifer_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Jennifer_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
 	C012_AfterClass_Jennifer_CanKickOut = (!Common_ActorIsOwner && !Common_ActorIsLover);
 	C012_AfterClass_Jennifer_AllowTennisOutfit = (GameLogQuery("C007_LunchBreak", CurrentActor, "Lunch") || GameLogQuery("C012_AfterClass", CurrentActor, "Running"));
+	C012_AfterClass_Jennifer_AllowSwimsuit = GameLogQuery("C012_AfterClass", CurrentActor, "EnterDormFromPool");
 	C012_AfterClass_Jennifer_SetPose();
 }
 
@@ -64,9 +66,6 @@ function C012_AfterClass_Jennifer_Load() {
 	ActorLoad("Jennifer", "Dorm");
 	Common_PlayerPose = "";
 	if (C012_AfterClass_Jennifer_CurrentStage == 3915) Common_PlayerPose = "TwoRopesPunishment";
-	
-	// At stage 400, Jennifer is leaving
-	if (C012_AfterClass_Jennifer_CurrentStage == 400) { ActorUngag(); LeaveIcon = ""; }
 
 	// Jennifer's parameters
 	C012_AfterClass_Jennifer_CalcParams();	
@@ -114,7 +113,7 @@ function C012_AfterClass_Jennifer_Run() {
 	if (((C012_AfterClass_Jennifer_CurrentStage >= 340) && (C012_AfterClass_Jennifer_CurrentStage < 400)) || ((C012_AfterClass_Jennifer_CurrentStage >= 291) && (C012_AfterClass_Jennifer_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
 
 	// Draw the actor alone or with the player depending on the stage
-	if ((C012_AfterClass_Jennifer_CurrentStage != 410) && (C012_AfterClass_Jennifer_CurrentStage != 3931) && (C012_AfterClass_Jennifer_CurrentStage != 3932) && (C012_AfterClass_Jennifer_CurrentStage != 3933) && (C012_AfterClass_Jennifer_CurrentStage != 632) && (C012_AfterClass_Jennifer_CurrentStage != 633) && (C012_AfterClass_Jennifer_CurrentStage != 634) && (C012_AfterClass_Jennifer_CurrentStage != 662) && (C012_AfterClass_Jennifer_CurrentStage != 663) && (C012_AfterClass_Jennifer_CurrentStage != 791) && (C012_AfterClass_Jennifer_CurrentStage != 194)) {
+	if ((C012_AfterClass_Jennifer_CurrentStage != 3931) && (C012_AfterClass_Jennifer_CurrentStage != 3932) && (C012_AfterClass_Jennifer_CurrentStage != 3933) && (C012_AfterClass_Jennifer_CurrentStage != 632) && (C012_AfterClass_Jennifer_CurrentStage != 633) && (C012_AfterClass_Jennifer_CurrentStage != 634) && (C012_AfterClass_Jennifer_CurrentStage != 662) && (C012_AfterClass_Jennifer_CurrentStage != 663) && (C012_AfterClass_Jennifer_CurrentStage != 791) && (C012_AfterClass_Jennifer_CurrentStage != 194)) {
 		if (((C012_AfterClass_Jennifer_CurrentStage >= 3090) && (C012_AfterClass_Jennifer_CurrentStage <= 3099)) || ((C012_AfterClass_Jennifer_CurrentStage >= 3901) && (C012_AfterClass_Jennifer_CurrentStage <= 3999))) {
 			DrawActor("Player", 475, 0, 1);
 			DrawActor(CurrentActor, 750, 0, 1);
@@ -419,18 +418,6 @@ function C012_AfterClass_Jennifer_TestPunish() {
 // Chapter 12 After Class - Allows the player to leave the scene
 function C012_AfterClass_Jennifer_AllowLeave() {
 	C012_AfterClass_Jennifer_CheckCellPhone();
-}
-
-// Chapter 12 After Class - The player can beg Jennifer to be released before she exits
-function C012_AfterClass_Jennifer_TestReleaseBeforeExit() {
-
-	// Check if the event succeeds randomly
-	if (EventRandomChance("Love")) {
-		OverridenIntroText = GetText("ReleaseBeforeExit");
-		PlayerReleaseBondage();
-		CurrentTime = CurrentTime + 50000;
-	}
-	
 }
 
 // Chapter 12 After Class - Jennifer can confiscate the player keys
