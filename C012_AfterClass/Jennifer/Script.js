@@ -4,12 +4,10 @@ var C012_AfterClass_Jennifer_HasEgg = false;
 var C012_AfterClass_Jennifer_HasBelt = false;
 var C012_AfterClass_Jennifer_ChatAvail = false;
 var C012_AfterClass_Jennifer_SpankCount = 0;
-var C012_AfterClass_Jennifer_EnslaveCount = 0;
 var	C012_AfterClass_Jennifer_IsGagged = false;
 var	C012_AfterClass_Jennifer_IsRoped = false;
 var	C012_AfterClass_Jennifer_IsStrapped = false;
 var C012_AfterClass_Jennifer_CanMasturbate = false;
-var C012_AfterClass_Jennifer_PusherDealAvail = false;
 var C012_AfterClass_Jennifer_PleasurePlayerAvail = false;
 var C012_AfterClass_Jennifer_SexAvail = false;
 var C012_AfterClass_Jennifer_PleasurePlayerCount = 0;
@@ -47,7 +45,6 @@ function C012_AfterClass_Jennifer_CalcParams() {
 	C012_AfterClass_Jennifer_IsGagged = ActorIsGagged();	
 	C012_AfterClass_Jennifer_IsRoped = (ActorHasInventory("Rope") || ActorHasInventory("TwoRopes") || ActorHasInventory("ThreeRopes"));
 	C012_AfterClass_Jennifer_IsStrapped = ActorHasInventory("Armbinder");
-	C012_AfterClass_Jennifer_PusherDealAvail = (!C012_AfterClass_Jennifer_HasBelt && PlayerHasInventory("ChastityBelt") && GameLogQuery(CurrentChapter, "", "DebtChastityBelt") && !GameLogQuery(CurrentChapter, "", "DebtChastityBeltDone"));
 	C012_AfterClass_Jennifer_PleasurePlayerAvail = (!Common_PlayerChaste && !ActorIsGagged() && !ActorIsRestrained() && Common_ActorIsOwned && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
 	C012_AfterClass_Jennifer_SexAvail = (!Common_PlayerRestrained && !Common_PlayerChaste && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Jennifer", "NextPossibleOrgasm") && !GameLogQuery(CurrentChapter, "Player", "AmandaAndSarahInBed"));
 	if (GameLogQuery(CurrentChapter, "", "EventBlockChanging") && (C012_AfterClass_Dorm_Guest.indexOf(Common_PlayerOwner) >= 0) && !Common_PlayerNaked) C012_AfterClass_Jennifer_SexAvail = false;
@@ -239,14 +236,9 @@ function C012_AfterClass_Jennifer_TestDomme() {
 	if (PlayerHasInventory("Collar")) {
 		if (!ActorIsGagged()) {
 			if (ActorGetValue(ActorSubmission) >= 20) {
-				if (!GameLogQuery(CurrentChapter, CurrentActor, "EnslaveDone")) {
-					if (ActorIsRestrained()) C012_AfterClass_Jennifer_EnslaveCount = 1;
-					else C012_AfterClass_Jennifer_EnslaveCount = 0;
-					C012_AfterClass_Jennifer_CurrentStage = 200;
-					OverridenIntroText = "";
-					LeaveIcon = "";
-					GameLogAdd("EnslaveDone");
-				} else OverridenIntroText = GetText("EnslaveAlreadyTried");
+				C012_AfterClass_Jennifer_CurrentStage = 200;
+				OverridenIntroText = "";
+				LeaveIcon = "";
 			}
 		} else C012_AfterClass_Jennifer_GaggedAnswer();
 	} else OverridenIntroText = GetText("CollarToEnslave");
@@ -595,21 +587,6 @@ function C012_AfterClass_Jennifer_ForceChangeActor(NewCloth) {
 	C012_AfterClass_Jennifer_GaggedAnswer();
 }
 
-// Chapter 12 After Class - Increases the slavery count for Jennifer, 5 is required to collar her
-function C012_AfterClass_Jennifer_EnslaveJenniferCount() {
-	C012_AfterClass_Jennifer_EnslaveCount++;
-}
-
-// Chapter 12 After Class - Check if Jennifer wants to be collared, 5 counts are required
-function C012_AfterClass_Jennifer_TestEnslaveJennifer() {
-	if (C012_AfterClass_Jennifer_EnslaveCount >= 5) {
-		if (ActorIsRestrained()) C012_AfterClass_Jennifer_CurrentStage = 285;
-		else if (ActorGetValue(ActorCloth) == "Naked") { C012_AfterClass_Jennifer_CurrentStage = 291; ActorSetPose("Shy"); }
-		else C012_AfterClass_Jennifer_CurrentStage = 290;
-		OverridenIntroText = GetText("AcceptCollar");
-	} else LeaveIcon = "Leave";
-}
-
 // Chapter 12 After Class - When the player gives up on enslaving Jennifer
 function C012_AfterClass_Jennifer_EndEnslaveJennifer() {
 	C012_AfterClass_Jennifer_CalcParams();
@@ -669,26 +646,6 @@ function C012_AfterClass_Jennifer_SetCurfew(CurfewType) {
 // Chapter 12 After Class - The player can decide how Jennifer will spend her evening
 function C012_AfterClass_Jennifer_BackToDorm() {
 	SetScene(CurrentChapter, "Dorm");
-}
-
-// Chapter 12 After Class - Jennifer will accept the chastity belt deal if she's not too dominant (-5 and up)
-function C012_AfterClass_Jennifer_TestBelt() {
-	ActorChangeAttitude(0, 1);
-	GameLogAdd("DebtChastityBeltDone");
-	C012_AfterClass_Jennifer_CalcParams();
-	if (ActorGetValue(ActorSubmission) >= -5) {
-		if (ActorGetValue(ActorCloth) == "Naked") C012_AfterClass_Jennifer_CurrentStage = 622;
-		else C012_AfterClass_Jennifer_CurrentStage = 621;
-		OverridenIntroText = GetText("AcceptPusherDeal");
-		LeaveIcon = "";
-	}
-}
-
-// Chapter 12 After Class - Jennifer can be locked in a chastity belt to follow the pusher deal
-function C012_AfterClass_Jennifer_LockBeltJennifer() {
-	PlayerRemoveInventory("ChastityBelt", 1);
-	ActorAddInventory("ChastityBelt");
-	CurrentTime = CurrentTime + 50000;
 }
 
 // Chapter 12 After Class - Starts the pleasure player scene
@@ -870,20 +827,6 @@ function C012_AfterClass_Jennifer_MakeLove() {
 	SetScene(CurrentChapter, "Bed");
 }
 
-// Chapter 12 After Class - Test Jennifer to go on a date with her
-function C012_AfterClass_Jennifer_TestGoOnDate() {
-	if (!ActorIsGagged()) {
-		if (!ActorIsRestrained()) {
-			if (!GameLogQuery(CurrentChapter, CurrentActor, "RockShowTogether")) {
-				if (CurrentTime >= 20 * 60 * 60 * 1000) {
-					OverridenIntroText = GetText("RockShowAlreadyStarted");
-					C012_AfterClass_Jennifer_CurrentStage = 185;
-				} else C012_AfterClass_Jennifer_CurrentStage = 180;
-			} else OverridenIntroText = GetText("AlreadyWentOut");
-		} else OverridenIntroText = GetText("ReleaseBeforeTalk");
-	} else C012_AfterClass_Jennifer_GaggedAnswer();	
-}
-
 // Chapter 12 After Class - Test if the player can start the serious dialog
 function C012_AfterClass_Jennifer_TestTalk() {
 	if (!ActorIsGagged()) {
@@ -906,16 +849,6 @@ function C012_AfterClass_Jennifer_JenniferLeave() {
 	CurrentActor = "";
 	LeaveIcon = "Leave";
 	C012_AfterClass_Dorm_Guest.splice("Jennifer");
-}
-
-// Chapter 12 After Class - When Jennifer and the player leaves for the rock show
-function C012_AfterClass_Jennifer_LeaveForRockShow() {
-	CurrentTime = CurrentTime + 290000;
-	PlayerReleaseBondage();
-	ActorSetCloth("Shorts");
-	PlayerClothes("BlackDress");
-	GameLogAdd("RockShowTogether");
-	SetScene(CurrentChapter, "RockShow");
 }
 
 // Chapter 12 After Class - Starts the lingerie show
@@ -943,13 +876,4 @@ function C012_AfterClass_Jennifer_KickedOut() {
 		C012_AfterClass_Jennifer_BreakUp();
 	}
 	CurrentActor = "";
-}
-
-// Chapter 12 After Class - When Jennifer changes back to her short to spank the player
-function C012_AfterClass_Jennifer_ChangeBackToShort() {
-	if (ActorGetValue(ActorCloth) != "Shorts") {
-		ActorSetCloth("Shorts");
-		CurrentTime = CurrentTime + 50000;
-		OverridenIntroText = GetText("SpankInShorts");
-	}
 }
