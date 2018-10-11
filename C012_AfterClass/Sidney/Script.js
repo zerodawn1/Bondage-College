@@ -71,7 +71,7 @@ function C012_AfterClass_Sidney_CalcParams() {
 // Chapter 12 After Class - Sidney Load
 function C012_AfterClass_Sidney_Load() {
 	
-	// Loads the scene to search in the wardrobe
+	// Loads the scene
 	LoadInteractions();
 	ActorLoad("Sidney", "Dorm");
 	Common_PlayerPose = "";

@@ -77,7 +77,7 @@ function C012_AfterClass_Amanda_CalcParams() {
 // Chapter 12 After Class - Amanda Load
 function C012_AfterClass_Amanda_Load() {
 	
-	// Loads the scene to search in the wardrobe
+	// Loads the scene
 	LoadInteractions();
 	ActorLoad("Amanda", "Dorm");
 	Common_PlayerPose = "";

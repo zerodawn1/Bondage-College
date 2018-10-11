@@ -19,11 +19,6 @@ var C012_AfterClass_Jennifer_AllowSwimsuit = false;
 var C012_AfterClass_Jennifer_AllowSexAfterDate = false;
 var C012_AfterClass_Jennifer_CanKickOut = false;
 
-// Jennifer can only check her cell phone if she's dressed
-function C012_AfterClass_Jennifer_CheckCellPhone() {
-	LeaveIcon = "Leave";
-}
-
 // In her shorts, Jennifer can have many poses when she talks
 function C012_AfterClass_Jennifer_SetPose() {
 	ActorSetPose("");
@@ -58,11 +53,11 @@ function C012_AfterClass_Jennifer_CalcParams() {
 // Chapter 12 After Class - Jennifer Load
 function C012_AfterClass_Jennifer_Load() {
 	
-	// Loads the scene to search in the wardrobe
+	// Loads the scene
 	LoadInteractions();
 	ActorLoad("Jennifer", "Dorm");
 	Common_PlayerPose = "";
-	if (C012_AfterClass_Jennifer_CurrentStage == 3915) Common_PlayerPose = "TwoRopesPunishment";
+	if (C012_AfterClass_Jennifer_CurrentStage == 3915) Common_PlayerPose = "FoldPunishment";
 
 	// Jennifer's parameters
 	C012_AfterClass_Jennifer_CalcParams();	
@@ -329,8 +324,8 @@ function C012_AfterClass_Jennifer_RandomJenniferDommeEvent() {
 
 	}
 
-	// If Jennifer doesn't respond, she checks her cell phone
-	if (C012_AfterClass_Jennifer_CurrentStage == 0) C012_AfterClass_Jennifer_CheckCellPhone();
+	// If Jennifer doesn't respond, we end the scene right there
+	if (C012_AfterClass_Jennifer_CurrentStage == 0) C012_AfterClass_Jennifer_AllowLeave();
 	
 }
 
@@ -398,7 +393,7 @@ function C012_AfterClass_Jennifer_TestPunish() {
 
 	// The more love, the less chances the player will be punished
 	if (EventRandomChance("Love")) {
-		C012_AfterClass_Jennifer_CheckCellPhone();
+		C012_AfterClass_Jennifer_AllowLeave();
 	} else {
 		ActorSetPose("Angry");
 		OverridenIntroText = "";
@@ -409,7 +404,7 @@ function C012_AfterClass_Jennifer_TestPunish() {
 
 // Chapter 12 After Class - Allows the player to leave the scene
 function C012_AfterClass_Jennifer_AllowLeave() {
-	C012_AfterClass_Jennifer_CheckCellPhone();
+	LeaveIcon = "Leave";
 }
 
 // Chapter 12 After Class - Jennifer can confiscate the player keys

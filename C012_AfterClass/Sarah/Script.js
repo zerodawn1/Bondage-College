@@ -75,11 +75,10 @@ function C012_AfterClass_Sarah_CalcParams() {
 // Chapter 12 After Class - Sarah Load
 function C012_AfterClass_Sarah_Load() {
 	
-	// Loads the scene to search in the wardrobe
+	// Loads the scene
 	LoadInteractions();
 	ActorLoad("Sarah", "Dorm");
 	Common_PlayerPose = "";
-	if (C012_AfterClass_Sarah_CurrentStage == 3915) Common_PlayerPose = "HogtiePunishment";
 	if (Common_ActorIsOwned) GameLogAddTimer("EventGenericNext", CurrentTime + 1200000 + Math.floor(Math.random() * 1200000));
 	
 	// Sarah's parameters

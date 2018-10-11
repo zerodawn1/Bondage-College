@@ -1,9 +1,7 @@
 Tag,Content
-EventNaked,3000
 EventUnderwear,3010
 EventSchoolUniform,3020
 EventRedBikini,3030
-EventWhiteLingerie,3040
 EventBlackDress,3050
 EventTennis,3060
 EventFullBondage,3100
@@ -37,9 +35,9 @@ GetOnYourKnees,"Very good, you'll be my protege.|Please kneel to make it officia
 ReleasePlayer,I'll give you a hand.|(She releases you.)
 ReleasePlayerGagged,Aaaegn mnh nnhg!|(She releases you.)
 CannotReleasePlayer,(She struggles to get|out but fails and sighs.)
-ActivityEndGood,Excellent my protege!  But that's enough.|Remember that your mentor is in control.
-ActivityEndFair,Fine my protege!  But that's enough.|Remember that your mentor is in control.
-ActivityEndBad,Stop my protege!  I've had enough.|Remember that your mentor is in control.
+ActivityEndGood,Excellent my protege!  But that's enough.|Remember that your Mentor is in control.
+ActivityEndFair,Fine my protege!  But that's enough.|Remember that your Mentor is in control.
+ActivityEndBad,Stop my protege!  I've had enough.|Remember that your Mentor is in control.
 MasturbatePlayerOrgasm,"Stay focused and enjoy your training.|(She masturbates you skillfully, making you climax.)"
 MasturbatePlayerOrgasmForced,"You're not in control, focus on your training.|(She masturbates you skillfully, making you climax.)"
 ChangingIsBlocked,"No my protege, only I can decide|when you're allowed to change."

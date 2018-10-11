@@ -36,6 +36,28 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 200,0,0,Common_ActorIsLover,I need training Darling?|I'm not sure I understand.,Dorm.jpg
 300,0,0,,I've seen the way you act around me.|Have you ever had a Mentor before?,Dorm.jpg
 300,0,0,Common_ActorIsLover,"Baby, I think I know you pretty well.|Have you ever had a Mentor before?",Dorm.jpg
+301,0,0,,,Dorm.jpg
+302,0,0,,,Dorm.jpg
+303,0,0,,,Dorm.jpg
+304,0,0,,,Dorm.jpg
+305,0,0,,,Dorm.jpg
+306,0,0,,,Dorm.jpg
+307,0,0,,,Dorm.jpg
+308,0,0,,,Dorm.jpg
+309,0,0,,,Dorm.jpg
+320,0,0,,,Dorm.jpg
+321,0,0,,,Dorm.jpg
+322,0,0,,,Dorm.jpg
+323,0,0,,,Dorm.jpg
+324,0,0,,,Dorm.jpg
+325,0,0,,,Dorm.jpg
+326,0,0,,,Dorm.jpg
+327,0,0,,,Dorm.jpg
+328,0,0,,,Dorm.jpg
+329,0,0,,,Dorm.jpg
+330,0,0,,,Dorm.jpg
+331,0,0,,,Dorm.jpg
+399,0,0,,,Dorm.jpg
 450,0,0,,(Jennifer slides her finger in your collar ring.)|Are you ready for some training my protege?,Dorm.jpg
 450,0,0,Common_ActorIsLover,"(Jennifer slides her finger in your collar ring.)|My baby, are you ready for some training?",Dorm.jpg
 500,0,0,,,Dorm.jpg
@@ -63,23 +85,19 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 790,0,0,,You're kicking me out|of your fucking dorm?,Door.jpg
 790,0,0,Common_ActorIsLover,You're fucking kicking me out?|That's the end of our shitty love?,StopDating.jpg
 791,0,0,,,Door.jpg
-3000,0,0,,"My protege, I want to see you naked.",Dorm.jpg
-3000,0,0,Common_ActorIsLover,"Baby, I want to see you naked.",Dorm.jpg
-3010,0,0,,"My protege, I want to see you in your undies.",Dorm.jpg
-3010,0,0,Common_ActorIsLover,"Baby, I want to see you in your undies.",Dorm.jpg
-3020,0,0,,"My protege, I want to see|you in your school uniform.",Dorm.jpg
-3020,0,0,Common_ActorIsLover,"Baby, I want to see you|in your school uniform.",Dorm.jpg
-3030,0,0,,"My protege, I want to see you in your swimsuit.",Dorm.jpg
-3030,0,0,Common_ActorIsLover,"Baby, I want to see you in your swimsuit.",Dorm.jpg
-3040,0,0,,"My protege, I want to see you in your lingerie.",Dorm.jpg
-3040,0,0,Common_ActorIsLover,"Baby, I want to see you in your lingerie.",Dorm.jpg
-3050,0,0,,"My protege, wear a cute dress for me.",Dorm.jpg
-3050,0,0,Common_ActorIsLover,"Baby, wear a cute dress for me.",Dorm.jpg
-3060,0,0,,"My protege, wear your tennis outfit for me.",Dorm.jpg
-3060,0,0,Common_ActorIsLover,"Baby, wear your tennis outfit for me.",Dorm.jpg
+3010,0,0,,You will change and do exercises with me.|I want to see you in your underwear.,Dorm.jpg
+3010,0,0,Common_ActorIsLover,You will change and do exercises with me.|I want to see you in your undies baby.,Dorm.jpg
+3020,0,0,,You will change and do exercises with me.|I want to see you in your school uniform.,Dorm.jpg
+3020,0,0,Common_ActorIsLover,You will change and do exercises with me.|I want to see you in your school clothes baby.,Dorm.jpg
+3030,0,0,,You will change and do exercises with me.|I want to see you in your swimsuit.,Dorm.jpg
+3030,0,0,Common_ActorIsLover,You will change and do exercises with me.|I want to see you in your bikini baby.,Dorm.jpg
+3050,0,0,,You will change and do exercises with me.|I want to see you in a regular dress.,Dorm.jpg
+3050,0,0,Common_ActorIsLover,You will change and do exercises with me.|I want to see you in your nice dress baby.,Dorm.jpg
+3060,0,0,,You will change and do exercises with me.|I want to see you in your tennis outfit.,Dorm.jpg
+3060,0,0,Common_ActorIsLover,You will change and do exercises with me.|I want to see you in your tennis gear baby.,Dorm.jpg
 3090,0,0,,,Dorm.jpg
 3091,0,0,,"(She gives a thumbs up.)  You look perfect.|Stay like that, you're not allowed to change.",Dorm.jpg
-3091,0,0,Common_ActorIsLover,"(She gives a thumbs up.)  I love it darling.|And stay like that, you're not allowed to change.",Dorm.jpg
+3091,0,0,Common_ActorIsLover,"(She gives a thumbs up.)  I love it darling.|Stay like that, you're not allowed to change.",Dorm.jpg
 3092,0,0,,,Dorm.jpg
 3100,0,0,,"My protege, I will bind and gag you to|train your flexibility and escaping skills.",Dorm.jpg
 3110,0,0,,"My protege, I will restrain you to|train your flexibility and escaping skills.",Dorm.jpg
@@ -96,7 +114,7 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 3201,0,0,,,Dorm.jpg
 3210,0,0,,It's time for you to train.  You will do|some sit-ups in your underwear.,Dorm.jpg
 3211,0,0,,,Dorm.jpg
-3230,0,0,,This crop is pretty interesting.|We will train your endurance.,Dorm.jpg
+3230,0,0,,This crop is kind of interesting.|We will train your endurance.,Dorm.jpg
 3231,0,0,,,Dorm.jpg
 3290,0,0,,,Dorm.jpg
 3291,0,0,,,Dorm.jpg
