@@ -1,12 +1,12 @@
 Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
-0,0,0,Common_ActorIsOwner,"Mentor, can we|train some more?","Not now, we are on short break.|Your training will resume later.",0,0,0,RandomJenniferDommeEvent()
+0,0,0,Common_ActorIsOwner,"Mentor, is it time|for my training?","Not now, we are on short break.|Your training will resume later.",0,0,0,RandomJenniferDommeEvent()
 0,0,0,Common_ActorIsOwner,"Mentor, can I wear|something else?",Of course my little protege.|You can wear what you want.,0,0,0,IsChangingBlocked()
 0,5,0,!Common_ActorIsLover,You look so|pretty Jennifer.,You look much better than me.|(You need +20 love to date Jennifer.),0,0,0,TestLove()
 0,0,0,,We need to talk.,Yeah?  What's on your mind?,0,0,0,TestTalk()
 0,0,5,!Common_ActorIsOwned,"Girl, you need|some training.",I already train almost everyday Miss.|(You need +20 submission to collar Jennifer.),0,0,0,TestDomme()
 0,0,-5,!Common_ActorIsOwner,Miss Jennifer.|I admire you.,I'm not sure why you admire me that much.|(You need -20 submission to submit to Jennifer.),0,0,0,TestSub()
 0,0,0,Common_PlayerGagged,@Om nnnuoogn mh!,Oh yeah.  I fucking understood|what you said.  (She laughs.),0,0,0,TestUnbind()
-0,0,0,Common_ActorIsOwner,(Hum a sexy song|and dance for fun.),Not now my little bitch.|(She checks her cell phone.),0,0,0,RandomJenniferDommeEvent()
+0,0,0,Common_ActorIsOwner,(Hum a sexy song|and dance for fun.),"Not now, we are on short break.|Your training will resume later.",0,0,0,RandomJenniferDommeEvent()
 0,0,0,Common_PlayerRestrained,(Struggle in|your restrains.),"Nope, you're not getting out.|It's great to see you struggle.",0,0,0,TestUnbind()
 0,0,0,!Common_ActorIsOwner,You should wear|something else.,"No, thanks.  I'm fine like that.",0,0,0,TestChange()
 0,0,0,SexAvail,Would you like to|make love with me?,"No, I don't feel like it.|Let's do something else.",0,0,0,TestSex()
@@ -94,13 +94,13 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 303,0,0,,More discipline|would be helpful.,"Absolutely, but it means that|you'll have to obey my rules.",304,0,0,
 304,0,0,,What kind of rules?,"I will decide what you will wear, with|whom you'll sleep and how you'll train.",305,0,0,
 304,0,0,,Rules are for losers.,It won't work then.  Think about it and|let me know if you change your mind.,399,0,0,
-304,0,0,,Many rules?,"I will decide what you will wear, with|whom you'll sleep and how you'll train.",305,0,0,
+304,0,0,,Lots of rules?,"I will decide what you will wear, with|whom you'll sleep and how you'll train.",305,0,0,
 305,0,0,,And you would|be my Mentor?,"Yes, I would be your Mentor|and you'll be my protege.",306,0,0,
 305,0,0,,Are you sure you're|ready to do that?,"Yes, I would be your Mentor|and you'll be my protege.",306,0,0,
 305,0,0,Common_ActorIsLover,"My love, you will|really Mentor me?","Yes, I would be your Mentor|and you'll be my protege.",306,0,0,
 305,0,0,,I'm not sure it's|a good idea.,I don't know.  Think about it and|let me know if you want do it.,399,0,0,
 306,0,0,,I'm no slave!,It won't work then.  Think about it and|let me know if you change your mind.,399,0,0,
-306,0,0,,What is a protege?,"As my protege, you will submit fully to me.|I will protect you, train you and collar you.",307,0,0,
+306,0,0,,What's a protege?,"As my protege, you will submit fully to me.|I will protect you, train you and collar you.",307,0,0,
 306,0,0,,I'll be your slave?,"Not a slave, but you will submit fully to me.|I will protect you, train you and collar you.",307,0,0,
 306,0,0,,You will own me?,"In a sense yes, you will submit fully to me.|I will protect you, train you and collar you.",307,0,0,
 306,0,0,,(Stay silent.),"As my protege, you will submit fully to me.|I will protect you, train you and collar you.",307,0,0,
@@ -120,13 +120,13 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 321,0,0,,Yes Miss Jennifer.|(Get on your knees.),"Repeat after me:  ""Today, I become your protege.""",322,0,1,"SetPlayerPose(""BackKneel"")"
 321,0,0,,My pleasure.|(Get on your knees.),"Repeat after me:  ""Today, I become your protege.""",322,0,0,"SetPlayerPose(""BackKneel"")"
 322,0,0,,(Listen carefully.),(She waits for you to repeat.),323,0,0,
-323,0,0,,"Today, I'm your protege.","""Today, you become my Mentor.""",324,-1,0,
-323,0,0,,"Today, I become your protege.","""Today, you become my Mentor.""",324,1,0,
-323,0,0,,"Today, I'll be your protege.","""Today, you become my Mentor.""",324,-1,0,
+323,0,0,,"Today, I'm|your protege.","""Today, you become my Mentor.""",324,-1,0,
+323,0,0,,"Today, I become|your protege.","""Today, you become my Mentor.""",324,1,0,
+323,0,0,,"Today, I'll be|your protege.","""Today, you become my Mentor.""",324,-1,0,
 324,0,0,,(Listen carefully.),(She waits for you to repeat.),325,0,0,
-325,0,0,,"Today, you become my Mentor.","""I vow to be loyal, obedient and honest.""",326,1,0,
-325,0,0,,"Today, you'll be my Mentor.","""I vow to be loyal, obedient and honest.""",326,-1,0,
-325,0,0,,"Today, you're my Mentor.","""I vow to be loyal, obedient and honest.""",326,-1,0,
+325,0,0,,"Today, you become|my Mentor.","""I vow to be loyal, obedient and honest.""",326,1,0,
+325,0,0,,"Today, you'll be|my Mentor.","""I vow to be loyal, obedient and honest.""",326,-1,0,
+325,0,0,,"Today, you're|my Mentor.","""I vow to be loyal, obedient and honest.""",326,-1,0,
 326,0,0,,(Listen carefully.),(She waits for you to repeat.),327,0,0,
 327,0,0,,"I vow to be loyal,|honest and obedient.",(She searches in her purse and gets a sturdy|leather collar.)  Please give me your neck.,328,-1,0,
 327,0,0,,"I vow to be obedient,|loyal and honest.",(She searches in her purse and gets a sturdy|leather collar.)  Please give me your neck.,328,-1,0,
@@ -141,9 +141,9 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 329,0,0,,I don't feel|very good.,It will be fine.  I will prepare|a training schedule for you soon.,330,-1,0,
 329,0,0,,(Stay silent and|look at her feet.),"My little protege, I will prepare|a training schedule for you soon.",330,0,-1,
 329,0,0,,Is the collar supposed|to be that tight?,You will get used to it.  I'll prepare|a training schedule for you soon.,330,0,1,
-330,0,0,,I can't wait to|start training!,"That's the spirit!  We will start soon.|Now stand up, the ceremony is over.",392,1,0,
-330,0,0,,Ok Jennifer.,"No girl, you need to call me ""Mentor"".|Now stand up, the ceremony is over.",392,-1,0,
-330,0,0,,Very good.,Stand up my protege.|The ceremony is over.,392,0,0,
+330,0,0,,I can't wait to|start training!,"That's the spirit!  We will start soon.|Now stand up, the ceremony is over.",331,1,0,
+330,0,0,,Ok Jennifer.,"No girl, you need to call me ""Mentor"".|Now stand up, the ceremony is over.",331,-1,0,
+330,0,0,,Very good.,Stand up my protege.|The ceremony is over.,331,0,0,
 331,0,0,,Yes Mentor.|(Stand up.),I'm happy to have you under|my wing my little protege.,0,0,0,PlayerStandUp()
 331,0,0,,(Stay silent|and stand up.),I'm happy to have you under|my wing my little protege.,0,0,0,PlayerStandUp()
 399,0,0,,Very well Miss.|(Back to your dorm.),,399,0,0,BackToDorm()

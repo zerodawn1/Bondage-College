@@ -19,7 +19,7 @@ var C012_AfterClass_Jennifer_AllowSwimsuit = false;
 var C012_AfterClass_Jennifer_AllowSexAfterDate = false;
 var C012_AfterClass_Jennifer_CanKickOut = false;
 
-// In her shorts, Jennifer can have many poses when she talks
+// In her school clothes, Jennifer can have many poses when she talks
 function C012_AfterClass_Jennifer_SetPose() {
 	ActorSetPose("");
 	if (((ActorGetValue(ActorCloth) == "Clothed") || (ActorGetValue(ActorCloth) == "")) && !ActorIsRestrained() && !ActorIsGagged()) {
@@ -29,6 +29,10 @@ function C012_AfterClass_Jennifer_SetPose() {
 		if ((Sub >= 10) && (Math.abs(Sub) >= Math.abs(Love))) ActorSetPose("Shy");
 		if ((Love >= 10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Happy");
 		if ((Love <= -10) && (Math.abs(Love) >= Math.abs(Sub))) ActorSetPose("Angry");
+		if (Common_ActorIsOwner) {
+			if (ActorHasInventory("Crop")) ActorSetPose("DominantCrop");
+			else ActorSetPose("Dominant");
+		}
 		if (Common_ActorIsOwned) ActorSetPose("Shy");
 	}
 }
@@ -102,7 +106,7 @@ function C012_AfterClass_Jennifer_Run() {
 	BuildInteraction(C012_AfterClass_Jennifer_CurrentStage);
 
 	// Draw the watching actors for ceremonies
-	if (((C012_AfterClass_Jennifer_CurrentStage >= 340) && (C012_AfterClass_Jennifer_CurrentStage < 400)) || ((C012_AfterClass_Jennifer_CurrentStage >= 291) && (C012_AfterClass_Jennifer_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
+	if (((C012_AfterClass_Jennifer_CurrentStage >= 320) && (C012_AfterClass_Jennifer_CurrentStage < 340)) || ((C012_AfterClass_Jennifer_CurrentStage >= 291) && (C012_AfterClass_Jennifer_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
 
 	// Draw the actor alone or with the player depending on the stage
 	if ((C012_AfterClass_Jennifer_CurrentStage != 3931) && (C012_AfterClass_Jennifer_CurrentStage != 3932) && (C012_AfterClass_Jennifer_CurrentStage != 3933) && (C012_AfterClass_Jennifer_CurrentStage != 632) && (C012_AfterClass_Jennifer_CurrentStage != 633) && (C012_AfterClass_Jennifer_CurrentStage != 634) && (C012_AfterClass_Jennifer_CurrentStage != 662) && (C012_AfterClass_Jennifer_CurrentStage != 663) && (C012_AfterClass_Jennifer_CurrentStage != 791) && (C012_AfterClass_Jennifer_CurrentStage != 194)) {
@@ -111,8 +115,8 @@ function C012_AfterClass_Jennifer_Run() {
 			DrawActor(CurrentActor, 750, 0, 1);
 		} else {
 			DrawInteractionActor();
-			if ((C012_AfterClass_Jennifer_CurrentStage >= 340) && (C012_AfterClass_Jennifer_CurrentStage < 400)) DrawActor("Player", 600, 100, 1);		
-		}		
+			if ((C012_AfterClass_Jennifer_CurrentStage >= 321) && (C012_AfterClass_Jennifer_CurrentStage < 340)) DrawActor("Player", 600, 100, 1);
+		}
 	}
 	
 }
@@ -242,10 +246,16 @@ function C012_AfterClass_Jennifer_TestDomme() {
 // Chapter 12 After Class - Jennifer can become the player Mistress at -20 submission
 function C012_AfterClass_Jennifer_TestSub() {
 	if (!ActorIsGagged()) {
-		if (ActorGetValue(ActorSubmission) <= -20) {
-			C012_AfterClass_Jennifer_CurrentStage = 300;
-			OverridenIntroText = "";
-		}
+		if (!ActorIsRestrained() && !Common_PlayerRestrained) {
+			if (ActorGetValue(ActorSubmission) <= -20) {
+				C012_AfterClass_Jennifer_CurrentStage = 300;
+				if (ActorGetValue(ActorCloth) != "Clothed") OverridenIntroText = GetText("ChangeForDommeSpeech");
+				else OverridenIntroText = "";
+				ActorSetCloth("Clothed");
+				ActorSetPose("Dominant");
+				LeaveIcon = "";
+			}
+		} else OverridenIntroText = GetText("CantDateWhileRestrained");
 	} else C012_AfterClass_Jennifer_GaggedAnswer();
 }
 
@@ -282,7 +292,6 @@ function C012_AfterClass_Jennifer_TestSubmit() {
 
 // Chapter 12 After Class - The player can strip for Jennifer
 function C012_AfterClass_Jennifer_PlayerStrip() {
-	ActorSetPose("");
 	PlayerClothes("Naked");
 	Common_PlayerPose = "BackShy";
 }
@@ -302,13 +311,9 @@ function C012_AfterClass_Jennifer_PlayerCollared() {
 	EventSetGenericTimer();
 }
 
-// Chapter 12 After Class - When the player gets collared
+// Chapter 12 After Class - When the player stands up after her collaring
 function C012_AfterClass_Jennifer_PlayerStandUp() {
 	Common_PlayerPose = "";
-	if (ActorGetValue(ActorCloth) != "Shorts") {
-		ActorSetCloth("Shorts");
-		OverridenIntroText = GetText("ChangeAfterCollaring");
-	}
 	LeaveIcon = "Leave";
 }
 

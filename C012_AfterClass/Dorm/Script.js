@@ -12,6 +12,7 @@ function C012_AfterClass_Dorm_SetPunishmentPose() {
 	if (GameLogQuery(CurrentChapter, "", "EventGrounded")) {
 		if (Common_PlayerOwner == "Sidney") Common_PlayerPose = "TwoRopesPunishment";
 		if (Common_PlayerOwner == "Amanda") Common_PlayerPose = "HogtiePunishment";
+		if (Common_PlayerOwner == "Amanda") Common_PlayerPose = "FoldPunishment";
 		if (CurrentScreen != "Dorm") {
 			if (CurrentScreen == Common_PlayerOwner) OverridenIntroText = GetText("StillGrounded");
 			else OverridenIntroText = GetText("StillGroundedByOther");
