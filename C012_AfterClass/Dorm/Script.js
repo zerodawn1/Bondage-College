@@ -12,7 +12,7 @@ function C012_AfterClass_Dorm_SetPunishmentPose() {
 	if (GameLogQuery(CurrentChapter, "", "EventGrounded")) {
 		if (Common_PlayerOwner == "Sidney") Common_PlayerPose = "TwoRopesPunishment";
 		if (Common_PlayerOwner == "Amanda") Common_PlayerPose = "HogtiePunishment";
-		if (Common_PlayerOwner == "Amanda") Common_PlayerPose = "FoldPunishment";
+		if (Common_PlayerOwner == "Jennifer") Common_PlayerPose = "FoldPunishment";
 		if (CurrentScreen != "Dorm") {
 			if (CurrentScreen == Common_PlayerOwner) OverridenIntroText = GetText("StillGrounded");
 			else OverridenIntroText = GetText("StillGroundedByOther");
@@ -37,25 +37,25 @@ function C012_AfterClass_Dorm_LeavingGuest() {
 
 	// Sidney will leave at 20:00, it ends any grounding event
 	if ((C012_AfterClass_Dorm_Guest.indexOf("Sidney") >= 0) && (CurrentTime >= C012_AfterClass_Dorm_SidneyExitTime) && (CurrentTime <= C012_AfterClass_Dorm_SidneyReturnTime) && !GameLogQuery(CurrentChapter, "Sidney", "BackFromRockShow") && !ActorSpecificIsRestrained("Sidney") && !GameLogQuery(CurrentChapter, "Sidney", "KickedOutFromDorm")) {
-		C012_AfterClass_Dorm_Guest.splice("Sidney");
-		if (CurrentScreen == "Dorm") {
+		C012_AfterClass_Dorm_Guest.splice("Sidney");		
+		if ((CurrentScreen == "Dorm") && (!C012_AfterClass_Dorm_PlayerGrounded || (Common_PlayerOwner == "Sidney"))) {
 			C012_AfterClass_Sidney_CurrentStage = 400;
 			if (C012_AfterClass_Dorm_PlayerGrounded && (Common_PlayerOwner == "Sidney")) GameLogSpecificAddTimer(CurrentChapter, "Sidney", "EventGrounded", 1);
 			SetScene(CurrentChapter, "Sidney");
 			ActorSetCloth("Shorts");
 			if (C012_AfterClass_Dorm_PlayerGrounded && (Common_PlayerOwner == "Sidney")) OverridenIntroText = GetText("GroundingEndForLeaving");
-		}
+		} else C012_AfterClass_Dorm_CalGuest();
 	}
 
 	// Sarah will leave at 21:00, it cancels the bed with Amanda event
 	if ((C012_AfterClass_Dorm_Guest.indexOf("Sarah") >= 0) && (CurrentTime >= C012_AfterClass_Dorm_SarahExitTime) && !GameLogQuery(CurrentChapter, "Sarah", "BackFromBondageClub") && !ActorSpecificIsRestrained("Sarah") && !GameLogQuery(CurrentChapter, "Sarah", "KickedOutFromDorm")) {		
 		GameLogSpecificAddTimer(CurrentChapter, "Player", "AmandaAndSarahInBed", 1);
 		C012_AfterClass_Dorm_Guest.splice("Sarah");
-		if (CurrentScreen == "Dorm") {
+		if ((CurrentScreen == "Dorm") && !C012_AfterClass_Dorm_PlayerGrounded) {
 			C012_AfterClass_Sarah_CurrentStage = 400;
 			SetScene(CurrentChapter, "Sarah");
 			ActorSetCloth("BrownDress");
-		}
+		} else C012_AfterClass_Dorm_CalGuest();
 	}
 	
 }
@@ -107,8 +107,8 @@ function C012_AfterClass_Dorm_Load() {
 
 	// Owners will not stay naked
 	if ((Common_PlayerOwner == "Sidney") && (ActorSpecificGetValue("Sidney", ActorCloth) == "Naked")) ActorSpecificSetCloth("Sidney", "Shorts");
-	if ((Common_PlayerOwner == "Amanda") && (ActorSpecificGetValue("Amanda", ActorCloth) == "Naked")) ActorSpecificSetCloth("Amanda", "");
-	if ((Common_PlayerOwner == "Jennifer") && (ActorSpecificGetValue("Jennifer", ActorCloth) == "Naked")) ActorSpecificSetCloth("Jennifer", "");
+	if ((Common_PlayerOwner == "Amanda") && (ActorSpecificGetValue("Amanda", ActorCloth) == "Naked")) ActorSpecificSetCloth("Amanda", "Clothed");
+	if ((Common_PlayerOwner == "Jennifer") && (ActorSpecificGetValue("Jennifer", ActorCloth) == "Naked")) ActorSpecificSetCloth("Jennifer", "Clothed");
 
 	// Calculates the time when Sidney will leave and return
 	C012_AfterClass_Dorm_SidneyExitTime = 20 * 60 * 60 * 1000;
@@ -156,6 +156,7 @@ function C012_AfterClass_Dorm_Run() {
 	if (C012_AfterClass_Dorm_PlayerGrounded && !GameLogQuery(CurrentChapter, "", "EventGrounded") && (C012_AfterClass_Sidney_CurrentStage != 400)) {
 		if (Common_PlayerOwner == "Sidney") C012_AfterClass_Sidney_CurrentStage = 3915;
 		if (Common_PlayerOwner == "Amanda") C012_AfterClass_Amanda_CurrentStage = 3915;
+		if (Common_PlayerOwner == "Jennifer") C012_AfterClass_Jennifer_CurrentStage = 3915;
 		SetScene(CurrentChapter, Common_PlayerOwner);
 		LeaveIcon = "";
 	}
@@ -165,6 +166,7 @@ function C012_AfterClass_Dorm_Run() {
 		if ((Common_PlayerOwner != "Amanda") || !GameLogQuery(CurrentChapter, "Player", "AmandaAndSarahInBed")) {
 			if (Common_PlayerOwner == "Sidney") C012_AfterClass_Sidney_CurrentStage = 450;
 			if (Common_PlayerOwner == "Amanda") C012_AfterClass_Amanda_CurrentStage = 450;
+			if (Common_PlayerOwner == "Jennifer") C012_AfterClass_Jennifer_CurrentStage = 450;
 			SetScene(CurrentChapter, Common_PlayerOwner);
 			LeaveIcon = "";
 		}

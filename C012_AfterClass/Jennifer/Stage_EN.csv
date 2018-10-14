@@ -5,7 +5,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,,We need to talk.,Yeah?  What's on your mind?,0,0,0,TestTalk()
 0,0,5,!Common_ActorIsOwned,"Girl, you need|some training.",I already train almost everyday Miss.|(You need +20 submission to collar Jennifer.),0,0,0,TestDomme()
 0,0,-5,!Common_ActorIsOwner,Miss Jennifer.|I admire you.,I'm not sure why you admire me that much.|(You need -20 submission to submit to Jennifer.),0,0,0,TestSub()
-0,0,0,Common_PlayerGagged,@Om nnnuoogn mh!,Oh yeah.  I fucking understood|what you said.  (She laughs.),0,0,0,TestUnbind()
+0,0,0,Common_PlayerGagged,@Om nnnuoogn mh!,"If you practice enough, maybe you'll|learn to talk clearly while being gagged.",0,0,0,TestUnbind()
 0,0,0,Common_ActorIsOwner,(Hum a sexy song|and dance for fun.),"Not now, we are on short break.|Your training will resume later.",0,0,0,RandomJenniferDommeEvent()
 0,0,0,Common_PlayerRestrained,(Struggle in|your restrains.),"Nope, you're not getting out.|It's great to see you struggle.",0,0,0,TestUnbind()
 0,0,0,!Common_ActorIsOwner,You should wear|something else.,"No, thanks.  I'm fine like that.",0,0,0,TestChange()
@@ -24,7 +24,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 20,0,0,Common_ActorIsOwned,Let's review|your rules.,(She seems to worry.)|Of course Mistress.,610,0,0,
 20,0,0,Common_PlayerChaste,Can you please help|me with this belt?,"Nope, that chastity belt|is a perfect fit for you.",0,0,0,
 20,0,0,Common_ActorIsLover,About our relationship...,What's going on sweetie?,190,0,0,
-20,0,0,CanKickOut,It's time for you|to leave my place.,You're fucking kicking me out?,790,-1,1,
+20,0,0,CanKickOut,It's time for you|to leave my place.,(She looks very disappointed.)|Are you kicking me out?,790,-1,1,"ActorSetPose("""")"
 20,0,0,,Never mind.,Alright.  So what could|we do to have some fun?,0,0,0,
 100,0,0,,Do you have|a loved one?,"No, I've never dated anyone.",110,0,0,TestRelationship()
 100,0,0,,Do you have|a boyfriend?,"No, I've never dated anyone.",110,0,0,TestRelationship()
@@ -148,7 +148,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 331,0,0,,(Stay silent|and stand up.),I'm happy to have you under|my wing my little protege.,0,0,0,PlayerStandUp()
 399,0,0,,Very well Miss.|(Back to your dorm.),,399,0,0,BackToDorm()
 450,0,0,,Yes!  Training time.,,0,0,0,RandomJenniferDommeEvent()
-450,0,0,,What's going on?,,0,0,0,RandomJenniferDommeEvent()
+450,0,0,,What kind of training?,,0,0,0,RandomJenniferDommeEvent()
 450,0,0,,(Nod happily.),,0,0,0,RandomJenniferDommeEvent()
 450,0,0,,(Look surprised.),,0,0,0,RandomJenniferDommeEvent()
 500,0,0,,Do you have|many friends?,I have some friends and some enemies.,510,0,0,
@@ -230,31 +230,31 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 650,0,0,,(Get in bed.),,0,0,0,MakeLove()
 650,0,0,!Common_ActorIsOwner,(Push her on the bed.),,0,0,0,MakeLove()
 650,0,0,!Common_ActorIsOwned,(Let her carry|you in bed.),,0,0,0,MakeLove()
-790,0,0,,Come back another day.|I need to study tonight.,That's a fucking lame excuse.|(She walks out and slams the door.),791,-2,0,KickedOut()
-790,0,0,,You need to go.|We'll talk later.,"Fine, I'll go then.|(She walks out.)",791,-1,0,KickedOut()
-790,0,0,,Don't be mad.|I'm sorry.,"Fuck that, I'll go smoke.|(She grumbles and walks out.)",791,-1,-1,KickedOut()
-790,0,0,,Pack your shit|and go girl.,Fuck you COMMON_PLAYERNAME!|(She walks away and slams the door.),791,-2,1,KickedOut()
+790,0,0,,Come back another day.|I need to study tonight.,"Fair enough, I'll see you later then.|(She walks out and closes the door.)",791,-1,0,KickedOut()
+790,0,0,,You need to go.|We'll talk later.,"Alright, I'll see you later then.|(She walks out and closes the door.)",791,-2,0,KickedOut()
+790,0,0,,Don't be mad.|I'm sorry.,"It's fine, I'll see you later then.|(She walks out and closes the door.)",791,-1,-1,KickedOut()
+790,0,0,,Pack your shit|and go girl.,You don't need to be rude you know.|(She walks out and closes the door.),791,-2,1,KickedOut()
 791,0,0,,(Back to your dorm.),,791,0,0,BackToDorm()
 3010,0,0,,Yes Mentor.|(Get in your undies.),(You change for Jennifer while|she looks at you and smiles.),3090,0,0,"ForceChangePlayer(""Underwear"")"
 3010,0,0,,(Nod slowly.)|(Get in your undies.),(You change for Jennifer while|she looks at you and smiles.),3090,0,0,"ForceChangePlayer(""Underwear"")"
-3010,0,0,,I don't want|to do that.,"Fine, let's take a break then.|(She turns around irritated.)",3092,0,0,TestPunish()
-3010,0,0,,(Shake your head no.),"Fine, let's take a break then.|(She turns around irritated.)",3092,0,0,TestPunish()
+3010,0,0,,I don't want|to do that.,"Fine, let's take a break then.|(She turns around irritated.)",3093,0,0,TestPunish()
+3010,0,0,,(Shake your head no.),"Fine, let's take a break then.|(She turns around irritated.)",3093,0,0,TestPunish()
 3020,0,0,,Yes Mentor.|(Wear your uniform.),(You change for Jennifer while|she looks at you and smiles.),3090,0,0,"ForceChangePlayer(""Clothed"")"
 3020,0,0,,(Nod slowly.)|(Wear your uniform.),(You change for Jennifer while|she looks at you and smiles.),3090,0,0,"ForceChangePlayer(""Clothed"")"
-3020,0,0,,I don't want|to do that.,"Fine, let's take a break then.|(She turns around irritated.)",3092,0,0,TestPunish()
-3020,0,0,,(Shake your head no.),"Fine, let's take a break then.|(She turns around irritated.)",3092,0,0,TestPunish()
+3020,0,0,,I don't want|to do that.,"Fine, let's take a break then.|(She turns around irritated.)",3093,0,0,TestPunish()
+3020,0,0,,(Shake your head no.),"Fine, let's take a break then.|(She turns around irritated.)",3093,0,0,TestPunish()
 3030,0,0,,Yes Mentor.|(Wear your bikini.),(You change for Jennifer while|she looks at you and smiles.),3090,0,0,"ForceChangePlayer(""RedBikini"")"
 3030,0,0,,(Nod slowly.)|(Wear your bikini.),(You change for Jennifer while|she looks at you and smiles.),3090,0,0,"ForceChangePlayer(""RedBikini"")"
-3030,0,0,,I don't want|to do that.,"Fine, let's take a break then.|(She turns around irritated.)",3092,0,0,TestPunish()
-3030,0,0,,(Shake your head no.),"Fine, let's take a break then.|(She turns around irritated.)",3092,0,0,TestPunish()
+3030,0,0,,I don't want|to do that.,"Fine, let's take a break then.|(She turns around irritated.)",3093,0,0,TestPunish()
+3030,0,0,,(Shake your head no.),"Fine, let's take a break then.|(She turns around irritated.)",3093,0,0,TestPunish()
 3050,0,0,,Yes Mentor.|(Wear your dress.),(You change for Jennifer while|she looks at you and smiles.),3090,0,0,"ForceChangePlayer(""BlackDress"")"
 3050,0,0,,(Nod slowly.)|(Wear your dress.),(You change for Jennifer while|she looks at you and smiles.),3090,0,0,"ForceChangePlayer(""BlackDress"")"
-3050,0,0,,I don't want|to do that.,"Fine, let's take a break then.|(She turns around irritated.)",3092,0,0,TestPunish()
-3050,0,0,,(Shake your head no.),"Fine, let's take a break then.|(She turns around irritated.)",3092,0,0,TestPunish()
+3050,0,0,,I don't want|to do that.,"Fine, let's take a break then.|(She turns around irritated.)",3093,0,0,TestPunish()
+3050,0,0,,(Shake your head no.),"Fine, let's take a break then.|(She turns around irritated.)",3093,0,0,TestPunish()
 3060,0,0,,Yes Mentor.|(Wear your tennis outfit.),(You change for Jennifer while|she looks at you and smiles.),3090,0,0,"ForceChangePlayer(""Tennis"")"
 3060,0,0,,(Nod slowly.)|(Wear your tennis outfit.),(You change for Jennifer while|she looks at you and smiles.),3090,0,0,"ForceChangePlayer(""Tennis"")"
-3060,0,0,,I don't want|to do that.,"Fine, let's take a break then.|(She turns around irritated.)",3092,0,0,TestPunish()
-3060,0,0,,(Shake your head no.),"Fine, let's take a break then.|(She turns around irritated.)",3092,0,0,TestPunish()
+3060,0,0,,I don't want|to do that.,"Fine, let's take a break then.|(She turns around irritated.)",3093,0,0,TestPunish()
+3060,0,0,,(Shake your head no.),"Fine, let's take a break then.|(She turns around irritated.)",3093,0,0,TestPunish()
 3090,0,0,,Do I look fine?,You do!  Now let's do some exercises.|(She smiles and starts to do exercises.),3092,0,0,TestBlockChanging()
 3090,0,0,,Are you happy?,Yes I am!  Now let's do some exercises.|(She smiles and starts to do exercises.),3092,0,0,TestBlockChanging()
 3090,0,0,,(Bow your head.),You look good!  Now let's do some exercises.|(She smiles and starts to do some exercises.),3092,0,0,TestBlockChanging()
@@ -264,6 +264,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 3091,0,0,,(Sulk.),Improve your attitude and move your body!|(She frowns and starts to do exercises.),3092,0,0,AllowLeave()
 3091,0,0,,That's unfair!,Improve your attitude and move your body!|(She frowns and starts to do exercises.),3092,0,0,AllowLeave()
 3092,0,0,,(Exercise a little and|go back to your dorm.),,3092,0,0,BackToDorm()
+3093,0,0,,(Back to your dorm.),,3093,0,0,BackToDorm()
 3100,0,0,,Yes Mentor.|(Show your items.),(She checks your items|and uses them on you.),3190,0,0,"ForceRandomBondage(""Full"")"
 3100,0,0,,(Nod slowly and|show your items.),(She checks your items|and uses them on you.),3190,0,0,"ForceRandomBondage(""Full"")"
 3100,0,0,,I don't want|to do that.,"Fine, let's take a break then.|(She turns around irritated.)",3191,0,0,TestPunish()
@@ -279,8 +280,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 3140,0,0,,(Bow your head and|give your keys.),Thanks my protege.  (She takes your|keys and starts to do some exercises.),3191,0,-1,ConfiscateKeys()
 3140,0,0,,No!  These|are my keys.,"Fine, let's take a break then.|(She turns around irritated.)",3191,0,1,TestPunish()
 3140,0,0,,(Shake your head|no and refuse.),"Fine, let's take a break then.|(She turns around irritated.)",3191,0,1,TestPunish()
-3150,0,0,,Yes Mentor.|(Give your crop.),(She takes the crop and looks intrigued.)|(She stores it and starts to do some exercises.),3191,1,0,ConfiscateCrop()
-3150,0,0,,(Bow your head and|give your crop.),(She takes the crop and looks intrigued.)|(She stores it and starts to do some exercises.),3191,1,0,ConfiscateCrop()
+3150,0,0,,Yes Mentor.|(Give your crop.),"(She takes the crop and looks intrigued.)|Take a break, I'll train your endurance soon.",3191,1,0,ConfiscateCrop()
+3150,0,0,,(Bow your head and|give your crop.),"(She takes the crop and looks intrigued.)|Take a break, I'll train your endurance soon.",3191,1,0,ConfiscateCrop()
 3150,0,0,,No!  It's not yours.,"Fine, let's take a break then.|(She turns around irritated.)",3191,-1,0,TestPunish()
 3150,0,0,,(Shake your head|no and refuse.),"Fine, let's take a break then.|(She turns around irritated.)",3191,-1,0,TestPunish()
 3160,0,0,,Yes Mentor.|It's a kinky egg.,Very well.  I'll put it in|you for vaginal training.,3161,0,0,
@@ -377,9 +378,9 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 3903,0,0,,(Take a deep breath.),,3903,0,0,StartPunishment()
 3903,0,0,,(Make puppy eyes.),,3903,0,0,StartPunishment()
 3903,0,0,,Yes Mentor.,,3903,0,0,StartPunishment()
-3910,0,0,,Grounded?  What|does that mean?,You will be restrained and isolated for a while.|Now put your arms behind your bac girl.,3911,0,0,
-3910,0,0,,(Give a curious look.),You will be restrained and isolated for a while.|Now put your arms behind your bac girl.,3911,0,0,
-3910,0,0,,"No, please.|I'll be good.",Enough!  You will be restrained for a while.|Now put your arms behind your bac girl.,3911,0,0,
+3910,0,0,,Grounded?  What|does that mean?,You will be restrained and isolated for a while.|Now put your arms behind your back girl.,3911,0,0,
+3910,0,0,,(Give a curious look.),You will be restrained and isolated for a while.|Now put your arms behind your back girl.,3911,0,0,
+3910,0,0,,"No, please.|I'll be good.",Enough!  You will be restrained for a while.|Now put your arms behind your back girl.,3911,0,0,
 3911,0,0,,Yes Mentor.|(Put your arms back.),"(She grabs your arms and ties them securely.)|Very good.  Now open up, you will be gagged.",3912,0,-1,RopePlayer()
 3911,0,0,,(Sigh and put|your arms back.),(She grabs your arms and ties them securely.)|Alright.  Now open up.  You will be gagged.,3912,0,0,RopePlayer()
 3911,0,0,,Can we negotiate?,(She grabs your arms and ties them securely.)|No!  Now open up.  You will be gagged.,3912,0,1,RopePlayer()

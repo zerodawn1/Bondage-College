@@ -136,7 +136,7 @@ function EventDoActivity(EventActivityType, EventLoveFactor, EventCurrentStage, 
 		// The number of times the activity will be done depends on the love or hate
 		if ((EventActivityType == "Tickle") || (EventActivityType == "Masturbate")) EventActivityMaxCount = 5 + Math.floor(ActorGetValue(ActorLove) / 10);
 		else EventActivityMaxCount = 5 - Math.floor(ActorGetValue(ActorLove) / 10);
-		if (EventActivityMaxCount < 3) EventActivityMaxCount = 3;
+		if (EventActivityMaxCount < 4) EventActivityMaxCount = 4;
 		if (EventActivityMaxCount > 8) EventActivityMaxCount = 8;
 		
 	}
@@ -167,7 +167,7 @@ function EventDoActivity(EventActivityType, EventLoveFactor, EventCurrentStage, 
 		// Log the activity and ends it
 		EventLogEnd()
 		if (EventActivityLove > 0) OverridenIntroText = GetText("ActivityEndGood");
-		if (EventActivityLove = 0) OverridenIntroText = GetText("ActivityEndFair");
+		if (EventActivityLove == 0) OverridenIntroText = GetText("ActivityEndFair");
 		if (EventActivityLove < 0) OverridenIntroText = GetText("ActivityEndBad");
 		ActorSetPose("");
 		return EventEndStage;

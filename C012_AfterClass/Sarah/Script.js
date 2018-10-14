@@ -81,6 +81,9 @@ function C012_AfterClass_Sarah_Load() {
 	Common_PlayerPose = "";
 	if (Common_ActorIsOwned) GameLogAddTimer("EventGenericNext", CurrentTime + 1200000 + Math.floor(Math.random() * 1200000));
 	
+	// At stage 400, Sarah is leaving
+	if (C012_AfterClass_Sarah_CurrentStage == 400) { ActorUngag(); LeaveIcon = ""; }
+	
 	// Sarah's parameters
 	C012_AfterClass_Sarah_CalcParams();	
 	C012_AfterClass_Sarah_ChatAvail = !GameLogQuery(CurrentChapter, "Sidney", "AllowPigCostume");

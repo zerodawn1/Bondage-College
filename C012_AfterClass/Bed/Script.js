@@ -68,6 +68,7 @@ function C012_AfterClass_Bed_Load() {
 			if (C012_AfterClass_Bed_Partner == "Sidney") C012_AfterClass_Bed_CurrentStage = 200;
 			if (C012_AfterClass_Bed_Partner == "Amanda") C012_AfterClass_Bed_CurrentStage = 300;
 			if (C012_AfterClass_Bed_Partner == "Sarah") C012_AfterClass_Bed_CurrentStage = 400;
+			if (C012_AfterClass_Bed_Partner == "Jennifer") C012_AfterClass_Bed_CurrentStage = 500;
 			C012_AfterClass_Bed_ShowCollar = (C012_AfterClass_Bed_Partner == "Sidney");
 			C012_AfterClass_Bed_PrepareImage(false, false);
 			C012_AfterClass_Bed_SexPleasurePartner = ActorHasInventory("VibratingEgg") ? 3 : 0;
@@ -128,6 +129,7 @@ function C012_AfterClass_Bed_AllRelatedGuest() {
 				CurrentTime = CurrentTime + 50000;
 				if (Common_PlayerOwner == "Sidney") C012_AfterClass_Sidney_CurrentStage = 3800;
 				if (Common_PlayerOwner == "Amanda") C012_AfterClass_Amanda_CurrentStage = 3800;
+				if (Common_PlayerOwner == "Jennifer") C012_AfterClass_Jennifer_CurrentStage = 3800;
 				SetScene(CurrentChapter, Common_PlayerOwner);
 				ActorSetPose("Angry");
 				LeaveIcon = "";
@@ -170,6 +172,7 @@ function C012_AfterClass_Bed_CheckMistress() {
 		CurrentTime = CurrentTime + 50000;
 		if (Common_PlayerOwner == "Sidney") C012_AfterClass_Sidney_CurrentStage = 3810;
 		if (Common_PlayerOwner == "Amanda") C012_AfterClass_Amanda_CurrentStage = 3810;
+		if (Common_PlayerOwner == "Jennifer") C012_AfterClass_Jennifer_CurrentStage = 3810;
 		SetScene(CurrentChapter, Common_PlayerOwner);
 		ActorSetPose("Angry");
 		LeaveIcon = "";

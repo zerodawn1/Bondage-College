@@ -51,6 +51,7 @@ function C012_AfterClass_Wardrobe_Change(NewCloth) {
 				CurrentTime = CurrentTime + 50000;
 				if (Common_PlayerOwner == "Sidney") C012_AfterClass_Sidney_CurrentStage = 3800;
 				if (Common_PlayerOwner == "Amanda") C012_AfterClass_Amanda_CurrentStage = 3800;
+				if (Common_PlayerOwner == "Jennifer") C012_AfterClass_Jennifer_CurrentStage = 3800;
 				SetScene(CurrentChapter, Common_PlayerOwner);
 				ActorSetPose("Angry");
 				LeaveIcon = "";
