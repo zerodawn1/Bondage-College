@@ -569,3 +569,12 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 3933,0,0,,I won't disobey|anymore Mistress.,Good!  Now get lost for a few minutes.|(She gets her phone and starts to text.),3999,0,0,"EndPunishment(""Spanked"")"
 3933,0,0,,(Dry your tears.),Stop crying and get lost for a few minutes.|(She gets her phone and starts to text.),3999,0,-1,"EndPunishment(""Spanked"")"
 3933,0,0,,(Stay silent and|look strong.),Get lost for a few minutes.|(She gets her phone to text.),3999,0,1,"EndPunishment(""Spanked"")"
+3940,0,0,,What do you|have in mind?,I'll drag your naked ass in public|and make sure everyone sees you.,3941,0,0,
+3940,0,0,,Humiliation?|This is nothing.,I'll drag your naked ass in public|and make sure everyone sees you.,3941,0,1,
+3940,0,0,,Oh please Mistress!|Don't humiliate me.,I'll drag your naked ass in public|and make sure everyone sees you.,3941,0,-1,
+3940,0,0,,I'm not sure I like|where this is going.,I'll drag your naked ass in public|and make sure everyone sees you.,3941,0,0,
+3941,0,0,,Public humiliation?|This is bullshit!,You will fucking remember it.|Let's go out little bitch.,3942,-1,0,
+3941,0,0,,Naked in public? |Oh my lord.,You will fucking remember it.|Let's go out little bitch.,3942,0,0,
+3941,0,0,,This sounds tough|but fair Mistress.,You will fucking remember it.|Let's go out little bitch.,3942,1,0,
+3942,0,0,,"Yes, let's go.|(Go out naked.)",,3942,0,0,StartPlayerHumiliation()
+3942,0,0,,No way!,(She slaps your face hard.)|Shut up!  We are going!,3942,0,0,

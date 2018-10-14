@@ -1045,3 +1045,8 @@ function C012_AfterClass_Sidney_TestPigCostume() {
 	}
 
 }
+
+// Chapter 12 After Class - When Sidney brings the player out naked to be humiliated
+function C012_AfterClass_Sidney_StartPlayerHumiliation() {
+	SetScene(CurrentChapter, "Humiliation");
+}

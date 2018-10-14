@@ -511,7 +511,8 @@ function C012_AfterClass_Jennifer_InsertEgg() {
 
 // Chapter 12 After Class - Ends the punishment and sets the duration between 30 minutes and 1.5 hours
 function C012_AfterClass_Jennifer_EndPunishment(PunishmentType) {
-	GameLogAddTimer("Event" + PunishmentType, CurrentTime + 1800000 + Math.floor(Math.random() * 3600000));
+	if (PunishmentType == "SleepBoundAndGagged") GameLogAdd("Event" + PunishmentType);
+	else GameLogAddTimer("Event" + PunishmentType, CurrentTime + 1800000 + Math.floor(Math.random() * 3600000));
 	EventSetGenericTimer();
 	C012_AfterClass_Jennifer_AllowLeave();
 }
@@ -878,4 +879,9 @@ function C012_AfterClass_Jennifer_KickedOut() {
 		C012_AfterClass_Jennifer_BreakUp();
 	}
 	CurrentActor = "";
+}
+
+// Chapter 12 After Class - When Jennifer brings the player out naked to be humiliated
+function C012_AfterClass_Jennifer_StartPlayerHumiliation() {
+	SetScene(CurrentChapter, "Humiliation");
 }
