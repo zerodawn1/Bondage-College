@@ -109,7 +109,7 @@ function C012_AfterClass_Jennifer_Run() {
 	if (((C012_AfterClass_Jennifer_CurrentStage >= 320) && (C012_AfterClass_Jennifer_CurrentStage < 340)) || ((C012_AfterClass_Jennifer_CurrentStage >= 291) && (C012_AfterClass_Jennifer_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
 
 	// Draw the actor alone or with the player depending on the stage
-	if ((C012_AfterClass_Jennifer_CurrentStage != 3201) && (C012_AfterClass_Jennifer_CurrentStage != 3211) && (C012_AfterClass_Jennifer_CurrentStage != 3931) && (C012_AfterClass_Jennifer_CurrentStage != 3932) && (C012_AfterClass_Jennifer_CurrentStage != 3933) && (C012_AfterClass_Jennifer_CurrentStage != 632) && (C012_AfterClass_Jennifer_CurrentStage != 633) && (C012_AfterClass_Jennifer_CurrentStage != 634) && (C012_AfterClass_Jennifer_CurrentStage != 662) && (C012_AfterClass_Jennifer_CurrentStage != 663) && (C012_AfterClass_Jennifer_CurrentStage != 791) && (C012_AfterClass_Jennifer_CurrentStage != 194)) {
+	if ((C012_AfterClass_Jennifer_CurrentStage != 3201) && (C012_AfterClass_Jennifer_CurrentStage != 3211) && (C012_AfterClass_Jennifer_CurrentStage != 632) && (C012_AfterClass_Jennifer_CurrentStage != 633) && (C012_AfterClass_Jennifer_CurrentStage != 634) && (C012_AfterClass_Jennifer_CurrentStage != 662) && (C012_AfterClass_Jennifer_CurrentStage != 663) && (C012_AfterClass_Jennifer_CurrentStage != 791) && (C012_AfterClass_Jennifer_CurrentStage != 194)) {
 		if (((C012_AfterClass_Jennifer_CurrentStage >= 3090) && (C012_AfterClass_Jennifer_CurrentStage <= 3099)) || ((C012_AfterClass_Jennifer_CurrentStage >= 3901) && (C012_AfterClass_Jennifer_CurrentStage <= 3999))) {
 			DrawActor("Player", 475, 0, 1);
 			DrawActor(CurrentActor, 750, 0, 1);

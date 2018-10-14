@@ -5,10 +5,13 @@ var C012_AfterClass_Bed_MasturbationRequired = 0;
 var C012_AfterClass_Bed_MistressApproveMasturbate = "";
 var C012_AfterClass_Bed_Partner = "";
 var C012_AfterClass_Bed_ShowCollar = false;
+var C012_AfterClass_Bed_SexCount = 0;
 var C012_AfterClass_Bed_SexPleasurePlayer = 0;
 var C012_AfterClass_Bed_SexPleasurePartner = 0;
 var C012_AfterClass_Bed_CanDateSarah = false;
 var C012_AfterClass_Bed_AmandaOwner = false;
+var C012_AfterClass_Bed_SexSoft = false;
+var C012_AfterClass_Bed_SexWild = false;
 
 // Chapter 12 After Class - Prepares the bed image that will be rendered for sex scenes
 function C012_AfterClass_Bed_PrepareImage(PartnerOrgasm, PlayerOrgasm, WorkAnim) {
@@ -71,6 +74,9 @@ function C012_AfterClass_Bed_Load() {
 			if (C012_AfterClass_Bed_Partner == "Jennifer") C012_AfterClass_Bed_CurrentStage = 500;
 			C012_AfterClass_Bed_ShowCollar = (C012_AfterClass_Bed_Partner == "Sidney");
 			C012_AfterClass_Bed_PrepareImage(false, false);
+			C012_AfterClass_Bed_SexSoft = false;
+			C012_AfterClass_Bed_SexWild = false;
+			C012_AfterClass_Bed_SexCount = 0;
 			C012_AfterClass_Bed_SexPleasurePartner = ActorHasInventory("VibratingEgg") ? 3 : 0;
 			C012_AfterClass_Bed_SexPleasurePlayer = PlayerHasLockedInventory("VibratingEgg") ? 3 : 0;
 			if (CurrentActor == "Amanda") C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner - 1;
@@ -251,6 +257,11 @@ function C012_AfterClass_Bed_Sex(PleasurePartner, PleasurePlayer, CanOrgasm, Wor
 	CurrentTime = CurrentTime + 50000;
 	C012_AfterClass_Bed_SexPleasurePartner = C012_AfterClass_Bed_SexPleasurePartner + PleasurePartner;
 	C012_AfterClass_Bed_SexPleasurePlayer = C012_AfterClass_Bed_SexPleasurePlayer + PleasurePlayer;
+	
+	// More sex options opens when the scene progress
+	C012_AfterClass_Bed_SexCount++;
+	C012_AfterClass_Bed_SexSoft = (C012_AfterClass_Bed_SexCount >= 3);
+	C012_AfterClass_Bed_SexWild = (C012_AfterClass_Bed_SexCount >= 6);
 	
 	// if an orgasm can be achieved from the activity, we trigger both orgasms at level 10 and they can be simultaneous
 	var PartnerOrgasm = false;

@@ -205,9 +205,14 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 642,0,0,,I control when|you cum girl.,(She nods and takes her|breath while slowly standing up.),0,0,1,EndEnslaveJennifer()
 642,0,0,,(Give her a hug.),(You give her a warm hug|and help her to recover.),0,1,-1,EndEnslaveJennifer()
 642,0,0,,(Help her to recover.),(You help her to recover.),0,0,-1,EndEnslaveJennifer()
-650,0,0,,(Get in bed.),,0,0,0,MakeLove()
-650,0,0,!Common_ActorIsOwner,(Push her on the bed.),,0,0,0,MakeLove()
-650,0,0,!Common_ActorIsOwned,(Let her carry|you in bed.),,0,0,0,MakeLove()
+650,0,0,,Alright.,(She gets a double ended|dildo from her bag and blushes.),651,0,0,
+650,0,0,,Sure!  Get your toy.,(She gets a double ended|dildo from her bag and blushes.),651,0,0,
+650,0,0,,What kind of toy?,(She gets a double ended|dildo from her bag and blushes.),651,0,0,
+650,0,0,Common_ActorIsOwner,A toy Mentor?,(She gets a double ended|dildo from her bag and smiles.),651,0,0,
+650,0,0,Common_ActorIsOwned,You're wild|my submissive.,(She gets a double ended|dildo from her bag and blushes.),651,0,0,
+651,0,0,,(Get in bed.),,0,0,0,MakeLove()
+651,0,0,!Common_ActorIsOwner,(Push her on the bed.),,0,0,0,MakeLove()
+651,0,0,!Common_ActorIsOwned,(Let her carry|you in bed.),,0,0,0,MakeLove()
 790,0,0,,Come back another day.|I need to study tonight.,"Fair enough, I'll see you later then.|(She walks out and closes the door.)",791,-1,0,KickedOut()
 790,0,0,,You need to go.|We'll talk later.,"Alright, I'll see you later then.|(She walks out and closes the door.)",791,-2,0,KickedOut()
 790,0,0,,Don't be mad.|I'm sorry.,"It's fine, I'll see you later then.|(She walks out and closes the door.)",791,-1,-1,KickedOut()
