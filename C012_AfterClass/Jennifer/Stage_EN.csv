@@ -54,10 +54,10 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 191,0,0,,"No, let's stay together.",(She stares at you and frowns.)|You had me scared my love.,0,0,0,
 191,0,0,Common_ActorIsOwned,"We'll break up, but I'll|keep you as my slave.","(She cries and looks devastated.)|Yes Mistress, I understand.",192,-5,0,BreakUp()
 191,0,0,!Common_ActorIsOwned,"Yes, I want to break up.",Fuck you then!  I hate you!|You think you can toy with me?,193,-5,0,BreakUp()
-192,0,0,,I'm sorry.|Don't cry.,It's fucking fine alright?|Let's talk about something else.,0,0,-1,EndChat()
-192,0,0,,You're not|in my league.,(She grumbles.)  Fine.  I get it.|Let's talk about something else.,0,-1,1,EndChat()
-192,0,0,,It was a mistake|from the start,"Maybe you're right, I don't know.|Let's talk about something else.",0,0,0,EndChat()
-192,0,0,,You'll find someone|perfect for you.,I thought I already did.  Fuck that.|Let's talk about something else.,0,1,0,EndChat()
+192,0,0,,I'm sorry.|Don't cry.,It's fucking fine alright?|Let's talk about something else.,0,0,-1,AllowLeave()
+192,0,0,,You're not|in my league.,(She grumbles.)  Fine.  I get it.|Let's talk about something else.,0,-1,1,AllowLeave()
+192,0,0,,It was a mistake|from the start,"Maybe you're right, I don't know.|Let's talk about something else.",0,0,0,AllowLeave()
+192,0,0,,You'll find someone|perfect for you.,I thought I already did.  Fuck that.|Let's talk about something else.,0,1,0,AllowLeave()
 193,0,0,,I'm sorry.|Don't cry.,I'm not fucking crying!|(She runs away from the room.),194,0,-1,JenniferLeave()
 193,0,0,,You're not|in my league.,(She grumbles.)  Fine.  I get it.|(She runs away from the room.),194,-1,1,JenniferLeave()
 193,0,0,,It was a mistake|from the start,"Maybe you're right, fuck that!|(She runs away from the room.)",194,0,0,JenniferLeave()
@@ -151,8 +151,33 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 450,0,0,,What kind of training?,,0,0,0,RandomJenniferDommeEvent()
 450,0,0,,(Nod happily.),,0,0,0,RandomJenniferDommeEvent()
 450,0,0,,(Look surprised.),,0,0,0,RandomJenniferDommeEvent()
-500,0,0,,TO DO CHAT,TO DO CHAT,560,0,0,
-560,0,0,,TO DO CHAT,TO DO CHAT,0,0,0,EndChat()
+500,0,0,,Do you have|any friends?,"Yes and no, Sidney can be friendly|when she doesn't bully me for money.",510,0,0,
+500,0,0,,What do you do|outside of school?,I go running and swimming and do|martial arts when I can find a partner.,510,0,0,
+500,0,0,,Why are you|always alone?,Please don't say that.  I'm not always alone.|I have roommates... who always fight each other.,510,-1,1,
+500,0,0,,What's you favorite sport?,"I love tennis, basketball and many martial arts.|I wish there were more players around here.",510,1,0,
+500,0,0,,"You look lonely,|just like me.",I know how you feel.  It's easier to make|enemies than friends when you're the new girl.,510,1,-1,
+510,0,0,,And you stay in shape|to defend yourself?,Yes.  But I need someone|to practice fighting with.,520,1,0,
+510,0,0,,How do you|deal with bullies?,Not that great so far.  I would need|someone to practice fighting them.,520,0,0,
+510,0,0,,Were you ever|gropped in public?,"Yeah, it was horrible, that's why I'm training.|I need someone to practice fighting with.",520,-1,0,
+510,0,0,,Have you ever|tried boxing?,I did but I prefer Judo or Karate.|I need someone to practice fighting.,520,0,0,
+520,0,0,,We could fight together|if you don't hurt me.,Maybe not a real fight but we|could simulate an attack in school.,530,0,-1,
+520,0,0,,We could fight|together to train.,Maybe not a real fight but we|could simulate an attack in school.,530,0,0,
+520,0,0,,I could teach|you how to fight.,Maybe not a real fight but we|could simulate an attack in school.,530,0,1,
+520,0,0,,Find someone else.|I hate fighting.,"Very well, I'll find someone else.|So what's going on around here?",530,-1,-1,AllowLeave()
+520,0,0,,You should find|someone in school.,"Yes, maybe I'll find someone else.|So what's going on around here?",530,-1,0,AllowLeave()
+530,0,0,,"Ok, let's do a|quick school fight.",(You grab each other In your school clothes.),540,0,0,StartFight()
+530,0,0,,"Alright, let's go!",(You grab each other In your school clothes.),540,0,0,StartFight()
+530,0,0,,No!  This isn't|a good idea.,"Fine, we don't have to train together.|So what else is going on around here?",540,-1,0,AllowLeave()
+540,0,0,,(Try to overpower her.),(You try to overpower her but fails.|She locks your arms behind your back.),550,0,-1,Fight(false)
+540,0,0,,(Let her win.),(You don't fight really hard and lose.|She locks your arms behind your back.),550,0,-1,Fight(true)
+550,0,0,,Ow!  Please|let me go!,(She releases you.)  Sorry.|I didn't meant to hurt you.,570,0,-1,
+550,0,0,,You've cheated!,(She releases you and frowns.)|I didn't cheated!  It was fair.,570,-1,0,
+550,0,0,,You're really|good at this!,"(She releases you and smiles.)|Thanks, you also need practice.",570,1,0,
+560,0,0,,That was fun!,(You release her and she smiles.)|Yes!  But I need more practice.,570,1,0,
+560,0,0,,You're weak.,(You release her and she bows her head.)|You're really strong.  I need more practice.,570,-1,1,
+560,0,0,,I was lucky.,(You release her and she shakes her head.)|I don't think that was luck.  I need more practice.,570,1,-1,
+570,0,0,,"Sure, we can|train again later.",Awesome!  Let me know|whenever you're ready.,0,1,0,UnlockTraining()
+570,0,0,,"No, I've had|enough of that.",(She seems disappointed.)  Very well.|I'll find someone else to train with.,0,-1,0,AllowLeave()
 600,0,0,,Wear your|school outfit.,"Very well, our college has nice uniforms.|(She changes in her school uniform.)",0,0,0,"ForceChangeActor(""Clothed"")"
 600,0,0,AllowTennisOutfit,Wear your|tennis outfit.,(She nods and changes.)  Sure!|We should play a match tommorow.,0,0,0,"ForceChangeActor(""Tennis"")"
 600,0,0,AllowSwimsuit,Wear your swimsuit.,(She nods and changes.)  Very well.|Do you want to go back to the pool?,0,0,0,"ForceChangeActor(""Swimsuit"")"

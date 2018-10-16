@@ -16,6 +16,7 @@ var C012_AfterClass_Jennifer_MasturbateCount = 0;
 var C012_AfterClass_Jennifer_CanSetCurfew22 = false;
 var C012_AfterClass_Jennifer_AllowTennisOutfit = false;
 var C012_AfterClass_Jennifer_AllowSwimsuit = false;
+var C012_AfterClass_Jennifer_AllowTraining = false;
 var C012_AfterClass_Jennifer_AllowSexAfterDate = false;
 var C012_AfterClass_Jennifer_CanKickOut = false;
 
@@ -51,6 +52,7 @@ function C012_AfterClass_Jennifer_CalcParams() {
 	C012_AfterClass_Jennifer_CanKickOut = (!Common_ActorIsOwner && !Common_ActorIsLover);
 	C012_AfterClass_Jennifer_AllowTennisOutfit = (GameLogQuery("C007_LunchBreak", CurrentActor, "Lunch") || GameLogQuery("C012_AfterClass", CurrentActor, "Running"));
 	C012_AfterClass_Jennifer_AllowSwimsuit = GameLogQuery("C012_AfterClass", CurrentActor, "EnterDormFromPool");
+	C012_AfterClass_Jennifer_AllowTraining = GameLogQuery("C012_AfterClass", CurrentActor, "UnlockTraining");
 	C012_AfterClass_Jennifer_SetPose();
 }
 
@@ -109,7 +111,7 @@ function C012_AfterClass_Jennifer_Run() {
 	if (((C012_AfterClass_Jennifer_CurrentStage >= 320) && (C012_AfterClass_Jennifer_CurrentStage < 340)) || ((C012_AfterClass_Jennifer_CurrentStage >= 291) && (C012_AfterClass_Jennifer_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
 
 	// Draw the actor alone or with the player depending on the stage
-	if ((C012_AfterClass_Jennifer_CurrentStage != 3201) && (C012_AfterClass_Jennifer_CurrentStage != 3211) && (C012_AfterClass_Jennifer_CurrentStage != 632) && (C012_AfterClass_Jennifer_CurrentStage != 633) && (C012_AfterClass_Jennifer_CurrentStage != 634) && (C012_AfterClass_Jennifer_CurrentStage != 662) && (C012_AfterClass_Jennifer_CurrentStage != 663) && (C012_AfterClass_Jennifer_CurrentStage != 791) && (C012_AfterClass_Jennifer_CurrentStage != 194)) {
+	if ((C012_AfterClass_Jennifer_CurrentStage != 3201) && (C012_AfterClass_Jennifer_CurrentStage != 3211) && (C012_AfterClass_Jennifer_CurrentStage != 632) && (C012_AfterClass_Jennifer_CurrentStage != 633) && (C012_AfterClass_Jennifer_CurrentStage != 634) && (C012_AfterClass_Jennifer_CurrentStage != 791) && (C012_AfterClass_Jennifer_CurrentStage != 194) && (C012_AfterClass_Jennifer_CurrentStage != 540) && (C012_AfterClass_Jennifer_CurrentStage != 550) && (C012_AfterClass_Jennifer_CurrentStage != 560)) {
 		if (((C012_AfterClass_Jennifer_CurrentStage >= 3090) && (C012_AfterClass_Jennifer_CurrentStage <= 3099)) || ((C012_AfterClass_Jennifer_CurrentStage >= 3901) && (C012_AfterClass_Jennifer_CurrentStage <= 3999))) {
 			DrawActor("Player", 475, 0, 1);
 			DrawActor(CurrentActor, 750, 0, 1);
@@ -537,11 +539,6 @@ function C012_AfterClass_Jennifer_StartChat() {
 	} else C012_AfterClass_Jennifer_GaggedAnswer();
 }
 
-// Chapter 12 After Class - Ends the chat with Jennifer
-function C012_AfterClass_Jennifer_EndChat() {
-	LeaveIcon = "Leave";
-}
-
 // Chapter 12 After Class - When Jennifer locks the belt on the player
 function C012_AfterClass_Jennifer_LockChastityBelt() {
 	PlayerLockInventory("ChastityBelt");
@@ -854,23 +851,6 @@ function C012_AfterClass_Jennifer_JenniferLeave() {
 	C012_AfterClass_Dorm_Guest.splice("Jennifer");
 }
 
-// Chapter 12 After Class - Starts the lingerie show
-function C012_AfterClass_Jennifer_StartLingerieShow() {
-	GameLogAdd("LingerieShow");
-}
-
-// Chapter 12 After Class - When Jennifer forces the player to kick someone out
-function C012_AfterClass_Jennifer_KickActor(KickedActor) {
-	if (KickedActor == "Amanda") C012_AfterClass_Amanda_CurrentStage = 790;
-	if (KickedActor == "Sarah") C012_AfterClass_Sarah_CurrentStage = 790;
-	SetScene(CurrentChapter, KickedActor);
-}
-
-// Chapter 12 After Class - When Jennifer is kicked for another actor
-function C012_AfterClass_Jennifer_KickForActor(KickedForActor) {
-	ActorSpecificChangeAttitude(KickedForActor, 2, 1);
-}
-
 // Chapter 12 After Class - When Jennifer is kicked out, it can destroy the players couple
 function C012_AfterClass_Jennifer_KickedOut() {
 	GameLogAdd("KickedOutFromDorm");
@@ -884,4 +864,28 @@ function C012_AfterClass_Jennifer_KickedOut() {
 // Chapter 12 After Class - When Jennifer brings the player out naked to be humiliated
 function C012_AfterClass_Jennifer_StartPlayerHumiliation() {
 	SetScene(CurrentChapter, "Humiliation");
+}
+
+// Chapter 12 After Class - When the player and Jennifer starts to train in fighting
+function C012_AfterClass_Jennifer_StartFight() {
+	CurrentTime = CurrentTime + 50000;
+	ActorSetCloth("Clothed");
+	PlayerClothes("Clothed");
+}
+
+// Chapter 12 After Class - Pick a winner in a fight against Jennifer (25% to win + 25% per level in fighting + 1% per domination point)
+function C012_AfterClass_Jennifer_Fight(AutoLose) {
+	var P = 25 + (PlayerGetSkillLevel("Fighting") * 25) + ActorGetValue(ActorSubmission);
+	if ((Math.floor(Math.random() * 100) < P) && !AutoLose) {
+		C012_AfterClass_Jennifer_CurrentStage = 560;
+		OverridenIntroText = GetText("WinFightAgainstJennifer");
+		if (!GameLogQuery(CurrentChapter, CurrentActor, "UnlockTraining")) ActorChangeAttitude(0, 2);
+	}
+}
+
+// Chapter 12 After Class - Unlocks the training option with Jennifer
+function C012_AfterClass_Jennifer_UnlockTraining() {
+	GameLogAdd("UnlockTraining");
+	C012_AfterClass_Jennifer_AllowTraining = true;
+	C012_AfterClass_Jennifer_AllowLeave();
 }
