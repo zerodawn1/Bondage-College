@@ -756,7 +756,7 @@ function C012_AfterClass_Jennifer_StartMasturbate() {
 			C012_AfterClass_Jennifer_CurrentStage = 640;
 			OverridenIntroText = GetText("StartMasturbateJennifer");
 			LeaveIcon = "";
-			if (!ActorIsGagged() && !ActorIsRestrained()) ActorSetPose("StandPleasure");
+			if (!ActorIsRestrained()) ActorSetPose("StandPleasure");
 		} else OverridenIntroText = GetText("MasturbateNotInTheMood");
 	}
 }

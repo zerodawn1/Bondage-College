@@ -256,13 +256,15 @@ function C012_AfterClass_Sarah_TestSex() {
 // Chapter 12 After Class - Sarah can be dominated at +20 submission
 function C012_AfterClass_Sarah_TestDomme() {
 	if (!ActorIsGagged()) {
-		if (PlayerHasInventory("Collar")) {
-			if (ActorGetValue(ActorSubmission) >= 20) {
-				C012_AfterClass_Sarah_CurrentStage = 200;
-				OverridenIntroText = "";
-				LeaveIcon = "";
-			}
-		} else OverridenIntroText = GetText("CollarToEnslave");
+		if (!ActorIsRestrained()) {
+			if (PlayerHasInventory("Collar")) {
+				if (ActorGetValue(ActorSubmission) >= 20) {
+					C012_AfterClass_Sarah_CurrentStage = 200;
+					OverridenIntroText = "";
+					LeaveIcon = "";
+				}
+			} else OverridenIntroText = GetText("CollarToEnslave");
+		} else OverridenIntroText = GetText("ReleaseBeforeTalk");
 	} else C012_AfterClass_Sarah_GaggedAnswer();
 }
 
