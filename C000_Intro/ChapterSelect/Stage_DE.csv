@@ -9,7 +9,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 10,0,0,,Kapitel 3|Morgendliches Nachsitzen,,10,0,0,"LoadChapter(""C003_MorningDetention"")"
 10,0,0,,Kapitel 4|Kunstunterricht,,10,0,0,"LoadChapter(""C004_ArtClass"")"
 10,0,0,,Kapitel 5|Sportstunde,,10,0,0,"LoadChapter(""C005_GymClass"")"
-10,0,0,,Kapitel 6|Isolierung,,10,0,0,"LoadChapter(""C006_Isolation"")"
+10,0,0,,Kapitel 6|Isolation,,10,0,0,"LoadChapter(""C006_Isolation"")"
 10,0,0,,Kapitel 7|Mittagspause,,10,0,0,"LoadChapter(""C007_LunchBreak"")"
 10,0,0,,Kapitel 8|Schauspielunterricht,,10,0,0,"LoadChapter(""C008_DramaClass"")"
 10,0,0,,Mehr Kapitel,"Wähle das Kapitel, welches du spielen willst.|Wenn du zum ersten Mal spielst, starte von Kapitel 1.",20,0,0,
@@ -25,4 +25,4 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 30,0,0,,Französich (Kapitel 1 bis 8)|Geschrieben von gottspende,,0,0,0,"SetLanguage(""FR"")"
 30,0,0,,Chinesisch (Kapitel 1 & 5)|Dwscdv3 & asdcvbgf,,0,0,0,"SetLanguage(""CN"")"
 30,0,0,,Spanisch (Kapitel 1)|Geschrieben von Rafael R,,0,0,0,"SetLanguage(""ES"")"
-30,0,0,,"Deutsch (Kapitel 1 bis 5)|adokilume, Knife, fleisch11",,0,0,0,"SetLanguage(""DE"")"
+30,0,0,,"Deutsch (Kapitel 1 bis 6)|adokilume, Knife, fleisch11",,0,0,0,"SetLanguage(""DE"")"
