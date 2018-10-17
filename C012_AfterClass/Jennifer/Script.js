@@ -873,9 +873,9 @@ function C012_AfterClass_Jennifer_StartFight() {
 	PlayerClothes("Clothed");
 }
 
-// Chapter 12 After Class - Pick a winner in a fight against Jennifer (25% to win + 25% per level in fighting + 1% per domination point)
+// Chapter 12 After Class - Pick a winner in a fight against Jennifer (25% to win + 25% per level in fighting + 2% per domination point)
 function C012_AfterClass_Jennifer_Fight(AutoLose) {
-	var P = 25 + (PlayerGetSkillLevel("Fighting") * 25) + ActorGetValue(ActorSubmission);
+	var P = 25 + (PlayerGetSkillLevel("Fighting") * 25) + (ActorGetValue(ActorSubmission) * 2);
 	if ((Math.floor(Math.random() * 100) < P) && !AutoLose) {
 		C012_AfterClass_Jennifer_CurrentStage = 560;
 		OverridenIntroText = GetText("WinFightAgainstJennifer");
