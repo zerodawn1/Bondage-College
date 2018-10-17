@@ -246,8 +246,19 @@ function ClickInteraction(CurrentStagePosition) {
 					if ((MouseX >= (Pos % 2) * 300) && (MouseX <= ((Pos % 2) * 300) + 299) && (MouseY >= 151 + (Math.round((Pos - 1) / 2) * 90)) && (MouseY <= 240 + (Math.round((Pos - 1) / 2) * 90))) {
 						window[CurrentChapter + "_" + CurrentScreen + "_CurrentStage"] = CurrentStage[L][StageNextStage];
 						OverridenIntroText = CurrentStage[L][StageInteractionResult];
-						ActorChangeAttitude(CurrentStage[L][StageLoveMod], CurrentStage[L][StageSubMod]);					
-						if (CurrentStage[L][StageInteractionText].indexOf("(1 minute)") >= 0) CurrentTime = CurrentTime + 60000;
+						ActorChangeAttitude(CurrentStage[L][StageLoveMod], CurrentStage[L][StageSubMod]);
+						// Check if the interaction has a time tag
+						var MinuteString = "ADD_MINUTES:";
+						var MinuteStringIndex = CurrentStage[L][StageInteractionText].indexOf(MinuteString);
+						if (MinuteStringIndex >= 0) {
+							var MinuteCount = parseInt(CurrentStage[L][StageInteractionText].substring(MinuteStringIndex + MinuteString.length));
+							// If the text after the tag isn't a valid number, output a log message and assume the default time
+							if (isNaN(MinuteCount)) {
+								console.log("Invalid minute expression in interaction: " + CurrentStage[L][StageInteractionText]);
+								CurrentTime = CurrentTime + 10000;
+							}
+							else CurrentTime = CurrentTime + MinuteCount * 60000;
+						}
 						else CurrentTime = CurrentTime + 10000;
 						if (CurrentStage[L][StageFunction].trim() != "") DynamicFunction(CurrentChapter + "_" + CurrentScreen + "_" + CurrentStage[L][StageFunction].trim());
 						return;

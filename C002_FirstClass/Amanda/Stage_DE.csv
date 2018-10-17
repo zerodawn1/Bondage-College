@@ -29,20 +29,20 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 100,0,0,Common_PlayerRestrained,(An deinen|Fesseln zerren.),(Sie schüttelt den Kopf.),100,0,0,
 100,0,-2,BowRemarkReady,(Den Kopf neigen.),(Sie flüstert.) Du bist gefesselt|und geknebelt so niedlich.,100,1,-1,BowRemark()
 110,0,0,Common_PlayerGagged,"@Mmmmmmph, mmph!",(Sie kichert und murmelt zurück.),110,0,0,
-110,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)|(1 Minute),(Du löst den großen Ball und entfernst ihn.)|Danke. Das war ziemlich unbequem.,100,0,0,Ungag()
+110,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)ADD_MINUTES:1,(Du löst den großen Ball und entfernst ihn.)|Danke. Das war ziemlich unbequem.,100,0,0,Ungag()
 130,0,0,Common_PlayerGagged,"@Mmmmmmph, mmph!",(Sie kichert und murmelt zurück.),130,0,0,
-130,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)|(1 Minute),(Du löst den großen Ball und entfernst ihn.)|Danke. Das war ziemlich unbequem.,120,0,0,Ungag()
-140,0,0,Common_PlayerNotRestrained,(Kitzeln.)|(1 Minute),"(Du kitzelst sie und sie lacht wie verrückt.)|HahaHAHAha! Bitte, bitte hör auf.",140,0,0,Tickle()
-140,0,0,Common_PlayerNotRestrained,(Befreien.)|(1 Minute),(Du bindest die Knoten los und sie zieht sich an.)|Du kennst dich mit Knoten aus. (Sie kichert.),100,0,0,Untie()
-140,0,0,BondageHugReady,Würdest du gern Sarah|umarmen? (1 Minute),(Sie gibt Sarah eine warme Fesselumarmung|und flüstert ihr sanft etwas ins Ohr.),160,0,0,BondageHug()
+130,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)ADD_MINUTES:1,(Du löst den großen Ball und entfernst ihn.)|Danke. Das war ziemlich unbequem.,120,0,0,Ungag()
+140,0,0,Common_PlayerNotRestrained,(Kitzeln.)ADD_MINUTES:1,"(Du kitzelst sie und sie lacht wie verrückt.)|HahaHAHAha! Bitte, bitte hör auf.",140,0,0,Tickle()
+140,0,0,Common_PlayerNotRestrained,(Befreien.)ADD_MINUTES:1,(Du bindest die Knoten los und sie zieht sich an.)|Du kennst dich mit Knoten aus. (Sie kichert.),100,0,0,Untie()
+140,0,0,BondageHugReady,Würdest du gern Sarah|umarmen?ADD_MINUTES:1,(Sie gibt Sarah eine warme Fesselumarmung|und flüstert ihr sanft etwas ins Ohr.),160,0,0,BondageHug()
 150,0,0,Common_PlayerGagged,"@Mmmmmmph, mmph!",(Sie kichert und murmelt zurück.),150,0,0,
-150,0,0,Common_PlayerNotRestrained,(Kitzeln.)|(1 Minute),"(Du kitzelst sie und sie lacht wie verrückt|in ihrem Knebel, danach wird sie sofort rot.)",150,0,0,Tickle()
-150,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)|(1 Minute),(Du löst den großen Ball und entfernst ihn.)|Danke. Das war ziemlich unbequem.,140,0,0,Ungag()
-150,0,0,Common_PlayerNotRestrained,(Befreien.)|(1 Minute),(Du bindest die Knoten los und sie zieht sich an.)|(Dann deutet sie auf ihren Knebel.),110,0,0,Untie()
-150,0,0,BondageHugReady,Würdest du gern Sarah|umarmen? (1 Minute),"(Sie zögert, nähert sich aber langsam ihrer|Freundin und gibt ihr eine warme Fesselumarmung.)",170,0,0,BondageHug()
-160,0,0,,Möchtest du sie|küssen? (1 Minute),"Sarah, möchtest du mich küssen?|(Sie kommt näher und küsst Sarah.)",160,0,0,KissSarah()
+150,0,0,Common_PlayerNotRestrained,(Kitzeln.)ADD_MINUTES:1,"(Du kitzelst sie und sie lacht wie verrückt|in ihrem Knebel, danach wird sie sofort rot.)",150,0,0,Tickle()
+150,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)ADD_MINUTES:1,(Du löst den großen Ball und entfernst ihn.)|Danke. Das war ziemlich unbequem.,140,0,0,Ungag()
+150,0,0,Common_PlayerNotRestrained,(Befreien.)ADD_MINUTES:1,(Du bindest die Knoten los und sie zieht sich an.)|(Dann deutet sie auf ihren Knebel.),110,0,0,Untie()
+150,0,0,BondageHugReady,Würdest du gern Sarah|umarmen?ADD_MINUTES:1,"(Sie zögert, nähert sich aber langsam ihrer|Freundin und gibt ihr eine warme Fesselumarmung.)",170,0,0,BondageHug()
+160,0,0,,Möchtest du sie|küssen?ADD_MINUTES:1,"Sarah, möchtest du mich küssen?|(Sie kommt näher und küsst Sarah.)",160,0,0,KissSarah()
 160,0,0,,Liebt ihr euch?,Ich...  Ähh...  Nun...  (Sie wird rot.),160,0,0,
-160,0,0,Common_PlayerNotRestrained,(Die beiden trennen.)|(1 Minute),(Sie flüstert Sarah etwas zu und sie trennen sich.),140,0,0,Separate()
+160,0,0,Common_PlayerNotRestrained,(Die beiden trennen.)ADD_MINUTES:1,(Sie flüstert Sarah etwas zu und sie trennen sich.),140,0,0,Separate()
 170,0,0,,Ihr beide seid ein|nettes Bondage-Duo.,(Sie wird rot und wendet ihren Blick von dir ab.),170,0,0,
-170,0,0,Common_PlayerNotRestrained,(Die beiden trennen.)|(1 Minute),(Sie sieht ein letztes Mal Sarah an|und kehrt zu ihrem Platz zurück.),150,0,0,Separate()
-170,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)|(1 Minute),(Du löst den Ballknebel und entfernst ihn.)|Danke. Das war ziemlich unbequem.,160,0,0,Ungag()
+170,0,0,Common_PlayerNotRestrained,(Die beiden trennen.)ADD_MINUTES:1,(Sie sieht ein letztes Mal Sarah an|und kehrt zu ihrem Platz zurück.),150,0,0,Separate()
+170,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)ADD_MINUTES:1,(Du löst den Ballknebel und entfernst ihn.)|Danke. Das war ziemlich unbequem.,160,0,0,Ungag()

@@ -80,6 +80,10 @@ function DrawText(Text, X, Y, Color) {
 	// Replace the COMMON_NUMBER keyword with a number generated while playing the game
 	Text = Text.replace("COMMON_NUMBER", Common_Number);
 
+	// Remove the timing tag if present
+	if (Text.indexOf("ADD_MINUTES:") >= 0)
+		Text = Text.substring(0, Text.indexOf("ADD_MINUTES:"));
+
 	// Font is fixed for now, color can be set
 	MainCanvas.font = "24px Arial";
 	MainCanvas.fillStyle = Color;
