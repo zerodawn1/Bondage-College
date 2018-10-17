@@ -21,6 +21,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 10,0,0,IsStrapped,(Unstrap her.),(You remove the straps and|unlace the binder from her arms.),10,0,0,Untie()
 10,0,0,,(Stop playing.),(You take a step back.),0,0,0,
 20,0,0,ChatAvail,I'd like to know|more about you.,"Very well, we can talk about me.",0,0,0,StartChat()
+20,0,0,AllowTraining,Would you like|to practice fighting?,Absolutely!  We can simulate|another school grounds attack.,590,0,0,StartTraining()
 20,0,0,Common_ActorIsOwned,Let's review|your rules.,(She seems to worry.)|Of course Mistress.,610,0,0,
 20,0,0,Common_PlayerChaste,Can you please help|me with this belt?,I can't.  I don't have|the keys for that belt.,0,0,0,
 20,0,0,Common_ActorIsLover,About our relationship...,What's going on sweetie?,190,0,0,
@@ -176,8 +177,19 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 560,0,0,,That was fun!,(You release her and she smiles.)|Yes!  But I need more practice.,570,1,0,
 560,0,0,,You're weak.,(You release her and she bows her head.)|You're really strong.  I need more practice.,570,-1,1,
 560,0,0,,I was lucky.,(You release her and she shakes her head.)|I don't think that was luck.  I need more practice.,570,1,-1,
-570,0,0,,"Sure, we can|train again later.",Awesome!  Let me know|whenever you're ready.,0,1,0,UnlockTraining()
+570,0,0,,We can train|fighting again later.,Awesome!  Let me know|whenever you're ready.,0,1,0,UnlockTraining()
 570,0,0,,"No, I've had|enough of that.",(She seems disappointed.)  Very well.|I'll find someone else to train with.,0,-1,0,AllowLeave()
+590,0,0,,"Alright, let's go!",(You grab each other In your school clothes.),591,0,0,StartFight()
+591,0,0,,(Try to overpower her.),(You try to overpower her but fails.|She locks your arms behind your back.),592,0,0,Fight(false)
+591,0,0,,(Let her win.),(You don't fight really hard and lose.|She locks your arms behind your back.),592,0,0,Fight(true)
+592,0,0,,Ow!  Please|let me go!,(She releases you.)  Sorry.|I didn't meant to hurt you.,594,0,0,
+592,0,0,,You've cheated!,(She releases you and frowns.)|I didn't cheated!  It was fair.,594,0,0,
+592,0,0,,You're really|good at this!,"(She releases you and smiles.)|Thanks, you also need practice.",594,0,0,
+593,0,0,,That was fun!,(You release her and she smiles.)|Yes!  But I need more practice.,594,0,0,
+593,0,0,,You're weak.,(You release her and she bows her head.)|You're really strong.  I need more practice.,594,0,0,
+593,0,0,,I was lucky.,(You release her and she shakes her head.)|I don't think that was luck.  I need more practice.,594,0,0,
+594,0,0,,We can train|fighting again later.,Awesome!  Let me know|whenever you're ready.,0,0,0,AllowLeave()
+594,0,0,,Practice makes perfect.,That's the spirit!  Let me know|when you want to train again.,0,0,0,AllowLeave()
 600,0,0,,Wear your|school outfit.,"Very well, our college has nice uniforms.|(She changes in her school uniform.)",0,0,0,"ForceChangeActor(""Clothed"")"
 600,0,0,AllowTennisOutfit,Wear your|tennis outfit.,(She nods and changes.)  Sure!|We should play a match tommorow.,0,0,0,"ForceChangeActor(""Tennis"")"
 600,0,0,AllowSwimsuit,Wear your swimsuit.,(She nods and changes.)  Very well.|Do you want to go back to the pool?,0,0,0,"ForceChangeActor(""Swimsuit"")"

@@ -68,6 +68,11 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 550,0,0,,,PlayerJenniferFightDefeat.jpg
 560,0,0,,,PlayerJenniferFightVictory.jpg
 570,0,0,,,Dorm.jpg
+590,0,0,,,Dorm.jpg
+591,0,0,,,PlayerJenniferFight.jpg
+592,0,0,,,PlayerJenniferFightDefeat.jpg
+593,0,0,,,PlayerJenniferFightVictory.jpg
+594,0,0,,,Dorm.jpg
 600,0,0,,,Dorm.jpg
 610,0,0,,,Dorm.jpg
 630,0,0,,,Dorm.jpg

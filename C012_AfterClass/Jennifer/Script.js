@@ -111,7 +111,7 @@ function C012_AfterClass_Jennifer_Run() {
 	if (((C012_AfterClass_Jennifer_CurrentStage >= 320) && (C012_AfterClass_Jennifer_CurrentStage < 340)) || ((C012_AfterClass_Jennifer_CurrentStage >= 291) && (C012_AfterClass_Jennifer_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
 
 	// Draw the actor alone or with the player depending on the stage
-	if ((C012_AfterClass_Jennifer_CurrentStage != 3201) && (C012_AfterClass_Jennifer_CurrentStage != 3211) && (C012_AfterClass_Jennifer_CurrentStage != 632) && (C012_AfterClass_Jennifer_CurrentStage != 633) && (C012_AfterClass_Jennifer_CurrentStage != 634) && (C012_AfterClass_Jennifer_CurrentStage != 791) && (C012_AfterClass_Jennifer_CurrentStage != 194) && (C012_AfterClass_Jennifer_CurrentStage != 540) && (C012_AfterClass_Jennifer_CurrentStage != 550) && (C012_AfterClass_Jennifer_CurrentStage != 560)) {
+	if ((C012_AfterClass_Jennifer_CurrentStage != 3201) && (C012_AfterClass_Jennifer_CurrentStage != 3211) && (C012_AfterClass_Jennifer_CurrentStage != 632) && (C012_AfterClass_Jennifer_CurrentStage != 633) && (C012_AfterClass_Jennifer_CurrentStage != 634) && (C012_AfterClass_Jennifer_CurrentStage != 791) && (C012_AfterClass_Jennifer_CurrentStage != 194) && (C012_AfterClass_Jennifer_CurrentStage != 540) && (C012_AfterClass_Jennifer_CurrentStage != 550) && (C012_AfterClass_Jennifer_CurrentStage != 560) && (C012_AfterClass_Jennifer_CurrentStage != 591) && (C012_AfterClass_Jennifer_CurrentStage != 592) && (C012_AfterClass_Jennifer_CurrentStage != 593)) {
 		if (((C012_AfterClass_Jennifer_CurrentStage >= 3090) && (C012_AfterClass_Jennifer_CurrentStage <= 3099)) || ((C012_AfterClass_Jennifer_CurrentStage >= 3901) && (C012_AfterClass_Jennifer_CurrentStage <= 3999))) {
 			DrawActor("Player", 475, 0, 1);
 			DrawActor(CurrentActor, 750, 0, 1);
@@ -539,6 +539,12 @@ function C012_AfterClass_Jennifer_StartChat() {
 	} else C012_AfterClass_Jennifer_GaggedAnswer();
 }
 
+// Chapter 12 After Class - Flags the chat as done and doesn't allow the player to leave
+function C012_AfterClass_Jennifer_StartTraining() {
+	ActorSetPose("");
+	LeaveIcon = "";
+}
+
 // Chapter 12 After Class - When Jennifer locks the belt on the player
 function C012_AfterClass_Jennifer_LockChastityBelt() {
 	PlayerLockInventory("ChastityBelt");
@@ -875,9 +881,11 @@ function C012_AfterClass_Jennifer_StartFight() {
 
 // Chapter 12 After Class - Pick a winner in a fight against Jennifer (25% to win + 25% per level in fighting + 2% per domination point)
 function C012_AfterClass_Jennifer_Fight(AutoLose) {
+	CurrentTime = CurrentTime + 50000;
 	var P = 25 + (PlayerGetSkillLevel("Fighting") * 25) + (ActorGetValue(ActorSubmission) * 2);
 	if ((Math.floor(Math.random() * 100) < P) && !AutoLose) {
-		C012_AfterClass_Jennifer_CurrentStage = 560;
+		if (C012_AfterClass_Jennifer_CurrentStage < 590) C012_AfterClass_Jennifer_CurrentStage = 560;
+		if (C012_AfterClass_Jennifer_CurrentStage >= 590) C012_AfterClass_Jennifer_CurrentStage = 593;
 		OverridenIntroText = GetText("WinFightAgainstJennifer");
 		if (!GameLogQuery(CurrentChapter, CurrentActor, "UnlockTraining")) ActorChangeAttitude(0, 2);
 	}
