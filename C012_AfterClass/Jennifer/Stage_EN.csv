@@ -30,39 +30,52 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 100,0,0,,Do you have|a loved one?,"No, I've never dated anyone.",110,0,0,TestRelationship()
 100,0,0,,Do you have|a boyfriend?,"No, I've never dated anyone.",110,0,0,TestRelationship()
 100,0,0,,Do you have|a girlfriend?,"No, I've never dated anyone.",110,0,0,TestRelationship()
-105,0,0,,"Yes, I'm lucky.",You're way more lucky than me.|But let's talk about something else.,0,0,0,
-105,0,0,,You'll find someone.,I hope to find someone someday.|But let's talk about something else.,0,0,0,
+105,0,0,,"Yes, I'm lucky.",You're way more lucky than me.|Let's talk about something else.,0,0,0,
+105,0,0,,You'll find someone.,I hope to find someone someday.|Let's talk about something else.,0,0,0,
 105,0,0,Common_ActorIsOwned,I would rather|date you.,"Please, break up with her first Mistress.|I'm don't want to join a love triangle.",106,0,0,
 105,0,0,!Common_ActorIsOwned,I would rather|date you.,You have to break up with her.|I don't want to join a love triangle.,106,0,0,
 106,0,0,,"Yes, I'll do that.",I'm surprised to hear that.|Let me know if you do it.,0,0,0,
 106,0,0,,I'll think about it.,"Very well, let me know if you break up.",0,0,0,
-106,0,0,,I can't do that.,I understand my friend.|Let's talk about something else.,0,0,0,
-110,0,0,,TO DO LOVE,TO DO LOVE,120,0,0,
-150,0,0,,Yes!!!|(Kiss her.),(You jump into each other arms|for a long and passionate kiss.),160,3,0,StartDating()
-150,0,0,,I need time to|think about it.,"Alright then, let me know|when you make up your mind.",0,0,0,
-160,0,0,AllowSexAfterDate,Show me your sexy|body my love.,Of course sweetie.  (You both strip|naked and look at each other body.),170,0,1,BothNaked()
-160,0,0,AllowSexAfterDate,(Blush red and|start to strip.),Don't be shy my love.  (You both strip|naked and look at each other body.),170,0,-1,BothNaked()
-160,0,0,AllowSexAfterDate,I want to make|love with you.,Fuck yeah!  (You both strip|naked and look at each other.),170,1,0,BothNaked()
-160,0,0,,I'm so happy!,Fuck yeah!  I'm sure we'll have fun.,0,0,0,
-160,0,0,,I can't wait to|tell my friends.,Don't brag to everyone sweetie.,0,-1,0,
-160,0,0,,We should|go out later.,Now you're talking sweetheart!|We should celebrate and get stoned.,0,1,0,
-170,0,0,,(Get in bed.),,0,0,0,MakeLove()
+106,0,0,,I can't do that.,I totally understand my friend.|Let's talk about something else.,0,0,0,
+110,0,0,,How do you|feel about me?,You're my best friend COMMON_PLAYERNAME.|I enjoy every moment we share together.,120,0,0,
+110,0,0,,Do you like me?,I do.  You're the best COMMON_PLAYERNAME.|I enjoy every moment we share together.,120,0,0,
+110,0,0,,You would date|someone like me?,I could.  You're the best COMMON_PLAYERNAME.|I enjoy every moment we share together.,120,0,0,
+120,0,0,,I think I love|you Jennifer.,Would you really date a loser like me?,130,0,0,
+120,0,0,,I love your|sexy body.,Would you really date a loser like me?,130,0,0,
+120,0,0,,I've masturbated|thinking about you.,I...  I don't know what to say.|Let's talk about something else.,0,0,0,
+120,0,0,,I want to fuck|you right now.,I...  I don't know what to say.|Let's talk about something else.,0,0,0,
+130,0,0,,"Sorry, I can't|date a loser.",(She sighs and looks down.)|Let's talk about something else.,0,0,0,
+130,0,0,,We can both be|losers in love.,That sounds wonderful.|I love you COMMON_PLAYERNAME.,140,0,0,
+130,0,0,,You're not a loser.|You've won my heart.,You've did the same with my heart.|I love you COMMON_PLAYERNAME.,140,0,0,
+130,0,0,,(Shut her up|with a kiss.),(She's surprised and smiles.)|I love you COMMON_PLAYERNAME.,140,0,0,
+140,0,0,,Will you be|my girlfriend?,Yes!  Will you be my girlfriend also?,150,0,0,
+140,0,0,,Will you marry me?,What?  Don't do jokes like that.|Let's talk about something else.,0,0,0,
+140,0,0,,I love you Jennifer.,(She nods with a bright smile.)|Will you be my girlfriend?,150,0,0,
+150,0,0,,Yes!!!|(Kiss her.),(You jump into each other arms for|some gropping and a passionate kiss.),160,3,0,StartDating()
+150,0,0,,I need time to|think about it.,"(She looks disappointed.)|Very well, take your time.",0,0,0,
+160,0,0,AllowSexAfterDate,Show me your sexy|body my love.,"Yes darling, I even have a toy we can try.|(You both strip and she gets a double dildo.)",170,0,1,BothNaked()
+160,0,0,AllowSexAfterDate,(Blush red and|start to strip.),"Don't be shy baby, I have a toy we can try.|(You both strip and she gets a double dildo.)",170,0,-1,BothNaked()
+160,0,0,AllowSexAfterDate,I want to make|love with you.,"That's my wish also, I have a toy we can try.|(You both strip and she gets a double dildo.)",170,1,0,BothNaked()
+160,0,0,,I'm so happy!,Me too baby!,0,0,0,
+160,0,0,,I can't wait to|tell my friends.,And I can't wait to tell my family.|I hope to meet your friends soon.,0,1,0,
+160,0,0,,We should|go out later.,Go out?  We have each other.|Isn't that everything we need?,0,-1,0,
+170,0,0,,You're so kinky!|(Get in bed.),,0,0,0,MakeLove()
 170,0,0,!Common_ActorIsOwner,(Push her on the bed.),,0,0,1,MakeLove()
 170,0,0,!Common_ActorIsOwned,(Let her carry|you in bed.),,0,0,-1,MakeLove()
-190,0,0,,I... I... I lost my|train of thought.,(She laughs at you.)|Are you stone sweetie?,0,0,0,
-190,0,0,,I don't think it's|working between us.,(She gives you an angry look.)|You want to break up with me?,191,0,0,
-190,0,0,,I want to break up.,(She gives you an angry look.)|Really?  You're breaking up?,191,0,0,
-191,0,0,,"No, let's stay together.",(She stares at you and frowns.)|You had me scared my love.,0,0,0,
-191,0,0,Common_ActorIsOwned,"We'll break up, but I'll|keep you as my slave.","(She cries and looks devastated.)|Yes Mistress, I understand.",192,-5,0,BreakUp()
-191,0,0,!Common_ActorIsOwned,"Yes, I want to break up.",Fuck you then!  I hate you!|You think you can toy with me?,193,-5,0,BreakUp()
-192,0,0,,I'm sorry.|Don't cry.,It's fucking fine alright?|Let's talk about something else.,0,0,-1,AllowLeave()
-192,0,0,,You're not|in my league.,(She grumbles.)  Fine.  I get it.|Let's talk about something else.,0,-1,1,AllowLeave()
-192,0,0,,It was a mistake|from the start,"Maybe you're right, I don't know.|Let's talk about something else.",0,0,0,AllowLeave()
-192,0,0,,You'll find someone|perfect for you.,I thought I already did.  Fuck that.|Let's talk about something else.,0,1,0,AllowLeave()
-193,0,0,,I'm sorry.|Don't cry.,I'm not fucking crying!|(She runs away from the room.),194,0,-1,JenniferLeave()
-193,0,0,,You're not|in my league.,(She grumbles.)  Fine.  I get it.|(She runs away from the room.),194,-1,1,JenniferLeave()
-193,0,0,,It was a mistake|from the start,"Maybe you're right, fuck that!|(She runs away from the room.)",194,0,0,JenniferLeave()
-193,0,0,,You'll find someone|perfect for you.,I thought I already did.  Fuck that.|(She runs away from the room.),194,1,0,JenniferLeave()
+190,0,0,,I... I... I lost my|train of thought.,(She seems a little nervous.)|You got me scared darling.,0,0,0,
+190,0,0,,I don't think it's|working between us.,(She looks devastated.)|You're breaking up baby?,191,0,0,
+190,0,0,,I want to break up.,(She looks devastated.)|You're breaking up baby?,191,0,0,
+191,0,0,,"No, let's stay together.",Don't toy with my emotions like that.,0,0,0,
+191,0,0,Common_ActorIsOwned,"We'll break up, but I'll|keep you as my slave.","(She bows her head and cries silently.)|Yes Mistress, it was too good to be true.",192,-5,0,BreakUp()
+191,0,0,!Common_ActorIsOwned,"Yes, I want to break up.",(She shakes her head in denial.)|I knew it was too good to last.,193,-5,0,BreakUp()
+192,0,0,,I'm sorry.|Don't cry.,"Don't be sorry, it's probably my fault.|Let's talk about something else.",0,0,-1,AllowLeave()
+192,0,0,,You're not|in my league.,No need to put salt in the wound.|Let's talk about something else.,0,-1,1,AllowLeave()
+192,0,0,,It was a mistake|from the start,"Yes, it was wonderful mistake.|Let's talk about something else.",0,0,0,AllowLeave()
+192,0,0,,You'll find someone|perfect for you.,You think so?  I really doubt it.|Let's talk about something else.,0,1,0,AllowLeave()
+193,0,0,,I'm sorry.|Don't cry.,I'm not crying!  I'm leaving!|(She runs away from the room.),194,0,-1,JenniferLeave()
+193,0,0,,You're not|in my league.,No need to put salt in the wound.|(She runs away from the room.),194,-1,1,JenniferLeave()
+193,0,0,,It was a mistake|from the start,I won't do that mistake again!|(She runs away from the room.),194,0,0,JenniferLeave()
+193,0,0,,You'll find someone|perfect for you.,"That's nice, but I'm leaving anyway.|(She runs away from the room.)",194,1,0,JenniferLeave()
 200,0,0,,TO DO DOMME,TO DO DOMME,200,0,0,
 292,0,0,,Get on your knees.,(She slowly kneels in front of you.),293,0,0,"ActorSetPose(""Kneel"")"
 292,0,0,,Will you please|kneel for me?,(She slowly kneels in front of you.),293,0,-1,"ActorSetPose(""Kneel"")"
