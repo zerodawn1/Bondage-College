@@ -30,26 +30,26 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 200,0,0,BondageNotConfronted,"Sorry.  Ich mag Seile,|kannst du mich fesseln?","Du bist erbärmlich, bald wirst du meine Stiefel lecken. | Jetzt gib mir meine Seile. (Sie nimmt die Seile.)",300,0,-2,GiveRope()
 200,0,0,,Nimm deine Seile|und versteck sie besser.,Gut!  Jetzt lass mich in Ruhe.|(Sie nimmt die Seile und dreht sich weg.),300,1,0,GiveRope()
 200,0,0,,Lass uns noch ein|bisschen reden.,Mmmh.  Gut.|Worüber willt du reden?,200,0,0,StopRope()
-200,0,2,,(Ausziehen und fesseln.)|(1 Minute),(Du hältst sie fest und fesselst ihre Hände.|Sie versucht dich zu treten aber versagt und gibt auf.),220,0,0,Tie()
-200,0,4,,"Du wirst mir gehorchen.|(Ausziehen, fesseln; 1 Min.)","(Widerwillig zieht sie ihre Uniform aus|und gibt dir die Seile, um sie zu fesseln.)",220,0,0,TieSub()
+200,0,2,,(Ausziehen und fesseln.)ADD_MINUTES:1,(Du hältst sie fest und fesselst ihre Hände.|Sie versucht dich zu treten aber versagt und gibt auf.),220,0,0,Tie()
+200,0,4,,"Du wirst mir gehorchen.|(Ausziehen und fesseln.)ADD_MINUTES:1","(Widerwillig zieht sie ihre Uniform aus|und gibt dir die Seile, um sie zu fesseln.)",220,0,0,TieSub()
 200,0,0,,"Wenn du die wiederhaben|willst, kämpfe darum.",,40,-2,0,Fight()
 220,0,0,,(Umdrehen.),"Fuck!  Was machst du da?|(Du zwingst sie, sich umzudrehen.)",230,0,0,
-220,0,0,,(Befreien.)|(1 Minute),"(Du löst ihre Arme, während sie dich beschimpft.|Einmal losgebunden, schubst sie dich wütend weg.)",200,0,0,Untie()
-220,0,0,,(Kitzeln.)|(1 Minute),"Ich sagte, ich bin nicht kitzlig!|(Sie schaut dich wütend an.)",220,0,0,Tickle()
-220,1,0,,(Küssen.)|(1 Minute),(Sie starrt dich nach dem Kuss|ausdruckslos an und bleibt sprachlos.),220,0,0,
-220,0,0,AmandaInBondage,(Amanda umarmen lassen.)|(1 Minute),"(Du zwingst die beiden, sich aneinander zu reiben.)|Fuck!  Wie pervers bist du denn?",240,-1,0,
+220,0,0,,(Befreien.)ADD_MINUTES:1,"(Du löst ihre Arme, während sie dich beschimpft.|Einmal losgebunden, schubst sie dich wütend weg.)",200,0,0,Untie()
+220,0,0,,(Kitzeln.)ADD_MINUTES:1,"Ich sagte, ich bin nicht kitzlig!|(Sie schaut dich wütend an.)",220,0,0,Tickle()
+220,1,0,,(Küssen.)ADD_MINUTES:1,(Sie starrt dich nach dem Kuss|ausdruckslos an und bleibt sprachlos.),220,0,0,
+220,0,0,AmandaInBondage,(Amanda umarmen lassen.)ADD_MINUTES:1,"(Du zwingst die beiden, sich aneinander zu reiben.)|Fuck!  Wie pervers bist du denn?",240,-1,0,
 220,0,0,,Die Seile passen wunderbar|zu deinem kurvigen Körper.,Oh!  Mmmmh...  Danke...  Schätz ich.,220,0,0,
-220,0,0,,"Wenn ich dich befreie, kann|ich dich später fesseln? (1)",Klingt fair.  Es ist ein Deal.|(Du befreist sie und schüttelst ihre Hand.),310,1,1,Untie()
-220,0,0,,"Wenn ich dich befreie,|fesselst du mich später? (1)","Ja, klar!  Rache ist süß.|(Du befreist sie und schüttelst ihre Hand.)",310,1,-2,Untie()
+220,0,0,,"Wenn ich dich befreie, kann|ich dich später fesseln?ADD_MINUTES:1",Klingt fair.  Es ist ein Deal.|(Du befreist sie und schüttelst ihre Hand.),310,1,1,Untie()
+220,0,0,,"Wenn ich dich befreie,|fesselst du mich später?ADD_MINUTES:1","Ja, klar!  Rache ist süß.|(Du befreist sie und schüttelst ihre Hand.)",310,1,-2,Untie()
 230,0,0,,(Drehe sie um.),"(Du drehst sie um, während sie dich wütend anstarrt.)",220,0,0,
-230,0,0,,(Befreien.)|(1 Minute),"(Einmal losgebunden, schubst sie dich wütend weg.)",200,0,0,Untie()
-230,0,0,,(Kitzeln.)|(1 Minute),"Ich sagte, ich bin nicht kitzlig!|(Sie schaut dich wütend an.)",230,0,0,Tickle()
-230,0,0,,(Auf den Hintern hauen.)|(1 Minute),(Du gibst ihr vor den anderen Schülern einen Klaps.)|Ha!  Mehr kannst du nicht?,230,0,0,
+230,0,0,,(Befreien.)ADD_MINUTES:1,"(Einmal losgebunden, schubst sie dich wütend weg.)",200,0,0,Untie()
+230,0,0,,(Kitzeln.)ADD_MINUTES:1,"Ich sagte, ich bin nicht kitzlig!|(Sie schaut dich wütend an.)",230,0,0,Tickle()
+230,0,0,,(Auf den Hintern hauen.)ADD_MINUTES:1,(Du gibst ihr vor den anderen Schülern einen Klaps.)|Ha!  Mehr kannst du nicht?,230,0,0,
 230,0,0,,"An deinem Höschen sieht|man, dass du das genießt.","Hör auf, dort hin zu schauen, du Perverse!",230,0,0,PantiesRemark()
-230,0,0,,"Wenn ich dich befreie, kann|ich dich später fesseln? (1)",Klingt fair.  Abgemacht.|(Du befreist sie und schüttelst ihre Hand.),310,1,1,Untie()
-230,0,0,,"Wenn ich dich befreie,|fesselst du mich später? (1)","Ja, klar!  Rache ist süß.|(Du befreist sie und schüttelst ihre Hand.)",310,1,-2,Untie()
+230,0,0,,"Wenn ich dich befreie, kann|ich dich später fesseln?ADD_MINUTES:1",Klingt fair.  Abgemacht.|(Du befreist sie und schüttelst ihre Hand.),310,1,1,Untie()
+230,0,0,,"Wenn ich dich befreie,|fesselst du mich später?ADD_MINUTES:1","Ja, klar!  Rache ist süß.|(Du befreist sie und schüttelst ihre Hand.)",310,1,-2,Untie()
 240,0,0,,(Die beiden trennen.),Endlich! Was für eine Scheißidee.,220,0,0,
-240,0,0,,"(Zum Küssen zwingen.)|(1 Minute)","(Du zwingst beide zum Kuss, Sidney sieht wütend aus.)|Wenn du deine Zunge benutzt, schneide ich sie ab.",250,0,0,KissAmanda()
+240,0,0,,"(Zum Küssen zwingen.)ADD_MINUTES:1","(Du zwingst beide zum Kuss, Sidney sieht wütend aus.)|Wenn du deine Zunge benutzt, schneide ich sie ab.",250,0,0,KissAmanda()
 240,0,0,,Ihr zwei gebt ein|super Bondage-Duo ab.,(Beide starren dich an.),240,0,0,
 250,0,0,,(Die beiden trennen.),Endlich!  Das war eine Scheißidee!,220,0,0,
 250,0,0,,(Den Kuss unterbrechen.),"Gib's zu!  Ich bin besser als die Blondine.|(Sie versucht Amanda einzuschüchtern, die wegschaut.)",240,0,0,

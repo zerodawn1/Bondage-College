@@ -59,23 +59,23 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 40,0,0,SubdueSuccess,Möchtest du mit|Amanda gefesselt sein?,Gefesselt mit meiner lieben Amy?|Das wäre ein Traum.,50,1,1,
 40,0,0,SubdueSuccess,Sollten wir all dem|ein Ende setzen?,"Nein! Das ist die beste Stunde, die ich je hatte.",50,-1,-1,
 110,0,0,Common_PlayerGagged,@Aagnm mugn!,Loongm monng gnu!,110,0,0,
-110,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)|(1 Minute),(Du lockerst und entfernst den großen Ball.)|Buuuuuuh! Knebelst du mich später nochmal?,100,0,0,Ungag()
+110,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)ADD_MINUTES:1,(Du lockerst und entfernst den großen Ball.)|Buuuuuuh! Knebelst du mich später nochmal?,100,0,0,Ungag()
 130,0,0,Common_PlayerGagged,@Aagnm mugn!,Loongm monng gnu!,130,0,0,
-130,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)|(1 Minute),(Du lockerst und entfernst den großen Ball.)|Oh! Knebelst du mich später nochmal?,120,0,0,Ungag()
-140,0,0,Common_PlayerNotRestrained,(Kitzeln.)|(1 Minute),"(Du kitzelst sie und sie kichert ein wenig.)|Hehehe, was hast du als nächstes vor?",140,0,0,
-140,0,0,Common_PlayerNotRestrained,(Befreien.)|(1 Minute),(Du löst die Knoten und sie zieht sich an.)|Das war spitze! Müssen wir nochmal machen.,100,0,0,Untie()
-140,0,0,BondageHugReady,Möchtest du Amanda|umarmen? (1 Minute),Amy umarmen? Oh ja! (Sie geht zu ihrer|Freundin und gibt ihr eine sexy Fesselumarmung.),160,0,0,BondageHug()
+130,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)ADD_MINUTES:1,(Du lockerst und entfernst den großen Ball.)|Oh! Knebelst du mich später nochmal?,120,0,0,Ungag()
+140,0,0,Common_PlayerNotRestrained,(Kitzeln.)ADD_MINUTES:1,"(Du kitzelst sie und sie kichert ein wenig.)|Hehehe, was hast du als nächstes vor?",140,0,0,
+140,0,0,Common_PlayerNotRestrained,(Befreien.)ADD_MINUTES:1,(Du löst die Knoten und sie zieht sich an.)|Das war spitze! Müssen wir nochmal machen.,100,0,0,Untie()
+140,0,0,BondageHugReady,Möchtest du Amanda|umarmen?ADD_MINUTES:1,Amy umarmen? Oh ja! (Sie geht zu ihrer|Freundin und gibt ihr eine sexy Fesselumarmung.),160,0,0,BondageHug()
 150,0,0,Common_PlayerGagged,@Aagnm mugn!,Loongm monng gnu!,150,0,0,
-150,0,0,Common_PlayerNotRestrained,(Kitzeln.)|(1 Minute),(Du kitzelst sie und sie kichert ein wenig.),150,0,0,
-150,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)|(1 Minute),(Du lockerst und entfernst den großen Ball.)|hast du noch einen Knebel für mich?,140,0,0,Ungag()
-150,0,0,Common_PlayerNotRestrained,(Befreien.)|(1 Minute),(Du löst die Knoten und sie zieht sich an.)|(Danach kaut sie fröhlich auf dem Knebel herum.),110,0,0,Untie()
-150,0,0,BondageHugReady,Möchtest du Amanda|umarmen? (1 Minute),"(Sie nicht fröhlich, geht zu ihrer|Freundin und gibt ihr eine sexy Fesselumarmung.)",170,0,0,BondageHug()
-160,0,0,,Möchtest du sie küssen?|(1 Minute),"(Sie wird rot und nickt.) Ein Kuss, Amy?|(Sie kommt näher und küsst Amanda.)",160,0,0,KissAmanda()
+150,0,0,Common_PlayerNotRestrained,(Kitzeln.)ADD_MINUTES:1,(Du kitzelst sie und sie kichert ein wenig.),150,0,0,
+150,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)ADD_MINUTES:1,(Du lockerst und entfernst den großen Ball.)|hast du noch einen Knebel für mich?,140,0,0,Ungag()
+150,0,0,Common_PlayerNotRestrained,(Befreien.)ADD_MINUTES:1,(Du löst die Knoten und sie zieht sich an.)|(Danach kaut sie fröhlich auf dem Knebel herum.),110,0,0,Untie()
+150,0,0,BondageHugReady,Möchtest du Amanda|umarmen?ADD_MINUTES:1,"(Sie nicht fröhlich, geht zu ihrer|Freundin und gibt ihr eine sexy Fesselumarmung.)",170,0,0,BondageHug()
+160,0,0,,Möchtest du sie küssen?ADD_MINUTES:1,"(Sie wird rot und nickt.) Ein Kuss, Amy?|(Sie kommt näher und küsst Amanda.)",160,0,0,KissAmanda()
 160,0,0,,Liebt ihr euch?,Das sag ich dir nicht.|(Sie streckt ihre Zunge raus.),160,0,0,
-160,0,0,Common_PlayerNotRestrained,(Die beiden trennen.)|(1 Minute),"Bis später, Amy. (Sie zwinkert.)",140,0,0,Separate()
+160,0,0,Common_PlayerNotRestrained,(Die beiden trennen.)ADD_MINUTES:1,"Bis später, Amy. (Sie zwinkert.)",140,0,0,Separate()
 170,0,0,,Ihr zwei seid ein|nettes Bondage-Duo.,(Sie nickt zufrieden.),170,0,0,BondageDuo()
-170,0,0,Common_PlayerNotRestrained,(Die beiden trennen.)|(1 Minute),(Sie kehrt widerwillig zu ihrem Platz zurück.),150,0,0,Separate()
-170,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)|(1 Minute),"(Du lockerst und entfernst den Knebel.)|Ist das nicht aufregend, Amanda?",160,0,0,Ungag()
+170,0,0,Common_PlayerNotRestrained,(Die beiden trennen.)ADD_MINUTES:1,(Sie kehrt widerwillig zu ihrem Platz zurück.),150,0,0,Separate()
+170,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)ADD_MINUTES:1,"(Du lockerst und entfernst den Knebel.)|Ist das nicht aufregend, Amanda?",160,0,0,Ungag()
 200,0,0,,"@Mmmmph, mmph!","(Sie lacht.) Verstehe kein Wort.|Ich bin Sarah, schön dich kennenzulernen.",210,0,0,
 200,0,0,,(Langsam nicken.),"(Sie kichert.) Das steht dir super.|Ich bin Sarah, schön dich kennenzulernen.",210,0,-1,
 200,0,0,,"(Versuchen, auf|Mildred zu zeigen.)","Sie hat dich gefesselt? Sehr schön.|Ich bin Sarah, nett dich kennenzulernen.",210,0,0,

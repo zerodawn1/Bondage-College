@@ -17,8 +17,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 30,0,0,,Das können Sie nicht tun.,Natürlich kann ich. Jetzt|ziehst du deine Uniform aus.,40,0,0,
 40,0,0,,Ausziehen? Dafür sind|Sie mir zu hässlich.,"(Sie drängt dich in einen Pranger und schließt ihn.)|Wenn du dich widersetzt, muss ich die Geräte benutzen.",70,-1,0,
 40,0,0,,Vergessen Sie's Fräulein.|Ich ziehe mich nicht aus.,"(Sie drängt dich in einen Pranger und schließt ihn.)|Wenn du dich widersetzt, muss ich die Geräte benutzen.",70,0,0,
-40,0,0,,"Verdammt! Okay, okay.|(Ausziehen.) (1 Minute)",Sehr gut. Außerdem sollst du das tragen.|(Sie zeigt dir ein Lederhalsband.),50,0,0,
-40,0,0,,Nur für Ihre Augen.|(Ausziehen.) (1 Minute),Natürlich. Außerdem sollst du das tragen.|(Sie zeigt dir ein Lederhalsband.),50,1,0,
+40,0,0,,"Verdammt! Okay, okay.|(Ausziehen.)ADD_MINUTES:1",Sehr gut. Außerdem sollst du das tragen.|(Sie zeigt dir ein Lederhalsband.),50,0,0,
+40,0,0,,Nur für Ihre Augen.|(Ausziehen.)ADD_MINUTES:1,Natürlich. Außerdem sollst du das tragen.|(Sie zeigt dir ein Lederhalsband.),50,1,0,
 50,0,0,,"Ja, Miss.|(Den Kopf senken.)",(Sie schnallt dir das Halsband um den Hals.)|Wie fühlst du dich jetzt? Wehrlos?,100,0,-1,AddCollar()
 50,0,0,,Ein Halsband? Sehe ich|aus wie ein Hund?,"(Sie drängt dich in einen Pranger und schließt ihn.)|Wenn du dich widersetzt, muss ich die Geräte benutzen.",80,0,0,
 50,0,0,,Mmmh. Okay.|(Den Kopf senken.),(Sie schnallt dir das Halsband um den Hals.)|Wie fühlst du dich jetzt? Wehrlos?,100,0,0,AddCollar()
@@ -64,9 +64,9 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 170,0,0,,(Den Kopf senken.),"Gutes Mädchen, ich bin um 11:30 Uhr zurück.|(Sie steht auf und verlässt den Raum.)",180,0,-1,AllowLeave()
 170,0,0,,@UUHEE!,Du bist so süß. Ich bin um 11:30 Uhr zurück.|(Sie steht auf und verlässt den Raum.),180,0,0,AllowLeave()
 170,0,0,,@Heesee ehhem.,Du bist so süß. Ich bin um 11:30 Uhr zurück.|(Sie steht auf und verlässt den Raum.),180,0,0,AllowLeave()
-200,0,0,,(An ihre Muschi|reiben.) (1 Minute),(Sie spreizt die Beine und stöhnt leise.),200,0,0,Pleasure(1)
-200,0,0,,(Ihre Klitoris lecken.)|(1 Minute),(Sie zieht dich an den Haaren näher und bebt.),200,0,0,Pleasure(2)
-200,0,0,,(Zunge reinstecken.)|(1 Minute),(Sie bewegt deinen Kopf mit beiden|Händen vor und zurück.),200,0,0,Pleasure(3)
+200,0,0,,(An ihre Muschi|reiben.)ADD_MINUTES:1,(Sie spreizt die Beine und stöhnt leise.),200,0,0,Pleasure(1)
+200,0,0,,(Ihre Klitoris lecken.)ADD_MINUTES:1,(Sie zieht dich an den Haaren näher und bebt.),200,0,0,Pleasure(2)
+200,0,0,,(Zunge reinstecken.)ADD_MINUTES:1,(Sie bewegt deinen Kopf mit beiden|Händen vor und zurück.),200,0,0,Pleasure(3)
 200,0,0,AllowPullBack,(Aufhören und|zurücklehnen.),(Du hörst auf und sie sieht enttäuscht aus.)|Du gibst also schon auf?,210,0,0,CheckToStop()
 210,0,0,,Ich wollte nur Luft|holen. (Weitermachen.),Sehr gut. (Sie packt deine|Haare und zieht dich wieder ran.),200,0,0,
 210,0,0,,"Tut mir leid, ich|kann das nicht.","Schön, ist mir sowieso egal.|(Sie holt Seile und fesselt deine Beine.)",150,-1,0,
