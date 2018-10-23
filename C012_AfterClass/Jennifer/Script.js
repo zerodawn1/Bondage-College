@@ -4,6 +4,7 @@ var C012_AfterClass_Jennifer_HasEgg = false;
 var C012_AfterClass_Jennifer_HasBelt = false;
 var C012_AfterClass_Jennifer_ChatAvail = false;
 var C012_AfterClass_Jennifer_SpankCount = 0;
+var C012_AfterClass_Jennifer_IsNaked = false;
 var	C012_AfterClass_Jennifer_IsGagged = false;
 var	C012_AfterClass_Jennifer_IsRoped = false;
 var	C012_AfterClass_Jennifer_IsStrapped = false;
@@ -19,6 +20,8 @@ var C012_AfterClass_Jennifer_AllowSwimsuit = false;
 var C012_AfterClass_Jennifer_AllowTraining = false;
 var C012_AfterClass_Jennifer_AllowSexAfterDate = false;
 var C012_AfterClass_Jennifer_CanKickOut = false;
+var C012_AfterClass_Jennifer_RefuseSubmitCount = 0;
+var C012_AfterClass_Jennifer_SubTrainingCount = 0;
 
 // In her school clothes, Jennifer can have many poses when she talks
 function C012_AfterClass_Jennifer_SetPose() {
@@ -42,7 +45,8 @@ function C012_AfterClass_Jennifer_SetPose() {
 function C012_AfterClass_Jennifer_CalcParams() {
 	C012_AfterClass_Jennifer_HasEgg = ActorHasInventory("VibratingEgg");
 	C012_AfterClass_Jennifer_HasBelt = ActorHasInventory("ChastityBelt");
-	C012_AfterClass_Jennifer_IsGagged = ActorIsGagged();	
+	C012_AfterClass_Jennifer_IsNaked = (ActorGetValue(ActorCloth) == "Naked");
+	C012_AfterClass_Jennifer_IsGagged = ActorIsGagged();
 	C012_AfterClass_Jennifer_IsRoped = (ActorHasInventory("Rope") || ActorHasInventory("TwoRopes") || ActorHasInventory("ThreeRopes"));
 	C012_AfterClass_Jennifer_IsStrapped = ActorHasInventory("Armbinder");
 	C012_AfterClass_Jennifer_PleasurePlayerAvail = (!Common_PlayerChaste && !ActorIsGagged() && !ActorIsRestrained() && Common_ActorIsOwned && !GameLogQuery(CurrentChapter, "Player", "NextPossibleOrgasm"));
@@ -50,7 +54,7 @@ function C012_AfterClass_Jennifer_CalcParams() {
 	if (GameLogQuery(CurrentChapter, "", "EventBlockChanging") && (C012_AfterClass_Dorm_Guest.indexOf(Common_PlayerOwner) >= 0) && !Common_PlayerNaked) C012_AfterClass_Jennifer_SexAvail = false;
 	C012_AfterClass_Jennifer_CanMasturbate = (!Common_PlayerRestrained && !C012_AfterClass_Jennifer_HasBelt && (ActorGetValue(ActorCloth) == "Naked"));	
 	C012_AfterClass_Jennifer_CanKickOut = (!Common_ActorIsOwner && !Common_ActorIsLover);
-	C012_AfterClass_Jennifer_AllowTennisOutfit = (GameLogQuery("C007_LunchBreak", CurrentActor, "Lunch") || GameLogQuery("C012_AfterClass", CurrentActor, "Running"));
+	C012_AfterClass_Jennifer_AllowTennisOutfit = (GameLogQuery("C007_LunchBreak", CurrentActor, "Lunch") || GameLogQuery("C012_AfterClass", CurrentActor, "Running") || GameLogQuery("C012_AfterClass", CurrentActor, "SubTraining"));
 	C012_AfterClass_Jennifer_AllowSwimsuit = GameLogQuery("C012_AfterClass", CurrentActor, "EnterDormFromPool");
 	C012_AfterClass_Jennifer_AllowTraining = GameLogQuery("C012_AfterClass", CurrentActor, "UnlockTraining");
 	C012_AfterClass_Jennifer_SetPose();
@@ -108,10 +112,10 @@ function C012_AfterClass_Jennifer_Run() {
 	BuildInteraction(C012_AfterClass_Jennifer_CurrentStage);
 
 	// Draw the watching actors for ceremonies
-	if (((C012_AfterClass_Jennifer_CurrentStage >= 320) && (C012_AfterClass_Jennifer_CurrentStage < 340)) || ((C012_AfterClass_Jennifer_CurrentStage >= 291) && (C012_AfterClass_Jennifer_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
+	if (((C012_AfterClass_Jennifer_CurrentStage >= 320) && (C012_AfterClass_Jennifer_CurrentStage < 340)) || ((C012_AfterClass_Jennifer_CurrentStage >= 290) && (C012_AfterClass_Jennifer_CurrentStage < 300))) C012_AfterClass_Dorm_DrawOtherActors();
 
 	// Draw the actor alone or with the player depending on the stage
-	if ((C012_AfterClass_Jennifer_CurrentStage != 3201) && (C012_AfterClass_Jennifer_CurrentStage != 3211) && (C012_AfterClass_Jennifer_CurrentStage != 632) && (C012_AfterClass_Jennifer_CurrentStage != 633) && (C012_AfterClass_Jennifer_CurrentStage != 634) && (C012_AfterClass_Jennifer_CurrentStage != 791) && (C012_AfterClass_Jennifer_CurrentStage != 194) && (C012_AfterClass_Jennifer_CurrentStage != 540) && (C012_AfterClass_Jennifer_CurrentStage != 550) && (C012_AfterClass_Jennifer_CurrentStage != 560) && (C012_AfterClass_Jennifer_CurrentStage != 591) && (C012_AfterClass_Jennifer_CurrentStage != 592) && (C012_AfterClass_Jennifer_CurrentStage != 593)) {
+	if ((C012_AfterClass_Jennifer_CurrentStage != 3201) && (C012_AfterClass_Jennifer_CurrentStage != 3211) && (C012_AfterClass_Jennifer_CurrentStage != 632) && (C012_AfterClass_Jennifer_CurrentStage != 633) && (C012_AfterClass_Jennifer_CurrentStage != 634) && (C012_AfterClass_Jennifer_CurrentStage != 791) && (C012_AfterClass_Jennifer_CurrentStage != 194) && (C012_AfterClass_Jennifer_CurrentStage != 540) && (C012_AfterClass_Jennifer_CurrentStage != 550) && (C012_AfterClass_Jennifer_CurrentStage != 560) && (C012_AfterClass_Jennifer_CurrentStage != 591) && (C012_AfterClass_Jennifer_CurrentStage != 592) && (C012_AfterClass_Jennifer_CurrentStage != 593) && (C012_AfterClass_Jennifer_CurrentStage != 810) && (C012_AfterClass_Jennifer_CurrentStage != 820) && (C012_AfterClass_Jennifer_CurrentStage != 830) && (C012_AfterClass_Jennifer_CurrentStage != 840)) {
 		if (((C012_AfterClass_Jennifer_CurrentStage >= 3090) && (C012_AfterClass_Jennifer_CurrentStage <= 3099)) || ((C012_AfterClass_Jennifer_CurrentStage >= 3901) && (C012_AfterClass_Jennifer_CurrentStage <= 3999))) {
 			DrawActor("Player", 475, 0, 1);
 			DrawActor(CurrentActor, 750, 0, 1);
@@ -238,6 +242,7 @@ function C012_AfterClass_Jennifer_TestDomme() {
 		if (!ActorIsGagged()) {
 			if (ActorGetValue(ActorSubmission) >= 20) {
 				C012_AfterClass_Jennifer_CurrentStage = 200;
+				C012_AfterClass_Jennifer_RefuseSubmitCount = 0;
 				OverridenIntroText = "";
 				LeaveIcon = "";
 			}
@@ -896,4 +901,37 @@ function C012_AfterClass_Jennifer_UnlockTraining() {
 	GameLogAdd("UnlockTraining");
 	C012_AfterClass_Jennifer_AllowTraining = true;
 	C012_AfterClass_Jennifer_AllowLeave();
+}
+
+// Chapter 12 After Class - Jennifer will refuse to submit after 2 strikes
+function C012_AfterClass_Jennifer_RefuseSubmit() {
+	C012_AfterClass_Jennifer_RefuseSubmitCount++;
+}
+
+// Chapter 12 After Class - Jennifer will accept the collar below 2 strikes
+function C012_AfterClass_Jennifer_TestEnslave() {
+	if (C012_AfterClass_Jennifer_RefuseSubmitCount <= 1) {
+		C012_AfterClass_Jennifer_CurrentStage = 290;
+		OverridenIntroText = GetText("AcceptCollar");
+	} else C012_AfterClass_Jennifer_EndEnslaveJennifer();
+}
+
+// Chapter 12 After Class - Jennifer changes to her tennis outfit to train
+function C012_AfterClass_Jennifer_ChangeToTrain() {
+	if (ActorGetValue(ActorCloth) != "Tennis") {
+		CurrentTime = CurrentTime + 50000;
+		ActorSetCloth("Tennis");
+		OverridenIntroText = GetText("TennisToTrain");
+	}
+}
+
+// Chapter 12 After Class - Jennifer loves when the player trains her, it raises the love level
+function C012_AfterClass_Jennifer_SubTraining() {
+	CurrentTime = CurrentTime + 110000;
+	if (!GameLogQuery("C012_AfterClass", CurrentActor, "SubTraining")) {
+		GameLogAdd("SubTraining");
+		ActorChangeAttitude(1, 1);
+	}
+	C012_AfterClass_Jennifer_SubTrainingCount++;
+	if (C012_AfterClass_Jennifer_SubTrainingCount % 12 == 11) ActorChangeAttitude(1, 0);
 }

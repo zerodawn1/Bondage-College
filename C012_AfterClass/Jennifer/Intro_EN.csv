@@ -34,6 +34,23 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 194,0,0,,,Dorm.jpg
 200,0,0,,Training?  But I do plenty of sports Miss.,Dorm.jpg
 200,0,0,Common_ActorIsLover,Are you serious darling?|I already do lots of sports.,Dorm.jpg
+210,0,0,,,Dorm.jpg
+220,0,0,,,Dorm.jpg
+230,0,0,,,Dorm.jpg
+240,0,0,,,Dorm.jpg
+245,0,0,,,Dorm.jpg
+250,0,0,,,Dorm.jpg
+260,0,0,,,Dorm.jpg
+270,0,0,,,Dorm.jpg
+280,0,0,,,Dorm.jpg
+290,0,0,,,Dorm.jpg
+291,0,0,,,Dorm.jpg
+292,0,0,,,Dorm.jpg
+293,0,0,,,Dorm.jpg
+294,0,0,,,Dorm.jpg
+295,0,0,,,Dorm.jpg
+296,0,0,,,Dorm.jpg
+297,0,0,,,Dorm.jpg
 300,0,0,,I've seen the way you act around me.|Have you ever had a Mentor before?,Dorm.jpg
 300,0,0,Common_ActorIsLover,"Baby, I think I know you pretty well.|Have you ever had a Mentor before?",Dorm.jpg
 301,0,0,,,Dorm.jpg
@@ -92,6 +109,11 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 790,0,0,,Are you really kicking me out?,Door.jpg
 790,0,0,Common_ActorIsLover,Are you really kicking me out?|This is the end of our love story?,StopDating.jpg
 791,0,0,,,Door.jpg
+800,0,0,,,Dorm.jpg
+810,0,0,,,JenniferPushUps.jpg
+820,0,0,,,JenniferSitUps.jpg
+830,0,0,,,JenniferSquats.jpg
+840,0,0,,,JenniferJumpingJacks.jpg
 3010,0,0,,You will change and do exercises with me.|I want to see you in your underwear.,Dorm.jpg
 3010,0,0,Common_ActorIsLover,You will change and do exercises with me.|I want to see you in your undies baby.,Dorm.jpg
 3020,0,0,,You will change and do exercises with me.|I want to see you in your school uniform.,Dorm.jpg

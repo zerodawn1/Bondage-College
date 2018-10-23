@@ -23,6 +23,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 20,0,0,ChatAvail,I'd like to know|more about you.,"Very well, we can talk about me.",0,0,0,StartChat()
 20,0,0,AllowTraining,Would you like|to practice fighting?,Absolutely!  We can simulate|another school grounds attack.,590,0,0,StartTraining()
 20,0,0,Common_ActorIsOwned,Let's review|your rules.,(She seems to worry.)|Of course Mistress.,610,0,0,
+20,0,0,Common_ActorIsOwned,Gear up!  It's time|for some training.,Yes Mistress!  (She jumps of joy.),800,0,0,ChangeToTrain()
 20,0,0,Common_PlayerChaste,Can you please help|me with this belt?,I can't.  I don't have|the keys for that belt.,0,0,0,
 20,0,0,Common_ActorIsLover,About our relationship...,What's going on sweetie?,190,0,0,
 20,0,0,CanKickOut,It's time for you|to leave my place.,(She looks very disappointed.)|Are you kicking me out?,790,-1,1,"ActorSetPose("""")"
@@ -83,33 +84,57 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 210,0,0,,"Girl, you're a loser.",(She sighs.)  I know I'm pretty bad in public.|I'm thinking about taking a sociology class.,220,0,0,RefuseSubmit()
 210,0,0,,You'll need help to|survive in our school.,(She nods.)  I guess you mean socialy?|I'm thinking about taking a sociology class.,220,0,0,
 210,0,0,,You need to step|your game up.,"Yes, I know I'm not very good in public.|I'm thinking about taking a sociology class.",220,0,0,
-220,0,0,,That's a pretty dumb idea.|You need something harsher.,(She sighs.)  Something harsher?|What do you have in mind Miss?,230,0,0,RefuseSubmit()
+220,0,0,,That's a dumb idea. You|need something harsher.,(She sighs.)  Something harsher?|What do you have in mind Miss?,230,0,0,RefuseSubmit()
 220,0,0,,That won't be enough.|You need harder training.,Harder training?  Are you sure?|What do you have in mind?,230,0,0,
 220,0,0,,Forget that class.|You need a real training.,A real training?  I'm confused.|What do you have in mind?,230,0,0,
 230,0,0,,I could reprogram you.|To make you popular.,You think I can be popular?|How will you do that?,240,0,0,
 230,0,0,,I will help you to get|rid of your public fears.,It sounds too good to be true.|How will you do that?,240,0,0,
 230,0,0,,"I'll train you to|be more daring,",It might be a good idea.|How will you do that?,240,0,0,
+230,0,0,,You'll be top slut when|I'm done with you.,(She shakes her head from left to right.)|How exactly do you plan to do that?,240,0,0,RefuseSubmit()
 230,0,0,,"Under my wing,|you will be loved.",I could be loved in school?|How will you do that?,240,0,0,
-240,0,0,,,,250,0,0,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
+240,0,0,IsNaked,You're done the first step.|Showing some flesh.,(She blushes.)  I rarely strip for anyone.|You have a strange magnetism over me.,250,0,0,
+240,0,0,IsNaked,You're naked.|That's a good start.,(She blushes.)  I rarely strip for anyone.|You have a strange magnetism over me.,250,0,0,
+240,0,0,!IsNaked,"First, you need to|take off your clothes.",(She gives you a surprised look.)|Are you serious?  Why?,245,0,0,
+240,0,0,!IsNaked,Follow my orders|and strip down.,(She gives you a surprised look.)|Are you serious?  Why?,245,0,0,
+240,0,0,!IsNaked,Strip slut!,(She shakes her head no.)|Are you serious?  Why?,245,0,0,RefuseSubmit()
+245,0,0,,I will not ask|you twice.,(She strips.)  I rarely strip for anyone.|You have a strange magnetism over me.,250,0,0,"ForceChangeActor(""Naked"")"
+245,0,0,,It's part of|your training.,(She strips.)  I rarely strip for anyone.|You have a strange magnetism over me.,250,0,0,"ForceChangeActor(""Naked"")"
+245,0,0,,(Stay silent and point|at her clothes.),(She strips.)  I rarely strip for anyone.|You have a strange magnetism over me.,250,0,0,"ForceChangeActor(""Naked"")"
+250,0,0,,"Admit it, you like|to obey my orders.","I'm don't know why, but you might be right.|I do feel very submissive toward you.",260,0,0,
+250,0,0,,It's easy to explain.|You're a submissive.,I do feel very submissive toward you.,260,0,0,
+250,0,0,,It's Dominant magnetism.|You cannot escape it.,It's quite powerful.  Kind of scary.|I do feel very submissive toward you.,260,0,0,RefuseSubmit()
+250,0,0,,"Cunt, you crave|to serve me.",(She frowns and looks down.)|I do feel submissive toward you.,260,0,0,
+260,0,0,,"As a bitch, you|will be collared.",A collar?  I've seen girls wearing that.|They seem to have a protector.,270,0,0,RefuseSubmit()
+260,0,0,,I will collar you|for your training.,A collar?  I've seen girls wearing that.|They seem to have a protector.,270,0,0,
+260,0,0,,As my sub.  I will lock a|collar around your neck.,A collar?  I've seen girls wearing that.|They seem to have a protector.,270,0,0,
+270,0,0,,"Once collared, you will|be protected by me.",You trully want to train|and protect me Miss?,280,0,0,
+270,0,0,,A collar means that|I fucking own you.,(She takes one step back.)|You want to own me Miss?,280,0,0,RefuseSubmit()
+270,0,0,,Only the best subs|found a Mistress.,You trully want to become my Mistress?,280,0,0,
+270,0,0,,You will join my family|if you wear it.,It sounds nice to have a family.|Do you want to collar me Miss?,280,0,0,
+280,0,0,,"Jennifer, will you|wear my collar?","I'm sorry, I don't think I can do it.|Let's talk about something else.",0,0,0,TestEnslave()
+280,0,0,,I've changed my mind.|(Don't collar Jennifer.),(She looks uncertain.)  I understand Miss.|Let's talk about something else then.,0,0,0,EndEnslaveJennifer()
+290,0,0,,"I will control your life,|sexuality and hobbies.",That sounds really tough.|But if it's part of the training.,291,0,1,
+290,0,0,,"As my sub, you will|become very popular.",It's a dream come true Miss!,291,1,0,
+290,0,0,,You will obey|me like a dog.,(She sighs and looks down.)|A dog?  Very well Miss.,291,-1,1,
+291,0,0,,You will not seek|another Mistress.,(She gulps.)  Of course Mistress.,292,-1,1,
+291,0,0,,How will you|address me?,"I know, I will address you|as ""Mistress"" from now on.",292,0,0,
+291,0,0,,"You will now|call me: ""Mistress"".","Yes Mistress, I accept.",292,0,0,
+291,0,0,,I'll be your Mistress.|Is that ok for you?,"Yes Mistress, of course.",292,0,-1,
 292,0,0,,Get on your knees.,(She slowly kneels in front of you.),293,0,0,"ActorSetPose(""Kneel"")"
 292,0,0,,Will you please|kneel for me?,(She slowly kneels in front of you.),293,0,-1,"ActorSetPose(""Kneel"")"
 292,0,0,,On your knees slut.,(She slowly kneels in front of you.),293,-1,1,"ActorSetPose(""Kneel"")"
-293,0,0,,"Once this collar is locked,|you will be my property.",(She nods and looks down.)|I understand Mistress.,294,0,0,
-293,0,0,,"Once locked on your neck,|there's no turning back.",(She trembles and looks down.)|I understand Mistress.,294,0,0,
-294,0,0,,(Lock the collar|around her neck.),(You circle the leather collar around her neck|buckle it and put a padlock to lock it in place.),295,0,3,LockCollarJennifer()
+293,0,0,,"Once this collar is locked,|you will be my property.",(She looks at the collar and nods.)|I understand and I accept Mistress.,294,0,0,
+293,0,0,,"Once locked on your neck,|there's no turning back.",(She looks at the collar and nods.)|I understand and I accept Mistress.,294,0,0,
+294,0,0,,(Lock the collar|around her neck.),"(You circle the leather collar around her neck,|buckle it and put a padlock to lock it in place.)",295,0,3,LockCollarJennifer()
 295,0,0,,You are now my bitch.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,-1,0,
 295,0,0,,You are mine.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,0,0,
-295,0,0,,You are now|my submissive.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,1,0,
-296,0,0,,I vow to protect you.,(She nods.)  Thanks Mistress.|I know you will protect me.,297,0,0,
-296,0,0,,I vow to help you.,(She smiles.)  Thanks Mistress.|I know you will help me.,297,0,-1,
-296,0,0,,I vow to discipline you.,(She gasps.)  Thanks Mistress.|I know it will make me better.,297,0,1,
-297,0,0,,Stand up my|lovely subbie.,(She smiles and slowly stands up.)|What do you wish to do now Mistress?,0,1,0,EndEnslaveJennifer()
-297,0,0,,Stand up slut.,(She frowns and slowly stands up.)|What do you wish to do now Mistress?,0,-1,0,EndEnslaveJennifer()
-297,0,0,,Stand up.,(She nods and slowly stands up.)|What do you wish to do now Mistress?,0,0,0,EndEnslaveJennifer()
+295,0,0,,You are now|my submissive.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,0,0,
+296,0,0,,I vow to protect you.,(She nods.)  Thanks Mistress.|I'm sure I will learn a lot.,297,1,0,
+296,0,0,,I vow to help you.,(She smiles.)  Thanks Mistress.|I'm sure I will learn a lot.,297,1,-1,
+296,0,0,,I vow to discipline you.,(She gasps.)  Thanks Mistress.|I'm sure I will learn a lot.,297,-1,1,
+297,0,0,,Stand up my|lovely subbie.,(She smiles and slowly stands up.)|I can't wait to start my training.,0,1,0,EndEnslaveJennifer()
+297,0,0,,Stand up slut.,(She frowns and slowly stands up.)|I can't wait to start my training.,0,-1,0,EndEnslaveJennifer()
+297,0,0,,Stand up.,(She nods and slowly stands up.)|I can't wait to start my training.,0,0,0,EndEnslaveJennifer()
 300,0,0,,A Mentor?,A Mentor is a life coach that will give|you advices and train you to be better.,301,0,0,
 300,0,0,,You think I|need a Mentor?,You need a life coach that will give|you advices and train you to be better.,301,0,0,
 300,0,0,,What does a|Mentor do?,A Mentor is a life coach that will give|you advices and train you to be better.,301,0,0,
@@ -286,6 +311,30 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 790,0,0,,Don't be mad.|I'm sorry.,"It's fine, I'll see you later then.|(She walks out and closes the door.)",791,-1,-1,KickedOut()
 790,0,0,,Pack your shit|and go girl.,You don't need to be rude you know.|(She walks out and closes the door.),791,-2,1,KickedOut()
 791,0,0,,(Back to your dorm.),,791,0,0,BackToDorm()
+800,0,0,,Do some push-ups!,(She nods happily and starts to do|some pretty intense push-ups.),810,0,0,SubTraining()
+800,0,0,,Do some sit-ups!,(She nods happily and starts to do|some pretty intense sit-ups.),820,0,0,SubTraining()
+800,0,0,,Do some squats!,(She nods happily and starts to do|some pretty intense squats.),830,0,0,SubTraining()
+800,0,0,,Do some jumping jacks!,(She nods happily and starts to do|some pretty intense jumping jacks.),840,0,0,SubTraining()
+810,0,0,,Keep it up!,(She catches her breath|and do more push-ups.),810,0,0,SubTraining()
+810,0,0,,Do some sit-ups!,(She nods and starts|to do some sit-ups.),820,0,0,SubTraining()
+810,0,0,,Do some squats!,(She nods and starts|to do some squats.),830,0,0,SubTraining()
+810,0,0,,Do some jumping jacks!,(She nods and starts to|do some jumping jacks.),840,0,0,SubTraining()
+810,0,0,,That's enough!,(She stands up.)  Very well Mistress.|It's wonderful to be trained by you.,0,0,0,"ActorSetPose(""Exhausted"")"
+820,0,0,,Do some push-ups!,(She nods and starts|to do some push-ups.),810,0,0,SubTraining()
+820,0,0,,Keep it up!,(She catches her breath|and do more sit-ups.),820,0,0,SubTraining()
+820,0,0,,Do some squats!,(She nods and starts|to do some squats.),830,0,0,SubTraining()
+820,0,0,,Do some jumping jacks!,(She nods and starts to|do some jumping jacks.),840,0,0,SubTraining()
+820,0,0,,That's enough!,(She stands up.)  Very well Mistress.|It's wonderful to be trained by you.,0,0,0,"ActorSetPose(""Exhausted"")"
+830,0,0,,Do some push-ups!,(She nods and starts|to do some push-ups.),810,0,0,SubTraining()
+830,0,0,,Do some sit-ups!,(She nods and starts|to do some sit-ups.),820,0,0,SubTraining()
+830,0,0,,Keep it up!,(She catches her breath|and do more squats.),830,0,0,SubTraining()
+830,0,0,,Do some jumping jacks!,(She nods and starts to|do some jumping jacks.),840,0,0,SubTraining()
+830,0,0,,That's enough!,(She stands up.)  Very well Mistress.|It's wonderful to be trained by you.,0,0,0,"ActorSetPose(""Exhausted"")"
+840,0,0,,Do some push-ups!,(She nods and starts|to do some push-ups.),810,0,0,SubTraining()
+840,0,0,,Do some sit-ups!,(She nods and starts|to do some sit-ups.),820,0,0,SubTraining()
+840,0,0,,Do some squats!,(She nods and starts|to do some squats.),830,0,0,SubTraining()
+840,0,0,,Keep it up!,(She catches her breath|and do more jumping jacks.),840,0,0,SubTraining()
+840,0,0,,That's enough!,(She stops.)  Very well Mistress.|It's wonderful to be trained by you.,0,0,0,"ActorSetPose(""Exhausted"")"
 3010,0,0,,Yes Mentor.|(Get in your undies.),(You change for Jennifer while|she looks at you and smiles.),3090,0,0,"ForceChangePlayer(""Underwear"")"
 3010,0,0,,(Nod slowly.)|(Get in your undies.),(You change for Jennifer while|she looks at you and smiles.),3090,0,0,"ForceChangePlayer(""Underwear"")"
 3010,0,0,,I don't want|to do that.,"Fine, let's take a break then.|(She turns around irritated.)",3093,0,0,TestPunish()
