@@ -76,7 +76,25 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 193,0,0,,You're not|in my league.,No need to put salt in the wound.|(She runs away from the room.),194,-1,1,JenniferLeave()
 193,0,0,,It was a mistake|from the start,I won't do that mistake again!|(She runs away from the room.),194,0,0,JenniferLeave()
 193,0,0,,You'll find someone|perfect for you.,"That's nice, but I'm leaving anyway.|(She runs away from the room.)",194,1,0,JenniferLeave()
-200,0,0,,TO DO DOMME,TO DO DOMME,200,0,0,
+200,0,0,,I'm not talking|about sports.,What are you talking about then?|(She looks down to avoid your eyes.),210,0,0,
+200,0,0,,"Common girl, you know|what I'm talking about.","I'm sorry Miss, I'm not sure|what you're referencing too.",210,0,0,
+200,0,0,,(Cross your arms|and stare at her.),(She gulps.)  You're not talking|about sports are you Miss?,210,0,0,
+210,0,0,,I'm talking about|your attitude.,"Yes, I know I'm not very good in public.|I'm thinking about taking a sociology class.",220,0,0,
+210,0,0,,"Girl, you're a loser.",(She sighs.)  I know I'm pretty bad in public.|I'm thinking about taking a sociology class.,220,0,0,RefuseSubmit()
+210,0,0,,You'll need help to|survive in our school.,(She nods.)  I guess you mean socialy?|I'm thinking about taking a sociology class.,220,0,0,
+210,0,0,,You need to step|your game up.,"Yes, I know I'm not very good in public.|I'm thinking about taking a sociology class.",220,0,0,
+220,0,0,,That's a pretty dumb idea.|You need something harsher.,(She sighs.)  Something harsher?|What do you have in mind Miss?,230,0,0,RefuseSubmit()
+220,0,0,,That won't be enough.|You need harder training.,Harder training?  Are you sure?|What do you have in mind?,230,0,0,
+220,0,0,,Forget that class.|You need a real training.,A real training?  I'm confused.|What do you have in mind?,230,0,0,
+230,0,0,,I could reprogram you.|To make you popular.,You think I can be popular?|How will you do that?,240,0,0,
+230,0,0,,I will help you to get|rid of your public fears.,It sounds too good to be true.|How will you do that?,240,0,0,
+230,0,0,,"I'll train you to|be more daring,",It might be a good idea.|How will you do that?,240,0,0,
+230,0,0,,"Under my wing,|you will be loved.",I could be loved in school?|How will you do that?,240,0,0,
+240,0,0,,,,250,0,0,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
 292,0,0,,Get on your knees.,(She slowly kneels in front of you.),293,0,0,"ActorSetPose(""Kneel"")"
 292,0,0,,Will you please|kneel for me?,(She slowly kneels in front of you.),293,0,-1,"ActorSetPose(""Kneel"")"
 292,0,0,,On your knees slut.,(She slowly kneels in front of you.),293,-1,1,"ActorSetPose(""Kneel"")"

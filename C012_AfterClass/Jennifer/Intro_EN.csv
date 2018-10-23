@@ -32,8 +32,8 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 192,0,0,,,StopDating.jpg
 193,0,0,,,StopDating.jpg
 194,0,0,,,Dorm.jpg
-200,0,0,,Training?  I'm not sure I understand Miss.,Dorm.jpg
-200,0,0,Common_ActorIsLover,I need training Darling?|I'm not sure I understand.,Dorm.jpg
+200,0,0,,Training?  But I do plenty of sports Miss.,Dorm.jpg
+200,0,0,Common_ActorIsLover,Are you serious darling?|I already do lots of sports.,Dorm.jpg
 300,0,0,,I've seen the way you act around me.|Have you ever had a Mentor before?,Dorm.jpg
 300,0,0,Common_ActorIsLover,"Baby, I think I know you pretty well.|Have you ever had a Mentor before?",Dorm.jpg
 301,0,0,,,Dorm.jpg
