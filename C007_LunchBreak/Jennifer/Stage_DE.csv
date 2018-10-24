@@ -86,9 +86,9 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 150,0,0,,Eine Suppe bitte.,Eine sehr gesunde Wahl.|(Sie bestellt das Gleiche.),160,0,0,GoodMatch()
 150,0,0,,Einen Hamburger bitte.,Nach einem Wettkampf gehen ein paar Proteine wohl|in Ordnung. (Sie bestellt einen kleinen Salat.),160,0,0,
 150,0,0,,Einen Nachoteller bitte.,Nach einem Wettkampf gehen ein paar Proteine wohl|in Ordnung. (Sie bestellt einen kleinen Salat.),160,0,0,
-150,0,0,,Nur Käsekuchen bitte.,Das ist ziemlich ungesund.|(Sie bestellt das Gleiche.),160,0,0,BadMatch()
+150,0,0,,Nur Käsekuchen bitte.,Das ist ziemlich ungesund.|(Sie bestellt einen kleinen Salat.),160,0,0,BadMatch()
 150,0,0,,Suppe und Salat bitte.,Eine sehr gesunde Wahl.|(Sie bestellt das Gleiche.),160,0,0,GoodMatch()
-150,0,0,,Einen Chili Dog bitte.,Das ist ziemlich ungesund.|(Sie bestellt das Gleiche.),160,0,0,BadMatch()
+150,0,0,,Einen Chili Dog bitte.,Das ist ziemlich ungesund.|(Sie bestellt einen kleinen Salat.),160,0,0,BadMatch()
 150,0,0,,Fettuccine Alfredo bitte.,Nach einem Wettkampf gehen ein paar Proteine wohl|in Ordnung. (Sie bestellt einen kleinen Salat.),160,0,0,
 150,0,0,,Nur Wasser bitte.,Du hast viel Selbstbeherrschung.|(Sie bestellt einen kleinen Salat.),160,0,0,GoodMatch()
 160,0,0,TennisVictory,Guten Hunger.,(Ihr esst beide auf und|Jennifer bezahlt die Rechnung.),170,0,0,EatLunch()
