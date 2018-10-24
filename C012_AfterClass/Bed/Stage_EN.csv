@@ -89,7 +89,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 500,0,0,,(Insult her.),"(You call her a whore, a slut, a cunt, etc.|She doesn't seem to like and stops moving.)",500,0,0,"Sex(0, 1, false, false)"
 500,0,0,,(Caress her butt.),(You slowly caress each other her butts.|She moans and squirms on the dildo.),500,0,0,"Sex(1, 1, false, false)"
 500,0,0,,(Spank her butt.),(You spank her pretty hard on the butt|while she whimpers and complains.),500,0,0,"Sex(0, 1, false, false)"
-500,0,0,,(Masturbate your breast.),(You both masturbate your breasts|but Jennifer doesn't react much.),500,0,0,"Sex(0, 1, false, true)"
+500,0,0,,(Masturbate your breast.),"(You both masturbate your breasts,|but Jennifer doesn't react much.)",500,0,0,"Sex(0, 1, false, true)"
 500,0,0,SexSoft,(Masturbate your clitoris.),(You both masturbate and|tremble from the rising pleasure.),500,0,0,"Sex(2, 1, true, true)"
 500,0,0,SexSoft,(Wiggle your butt.),(You both wiggle your butts playfully.|Feeling each other pleasure inside.),500,0,0,"Sex(1, 1, false, true)"
 500,0,0,SexSoft,(Trusts slowly.),"(You slowly trust backward, inserting the|long dildo in and out in moans of pleasure.)",500,0,0,"Sex(2, 1, true, true)"

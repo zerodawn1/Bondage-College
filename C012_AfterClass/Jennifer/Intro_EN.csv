@@ -11,7 +11,7 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 0,0,0,Common_ActorIsOwner,What's going on my protege?,Dorm.jpg
 0,0,0,Common_ActorIsOwned,What's going on Mistress?,Dorm.jpg
 0,0,0,IsRoped,"(She struggles and tries to reach a knot.)|This is tight, can you help me out?",Dorm.jpg
-0,0,0,IsStrapped,"(She struggles and tries to undo the binder.)|This is not comfy, can you help me out?",Dorm.jpg
+0,0,0,IsStrapped,(She struggles and tries to undo the binder.)|This is not comfy.  Can you help me out?,Dorm.jpg
 0,0,0,IsGagged,Ohm uuooohmg uom nougn!,Dorm.jpg
 10,0,0,,,Dorm.jpg
 20,0,0,,,Dorm.jpg
@@ -76,7 +76,7 @@ Stage,LoveReq,SubReq,VarReq,IntroText,Image
 331,0,0,,,Dorm.jpg
 399,0,0,,,Dorm.jpg
 450,0,0,,(Jennifer slides her finger in your collar ring.)|Are you ready for some training my protege?,Dorm.jpg
-450,0,0,Common_ActorIsLover,"(Jennifer slides her finger in your collar ring.)|My baby, are you ready for some training?",Dorm.jpg
+450,0,0,Common_ActorIsLover,(Jennifer slides her finger in your collar ring.)|Are you ready for some training my baby?,Dorm.jpg
 500,0,0,,,Dorm.jpg
 510,0,0,,,Dorm.jpg
 520,0,0,,,Dorm.jpg

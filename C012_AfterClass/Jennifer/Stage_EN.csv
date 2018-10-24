@@ -27,11 +27,11 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 20,0,0,Common_PlayerChaste,Can you please help|me with this belt?,I can't.  I don't have|the keys for that belt.,0,0,0,
 20,0,0,Common_ActorIsLover,About our relationship...,What's going on sweetie?,190,0,0,
 20,0,0,CanKickOut,It's time for you|to leave my place.,(She looks very disappointed.)|Are you kicking me out?,790,-1,1,"ActorSetPose("""")"
-20,0,0,,Never mind.,Alright.  So what could|we do to have some fun?,0,0,0,
+20,0,0,,Never mind.,"Alright.  So, what could|we do to have some fun?",0,0,0,
 100,0,0,,Do you have|a loved one?,"No, I've never dated anyone.",110,0,0,TestRelationship()
 100,0,0,,Do you have|a boyfriend?,"No, I've never dated anyone.",110,0,0,TestRelationship()
 100,0,0,,Do you have|a girlfriend?,"No, I've never dated anyone.",110,0,0,TestRelationship()
-105,0,0,,"Yes, I'm lucky.",You're way more lucky than me.|Let's talk about something else.,0,0,0,
+105,0,0,,"Yes, I'm lucky.",You're way luckier than me.|Let's talk about something else.,0,0,0,
 105,0,0,,You'll find someone.,I hope to find someone someday.|Let's talk about something else.,0,0,0,
 105,0,0,Common_ActorIsOwned,I would rather|date you.,"Please, break up with her first Mistress.|I'm don't want to join a love triangle.",106,0,0,
 105,0,0,!Common_ActorIsOwned,I would rather|date you.,You have to break up with her.|I don't want to join a love triangle.,106,0,0,
@@ -52,7 +52,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 140,0,0,,Will you be|my girlfriend?,Yes!  Will you be my girlfriend also?,150,0,0,
 140,0,0,,Will you marry me?,What?  Don't do jokes like that.|Let's talk about something else.,0,0,0,
 140,0,0,,I love you Jennifer.,(She nods with a bright smile.)|Will you be my girlfriend?,150,0,0,
-150,0,0,,Yes!!!|(Kiss her.),(You jump into each other arms for|some gropping and a passionate kiss.),160,3,0,StartDating()
+150,0,0,,Yes!!!|(Kiss her.),(You jump into each other arms for|some groping and a passionate kiss.),160,3,0,StartDating()
 150,0,0,,I need time to|think about it.,"(She looks disappointed.)|Very well, take your time.",0,0,0,
 160,0,0,AllowSexAfterDate,Show me your sexy|body my love.,"Yes darling, I even have a toy we can try.|(You both strip and she gets a double dildo.)",170,0,1,BothNaked()
 160,0,0,AllowSexAfterDate,(Blush red and|start to strip.),"Don't be shy baby, I have a toy we can try.|(You both strip and she gets a double dildo.)",170,0,-1,BothNaked()
@@ -82,7 +82,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 200,0,0,,(Cross your arms|and stare at her.),(She gulps.)  You're not talking|about sports are you Miss?,210,0,0,
 210,0,0,,I'm talking about|your attitude.,"Yes, I know I'm not very good in public.|I'm thinking about taking a sociology class.",220,0,0,
 210,0,0,,"Girl, you're a loser.",(She sighs.)  I know I'm pretty bad in public.|I'm thinking about taking a sociology class.,220,0,0,RefuseSubmit()
-210,0,0,,You'll need help to|survive in our school.,(She nods.)  I guess you mean socialy?|I'm thinking about taking a sociology class.,220,0,0,
+210,0,0,,You'll need help to|survive in our school.,(She nods.)  I guess you mean socially?|I'm thinking about taking a sociology class.,220,0,0,
 210,0,0,,You need to step|your game up.,"Yes, I know I'm not very good in public.|I'm thinking about taking a sociology class.",220,0,0,
 220,0,0,,That's a dumb idea. You|need something harsher.,(She sighs.)  Something harsher?|What do you have in mind Miss?,230,0,0,RefuseSubmit()
 220,0,0,,That won't be enough.|You need harder training.,Harder training?  Are you sure?|What do you have in mind?,230,0,0,
@@ -107,9 +107,9 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 260,0,0,,"As a bitch, you|will be collared.",A collar?  I've seen girls wearing that.|They seem to have a protector.,270,0,0,RefuseSubmit()
 260,0,0,,I will collar you|for your training.,A collar?  I've seen girls wearing that.|They seem to have a protector.,270,0,0,
 260,0,0,,As my sub.  I will lock a|collar around your neck.,A collar?  I've seen girls wearing that.|They seem to have a protector.,270,0,0,
-270,0,0,,"Once collared, you will|be protected by me.",You trully want to train|and protect me Miss?,280,0,0,
+270,0,0,,"Once collared, you will|be protected by me.",You truly want to train|and protect me Miss?,280,0,0,
 270,0,0,,A collar means that|I fucking own you.,(She takes one step back.)|You want to own me Miss?,280,0,0,RefuseSubmit()
-270,0,0,,Only the best subs|found a Mistress.,You trully want to become my Mistress?,280,0,0,
+270,0,0,,Only the best subs|found a Mistress.,You truly want to become my Mistress?,280,0,0,
 270,0,0,,You will join my family|if you wear it.,It sounds nice to have a family.|Do you want to collar me Miss?,280,0,0,
 280,0,0,,"Jennifer, will you|wear my collar?","I'm sorry, I don't think I can do it.|Let's talk about something else.",0,0,0,TestEnslave()
 280,0,0,,I've changed my mind.|(Don't collar Jennifer.),(She looks uncertain.)  I understand Miss.|Let's talk about something else then.,0,0,0,EndEnslaveJennifer()
@@ -123,8 +123,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 292,0,0,,Get on your knees.,(She slowly kneels in front of you.),293,0,0,"ActorSetPose(""Kneel"")"
 292,0,0,,Will you please|kneel for me?,(She slowly kneels in front of you.),293,0,-1,"ActorSetPose(""Kneel"")"
 292,0,0,,On your knees slut.,(She slowly kneels in front of you.),293,-1,1,"ActorSetPose(""Kneel"")"
-293,0,0,,"Once this collar is locked,|you will be my property.",(She looks at the collar and nods.)|I understand and I accept Mistress.,294,0,0,
-293,0,0,,"Once locked on your neck,|there's no turning back.",(She looks at the collar and nods.)|I understand and I accept Mistress.,294,0,0,
+293,0,0,,"Once this collar is locked,|you will be my property.","(She looks at the collar and nods.)|I understand, and I accept Mistress.",294,0,0,
+293,0,0,,"Once locked on your neck,|there's no turning back.","(She looks at the collar and nods.)|I understand, and I accept Mistress.",294,0,0,
 294,0,0,,(Lock the collar|around her neck.),"(You circle the leather collar around her neck,|buckle it and put a padlock to lock it in place.)",295,0,3,LockCollarJennifer()
 295,0,0,,You are now my bitch.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,-1,0,
 295,0,0,,You are mine.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,0,0,
@@ -141,7 +141,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 301,0,0,,Are you a Mentor|Miss Jennifer?,I'm not but I've had Mentors before.|Maybe I could train you girl.,302,0,0,
 301,0,0,,Would you|coach me?,Yes.  Maybe I could train you girl.,302,0,0,
 301,0,0,,Like a Mistress?,"Yes, some prefer the term ""Mistress"".|Mmmh.  Maybe I could train you girl.",302,0,0,
-301,0,0,,You've had Mentors|before Miss?,Yes I've had Mentors before.|Maybe I could train you girl.,302,0,0,
+301,0,0,,You've had Mentors|before Miss?,"Yes, I've had Mentors before.|Maybe I could train you girl.",302,0,0,
 302,0,0,,Train me how?,I can teach mental and physical discipline|to help you in many sports and at school.,303,0,0,
 302,0,0,,(Stay silent.),I can teach mental and physical discipline|to help you in many sports and at school.,303,0,0,
 302,0,0,,Training isn't for me.,Maybe not.  But think about it and|let me know if you change your mind.,399,0,0,
@@ -155,7 +155,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 305,0,0,,And you would|be my Mentor?,"Yes, I would be your Mentor|and you'll be my protege.",306,0,0,
 305,0,0,,Are you sure you're|ready to do that?,"Yes, I would be your Mentor|and you'll be my protege.",306,0,0,
 305,0,0,Common_ActorIsLover,"My love, you will|really Mentor me?","Yes, I would be your Mentor|and you'll be my protege.",306,0,0,
-305,0,0,,I'm not sure it's|a good idea.,I don't know.  Think about it and|let me know if you want do it.,399,0,0,
+305,0,0,,I'm not sure it's|a good idea.,I don't know.  Think about it and|let me know if you want to do it.,399,0,0,
 306,0,0,,I'm no slave!,It won't work then.  Think about it and|let me know if you change your mind.,399,0,0,
 306,0,0,,What's a protege?,"As my protege, you will submit fully to me.|I will protect you, train you and collar you.",307,0,0,
 306,0,0,,I'll be your slave?,"Not a slave, but you will submit fully to me.|I will protect you, train you and collar you.",307,0,0,
@@ -168,7 +168,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 307,0,0,,A BDSM collar?|This is kinky.,"Maybe.  Your collar will show that you're owned.|It's a college tradition, I'm not really sure why.",308,0,0,
 308,0,0,,I'm scared.,I know this is scary.  Think about it and|let me know if you change your mind.,399,0,0,
 308,0,0,,Then you really|want to own me?,"Yes, I do.  Will you become my protege?|Will you accept to wear my locked collar?",309,0,0,
-308,0,0,,This is thrilling.,Yes it is.  Will you become my protege?|Will you accept to wear my locked collar?,309,0,0,
+308,0,0,,This is thrilling.,"Yes, it is.  Will you become my protege?|Will you accept to wear my locked collar?",309,0,0,
 309,0,0,Common_PlayerNaked,Yes Miss Jennifer.|(Submit to her.),Awesome!  At school we call this a collaring|ceremony.  I will now ask you to kneel for me.,321,0,0,
 309,0,0,!Common_PlayerNaked,Yes Miss Jennifer.|(Submit to her.),Awesome!  At school we call this a collaring|ceremony.  I will now ask you to strip naked.,320,0,0,
 309,0,0,,I cannot do that.,I will not force you.  Think about it and|let me know if you change your mind.,399,0,0,
@@ -215,20 +215,20 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 500,0,0,,You look lonely.|Just like me.,I know how you feel.  It's easier to make|enemies than friends when you're the new girl.,510,1,-1,
 510,0,0,,And you stay in shape|to defend yourself?,Yes.  But I need someone|to practice fighting with.,520,1,0,
 510,0,0,,How do you|deal with bullies?,Not that great so far.  I would need|someone to practice fighting them.,520,0,0,
-510,0,0,,Were you ever|gropped in public?,"Yeah, it was horrible, that's why I'm training.|I need someone to practice fighting with.",520,-1,0,
+510,0,0,,Were you ever|groped in public?,"Yeah, it was horrible, that's why I'm training.|I need someone to practice fighting with.",520,-1,0,
 510,0,0,,Have you ever|tried boxing?,I did but I prefer Judo or Karate.|I need someone to practice fighting.,520,0,0,
 520,0,0,,We could fight together|if you don't hurt me.,Maybe not a real fight but we|could simulate an attack in school.,530,0,-1,
 520,0,0,,We could fight|together to train.,Maybe not a real fight but we|could simulate an attack in school.,530,0,0,
 520,0,0,,I could teach|you how to fight.,Maybe not a real fight but we|could simulate an attack in school.,530,0,1,
-520,0,0,,Find someone else.|I hate fighting.,"Very well, I'll find someone else.|So what's going on around here?",0,-1,-1,AllowLeave()
-520,0,0,,You should find|someone in school.,"Yes, maybe I'll find someone else.|So what's going on around here?",0,-1,0,AllowLeave()
+520,0,0,,Find someone else.|I hate fighting.,"Very well, I'll find someone else.|So, what's going on around here?",0,-1,-1,AllowLeave()
+520,0,0,,You should find|someone in school.,"Yes, maybe I'll find someone else.|So, what's going on around here?",0,-1,0,AllowLeave()
 530,0,0,,Let's simulate a|quick school fight.,(You grab each other In your school clothes.),540,0,0,StartFight()
 530,0,0,,"Alright, let's go!",(You grab each other In your school clothes.),540,0,0,StartFight()
-530,0,0,,No!  This isn't|a good idea.,"Fine, we don't have to train together.|So what else is going on around here?",0,-1,0,AllowLeave()
+530,0,0,,No!  This isn't|a good idea.,"Fine, we don't have to train together.|So, what else is going on around here?",0,-1,0,AllowLeave()
 540,0,0,,(Try to overpower her.),(You try to overpower her but fails.|She locks your arms behind your back.),550,0,-1,Fight(false)
 540,0,0,,(Let her win.),(You don't fight really hard and lose.|She locks your arms behind your back.),550,0,-1,Fight(true)
-550,0,0,,Ow!  Please|let me go!,(She releases you.)  Sorry.|I didn't meant to hurt you.,570,0,-1,
-550,0,0,,You've cheated!,(She releases you and frowns.)|I didn't cheated!  It was fair.,570,-1,0,
+550,0,0,,Ow!  Please|let me go!,(She releases you.)  Sorry.|I didn't mean to hurt you.,570,0,-1,
+550,0,0,,You've cheated!,(She releases you and frowns.)|I didn't cheat!  It was fair.,570,-1,0,
 550,0,0,,You're really|good at this!,"(She releases you and smiles.)|Thanks, you also need practice.",570,1,0,
 560,0,0,,That was fun!,(You release her and she smiles.)|Yes!  But I need more practice.,570,1,0,
 560,0,0,,You're weak.,(You release her and she bows her head.)|You're really strong.  I need more practice.,570,-1,1,
@@ -238,8 +238,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 590,0,0,,"Alright, let's go!",(You grab each other In your school clothes.),591,0,0,StartFight()
 591,0,0,,(Try to overpower her.),(You try to overpower her but fails.|She locks your arms behind your back.),592,0,0,Fight(false)
 591,0,0,,(Let her win.),(You don't fight really hard and lose.|She locks your arms behind your back.),592,0,0,Fight(true)
-592,0,0,,Ow!  Please|let me go!,(She releases you.)  Sorry.|I didn't meant to hurt you.,594,0,0,
-592,0,0,,You've cheated!,(She releases you and frowns.)|I didn't cheated!  It was fair.,594,0,0,
+592,0,0,,Ow!  Please|let me go!,(She releases you.)  Sorry.|I didn't mean to hurt you.,594,0,0,
+592,0,0,,You've cheated!,(She releases you and frowns.)|I didn't cheat!  It was fair.,594,0,0,
 592,0,0,,You're really|good at this!,"(She releases you and smiles.)|Thanks, you also need practice.",594,0,0,
 593,0,0,,That was fun!,(You release her and she smiles.)|Yes!  But I need more practice.,594,0,0,
 593,0,0,,You're weak.,(You release her and she bows her head.)|You're really strong.  I need more practice.,594,0,0,
@@ -247,15 +247,15 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 594,0,0,,We can train|fighting again later.,Awesome!  Let me know|whenever you're ready.,0,0,0,AllowLeave()
 594,0,0,,Practice makes perfect.,That's the spirit!  Let me know|when you want to train again.,0,0,0,AllowLeave()
 600,0,0,,Wear your|school outfit.,"Very well, our college has nice uniforms.|(She changes in her school uniform.)",0,0,0,"ForceChangeActor(""Clothed"")"
-600,0,0,AllowTennisOutfit,Wear your|tennis outfit.,(She nods and changes.)  Sure!|We should play a match tommorow.,0,0,0,"ForceChangeActor(""Tennis"")"
+600,0,0,AllowTennisOutfit,Wear your|tennis outfit.,(She nods and changes.)  Sure!|We should play a match tomorow.,0,0,0,"ForceChangeActor(""Tennis"")"
 600,0,0,AllowSwimsuit,Wear your swimsuit.,(She nods and changes.)  Very well.|Do you want to go back to the pool?,0,0,0,"ForceChangeActor(""Swimsuit"")"
 600,0,0,!HasBelt,Get in your|underwear.,You're planning something funky?|(She changes in her underwear for you.),0,0,0,"ForceChangeActor(""Underwear"")"
 600,0,0,,Get naked.,Please don't take pictures.|(She strips naked for you.),0,0,0,"ForceChangeActor(""Naked"")"
 600,0,0,,Forget it.,(She nods slowly.),0,0,0,
-610,0,0,,You're free to|have fun tonight.,Thanks Mistress.  But I don't have|any plans so I will stay here.,0,0,0,"SetCurfew(""None"")"
+610,0,0,,You're free to|have fun tonight.,"Thanks Mistress.  But I don't have|any plan, so I will stay here.",0,0,0,"SetCurfew(""None"")"
 610,0,0,,"You can have fun tonight,|but you will sleep here.",I will sleep in your dorm?|I didn't expect that Mistress.,0,0,0,"SetCurfew(""24"")"
-610,0,0,CanSetCurfew22,"You can have fun, but|come back at twenty-two.",Thanks Mistress.  But I don't have|any plans so I will stay here.,0,0,0,"SetCurfew(""22"")"
-610,0,0,,You cannot leave my|dorm room tonight.,Alright Mistress.  I didn't had|any plans to go out anyway.,0,0,0,"SetCurfew(""Stay"")"
+610,0,0,CanSetCurfew22,"You can have fun, but|come back at twenty-two.","Thanks Mistress.  But I don't have|any plan, so I will stay here.",0,0,0,"SetCurfew(""22"")"
+610,0,0,,You cannot leave my|dorm room tonight.,Alright Mistress.  I don't have|any plan to go out anyway.,0,0,0,"SetCurfew(""Stay"")"
 630,0,0,,Get naked first.,(She nods and slowly|strips down for you.),631,0,0,"ForceChangeActor(""Naked"")"
 630,0,0,,Strip girl.,(She nods and slowly|strips down for you.),631,0,0,"ForceChangeActor(""Naked"")"
 630,0,0,,I've changed my mind.,Ok.  What would you like to do Mistress?,0,0,0,EndEnslaveJennifer()
@@ -279,7 +279,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 635,0,0,,I've had better.,I'm sorry to hear that Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromJennifer(-1, 0)"
 635,0,0,,You need some|oral training.,I will train for you Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromJennifer(-2, 1)"
 640,0,0,!Common_PlayerGagged,(Kiss her.),(You kiss her lovingly|while she moans lightly.),640,0,0,Masturbate(0)
-640,0,0,,(Massage her breast.),(You massage her little breast|but she doesn't seem turned on.),640,0,0,Masturbate(0)
+640,0,0,,(Massage her breast.),"(You massage her little breast,|but she doesn't seem turned on.)",640,0,0,Masturbate(0)
 640,0,0,,(Pinch her nipple.),(She whimpers from the pain.|She doesn't seem to appreciate.),640,0,0,Masturbate(-1)
 640,0,0,,(Slap her butt.),(You slap her butt a few times|while she whimpers from the pain.),640,0,0,Masturbate(-1)
 640,0,0,,(Caress her clitoris.),(She shivers lightly and seems|to enjoy your gentle touch.),640,0,0,Masturbate(1)
@@ -356,7 +356,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 3060,0,0,,I don't want|to do that.,"Fine, let's take a break then.|(She turns around irritated.)",3093,0,0,TestPunish()
 3060,0,0,,(Shake your head no.),"Fine, let's take a break then.|(She turns around irritated.)",3093,0,0,TestPunish()
 3090,0,0,,Do I look fine?,You do!  Now let's do some exercises.|(She smiles and starts to do exercises.),3092,0,0,TestBlockChanging()
-3090,0,0,,Are you happy?,Yes I am!  Now let's do some exercises.|(She smiles and starts to do exercises.),3092,0,0,TestBlockChanging()
+3090,0,0,,Are you happy?,I am!  Now let's do some exercises.|(She smiles and starts to do exercises.),3092,0,0,TestBlockChanging()
 3090,0,0,,(Bow your head.),You look good!  Now let's do some exercises.|(She smiles and starts to do some exercises.),3092,0,0,TestBlockChanging()
 3091,0,0,,I cannot change?|For how long?,"Until I change my mind, now get moving!|(She smiles and starts to do exercises.)",3092,0,0,AllowLeave()
 3091,0,0,,(Nod slowly.),Stay like that and move your body!|(She smiles and starts to do exercises.),3092,0,0,AllowLeave()
@@ -397,7 +397,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 3162,0,0,,It tickles!,Vaginal muscles training?  I love it.|(She starts to do some exercises.),3191,0,0,AllowLeave()
 3162,0,0,,(Blush red.),Vaginal muscles training?  I love it.|(She starts to do some exercises.),3191,0,0,AllowLeave()
 3190,0,0,!Common_PlayerRestrained,I'm sorry you didn't|find anything you like.,We'll do something else later.|(She starts to do some exercises.),3191,0,0,AllowLeave()
-3190,0,0,Common_PlayerRestrained,Do you like to|see me restrained?,Yes I do.  Train to escape now.|(She starts to do some exercises.),3191,0,0,AllowLeave()
+3190,0,0,Common_PlayerRestrained,Do you like to|see me restrained?,I do.  Train to escape now.|(She starts to do some exercises.),3191,0,0,AllowLeave()
 3190,0,0,Common_PlayerGagged,@Niighn mhim!,It's great to have my own protege.|(She starts to do some exercises.),3191,0,0,AllowLeave()
 3190,0,0,,(Bow your head.),It's great to have my own protege.|(She starts to do some exercises.),3191,0,0,AllowLeave()
 3200,0,0,,Yes Mentor.|(Start push-ups.),(You lie down in your undies.|Ready to do some push-ups.),3201,0,0,"DoActivity(""PushUp"", 0, 0)"
@@ -502,7 +502,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 3915,0,0,,@Aaehm!,Make it clear girl.  Nod for yes.|Shake from left to right for no.,3915,0,0,
 3920,0,0,,A chastity belt?|This is torture!,You will have more time to train|if you stop touching yourself.,3921,0,0,
 3920,0,0,,Mentor!  Can you|spank me instead?,You're not in control.|You will be chaste.,3921,0,1,
-3920,0,0,,"No, please.|I'll be good.",You will be good and you'll be|training instead of masturbating.,3921,0,0,
+3920,0,0,,"No, please.|I'll be good.","You will be good, and you'll be|training instead of masturbating.",3921,0,0,
 3920,0,0,,Fuck no!,(She gives you a menacing look.)|Do not curse!  You will be chaste.,3921,-1,1,
 3920,0,0,,(Nod slowly.),You will have more time to train|if you stop touching yourself.,3921,0,-1,
 3921,0,0,,I guess it's fair.,Absolutely.  Now open your legs.,3922,1,0,
@@ -517,10 +517,10 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 3923,0,0,,It needs to|be so tight?,"It does, so get used to it.|Take a break my protege.",3999,0,0,"EndPunishment(""Belted"")"
 3923,0,0,,This is so kinky!,You won't be kinky anymore.|Take a break my protege.,3999,0,0,"EndPunishment(""Belted"")"
 3923,0,0,,(Bow your head.),It won't be forever.|Now take a break.,3999,0,0,"EndPunishment(""Belted"")"
-3930,0,0,,What do you|have in mind?,We will go out in public and you|will be humilited for your punishment.,3931,0,0,
-3930,0,0,,Humiliation?|This is nothing.,We will go out in public and you|will be humilited for your punishment.,3931,0,1,
-3930,0,0,,Oh please Mentor!|Don't humiliate me.,We will go out in public and you|will be humilited for your punishment.,3931,0,-1,
-3930,0,0,,I'm not sure I like|where this is going.,We will go out in public and you|will be humilited for your punishment.,3931,0,0,
+3930,0,0,,What do you|have in mind?,We will go out in public and you|will be humiliated for your punishment.,3931,0,0,
+3930,0,0,,Humiliation?|This is nothing.,We will go out in public and you|will be humiliated for your punishment.,3931,0,1,
+3930,0,0,,Oh please Mentor!|Don't humiliate me.,We will go out in public and you|will be humiliated for your punishment.,3931,0,-1,
+3930,0,0,,I'm not sure I like|where this is going.,We will go out in public and you|will be humiliated for your punishment.,3931,0,0,
 3931,0,0,,Public humiliation?|This is bullshit!,It will certainly teach you a lesson.|Let's go out my naked protege.,3932,-1,0,
 3931,0,0,,Naked in public? |Oh my lord.,It will certainly teach you a lesson.|Let's go out my naked protege.,3932,0,0,
 3931,0,0,,This sounds tough|but fair Mentor.,It will certainly teach you a lesson.|Let's go out my naked protege.,3932,1,0,
