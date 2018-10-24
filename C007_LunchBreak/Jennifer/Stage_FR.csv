@@ -86,9 +86,9 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 150,0,0,,"Une soupe, s'il vous plaît.",C'est un choix très sain.|(Elle commande la même chose.),160,0,0,GoodMatch()
 150,0,0,,"Un hamburger,|s'il vous plaît.",Je suppose que tu peux faire le plein de protéines|après un match. (Elle commande une petite salade.),160,0,0,
 150,0,0,,"Un plateau de nachos,|s'il vous plaît.",Je suppose que tu peux faire le plein de protéines|après un match. (Elle commande une petite salade.),160,0,0,
-150,0,0,,"Juste un cheesecake,|s'il vous plaît.",Ce n'est pas très sain.|(Elle commande la même chose.),160,0,0,BadMatch()
+150,0,0,,"Juste un cheesecake,|s'il vous plaît.",Ce n'est pas très sain.|(Elle commande une petite salade.),160,0,0,BadMatch()
 150,0,0,,"Une soupe et une salade,|s'il vous plaît.",C'est un choix très sain.|(Elle commande la même chose.),160,0,0,GoodMatch()
-150,0,0,,"Un chili dog,|s'il vous plaît.",Ce n'est pas très sain.|(Elle commande la même chose.),160,0,0,BadMatch()
+150,0,0,,"Un chili dog,|s'il vous plaît.",Ce n'est pas très sain.|(Elle commande une petite salade.),160,0,0,BadMatch()
 150,0,0,,"Un fettuccine alfredo,|s'il vous plaît.",Je suppose que tu peux faire le plein de protéines|après un match. (Elle commande une petite salade.),160,0,0,
 150,0,0,,"Juste de l'eau,|s'il vous plaît.",Tu possèdes une grande maîtrise de soi.|(Elle commande une petite salade.),160,0,0,GoodMatch()
 160,0,0,TennisVictory,Je te souhaite|un bon repas.,(Vous prenez toutes les deux votre déjeuner|et Jennifer règle l'addition.),170,0,0,EatLunch()

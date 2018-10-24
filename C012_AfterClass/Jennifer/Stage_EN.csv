@@ -268,10 +268,10 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 632,0,0,,You know|what to do.,(She bends down near your pussy|and starts to lick it slowly.),633,0,0,
 633,0,0,,(Let her pleasure you.),(You let Jennifer pleasure you with her|mouth and slowly drift away in ecstasy.),633,0,0,PleasurePlayer()
 633,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you have pleasure?,635,0,0,StopPleasureFromJennifer()
-633,0,0,,(Force her to|go faster.),(You grab her hair and force|her to speed up the rhythm.),633,0,0,PleasurePlayerSetSpeed(1)
-633,0,0,,(Force her to|go slower.),(You push her head and force|her to slow down the rhythm.),633,0,0,PleasurePlayerSetSpeed(-1)
-634,0,0,,Aaaaah!  Stop slave!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you have pleasure?,635,0,0,StopPleasureFromJennifer()
-634,0,0,,That's enough!|(Stop everything.),(You push her back and stop everything.)|Did you enjoy it Mistress?  Did you have pleasure?,635,0,0,StopPleasureFromJennifer()
+633,0,0,,(Force her to|go faster.),(You squeeze your legs around her head.|Forcing her to speed up to catch her breath.),633,0,0,PleasurePlayerSetSpeed(1)
+633,0,0,,(Force her to|go slower.),(You relax your legs around her head.|Allowing her to slow down the rhythm.),633,0,0,PleasurePlayerSetSpeed(-1)
+634,0,0,,Aaaaah!  Stop slave!|(Stop everything.),(You both stand up and stop everything.)|Did you enjoy it Mistress?  How was it?,635,0,0,StopPleasureFromJennifer()
+634,0,0,,That's enough!|(Stop everything.),(You both stand up and stop everything.)|Did you enjoy it Mistress?  How was it?,635,0,0,StopPleasureFromJennifer()
 635,0,0,,It was wonderful.|I'm still shaking.,I'm very happy to hear you say that.|What would you like to do now?,0,0,0,"EndPleasureFromJennifer(2, -1)"
 635,0,0,,It was good.,I'm happy to hear you say that.|What would you like to do now?,0,0,0,"EndPleasureFromJennifer(1, 0)"
 635,0,0,,It was ok.,I'll do better next time Mistress.|What would you like to do now?,0,0,0,"EndPleasureFromJennifer(0, 0)"
