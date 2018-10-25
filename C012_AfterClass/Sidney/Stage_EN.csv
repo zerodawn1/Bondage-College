@@ -126,7 +126,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 292,0,0,,On your knees slut.,(She slowly kneels in front of you.),293,-1,1,"ActorSetPose(""Kneel"")"
 293,0,0,,"Once this collar is locked,|you will be my property.",(She nods and looks down.)|I understand Mistress.,294,0,0,
 293,0,0,,"Once locked on your neck,|there's no turning back.",(She trembles and looks down.)|I understand Mistress.,294,0,0,
-294,0,0,,(Lock the collar|around her neck.),(You circle the leather collar around her neck,|buckle it and put a padlock to lock it in place.),295,0,3,LockCollarSidney()
+294,0,0,,(Lock the collar|around her neck.),"(You circle the leather collar around her neck,|buckle it and put a padlock to lock it in place.)",295,0,3,LockCollarSidney()
 295,0,0,,You are now my bitch.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,-1,0,
 295,0,0,,You are mine.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,0,0,
 295,0,0,,You are now|my submissive.,"(She adjusts her neck to the collar.)|Yes Mistress, I will follow your rules.",296,1,0,
