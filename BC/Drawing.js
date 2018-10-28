@@ -63,6 +63,58 @@ function DrawImage(Source, X, Y) {
 	MainCanvas.drawImage(DrawGetImage(Source), X, Y);
 }
 
+// Colorize a grey scaled image like hair and eyes
+function DrawColorizeImage(imgElement, HexColor, FullRedraw) {
+
+	// Prepares a canvas to draw the colorized image
+    var canvas = document.createElement("canvas");
+    canvas.width = imgElement.width;
+    canvas.height = imgElement.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(imgElement,0,0);
+    var imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
+    var data = imageData.data;
+
+    // Get the RGB color
+    var rgbColor = HexToRGB(HexColor);
+	var trans;
+
+	// We transform each non transparent pixel
+	if (FullRedraw) {
+		for(var p = 0, len = data.length; p < len; p+=4) {
+			if (data[p+3] == 0)
+			   continue;
+			trans = (data[p] - 100) * 2;
+			data[p + 0] = rgbColor.r + trans;
+			data[p + 1] = rgbColor.g + trans;
+			data[p + 2] = rgbColor.b + trans;
+		}		
+	} else {
+		for(var p = 0, len = data.length; p < len; p+=4) {
+			trans = (data[p] + data[p + 1] + data[p + 2]) / 3
+			if ((data[p+3] == 0) || (trans < 100) || (trans > 155))
+			   continue;
+			trans = (data[p] - 100) * 2;
+			data[p + 0] = rgbColor.r + trans;
+			data[p + 1] = rgbColor.g + trans;
+			data[p + 2] = rgbColor.b + trans;
+		}
+	}
+
+    // Replace the source image with the modified canvas
+    ctx.putImageData(imageData, 0, 0);
+    imgElement.src = canvas.toDataURL();
+	
+}
+
+// Draw an image from a source to the canvas
+function DrawImageColorize(Source, X, Y, Zoom, HexColor, FullRedraw) {
+	var img = new Image();
+	img.src = DrawGetImage(Source).src;
+	if ((img != null) && (img.width > 0)) DrawColorizeImage(img, HexColor, FullRedraw);
+	MainCanvas.drawImage(img, 0, 0, img.width, img.height, X, Y, img.width * Zoom, img.height * Zoom);
+}
+
 // Draw an image from a source to the canvas
 function DrawImageMirror(Source, X, Y) {
 	MainCanvas.save();

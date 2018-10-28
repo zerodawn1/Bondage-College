@@ -24,7 +24,7 @@ var C012_AfterClass_Sidney_CanKickOut = false;
 
 // Sidney can only check her cell phone if she's dressed
 function C012_AfterClass_Sidney_CheckCellPhone() {
-	if ((ActorGetValue(ActorCloth) == "Shorts") || (ActorGetValue(ActorCloth) == "BlackLingerie")) ActorSetPose("CheckCellPhone");
+	if (((ActorGetValue(ActorCloth) == "Shorts") || (ActorGetValue(ActorCloth) == "BlackLingerie")) && !ActorHasInventory("Collar")) ActorSetPose("CheckCellPhone");
 	LeaveIcon = "Leave";
 }
 
