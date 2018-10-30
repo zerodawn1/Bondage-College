@@ -255,46 +255,19 @@ function C012_AfterClass_Jennifer_TestSub() {
 	if (!ActorIsGagged()) {
 		if (!ActorIsRestrained() && !Common_PlayerRestrained) {
 			if (ActorGetValue(ActorSubmission) <= -20) {
-				C012_AfterClass_Jennifer_CurrentStage = 300;
-				if (ActorGetValue(ActorCloth) != "Clothed") OverridenIntroText = GetText("ChangeForDommeSpeech");
-				else OverridenIntroText = "";
-				ActorSetCloth("Clothed");
-				ActorSetPose("Dominant");
-				LeaveIcon = "";
+				if (Common_PlayerOwner == "") {
+					if (!PlayerHasLockedInventory("Collar")) {
+						C012_AfterClass_Jennifer_CurrentStage = 300;
+						if (ActorGetValue(ActorCloth) != "Clothed") OverridenIntroText = GetText("ChangeForDommeSpeech");
+						else OverridenIntroText = "";
+						ActorSetCloth("Clothed");
+						ActorSetPose("Dominant");
+						LeaveIcon = "";
+					} else OverridenIntroText = GetText("PlayerUncollarFirst");
+				} else OverridenIntroText = GetText("AlreadyOwned");
 			}
 		} else OverridenIntroText = GetText("CantDateWhileRestrained");
 	} else C012_AfterClass_Jennifer_GaggedAnswer();
-}
-
-// Chapter 12 After Class - Tests if the player can submit (no restrains first)
-function C012_AfterClass_Jennifer_TestSubmit() {
-	if (Common_PlayerOwner != "") {
-		OverridenIntroText = GetText("AlreadyOwned");
-	} else {
-		if (ActorIsRestrained()) {
-			OverridenIntroText = GetText("UnrestrainFirst");
-		} else {
-			if (ActorIsChaste()) {
-				OverridenIntroText = GetText("UnchasteFirst");
-			} else {
-				if (PlayerHasLockedInventory("Collar")) {
-					OverridenIntroText = GetText("PlayerUncollarFirst");					
-				} else {					
-					if (Common_PlayerRestrained) {
-						OverridenIntroText = GetText("PlayerUnrestrainFirst");
-					} else {
-						if (Common_PlayerNaked) {
-							OverridenIntroText = GetText("GetOnYourKnees");
-							C012_AfterClass_Jennifer_PlayerStrip();
-							C012_AfterClass_Jennifer_CurrentStage = 340;
-						} else {
-							C012_AfterClass_Jennifer_CurrentStage = 330;						
-						}
-					}					
-				}
-			}
-		}
-	}
 }
 
 // Chapter 12 After Class - The player can strip for Jennifer

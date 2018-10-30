@@ -28,7 +28,7 @@ var C012_AfterClass_Amanda_SarahAvail = false;
 
 // Amanda can only check her notes if she's dressed
 function C012_AfterClass_Amanda_CheckNotes() {
-	if ((ActorGetValue(ActorCloth) == "") || (ActorGetValue(ActorCloth) == "Clothed") || (ActorGetValue(ActorCloth) == "Pajamas")) ActorSetPose("CheckNotes");
+	if (((ActorGetValue(ActorCloth) == "") || (ActorGetValue(ActorCloth) == "Clothed") || (ActorGetValue(ActorCloth) == "Pajamas")) && !ActorHasInventory("Collar") && !ActorIsRestrained() && !ActorIsGagged()) ActorSetPose("CheckNotes");
 	LeaveIcon = "Leave";
 }
 

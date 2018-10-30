@@ -16,6 +16,7 @@ function C012_AfterClass_Dorm_SetPunishmentPose() {
 		if (CurrentScreen != "Dorm") {
 			if (CurrentScreen == Common_PlayerOwner) OverridenIntroText = GetText("StillGrounded");
 			else OverridenIntroText = GetText("StillGroundedByOther");
+			if ((CurrentActor != "") && ActorIsGagged()) OverridenIntroText = GetText("StillGroundedGagged");
 		}
 	}
 }

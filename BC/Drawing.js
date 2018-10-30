@@ -1,5 +1,7 @@
 // The main game canvas where everything will be drawn
 var MainCanvas;
+var TempCanvas;
+var ColorCanvas;
 
 // A bank of all the chached images
 var CacheImage = {};
@@ -45,7 +47,12 @@ function DrawGetImage(Source) {
     return CacheImage[Source];
 }
 		
-// Draw a zoomed image from a source to the canvas
+// Draw a zoomed image from a source to a specific canvas
+function DrawImageZoomCanvas(Source, Canvas, SX, SY, SWidth, SHeight, X, Y, Width, Height) {
+	Canvas.drawImage(DrawGetImage(Source), SX, SY, Math.round(SWidth), Math.round(SHeight), X, Y, Width, Height);
+}
+		
+// Draw a zoomed image from a source to the screen canvas
 function DrawImageZoom(Source, SX, SY, SWidth, SHeight, X, Y, Width, Height) {
 	MainCanvas.drawImage(DrawGetImage(Source), SX, SY, Math.round(SWidth), Math.round(SHeight), X, Y, Width, Height);
 }
@@ -63,56 +70,53 @@ function DrawImage(Source, X, Y) {
 	MainCanvas.drawImage(DrawGetImage(Source), X, Y);
 }
 
-// Colorize a grey scaled image like hair and eyes
-function DrawColorizeImage(imgElement, HexColor, FullRedraw) {
-
-	// Prepares a canvas to draw the colorized image
-    var canvas = document.createElement("canvas");
-    canvas.width = imgElement.width;
-    canvas.height = imgElement.height;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(imgElement,0,0);
-    var imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
-    var data = imageData.data;
-
-    // Get the RGB color
-    var rgbColor = HexToRGB(HexColor);
-	var trans;
-
-	// We transform each non transparent pixel
-	if (FullRedraw) {
-		for(var p = 0, len = data.length; p < len; p+=4) {
-			if (data[p+3] == 0)
-			   continue;
-			trans = (data[p] - 100) * 2;
-			data[p + 0] = rgbColor.r + trans;
-			data[p + 1] = rgbColor.g + trans;
-			data[p + 2] = rgbColor.b + trans;
-		}		
-	} else {
-		for(var p = 0, len = data.length; p < len; p+=4) {
-			trans = (data[p] + data[p + 1] + data[p + 2]) / 3
-			if ((data[p+3] == 0) || (trans < 100) || (trans > 155))
-			   continue;
-			trans = (data[p] - 100) * 2;
-			data[p + 0] = rgbColor.r + trans;
-			data[p + 1] = rgbColor.g + trans;
-			data[p + 2] = rgbColor.b + trans;
-		}
-	}
-
-    // Replace the source image with the modified canvas
-    ctx.putImageData(imageData, 0, 0);
-    imgElement.src = canvas.toDataURL();
-	
-}
-
 // Draw an image from a source to the canvas
-function DrawImageColorize(Source, X, Y, Zoom, HexColor, FullRedraw) {
-	var img = new Image();
-	img.src = DrawGetImage(Source).src;
-	if ((img != null) && (img.width > 0)) DrawColorizeImage(img, HexColor, FullRedraw);
-	MainCanvas.drawImage(img, 0, 0, img.width, img.height, X, Y, img.width * Zoom, img.height * Zoom);
+function DrawImageColorize(Source, Canvas, X, Y, Zoom, HexColor, FullRedraw) {
+
+	// Make sure that the starting image is loaded
+	var Img = new Image();
+	Img.src = DrawGetImage(Source).src;
+	if ((Img != null) && (Img.width > 0)) {
+
+		// Prepares a canvas to draw the colorized image
+		ColorCanvas.width = Img.width;
+		ColorCanvas.height = Img.height;
+		var ctx = ColorCanvas.getContext("2d");
+		ctx.drawImage(Img,0,0);
+		var imageData = ctx.getImageData(0,0,ColorCanvas.width,ColorCanvas.height);
+		var data = imageData.data;
+
+		// Get the RGB color used to transform
+		var rgbColor = HexToRGB(HexColor);
+		var trans;
+
+		// We transform each non transparent pixel based on the RGG value
+		if (FullRedraw) {
+			for(var p = 0, len = data.length; p < len; p+=4) {
+				if (data[p+3] == 0)
+				   continue;
+				trans = ((data[p] + data[p + 1] + data[p + 2]) / 383);
+				data[p + 0] = rgbColor.r * trans;
+				data[p + 1] = rgbColor.g * trans;
+				data[p + 2] = rgbColor.b * trans;
+			}		
+		} else {
+			for(var p = 0, len = data.length; p < len; p+=4) {
+				trans = ((data[p] + data[p + 1] + data[p + 2]) / 383);
+				if ((data[p+3] == 0) || (trans < 0.65) || (trans > 1.35))
+				   continue;
+				data[p + 0] = rgbColor.r * trans;
+				data[p + 1] = rgbColor.g * trans;
+				data[p + 2] = rgbColor.b * trans;
+			}
+		}
+
+		// Replace the source image with the modified canvas
+		ctx.putImageData(imageData, 0, 0);
+		Canvas.drawImage(ctx.canvas, 0, 0, Img.width, Img.height, X, Y, Img.width * Zoom, Img.height * Zoom);
+	
+	}
+	
 }
 
 // Draw an image from a source to the canvas

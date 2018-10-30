@@ -40,6 +40,8 @@
 window.onload = function() {
 	CurrentScreen = "CreateCharacter";
 	MainCanvas = document.getElementById("MainCanvas").getContext("2d");
+	TempCanvas = document.createElement("canvas").getContext("2d");
+	ColorCanvas = document.createElement("canvas");
 	IsMobile = DetectMobile();
 	document.getElementById("MainCanvas").addEventListener("keypress", KeyDown);
 	document.getElementById("MainCanvas").tabIndex = 1000;
