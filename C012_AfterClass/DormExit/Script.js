@@ -100,3 +100,19 @@ function C012_AfterClass_DormExit_LaunchRescueSarah() {
 		} else OverridenIntroText = GetText("SchoolClothesFirst");
 	} else OverridenIntroText = GetText("UnrestrainFirst");
 }
+
+// Chapter 12 After Class - Check if the player can go to the Bondage Club
+function C012_AfterClass_DormExit_LaunchBondageClub() {
+	if (!Common_PlayerRestrained && !Common_PlayerGagged) {
+		if (Common_PlayerClothed && (Common_PlayerCostume == "")) {
+			if (CurrentTime >= 20 * 60 * 60 * 1000) {
+				C012_AfterClass_DormExit_CurrentStage = 10;
+			} else OverridenIntroText = GetText("TooEarlyForBondageClub");
+		} else OverridenIntroText = GetText("SchoolClothesFirst");
+	} else OverridenIntroText = GetText("UnrestrainFirst");
+}
+
+// Chapter 12 After Class - Enter the Bondage Club
+function C012_AfterClass_DormExit_EnterBondageClub() {
+	SetScene("C013_BondageClub", "Intro");
+}

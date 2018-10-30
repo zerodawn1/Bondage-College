@@ -744,3 +744,9 @@ function C012_AfterClass_Sarah_StopEvents() {
 	GameLogAdd("StopEvents");
 	LeaveIcon = "Leave";
 }
+
+// Chapter 12 After Class - Enter the Bondage Club with Sarah
+function C012_AfterClass_Sarah_EnterBondageClub() {
+	GameLogAdd("VisitBondageClubWithSarah");
+	SetScene("C013_BondageClub", "Intro");
+}

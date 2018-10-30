@@ -27,7 +27,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 20,0,0,Common_ActorIsLover,About our relationship...,Yes my sexy lover?|(She seems nervous.),190,0,0,
 20,0,0,,It's time for you|to leave my place.,You're expelling me from your dorm?,790,-1,1,
 20,0,0,,Never mind.,Very well.  What would you like to do?,0,0,0,
-30,0,0,,Yes!  Let's go!|(Go to the club.),(The Bondage Club will be available|in another version of the game.),30,0,0,
+30,0,0,,Yes!  Let's go!|(Go to the club.),,30,0,0,EnterBondageClub()
 30,0,0,,"Not yet, let me|pack my stuff.","Ok, but be quick, we might|get punished if we're late.",0,0,0,
 100,0,0,,(Get in bed.),,0,0,0,MakeLove()
 100,0,0,,(Push her on the bed.),,0,0,0,MakeLove()
