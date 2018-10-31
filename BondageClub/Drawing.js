@@ -4,47 +4,44 @@ var TempCanvas;
 var ColorCanvas;
 
 // A bank of all the chached images
-var CacheImage = {};
+var DrawCacheImage = {};
+var DrawCacheLoadedImages = 0;
+var DrawCacheTotalImages = 0;
 
-// Icons bank and paths
-var Icons = new function () {
-    this.Path = GetPath("Icons");
-    this.Fight = new function (parent) {
-        this.Path = GetPath("C999_Common", "Fights", "Icons");
-        this.Punch = GetIconPath(this.Path, "Punch");
-        this.Rope = GetIconPath(this.Path, "Rope");
-        this.TennisBall = GetIconPath(this.Path, "TennisBall");
-    }(this);
-    this.Race = new function (parent) {
-        this.Path = GetPath("C999_Common", "Races", "Icons");
-        this.ElbowBound = GetIconPath(this.Path, "ElbowBound");
-        this.KneeBound = GetIconPath(this.Path, "KneeBound");
-    }(this);
-    this.Navigation = new function (parent) {
-        this.Path = GetPath("Icons", "Navigation");
-        this.ArrowLeftActive = GetIconPath(this.Path, "ArrowLeftActive");
-        this.ArrowRightActive = GetIconPath(this.Path, "ArrowRightActive");
-        this.ArrowUpActive = GetIconPath(this.Path, "ArrowUpActive");
-        this.ArrowDownActive = GetIconPath(this.Path, "ArrowDownActive");
-        this.ArrowLeftInactive = GetIconPath(this.Path, "ArrowLeftInactive");
-        this.ArrowRightInactive = GetIconPath(this.Path, "ArrowRightInactive");
-        this.ArrowUpInactive = GetIconPath(this.Path, "ArrowUpInactive");
-        this.ArrowDownInactive = GetIconPath(this.Path, "ArrowDownInactive");
-    }(this);
-}();
+// Loads the drawing objects
+function DrawLoad() {
+	MainCanvas = document.getElementById("MainCanvas").getContext("2d");
+	TempCanvas = document.createElement("canvas").getContext("2d");
+	ColorCanvas = document.createElement("canvas");
+	document.getElementById("MainCanvas").addEventListener("keypress", KeyDown);
+	document.getElementById("MainCanvas").tabIndex = 1000;	
+}
 
 // Returns the image file or build it from the source
 function DrawGetImage(Source) {
 
     // Search in the cache to find the image
-    if (!CacheImage[Source]) {
+    if (!DrawCacheImage[Source]) {
         var img = new Image;
         img.src = Source;
-        CacheImage[Source] = img;
+        DrawCacheImage[Source] = img;
+		DrawCacheTotalImages++;
+		img.onload = function () {
+			DrawCacheLoadedImages++;
+		}
     }
 
     // returns the final image
-    return CacheImage[Source];
+    return DrawCacheImage[Source];
+}
+
+// Refreshes the character if not all images are loaded and draw the character canvas on the main game screen
+function DrawCharacter(CharacterID, X, Y, Zoom) {
+	if (DrawCacheTotalImages != DrawCacheLoadedImages) Character[CharacterID].Canvas = CharacterAppearanceGetCanvas(Character[CharacterID].Appearance);
+	if ((Zoom == undefined) || (Zoom == 1))
+		DrawCanvas(Character[CharacterID].Canvas, X, Y);
+    else
+		DrawCanvasZoom(Character[CharacterID].Canvas, X, Y, Zoom);
 }
 		
 // Draw a zoomed image from a source to a specific canvas
@@ -53,8 +50,18 @@ function DrawImageZoomCanvas(Source, Canvas, SX, SY, SWidth, SHeight, X, Y, Widt
 }
 		
 // Draw a zoomed image from a source to the screen canvas
-function DrawImageZoom(Source, SX, SY, SWidth, SHeight, X, Y, Width, Height) {
+/*function DrawImageZoom(Source, SX, SY, SWidth, SHeight, X, Y, Width, Height) {
 	MainCanvas.drawImage(DrawGetImage(Source), SX, SY, Math.round(SWidth), Math.round(SHeight), X, Y, Width, Height);
+}*/
+
+// Draw a specific canvas on the main canvas
+function DrawCanvas(Canvas, X, Y) {
+	MainCanvas.drawImage(Canvas, X, Y);
+}
+
+// Draw a specific canvas with a zoom on the main canvas
+function DrawCanvasZoom(Canvas, X, Y, Zoom) {
+	MainCanvas.drawImage(Canvas, 0, 0, Canvas.width, Canvas.height, X, Y, Canvas.width * Zoom, Canvas.height * Zoom);
 }
 
 // Draw a zoomed image from a source to the canvas and mirrors it from left to right

@@ -32,19 +32,22 @@
 
 <script src="Common.js"></script>
 <script src="Drawing.js"></script>
-<script src="CreateCharacter.js"></script>
+<script src="Character.js"></script>
+<script src="CharacterAppearance.js"></script>
+<script src="Inventory.js"></script>
+<script src="Assets.js"></script>
+<script src="Assets/Female3DCG/Assets.js"></script>
 <script>
-//style="border:0px solid #000000; display:block; ; margin:auto; outline:none;"
 
 // When the code is loaded
 window.onload = function() {
-	CurrentScreen = "CreateCharacter";
-	MainCanvas = document.getElementById("MainCanvas").getContext("2d");
-	TempCanvas = document.createElement("canvas").getContext("2d");
-	ColorCanvas = document.createElement("canvas");
+	CurrentScreen = "CharacterAppearance";
 	IsMobile = DetectMobile();
-	document.getElementById("MainCanvas").addEventListener("keypress", KeyDown);
-	document.getElementById("MainCanvas").tabIndex = 1000;
+	DrawLoad();
+	AssetLoad();
+	CharacterLoad("*Player*", [], []);
+	InventoryCreate();
+	CharacterAppearanceSetDefault(Character[0], "Female3DCG");
 	MainRun();	
 };
 

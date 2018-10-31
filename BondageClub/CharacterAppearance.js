@@ -30,7 +30,79 @@ var CreateCharacter_SocksColor = 0;
 var CreateCharacter_ShoesStyle = 0;
 var CreateCharacter_ShoesColor = 0;
 
-function DrawCharacter(X, Y, Zoom) {
+// Resets the character to it's default appearance
+function CharacterAppearanceSetDefault(C, DefaultAssetFamily) {
+
+	// Resets the current appearance
+	C.Appearance = [];
+
+	// For each items in the character inventory
+	var I;
+	for (I = 0; I < C.Inventory.length; I++)
+		if (C.Inventory[I].Asset.Group.Family == DefaultAssetFamily) {
+
+			// If there's no item in a slot, the first one becomes the default
+			var MustWear = true;
+			var A;
+			for (A = 0; A < C.Appearance.length; A++)
+				if (C.Appearance[A].Asset.Group.Name == C.Inventory[I].Asset.Group.Name)
+					MustWear = false;
+
+			// No item, we wear it with the default color
+			if (MustWear) {
+				var NA = {
+					Asset: C.Inventory[I].Asset,
+					Color: C.Inventory[I].Asset.Group.ColorSchema[0]
+				}
+				C.Appearance.push(NA);				
+			}
+			
+		}
+		
+	// Draw the character canvas
+	C.Canvas = CharacterAppearanceGetCanvas(C.Appearance);
+	
+}
+
+// Gets the character 
+function CharacterAppearanceGetCanvas(CA) {
+	
+	// Prepares the canvas (500x1000 for characters)
+	var Canvas = document.createElement("canvas");
+	Canvas.width = 500;
+	Canvas.height = 1000;
+	var CTX = Canvas.getContext("2d")
+	
+	// Loops in all items worn by the character
+	var A;
+	for (A = 0; A < CA.length; A++) {
+
+
+		// If there's a father group, we must add it to find the correct image
+		var G = "";
+		if (CA[A].Asset.Group.FatherGroupName != "") {
+			var FG;
+			for (FG = 0; FG < CA.length; FG++)
+				if (CA[A].Asset.Group.FatherGroupName == CA[FG].Asset.Group.Name)
+					G = "_" + CA[FG].Asset.Name;
+		}
+	
+		// Draw the item on the canvas (default or empty means no special color, # means apply a color, regular text means we apply that text)
+		if ((CA[A].Color == "default") || (CA[A].Color == ""))
+			DrawImageZoomCanvas("Assets/" + CA[A].Asset.Group.Family + "/" + CA[A].Asset.Group.Name + "/" + CA[A].Asset.Name + G + ".png", CTX, 0, 0, 500, 1000, 0, 0, 500, 1000);
+	    else
+			if (CA[A].Color.indexOf("#") != 0)
+				DrawImageZoomCanvas("Assets/" + CA[A].Asset.Group.Family + "/" + CA[A].Asset.Group.Name + "/" + CA[A].Asset.Name + G + "_" + CA[A].Color + ".png", CTX, 0, 0, 500, 1000, 0, 0, 500, 1000);
+			else
+				DrawImageColorize("Assets/" + CA[A].Asset.Group.Family + "/" + CA[A].Asset.Group.Name + "/" + CA[A].Asset.Name + G + ".png", CTX, CA[A].Asset.Group.Left, CA[A].Asset.Group.Top, 1, CA[A].Color, true);
+
+	}
+		
+	// Returns the final canvas
+	return Canvas;
+}
+
+/*function DrawCharacter(X, Y, Zoom) {
 	Y = Y - CreateCharacter_ShoesBaseHeight[CreateCharacter_ShoesStyle];
 	var ModelPath = "Models/Female3DCG/"
 	var seconds = new Date().getTime();
@@ -45,12 +117,15 @@ function DrawCharacter(X, Y, Zoom) {
 	if (CreateCharacter_ClothList[CreateCharacter_Cloth] != "") DrawImageZoomCanvas(ModelPath + "/Cloth/" + CreateCharacter_ClothList[CreateCharacter_Cloth] + "_" + CreateCharacter_BodySizeList[CreateCharacter_BodySize] + ".png", TempCanvas, 0, 0, 500, 1000, 0, 0, 500 * Zoom, 1000 * Zoom);
 	DrawImageColorize(ModelPath + "/Hair/" + CreateCharacter_HairStyleList[CreateCharacter_HairStyle] + ".png", TempCanvas, 150 * Zoom, 50 * Zoom, Zoom, CreateCharacter_HairColorList[CreateCharacter_HairColor], true);
 	MainCanvas.drawImage(TempCanvas.canvas, X, Y);
-}
+}*/
 
-function CreateCharacter_Run() {
+function CharacterAppearance_Run() {
 	DrawImage("Backgrounds/DressingRoom.jpg", 0, 0);
-	DrawCharacter(900, 0, 1);
-	DrawCharacter(-500, -100, 4);
+	DrawCharacter(0, -500, -100, 4);
+	DrawCharacter(0, 900, 0, 1);
+	//DrawText(DrawCacheLoadedImages.toString(), 1000, 500, "white");
+	//DrawText(DrawCacheTotalImages.toString(), 1000, 600, "white");
+	/*
 	DrawButton(1500, 50, 225, 75, "Randomize");
 	DrawButton(1500, 150, 225, 75, "Skin Color|" + CreateCharacter_SkinColorList[CreateCharacter_SkinColor]);
 	DrawButton(1500, 250, 225, 75, "Body Size|" + CreateCharacter_BodySizeList[CreateCharacter_BodySize]);
@@ -67,24 +142,24 @@ function CreateCharacter_Run() {
 	DrawButton(1750, 450, 225, 75, "Socks Style|" + CreateCharacter_SocksStyleList[CreateCharacter_SocksStyle]);
 	DrawButton(1750, 550, 225, 75, "Socks Color|" + CreateCharacter_SocksColorList[CreateCharacter_SocksColor]);
 	DrawButton(1750, 650, 225, 75, "Shoes Style|" + CreateCharacter_ShoesStyleList[CreateCharacter_ShoesStyle]);
-	DrawButton(1750, 750, 225, 75, "Shoes Color|" + CreateCharacter_ShoesColorList[CreateCharacter_ShoesColor]);
+	DrawButton(1750, 750, 225, 75, "Shoes Color|" + CreateCharacter_ShoesColorList[CreateCharacter_ShoesColor]);*/
 	
 	DrawText("Select your appearance", 500, 50, "White");
 	
 }
 
-function CreateCharacter_NextItem(ÌtemPos, List) {
+function CharacterAppearance_NextItem(ÌtemPos, List) {
 	ÌtemPos++;
 	if (ÌtemPos >= List.length) ÌtemPos = 0;
 	return ÌtemPos;
 }
 
 
-function CreateCharacter_Randomize(List) {
+function CharacterAppearance_Randomize(List) {
 	return Math.round(Math.random() * (List.length - 1));
 }
 
-function CreateCharacter_RandomizeAll() {
+function CharacterAppearance_RandomizeAll() {
 	CreateCharacter_SkinColor = CreateCharacter_Randomize(CreateCharacter_SkinColorList);
 	CreateCharacter_BodySize = CreateCharacter_Randomize(CreateCharacter_BodySizeList);
 	CreateCharacter_EyesStyle = CreateCharacter_Randomize(CreateCharacter_EyesStyleList);
@@ -102,9 +177,9 @@ function CreateCharacter_RandomizeAll() {
 	CreateCharacter_ShoesColor = CreateCharacter_Randomize(CreateCharacter_ShoesColorList);
 }
 
-function CreateCharacter_Click() {
+function CharacterAppearance_Click() {
 
-	if ((MouseX >= 1500) && (MouseX < 1725) && (MouseY >= 50) && (MouseY < 125)) CreateCharacter_RandomizeAll();
+	/*if ((MouseX >= 1500) && (MouseX < 1725) && (MouseY >= 50) && (MouseY < 125)) CreateCharacter_RandomizeAll();
 	if ((MouseX >= 1500) && (MouseX < 1725) && (MouseY >= 150) && (MouseY < 225)) CreateCharacter_SkinColor = CreateCharacter_NextItem(CreateCharacter_SkinColor, CreateCharacter_SkinColorList);
 	if ((MouseX >= 1500) && (MouseX < 1725) && (MouseY >= 250) && (MouseY < 325)) CreateCharacter_BodySize = CreateCharacter_NextItem(CreateCharacter_BodySize, CreateCharacter_BodySizeList);
 	if ((MouseX >= 1500) && (MouseX < 1725) && (MouseY >= 350) && (MouseY < 425)) CreateCharacter_EyesStyle = CreateCharacter_NextItem(CreateCharacter_EyesStyle, CreateCharacter_EyesStyleList);
@@ -120,9 +195,9 @@ function CreateCharacter_Click() {
 	if ((MouseX >= 1750) && (MouseX < 1975) && (MouseY >= 450) && (MouseY < 525)) CreateCharacter_SocksStyle = CreateCharacter_NextItem(CreateCharacter_SocksStyle, CreateCharacter_SocksStyleList);
 	if ((MouseX >= 1750) && (MouseX < 1975) && (MouseY >= 550) && (MouseY < 625)) CreateCharacter_SocksColor = CreateCharacter_NextItem(CreateCharacter_SocksColor, CreateCharacter_SocksColorList);
 	if ((MouseX >= 1750) && (MouseX < 1975) && (MouseY >= 650) && (MouseY < 725)) CreateCharacter_ShoesStyle = CreateCharacter_NextItem(CreateCharacter_ShoesStyle, CreateCharacter_ShoesStyleList);
-	if ((MouseX >= 1750) && (MouseX < 1975) && (MouseY >= 750) && (MouseY < 825)) CreateCharacter_ShoesColor = CreateCharacter_NextItem(CreateCharacter_ShoesColor, CreateCharacter_ShoesColorList);
+	if ((MouseX >= 1750) && (MouseX < 1975) && (MouseY >= 750) && (MouseY < 825)) CreateCharacter_ShoesColor = CreateCharacter_NextItem(CreateCharacter_ShoesColor, CreateCharacter_ShoesColorList);*/
 	
 }
 
-function CreateCharacter_KeyDown() {
+function CharacterAppearance_KeyDown() {
 }
