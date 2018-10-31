@@ -16,7 +16,7 @@ function C013_BondageClub_Intro_Run() {
 	// Write the chapter introduction
 	DrawText(GetText("Intro1"), 450, 150, "White");
 	if (TextPhase >= 1) {
-		if (!GameQueryLog("", "" "VisitBondageClubWithSarah")) DrawText(GetText("Intro2"), 450, 250, "White");
+		if (!GameLogQuery("", "", "VisitBondageClubWithSarah")) DrawText(GetText("Intro2"), 450, 250, "White");
 		else DrawText(GetText("IntroSarah2"), 450, 250, "White");
 	}
 	if (TextPhase >= 2) DrawText(GetText("Intro3"), 450, 350, "White");

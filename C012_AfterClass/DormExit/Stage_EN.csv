@@ -7,5 +7,5 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,!KnowKinbakuClub,@Take a walk|around college.,,0,0,0,LaunchKinbaku()
 0,0,0,KnowKinbakuClub,@The Kinbaku Club.,,0,0,0,LaunchKinbaku()
 0,0,0,KnowBondageClub,@The Bondage Club.,Are you ready to end your adventure in|the college and go to the Bondage Club alone?,0,0,0,LaunchBondageClub()
-10,0,0,,"Yes, I'm ready.|(Go to the club.)",,0,0,0,EnterClub()
+10,0,0,,"Yes, I'm ready.|(Go to the club.)",,0,0,0,EnterBondageClub()
 10,0,0,,Not yet.,Where would you like to go?,0,0,0,

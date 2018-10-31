@@ -1,5 +1,6 @@
 var C013_BondageClub_Entrance_CurrentStage = 0;
 var C013_BondageClub_Entrance_WithSarah = false;
+var C013_BondageClub_Entrance_HasInvitation = false;
 var C013_BondageClub_Entrance_IsCollared = false;
 var C013_BondageClub_Entrance_BeltProblem = false;
 var C013_BondageClub_Entrance_EggProblem = false;
@@ -7,7 +8,8 @@ var C013_BondageClub_Entrance_NoProblem = false;
 
 // Chapter 13 Bondage Club - Load the entrance parameters
 function C013_BondageClub_Entrance_LoadParams() {
-	C013_BondageClub_Entrance_WithSarah = GameQueryLog("", "" "VisitBondageClubWithSarah");
+	C013_BondageClub_Entrance_HasInvitation = GameLogQuery("", "", "BondageClubInvitation");
+	C013_BondageClub_Entrance_WithSarah = GameLogQuery("", "", "VisitBondageClubWithSarah");
 	C013_BondageClub_Entrance_IsCollared = (PlayerHasLockedInventory("Collar") && (Common_PlayerOwner != ""));
 	C013_BondageClub_Entrance_BeltProblem = PlayerHasLockedInventory("ChastityBelt");
 	C013_BondageClub_Entrance_EggProblem = (PlayerHasLockedInventory("VibratingEgg") && !PlayerHasLockedInventory("ChastityBelt"));
@@ -32,13 +34,6 @@ function C013_BondageClub_Entrance_Load() {
 // Chapter 13 Bondage Club - Entrance Load
 function C013_BondageClub_Entrance_Run() {
 	BuildInteraction(C013_BondageClub_Entrance_CurrentStage);
-	if (parseInt(C012_AfterClass_RockShow_CurrentStage) >= 200) {
-		DrawActor(CurrentActor, 680, 0, 1);	
-		DrawActor("Player", 500, 0, 1);
-	} else {
-		DrawActor("Player", 500, 0, 1);
-		DrawActor(CurrentActor, 680, 0, 1);		
-	}
 }
 
 // Chapter 13 Bondage Club - Entrance Click
@@ -54,5 +49,5 @@ function C013_BondageClub_Entrance_UnlockItem(ItemType) {
 
 // Chapter 13 Bondage Club - Ends the Bondage College and loads the Bondage Club game engine
 function C013_BondageClub_Entrance_EnterClub() {
-	window.location = "/BondageClub/index.html";
+	window.location = "BondageClub/index.html";
 }

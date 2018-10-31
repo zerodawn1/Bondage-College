@@ -1,12 +1,12 @@
 Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
-0,0,0,!WithSarah,Yes.  Here it is.|(Show the invite.),(She verifies the card.)  Very well.|Do you know the establishment rules?,100,0,0,
-0,0,0,!WithSarah,Of course girl!|(Show the invite.),(She reads the card.)  Very well Miss.|Do you know the establishment rules?,100,0,0,
-0,0,0,!WithSarah,"Yes Miss, sorry.|(Show the invite.)",(She verifies the card.)  Good girl.|Do you know the establishment rules?,100,0,0,
+0,0,0,HasInvitation,Yes.  Here it is.|(Show the invite.),(She verifies the card.)  Very well.|Do you know the establishment rules?,100,0,0,
+0,0,0,HasInvitation,Of course girl!|(Show the invite.),(She reads the card.)  Very well Miss.|Do you know the establishment rules?,100,0,0,
+0,0,0,HasInvitation,"Yes Miss, sorry.|(Show the invite.)",(She verifies the card.)  Good girl.|Do you know the establishment rules?,100,0,0,
 0,0,0,WithSarah,"No, my friend|Sarah invited me.","(Sarah seems nervous.)|Yes, I've invited her.",10,0,0,
 0,0,0,WithSarah,I came with her.|(Turn to Sarah.),"(Sarah seems nervous.)|Yes, I've invited her.",10,0,0,
 10,0,0,,(Check the maid.),"Sarah, you know you're not|supposed to invite strangers.",20,0,0,
 20,0,0,,(Check Sarah.),I know Miss!  But she's the perfect|candidate for the club.  Trust me.,30,0,0,
-30,0,0,,(Check the maid.),"Young lady, you will be punished tonight.|Go inside, I will talk with your friend.",40,0,0,
+30,0,0,,(Check the maid.),"Young lady, you will be punished tonight.|Go inside.  I will talk with your friend.",40,0,0,
 40,0,0,,(Check Sarah.),Punished!  This is so unfair.|See you later COMMON_PLAYERNAME.,50,0,0,
 50,0,0,,Take care Sarah!,(Sarah leaves and the maid turns to you.)|I trust you want to come inside young lady?,60,0,0,
 50,0,0,,See you later.,(Sarah leaves and the maid turns to you.)|I trust you want to come inside young lady?,60,0,0,
@@ -26,5 +26,5 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 140,0,0,!IsCollared,What about|my slaves?,You cannot invite your slaves without|a permission from the Head Mistress.,150,0,0,
 150,0,0,,I understand.,Are you ready to enter the club?|I will lead you to the dressing room.,160,0,0,
 160,0,0,BeltProblem,(Blush)  I have a|metal undies problem.,(She uses a special a key and unlocks your belt.)|You will be locked in it again when you leave.,160,0,0,"UnlockItem(""ChastityBelt"")"
-160,0,0,EggProblem,(Blush)  I'm stuck|with a vibrating egg.,"(She grabs your crotch, slides a finger and removes it.)|Here you go naughty girl, are you ready now?",160,0,0,"UnlockItem(""VibratingEgg"")"
+160,0,0,EggProblem,(Blush)  I'm stuck|with a vibrating egg.,"(She grabs your crotch, slides two finger inside and|removes the egg easily.)  Are you ready naughty girl?",160,0,0,"UnlockItem(""VibratingEgg"")"
 160,0,0,NoProblem,I'm ready!|(Enter the club.),,160,0,0,EnterClub()

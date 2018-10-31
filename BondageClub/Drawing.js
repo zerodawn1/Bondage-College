@@ -131,7 +131,7 @@ function DrawImageMirror(Source, X, Y) {
 function DrawText(Text, X, Y, Color) {
 
 	// Font is fixed for now, color can be set
-	MainCanvas.font = "30px Arial";
+	MainCanvas.font = "24px Arial";
 	MainCanvas.fillStyle = Color;
 	MainCanvas.textAlign = "center";
 	MainCanvas.textBaseline = "middle";
