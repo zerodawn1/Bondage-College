@@ -22,17 +22,17 @@ function InventoryAdd(CharacterID, NewItemAsset, NewItemQuantity, NewItemUsable)
 // Creates the player starting inventory (CharacterID zero is always the player)
 function InventoryCreate() {
 	
-	// Adds all items with 0 value, these come by default for any character
-	var A;
-	for (A = 0; A < Asset.length; A++)
-		if (Asset[A].Value == 0)
-			InventoryAdd(0, Asset[A], 1, false);
-
 	// If we come from the Bondage College, we add the Bondage College items
 	var url = new URL(window.location.href);
 	if (url.searchParams.get("Source") == "BondageCollege")
 		for (A = 0; A < Asset.length; A++)
 			if (Asset[A].Name.indexOf("College") >= 0)
 				InventoryAdd(0, Asset[A], 1, false);
+
+	// Adds all items with 0 value, these come by default for any character
+	var A;
+	for (A = 0; A < Asset.length; A++)
+		if (Asset[A].Value == 0)
+			InventoryAdd(0, Asset[A], 1, false);
 
 }

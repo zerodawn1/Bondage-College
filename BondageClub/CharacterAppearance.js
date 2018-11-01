@@ -1,3 +1,5 @@
+var CharacterAppearanceOffset = 0;
+
 // Resets the character to it's default appearance
 function CharacterAppearanceSetDefault(C) {
 
@@ -115,7 +117,10 @@ function CharacterAppearanceBuildCanvas(C) {
 
 }
 
+// Returns a value from the character current appearance
 function CharacterAppearanceGetCurrentValue(C, Group, Type) {
+	
+	// Finds the value
 	var A;
 	for (A = 0; A < C.Appearance.length; A++)
 		if ((C.Appearance[A].Asset.Group.Family == AssetCurrentFamily) && (C.Appearance[A].Asset.Group.Name == Group)) {
@@ -124,6 +129,7 @@ function CharacterAppearanceGetCurrentValue(C, Group, Type) {
 			if (Type == "ID") return A;
 		}
 	return "None";
+
 }
 
 // Run the characther appearance selection screen 
@@ -133,7 +139,7 @@ function CharacterAppearance_Run() {
 	DrawImage("Backgrounds/DressingRoom.jpg", 0, 0);
 	DrawCharacter(Character[0], -500, -100, 4);
 	DrawCharacter(Character[0], 900, 0, 1);
-	DrawText("Select your appearance", 500, 50, "White");
+	DrawText("Select your appearance", 500, 50, "White");	
 	
 	// Draw the top buttons
 	DrawButton(1450, 25, 125, 60, "Reset", "White");
@@ -143,12 +149,12 @@ function CharacterAppearance_Run() {
 	
 	// Creates buttons for all groups
 	var A;
-	for (A = 0; A < AssetGroup.length; A++)
+	for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + 10; A++)
 		if (AssetGroup[A].Family == AssetCurrentFamily) {
-			DrawButton(1450, 115 + A * 85, 325, 60, AssetGroup[A].Name + ": " + CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Name"), "White");
+			DrawButton(1450, 115 + (A - CharacterAppearanceOffset) * 85, 325, 60, AssetGroup[A].Name + ": " + CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Name"), "White");
 			var Color = CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Color");
-			if (Color.indexOf("#") == 0) DrawButton(1800, 115 + A * 85, 175, 60, Color, Color);
-			else DrawButton(1800, 115 + A * 85, 175, 60, Color, "White");
+			if (Color.indexOf("#") == 0) DrawButton(1800, 115 + (A - CharacterAppearanceOffset) * 85, 175, 60, Color, Color);
+			else DrawButton(1800, 115 + (A - CharacterAppearanceOffset) * 85, 175, 60, Color, "White");
 		}
 
 }
@@ -242,26 +248,35 @@ function CharacterAppearanceNextColor(C, Group) {
 
 }
 
+// Moves the offset to get new character appearance items
+function CharacterAppearanceMoveOffset(Move) {
+	CharacterAppearanceOffset = CharacterAppearanceOffset + Move;
+	if (CharacterAppearanceOffset > AssetGroup.length) CharacterAppearanceOffset = 0;
+	if (CharacterAppearanceOffset < 0) CharacterAppearanceOffset = Math.floor(AssetGroup.length / 10) * 10;
+}
+
 // When the user clicks on the character appearance selection screen
 function CharacterAppearance_Click() {
 
 	// If we must switch to the next item in the player inventory
-	if ((MouseX >= 1450) && (MouseX < 1775) && (MouseY >= 115) && (MouseY < 975))		
-		for (A = 0; A < AssetGroup.length; A++)
+	if ((MouseX >= 1450) && (MouseX < 1775) && (MouseY >= 115) && (MouseY < 950))
+		for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + 10; A++)
 			if (AssetGroup[A].Family == AssetCurrentFamily)
-				if ((MouseY >= 115 + A * 85) && (MouseY <= 175 + A * 85))
+				if ((MouseY >= 115 + (A - CharacterAppearanceOffset) * 85) && (MouseY <= 175 + (A - CharacterAppearanceOffset) * 85))
 					CharacterAppearanceNextItem(Character[0], AssetGroup[A].Name);
 
 	// If we must switch to the next item in the player inventory
-	if ((MouseX >= 1800) && (MouseX < 1975) && (MouseY >= 115) && (MouseY < 975))		
-		for (A = 0; A < AssetGroup.length; A++)
+	if ((MouseX >= 1800) && (MouseX < 1975) && (MouseY >= 115) && (MouseY < 950))
+		for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + 10; A++)
 			if (AssetGroup[A].Family == AssetCurrentFamily)
-				if ((MouseY >= 115 + A * 85) && (MouseY <= 175 + A * 85))
+				if ((MouseY >= 115 + (A - CharacterAppearanceOffset) * 85) && (MouseY <= 175 + (A - CharacterAppearanceOffset) * 85))
 					CharacterAppearanceNextColor(Character[0], AssetGroup[A].Name);
 
 	// If we must set back the default outfit or set a random outfit
 	if ((MouseX >= 1450) && (MouseX < 1575) && (MouseY >= 25) && (MouseY < 85)) CharacterAppearanceSetDefault(Character[0]);
 	if ((MouseX >= 1600) && (MouseX < 1725) && (MouseY >= 25) && (MouseY < 85)) CharacterAppearanceFullRandom(Character[0]);
+	if ((MouseX >= 1750) && (MouseX < 1850) && (MouseY >= 25) && (MouseY < 85)) CharacterAppearanceMoveOffset(-10);
+	if ((MouseX >= 1875) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 85)) CharacterAppearanceMoveOffset(10);
 
 }
 

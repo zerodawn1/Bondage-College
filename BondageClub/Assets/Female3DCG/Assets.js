@@ -1,76 +1,125 @@
-// Loads the full set assets
-function AssetFemale3DCGLoad() {
-	
-	var F = "Female3DCG";
-	
-	// Body group
-	AssetGroupAdd(F, "Body", "", false, ["White", "Asian", "Black"], 1, 0, 0, true, false);
-	AssetAdd("Small", 0, 0);
-	AssetAdd("Normal", 0, 0);
-	AssetAdd("Large", 0, 0);
-	AssetAdd("XLarge", 0, 0);
+var AssetFemale3DCG = [
 
-	// Eyes group
-	AssetGroupAdd(F, "Eyes", "", false, ["#6a3628", "#5e481e", "#666666", "#555588", "#558855", "#885555", "#202020", "#aa3333", "#33aa33", "#3333aa", "#aaaa33", "#33aaaa", "#aa33aa"], 2, 200, 150, false, true);
-	AssetAdd("Eyes1", 0, 0);
-	AssetAdd("Eyes2", 0, 0);
-	AssetAdd("Eyes3", 0, 0);
-	AssetAdd("Eyes4", 0, 0);
-	AssetAdd("Eyes5", 0, 0);
-	AssetAdd("Eyes6", 0, 0);
-	AssetAdd("Eyes7", 0, 0);
-	AssetAdd("Eyes8", 0, 0);
-	AssetAdd("Eyes9", 0, 0);
-	AssetAdd("Eyes10", 0, 0);
-	AssetAdd("Eyes11", 0, 0);
-	
-	// Bra group
-	AssetGroupAdd(F, "Bra", "Body", true, ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"], 3, 150, 200, true, false);
-	AssetAdd("Bra1", 0, 0);
-	AssetAdd("Bra2", 0, 0);
-	AssetAdd("Bra7", 0, 0);
+	{
+		Group: "HairBack",
+		Color: ["#6a3628", "#202020", "#dcc787", "#6c2132", "#999999", "#dddddd", "#e781b1", "#81e7b1", "#81b1e7", "#eeee99", "#ee9999", "#ee99ee"],
+		Left: 150,
+		Top: 50,
+		Asset: ["HairBack1"]
+	},
 
-	// Panties group
-	AssetGroupAdd(F, "Panties", "Body", true, ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"], 4, 150, 450, true, false);
-	AssetAdd("Panties1", 0, 0);
-	AssetAdd("Panties7", 0, 0);
-	AssetAdd("Panties8", 0, 0);
-	AssetAdd("Panties11", 0, 0);	
+	{
+		Group: "Body",
+		AllowNone: false,
+		Color: ["White", "Asian", "Black"],
+		Asset: ["Small", "Normal", "Large", "XLarge"]
+	},
+	 
+	{
+		Group: "Eyes",
+		AllowNone: false,
+		Color: ["#6a3628", "#5e481e", "#666666", "#555588", "#558855", "#885555", "#202020", "#aa3333", "#33aa33", "#3333aa", "#aaaa33", "#33aaaa", "#aa33aa"],
+		Left: 200,
+		Top: 150,
+		FullAlpha: false,
+		Blink: true,
+		Asset: ["Eyes1", "Eyes2", "Eyes3", "Eyes4", "Eyes5", "Eyes6", "Eyes7", "Eyes8", "Eyes9", "Eyes10", "Eyes11"]
+	},
 
-	// Socks group
-	AssetGroupAdd(F, "Socks", "Body", true, ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"], 5, 125, 500, true, false);
-	AssetAdd("Socks1", 0, 0);	
-	AssetAdd("Socks2", 0, 0);	
-	AssetAdd("Socks3", 0, 0);	
-	AssetAdd("Socks4", 0, 0);	
-	AssetAdd("Socks5", 0, 0);
+	{
+		Group: "Mouth",
+		AllowNone: false,
+		Color: ["Default", "#aa5555", "#cc3333", "#55aa55", "#5555aa", "#55aaaa", "#aa55aa", "#aaaa55"],
+		Left: 240,
+		Top: 190,
+		Asset: ["Mouth1", "Mouth2", "Mouth3"]
+	},
 	
-	// Shoes group
-	AssetGroupAdd(F, "Shoes", "Body", true, ["Default", "#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"], 6, 125, 500, true, false);
-	AssetAdd("Shoes1", 0, 6);
-	AssetAdd("Shoes2", 0, 6);
-	AssetAdd("Shoes4", 0, 6);
-	AssetAdd("Sneakers1", 0, 3);
-	AssetAdd("Sneakers2", 0, 3);
-	AssetAdd("Heels1", 0, 15);
-	AssetAdd("Boots1", 0, 9);
+	{
+		Group: "Glasses",
+		Color: ["#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
+		Left: 200,
+		Top: 150,
+		Asset: ["Glasses1"]
+	},
+	
+	{
+		Group: "Bra",
+		FatherGroup : "Body",
+		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
+		Left: 150,
+		Top: 200,
+		Asset: ["Bra1", "Bra2", "Bra7"]
+	},
 
-	// Cloth group
-	AssetGroupAdd(F, "Cloth", "Body", true, ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"], 7, 0, 0, true, false);
-	AssetAdd("CollegeOutfit1", 100, 0);
-	AssetAdd("StudentOutfit1", 0, 0);
-	AssetAdd("SummerDress1", 0, 0);
 	
-	// Hair group
-	AssetGroupAdd(F, "Hair", "", false, ["#6a3628", "#202020", "#dcc787", "#6c2132", "#999999", "#dddddd", "#e781b1", "#81e7b1", "#81b1e7", "#eeee99", "#ee9999", "#ee99ee"], 8, 150, 50, true, false);
-	AssetAdd("Hair1", 0, 0);
-	AssetAdd("Hair2", 0, 0);
-	AssetAdd("Hair3", 0, 0);
-	AssetAdd("Hair4", 0, 0);
-	AssetAdd("Hair5", 0, 0);
-	AssetAdd("Hair6", 0, 0);
-	AssetAdd("Hair7", 0, 0);
-	AssetAdd("Hair8", 0, 0);
-	AssetAdd("Hair9", 0, 0);	
+	{
+		Group: "Gloves",
+		FatherGroup : "Body",
+		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
+		Left: 100,
+		Top: 400,
+		Asset: ["Gloves1"]
+	},
 	
-}
+	{
+		Group: "Panties",
+		FatherGroup : "Body",
+		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
+		Left: 150,
+		Top: 450,
+		Asset: ["Panties1", "Panties7", "Panties8", "Panties11"]
+	},
+		
+	{
+		Group: "Socks",
+		FatherGroup : "Body",
+		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
+		Left: 125,
+		Top: 500,
+		Asset: ["Socks1", "Socks2", "Socks3", "Socks4", "Socks5"]
+	},
+
+	{
+		Group: "Shoes",
+		FatherGroup : "Body",
+		Color: ["Default", "#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
+		Left: 125,
+		Top: 500,
+		Asset: [
+			{ Name: "Shoes1", Height: 6 },
+			{ Name: "Shoes2", Height: 6 },
+			{ Name: "Shoes4", Height: 6 },
+			{ Name: "Sneakers1", Height: 3 },
+			{ Name: "Sneakers2", Height: 3 },
+			{ Name: "Heels1", Height: 15 },
+			{ Name: "Boots1", Height: 9 }
+		]
+	},
+
+	{
+		Group: "Cloth",
+		FatherGroup : "Body",
+		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
+		Asset: [ { Name: "CollegeOutfit1", Value: -1 }, "StudentOutfit1", "SummerDress1" ]
+	},
+
+	{
+		Group: "HairFront",
+		AllowNone: false,
+		Color: ["#6a3628", "#202020", "#dcc787", "#6c2132", "#999999", "#dddddd", "#e781b1", "#81e7b1", "#81b1e7", "#eeee99", "#ee9999", "#ee99ee"],
+		Left: 150,
+		Top: 50,
+		Asset: ["HairFront1", "HairFront2", "HairFront3", "HairFront4", "HairFront5", "HairFront6", "HairFront7", "HairFront8", "HairFront9"]
+	},
+
+	{
+		Group: "Hat",
+		AllowNone: false,
+		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
+		Left: 150,
+		Top: 0,
+		Asset: ["Hat1"]
+	}
+		
+];
