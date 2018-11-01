@@ -1,15 +1,21 @@
 var Asset = [];
 var AssetGroup = [];
+var AssetCurrentFamily;
 var AssetCurrentGroup;
 
 // Adds a new asset group to the main list
-function AssetGroupAdd(NewAssetFamily, NewAssetGroupName, NewAssetFatherGroupName, NewAssetColorSchema, NewAssetDrawingPriority) {
+function AssetGroupAdd(NewAssetFamily, NewAssetGroupName, NewAssetFatherGroupName, NewAssetGroupAllowNone, NewAssetColorSchema, NewAssetDrawingPriority, NewAssetDrawingLeft, NewAssetDrawingTop, NewAssetDrawingFullAlpha, NewAssetDrawingBlink) {
 	var A = {
 		Family: NewAssetFamily,
 		Name: NewAssetGroupName,
 		FatherGroupName: NewAssetFatherGroupName,
+		AllowNone: NewAssetGroupAllowNone,
 		ColorSchema: NewAssetColorSchema,
-		DrawingPriority: NewAssetDrawingPriority
+		DrawingPriority: NewAssetDrawingPriority,
+		DrawingLeft: NewAssetDrawingLeft,
+		DrawingTop: NewAssetDrawingTop,
+		DrawingFullAlpha: NewAssetDrawingFullAlpha,
+		DrawingBlink: NewAssetDrawingBlink
 	}
 	AssetGroup.push(A);
 	AssetCurrentGroup = A;
@@ -28,6 +34,7 @@ function AssetAdd(NewAssetName, NewAssetValue, NewAssetHeightModifier) {
 
 // Reset and load all the assets
 function AssetLoad() {
+	AssetCurrentFamily = "Female3DCG";
 	Asset = [];
 	AssetGroup = [];
 	AssetFemale3DCGLoad();	

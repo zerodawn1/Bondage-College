@@ -31,7 +31,7 @@ function InventoryCreate() {
 	// If we come from the Bondage College, we add the Bondage College items
 	var url = new URL(window.location.href);
 	if (url.searchParams.get("Source") == "BondageCollege")
-		for (A = 0; I < Asset.length; A++)
+		for (A = 0; A < Asset.length; A++)
 			if (Asset[A].Name.indexOf("College") >= 0)
 				InventoryAdd(0, Asset[A], 1, false);
 

@@ -25,9 +25,15 @@ function DrawGetImage(Source) {
         var img = new Image;
         img.src = Source;
         DrawCacheImage[Source] = img;
-		DrawCacheTotalImages++;
-		img.onload = function () {
-			DrawCacheLoadedImages++;
+		
+		// Reloads all character canvas once everything is loaded
+		if (Source.indexOf("Assets") >= 0) {
+			DrawCacheTotalImages++;
+			img.onload = function () {			
+				DrawCacheLoadedImages++;
+				if (DrawCacheLoadedImages == DrawCacheTotalImages)
+					CharacterLoadCanvasAll();				
+			}			
 		}
     }
 
@@ -36,17 +42,26 @@ function DrawGetImage(Source) {
 }
 
 // Refreshes the character if not all images are loaded and draw the character canvas on the main game screen
-function DrawCharacter(CharacterID, X, Y, Zoom) {
-	if (DrawCacheTotalImages != DrawCacheLoadedImages) Character[CharacterID].Canvas = CharacterAppearanceGetCanvas(Character[CharacterID].Appearance);
+function DrawCharacter(C, X, Y, Zoom) {
+
+	// The file name changes if the player is gagged or blinks at specified intervals
+	var seconds = new Date().getTime();
+	var Canvas = (Math.round(seconds / 400) % C.BlinkFactor == 0) ? C.CanvasBlink : C.Canvas;
 	if ((Zoom == undefined) || (Zoom == 1))
-		DrawCanvas(Character[CharacterID].Canvas, X, Y);
+		DrawCanvas(Canvas, X, Y);
     else
-		DrawCanvasZoom(Character[CharacterID].Canvas, X, Y, Zoom);
+		DrawCanvasZoom(Canvas, X, Y, Zoom);
+	
 }
 		
 // Draw a zoomed image from a source to a specific canvas
 function DrawImageZoomCanvas(Source, Canvas, SX, SY, SWidth, SHeight, X, Y, Width, Height) {
 	Canvas.drawImage(DrawGetImage(Source), SX, SY, Math.round(SWidth), Math.round(SHeight), X, Y, Width, Height);
+}
+
+// Draw a zoomed image from a source to a specific canvas
+function DrawImageCanvas(Source, Canvas, X, Y) {
+	Canvas.drawImage(DrawGetImage(Source), X, Y);
 }
 		
 // Draw a zoomed image from a source to the screen canvas
@@ -78,7 +93,7 @@ function DrawImage(Source, X, Y) {
 }
 
 // Draw an image from a source to the canvas
-function DrawImageColorize(Source, Canvas, X, Y, Zoom, HexColor, FullRedraw) {
+function DrawImageCanvasColorize(Source, Canvas, X, Y, Zoom, HexColor, FullAlpha) {
 
 	// Make sure that the starting image is loaded
 	var Img = new Image();
@@ -98,7 +113,7 @@ function DrawImageColorize(Source, Canvas, X, Y, Zoom, HexColor, FullRedraw) {
 		var trans;
 
 		// We transform each non transparent pixel based on the RGG value
-		if (FullRedraw) {
+		if (FullAlpha) {
 			for(var p = 0, len = data.length; p < len; p+=4) {
 				if (data[p+3] == 0)
 				   continue;
@@ -138,7 +153,7 @@ function DrawImageMirror(Source, X, Y) {
 function DrawText(Text, X, Y, Color) {
 
 	// Font is fixed for now, color can be set
-	MainCanvas.font = "24px Arial";
+	MainCanvas.font = "30px Arial";
 	MainCanvas.fillStyle = Color;
 	MainCanvas.textAlign = "center";
 	MainCanvas.textBaseline = "middle";
@@ -154,12 +169,12 @@ function DrawText(Text, X, Y, Color) {
 }
 
 // Draw a button
-function DrawButton(Left, Top, Width, Height, Label) {
+function DrawButton(Left, Top, Width, Height, Label, Color) {
 
 	// Draw the button rectangle
 	MainCanvas.beginPath();
 	MainCanvas.rect(Left, Top, Width, Height);
-    MainCanvas.fillStyle = 'white'; 
+    MainCanvas.fillStyle = Color; 
     MainCanvas.fillRect(Left, Top, Width, Height);
 	MainCanvas.fill();	
 	MainCanvas.lineWidth = '2';
