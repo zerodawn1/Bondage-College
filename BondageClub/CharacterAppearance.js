@@ -9,7 +9,7 @@ function CharacterAppearanceSetDefault(C) {
 	// For each items in the character inventory
 	var I;
 	for (I = 0; I < C.Inventory.length; I++)
-		if (C.Inventory[I].Asset.Group.Family == AssetCurrentFamily) {
+		if ((C.Inventory[I].Asset.Group.Family == AssetCurrentFamily) && C.Inventory[I].Asset.Group.IsDefault) {
 
 			// If there's no item in a slot, the first one becomes the default
 			var MustWear = true;
@@ -40,28 +40,30 @@ function CharacterAppearanceFullRandom(C) {
 	// Clear the current appearance
 	C.Appearance = [];
 
-	// For each item group
+	// For each item group (non default items only show at a 20% rate)
 	var A;
-	for (A = 0; A < AssetGroup.length; A++) {
+	for (A = 0; A < AssetGroup.length; A++)
+		if (AssetGroup[A].IsDefault || (Math.random() < 0.2)) {
 		
-		// Prepares an array of all possible items
-		var R = [];
-		var I;
-		for (I = 0; I < C.Inventory.length; I++)
-			if (C.Inventory[I].Asset.Group.Name == AssetGroup[A].Name)
-				R.push(C.Inventory[I].Asset);
-		
-		// Picks a random item and color and add it
-		var SelectedAsset = R[Math.round(Math.random() * (R.length - 1))];
-		var SelectedColor = SelectedAsset.Group.ColorSchema[Math.round(Math.random() * (SelectedAsset.Group.ColorSchema.length - 1))];
-		if ((SelectedAsset.Group.ColorSchema[0] == "Default") && (Math.random() < 0.5)) SelectedColor = "Default";		
-		var NA = {
-			Asset: SelectedAsset,
-			Color: SelectedColor
+			// Prepares an array of all possible items
+			var R = [];
+			var I;
+			for (I = 0; I < C.Inventory.length; I++)
+				if (C.Inventory[I].Asset.Group.Name == AssetGroup[A].Name)
+					R.push(C.Inventory[I].Asset);
+			
+			// Picks a random item and color and add it
+			var SelectedAsset = R[Math.round(Math.random() * (R.length - 1))];
+			var SelectedColor = SelectedAsset.Group.ColorSchema[Math.round(Math.random() * (SelectedAsset.Group.ColorSchema.length - 1))];
+			if ((SelectedAsset.Group.ColorSchema[0] == "Default") && (Math.random() < 0.5)) SelectedColor = "Default";
+			if (SelectedAsset.Group.ParentColor != "") SelectedColor = CharacterAppearanceGetCurrentValue(C, SelectedAsset.Group.ParentColor, "Color");
+			var NA = {
+				Asset: SelectedAsset,
+				Color: SelectedColor
+			}
+			C.Appearance.push(NA);
+			
 		}
-		C.Appearance.push(NA);
-		
-	}
 
 	// Loads the new character canvas
 	CharacterLoadCanvas(C);
@@ -90,10 +92,10 @@ function CharacterAppearanceBuildCanvas(C) {
 		// If there's a father group, we must add it to find the correct image
 		var CA = C.Appearance[A];
 		var G = "";
-		if (CA.Asset.Group.FatherGroupName != "") {
+		if (CA.Asset.Group.ParentGroupName != "") {
 			var FG;
 			for (FG = 0; FG < C.Appearance.length; FG++)
-				if (CA.Asset.Group.FatherGroupName == C.Appearance[FG].Asset.Group.Name)
+				if (CA.Asset.Group.ParentGroupName == C.Appearance[FG].Asset.Group.Name)
 					G = "_" + C.Appearance[FG].Asset.Name;
 		}
 	

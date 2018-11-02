@@ -43,14 +43,19 @@ function DrawGetImage(Source) {
 
 // Refreshes the character if not all images are loaded and draw the character canvas on the main game screen
 function DrawCharacter(C, X, Y, Zoom) {
+	
+	var Height = 0;
+	var A;
+	for (A = 0; A < C.Appearance.length; A++)
+		Height = Height + C.Appearance[A].Asset.HeightModifier;	
 
 	// The file name changes if the player is gagged or blinks at specified intervals
 	var seconds = new Date().getTime();
 	var Canvas = (Math.round(seconds / 400) % C.BlinkFactor == 0) ? C.CanvasBlink : C.Canvas;
 	if ((Zoom == undefined) || (Zoom == 1))
-		DrawCanvas(Canvas, X, Y);
+		DrawCanvas(Canvas, X, Y - Height);
     else
-		DrawCanvasZoom(Canvas, X, Y, Zoom);
+		DrawCanvasZoom(Canvas, X, Y - (Height * Zoom), Zoom);
 	
 }
 		

@@ -3,9 +3,9 @@ var AssetFemale3DCG = [
 	{
 		Group: "HairBack",
 		Color: ["#6a3628", "#202020", "#dcc787", "#6c2132", "#999999", "#dddddd", "#e781b1", "#81e7b1", "#81b1e7", "#eeee99", "#ee9999", "#ee99ee"],
-		Left: 150,
-		Top: 50,
-		Asset: ["HairBack1"]
+		Left: 50,
+		Top: 0,
+		Asset: ["HairBack1", "HairBack2", "HairBack4", "HairBack10", "HairBack14", "HairBack15", "HairBack16", "HairBack17", "HairBack18", "HairBack19"]
 	},
 
 	{
@@ -37,34 +37,25 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Glasses",
-		Color: ["#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
+		Default: false,
+		Color: ["#303030", "#808080", "#e0e0e0", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 200,
-		Top: 150,
-		Asset: ["Glasses1"]
+		Top: 135,
+		Asset: ["Glasses1", "Glasses2", "Glasses3", "Glasses4", "Glasses5", "Glasses6", "Glasses7", "Glasses8"]
 	},
 	
 	{
 		Group: "Bra",
-		FatherGroup : "Body",
+		ParentGroup: "Body",
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 150,
 		Top: 200,
 		Asset: ["Bra1", "Bra2", "Bra7"]
 	},
-
-	
-	{
-		Group: "Gloves",
-		FatherGroup : "Body",
-		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
-		Left: 100,
-		Top: 400,
-		Asset: ["Gloves1"]
-	},
 	
 	{
 		Group: "Panties",
-		FatherGroup : "Body",
+		ParentGroup: "Body",
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 150,
 		Top: 450,
@@ -73,16 +64,26 @@ var AssetFemale3DCG = [
 		
 	{
 		Group: "Socks",
-		FatherGroup : "Body",
+		ParentGroup: "Body",
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 125,
 		Top: 500,
 		Asset: ["Socks1", "Socks2", "Socks3", "Socks4", "Socks5"]
 	},
+	
+	{
+		Group: "Gloves",
+		ParentGroup: "Body",
+		Default: false,
+		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
+		Left: 125,
+		Top: 275,
+		Asset: ["Gloves1", "Gloves2"]
+	},
 
 	{
 		Group: "Shoes",
-		FatherGroup : "Body",
+		ParentGroup: "Body",
 		Color: ["Default", "#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 125,
 		Top: 500,
@@ -99,7 +100,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Cloth",
-		FatherGroup : "Body",
+		ParentGroup: "Body",
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Asset: [ { Name: "CollegeOutfit1", Value: -1 }, "StudentOutfit1", "SummerDress1" ]
 	},
@@ -108,6 +109,7 @@ var AssetFemale3DCG = [
 		Group: "HairFront",
 		AllowNone: false,
 		Color: ["#6a3628", "#202020", "#dcc787", "#6c2132", "#999999", "#dddddd", "#e781b1", "#81e7b1", "#81b1e7", "#eeee99", "#ee9999", "#ee99ee"],
+		ParentColor: "HairBack",
 		Left: 150,
 		Top: 50,
 		Asset: ["HairFront1", "HairFront2", "HairFront3", "HairFront4", "HairFront5", "HairFront6", "HairFront7", "HairFront8", "HairFront9"]
@@ -115,11 +117,11 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Hat",
-		AllowNone: false,
-		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
-		Left: 150,
+		Default: false,
+		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
+		Left: 125,
 		Top: 0,
-		Asset: ["Hat1"]
+		Asset: ["Hat1", "Hat2", "Hat3", "Hat4"]
 	}
 		
 ];
