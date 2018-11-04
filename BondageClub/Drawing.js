@@ -130,7 +130,7 @@ function DrawImageCanvasColorize(Source, Canvas, X, Y, Zoom, HexColor, FullAlpha
 		} else {
 			for(var p = 0, len = data.length; p < len; p+=4) {
 				trans = ((data[p] + data[p + 1] + data[p + 2]) / 383);
-				if ((data[p+3] == 0) || (trans < 0.65) || (trans > 1.35))
+				if ((data[p+3] == 0) || (trans < 0.8) || (trans > 1.2))
 				   continue;
 				data[p + 0] = rgbColor.r * trans;
 				data[p + 1] = rgbColor.g * trans;

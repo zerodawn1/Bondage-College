@@ -2,6 +2,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "HairBack",
+		KeepNaked: true,
 		Color: ["#6a3628", "#202020", "#dcc787", "#6c2132", "#999999", "#dddddd", "#e781b1", "#81e7b1", "#81b1e7", "#eeee99", "#ee9999", "#ee99ee"],
 		Left: 50,
 		Top: 0,
@@ -29,15 +30,36 @@ var AssetFemale3DCG = [
 	{
 		Group: "Mouth",
 		AllowNone: false,
-		Color: ["Default", "#aa5555", "#cc3333", "#55aa55", "#5555aa", "#55aaaa", "#aa55aa", "#aaaa55"],
+		Color: ["Default", "#803d26", "#aa5555", "#cc3333", "#55aa55", "#5555aa", "#55aaaa", "#aa55aa", "#aaaa55"],
 		Left: 240,
 		Top: 190,
-		Asset: ["Mouth1", "Mouth2", "Mouth3"]
+		Asset: ["Mouth1", "Mouth2", "Mouth3", "Mouth4"]
+	},
+
+	{
+		Group: "Nipples",
+		ParentGroup: "Body",
+		AllowNone: false,
+		Color: ["Default", "#a6665b", "#803d26", "#d68777", "#9b4a2e", "#bb6655"],
+		Left: 175,
+		Top: 285,
+		Asset: ["Nipples1", "Nipples2"]
+	},
+
+	{
+		Group: "Pussy",
+		AllowNone: false,
+		Color: ["Default", "#6a3628", "#443330", "#222222"],
+		Left: 225,
+		Top: 500,
+		FullAlpha: false,
+		Asset: ["PussyLight1", "PussyLight2", "PussyLight3", "PussyDark1", "PussyDark2", "PussyDark3"]
 	},
 	
 	{
 		Group: "Glasses",
 		Default: false,
+		KeepNaked: true,
 		Color: ["#303030", "#808080", "#e0e0e0", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 200,
 		Top: 135,

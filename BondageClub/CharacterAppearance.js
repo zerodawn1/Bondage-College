@@ -70,6 +70,22 @@ function CharacterAppearanceFullRandom(C) {
 	
 }
 
+// Removes all items that can be removed, making the character naked
+function CharacterAppearanceNaked(C) {
+
+	// For each item group (non default items only show at a 20% rate)
+	var A;
+	for (A = 0; A < C.Appearance.length; A++)
+		if (C.Appearance[A].Asset.Group.AllowNone && !C.Appearance[A].Asset.Group.KeepNaked) {
+			C.Appearance.splice(A, 1);
+			A--;
+		}
+
+	// Loads the new character canvas
+	CharacterLoadCanvas(C);
+
+}
+
 // Gets the character 
 function CharacterAppearanceBuildCanvas(C) {
 
@@ -144,10 +160,10 @@ function CharacterAppearance_Run() {
 	DrawText("Select your appearance", 500, 50, "White");	
 	
 	// Draw the top buttons
-	DrawButton(1450, 25, 125, 60, "Reset", "White");
-	DrawButton(1600, 25, 125, 60, "Random", "White");
-	DrawButton(1750, 25, 100, 60, "Back", "White");
-	DrawButton(1875, 25, 100, 60, "Next", "White");
+	DrawButton(1450, 25, 120, 60, "Reset", "White");
+	DrawButton(1585, 25, 120, 60, "Random", "White");
+	DrawButton(1720, 25, 120, 60, "Naked", "White");
+	DrawButton(1855, 25, 120, 60, "More", "White");
 	
 	// Creates buttons for all groups
 	var A;
@@ -275,11 +291,11 @@ function CharacterAppearance_Click() {
 					CharacterAppearanceNextColor(Character[0], AssetGroup[A].Name);
 
 	// If we must set back the default outfit or set a random outfit
-	if ((MouseX >= 1450) && (MouseX < 1575) && (MouseY >= 25) && (MouseY < 85)) CharacterAppearanceSetDefault(Character[0]);
-	if ((MouseX >= 1600) && (MouseX < 1725) && (MouseY >= 25) && (MouseY < 85)) CharacterAppearanceFullRandom(Character[0]);
-	if ((MouseX >= 1750) && (MouseX < 1850) && (MouseY >= 25) && (MouseY < 85)) CharacterAppearanceMoveOffset(-10);
-	if ((MouseX >= 1875) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 85)) CharacterAppearanceMoveOffset(10);
-
+	if ((MouseX >= 1450) && (MouseX < 1570) && (MouseY >= 25) && (MouseY < 85)) CharacterAppearanceSetDefault(Character[0]);
+	if ((MouseX >= 1585) && (MouseX < 1705) && (MouseY >= 25) && (MouseY < 85)) CharacterAppearanceFullRandom(Character[0]);
+	if ((MouseX >= 1720) && (MouseX < 1840) && (MouseY >= 25) && (MouseY < 85)) CharacterAppearanceNaked(Character[0]);
+	if ((MouseX >= 1855) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 85)) CharacterAppearanceMoveOffset(10);
+	
 }
 
 function CharacterAppearance_KeyDown() {

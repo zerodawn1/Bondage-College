@@ -173,7 +173,7 @@ function C012_AfterClass_Dorm_Run() {
 		}
 
 	// If Sarah wants to start a random activity with the player as an owner
-	if (!C012_AfterClass_Dorm_PlayerGrounded && (C012_AfterClass_Dorm_Guest.indexOf("Sarah") >= 0) && (ActorSpecificGetValue("Sarah", ActorOwner) == "Player") && !GameLogQuery(CurrentChapter, "Sarah", "EventGenericNext") && !GameLogQuery(CurrentChapter, "Sarah", "StopEvents")) {
+	if (!C012_AfterClass_Dorm_PlayerGrounded && (C012_AfterClass_Dorm_Guest.indexOf("Sarah") >= 0) && (ActorSpecificGetValue("Sarah", ActorOwner) == "Player") && !GameLogQuery(CurrentChapter, "Sarah", "EventGenericNext") && !GameLogQuery(CurrentChapter, "Sarah", "StopEvents") && !GameLogQuery(CurrentChapter, "Player", "AmandaAndSarahInBed")) {
 		CurrentActor = "Sarah";
 		if (ActorIsGagged()) C012_AfterClass_Sarah_CurrentStage = 2200;
 		else if (ActorIsRestrained()) C012_AfterClass_Sarah_CurrentStage = 2100;

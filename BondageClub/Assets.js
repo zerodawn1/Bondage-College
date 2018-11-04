@@ -4,13 +4,14 @@ var AssetCurrentFamily;
 var AssetCurrentGroup;
 
 // Adds a new asset group to the main list
-function AssetGroupAdd(NewAssetFamily, NewAssetGroupName, NewAssetParentGroupName, NewAssetIsDefault, NewAssetGroupAllowNone, NewAssetColorSchema, NewAssetParentColor, NewAssetDrawingPriority, NewAssetDrawingLeft, NewAssetDrawingTop, NewAssetDrawingFullAlpha, NewAssetDrawingBlink) {
+function AssetGroupAdd(NewAssetFamily, NewAssetGroupName, NewAssetParentGroupName, NewAssetIsDefault, NewAssetGroupAllowNone, NewAssetGroupKeepNaked, NewAssetColorSchema, NewAssetParentColor, NewAssetDrawingPriority, NewAssetDrawingLeft, NewAssetDrawingTop, NewAssetDrawingFullAlpha, NewAssetDrawingBlink) {
 	var A = {
 		Family: NewAssetFamily,
 		Name: NewAssetGroupName,
 		ParentGroupName: (NewAssetParentGroupName == null) ? "" : NewAssetParentGroupName,
 		IsDefault: (NewAssetIsDefault == null) ? true : NewAssetIsDefault,
 		AllowNone: (NewAssetGroupAllowNone == null) ? true : NewAssetGroupAllowNone,
+		KeepNaked : (NewAssetGroupKeepNaked == null) ? false : NewAssetGroupKeepNaked,
 		ColorSchema: (NewAssetColorSchema == null) ? ["Default"] : NewAssetColorSchema,
 		ParentColor: (NewAssetParentColor == null) ? "" : NewAssetParentColor,
 		DrawingPriority: (NewAssetDrawingPriority == null) ? 0 : NewAssetDrawingPriority,
@@ -42,7 +43,7 @@ function AssetLoad(A, Family) {
 	for (G = 0; G < A.length; G++) {
 		
 		// Creates the asset group
-		AssetGroupAdd(Family, A[G].Group, A[G].ParentGroup, A[G].Default, A[G].AllowNone, A[G].Color, A[G].ParentColor, G, A[G].Left, A[G].Top, A[G].FullAlpha, A[G].Blink);
+		AssetGroupAdd(Family, A[G].Group, A[G].ParentGroup, A[G].Default, A[G].AllowNone, A[G].KeepNaked, A[G].Color, A[G].ParentColor, G, A[G].Left, A[G].Top, A[G].FullAlpha, A[G].Blink);
 
 		// Add each assets in the group 1 by 1
 		var I;
