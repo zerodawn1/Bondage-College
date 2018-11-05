@@ -80,8 +80,8 @@ var AssetFemale3DCG = [
 		ParentGroup: "Body",
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 150,
-		Top: 450,
-		Asset: ["Panties1", "Panties7", "Panties8", "Panties11"]
+		Top: 425,
+		Asset: ["Panties1", "Panties7", "Panties8", "Panties11", "Shorts1"]
 	},
 		
 	{
@@ -134,7 +134,7 @@ var AssetFemale3DCG = [
 		ParentColor: "HairBack",
 		Left: 150,
 		Top: 50,
-		Asset: ["HairFront1", "HairFront2", "HairFront3", "HairFront4", "HairFront5", "HairFront6", "HairFront7", "HairFront8", "HairFront9"]
+		Asset: ["HairFront1", "HairFront2", "HairFront3", "HairFront4", "HairFront5", "HairFront6", "HairFront7", "HairFront8", "HairFront9", "HairFront10", "HairFront11", "HairFront12"]
 	},
 
 	{
