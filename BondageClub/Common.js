@@ -189,3 +189,9 @@ function HexToRGB(color) {
         b: 0
     };
 }
+
+// Sets the current screen and calls the loading
+function SetScreen(NewScreen) {
+	CurrentScreen = NewScreen;
+	DynamicFunction(CurrentScreen + "_Load()");
+}

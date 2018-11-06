@@ -174,7 +174,7 @@ function DrawText(Text, X, Y, Color) {
 }
 
 // Draw a button
-function DrawButton(Left, Top, Width, Height, Label, Color) {
+function DrawButton(Left, Top, Width, Height, Label, Color, Image) {
 
 	// Draw the button rectangle
 	MainCanvas.beginPath();
@@ -189,6 +189,7 @@ function DrawButton(Left, Top, Width, Height, Label, Color) {
 	
 	// Draw the text
 	DrawText(Label, Left + Width / 2, Top + Height / 2, "black");
+	if ((Image != null) && (Image != "")) DrawImage(Image, Left + 2, Top + 2);
 	
 }
 
