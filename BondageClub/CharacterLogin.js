@@ -28,42 +28,42 @@ function CharacterLogin_Load() {
 
 }
 
-// Run the characther appearance selection screen 
+// Run the character login screen 
 function CharacterLogin_Run() {
 	
+	// Position the login fields on the screen
 	document.getElementById("InputName").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:50%; top:" + (window.innerHeight / 2 - MainCanvas.height / 4) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
 	document.getElementById("InputPassword").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:50%; top:" + (window.innerHeight / 2 - MainCanvas.height / 10) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
 		
 	// Draw the background and the character twice
 	DrawImage("Backgrounds/DressingRoom.jpg", 0, 0);
 	DrawCharacter(Character[0], 500, 0, 1);
-	DrawText("Welcome to the Bondage Club", 1251, 51, "Black");
-	DrawText("Welcome to the Bondage Club", 1250, 50, "White");
-	DrawText(CharacterLoginMessage, 1251, 101, "Black");
-	DrawText(CharacterLoginMessage, 1250, 100, "White");
-	DrawText("Name: ", 1251, 218, "Black");
-	DrawText("Name: ", 1250, 217, "White");
-	DrawText("Password: ", 1251, 369, "Black");
-	DrawText("Password: ", 1250, 368, "White");
+	DrawText("Welcome to the Bondage Club", 1250, 50, "White", "Black");
+	DrawText(CharacterLoginMessage, 1250, 100, "White", "Black");
+	DrawText("Account Name", 1250, 217, "White", "Black");
+	DrawText("Password", 1250, 368, "White", "Black");
 	DrawButton(1200, 500, 100, 60, "Login", "White", "");
-	DrawText("Or create a new character", 1251, 701, "Black");
-	DrawText("Or create a new character", 1250, 700, "White");
+	DrawText("Or create a new character", 1250, 700, "White", "Black");
 	DrawButton(1125, 800, 250, 60, "New Character", "White", "");
+
 }
 
 // When the character logs, we analyze the data
-function CharacterLogin_Log(CharacterData) {
-	var C = JSON.parse(CharacterData);	
-	if (C.Name != null) {
-		Character[0].Name = C.Name;
-		if (C.Appearance != null) Character[0].Appearance = C.Appearance;
+function CharacterLogin_Response(CharacterData) {
+	var C = JSON.parse(CharacterData);
+	if ((C.CharacterName != null) && (C.AccountName != null)) {
+		Character[0].Name = C.CharacterName;
+		Character[0].AccountName = C.AccountName;
+		Character[0].AccountPassword = document.getElementById("InputPassword").value.trim();
+		CharacterAppearanceLoad(Character[0], C.Appearance);
+		InventoryLoad(Character[0], C.Inventory);
 		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 		document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
 		SetScreen("MainHall");
 	} else CharacterLoginMessage = "Error loading character data";
 }
 
-// When the user clicks on the character appearance selection screen
+// When the user clicks on the character login screen
 function CharacterLogin_Click() {
 	
 	// If we must create a new character
@@ -77,27 +77,26 @@ function CharacterLogin_Click() {
 	if ((MouseX >= 1200) && (MouseX <= 1300) && (MouseY >= 500) && (MouseY <= 560)) {
 		var Name = document.getElementById("InputName").value.trim();
 		var Password = document.getElementById("InputPassword").value.trim();
-		var letters = /^[a-zA-Z0-9 ]+$/;
+		var letters = /^[a-zA-Z0-9]+$/;
 		if (Name.match(letters) && Password.match(letters) && (Name.length > 0) && (Name.length <= 20) && (Password.length > 0) && (Password.length <= 20)) {
-		
+
 			// Calls the PHP page to check if the login is correct
-			var xmlhttp = new XMLHttpRequest();			
+			var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == XMLHttpRequest.DONE) {
 				   if (xmlhttp.status == 200) {
-					   if (xmlhttp.responseText.trim().substring(0, 1) == "{") CharacterLogin_Log(xmlhttp.responseText);
+					   if (xmlhttp.responseText.trim().substring(0, 1) == "{") CharacterLogin_Response(xmlhttp.responseText);
 					   else CharacterLoginMessage = "Incorrect name or password";
-				   } else CharacterLoginMessage = "Error while contacting account";
+				   } else CharacterLoginMessage = "Error " + xmlhttp.status.toString() + " on account service";
 				}
 			};
-			xmlhttp.open("GET", "Account.php?command=log_account&name=" + Name + "&password=" + Password, true);
+			xmlhttp.open("GET", "Account.php?command=account_log&account=" + Name + "&password=" + Password, true);
 			xmlhttp.send();
 
-		}
+		} else CharacterCreationMessage = "Invalid name or password";
 	}
 	
 }
 
 function CharacterLogin_KeyDown() {
-	
 }

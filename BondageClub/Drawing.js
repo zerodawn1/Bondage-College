@@ -7,14 +7,24 @@ var ColorCanvas;
 var DrawCacheImage = {};
 var DrawCacheLoadedImages = 0;
 var DrawCacheTotalImages = 0;
+var DrawScreenWidth = -1;
+var DrawScreenHeight = -1;
 
 // Loads the drawing objects
 function DrawLoad() {
+	
+	// Creates the objects used in the game
 	MainCanvas = document.getElementById("MainCanvas").getContext("2d");
 	TempCanvas = document.createElement("canvas").getContext("2d");
 	ColorCanvas = document.createElement("canvas");
 	document.getElementById("MainCanvas").addEventListener("keypress", KeyDown);
 	document.getElementById("MainCanvas").tabIndex = 1000;	
+
+	// Font is fixed for now, color can be set
+	MainCanvas.font = "30px Arial";
+	MainCanvas.textAlign = "center";
+	MainCanvas.textBaseline = "middle";
+	
 }
 
 // Returns the image file or build it from the source
@@ -56,6 +66,10 @@ function DrawCharacter(C, X, Y, Zoom) {
 		DrawCanvas(Canvas, X, Y - Height);
     else
 		DrawCanvasZoom(Canvas, X, Y - (Height * Zoom), Zoom);
+
+	// Draw the character name below herself
+	if (C.Name != "")
+		DrawText(C.Name, X + 255, Y + 980, "White", "Black");
 	
 }
 		
@@ -155,15 +169,24 @@ function DrawImageMirror(Source, X, Y) {
 }
 
 // Draw a text in the canvas
-function DrawText(Text, X, Y, Color) {
+function DrawText(Text, X, Y, Color, BackColor) {
 
-	// Font is fixed for now, color can be set
-	MainCanvas.font = "30px Arial";
-	MainCanvas.fillStyle = Color;
-	MainCanvas.textAlign = "center";
-	MainCanvas.textBaseline = "middle";
+	// Draw a back color relief text if needed
+	if ((BackColor != null) && (BackColor != "")) {
+
+		// Split the text on two lines if there's a |
+		MainCanvas.fillStyle = BackColor;
+		if (Text.indexOf("|") == -1)
+			MainCanvas.fillText(Text, X + 1, Y + 1);
+		else {
+			MainCanvas.fillText(Text.substring(0, Text.indexOf("|")), X + 1, Y + 1 - 25);
+			MainCanvas.fillText(Text.substring(Text.indexOf("|") + 1, 1000), X + 1, Y + 1 + 25);
+		}					
+	
+	}
 
 	// Split the text on two lines if there's a |
+	MainCanvas.fillStyle = Color;
 	if (Text.indexOf("|") == -1)
 		MainCanvas.fillText(Text, X, Y);
 	else {
@@ -604,4 +627,23 @@ function GetIconPath(IconName) {
 // Returns a the path to an icon for the current screen.  IconName can be preceeded by additional paths.
 function GetIconScreenPath(IconName) {
     return GetIconPath(GetPath.apply(undefined, [CurrentChapter, CurrentScreen].concat(Array.from(arguments))));
+}
+
+// Makes sure the screen is at the proper size
+function DrawResize() {
+	if ((DrawScreenWidth != window.innerWidth) || (DrawScreenHeight != window.innerHeight)) {
+		DrawScreenWidth = window.innerWidth;
+		DrawScreenHeight = window.innerHeight;
+		if (window.innerWidth <= window.innerHeight * 2) {
+			MainCanvas.width = window.innerWidth;
+			MainCanvas.height = MainCanvas.width / 2;
+			MainCanvas.canvas.style.width = "100%"; 
+			MainCanvas.canvas.style.height = "";
+		} else {
+			MainCanvas.height = window.innerHeight;
+			MainCanvas.width = MainCanvas.height * 2;
+			MainCanvas.canvas.style.width = ""; 
+			MainCanvas.canvas.style.height = "100%";
+		}
+	}
 }

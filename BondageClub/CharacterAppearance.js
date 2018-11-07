@@ -1,5 +1,6 @@
 var CharacterAppearanceOffset = 0;
 var CharacterAppearanceHeaderText = "Select your appearance";
+var CharacterAppearanceBackup = null;
 
 // Resets the character to it's default appearance
 function CharacterAppearanceSetDefault(C) {
@@ -153,6 +154,7 @@ function CharacterAppearanceGetCurrentValue(C, Group, Type) {
 
 // Loads the character appearance screen
 function CharacterAppearance_Load() {
+	CharacterAppearanceBackup = JSON.parse(JSON.stringify(Character[0].Appearance));
 }
 
 // Run the characther appearance selection screen 
@@ -162,14 +164,14 @@ function CharacterAppearance_Run() {
 	DrawImage("Backgrounds/DressingRoom.jpg", 0, 0);
 	DrawCharacter(Character[0], -500, -100, 4);
 	DrawCharacter(Character[0], 900, 0, 1);
-	DrawText(CharacterAppearanceHeaderText, 500, 50, "White");	
+	DrawText(CharacterAppearanceHeaderText, 500, 40, "White", "Black");
 	
-	// Draw the top buttons
+	// Draw the top buttons with images
 	DrawButton(1450, 25, 65, 65, "", "White", "Icons/Reset.png");
 	DrawButton(1542, 25, 65, 65, "", "White", "Icons/Random.png");
 	DrawButton(1634, 25, 65, 65, "", "White", "Icons/Naked.png");
-	DrawButton(1726, 25, 65, 65, "", "White", "Icons/Back.png");
-	DrawButton(1818, 25, 65, 65, "", "White", "Icons/Next.png");
+	DrawButton(1726, 25, 65, 65, "", "White", "Icons/Next.png");
+	DrawButton(1818, 25, 65, 65, "", "White", "Icons/Cancel.png");
 	DrawButton(1910, 25, 65, 65, "", "White", "Icons/Ready.png");
 	
 	// Creates buttons for all groups
@@ -302,8 +304,20 @@ function CharacterAppearance_Click() {
 	if ((MouseX >= 1542) && (MouseX < 1607) && (MouseY >= 25) && (MouseY < 90)) CharacterAppearanceFullRandom(Character[0]);
 	if ((MouseX >= 1634) && (MouseX < 1699) && (MouseY >= 25) && (MouseY < 90)) CharacterAppearanceNaked(Character[0]);
 	if ((MouseX >= 1726) && (MouseX < 1791) && (MouseY >= 25) && (MouseY < 90)) CharacterAppearanceMoveOffset(10);
-	if ((MouseX >= 1818) && (MouseX < 1883) && (MouseY >= 25) && (MouseY < 90)) CharacterAppearanceMoveOffset(10);
+	if ((MouseX >= 1818) && (MouseX < 1883) && (MouseY >= 25) && (MouseY < 90)) CharacterAppearanceExit(Character[0]);
 	if ((MouseX >= 1910) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 90)) CharacterAppearanceReady(Character[0]);
+
+}
+
+// When we exit the character appearance screen
+function CharacterAppearanceExit(C) {
+	
+	// If we cancel, we restore the backup version
+	if ((C.AccountName != "") && (C.AccountPassword != "")) {
+		C.Appearance = CharacterAppearanceBackup;
+		CharacterLoadCanvas(C);
+		SetScreen("MainHall");
+	} else SetScreen("CharacterLogin");
 
 }
 
@@ -330,8 +344,56 @@ function CharacterAppearanceReady(C) {
 			
 		}
 
-	// If there's no error, we continue to the login
-	SetScreen("CharacterLogin");
+	// If there's no error, we continue to the login or main hall if already logged
+	if ((C.AccountName != "") && (C.AccountPassword != "")) {
+		CharacterAppearanceSave(C);
+		SetScreen("MainHall");
+	} else SetScreen("CharacterCreation");
+
+}
+
+// Pushes the character appearance to the account service
+function CharacterAppearanceSave(C) {
+	
+	// Creates a big parameter string of every appearance items 
+	if (C.AccountName != "") {
+		var P = "";
+		for (A = 0; A < C.Appearance.length; A++)
+			P = P + "&family" + A.toString() + "=" + C.Appearance[A].Asset.Group.Family + "&group" + A.toString() + "=" + C.Appearance[A].Asset.Group.Name + "&name" + A.toString() + "=" + C.Appearance[A].Asset.Name + "&color" + A.toString() + "=" + C.Appearance[A].Color;
+		CharacterAccountRequest("appearance_update", P);
+	}	
+
+}
+
+// Loads the character appearance from the JSON file
+function CharacterAppearanceLoad(C, Appearance) {
+	
+	// Make sure we have something to load
+	if (Appearance != null) {
+	
+		// For each appearance item to load
+		var A;
+		C.Appearance = [];
+		for (A = 0; A < Appearance.length; A++) {
+
+			// Cycles in all the assets to find the correct item to add and colorize it
+			var I;
+			for (I = 0; I < Asset.length; I++)
+				if ((Asset[I].Name == Appearance[A].Name) && (Asset[I].Group.Name == Appearance[A].Group) && (Asset[I].Group.Family == Appearance[A].Family)) {
+					var NA = {
+						Asset: Asset[I],
+						Color: Appearance[A].Color
+					}
+					C.Appearance.push(NA);
+					break;
+				}
+				
+		}
+
+		// Draw the character canvas
+		CharacterLoadCanvas(C);
+		
+	}
 
 }
 

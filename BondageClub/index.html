@@ -15,19 +15,15 @@
 
 <style>
     canvas {
-		padding-left: 0;
-        padding-right: 0;
-        margin-left: auto;
-        margin-right: auto;
+		padding: 0;
+        margin: auto;
 		outline: none;
         display: block;
-		width:100%;
 		top:0;
 		bottom: 0;
 		left: 0;
 		right: 0;
 		position: absolute;
-		margin:auto;
     }
 </style>
 
@@ -36,6 +32,7 @@
 <script src="Character.js"></script>
 <script src="CharacterLogin.js"></script>
 <script src="CharacterAppearance.js"></script>
+<script src="CharacterCreation.js"></script>
 <script src="MainHall.js"></script>
 <script src="Inventory.js"></script>
 <script src="Assets.js"></script>
@@ -46,22 +43,27 @@
 window.onload = function() {
 	IsMobile = DetectMobile();
 	DrawLoad();
-	AssetLoadAll();
-	CharacterLoad("*Player*", [], []);
-	InventoryCreate();
-	CharacterAppearanceSetDefault(Character[0]);
-	SetScreen("CharacterLogin");
+	GameInit();
 	MainRun();
 };
 
+// Game init script
+function GameInit() {
+	AssetLoadAll();
+	Character = [];
+	CharacterLoad("", [], []);
+	InventoryCreate(Character[0]);
+	CharacterAppearanceSetDefault(Character[0]);
+	SetScreen("CharacterLogin");
+}
+
 // Main game running state, runs the current screen code and bottom bar
 function MainRun() {
-	MainCanvas.width = window.innerWidth;
-	MainCanvas.height = MainCanvas.width / 2;
-	MainCanvas.left = 500;
+	DrawResize();
 	clearInterval(CurrentTimer);
 	CurrentTimer = setInterval("MainRun()", RunInterval);
 	DynamicFunction(CurrentScreen + "_Run()");
+	CharacterAccountProcess();
 }
 
 // When the user presses a key, we send the KeyDown event to the other screens
@@ -91,8 +93,13 @@ function Touch(event) {
 // When mouse move, we keep the mouse position for other scripts
 function MouseMove(event) {
 	var rect = document.getElementById("MainCanvas").getBoundingClientRect();
-	MouseX = Math.round((event.clientX - rect.left) * 2000 / window.innerWidth);
-	MouseY = Math.round((event.clientY - rect.top) * 2000 / window.innerWidth);
+	if (window.innerWidth <= window.innerHeight * 2) {
+		MouseX = Math.round((event.clientX - rect.left) * 2000 / window.innerWidth);
+		MouseY = Math.round((event.clientY - rect.top) * 2000 / window.innerWidth);
+	} else {
+		MouseX = Math.round((event.clientX - rect.left) * 1000 / window.innerHeight);
+		MouseY = Math.round((event.clientY - rect.top) * 1000 / window.innerHeight);
+	}
 }
 
 // When the mouse is away from the control, we stop keeping the coordinates
