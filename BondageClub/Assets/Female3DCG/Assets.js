@@ -144,6 +144,16 @@ var AssetFemale3DCG = [
 		Left: 125,
 		Top: 0,
 		Asset: ["Hat1", "Hat2", "Hat3", "Hat4"]
+	},
+
+	{
+		Group: "Gag",
+		Default: false,
+		Color: ["Default"],
+		Left: 200,
+		Top: 80,
+		Category: "Gag",
+		Asset: [ { Name: "BallGag", Value: -1 }, { Name: "ClothGag", Value: -1 }, { Name: "TapeGag", Value: -1 }]
 	}
-		
+	
 ];

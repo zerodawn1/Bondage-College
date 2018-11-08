@@ -30,6 +30,7 @@
 <script src="Common.js"></script>
 <script src="Drawing.js"></script>
 <script src="Character.js"></script>
+<script src="CharacterAccount.js"></script>
 <script src="CharacterLogin.js"></script>
 <script src="CharacterAppearance.js"></script>
 <script src="CharacterCreation.js"></script>
@@ -43,17 +44,14 @@
 window.onload = function() {
 	IsMobile = DetectMobile();
 	DrawLoad();
+	AssetLoadAll();
 	GameInit();
 	MainRun();
 };
 
 // Game init script
 function GameInit() {
-	AssetLoadAll();
-	Character = [];
-	CharacterLoad("", [], []);
-	InventoryCreate(Character[0]);
-	CharacterAppearanceSetDefault(Character[0]);
+	CharacterReset(0, "Female3DCG");
 	SetScreen("CharacterLogin");
 }
 

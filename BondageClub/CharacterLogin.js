@@ -90,7 +90,7 @@ function CharacterLogin_Click() {
 				   } else CharacterLoginMessage = "Error " + xmlhttp.status.toString() + " on account service";
 				}
 			};
-			xmlhttp.open("GET", "Account.php?command=account_log&account=" + Name + "&password=" + Password, true);
+			xmlhttp.open("GET", CharacterAccountAddress + "?command=account_log&account=" + Name + "&password=" + Password, true);
 			xmlhttp.send();
 
 		} else CharacterCreationMessage = "Invalid name or password";

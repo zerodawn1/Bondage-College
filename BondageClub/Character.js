@@ -1,33 +1,34 @@
 var Character = [];
-var CharacterAccountURL = [];
-var CharacterAccountReady = true;
 
 // Loads a character in the buffer
-function CharacterLoad(CharacterName, CharacterInventory, CharacterAppearance) {
+function CharacterReset(CharacterID, CharacterAssetFamily) {
 
-	// First, we check if the character already exists
-	var C;
-	for (C = 0; C < Character.length; C++)
-		if (Character[C].CharacterName == "CharacterName") {
-			Character[C].Inventory = CharacterInventory;
-			Character[C].Appearance = CharacterAppearance;
-			CharacterLoadCanvas(Character[C]);
-			return;
-		}
-
-	// Since we could not find the character, we add a new one to the list
+	// Prepares the character sheet
 	var NewCharacter = {
-		Name: CharacterName,
+		ID: CharacterID,
+		Name: "",
+		AssetFamily: CharacterAssetFamily,
 		AccountName: "",
 		AccountPassword: "",
-		Inventory: CharacterInventory,
-		Appearance: CharacterAppearance,
+		Inventory: [],
+		Appearance: [],
 		Canvas: null,
 		CanvasBlink: null,
 		BlinkFactor: Math.round(Math.random() * 10) + 10
 	}
-	Character.push(NewCharacter);
-	CharacterLoadCanvas(Character[Character.length - 1]);
+
+	// If the character doesn't exist, we create it
+	if (CharacterID >= Character.length)
+		Character.push(NewCharacter);
+	else
+		Character[CharacterID] = NewCharacter;
+
+	// Creates the inventory and default appearance
+	InventoryCreate(NewCharacter);
+	CharacterAppearanceSetDefault(NewCharacter);
+		
+	// Load the character image
+	CharacterLoadCanvas(NewCharacter);
 
 }
 
@@ -55,28 +56,4 @@ function CharacterLoadCanvasAll() {
 	var C;
 	for (C = 0; C < Character.length; C++)
 		CharacterLoadCanvas(Character[C]);
-}
-
-// Puts the URL to call in a buffer
-function CharacterAccountRequest(Command, Params) {
-	if ((Character[0].AccountName != "") && (Character[0].AccountPassword != ""))
-		CharacterAccountURL.push("Account.php?command=" + Command + "&account=" + Character[0].AccountName + "&password=" + Character[0].AccountPassword + Params.replace(/#/g, "|"));
-}
-
-// When the queue is ready to process, we launch a new http request
-function CharacterAccountProcess() {
-	if (CharacterAccountReady && (CharacterAccountURL.length > 0)) {
-		CharacterAccountReady = false;
-		var xmlhttp = new XMLHttpRequest();
-		var URL = CharacterAccountURL[0];
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == XMLHttpRequest.DONE) {
-				CharacterAccountURL.splice(0, 1);
-				CharacterAccountReady = true;
-			}
-		};
-		//console.log(URL);
-		xmlhttp.open("GET", URL, true);
-		xmlhttp.send();		
-	}	
 }

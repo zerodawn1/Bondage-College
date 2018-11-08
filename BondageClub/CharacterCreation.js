@@ -140,7 +140,7 @@ function CharacterCreation_Click() {
 						else CharacterCreationMessage = "Error " + xmlhttp.status.toString() + " on account service";
 					}
 				};
-				xmlhttp.open("GET", "Account.php?command=account_create&character=" + CharacterName + "&account=" + Name + "&password=" + Password1 + "&email=" + Email, true);
+				xmlhttp.open("GET", CharacterAccountAddress + "?command=account_create&character=" + CharacterName + "&account=" + Name + "&password=" + Password1 + "&email=" + Email, true);
 				xmlhttp.send();
 			
 			} else CharacterCreationMessage = "Invalid character, account name, password or email";

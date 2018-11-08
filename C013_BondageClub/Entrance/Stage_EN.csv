@@ -7,7 +7,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 10,0,0,,(Check the maid.),"Sarah, you know you're not|supposed to invite strangers.",20,0,0,
 20,0,0,,(Check Sarah.),I know Miss!  But she's the perfect|candidate for the club.  Trust me.,30,0,0,
 30,0,0,,(Check the maid.),"Young lady, you will be punished tonight.|Go inside.  I will talk with your friend.",40,0,0,
-40,0,0,,(Check Sarah.),Punished!  This is so unfair.|See you later COMMON_PLAYERNAME.,50,0,0,
+40,0,0,,(Check Sarah.),Punished!  This is so unfair.|See you later COMMON_PLAYERNAME.,50,0,0,SarahPunished()
 50,0,0,,Take care Sarah!,(Sarah leaves and the maid turns to you.)|I trust you want to come inside young lady?,60,0,0,
 50,0,0,,See you later.,(Sarah leaves and the maid turns to you.)|I trust you want to come inside young lady?,60,0,0,
 50,0,0,,Sarah!  Wait!,(Sarah leaves and the maid turns to you.)|I trust you want to come inside young lady?,60,0,0,

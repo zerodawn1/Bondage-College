@@ -11,7 +11,7 @@ function CharacterAppearanceSetDefault(C) {
 	// For each items in the character inventory
 	var I;
 	for (I = 0; I < C.Inventory.length; I++)
-		if ((C.Inventory[I].Asset.Group.Family == AssetCurrentFamily) && C.Inventory[I].Asset.Group.IsDefault) {
+		if ((C.Inventory[I].Asset.Group.Family == C.AssetFamily) && C.Inventory[I].Asset.Group.IsDefault) {
 
 			// If there's no item in a slot, the first one becomes the default
 			var MustWear = true;
@@ -55,15 +55,17 @@ function CharacterAppearanceFullRandom(C) {
 					R.push(C.Inventory[I].Asset);
 			
 			// Picks a random item and color and add it
-			var SelectedAsset = R[Math.round(Math.random() * (R.length - 1))];
-			var SelectedColor = SelectedAsset.Group.ColorSchema[Math.round(Math.random() * (SelectedAsset.Group.ColorSchema.length - 1))];
-			if ((SelectedAsset.Group.ColorSchema[0] == "Default") && (Math.random() < 0.5)) SelectedColor = "Default";
-			if (SelectedAsset.Group.ParentColor != "") SelectedColor = CharacterAppearanceGetCurrentValue(C, SelectedAsset.Group.ParentColor, "Color");
-			var NA = {
-				Asset: SelectedAsset,
-				Color: SelectedColor
+			if (R.length > 0) {
+				var SelectedAsset = R[Math.round(Math.random() * (R.length - 1))];			
+				var SelectedColor = SelectedAsset.Group.ColorSchema[Math.round(Math.random() * (SelectedAsset.Group.ColorSchema.length - 1))];
+				if ((SelectedAsset.Group.ColorSchema[0] == "Default") && (Math.random() < 0.5)) SelectedColor = "Default";
+				if (SelectedAsset.Group.ParentColor != "") SelectedColor = CharacterAppearanceGetCurrentValue(C, SelectedAsset.Group.ParentColor, "Color");
+				var NA = {
+					Asset: SelectedAsset,
+					Color: SelectedColor
+				}
+				C.Appearance.push(NA);				
 			}
-			C.Appearance.push(NA);
 			
 		}
 
@@ -143,7 +145,7 @@ function CharacterAppearanceGetCurrentValue(C, Group, Type) {
 	// Finds the value
 	var A;
 	for (A = 0; A < C.Appearance.length; A++)
-		if ((C.Appearance[A].Asset.Group.Family == AssetCurrentFamily) && (C.Appearance[A].Asset.Group.Name == Group)) {
+		if ((C.Appearance[A].Asset.Group.Family == C.AssetFamily) && (C.Appearance[A].Asset.Group.Name == Group)) {
 			if (Type == "Name") return C.Appearance[A].Asset.Name;
 			if (Type == "Color") return C.Appearance[A].Color;
 			if (Type == "ID") return A;
@@ -177,7 +179,7 @@ function CharacterAppearance_Run() {
 	// Creates buttons for all groups
 	var A;
 	for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + 10; A++)
-		if (AssetGroup[A].Family == AssetCurrentFamily) {
+		if ((AssetGroup[A].Family == Character[0].AssetFamily) && (AssetGroup[A].Category == "Appearance")) {
 			DrawButton(1450, 120 + (A - CharacterAppearanceOffset) * 85, 325, 60, AssetGroup[A].Name + ": " + CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Name"), "White", "");
 			var Color = CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Color", "");
 			if (Color.indexOf("#") == 0) DrawButton(1800, 120 + (A - CharacterAppearanceOffset) * 85, 175, 60, Color, Color);
@@ -219,7 +221,7 @@ function CharacterAppearanceNextItem(C, Group) {
 	var Current = CharacterAppearanceGetCurrentValue(C, Group, "Name");
 	var Found = (Current == "None");
 	for (I = 0; I < C.Inventory.length; I++)
-		if ((C.Inventory[I].Asset.Group.Name == Group) && (C.Inventory[I].Asset.Group.Family == AssetCurrentFamily)) {
+		if ((C.Inventory[I].Asset.Group.Name == Group) && (C.Inventory[I].Asset.Group.Family == C.AssetFamily)) {
 			if (Found) {
 				CharacterAppearanceSetItem(C, Group, C.Inventory[I].Asset);
 				return;				
@@ -240,7 +242,7 @@ function CharacterAppearanceNextItem(C, Group) {
 			}
 			else
 				for (I = 0; I < C.Inventory.length; I++)
-					if ((C.Inventory[I].Asset.Group.Name == Group) && (C.Inventory[I].Asset.Group.Family == AssetCurrentFamily)) {
+					if ((C.Inventory[I].Asset.Group.Name == Group) && (C.Inventory[I].Asset.Group.Family == C.AssetFamily)) {
 						CharacterAppearanceSetItem(C, Group, C.Inventory[I].Asset);
 						return;						
 					}			
@@ -264,7 +266,7 @@ function CharacterAppearanceNextColor(C, Group) {
 
 			// Sets the color
 			for (Pos = 0; Pos < C.Appearance.length; Pos++)
-				if ((C.Appearance[Pos].Asset.Group.Name == Group) && (C.Appearance[Pos].Asset.Group.Family == AssetCurrentFamily))
+				if ((C.Appearance[Pos].Asset.Group.Name == Group) && (C.Appearance[Pos].Asset.Group.Family == C.AssetFamily))
 					C.Appearance[Pos].Color = Color;
 
 			// Reloads the character canvas
@@ -288,14 +290,14 @@ function CharacterAppearance_Click() {
 	// If we must switch to the next item in the player inventory
 	if ((MouseX >= 1450) && (MouseX < 1775) && (MouseY >= 120) && (MouseY < 950))
 		for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + 10; A++)
-			if (AssetGroup[A].Family == AssetCurrentFamily)
+			if ((AssetGroup[A].Family == Character[0].AssetFamily) && (AssetGroup[A].Category == "Appearance"))
 				if ((MouseY >= 120 + (A - CharacterAppearanceOffset) * 85) && (MouseY <= 180 + (A - CharacterAppearanceOffset) * 85))
 					CharacterAppearanceNextItem(Character[0], AssetGroup[A].Name);
 
 	// If we must switch to the next item in the player inventory
 	if ((MouseX >= 1800) && (MouseX < 1975) && (MouseY >= 120) && (MouseY < 950))
 		for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + 10; A++)
-			if (AssetGroup[A].Family == AssetCurrentFamily)
+			if ((AssetGroup[A].Family == Character[0].AssetFamily) && (AssetGroup[A].Category == "Appearance"))
 				if ((MouseY >= 120 + (A - CharacterAppearanceOffset) * 85) && (MouseY <= 180 + (A - CharacterAppearanceOffset) * 85))
 					CharacterAppearanceNextColor(Character[0], AssetGroup[A].Name);
 

@@ -1,9 +1,15 @@
-<?php header("content-type: text/plain; charset=utf-8"); ?>
+<?php 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST');
+header("Access-Control-Allow-Headers: X-Requested-With");
+header("content-type: text/plain; charset=utf-8"); 
+?>
 
 <?php
 
+// Returns the character file name
 function GetFileName() {
-	return 'Characters/'.$_GET["account"].'.json';
+	return 'characters/'.$_GET["account"].'.json';
 }
 
 // For any transaction, we validate the login
@@ -59,20 +65,19 @@ if (isset($_GET["command"])) {
 	// Add an item to the account inventory
 	if ($_GET["command"] == "inventory_add") 
 		if (ValidLogin($data))
-			if (isset($_GET["name"]) && isset($_GET["group"]) && isset($_GET["family"]) && ($_GET["name"] != "") && ($_GET["group"] != "") && ($_GET["family"] != "")) {
+			if (isset($_GET["name"]) && isset($_GET["group"]) && ($_GET["name"] != "") && ($_GET["group"] != "")) {
 
 				// If the item is already in inventory, we exit
 				$arr = json_decode($data);
 				if (!isset($arr->Inventory)) $arr->Inventory = [];
 				foreach ($arr->Inventory as $item)
-					if (($item->Name == $_GET["name"]) && ($item->Group == $_GET["group"]) && ($item->Family == $_GET["family"]))
+					if (($item->Name == $_GET["name"]) && ($item->Group == $_GET["group"]))
 						die("already_in_inventory");
 
 				// Create the inventory item and add it
 				$inventory = new stdClass();
 				$inventory->Name = $_GET["name"];
 				$inventory->Group = $_GET["group"];
-				$inventory->Family = $_GET["family"];				
 				array_push($arr->Inventory, $inventory);
 
 				// Overwrite the file
