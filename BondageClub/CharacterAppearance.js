@@ -1,4 +1,5 @@
 var CharacterAppearanceOffset = 0;
+var CharacterAppearanceNumPerPage = 9;
 var CharacterAppearanceHeaderText = "Select your appearance";
 var CharacterAppearanceBackup = null;
 var CharacterAppearanceAssets = [];
@@ -182,28 +183,31 @@ function CharacterAppearance_Run() {
 	
 	// Draw the background and the character twice
 	DrawImage("Backgrounds/DressingRoom.jpg", 0, 0);
-	DrawCharacter(Character[0], -500, -100, 4);
-	DrawCharacter(Character[0], 900, 0, 1);
-	DrawText(CharacterAppearanceHeaderText, 500, 40, "White", "Black");
+	DrawCharacter(Character[0], -550, -100, 4);
+	DrawCharacter(Character[0], 800, 0, 1);
+	DrawText(CharacterAppearanceHeaderText, 450, 40, "White", "Black");
 	
 	// Draw the top buttons with images
-	DrawButton(1450, 25, 65, 65, "", "White", "Icons/Reset.png");
-	DrawButton(1542, 25, 65, 65, "", "White", "Icons/Random.png");
-	DrawButton(1634, 25, 65, 65, "", "White", "Icons/Naked.png");
-	DrawButton(1726, 25, 65, 65, "", "White", "Icons/Next.png");
-	DrawButton(1818, 25, 65, 65, "", "White", "Icons/Cancel.png");
-	DrawButton(1910, 25, 65, 65, "", "White", "Icons/Ready.png");
+	DrawButton(1300, 25, 90, 90, "", "White", "Icons/Reset.png");
+	DrawButton(1417, 25, 90, 90, "", "White", "Icons/Random.png");
+	DrawButton(1534, 25, 90, 90, "", "White", "Icons/Naked.png");
+	DrawButton(1651, 25, 90, 90, "", "White", "Icons/Next.png");
+	DrawButton(1768, 25, 90, 90, "", "White", "Icons/Cancel.png");
+	DrawButton(1885, 25, 90, 90, "", "White", "Icons/Ready.png");
 	
 	// Creates buttons for all groups
 	var A;
-	for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + 10; A++)
+	for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + CharacterAppearanceNumPerPage; A++)
 		if ((AssetGroup[A].Family == Character[0].AssetFamily) && (AssetGroup[A].Category == "Appearance")) {
-			DrawButton(1450, 120 + (A - CharacterAppearanceOffset) * 85, 325, 60, AssetGroup[A].Name + ": " + CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Name"), "White", "");
+			DrawButton(1300, 145 + (A - CharacterAppearanceOffset) * 95, 400, 65, AssetGroup[A].Name + ": " + CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Name"), "White", "");
 			var Color = CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Color", "");
-			if (Color.indexOf("#") == 0) DrawButton(1800, 120 + (A - CharacterAppearanceOffset) * 85, 175, 60, Color, Color);
-			else DrawButton(1800, 120 + (A - CharacterAppearanceOffset) * 85, 175, 60, Color, "White", "");
+			DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, Color, ((Color.indexOf("#") == 0) ? Color : "White"));
+			DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", ((Color.indexOf("#") == 0) ? Color : "White"), "Icons/Color.png");
 		}
 
+	DrawText(MouseX.toString(), 50, 20, "white");	
+	DrawText(MouseY.toString(), 50, 50, "white");
+		
 }
 
 // Sets an item in the character appearance
@@ -299,7 +303,7 @@ function CharacterAppearanceNextColor(C, Group) {
 function CharacterAppearanceMoveOffset(Move) {
 	CharacterAppearanceOffset = CharacterAppearanceOffset + Move;
 	if (CharacterAppearanceOffset > AssetGroup.length) CharacterAppearanceOffset = 0;
-	if (CharacterAppearanceOffset < 0) CharacterAppearanceOffset = Math.floor(AssetGroup.length / 10) * 10;
+	if (CharacterAppearanceOffset < 0) CharacterAppearanceOffset = Math.floor(AssetGroup.length / CharacterAppearanceNumPerPage) * CharacterAppearanceNumPerPage;
 }
 
 // When the user clicks on the character appearance selection screen
@@ -307,14 +311,14 @@ function CharacterAppearance_Click() {
 
 	// If we must switch to the next item in the assets
 	if ((MouseX >= 1450) && (MouseX < 1775) && (MouseY >= 120) && (MouseY < 950))
-		for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + 10; A++)
+		for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + CharacterAppearanceNumPerPage; A++)
 			if ((AssetGroup[A].Family == Character[0].AssetFamily) && (AssetGroup[A].Category == "Appearance"))
 				if ((MouseY >= 120 + (A - CharacterAppearanceOffset) * 85) && (MouseY <= 180 + (A - CharacterAppearanceOffset) * 85))
 					CharacterAppearanceNextItem(Character[0], AssetGroup[A].Name);
 
 	// If we must switch to the next item in the assets
 	if ((MouseX >= 1800) && (MouseX < 1975) && (MouseY >= 120) && (MouseY < 950))
-		for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + 10; A++)
+		for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + CharacterAppearanceNumPerPage; A++)
 			if ((AssetGroup[A].Family == Character[0].AssetFamily) && (AssetGroup[A].Category == "Appearance"))
 				if ((MouseY >= 120 + (A - CharacterAppearanceOffset) * 85) && (MouseY <= 180 + (A - CharacterAppearanceOffset) * 85))
 					CharacterAppearanceNextColor(Character[0], AssetGroup[A].Name);
@@ -323,7 +327,7 @@ function CharacterAppearance_Click() {
 	if ((MouseX >= 1450) && (MouseX < 1515) && (MouseY >= 25) && (MouseY < 90)) CharacterAppearanceSetDefault(Character[0]);
 	if ((MouseX >= 1542) && (MouseX < 1607) && (MouseY >= 25) && (MouseY < 90)) CharacterAppearanceFullRandom(Character[0]);
 	if ((MouseX >= 1634) && (MouseX < 1699) && (MouseY >= 25) && (MouseY < 90)) CharacterAppearanceNaked(Character[0]);
-	if ((MouseX >= 1726) && (MouseX < 1791) && (MouseY >= 25) && (MouseY < 90)) CharacterAppearanceMoveOffset(10);
+	if ((MouseX >= 1726) && (MouseX < 1791) && (MouseY >= 25) && (MouseY < 90)) CharacterAppearanceMoveOffset(CharacterAppearanceNumPerPage);
 	if ((MouseX >= 1818) && (MouseX < 1883) && (MouseY >= 25) && (MouseY < 90)) CharacterAppearanceExit(Character[0]);
 	if ((MouseX >= 1910) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 90)) CharacterAppearanceReady(Character[0]);
 
@@ -380,7 +384,7 @@ function CharacterAppearanceSave(C) {
 		var P = "";
 		for (A = 0; A < C.Appearance.length; A++)
 			P = P + "&family" + A.toString() + "=" + C.Appearance[A].Asset.Group.Family + "&group" + A.toString() + "=" + C.Appearance[A].Asset.Group.Name + "&name" + A.toString() + "=" + C.Appearance[A].Asset.Name + "&color" + A.toString() + "=" + C.Appearance[A].Color;
-		CharacterAccountRequest("appearance_update", P);
+		AccountRequest("appearance_update", P);
 	}	
 
 }

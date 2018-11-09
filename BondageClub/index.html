@@ -30,13 +30,14 @@
 <script src="Common.js"></script>
 <script src="Drawing.js"></script>
 <script src="Log.js"></script>
+<script src="Account.js"></script>
 <script src="Character.js"></script>
-<script src="CharacterAccount.js"></script>
 <script src="CharacterLogin.js"></script>
 <script src="CharacterAppearance.js"></script>
 <script src="CharacterCreation.js"></script>
 <script src="MainHall.js"></script>
 <script src="Inventory.js"></script>
+<script src="Import.js"></script>
 <script src="Assets.js"></script>
 <script src="Assets/Female3DCG/Assets.js"></script>
 <script>
@@ -62,7 +63,7 @@ function MainRun() {
 	clearInterval(CurrentTimer);
 	CurrentTimer = setInterval("MainRun()", RunInterval);
 	DynamicFunction(CurrentScreen + "_Run()");
-	CharacterAccountProcess();
+	AccountProcess();
 }
 
 // When the user presses a key, we send the KeyDown event to the other screens

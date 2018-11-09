@@ -21,7 +21,7 @@ function DrawLoad() {
 	document.getElementById("MainCanvas").tabIndex = 1000;	
 
 	// Font is fixed for now, color can be set
-	MainCanvas.font = "30px Arial";
+	MainCanvas.font = "36px Arial";
 	MainCanvas.textAlign = "center";
 	MainCanvas.textBaseline = "middle";
 	

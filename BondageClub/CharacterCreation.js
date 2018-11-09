@@ -86,17 +86,25 @@ function CharacterCreation_Run() {
 // When the ajax response returns, we analyze it's data
 function CharacterCreation_Response(CharacterData) {
 	if ((CharacterData != null) && (CharacterData == "account_created")) {
+		
+		// Keep the character data and pushes it's appearance to the server
 		Character[0].Name = document.getElementById("InputCharacter").value.trim();
 		Character[0].AccountName = document.getElementById("InputName").value.trim();
 		Character[0].AccountPassword = document.getElementById("InputPassword1").value.trim();
 		InventoryLoad(Character[0], null, true);
 		CharacterAppearanceSave(Character[0]);
+		
+		// Logs Sarah status from the Bondage College if needed
+		ImportBondageCollegeSarah();
+		
+		// Flush the controls and enters the main hall
 		document.getElementById("InputCharacter").parentNode.removeChild(document.getElementById("InputCharacter"));
 		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 		document.getElementById("InputPassword1").parentNode.removeChild(document.getElementById("InputPassword1"));
 		document.getElementById("InputPassword2").parentNode.removeChild(document.getElementById("InputPassword2"));
 		document.getElementById("InputEmail").parentNode.removeChild(document.getElementById("InputEmail"));
 		SetScreen("MainHall");
+		
 	} else CharacterCreationMessage = "Error: " + CharacterData;
 }
 
@@ -140,7 +148,7 @@ function CharacterCreation_Click() {
 						else CharacterCreationMessage = "Error " + xmlhttp.status.toString() + " on account service";
 					}
 				};
-				xmlhttp.open("GET", CharacterAccountAddress + "?command=account_create&character=" + CharacterName + "&account=" + Name + "&password=" + Password1 + "&email=" + Email, true);
+				xmlhttp.open("GET", AccountAddress + "?command=account_create&character=" + CharacterName + "&account=" + Name + "&password=" + Password1 + "&email=" + Email, true);
 				xmlhttp.send();
 			
 			} else CharacterCreationMessage = "Invalid character, account name, password or email";

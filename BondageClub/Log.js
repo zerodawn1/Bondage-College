@@ -21,9 +21,8 @@ function LogAdd(NewLogName, NewLogGroup) {
 		Log.push(NewLog);
 	}
 
-	// Sends the log 
-	if (Character[0].AccountName != "")
-		CharacterAccountRequest("log_add", "&name=" + NewLogName + "&group=" + NewLogGroup);
+	// Sends the log to the server
+	AccountRequest("log_add", "&name=" + NewLogName + "&group=" + NewLogGroup);
 
 }
 
@@ -34,5 +33,20 @@ function LogQuery(QueryLogName, QueryLogGroup) {
 		if ((Log[L].Name == QueryLogName) && (Log[L].Group == QueryLogGroup))
 			return true;
 	return false;
+}
+
+// Loads the account log
+function LogLoad(NewLog) {
+
+	// Make sure we have something to load
+	if (NewLog != null) {
+
+		// Add each log entry one by one
+		var L;
+		for (L = 0; L < NewLog.length; I++)
+			LogAdd(NewLog[L].Name, NewLog[L].Group);
+
+	}
+	
 }
 

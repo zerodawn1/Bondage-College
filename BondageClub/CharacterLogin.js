@@ -38,13 +38,13 @@ function CharacterLogin_Run() {
 	// Draw the background and the character twice
 	DrawImage("Backgrounds/DressingRoom.jpg", 0, 0);
 	DrawCharacter(Character[0], 500, 0, 1);
-	DrawText("Welcome to the Bondage Club", 1250, 50, "White", "Black");
-	DrawText(CharacterLoginMessage, 1250, 100, "White", "Black");
-	DrawText("Account Name", 1250, 217, "White", "Black");
-	DrawText("Password", 1250, 368, "White", "Black");
-	DrawButton(1200, 500, 100, 60, "Login", "White", "");
-	DrawText("Or create a new character", 1250, 700, "White", "Black");
-	DrawButton(1125, 800, 250, 60, "New Character", "White", "");
+	DrawText("Welcome to the Bondage Club", 1265, 50, "White", "Black");
+	DrawText(CharacterLoginMessage, 1265, 100, "White", "Black");
+	DrawText("Account Name", 1265, 217, "White", "Black");
+	DrawText("Password", 1265, 368, "White", "Black");
+	DrawButton(1200, 500, 130, 60, "Login", "White", "");
+	DrawText("Or create a new character", 1265, 700, "White", "Black");
+	DrawButton(1125, 800, 280, 60, "New Character", "White", "");
 
 	//DrawText(MouseX.toString(), 50, 20, "white");	
 	//DrawText(MouseY.toString(), 50, 50, "white");
@@ -60,6 +60,7 @@ function CharacterLogin_Response(CharacterData) {
 		Character[0].AccountPassword = document.getElementById("InputPassword").value.trim();
 		CharacterAppearanceLoad(Character[0], C.Appearance);
 		InventoryLoad(Character[0], C.Inventory, false);
+		LogLoad(C.Log);
 		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 		document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
 		SetScreen("MainHall");
@@ -93,7 +94,7 @@ function CharacterLogin_Click() {
 				   } else CharacterLoginMessage = "Error " + xmlhttp.status.toString() + " on account service";
 				}
 			};
-			xmlhttp.open("GET", CharacterAccountAddress + "?command=account_log&account=" + Name + "&password=" + Password, true);
+			xmlhttp.open("GET", AccountAddress + "?command=account_log&account=" + Name + "&password=" + Password, true);
 			xmlhttp.send();
 
 		} else CharacterCreationMessage = "Invalid name or password";

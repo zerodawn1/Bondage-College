@@ -121,6 +121,33 @@ if (isset($_GET["command"])) {
 			
 		}
 		
+	// Add an entry to the account log
+	if ($_GET["command"] == "log_add") 
+		if (ValidLogin($data))
+			if (isset($_GET["name"]) && isset($_GET["group"]) && ($_GET["name"] != "") && ($_GET["group"] != "")) {
+
+				// If the entry is already in the log, we exit
+				$arr = json_decode($data);
+				if (!isset($arr->Log)) $arr->Log = [];
+				foreach ($arr->Log as $item)
+					if (($item->Name == $_GET["name"]) && ($item->Group == $_GET["group"]))
+						die("already_in_log");
+
+				// Create the log entry and add it
+				$log = new stdClass();
+				$log->Name = $_GET["name"];
+				$log->Group = $_GET["group"];
+				array_push($arr->Log, $log);
+
+				// Overwrite the file
+				$file = GetFileName();
+				$myfile = fopen($file, "w") or die("Unable to open file!");
+				fwrite($myfile, json_encode($arr));
+				fclose($myfile);
+				echo "log_added";
+
+			} else echo "parameter_error";
+
 } else echo "no_command_error";
 
 ?>
