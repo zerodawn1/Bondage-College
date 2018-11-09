@@ -39,7 +39,7 @@ if (isset($_GET["command"])) {
 
 	// Checks if all the parameters are there to create an account
 	if ($_GET["command"] == "account_create")
-		if (isset($_GET["account"]) && isset($_GET["password"]) && isset($_GET["character"]) && isset($_GET["email"]) && ($_GET["account"] != "") && ($_GET["password"] != "") && ($_GET["character"] != "") && ($_GET["email"] != "")) {
+		if (isset($_GET["account"]) && isset($_GET["password"]) && isset($_GET["character"]) && isset($_GET["email"]) && ($_GET["account"] != "") && ($_GET["password"] != "") && ($_GET["character"] != "")) {
 			
 			// The character file is named like her, we check if it already exists
 			$file = GetFileName();

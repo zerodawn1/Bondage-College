@@ -46,6 +46,9 @@ function CharacterLogin_Run() {
 	DrawText("Or create a new character", 1250, 700, "White", "Black");
 	DrawButton(1125, 800, 250, 60, "New Character", "White", "");
 
+	//DrawText(MouseX.toString(), 50, 20, "white");	
+	//DrawText(MouseY.toString(), 50, 50, "white");
+
 }
 
 // When the character logs, we analyze the data

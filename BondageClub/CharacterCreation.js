@@ -77,7 +77,7 @@ function CharacterCreation_Run() {
 	DrawText("Account name: (letters & numbers)", 1267, 250, "White", "Black");
 	DrawText("Account password: (letters & numbers)", 1267, 380, "White", "Black");
 	DrawText("Confirm password: (letters & numbers)", 1267, 510, "White", "Black");
-	DrawText("Email address: (for password recovery)", 1267, 640, "White", "Black");
+	DrawText("Email: (optional, to recover password)", 1267, 640, "White", "Black");
 	DrawButton(1120, 770, 290, 60, "Create your account", "White", "");
 	DrawText("Your account already exists?", 1200, 930, "White", "Black");
 	DrawButton(1430, 900, 100, 60, "Login", "White", "");
@@ -130,7 +130,7 @@ function CharacterCreation_Click() {
 			var LN = /^[a-zA-Z0-9 ]+$/;
 			var LS = /^[a-zA-Z ]+$/;
 			var E = /^[a-zA-Z0-9@.]+$/;
-			if (CharacterName.match(LS) && Name.match(LN) && Password1.match(LN) && Email.match(E) && (CharacterName.length > 0) && (CharacterName.length <= 20) && (Name.length > 0) && (Name.length <= 20) && (Password1.length > 0) && (Password1.length <= 20) && (Email.length >= 5) && (Email.length <= 100)) {
+			if (CharacterName.match(LS) && Name.match(LN) && Password1.match(LN) && (Email.match(E) || Email == "") && (CharacterName.length > 0) && (CharacterName.length <= 20) && (Name.length > 0) && (Name.length <= 20) && (Password1.length > 0) && (Password1.length <= 20) && (Email.length <= 100)) {
 
 				// Calls the PHP page to create the accounts
 				var xmlhttp = new XMLHttpRequest();
