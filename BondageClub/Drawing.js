@@ -631,19 +631,26 @@ function GetIconScreenPath(IconName) {
 
 // Makes sure the screen is at the proper size
 function DrawResize() {
-	if ((DrawScreenWidth != window.innerWidth) || (DrawScreenHeight != window.innerHeight)) {
-		DrawScreenWidth = window.innerWidth;
-		DrawScreenHeight = window.innerHeight;
-		if (window.innerWidth <= window.innerHeight * 2) {
-			MainCanvas.width = window.innerWidth;
+	
+	// Gets the Width and Height differently on mobile and regular browsers
+	var W = (IsMobile) ? document.documentElement.clientWidth : window.innerWidth;
+	var H = (IsMobile) ? document.documentElement.clientHeight : window.innerHeight;
+
+	// If we need to resize, we keep the 2x1 ratio
+	if ((DrawScreenWidth != W) || (DrawScreenHeight != H)) {
+		DrawScreenWidth = W;
+		DrawScreenHeight = H;
+		if (W <= H * 2) {
+			MainCanvas.width = W;
 			MainCanvas.height = MainCanvas.width / 2;
 			MainCanvas.canvas.style.width = "100%"; 
 			MainCanvas.canvas.style.height = "";
 		} else {
-			MainCanvas.height = window.innerHeight;
+			MainCanvas.height = H;
 			MainCanvas.width = MainCanvas.height * 2;
 			MainCanvas.canvas.style.width = ""; 
 			MainCanvas.canvas.style.height = "100%";
 		}
 	}
+
 }
