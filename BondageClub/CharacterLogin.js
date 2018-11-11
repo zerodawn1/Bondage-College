@@ -12,7 +12,6 @@ function CharacterLogin_Load() {
 	InputName.setAttribute("type", "text");
 	InputName.setAttribute("value", "");
 	InputName.setAttribute("maxlength", "20");
-	InputName.setAttribute("onfocus", "this.removeAttribute('readonly');");
 	InputName.addEventListener("keypress", KeyDown);
 	document.body.appendChild(InputName);
 
@@ -58,6 +57,7 @@ function CharacterLogin_Response(CharacterData) {
 		Character[0].Name = C.CharacterName;
 		Character[0].AccountName = C.AccountName;
 		Character[0].AccountPassword = document.getElementById("InputPassword").value.trim();
+		Character[0].AssetFamily = C.AssetFamily;
 		CharacterAppearanceLoad(Character[0], C.Appearance);
 		InventoryLoad(Character[0], C.Inventory, false);
 		LogLoad(C.Log);

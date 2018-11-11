@@ -73,14 +73,14 @@ function CharacterCreation_Run() {
 	DrawImage("Backgrounds/DressingRoom.jpg", 0, 0);
 	DrawCharacter(Character[0], 500, 0, 1);
 	DrawText(CharacterCreationMessage, 1267, 50, "White", "Black");
-	DrawText("Character name: (letters & spaces)", 1267, 120, "White", "Black");
-	DrawText("Account name: (letters & numbers)", 1267, 250, "White", "Black");
-	DrawText("Account password: (letters & numbers)", 1267, 380, "White", "Black");
-	DrawText("Confirm password: (letters & numbers)", 1267, 510, "White", "Black");
-	DrawText("Email: (optional, to recover password)", 1267, 640, "White", "Black");
-	DrawButton(1120, 770, 290, 60, "Create your account", "White", "");
-	DrawText("Your account already exists?", 1200, 930, "White", "Black");
-	DrawButton(1430, 900, 100, 60, "Login", "White", "");
+	DrawText("Character name (letters & spaces)", 1267, 120, "White", "Black");
+	DrawText("Account name (letters & numbers)", 1267, 250, "White", "Black");
+	DrawText("Account password (letters & numbers)", 1267, 380, "White", "Black");
+	DrawText("Confirm password (letters & numbers)", 1267, 510, "White", "Black");
+	DrawText("Email (optional, to recover password)", 1267, 640, "White", "Black");
+	DrawButton(1080, 770, 370, 60, "Create your account", "White", "");
+	DrawText("Your account already exists?", 1180, 930, "White", "Black");
+	DrawButton(1440, 900, 120, 60, "Login", "White", "");
 }
 
 // When the ajax response returns, we analyze it's data
@@ -112,7 +112,7 @@ function CharacterCreation_Response(CharacterData) {
 function CharacterCreation_Click() {
 	
 	// If we must go back to the login screen
-	if ((MouseX >= 1430) && (MouseX <= 1530) && (MouseY >= 900) && (MouseY <= 960)) {
+	if ((MouseX >= 1440) && (MouseX <= 1560) && (MouseY >= 900) && (MouseY <= 960)) {
 		document.getElementById("InputCharacter").parentNode.removeChild(document.getElementById("InputCharacter"));
 		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 		document.getElementById("InputPassword1").parentNode.removeChild(document.getElementById("InputPassword1"));
@@ -122,7 +122,7 @@ function CharacterCreation_Click() {
 	}
 	
 	// If we must try to create a new account
-	if ((MouseX >= 1120) && (MouseX <= 1410) && (MouseY >= 770) && (MouseY <= 830)) {
+	if ((MouseX >= 1080) && (MouseX <= 1450) && (MouseY >= 770) && (MouseY <= 830)) {
 		
 		// First, we make sure both passwords are the same
 		var CharacterName = document.getElementById("InputCharacter").value.trim();

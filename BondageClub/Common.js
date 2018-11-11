@@ -190,8 +190,29 @@ function HexToRGB(color) {
     };
 }
 
+// Returns the hex value of a RGB data
+function RGBToHex(rgb){
+	var rgb = rgb[2] | (rgb[1] << 8) | (rgb[0] << 16);
+    return '#' + (0x1000000 + rgb).toString(16).slice(1)  
+};
+
 // Sets the current screen and calls the loading
 function SetScreen(NewScreen) {
 	CurrentScreen = NewScreen;
 	DynamicFunction(CurrentScreen + "_Load()");
+}
+
+// Sorts a list of objects based on a key property
+function SortObjectList(list, key) {
+    function compare(a, b) {
+        a = a[key];
+        b = b[key];
+        var type = (typeof(a) === 'string' ||
+                    typeof(b) === 'string') ? 'string' : 'number';
+        var result;
+        if (type === 'string') result = a.localeCompare(b);
+        else result = a - b;
+        return result;
+    }
+    return list.sort(compare);
 }

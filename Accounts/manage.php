@@ -91,35 +91,36 @@ if (isset($_GET["command"])) {
 
 	// Add an item to the account inventory
 	if ($_GET["command"] == "appearance_update") 
-		if (ValidLogin($data)) {
+		if (ValidLogin($data)) 
+			if (isset($_GET["family"]) && ($_GET["family"] != "")) {
 
-			// Decodes the data
-			$arr = json_decode($data);
-			$arr->Appearance = [];
-			
-			// Fills the appearance array
-			$p = 0;
-			while (isset($_GET["name".$p]) && isset($_GET["group".$p]) && isset($_GET["family".$p]) && isset($_GET["color".$p]) && ($_GET["name".$p] != "") && ($_GET["group".$p] != "") && ($_GET["family".$p] != "") && ($_GET["color".$p] != "")) {
+				// Decodes the data
+				$arr = json_decode($data);
+				$arr->AssetFamily = $_GET["family"];
+				$arr->Appearance = [];
+				
+				// Fills the appearance array
+				$p = 0;
+				while (isset($_GET["name".$p]) && isset($_GET["group".$p]) && isset($_GET["color".$p]) && ($_GET["name".$p] != "") && ($_GET["group".$p] != "") && ($_GET["color".$p] != "")) {
 
-				// Adds the appearance in the array
-				$appearance = new stdClass();
-				$appearance->Name = $_GET["name".$p];
-				$appearance->Group = $_GET["group".$p];
-				$appearance->Family = $_GET["family".$p];				
-				$appearance->Color = str_replace("|", "#", $_GET["color".$p]);
-				array_push($arr->Appearance, $appearance);
-				$p++;
-			
-			}
+					// Adds the appearance in the array
+					$appearance = new stdClass();
+					$appearance->Name = $_GET["name".$p];
+					$appearance->Group = $_GET["group".$p];
+					$appearance->Color = str_replace("|", "#", $_GET["color".$p]);
+					array_push($arr->Appearance, $appearance);
+					$p++;
+				
+				}
 
-			// Overwrite the file
-			$file = GetFileName();
-			$myfile = fopen($file, "w") or die("Unable to open file!");
-			fwrite($myfile, json_encode($arr));
-			fclose($myfile);
-			echo "appearance_updated";
-			
-		}
+				// Overwrite the file
+				$file = GetFileName();
+				$myfile = fopen($file, "w") or die("Unable to open file!");
+				fwrite($myfile, json_encode($arr));
+				fclose($myfile);
+				echo "appearance_updated";
+				
+			} else echo "missing_family";
 		
 	// Add an entry to the account log
 	if ($_GET["command"] == "log_add") 

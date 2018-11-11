@@ -3,22 +3,23 @@ var AssetGroup = [];
 var AssetCurrentGroup;
 
 // Adds a new asset group to the main list
-function AssetGroupAdd(NewAssetFamily, NewAssetGroupName, NewAssetParentGroupName, NewAssetCategory, NewAssetIsDefault, NewAssetGroupAllowNone, NewAssetGroupKeepNaked, NewAssetColorSchema, NewAssetParentColor, NewAssetDrawingPriority, NewAssetDrawingLeft, NewAssetDrawingTop, NewAssetDrawingFullAlpha, NewAssetDrawingBlink) {
+function AssetGroupAdd(NewAssetFamily, NewAsset) {
 	var A = {
 		Family: NewAssetFamily,
-		Name: NewAssetGroupName,
-		ParentGroupName: (NewAssetParentGroupName == null) ? "" : NewAssetParentGroupName,
-		Category: (NewAssetCategory == null) ? "Appearance" : NewAssetCategory,
-		IsDefault: (NewAssetIsDefault == null) ? true : NewAssetIsDefault,
-		AllowNone: (NewAssetGroupAllowNone == null) ? true : NewAssetGroupAllowNone,
-		KeepNaked : (NewAssetGroupKeepNaked == null) ? false : NewAssetGroupKeepNaked,
-		ColorSchema: (NewAssetColorSchema == null) ? ["Default"] : NewAssetColorSchema,
-		ParentColor: (NewAssetParentColor == null) ? "" : NewAssetParentColor,
-		DrawingPriority: (NewAssetDrawingPriority == null) ? 0 : NewAssetDrawingPriority,
-		DrawingLeft: (NewAssetDrawingLeft == null) ? 0 : NewAssetDrawingLeft,
-		DrawingTop: (NewAssetDrawingTop == null) ? 0 : NewAssetDrawingTop,
-		DrawingFullAlpha: (NewAssetDrawingFullAlpha == null) ? true : NewAssetDrawingFullAlpha,
-		DrawingBlink: (NewAssetDrawingBlink == null) ? false : NewAssetDrawingBlink
+		Name: NewAsset.Group,
+		ParentGroupName: (NewAsset.ParentGroup == null) ? "" : NewAsset.ParentGroup,
+		Category: (NewAsset.Category == null) ? "Appearance" : NewAsset.Category,
+		IsDefault: (NewAsset.Default == null) ? true : NewAsset.Default,
+		AllowNone: (NewAsset.AllowNone == null) ? true : NewAsset.AllowNone,
+		AllowColorize: (NewAsset.AllowColorize == null) ? true : NewAsset.AllowColorize,
+		KeepNaked : (NewAsset.KeepNaked == null) ? false : NewAsset.KeepNaked,
+		ColorSchema: (NewAsset.Color == null) ? ["Default"] : NewAsset.Color,
+		ParentColor: (NewAsset.ParentColor == null) ? "" : NewAsset.ParentColor,
+		DrawingPriority: (NewAsset.Priority == null) ? AssetGroup.length : NewAsset.Priority,
+		DrawingLeft: (NewAsset.Left == null) ? 0 : NewAsset.Left,
+		DrawingTop: (NewAsset.Top == null) ? 0 : NewAsset.Top,
+		DrawingFullAlpha: (NewAsset.FullAlpha == null) ? true : NewAsset.FullAlpha,
+		DrawingBlink: (NewAsset.Blink == null) ? false : NewAsset.Blink
 	}
 	AssetGroup.push(A);
 	AssetCurrentGroup = A;
@@ -43,7 +44,7 @@ function AssetLoad(A, Family) {
 	for (G = 0; G < A.length; G++) {
 		
 		// Creates the asset group
-		AssetGroupAdd(Family, A[G].Group, A[G].ParentGroup, A[G].Category, A[G].Default, A[G].AllowNone, A[G].KeepNaked, A[G].Color, A[G].ParentColor, G, A[G].Left, A[G].Top, A[G].FullAlpha, A[G].Blink);
+		AssetGroupAdd(Family, A[G]);
 
 		// Add each assets in the group 1 by 1
 		var I;

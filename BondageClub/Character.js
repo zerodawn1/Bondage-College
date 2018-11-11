@@ -32,6 +32,54 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 
 }
 
+// Creates a random name for the character
+function CharacterRandomName(C) {
+
+	// Generates a name from the name bank 
+	var NewName = CharacterName[Math.floor(Math.random() * CharacterName.length)];
+	C.Name = NewName;
+	
+	// If the name is already taken, we generate a new one
+	var C;
+	for (C = 0; C < Character.length; C++)
+		if ((Character[C].Name == NewName) && (Character[C].ID != C.ID)) {
+			CharacterRandomName(C)
+			return;
+		}
+
+}
+
+// Loads in the NPC character in the buffer
+function CharacterLoadNPC(NPCType) {
+
+	// Checks if the NPC already exists and returns it if it's the case
+	var C;
+	for (C = 0; C < Character.length; C++)
+		if (Character[C].AccountName == NPCType)
+			return Character[C];
+
+	// Randomzie the new character
+	CharacterReset(Character.length, "Female3DCG");
+	C = Character[Character.length - 1];
+	C.AccountName = NPCType;
+	CharacterRandomName(C);
+	CharacterAppearanceFullRandom(C);
+	
+	// Maid archetype
+	if (NPCType.indexOf("Maid") >= 0) {
+		InventoryAdd(C, "MaidOutfit1", "Cloth");
+		CharacterAppearanceSetItem(C, "Cloth", C.Inventory[C.Inventory.length - 1].Asset);
+		CharacterAppearanceSetColorForGroup(C, "Default", "Cloth");
+		InventoryAdd(C, "MaidHat1", "Hat");
+		CharacterAppearanceSetItem(C, "Hat", C.Inventory[C.Inventory.length - 1].Asset);
+		CharacterAppearanceSetColorForGroup(C, "Default", "Hat");
+	}
+
+	// Returns the new character
+	return C;
+	
+}
+
 // Sorts the character appearance by priority and loads the canvas
 function CharacterLoadCanvas(C) {
 	

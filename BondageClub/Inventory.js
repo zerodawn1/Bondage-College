@@ -1,5 +1,5 @@
 // Add a new item by group & name to character inventory
-function InventoryAdd(C, NewItemName, NewItemGroup) {
+function InventoryAdd(C, NewItemName, NewItemGroup, Push) {
 
 	// First, we check if the inventory already exists, exit if it's the case
 	var I;
@@ -24,7 +24,7 @@ function InventoryAdd(C, NewItemName, NewItemGroup) {
 	C.Inventory.push(NewItem);
 
 	// Sends the new item to the server if it's for the current player
-	if (C.ID == 0)
+	if ((C.ID == 0) && ((Push == null) || Push))
 		AccountRequest("inventory_add", "&name=" + NewItemName + "&group=" + NewItemGroup);
 
 }
@@ -42,7 +42,7 @@ function InventoryLoad(C, Inventory, Import) {
 		// Add each items one by one
 		var I;
 		for (I = 0; I < Inventory.length; I++)
-			InventoryAdd(C, Inventory[I].Name, Inventory[I].Group);
+			InventoryAdd(C, Inventory[I].Name, Inventory[I].Group, false);
 
 	}
 

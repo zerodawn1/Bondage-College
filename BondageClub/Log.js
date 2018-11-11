@@ -1,7 +1,7 @@
 var Log = [];
 
 // Add a new log to the server side
-function LogAdd(NewLogName, NewLogGroup) {
+function LogAdd(NewLogName, NewLogGroup, Push) {
 
 	// Checks to make sure we don't duplicate a log
 	AddToLog = true;
@@ -22,7 +22,8 @@ function LogAdd(NewLogName, NewLogGroup) {
 	}
 
 	// Sends the log to the server
-	AccountRequest("log_add", "&name=" + NewLogName + "&group=" + NewLogGroup);
+	if ((Push == null) || Push)
+		AccountRequest("log_add", "&name=" + NewLogName + "&group=" + NewLogGroup);
 
 }
 
@@ -43,8 +44,8 @@ function LogLoad(NewLog) {
 
 		// Add each log entry one by one
 		var L;
-		for (L = 0; L < NewLog.length; I++)
-			LogAdd(NewLog[L].Name, NewLog[L].Group);
+		for (L = 0; L < NewLog.length; L++)
+			LogAdd(NewLog[L].Name, NewLog[L].Group, false);
 
 	}
 	
