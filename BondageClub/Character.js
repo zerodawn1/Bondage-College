@@ -10,8 +10,10 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		AssetFamily: CharacterAssetFamily,
 		AccountName: "",
 		AccountPassword: "",
-		Inventory: [],
+		Inventory: [],		
 		Appearance: [],
+		Dialog: [],
+		Stage: "0",
 		Canvas: null,
 		CanvasBlink: null,
 		BlinkFactor: Math.round(Math.random() * 10) + 10
@@ -49,6 +51,49 @@ function CharacterRandomName(C) {
 
 }
 
+// Builds the dialog objects from the CSV files
+function CharacterBuildDialog(C, CSV) {
+
+	// For each lines in the file
+	C.Dialog = [];
+	var L;
+	for (L = 0; L < CSV.length; L++) 
+		if ((CSV[L][0] != null) && (CSV[L][0] != "")) {
+		
+			// Creates a dialog object
+			var D = {};
+			D.Stage = CSV[L][0];
+			if ((CSV[L][1] != null) && (CSV[L][1].trim() != "")) D.NextStage = CSV[L][1];
+			if ((CSV[L][2] != null) && (CSV[L][2].trim() != "")) D.Option = CSV[L][2];
+			if ((CSV[L][3] != null) && (CSV[L][3].trim() != "")) D.Result = CSV[L][3];
+			if ((CSV[L][4] != null) && (CSV[L][4].trim() != "")) D.Function = ((CSV[L][4].trim().substring(0, 8) == "Generic_") ? "" : CurrentScreen + "_") + CSV[L][4];
+			if ((CSV[L][5] != null) && (CSV[L][5].trim() != "")) D.Prerequisite = CSV[L][5];
+			C.Dialog.push(D);
+		
+		}
+
+}
+
+// Loads a CSV file to build the character dialog
+function CharacterLoadCSVDialog(C) {
+
+    // Finds the full path of the CSV file to use cache
+    var FullPath = "Rooms/" + CurrentScreen + "/" + C.AccountName + "_" + Common_GetWorkingLanguage() + ".csv";    
+    if (Common_CSVCache[FullPath]) {
+		CharacterBuildDialog(C, Common_CSVCache[FullPath]);
+        return;
+    }
+    
+    // Opens the file, parse it and returns the result it to build the dialog
+    Common_Get(FullPath, function() {
+        if (this.status == 200) {
+            Common_CSVCache[FullPath] = Common_ParseCSV(this.responseText);
+			CharacterBuildDialog(C, Common_CSVCache[FullPath]);
+        }
+    });
+	
+}
+
 // Loads in the NPC character in the buffer
 function CharacterLoadNPC(NPCType) {
 
@@ -62,6 +107,7 @@ function CharacterLoadNPC(NPCType) {
 	CharacterReset(Character.length, "Female3DCG");
 	C = Character[Character.length - 1];
 	C.AccountName = NPCType;
+	CharacterLoadCSVDialog(C);
 	CharacterRandomName(C);
 	CharacterAppearanceFullRandom(C);
 	

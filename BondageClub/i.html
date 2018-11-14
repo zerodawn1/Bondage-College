@@ -28,7 +28,6 @@
 </style>
 
 <script src="Common.js"></script>
-<script src="Generic.js"></script>
 <script src="Drawing.js"></script>
 <script src="Log.js"></script>
 <script src="Account.js"></script>
@@ -45,15 +44,15 @@
 <script src="Rooms/Introduction/Introduction.js"></script>
 <script>
 
-/*window.onerror = function (message, url, lineNo){
+window.onerror = function (message, url, lineNo){
     console.log('Error: ' + message + '\n' + 'Line Number: ' + lineNo);
 	CharacterLoginMessage = 'Error: ' + message + '\n' + 'Line Number: ' + lineNo;
     return true;
-}*/
+}
 
 // When the code is loaded
 window.onload = function() {
-	Common_IsMobile = Common_DetectMobile();
+	IsMobile = DetectMobile();
 	DrawLoad();
 	AssetLoadAll();
 	GameInit();
@@ -69,8 +68,8 @@ function GameInit() {
 // Main game running state, runs the current screen code and bottom bar
 function MainRun() {
 	DrawResize();
-	clearInterval(Common_CurrentTimer);
-	Common_CurrentTimer = setInterval("MainRun()", Common_RunInterval);
+	clearInterval(CurrentTimer);
+	CurrentTimer = setInterval("MainRun()", RunInterval);
 	DynamicFunction(CurrentScreen + "_Run()");
 	AccountProcess();
 }
@@ -83,23 +82,23 @@ function KeyDown(event) {
 
 // When the user clicks, we fire the click event for other screens
 function Click(event) {
-	if (!Common_IsMobile) {
+	if (!IsMobile) {
 		MouseMove(event);
-		//var i = csdcsdc;
+		var i = csdcsdc;
 		DynamicFunction(CurrentScreen + "_Click()");
 	}
 }
 
 // When the user clicks, we fire the click event for other screens
 function Touch(event) {
-	if (Common_IsMobile) {
+	if (IsMobile) {
 		var rect = document.getElementById("MainCanvas").getBoundingClientRect();
-		if (document.body.clientWidth <= document.body.clientHeight * 2) {
+		if (document.body.clientWidth <= document.body.clientWidth * 2) {
 			MouseX = Math.round((event.touches[0].clientX - rect.left) * 2000 / document.body.clientWidth);
 			MouseY = Math.round((event.touches[0].clientY - rect.top) * 2000 / document.body.clientWidth);
 		} else {
-			MouseX = Math.round((event.touches[0].clientX - rect.left) * 1000 / document.body.clientHeight);
-			MouseY = Math.round((event.touches[0].clientY - rect.top) * 1000 / document.body.clientHeight);
+			MouseX = Math.round((event.touches[0].clientX - rect.left) * 1000 / document.body.clientWidth);
+			MouseY = Math.round((event.touches[0].clientY - rect.top) * 1000 / document.body.clientWidth);
 		}		
 		DynamicFunction(CurrentScreen + "_Click()");
 	} 

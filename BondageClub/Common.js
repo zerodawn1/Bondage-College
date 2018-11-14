@@ -1,19 +1,21 @@
 // Main variables
 var CurrentScreen;
+var CurrentCharacter = null;
 var MouseX = 0;
 var MouseY = 0;
 var KeyPress = "";
-var IsMobile = false;
-var RunInterval = 20;
-var CurrentTimer;
+var Common_IsMobile = false;
+var Common_CurrentTimer = 0;
+var Common_RunInterval = 20;
+var Common_CSVCache = {};
 
 // Returns TRUE if the variable is a number
-function IsNumeric(n) {
+function Common_IsNumeric(n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
 // Returns the current date and time in a yyyy-mm-dd hh:mm:ss format
-function GetFormatDate() {
+function Common_GetFormatDate() {
 	var d = new Date();
 	var yyyy = d.getFullYear();
 	var mm = d.getMonth() < 9 ? "0" + (d.getMonth() + 1) : (d.getMonth() + 1); // getMonth() is zero-based
@@ -25,7 +27,7 @@ function GetFormatDate() {
 }
 
 // Used to detect whether the users browser is an mobile browser
-function DetectMobile() {
+function Common_DetectMobile() {
 
 	// First check
     if (sessionStorage.desktop) return false;
@@ -40,7 +42,7 @@ function DetectMobile() {
 }
 
 // Parse a CSV file
-function ParseCSV(str) {
+function Common_ParseCSV(str) {
 		
     var arr = [];
     var quote = false;  // true means we're inside a quoted field
@@ -73,31 +75,32 @@ function ParseCSV(str) {
 }
 
 // Read a CSV file from the web site
-function ReadCSV(Array, ChapterOrPath, Screen, Type, Language) {
+function Common_ReadCSV(Array, Path, Screen, File) {
+	
     // Changed from a single path to various arguments and internally concatenate them
     // This ternary operator is used to keep backward compatibility
-    var Path = (Screen && Type)
-                 ? ChapterOrPath + "/" + Screen + "/" + Type + (Language ? "_" : "") + (Language || "") + ".csv"
-                 : ChapterOrPath;
-    
-    if (CSVCache[Path]) {
-        window[Array] = CSVCache[Path];
+    var FullPath = Path + "/" + Screen + "/" + File + "_" + Common_GetWorkingLanguage() + ".csv";    
+    if (Common_CSVCache[FullPath]) {
+		window[Array] = Common_CSVCache[FullPath];
         return;
     }
     
-    // Opens the file, parse it and returns the result in an array
-    Get(Path, function() {
+    // Opens the file, parse it and returns the result in an Object
+    Common_Get(FullPath, function() {
         if (this.status == 200) {
-            CSVCache[Path] = ParseCSV(this.responseText);
-            window[Array] = CSVCache[Path];
-        } else if (this.status == 404 && Language && Language != "EN") { // If language isn't EN and the file doesn't exist, then fallback to EN
-            ReadCSV(Array, ChapterOrPath, Screen, Type, "EN");
+            Common_CSVCache[FullPath] = Common_ParseCSV(this.responseText);
+			window[Array] = Common_CSVCache[FullPath];
         }
     });
 }
 
+// Returns a working language if translation isn't fully ready
+function Common_GetWorkingLanguage() {
+	return "EN";
+}
+
 // AJAX utility
-function Get(Path, Callback) {
+function Common_Get(Path, Callback) {
 	var xhr = new XMLHttpRequest();
     xhr.open("GET", Path);
     xhr.onreadystatechange = function() { if (this.readyState == 4) Callback.bind(this)(); };
@@ -215,4 +218,8 @@ function SortObjectList(list, key) {
         return result;
     }
     return list.sort(compare);
+}
+
+function Common_InteractionClick() {
+	
 }

@@ -262,57 +262,31 @@ function DrawActorStats(Left, Top) {
 
 }
 
-// Draw the intro box
-function DrawIntro(Intro, CurrentStagePosition, LoveLevel, SubLevel) {
-
-	// Draw the top box and stats
-	DrawRect(0, 0, 599, 150, "White");	
-	if (CurrentActor != "") {
-		DrawRect(30, 60, 539, 1, "Black");
-		DrawActorStats(300, 15);
-	}
-	
-	// Find the correct intro text
-	var ShowText = "";
-	if (OverridenIntroText != "")
-		ShowText = OverridenIntroText
-	else
-		for (var I = 0; I < Intro.length; I++)
-			if (Intro[I][IntroStage] == CurrentStagePosition)
-				if (ActorInteractionAvailable(Intro[I][IntroLoveReq], Intro[I][IntroSubReq], Intro[I][IntroVarReq], Intro[I][IntroText], true))
-					ShowText = Intro[I][IntroText];
-
-	// Draw the intro
-	if (CurrentActor != "") DrawText(ShowText, 300, 105, "black");
-	else DrawText(ShowText, 300, 75, "black");
-				
-}
-
-// Draw a selectable option on the screen
-function DrawOption(OptionText, Left, Top) {
-
-	// Draw the rectangle and text
-	if (OptionText.substr(0, 1) == "@") OptionText = OptionText.substr(1);
-	DrawRect(Left, Top, 299, 89, "White");	
-	if ((MouseX >= Left) && (MouseX <= Left + 299) && (MouseY >= Top) && (MouseY <= Top + 89) && !IsMobile) DrawText(OptionText, Left + 150, Top + 45, "#00BB00");
-	else DrawText(OptionText, Left + 150, Top + 45, "#BB0000");	
-	
-}
-
 // Draw all the possible interactions 
-function DrawInteraction(Stage, CurrentStagePosition, LoveLevel, SubLevel) {
+function DrawInteraction() {
 
-	// Find all the correct interactions for the current stage
+	// Draw both the player and the interaction character
+	DrawCharacter(Character[0], 0, 0, 1);
+	DrawCharacter(CurrentCharacter, 500, 0, 1);
+	
+	// Find the intro text
+	var IntroText = "";
+	for(var D = 0; D < CurrentCharacter.Dialog.length; D++)
+		if ((CurrentCharacter.Dialog[D].Stage == CurrentCharacter.Stage) && (CurrentCharacter.Dialog[D].Option == null) && (CurrentCharacter.Dialog[D].Result != null)) {
+			IntroText = CurrentCharacter.Dialog[D].Result
+			break;
+		}
+
+	// Draws the intro
+	DrawText(CurrentCharacter.Name + ": " + IntroText, 1500, 50, "white", "black");
+	
+	// Draws the possible answers
 	var Pos = 0;
-	for (var S = 0; S < Stage.length; S++)
-		if (Stage[S][StageNumber] == CurrentStagePosition) 
-			if (ActorInteractionAvailable(Stage[S][StageLoveReq], Stage[S][StageSubReq], Stage[S][StageVarReq], Stage[S][StageInteractionText], false)) {
-				
-				// Draw the box and interaction
-				DrawOption(Stage[S][StageInteractionText], (Pos % 2) * 300, 151 + (Math.round((Pos - 1) / 2) * 90));
-				Pos = Pos + 1;			
-				
-			}
+	for(var D = 0; D < CurrentCharacter.Dialog.length; D++)
+		if ((CurrentCharacter.Dialog[D].Stage == CurrentCharacter.Stage) && (CurrentCharacter.Dialog[D].Option != null)) {
+			DrawButton(1200, 100 + 100 * Pos, 600, 75, CurrentCharacter.Dialog[D].Option, "white");
+			Pos++;			
+		}
 		
 }
 
@@ -364,135 +338,6 @@ function GetPlayerIconImage() {
     if (PlayerHasLockedInventory("Blindfold") == true) Image = Image + "_Blindfold";
 	if (Math.round(seconds / 500) % 15 == 0) Image = Image + "_Blink";
 	return Image;
-
-}
-
-// Draw all the inventory icons
-function DrawInventory() {
-
-	// Draw the player icon
-	if (((MouseX >= 1) && (MouseX <= 74) && (MouseY >= 601) && (MouseY <= 674)) || (IsMobile))
-		DrawImage("Icons/" + GetPlayerIconImage() + "_Active.png", 0, 601);
-	else
-		DrawImage("Icons/" + GetPlayerIconImage() + "_Inactive.png", 0, 601);
-	
-	// Draw an arrow over the player head if there's a skill level up
-	if (PlayerSkillShowLevelUp > 0) DrawImage("Icons/SkillLevelUp.png", 0, 601);
-	
-	// Scroll in the full inventory to draw the icons and quantity, draw a padlock over the item if it's locked
-	var Pos = 1;
-	for (var I = 0; I < PlayerInventory.length; I++) {
-
-		// First inventory tab
-		if (PlayerInventoryTab == 0) {
-
-			// 11 positions for the items
-			if (Pos <= 11) {
-				var ImgState = "Inactive";
-				if (((MouseX >= 1 + Pos * 75) && (MouseX <= 74 + Pos * 75) && (MouseY >= 601) && (MouseY <= 674)) || (IsMobile)) ImgState = "Active";		
-				DrawImage("Icons/" + PlayerInventory[I][PlayerInventoryName] + "_" + ImgState + ".png", 1 + Pos * 75, 601);
-				DrawText(PlayerInventory[I][PlayerInventoryQuantity].toString(), Pos * 75 + 64, 661, "#000000");
-				if (PlayerHasLockedInventory(PlayerInventory[I][PlayerInventoryName]))
-					DrawImage("Icons/Lock_" + ImgState + ".png", Pos * 75, 600)
-			}
-
-			// the last position is for the next tab
-			if (Pos == 12) {
-				var ImgState = "Inactive";
-				if (((MouseX >= 1 + Pos * 75) && (MouseX <= 74 + Pos * 75) && (MouseY >= 601) && (MouseY <= 674)) || (IsMobile)) ImgState = "Active";
-				DrawImage("Icons/SecondInventoryTab_" + ImgState + ".png", 1 + Pos * 75, 601);
-			}
-			
-		};
-		
-		// Second inventory tab
-		if ((Pos >= 12) && (PlayerInventoryTab == 1)) {		
-			var ImgState = "Inactive";
-			if (((MouseX >= 1 + (Pos - 11) * 75) && (MouseX <= 74 + (Pos - 11) * 75) && (MouseY >= 601) && (MouseY <= 674)) || (IsMobile)) ImgState = "Active";		
-			DrawImage("Icons/" + PlayerInventory[I][PlayerInventoryName] + "_" + ImgState + ".png", 1 + (Pos - 11) * 75, 601);
-			DrawText(PlayerInventory[I][PlayerInventoryQuantity].toString(), (Pos - 11) * 75 + 64, 661, "#000000");
-			if (PlayerHasLockedInventory(PlayerInventory[I][PlayerInventoryName]))
-				DrawImage("Icons/Lock_" + ImgState + ".png", (Pos - 11) * 75, 600)
-		};
-
-		// Jumps to the next position
-		Pos = Pos + 1;
-		
-	}
-
-	// Scroll in the locked inventory also to find items that were not loaded
-	for (var I = 0; I < PlayerLockedInventory.length; I++) 
-		if (!PlayerHasInventory(PlayerLockedInventory[I])) {
-
-			// First inventory tab
-			if (PlayerInventoryTab == 0) {
-
-				// 11 positions for the items
-				if (Pos <= 11) {
-					if (((MouseX >= 1 + Pos * 75) && (MouseX <= 74 + Pos * 75) && (MouseY >= 601) && (MouseY <= 674)) || (IsMobile)) {
-						DrawImage("Icons/" + PlayerLockedInventory[I] + "_Active.png", 1 + Pos * 75, 601);
-						DrawImage("Icons/Lock_Active.png", Pos * 75, 600);
-					}
-					else {
-						DrawImage("Icons/" + PlayerLockedInventory[I] + "_Inactive.png", 1 + Pos * 75, 601);				
-						DrawImage("Icons/Lock_Inactive.png", Pos * 75, 600);
-					}
-				}
-
-				// the last position is for the next tab
-				if (Pos == 12) {
-					var ImgState = "Inactive";
-					if (((MouseX >= 1 + Pos * 75) && (MouseX <= 74 + Pos * 75) && (MouseY >= 601) && (MouseY <= 674)) || (IsMobile)) ImgState = "Active";
-					DrawImage("Icons/SecondInventoryTab_" + ImgState + ".png", 1 + Pos * 75, 601);
-				}
-
-			}
-			
-			// Second inventory tab
-			if ((Pos >= 12) && (PlayerInventoryTab == 1)) {		
-				if (((MouseX >= 1 + (Pos - 11) * 75) && (MouseX <= 74 + (Pos - 11) * 75) && (MouseY >= 601) && (MouseY <= 674)) || (IsMobile)) {
-					DrawImage("Icons/" + PlayerLockedInventory[I] + "_Active.png", 1 + (Pos - 11) * 75, 601);
-					DrawImage("Icons/Lock_Active.png", (Pos - 11) * 75, 600);
-				}
-				else {
-					DrawImage("Icons/" + PlayerLockedInventory[I] + "_Inactive.png", 1 + (Pos - 11) * 75, 601);				
-					DrawImage("Icons/Lock_Inactive.png", (Pos - 11) * 75, 600);
-				}
-			};
-
-			// Jumps to the next position
-			Pos = Pos + 1;
-
-		};
-		
-	// On the second tab, we put an arrow to go back to the first tab
-	if ((Pos >= 12) && (PlayerInventoryTab == 1)) {
-		var ImgState = "Inactive";
-		if (((MouseX >= 1 + (Pos - 11) * 75) && (MouseX <= 74 + (Pos - 11) * 75) && (MouseY >= 601) && (MouseY <= 674)) || (IsMobile)) ImgState = "Active";
-		DrawImage("Icons/FirstInventoryTab_" + ImgState + ".png", 1 + (Pos - 11) * 75, 601);
-	}
-
-}
-
-// Build the bottom bar menu
-function BuildBottomBar() {
-
-	// Paints the background depending on the current stage
-	DrawRect(0, 600, 1200, 1, "black");
-	DrawRect(0, 601, 1200, 74, "white");
-	DrawRect(975, 600, 1, 675, "black");
-	DrawInventory();
-
-	// Draw the leave icon and clock
-	if (LeaveIcon != "") {
-		DrawImage("Icons/Clock.png", 985, 621);
-		DrawText(msToTime(CurrentTime), 1073, 637, "black");
-		if (((MouseX >= 1125) && (MouseX <= 1200) && (MouseY >= 600) && (MouseY <= 675)) || (IsMobile)) DrawImage("Icons/" + LeaveIcon + "_Active.png", 1125, 600);
-		else DrawImage("Icons/" + LeaveIcon + "_Inactive.png", 1125, 600);
-	} else {
-		DrawImage("Icons/Clock.png", 1010, 621);
-		DrawText(msToTime(CurrentTime), 1110, 637, "black");
-	}
 
 }
 
@@ -633,8 +478,8 @@ function GetIconScreenPath(IconName) {
 function DrawResize() {
 	
 	// Gets the Width and Height differently on mobile and regular browsers
-	var W = (IsMobile) ? document.documentElement.clientWidth : window.innerWidth;
-	var H = (IsMobile) ? document.documentElement.clientHeight : window.innerHeight;
+	var W = (Common_IsMobile) ? document.documentElement.clientWidth : window.innerWidth;
+	var H = (Common_IsMobile) ? document.documentElement.clientHeight : window.innerHeight;
 
 	// If we need to resize, we keep the 2x1 ratio
 	if ((DrawScreenWidth != W) || (DrawScreenHeight != H)) {
