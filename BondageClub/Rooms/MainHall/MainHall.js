@@ -14,7 +14,7 @@ function MainHall_Run() {
 	// Draws the buttons
 	DrawButton(1765, 25, 90, 90, "", "White", "Icons/Dress.png");
 	DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
-	DrawButton(1575, 145, 400, 65, "Introduction Room", "White");
+	DrawButton(1575, 145, 400, 65, "Introduction Class", "White");
 	
 }
 

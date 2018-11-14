@@ -14,6 +14,7 @@ function AssetGroupAdd(NewAssetFamily, NewAsset) {
 		AllowColorize: (NewAsset.AllowColorize == null) ? true : NewAsset.AllowColorize,
 		KeepNaked : (NewAsset.KeepNaked == null) ? false : NewAsset.KeepNaked,
 		ColorSchema: (NewAsset.Color == null) ? ["Default"] : NewAsset.Color,
+		ParentSize: (NewAsset.ParentSize == null) ? "" : NewAsset.ParentSize,
 		ParentColor: (NewAsset.ParentColor == null) ? "" : NewAsset.ParentColor,
 		DrawingPriority: (NewAsset.Priority == null) ? AssetGroup.length : NewAsset.Priority,
 		DrawingLeft: (NewAsset.Left == null) ? 0 : NewAsset.Left,

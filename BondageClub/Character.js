@@ -12,8 +12,9 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		AccountPassword: "",
 		Inventory: [],		
 		Appearance: [],
-		Dialog: [],
 		Stage: "0",
+		CurrentDialog: "",
+		Dialog: [],
 		Canvas: null,
 		CanvasBlink: null,
 		BlinkFactor: Math.round(Math.random() * 10) + 10
@@ -66,7 +67,7 @@ function CharacterBuildDialog(C, CSV) {
 			if ((CSV[L][1] != null) && (CSV[L][1].trim() != "")) D.NextStage = CSV[L][1];
 			if ((CSV[L][2] != null) && (CSV[L][2].trim() != "")) D.Option = CSV[L][2];
 			if ((CSV[L][3] != null) && (CSV[L][3].trim() != "")) D.Result = CSV[L][3];
-			if ((CSV[L][4] != null) && (CSV[L][4].trim() != "")) D.Function = ((CSV[L][4].trim().substring(0, 8) == "Generic_") ? "" : CurrentScreen + "_") + CSV[L][4];
+			if ((CSV[L][4] != null) && (CSV[L][4].trim() != "")) D.Function = ((CSV[L][4].trim().substring(0, 7) == "Dialog_") ? "" : CurrentScreen + "_") + CSV[L][4];
 			if ((CSV[L][5] != null) && (CSV[L][5].trim() != "")) D.Prerequisite = CSV[L][5];
 			C.Dialog.push(D);
 		

@@ -82,11 +82,6 @@ function DrawImageZoomCanvas(Source, Canvas, SX, SY, SWidth, SHeight, X, Y, Widt
 function DrawImageCanvas(Source, Canvas, X, Y) {
 	Canvas.drawImage(DrawGetImage(Source), X, Y);
 }
-		
-// Draw a zoomed image from a source to the screen canvas
-/*function DrawImageZoom(Source, SX, SY, SWidth, SHeight, X, Y, Width, Height) {
-	MainCanvas.drawImage(DrawGetImage(Source), SX, SY, Math.round(SWidth), Math.round(SHeight), X, Y, Width, Height);
-}*/
 
 // Draw a specific canvas on the main canvas
 function DrawCanvas(Canvas, X, Y) {
@@ -168,6 +163,46 @@ function DrawImageMirror(Source, X, Y) {
     MainCanvas.restore();
 }
 
+// Draw a word wrapped text in a rectangle
+function DrawTextWrap(Text, X, Y, Width, Height, ForeColor, BackColor) {
+
+	// Draw the rectangle if we need too
+	if (BackColor != null) {
+		MainCanvas.beginPath();
+		MainCanvas.rect(X, Y, Width, Height);
+		MainCanvas.fillStyle = BackColor; 
+		MainCanvas.fillRect(X, Y, Width, Height);
+		MainCanvas.fill();	
+		MainCanvas.lineWidth = '2';
+		MainCanvas.strokeStyle = ForeColor;
+		MainCanvas.stroke();
+		MainCanvas.closePath();		
+	}
+	
+	// Split the text if it wouldn't fit in the rectangle
+	MainCanvas.fillStyle = ForeColor;
+	if (MainCanvas.measureText(Text).width > Width) {
+		var words = Text.split(' ');
+		var line = '';
+		Y += 46;
+		for(var n = 0; n < words.length; n++) {
+		  var testLine = line + words[n] + ' ';
+		  var metrics = MainCanvas.measureText(testLine);
+		  var testWidth = metrics.width;
+		  if (testWidth > Width && n > 0) {
+			MainCanvas.fillText(line, X + Width / 2, Y);
+			line = words[n] + ' ';
+			Y += 46;
+		  }
+		  else {
+			line = testLine;
+		  }
+		}
+		MainCanvas.fillText(line, X + Width / 2, Y);
+	} else MainCanvas.fillText(Text, X + Width / 2, Y + Height / 2);
+
+}
+
 // Draw a text in the canvas
 function DrawText(Text, X, Y, Color, BackColor) {
 
@@ -216,6 +251,16 @@ function DrawButton(Left, Top, Width, Height, Label, Color, Image) {
 	
 }
 
+// Draw a basic empty rectangle
+function DrawEmptyRect(Left, Top, Width, Height, Color) {
+	MainCanvas.beginPath();
+	MainCanvas.rect(Left, Top, Width, Height);
+	MainCanvas.lineWidth = '3';
+	MainCanvas.strokeStyle = Color;
+	MainCanvas.stroke();
+	MainCanvas.closePath();
+}
+
 // Draw a basic rectangle
 function DrawRect(Left, Top, Width, Height, Color) {
 	MainCanvas.beginPath();
@@ -260,218 +305,6 @@ function DrawActorStats(Left, Top) {
 	DrawText(ActorGetValue(ActorOrgasmCount).toString(), Left + 150, Top + 17, "black");
 	DrawText(ActorGetValue(ActorBondageCount).toString(), Left + 250, Top + 17, "black");
 
-}
-
-// Draw all the possible interactions 
-function DrawInteraction() {
-
-	// Draw both the player and the interaction character
-	DrawCharacter(Character[0], 0, 0, 1);
-	DrawCharacter(CurrentCharacter, 500, 0, 1);
-	
-	// Find the intro text
-	var IntroText = "";
-	for(var D = 0; D < CurrentCharacter.Dialog.length; D++)
-		if ((CurrentCharacter.Dialog[D].Stage == CurrentCharacter.Stage) && (CurrentCharacter.Dialog[D].Option == null) && (CurrentCharacter.Dialog[D].Result != null)) {
-			IntroText = CurrentCharacter.Dialog[D].Result
-			break;
-		}
-
-	// Draws the intro
-	DrawText(CurrentCharacter.Name + ": " + IntroText, 1500, 50, "white", "black");
-	
-	// Draws the possible answers
-	var Pos = 0;
-	for(var D = 0; D < CurrentCharacter.Dialog.length; D++)
-		if ((CurrentCharacter.Dialog[D].Stage == CurrentCharacter.Stage) && (CurrentCharacter.Dialog[D].Option != null)) {
-			DrawButton(1200, 100 + 100 * Pos, 600, 75, CurrentCharacter.Dialog[D].Option, "white");
-			Pos++;			
-		}
-		
-}
-
-// Find the current image file 
-function FindImage(Intro, CurrentStagePosition) {
-	
-	// The image file is a column in the intro CSV file
-	var ImageName = "";
-	if (OverridenIntroImage != "")
-		ImageName = OverridenIntroImage;
-	else
-		for (var I = 0; I < Intro.length; I++)
-			if (Intro[I][IntroStage] == CurrentStagePosition)
-				if (ActorInteractionAvailable(Intro[I][IntroLoveReq], Intro[I][IntroSubReq], Intro[I][IntroVarReq], Intro[I][IntroText], true))
-					ImageName = Intro[I][IntroImage];
-	return ImageName;
-
-}
-
-// Build the full character / object interaction screen
-function BuildInteraction(CurrentStagePosition) {
-
-	// Make sure the CSV files for interactions are loaded
-	if ((CurrentIntro != null) && (CurrentStage != null)) {
-
-		// Paints the background image depending on the current stage
-		var ImageName = FindImage(CurrentIntro, CurrentStagePosition);
-		if ((ImageName !== undefined) && (ImageName.trim() != "")) DrawImage(CurrentChapter + "/" + CurrentScreen + "/" + ImageName, 600, 0);
-
-		// Build all the options for interaction
-		DrawRect(0, 0, 600, 600, "Black");
-		DrawIntro(CurrentIntro, CurrentStagePosition, 0, 0);
-		DrawInteraction(CurrentStage, CurrentStagePosition, 0, 0);
-
-	}
-
-}
-
-// Get the player image file name
-function GetPlayerIconImage() {
-
-	// The file name changes if the player is gagged or blinks at specified intervals
-	var Image = "Player";
-	var seconds = new Date().getTime();
-	if (PlayerHasLockedInventory("BallGag") == true) Image = Image + "_BallGag";
-    if (PlayerHasLockedInventory("TapeGag") == true) Image = Image + "_TapeGag";
-    if (PlayerHasLockedInventory("ClothGag") == true) Image = Image + "_ClothGag";
-    if (PlayerHasLockedInventory("DoubleOpenGag") == true) Image = Image + "_DoubleOpenGag";
-    if (PlayerHasLockedInventory("Blindfold") == true) Image = Image + "_Blindfold";
-	if (Math.round(seconds / 500) % 15 == 0) Image = Image + "_Blink";
-	return Image;
-
-}
-
-// Returns the name of the image file to use to draw the player
-function DrawGetPlayerImageName(IncludePose) {
-	
-	// Get the first part of the image
-	var ImageCloth = "Clothed";
-	if (Common_PlayerUnderwear) ImageCloth = "Underwear";
-	if (Common_PlayerNaked) ImageCloth = "Naked";
-	if ((Common_PlayerUnderwear || Common_PlayerNaked) && PlayerHasLockedInventory("ChastityBelt")) ImageCloth = "ChastityBelt";
-	if (Common_PlayerCostume != "") ImageCloth = Common_PlayerCostume
-	
-	// Second part is the type of bondage
-	var ImageBondage = "_NoBondage";	
-	if (PlayerHasLockedInventory("Cuffs") == true) ImageBondage = "_Cuffs";
-	if (PlayerHasLockedInventory("Rope") == true) ImageBondage = "_Rope";
-	if (PlayerHasLockedInventory("Armbinder") == true) ImageBondage = "_Armbinder";
-
-	// Third part is the collar, which only shows for certain clothes
-	var ImageCollar = "";
-	if ((ImageCloth == "Underwear") || (ImageCloth == "Naked") || (ImageCloth == "ChastityBelt") || (ImageCloth == "Damsel") || (ImageCloth == "Tennis") || (ImageCloth == "Judo") || (ImageCloth == "RedBikini")) {
-		if (PlayerHasLockedInventory("Collar")) ImageCollar = "_Collar";
-		else ImageCollar = "_NoCollar";
-	}
-	
-	// Fourth part is the gag
-	var ImageGag = "_NoGag";
-	if (PlayerHasLockedInventory("BallGag") == true) ImageGag = "_BallGag";
-    if (PlayerHasLockedInventory("TapeGag") == true) ImageGag = "_TapeGag";
-    if (PlayerHasLockedInventory("ClothGag") == true) ImageGag = "_ClothGag";
-    if (PlayerHasLockedInventory("DoubleOpenGag") == true) ImageGag = "_DoubleOpenGag";
-
-	// Fifth part is the blindfold
-	var ImageBlindfold = "";	
-    if (PlayerHasLockedInventory("Blindfold") == true) ImageBlindfold = "_Blindfold";
-
-	// Sixth part is the pose
-	var ImagePose = "";
-    if ((Common_PlayerPose != "") && IncludePose) ImagePose = "_" + Common_PlayerPose;
-
-	// Return the constructed name
-	return ImageCloth + ImageBondage + ImageCollar + ImageGag + ImageBlindfold + ImagePose;
-
-}
-
-// Draw the regular player image (600x600) (can zoom if an X and Y are provided)
-function DrawPlayerImage(X, Y) {
-	if ((Common_PlayerCostume == "Tennis") || (Common_PlayerCostume == "Judo") || (Common_PlayerCostume == "Teacher") || (Common_PlayerCostume == "BlackDress") || (Common_PlayerCostume == "WhiteLingerie") || (Common_PlayerCostume == "RedBikini")) {
-		DrawRect(600, 0, 1200, 600, "White");
-		DrawTransparentPlayerImage(600, 0, 1);
-	} else {
-		if ((X == 0) && (Y == 0)) DrawImage("C999_Common/Player/" + DrawGetPlayerImageName(false) + ".jpg", 600, 0);
-		else DrawImageZoom("C999_Common/Player/" + DrawGetPlayerImageName(false) + ".jpg", X, Y, 600, 600, 600, 0, 1200, 1200);
-	}	
-}
-
-// Draw the transparent player image (600x900) with a zoom if required
-function DrawTransparentPlayerImage(X, Y, Zoom) {
-	DrawImageZoom("Actors/Player/" + DrawGetPlayerImageName(true) + ".png", 0, 0, 600, 900, X, Y, 600 * Zoom, 900 * Zoom);
-}
-
-// Draw the transparent actor over the current background
-function DrawActor(ActorToDraw, X, Y, Zoom) {
-	
-	// Validate first if we must draw the transparent player image
-	if (ActorToDraw == "Player") {
-		DrawTransparentPlayerImage(X, Y, Zoom);		
-	} else {
-
-		// First, we retrieve the current clothes
-		var ImageCloth = ActorSpecificGetValue(ActorToDraw, ActorCloth);
-		if (ImageCloth == "") ImageCloth = "Clothed";
-		if (((ImageCloth == "Underwear") || (ImageCloth == "Naked")) && ActorSpecificHasInventory(ActorToDraw, "ChastityBelt")) ImageCloth = "ChastityBelt";
-
-		// Second part is the type of bondage
-		var ImageBondage = "_NoBondage";	
-		if (ActorSpecificHasInventory(ActorToDraw, "Cuffs")) ImageBondage = "_Cuffs";
-		if (ActorSpecificHasInventory(ActorToDraw, "Rope")) ImageBondage = "_Rope";
-		if (ActorSpecificHasInventory(ActorToDraw, "TwoRopes")) ImageBondage = "_TwoRopes";
-		if (ActorSpecificHasInventory(ActorToDraw, "ThreeRopes")) ImageBondage = "_ThreeRopes";
-		if (ActorSpecificHasInventory(ActorToDraw, "Armbinder")) ImageBondage = "_Armbinder";
-
-		// Third part is the collar, which only shows for certain clothes
-		var ImageCollar = "";
-		if ((ImageCloth == "Underwear") || (ImageCloth == "Naked") || (ImageCloth == "ChastityBelt") || (ImageCloth == "Damsel") || (ImageCloth == "Shorts") || (ImageCloth == "Swimsuit") || (ImageCloth == "Tennis") || (ImageCloth == "BrownDress")) {
-			if (ActorSpecificHasInventory(ActorToDraw, "Collar")) ImageCollar = "_Collar";
-		}
-
-		// Fourth part is the gag
-		var ImageGag = "_NoGag";
-		if (ActorSpecificHasInventory(ActorToDraw, "BallGag")) ImageGag = "_BallGag";
-		if (ActorSpecificHasInventory(ActorToDraw, "TapeGag")) ImageGag = "_TapeGag";
-		if (ActorSpecificHasInventory(ActorToDraw, "ClothGag")) ImageGag = "_ClothGag";
-
-		// Fifth part is the blindfold
-		var ImageBlindfold = "";	
-		if (ActorSpecificHasInventory(ActorToDraw, "Blindfold")) ImageBlindfold = "_Blindfold";
-
-		// Fourth part is the pose
-		var ImagePose = "";
-		if (ActorSpecificGetValue(ActorToDraw, ActorPose) != "") ImagePose = "_" + ActorSpecificGetValue(ActorToDraw, ActorPose);
-
-		// Draw the full image from all parts
-		DrawImageZoom("Actors/" + ActorToDraw + "/" + ImageCloth + ImageBondage + ImageCollar + ImageGag + ImageBlindfold + ImagePose + ".png", 0, 0, 600, 900, X, Y, 600 * Zoom, 900 * Zoom);
-		
-	}
-
-}
-
-// Draw the current interaction actor (if there's no actor, we draw the player)
-function DrawInteractionActor() {
-	if (CurrentActor == "") {
-		DrawTransparentPlayerImage(600, 0, 1);
-	} else {
-		if (ActorHasInventory("TwoRopes") || ActorHasInventory("ThreeRopes")) DrawActor(CurrentActor, 600, -250, 1);
-		else DrawActor(CurrentActor, 600, 0, 1);
-	}
-}
-
-// Draw a ramdom image of the player as transition from chapter to chapter
-function DrawPlayerTransition() {
-	var ImgRnd = (Math.round(new Date().getTime() / 5000) % 8) + 1;
-	DrawImage("Actors/PlayerTransition/Player0" + ImgRnd.toString() + ".png", 900, 0);
-}
-
-// Returns a the path to a icon.  IconName can be preceeded by additional paths.
-function GetIconPath(IconName) {
-    return GetPath.apply(undefined, arguments) + ".png";
-}
-
-// Returns a the path to an icon for the current screen.  IconName can be preceeded by additional paths.
-function GetIconScreenPath(IconName) {
-    return GetIconPath(GetPath.apply(undefined, [CurrentChapter, CurrentScreen].concat(Array.from(arguments))));
 }
 
 // Makes sure the screen is at the proper size

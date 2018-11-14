@@ -1,7 +1,7 @@
 var AssetFemale3DCG = [
 
 	{
-		Group: "Body",
+		Group: "BodyUpper",
 		Priority: 2,
 		AllowNone: false,
 		AllowColorize: false,
@@ -10,9 +10,21 @@ var AssetFemale3DCG = [
 	},
 
 	{
+		Group: "BodyLower",
+		Priority: 3,
+		AllowNone: false,
+		AllowColorize: false,
+		ParentSize: "BodyUpper",
+		ParentColor: "BodyUpper",
+		Color: ["White", "Asian", "Black"],
+		Top: 462,
+		Asset: ["Small", "Normal", "Large", "XLarge"]
+	},
+	
+	{
 		Group: "Cloth",
-		Priority: 14,
-		ParentGroup: "Body",
+		Priority: 15,
+		ParentGroup: "BodyUpper",
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Asset: [ { Name: "CollegeOutfit1", Value: -1 }, { Name: "MaidOutfit1", Value: -1 }, "StudentOutfit1", "StudentOutfit2", "SummerDress1", "SummerDress2", "TeacherOutfit1", "TennisOutfit1", "ChineseDress1"]
 	},
@@ -29,10 +41,10 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "HairFront",
-		Priority: 15,
+		Priority: 16,
 		AllowNone: false,
-		Color: ["#6a3628", "#202020", "#dcc787", "#6c2132", "#999999", "#dddddd", "#e781b1", "#81e7b1", "#81b1e7", "#eeee99", "#ee9999", "#ee99ee"],
 		ParentColor: "HairBack",
+		Color: ["#6a3628", "#202020", "#dcc787", "#6c2132", "#999999", "#dddddd", "#e781b1", "#81e7b1", "#81b1e7", "#eeee99", "#ee9999", "#ee99ee"],
 		Left: 150,
 		Top: 50,
 		Asset: ["HairFront1", "HairFront2", "HairFront3", "HairFront4", "HairFront5", "HairFront6", "HairFront7", "HairFront8", "HairFront9", "HairFront10", "HairFront11", "HairFront12"]
@@ -40,7 +52,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Hat",
-		Priority: 16,
+		Priority: 17,
 		Default: false,
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 125,
@@ -50,7 +62,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Eyes",
-		Priority: 3,
+		Priority: 4,
 		AllowNone: false,
 		Color: ["#6a3628", "#5e481e", "#666666", "#555588", "#558855", "#885555", "#202020", "#aa3333", "#33aa33", "#3333aa", "#aaaa33", "#33aaaa", "#aa33aa"],
 		Left: 200,
@@ -62,7 +74,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Glasses",
-		Priority: 8,
+		Priority: 9,
 		Default: false,
 		KeepNaked: true,
 		Color: ["#303030", "#808080", "#e0e0e0", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
@@ -73,7 +85,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Mouth",
-		Priority: 4,
+		Priority: 5,
 		AllowNone: false,
 		Color: ["Default", "#803d26", "#aa5555", "#cc3333", "#55aa55", "#5555aa", "#55aaaa", "#aa55aa", "#aaaa55"],
 		Left: 240,
@@ -83,8 +95,8 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Gloves",
-		Priority: 12,
-		ParentGroup: "Body",
+		Priority: 13,
+		ParentGroup: "BodyUpper",
 		Default: false,
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 125,
@@ -94,8 +106,8 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Nipples",
-		Priority: 6,
-		ParentGroup: "Body",
+		Priority: 7,
+		ParentGroup: "BodyUpper",
 		AllowNone: false,
 		Color: ["Default", "#a6665b", "#803d26", "#d68777", "#9b4a2e", "#bb6655"],
 		Left: 175,
@@ -105,8 +117,8 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Bra",
-		Priority: 9,
-		ParentGroup: "Body",
+		Priority: 10,
+		ParentGroup: "BodyUpper",
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 150,
 		Top: 200,
@@ -115,7 +127,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Pussy",
-		Priority: 7,
+		Priority: 8,
 		AllowNone: false,
 		Color: ["Default", "#6a3628", "#443330", "#222222"],
 		Left: 225,
@@ -126,8 +138,8 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Panties",
-		Priority: 10,
-		ParentGroup: "Body",
+		Priority: 11,
+		ParentGroup: "BodyLower",
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 150,
 		Top: 425,
@@ -136,8 +148,8 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Socks",
-		Priority: 11,
-		ParentGroup: "Body",
+		Priority: 12,
+		ParentGroup: "BodyLower",
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 125,
 		Top: 500,
@@ -146,8 +158,8 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Shoes",
-		Priority: 13,
-		ParentGroup: "Body",
+		Priority: 14,
+		ParentGroup: "BodyLower",
 		Color: ["Default", "#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 125,
 		Top: 500,
@@ -165,7 +177,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Gag",
-		Priority: 5,
+		Priority: 6,
 		Category: "Gag",
 		Default: false,
 		Color: ["Default"],

@@ -219,7 +219,3 @@ function SortObjectList(list, key) {
     }
     return list.sort(compare);
 }
-
-function Common_InteractionClick() {
-	
-}

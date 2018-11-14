@@ -66,12 +66,17 @@ function CharacterAppearanceFullRandom(C) {
 	var A;
 	for (A = 0; A < AssetGroup.length; A++)
 		if ((AssetGroup[A].Category == "Appearance") && (AssetGroup[A].IsDefault || (Math.random() < 0.2))) {
+			
+			// Get the parent size
+			var ParentSize = "";
+			if (AssetGroup[A].ParentSize != "") 
+				ParentSize = CharacterAppearanceGetCurrentValue(C, AssetGroup[A].ParentSize, "Name");
 		
 			// Prepares an array of all possible items
 			var R = [];
 			var I;
 			for (I = 0; I < CharacterAppearanceAssets.length; I++)
-				if (CharacterAppearanceAssets[I].Group.Name == AssetGroup[A].Name)
+				if ((CharacterAppearanceAssets[I].Group.Name == AssetGroup[A].Name) && ((ParentSize == "") || (CharacterAppearanceAssets[I].Name == ParentSize)))
 					R.push(CharacterAppearanceAssets[I]);
 			
 			// Picks a random item and color and add it

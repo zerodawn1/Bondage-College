@@ -1,35 +1,47 @@
-0,,,"Hello there, welcome to the Bondage Club introduction class.",
-0,10,Thanks girl!  What's going on here?,"In here, you will learn how to restrain someone and escape by yourself.",ChangeMaidOpinion(1)
-0,10,Introduction class?,"In this class, you will learn how to restrain someone and free yourself.",
-0,100,I don't need any introduction.,"Very well, would you like to practice with us then?",
-0,,I can't stay to chat.  (Leave her.),,Generic_Leave()
-10,20,This is great!,I'm glad you like it.  First I will teach you about the body parts your can restrain.,
-10,20,It sounds kinky. (Blush a little.),It's kinky and fun.  First I will teach you about the body parts your can restrain.,ChangeMaidOpinion(-1)
-10,15,Tell me about the club first.,The Bondage Club is a place for open minded adults to share their BDSM kinks.,
-10,,You're both a maid and a teacher?,We maids do a lot of work here.  You'll see with time.,Generic_RemoveOption()
-10,100,I already know that.,"Very well, would you like to practice with us then?",
-15,20,Fair enough.,Very well.  First I will teach you about the body parts your can restrain.,
-15,20,Awesome!,I'm glad you like it.  First I will teach you about the body parts your can restrain.,
-20,30,I'm listening.,There are eight body parts to interact with.  They restrict the victim differently.,
-20,30,Please tell me Miss.,There are eight body parts to interact with.  They restrict the victim differently.,ChangeMaidOpinion(-1)
-20,30,"Alright, but make it quick.",There are eight body parts to interact with.  They restrict the victim differently.,ChangeMaidOpinion(1)
-20,30,I already know that.,"Very well, would you like to practice with us then?",
-30,31,(Listen.),Restraining the feet will prevent your victim from moving away.,"BodyRect(100, 100, 900, 900)"
-31,32,(Listen.),Restraining the legs will still allow your victim to move but make kidnappings easier.,"BodyRect(100, 100, 900, 900)"
-32,33,(Listen.),"You can use kinky or chastity devices on the lower body, or a crotch rope to tease your victim.","BodyRect(100, 100, 900, 900)"
-33,34,(Listen.),"On the upper body, you can do breast bondage or use harnesses, mostly for esthetics.","BodyRect(100, 100, 900, 900)"
-34,35,(Listen.),The arms can be restrained using many devices.  This will prevent your victim from using her hands.,"BodyRect(100, 100, 900, 900)"
-35,36,(Listen.),You can use collars on your victim neck to leash them and walk them around.,"BodyRect(100, 100, 900, 900)"
-36,37,(Listen.),Collars are also used to enslave someone but you will learn about it in another class.,"BodyRect(100, 100, 900, 900)"
-37,38,(Listen.),"You can use gags to silence your victim, making her unable to speak.","BodyRect(100, 100, 900, 900)"
-38,39,(Listen.),"Blindfolds, ear muffs or hoods can also be used to restrict view and hearing.","BodyRect(100, 100, 900, 900)"
-39,40,(Listen.),"This is it, remember that your arms needs to be free to restrain someone.",NoBodyRect()
-40,100,Thanks for the info.,"My pleasure, now we can practice.  Would you prefer to restrain someone or be tied up yourself?",
-40,100,That makes sense.,"Of course, and now we can practice.  Would you prefer to restrain someone or be tied up yourself?",
-40,200,Can I strap you up now?,"Not me, but we have someone here who would certainly enjoy being your victim.",ChangeMaidOpinion(1)
-40,100,Can we practice?,Absolutely.  Would you prefer to restrain someone or be tied up yourself?,
-40,300,Can you tie me up now?,I can certainly tie you up.  It's a good time to practice.,ChangeMaidOpinion(-1)
-100,200,I want to practice tying you up.,"You won't tie me up, but we have someone here who would certainly enjoy being your victim.",ChangeMaidOpinion(1)
-100,200,Can I strap her up?,"Absolutely, you have the perfect candidate here to practice on.",ChangeMaidOpinion(1)
-100,300,I want to practice freeing myself.,,ChangeMaidOpinion(-1)
-100,,Who runs this club?,The Head Mistress is in charge.  You should go present yourself if you haven't done it.,Generic_RemoveOption()
+0,,,"Hello there, welcome to the Bondage Club introduction class.",,
+0,10,Thanks girl!  What's going on here?,"In here, you will learn how to restrain someone and escape by yourself.",ChangeMaidOpinion(1),
+0,10,Introduction class?,"In this class, you will learn how to restrain someone and free yourself.",,
+0,100,I don't need any introduction.,"Very well, would you like to practice with us then?",,
+0,,I can't stay to chat.  (Leave her.),,Dialog_Leave(),
+10,20,This is great!,I'm glad you like it.  First I will teach you about the body parts your can restrain.,,
+10,20,It sounds kinky. (Blush a little.),It's kinky and fun.  First I will teach you about the body parts your can restrain.,ChangeMaidOpinion(-1),
+10,15,Tell me about the club first.,The Bondage Club is a place for open minded adults to share their BDSM kinks.,,
+10,,You're both a maid and a teacher?,We maids do a lot of work here.  You'll see with time.,Dialog_RemoveOption(),
+10,100,I already know that.,"Very well, would you like to practice with us then?",,
+15,20,Fair enough.,Very well.  First I will teach you about the body parts your can restrain.,,
+15,20,Awesome!,I'm glad you like it.  First I will teach you about the body parts your can restrain.,,
+20,30,I'm listening.,There are eight body parts to interact with.  They restrict the victim differently.,,
+20,30,Please tell me Miss.,There are eight body parts to interact with.  They restrict the victim differently.,ChangeMaidOpinion(-1),
+20,30,"Alright, but make it quick.",There are eight body parts to interact with.  They restrict the victim differently.,ChangeMaidOpinion(1),
+20,30,I already know that.,"Very well, would you like to practice with us then?",,
+30,31,(Listen.),Restraining the feet will prevent your victim from moving away.,"BodyRect(100, 730, 300, 260)",
+31,32,(Listen.),Restraining the upper legs will still allow your victim to move but make kidnappings much easier.,"BodyRect(100, 550, 300, 180)",
+32,33,(Listen.),"You can use kinky or chastity devices on the lower body, or a crotch rope to tease your victim.","BodyRect(125, 400, 250, 150)",
+33,34,(Listen.),"On the upper body, you can do breast bondage or use harnesses, mostly for esthetics.","BodyRect(150, 250, 200, 150)",
+34,35,(Listen.),The arms can be restrained using many devices.  This will prevent your victim from using her hands.,"BodyRect(50, 250, 100, 250)",
+35,36,(Listen.),You can use collars on your victim neck to leash them and walk them around.,"BodyRect(175, 200, 150, 50)",
+36,37,(Listen.),Collars are also used to enslave someone but you will learn about it in another class.,,
+37,38,(Listen.),"You can use gags to silence your victim, making her unable to speak.","BodyRect(150, 150, 200, 50)",
+38,39,(Listen.),"Blindfolds, ear muffs or hoods can also be used to restrict view and hearing.","BodyRect(150, 50, 200, 100)",
+39,40,(Listen.),"This is it, remember that your arms needs to be free to restrain someone.",ClearBodyRect(),
+40,100,Thanks for the info.,"My pleasure, now we can practice.  Would you prefer to restrain someone or be tied up yourself?",,
+40,100,That makes sense.,"Of course, and now we can practice.  Would you prefer to restrain someone or be tied up yourself?",,
+40,200,Can I strap you up now?,"Not me, but we have someone here who would certainly enjoy being your victim.",ChangeMaidOpinion(1),
+40,100,Can we practice?,Absolutely.  Would you prefer to restrain someone or be tied up yourself?,,
+40,300,Can you tie me up now?,I can certainly tie you up.  It's a good time to practice.,ChangeMaidOpinion(-1),
+100,,,You can practice your bondage skills here.  Would you prefer to restrain someone or be tied up yourself?,,
+100,200,I want to practice tying you up.,"You won't tie me up, but we have someone here who would certainly enjoy being your victim.",ChangeMaidOpinion(1),
+100,200,Can I tie her up?,"Absolutely, you have the perfect candidate here to practice on.",ChangeMaidOpinion(1),
+100,300,I want to practice freeing myself.,,ChangeMaidOpinion(-1),
+100,,Who runs this club?,The Head Mistress is in charge.  You should go present yourself if you haven't done it.,Dialog_RemoveOption(),
+100,,Let's practice later.  (Leave her.),,Dialog_Leave(),
+200,220,I can use my favorite restraints on her?,"Of course, use anything you want on her.  She's very submissive, she will enjoy it.",,HasBasicItems
+200,210,Can I have some items to practice with?,"Use these beginers items, they are easy to use but also easy to struggle out from.",,!HasBasicItems
+210,220,Thanks!  (Take the items.),(She gives you ropes for her arms and legs plus a basic cloth gag.),GetBasicItems(),
+210,220,This is sweet.  (Take the items.),(She gives you ropes for her arms and legs plus a basic cloth gag.),GetBasicItems(),
+220,230,I'll make it extra tight.,"Impressive.  Make sure to restrain her arms, her feet and to gag her.",ChangeMaidOpinion(1),
+220,230,I'm ready!,"Wonderful.  Make sure to restrain her arms, her feet and to gag her.",,
+220,230,I can do it now?,"Absolutely.  Make sure to restrain her arms, her feet and to gag her.",ChangeMaidOpinion(-1),
+230,,,"Make sure to restrain her arms, her feet and to gag her.",,
+230,,I'll do it.  (Leave her.),,Dialog_Leave(),
+230,,Very good.  (Leave her.),,Dialog_Leave(),
