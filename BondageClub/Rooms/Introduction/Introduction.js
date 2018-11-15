@@ -9,21 +9,13 @@ var IntroductionHasBasicItems = false;
 function Introduction_Load() {
 
 	// Checks if the player already has the basic items
-	IntroductionHasBasicItems = (InventoryAvailable(Character[0], "BeginnersRope", "FeetRestrains") && InventoryAvailable(Character[0], "BeginnersRope", "ArmRestrains") && InventoryAvailable(Character[0], "BeginnersClothGag", "Gag"));
+	IntroductionHasBasicItems = (InventoryAvailable(Character[0], "BeginnersRope", "ItemFeet") && InventoryAvailable(Character[0], "BeginnersRope", "ItemLegs") && InventoryAvailable(Character[0], "BeginnersRope", "ItemArms") && InventoryAvailable(Character[0], "BeginnersClothGag", "ItemMouth"));
 	
 	// Creates two characters to begin with
 	IntroductionMaid = CharacterLoadNPC("NPC_Introduction_Maid");
 	IntroductionSub = CharacterLoadNPC("NPC_Introduction_Sub");
 	IntroductionMaid.AllowItem = false;
-	
-	// Restrain the sub
-	if (!IntroductionSubRestrained) {
-		IntroductionSubRestrained = true;
-		/*InventoryAdd(IntroductionSub, "ClothOTMGag", "Gag");
-		CharacterAppearanceSetItem(IntroductionSub, "Gag", IntroductionSub.Inventory[IntroductionSub.Inventory.length - 1].Asset);
-		CharacterAppearanceSetColorForGroup(IntroductionSub, "Default", "Cloth");*/
-	}
-	
+
 }
 
 // Run the main introduction room
@@ -96,7 +88,8 @@ function Introduction_ClearZone() {
 
 // Loads the introduction room
 function Introduction_GetBasicItems() {
-	InventoryAdd(Character[0], "BeginnersRope", "FeetRestraints");
-	InventoryAdd(Character[0], "BeginnersRope", "ArmsRestraints");
-	InventoryAdd(Character[0], "BeginnersClothGag", "Gag");
+	InventoryAdd(Character[0], "BeginnersRope", "ItemFeet");
+	InventoryAdd(Character[0], "BeginnersRope", "ItemLegs");
+	InventoryAdd(Character[0], "BeginnersRope", "ItemArms");
+	InventoryAdd(Character[0], "BeginnersClothGag", "ItemMouth");
 }

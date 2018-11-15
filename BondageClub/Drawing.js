@@ -77,6 +77,11 @@ function DrawImageZoomCanvas(Source, Canvas, SX, SY, SWidth, SHeight, X, Y, Widt
 	Canvas.drawImage(DrawGetImage(Source), SX, SY, Math.round(SWidth), Math.round(SHeight), X, Y, Width, Height);
 }
 
+function DrawImageResize(Source, X, Y, Width, Height) {
+	var img = DrawGetImage(Source);
+	MainCanvas.drawImage(img, 0, 0, img.width, img.height, X, Y, Width, Height);
+}
+
 // Draw a zoomed image from a source to a specific canvas
 function DrawImageCanvas(Source, Canvas, X, Y) {
 	Canvas.drawImage(DrawGetImage(Source), X, Y);

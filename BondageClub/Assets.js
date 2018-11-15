@@ -17,6 +17,7 @@ function AssetGroupAdd(NewAssetFamily, NewAsset) {
 		ParentSize: (NewAsset.ParentSize == null) ? "" : NewAsset.ParentSize,
 		ParentColor: (NewAsset.ParentColor == null) ? "" : NewAsset.ParentColor,
 		Zone: NewAsset.Zone,
+		Effect: NewAsset.Effect,
 		DrawingPriority: (NewAsset.Priority == null) ? AssetGroup.length : NewAsset.Priority,
 		DrawingLeft: (NewAsset.Left == null) ? 0 : NewAsset.Left,
 		DrawingTop: (NewAsset.Top == null) ? 0 : NewAsset.Top,

@@ -208,8 +208,7 @@ function CharacterAppearance_Run() {
 		DrawButton(1651, 25, 90, 90, "", "White", "Icons/Next.png");
 		
 		// Creates buttons for all groups	
-		var A;
-		for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + CharacterAppearanceNumPerPage; A++)
+		for (var A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + CharacterAppearanceNumPerPage; A++)
 			if ((AssetGroup[A].Family == Character[0].AssetFamily) && (AssetGroup[A].Category == "Appearance")) {
 				DrawButton(1300, 145 + (A - CharacterAppearanceOffset) * 95, 400, 65, AssetGroup[A].Name + ": " + CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Name"), "White", "");
 				var Color = CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Color", "");
@@ -254,7 +253,8 @@ function CharacterAppearanceSetItem(C, Group, ItemAsset) {
 		C.Appearance.push(NA);
 	}
 
-	// Draw the character canvas
+	// Draw the character canvas and calculate the effects on the character
+	CharacterLoadEffect(C);
 	CharacterLoadCanvas(C);
 	
 }

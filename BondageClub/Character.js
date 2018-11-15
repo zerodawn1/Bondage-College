@@ -20,7 +20,8 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		CanvasBlink: null,
 		BlinkFactor: Math.round(Math.random() * 10) + 10,
 		AllowItem: true,
-		HeightModifier: 0
+		HeightModifier: 0,
+		Effect: []
 	}
 
 	// If the character doesn't exist, we create it
@@ -125,6 +126,25 @@ function CharacterLoadNPC(NPCType) {
 	// Returns the new character
 	return C;
 	
+}
+
+// Adds new effects on a character if it's not already there
+function CharacterAddEffect(C, NewEffect) {
+	for (var E = 0; E < NewEffect.length; E++)
+		if (C.Effect.indexOf(NewEffect[E]) < 0)
+			C.Effect.push(NewEffect[E]);
+}
+
+// Resets the current effect list on a character
+function CharacterLoadEffect(C) {	
+	C.Effect = [];
+	for (var A = 0; A < C.Appearance.length; A++) {
+		if (C.Appearance[A].Asset.Effect != null)
+			CharacterAddEffect(C, C.Appearance[A].Asset.Effect);
+		else
+			if (C.Appearance[A].Asset.Group.Effect != null)
+				CharacterAddEffect(C, C.Appearance[A].Asset.Group.Effect);
+	}	
 }
 
 // Sorts the character appearance by priority and loads the canvas
