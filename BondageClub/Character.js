@@ -15,9 +15,12 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		Stage: "0",
 		CurrentDialog: "",
 		Dialog: [],
+		FocusGroup: null,
 		Canvas: null,
 		CanvasBlink: null,
-		BlinkFactor: Math.round(Math.random() * 10) + 10
+		BlinkFactor: Math.round(Math.random() * 10) + 10,
+		AllowItem: true,
+		HeightModifier: 0
 	}
 
 	// If the character doesn't exist, we create it
@@ -43,8 +46,7 @@ function CharacterRandomName(C) {
 	C.Name = NewName;
 	
 	// If the name is already taken, we generate a new one
-	var C;
-	for (C = 0; C < Character.length; C++)
+	for (var C = 0; C < Character.length; C++)
 		if ((Character[C].Name == NewName) && (Character[C].ID != C.ID)) {
 			CharacterRandomName(C)
 			return;
@@ -57,20 +59,19 @@ function CharacterBuildDialog(C, CSV) {
 
 	// For each lines in the file
 	C.Dialog = [];
-	var L;
-	for (L = 0; L < CSV.length; L++) 
+	for (var L = 0; L < CSV.length; L++)
 		if ((CSV[L][0] != null) && (CSV[L][0] != "")) {
-		
+
 			// Creates a dialog object
 			var D = {};
 			D.Stage = CSV[L][0];
 			if ((CSV[L][1] != null) && (CSV[L][1].trim() != "")) D.NextStage = CSV[L][1];
-			if ((CSV[L][2] != null) && (CSV[L][2].trim() != "")) D.Option = CSV[L][2];
-			if ((CSV[L][3] != null) && (CSV[L][3].trim() != "")) D.Result = CSV[L][3];
+			if ((CSV[L][2] != null) && (CSV[L][2].trim() != "")) D.Option = CSV[L][2].replace("Dialog_CharacterName", C.Name);
+			if ((CSV[L][3] != null) && (CSV[L][3].trim() != "")) D.Result = CSV[L][3].replace("Dialog_CharacterName", C.Name);
 			if ((CSV[L][4] != null) && (CSV[L][4].trim() != "")) D.Function = ((CSV[L][4].trim().substring(0, 7) == "Dialog_") ? "" : CurrentScreen + "_") + CSV[L][4];
 			if ((CSV[L][5] != null) && (CSV[L][5].trim() != "")) D.Prerequisite = CSV[L][5];
 			C.Dialog.push(D);
-		
+
 		}
 
 }
@@ -99,12 +100,11 @@ function CharacterLoadCSVDialog(C) {
 function CharacterLoadNPC(NPCType) {
 
 	// Checks if the NPC already exists and returns it if it's the case
-	var C;
-	for (C = 0; C < Character.length; C++)
+	for (var C = 0; C < Character.length; C++)
 		if (Character[C].AccountName == NPCType)
 			return Character[C];
 
-	// Randomzie the new character
+	// Randomize the new character
 	CharacterReset(Character.length, "Female3DCG");
 	C = Character[Character.length - 1];
 	C.AccountName = NPCType;
@@ -129,17 +129,19 @@ function CharacterLoadNPC(NPCType) {
 
 // Sorts the character appearance by priority and loads the canvas
 function CharacterLoadCanvas(C) {
-	
+		
 	// Sorts the full appearance arraw first
 	var App = [];
-	var I;
-	for (I = 0; I < 101 && App.length < C.Appearance.length; I++) {
-		var A;
-		for (A = 0; A < C.Appearance.length; A++)
+	for (var I = 0; I < 101 && App.length < C.Appearance.length; I++)
+		for (var A = 0; A < C.Appearance.length; A++)
 			if (C.Appearance[A].Asset.Group.DrawingPriority == I)
 				App.push(C.Appearance[A]);
-	}	
 	C.Appearance = App;
+	
+	// Sets the total height modifier for that character
+	C.HeightModifier = 0;
+	for (var A = 0; A < C.Appearance.length; A++)
+		C.HeightModifier = C.HeightModifier + C.Appearance[A].Asset.HeightModifier;
 	
 	// Reload the canvas
 	CharacterAppearanceBuildCanvas(C);
@@ -147,8 +149,7 @@ function CharacterLoadCanvas(C) {
 }
 
 // Reload all characters canvas
-function CharacterLoadCanvasAll() {	
-	var C;
-	for (C = 0; C < Character.length; C++)
+function CharacterLoadCanvasAll() {
+	for (var C = 0; C < Character.length; C++)
 		CharacterLoadCanvas(Character[C]);
 }

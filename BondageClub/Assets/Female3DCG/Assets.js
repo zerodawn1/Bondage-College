@@ -1,5 +1,6 @@
 var AssetFemale3DCG = [
 
+	// Appearance specific
 	{
 		Group: "BodyUpper",
 		Priority: 2,
@@ -175,15 +176,107 @@ var AssetFemale3DCG = [
 		]
 	},
 
+	// Item specific
 	{
-		Group: "Gag",
+		Group: "ItemFeet",
+		Category: "Item",
 		Priority: 6,
-		Category: "Gag",
+		Default: false,
+		Effect: ["Freeze", "Prone"],
+		Color: ["Default"],
+		Left: 150,
+		Top: 700,
+		Zone: [[100, 730, 300, 260]],
+		Asset: [ { Name: "BeginnersRope", Value: -1 }, { Name: "HempRope", Value: -1 } ]
+	},
+
+	{
+		Group: "ItemLegs",
+		Category: "Item",
+		Priority: 6,
+		Default: false,
+		Effect: ["Prone"],
+		Color: ["Default"],
+		Left: 150,
+		Top: 550,
+		Zone: [[100, 550, 300, 180]],
+		Asset: [ { Name: "HempRope", Value: -1 } ]
+	},
+
+	{
+		Group: "ItemPelvis",
+		Category: "Item",
+		Priority: 6,
+		Default: false,
+		Effect: ["Chaste"],
+		Color: ["Default"],
+		Left: 150,
+		Top: 50,
+		Zone: [[150, 425, 200, 125]],
+		Asset: [ { Name: "MetalChastityBelt", Value: -1 }, { Name: "VibratingEgg", Value: -1, Visible: false } ]
+	},
+
+	{
+		Group: "ItemTorso",
+		Category: "Item",
+		Priority: 6,
 		Default: false,
 		Color: ["Default"],
 		Left: 150,
 		Top: 50,
-		Asset: [ { Name: "HarnessBallGag", Value: -1 }, { Name: "ClothOTMGag", Value: -1 }, { Name: "DuctTapeGag", Value: -1 }, { Name: "CleaveGag", Value: -1 }, { Name: "ClothOTMGag", Value: -1 }, { Name: "ClothOTNGag", Value: -1 } ]
-	}
+		Zone: [[150, 275, 200, 150]],
+		Asset: [ { Name: "HempHarness", Value: -1 }, { Name: "LeatherHarness", Value: -1 } ]
+	},
 
+	{
+		Group: "ItemArms",
+		Category: "Item",
+		Priority: 6,
+		Default: false,
+		Effect: ["Block", "Prone"],
+		Color: ["Default"],
+		Left: 150,
+		Top: 50,
+		Zone: [[50, 250, 100, 250], [350, 250, 100, 250]],
+		Asset: [ { Name: "HempRope", Value: -1 }, { Name: "MetalCuffs", Value: -1}, { Name: "LeatherArmbinder", Value: -1} ]
+	},
+
+	{
+		Group: "ItemNeck",
+		Category: "Item",
+		Priority: 6,
+		Default: false,
+		Color: ["Default"],
+		Left: 175,
+		Top: 50,
+		Zone: [[150, 225, 200, 50]],
+		Asset: [ { Name: "LeatherCollar", Value: -1 } ]
+	},
+	
+	{
+		Group: "ItemMouth",
+		Category: "Item",
+		Priority: 6,
+		Default: false,
+		Effect: ["Gag"],
+		Color: ["Default"],
+		Left: 150,
+		Top: 50,
+		Zone: [[150, 175, 200, 50]],
+		Asset: [ { Name: "HarnessBallGag", Value: -1 }, { Name: "ClothOTMGag", Value: -1 }, { Name: "DuctTapeGag", Value: -1 }, { Name: "CleaveGag", Value: -1 }, { Name: "ClothOTMGag", Value: -1 }, { Name: "ClothOTNGag", Value: -1 } ]
+	},
+
+	{
+		Group: "ItemHead",
+		Category: "Item",
+		Priority: 6,
+		Default: false,
+		Effect: ["Blind", "Prone"],
+		Color: ["Default"],
+		Left: 150,
+		Top: 50,
+		Zone: [[150, 50, 200, 125]],
+		Asset: [ { Name: "LeatherBlindfold", Value: -1 }, { Name: "LeatherHood", Value: -1 } ]
+	}
+	
 ];

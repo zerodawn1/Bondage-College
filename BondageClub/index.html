@@ -117,10 +117,12 @@ function MouseMove(event) {
 	}
 }
 
-// When the mouse is away from the control, we stop keeping the coordinates
+// When the mouse is away from the control, we stop keeping the coordinates, we also check for false positives with "relatedTarget"
 function LoseFocus(event) {
-	MouseX = -1;
-	MouseY = -1;
+	if (event.relatedTarget || event.toElement) {
+		MouseX = -1;
+		MouseY = -1;
+	}
 }
  
 </script>

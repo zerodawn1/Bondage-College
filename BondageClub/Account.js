@@ -28,3 +28,8 @@ function AccountProcess() {
 		
 	}
 }
+
+// Returns TRUE if the account queue is empty and everything is done
+function AccountQueueIsEmpty() {
+	return ((AccountURL.length == 0) && AccountReady);
+}

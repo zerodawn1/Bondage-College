@@ -14,13 +14,14 @@ function Introduction_Load() {
 	// Creates two characters to begin with
 	IntroductionMaid = CharacterLoadNPC("NPC_Introduction_Maid");
 	IntroductionSub = CharacterLoadNPC("NPC_Introduction_Sub");
+	IntroductionMaid.AllowItem = false;
 	
 	// Restrain the sub
 	if (!IntroductionSubRestrained) {
 		IntroductionSubRestrained = true;
-		InventoryAdd(IntroductionSub, "ClothOTMGag", "Gag");
+		/*InventoryAdd(IntroductionSub, "ClothOTMGag", "Gag");
 		CharacterAppearanceSetItem(IntroductionSub, "Gag", IntroductionSub.Inventory[IntroductionSub.Inventory.length - 1].Asset);
-		CharacterAppearanceSetColorForGroup(IntroductionSub, "Default", "Cloth");
+		CharacterAppearanceSetColorForGroup(IntroductionSub, "Default", "Cloth");*/
 	}
 	
 }
@@ -77,14 +78,20 @@ function Introduction_ChangeMaidOpinion(Bonus) {
 	IntroductionMaidOpinion = IntroductionMaidOpinion + Bonus;
 }
 
-// The body rect points to bondage body parts
-function Introduction_BodyRect(X, Y, Width, Height) {
-	IntroductionBodyRect = [X, Y, Width, Height];
+// Gives focus on certain body parts with rectangles
+function Introduction_SetZone(NewZone) {
+	for (var A = 0; A < AssetGroup.length; A++)
+		if (AssetGroup[A].Name == NewZone) {
+			Character[0].FocusGroup = AssetGroup[A];
+			CurrentCharacter.FocusGroup = AssetGroup[A];
+			break;
+		}
 }
 
-// Clears the body rect
-function Introduction_ClearBodyRect() {
-	IntroductionBodyRect = null;
+// Clears the body part focus rectangles
+function Introduction_ClearZone() {
+	Character[0].FocusGroup = null;
+	CurrentCharacter.FocusGroup = null;
 }
 
 // Loads the introduction room

@@ -327,6 +327,7 @@ function CharacterAppearanceNextColor(C, Group) {
 function CharacterAppearanceMoveOffset(Move) {
 	CharacterAppearanceOffset = CharacterAppearanceOffset + Move;
 	if (CharacterAppearanceOffset > AssetGroup.length) CharacterAppearanceOffset = 0;
+	if (AssetGroup[CharacterAppearanceOffset].Category != "Appearance") CharacterAppearanceOffset = 0;
 	if (CharacterAppearanceOffset < 0) CharacterAppearanceOffset = Math.floor(AssetGroup.length / CharacterAppearanceNumPerPage) * CharacterAppearanceNumPerPage;
 }
 

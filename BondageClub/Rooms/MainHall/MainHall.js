@@ -1,21 +1,24 @@
-// Loads the character login screen
+// Loads the main hall screen
 function MainHall_Load() {
-
-
 }
 
 // Run the main hall screen
 function MainHall_Run() {
 
-	// Draw the background and character
+	// Draw the background and player character
 	DrawImage("Backgrounds/MainHall.jpg", 0, 0);
 	DrawCharacter(Character[0], 750, 0, 1);
 	
-	// Draws the buttons
-	DrawButton(1765, 25, 90, 90, "", "White", "Icons/Dress.png");
-	DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
-	DrawButton(1575, 145, 400, 65, "Introduction Class", "White");
-	
+	// If we are not waiting on the server
+	if (AccountQueueIsEmpty()) {
+
+		// Draws the main hall buttons
+		DrawButton(1765, 25, 90, 90, "", "White", "Icons/Dress.png");
+		DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
+		DrawButton(1575, 145, 400, 65, "Introduction Class", "White");
+
+	} else DrawText("Synchronizing with account server...", 1500, 500, "White", "Black");
+
 }
 
 // When the user clicks in the main hall screen
@@ -27,6 +30,6 @@ function MainHall_Click() {
 
 }
 
+// When the user presses keys in the main hall
 function MainHall_KeyDown() {
-	
 }

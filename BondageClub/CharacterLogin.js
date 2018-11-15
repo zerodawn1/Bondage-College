@@ -85,6 +85,7 @@ function CharacterLogin_Click() {
 		if (Name.match(letters) && Password.match(letters) && (Name.length > 0) && (Name.length <= 20) && (Password.length > 0) && (Password.length <= 20)) {
 
 			// Calls the PHP page to check if the login is correct
+			CharacterLoginMessage = "Validating name and password..."
 			var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == XMLHttpRequest.DONE) {
@@ -97,7 +98,7 @@ function CharacterLogin_Click() {
 			xmlhttp.open("GET", AccountAddress + "?command=account_log&account=" + Name + "&password=" + Password, true);
 			xmlhttp.send();
 
-		} else CharacterCreationMessage = "Invalid name or password";
+		} else CharacterLoginMessage = "Invalid name or password";
 	}
 	
 }
