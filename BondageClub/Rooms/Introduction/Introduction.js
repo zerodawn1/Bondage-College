@@ -8,7 +8,7 @@ var IntroductionHasBasicItems = false;
 function IntroductionLoad() {
 
 	// Checks if the player already has the basic items
-	IntroductionHasBasicItems = (InventoryAvailable(Player, "BeginnersRope", "ItemFeet") && InventoryAvailable(Player, "BeginnersRope", "ItemLegs") && InventoryAvailable(Player, "BeginnersRope", "ItemArms") && InventoryAvailable(Player, "BeginnersClothGag", "ItemMouth"));
+	IntroductionHasBasicItems = (InventoryAvailable(Player, "NylonRope", "ItemFeet") && InventoryAvailable(Player, "NylonRope", "ItemLegs") && InventoryAvailable(Player, "NylonRope", "ItemArms") && InventoryAvailable(Player, "SmallClothGag", "ItemMouth"));
 	
 	// Creates two characters to begin with
 	IntroductionMaid = CharacterLoadNPC("NPC_Introduction_Maid");
@@ -57,8 +57,8 @@ function IntroductionClearZone() {
 
 // The maid can give basic items to the player
 function IntroductionGetBasicItems() {
-	InventoryAdd(Player, "BeginnersRope", "ItemFeet");
-	InventoryAdd(Player, "BeginnersRope", "ItemLegs");
-	InventoryAdd(Player, "BeginnersRope", "ItemArms");
-	InventoryAdd(Player, "BeginnersClothGag", "ItemMouth");
+	InventoryAdd(Player, "NylonRope", "ItemFeet");
+	InventoryAdd(Player, "NylonRope", "ItemLegs");
+	InventoryAdd(Player, "NylonRope", "ItemArms");
+	InventoryAdd(Player, "SmallClothGag", "ItemMouth");
 }

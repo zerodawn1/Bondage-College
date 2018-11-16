@@ -1,12 +1,5 @@
 var Character = [];
 
-// Sets the main player character
-function CharacterSetPlayer() {
-	CharacterReset(0, "Female3DCG");
-	Player = Character[0];
-	CharacterLoadCSVDialog(Player);	
-}
-
 // Loads a character in the buffer
 function CharacterReset(CharacterID, CharacterAssetFamily) {
 
@@ -41,6 +34,7 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		Character[CharacterID] = NewCharacter;
 
 	// Creates the inventory and default appearance
+	if (CharacterID == 0) Player = NewCharacter;
 	InventoryLoad(NewCharacter, null, true);
 	CharacterAppearanceSetDefault(NewCharacter);
 		

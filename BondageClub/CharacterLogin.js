@@ -5,7 +5,8 @@ var CharacterLoginMessage = "";
 function CharacterLoginLoad() {
 
 	// Resets the player
-	CharacterSetPlayer();
+	CharacterReset(0, "Female3DCG");
+	CharacterLoadCSVDialog(Player);	
 	CharacterLoginMessage = "Enter your name and password";
 
 	// Creates a text box to enter the player name

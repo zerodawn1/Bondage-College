@@ -22,7 +22,7 @@ function AccountProcess() {
 				AccountReady = true;
 			}
 		};
-		//console.log(URL);
+		console.log(URL);
 		xmlhttp.open("GET", URL, true);
 		xmlhttp.send();
 		

@@ -190,7 +190,7 @@ var AssetFemale3DCG = [
 		Left: 125,
 		Top: 725,
 		Zone: [[100, 730, 300, 260]],
-		Asset: [ { Name: "BeginnersRope", Value: -1 }, { Name: "HempRope", Value: -1 } ]
+		Asset: [ { Name: "NylonRope", Value: -1 }, { Name: "HempRope", Value: -1 } ]
 	},
 
 	{
@@ -205,7 +205,7 @@ var AssetFemale3DCG = [
 		Left: 125,
 		Top: 500,
 		Zone: [[100, 550, 300, 180]],
-		Asset: [ { Name: "BeginnersRope", Value: -1 }, { Name: "HempRope", Value: -1 } ]
+		Asset: [ { Name: "NylonRope", Value: -1 }, { Name: "HempRope", Value: -1 } ]
 	},
 
 	{
@@ -230,7 +230,7 @@ var AssetFemale3DCG = [
 		Left: 150,
 		Top: 50,
 		Zone: [[150, 260, 200, 165]],
-		Asset: [ { Name: "HempRopeHarness", Value: -1 }, { Name: "LeatherHarness", Value: -1 } ]
+		Asset: [ { Name: "NylonRopeHarness", Value: -1 }, { Name: "HempRopeHarness", Value: -1 }, { Name: "LeatherHarness", Value: -1 } ]
 	},
 
 	{
@@ -243,7 +243,7 @@ var AssetFemale3DCG = [
 		Left: 150,
 		Top: 50,
 		Zone: [[50, 250, 100, 250], [350, 250, 100, 250]],
-		Asset: [ { Name: "BeginnersRope", Value: -1 }, { Name: "HempRope", Value: -1 }, { Name: "MetalCuffs", Value: -1}, { Name: "MetalCuffsKey", Effect: ["Unlock"], Value: -1}, { Name: "LeatherArmbinder", Value: -1} ]
+		Asset: [ { Name: "NylonRope", Value: -1 }, { Name: "HempRope", Value: -1 }, { Name: "MetalCuffs", Value: -1}, { Name: "MetalCuffsKey", Effect: ["Unlock"], Value: -1}, { Name: "LeatherArmbinder", Value: -1} ]
 	},
 
 	{
@@ -268,7 +268,7 @@ var AssetFemale3DCG = [
 		Left: 150,
 		Top: 50,
 		Zone: [[150, 160, 200, 50]],
-		Asset: [ { Name: "BeginnersClothGag", Effect: ["GagLight"], Value: -1 }, { Name: "ClothCleaveGag", Effect: ["GagLight"], Value: -1 }, { Name: "ClothOTMGag", Value: -1 }, { Name: "ClothOTNGag", Value: -1 }, { Name: "HarnessBallGag", Effect: ["GagHeavy"], Value: -1 }, { Name: "DuctTapeGag", Value: -1 } ]
+		Asset: [ { Name: "SmallClothGag", Effect: ["GagLight"], Value: -1 }, { Name: "ClothCleaveGag", Effect: ["GagLight"], Value: -1 }, { Name: "ClothOTMGag", Value: -1 }, { Name: "ClothOTNGag", Value: -1 }, { Name: "HarnessBallGag", Effect: ["GagHeavy"], Value: -1 }, { Name: "DuctTapeGag", Value: -1 } ]
 	},
 
 	{

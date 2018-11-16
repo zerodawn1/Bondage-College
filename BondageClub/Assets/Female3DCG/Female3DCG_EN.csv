@@ -115,19 +115,20 @@ Shoes,Heels1,Heels
 Shoes,Heels2,Heels Strap
 Shoes,Boots1,Boots
 ItemFeet,,Feet
-ItemFeet,BeginnersRope,Beginners Rope
+ItemFeet,NylonRope,Nylon Rope
 ItemFeet,HempRope,Hemp Rope
 ItemLegs,,Legs
-ItemLegs,BeginnersRope,Beginners Rope
+ItemLegs,NylonRope,Nylon Rope
 ItemLegs,HempRope,Hemp Rope
 ItemPelvis,,Pelvis
 ItemPelvis,MetalChastityBelt,Metal Chastity Belt
 ItemPelvis,RegularVibratingEgg,Regular Vibrating Egg
 ItemTorso,,Torso
+ItemTorso,NylonRopeHarness,Nylon Rope Harness
 ItemTorso,HempRopeHarness,Hemp Rope Harness
 ItemTorso,LeatherHarness,Leather Harness
 ItemArms,,Arms
-ItemArms,BeginnersRope,Beginners Rope
+ItemArms,NylonRope,Nylon Rope
 ItemArms,HempRope,Hemp Rope
 ItemArms,MetalCuffs,Metal Cuffs
 ItemArms,MetalCuffsKey,Metal Cuffs Key

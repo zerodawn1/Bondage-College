@@ -12,11 +12,10 @@ function CharacterAppearanceBuildAssets(C) {
 
 	// Adds all items with 0 value and from the appearance category
 	CharacterAppearanceAssets = [];
-	var A;
-	for (A = 0; A < Asset.length; A++)
+	for (var A = 0; A < Asset.length; A++)
 		if ((Asset[A].Value == 0) && (Asset[A].Group.Family == C.AssetFamily) && (Asset[A].Group.Category == "Appearance"))
 			CharacterAppearanceAssets.push(Asset[A]);
-	for (A = 0; A < C.Inventory.length; A++)
+	for (var A = 0; A < C.Inventory.length; A++)
 		if ((C.Inventory[A].Asset != null) && (C.Inventory[A].Asset.Group.Family == C.AssetFamily) && (C.Inventory[A].Asset.Group.Category == "Appearance"))
 			CharacterAppearanceAssets.push(C.Inventory[A].Asset);
 
@@ -30,14 +29,12 @@ function CharacterAppearanceSetDefault(C) {
 	if (CharacterAppearanceAssets.length == 0) CharacterAppearanceBuildAssets(C);
 
 	// For each items in the character appearance assets
-	var I;
-	for (I = 0; I < CharacterAppearanceAssets.length; I++)
+	for (var I = 0; I < CharacterAppearanceAssets.length; I++)
 		if (CharacterAppearanceAssets[I].Group.IsDefault) {
 
 			// If there's no item in a slot, the first one becomes the default
 			var MustWear = true;
-			var A;
-			for (A = 0; A < C.Appearance.length; A++)
+			for (var A = 0; A < C.Appearance.length; A++)
 				if (C.Appearance[A].Asset.Group.Name == CharacterAppearanceAssets[I].Group.Name)
 					MustWear = false;
 
@@ -78,8 +75,7 @@ function CharacterAppearanceFullRandom(C) {
 		
 			// Prepares an array of all possible items
 			var R = [];
-			var I;
-			for (I = 0; I < CharacterAppearanceAssets.length; I++)
+			for (var I = 0; I < CharacterAppearanceAssets.length; I++)
 				if ((CharacterAppearanceAssets[I].Group.Name == AssetGroup[A].Name) && ((ParentSize == "") || (CharacterAppearanceAssets[I].Name == ParentSize)))
 					R.push(CharacterAppearanceAssets[I]);
 			
@@ -107,8 +103,7 @@ function CharacterAppearanceFullRandom(C) {
 function CharacterAppearanceNaked(C) {
 
 	// For each item group (non default items only show at a 20% rate)
-	var A;
-	for (A = 0; A < C.Appearance.length; A++)
+	for (var A = 0; A < C.Appearance.length; A++)
 		if (C.Appearance[A].Asset.Group.AllowNone && !C.Appearance[A].Asset.Group.KeepNaked && (C.Appearance[A].Asset.Group.Category == "Appearance")) {
 			C.Appearance.splice(A, 1);
 			A--;
@@ -182,8 +177,7 @@ function CharacterAppearanceBuildCanvas(C) {
 function CharacterAppearanceGetCurrentValue(C, Group, Type) {
 	
 	// Finds the value
-	var A;
-	for (A = 0; A < C.Appearance.length; A++)
+	for (var A = 0; A < C.Appearance.length; A++)
 		if ((C.Appearance[A].Asset.Group.Family == C.AssetFamily) && (C.Appearance[A].Asset.Group.Name == Group)) {
 			if (Type == "Name") return C.Appearance[A].Asset.Name;
 			if (Type == "Description") return C.Appearance[A].Asset.Description;
@@ -238,10 +232,7 @@ function CharacterAppearanceRun() {
 	// Draw the default buttons
 	DrawButton(1768, 25, 90, 90, "", "White", "Icons/Cancel.png");
 	DrawButton(1885, 25, 90, 90, "", "White", "Icons/Accept.png");
-	
-	//DrawText(MouseX.toString(), 50, 20, "white");	
-	//DrawText(MouseY.toString(), 50, 50, "white");
-		
+
 }
 
 // Sets an item in the character appearance
@@ -276,10 +267,9 @@ function CharacterAppearanceSetItem(C, Group, ItemAsset) {
 function CharacterAppearanceNextItem(C, Group) {
 	
 	// For each item, we first find the item and pick the next one
-	var I;
 	var Current = CharacterAppearanceGetCurrentValue(C, Group, "Name");
 	var Found = (Current == "None");
-	for (I = 0; I < CharacterAppearanceAssets.length; I++)
+	for (var I = 0; I < CharacterAppearanceAssets.length; I++)
 		if (CharacterAppearanceAssets[I].Group.Name == Group) {
 			if (Found) {
 				CharacterAppearanceSetItem(C, Group, CharacterAppearanceAssets[I]);
@@ -292,8 +282,7 @@ function CharacterAppearanceNextItem(C, Group) {
 		}
 				
 	// Since we didn't found any item, we pick "None" or the first item if we can't
-	var A;
-	for (A = 0; A < AssetGroup.length; A++)
+	for (var A = 0; A < AssetGroup.length; A++)
 		if (AssetGroup[A].Name == Group) {
 			if (AssetGroup[A].AllowNone) {
 				CharacterAppearanceSetItem(C, Group, null);
@@ -314,8 +303,7 @@ function CharacterAppearanceNextColor(C, Group) {
 	
 	// For each item, we first find the item and pick the next one
 	var Color = CharacterAppearanceGetCurrentValue(C, Group, "Color");
-	var A;
-	for (A = 0; A < AssetGroup.length; A++)
+	for (var A = 0; A < AssetGroup.length; A++)
 		if (AssetGroup[A].Name == Group) {
 			
 			// Finds the next color
@@ -346,8 +334,7 @@ function CharacterAppearanceMoveOffset(Move) {
 
 // Sets the color for a specific group
 function CharacterAppearanceSetColorForGroup(C, Color, Group) {
-	var A;
-	for (A = 0; A < C.Appearance.length; A++)
+	for (var A = 0; A < C.Appearance.length; A++)
 		if (C.Appearance[A].Asset.Group.Name == Group)
 			C.Appearance[A].Color = Color;
 	CharacterLoadCanvas(C);
@@ -418,27 +405,25 @@ function CharacterAppearanceExit(C) {
 function CharacterAppearanceReady(C) {
 	
 	// Make sure the character has one item of each default type
-	var A;
-	for (A = 0; A < AssetGroup.length; A++)
+	for (var A = 0; A < AssetGroup.length; A++)
 		if (AssetGroup[A].IsDefault) {
 
 			// Check to find at least one item from the group
 			var Found = false;
-			var P;
-			for (P = 0; P < C.Appearance.length; P++)
+			for (var P = 0; P < C.Appearance.length; P++)
 				if (C.Appearance[P].Asset.Group.Name == AssetGroup[A].Name)
 					Found = true;
-			
+
 			// If we didn't found the group, we warn the user
 			if (!Found) {
 				CharacterAppearanceHeaderText = "You must pick an item of type: " + AssetGroup[A].Name;
-				return;				
+				return;
 			}
-			
+
 		}
 
 	// If there's no error, we continue to the login or main hall if already logged
-	if ((C.AccountName != "") && (C.AccountPassword != "")) {
+	if ((C.ID == 0) && (C.AccountName != "") && (C.AccountPassword != "")) {
 		CharacterAppearanceSave(C);
 		CommonSetScreen("MainHall");
 	} else CommonSetScreen("CharacterCreation");
@@ -449,7 +434,7 @@ function CharacterAppearanceReady(C) {
 function CharacterAppearanceSave(C) {
 	
 	// Creates a big parameter string of every appearance items 
-	if (C.AccountName != "") {
+	if ((C.ID == 0) && (C.AccountName != "") && (C.AccountPassword != "")) {
 		var P = "&family=" + C.AssetFamily;
 		for (A = 0; A < C.Appearance.length; A++)
 			P = P + "&group" + A.toString() + "=" + C.Appearance[A].Asset.Group.Name + "&name" + A.toString() + "=" + C.Appearance[A].Asset.Name + "&color" + A.toString() + "=" + C.Appearance[A].Color;
@@ -465,9 +450,8 @@ function CharacterAppearanceLoadFromAccount(C, Appearance) {
 	if (Appearance != null) {
 	
 		// For each appearance item to load
-		var A;
 		C.Appearance = [];
-		for (A = 0; A < Appearance.length; A++) {
+		for (var A = 0; A < Appearance.length; A++) {
 
 			// Cycles in all the assets to find the correct item to add and colorize it
 			var I;
