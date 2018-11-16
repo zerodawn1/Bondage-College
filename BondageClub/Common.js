@@ -1,21 +1,22 @@
 // Main variables
-var CurrentScreen;
-var CurrentCharacter = null;
+var Player;
 var MouseX = 0;
 var MouseY = 0;
 var KeyPress = "";
-var Common_IsMobile = false;
-var Common_CurrentTimer = 0;
-var Common_RunInterval = 20;
-var Common_CSVCache = {};
+var CurrentScreen;
+var CurrentCharacter = null;
+var CommonIsMobile = false;
+var CommonCurrentTimer = 0;
+var CommonRunInterval = 20;
+var CommonCSVCache = {};
 
 // Returns TRUE if the variable is a number
-function Common_IsNumeric(n) {
+function CommonIsNumeric(n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
 // Returns the current date and time in a yyyy-mm-dd hh:mm:ss format
-function Common_GetFormatDate() {
+function CommonGetFormatDate() {
 	var d = new Date();
 	var yyyy = d.getFullYear();
 	var mm = d.getMonth() < 9 ? "0" + (d.getMonth() + 1) : (d.getMonth() + 1); // getMonth() is zero-based
@@ -27,7 +28,7 @@ function Common_GetFormatDate() {
 }
 
 // Used to detect whether the users browser is an mobile browser
-function Common_DetectMobile() {
+function CommonDetectMobile() {
 
 	// First check
     if (sessionStorage.desktop) return false;
@@ -42,7 +43,7 @@ function Common_DetectMobile() {
 }
 
 // Parse a CSV file
-function Common_ParseCSV(str) {
+function CommonParseCSV(str) {
 		
     var arr = [];
     var quote = false;  // true means we're inside a quoted field
@@ -75,138 +76,63 @@ function Common_ParseCSV(str) {
 }
 
 // Read a CSV file from the web site
-function Common_ReadCSV(Array, Path, Screen, File) {
+function CommonReadCSV(Array, Path, Screen, File) {
 	
     // Changed from a single path to various arguments and internally concatenate them
     // This ternary operator is used to keep backward compatibility
-    var FullPath = Path + "/" + Screen + "/" + File + "_" + Common_GetWorkingLanguage() + ".csv";    
-    if (Common_CSVCache[FullPath]) {
-		window[Array] = Common_CSVCache[FullPath];
+    var FullPath = Path + "/" + Screen + "/" + File + "_" + CommonGetWorkingLanguage() + ".csv";    
+    if (CommonCSVCache[FullPath]) {
+		window[Array] = CommonCSVCache[FullPath];
         return;
     }
     
     // Opens the file, parse it and returns the result in an Object
-    Common_Get(FullPath, function() {
+    CommonGet(FullPath, function() {
         if (this.status == 200) {
-            Common_CSVCache[FullPath] = Common_ParseCSV(this.responseText);
-			window[Array] = Common_CSVCache[FullPath];
+            CommonCSVCache[FullPath] = CommonParseCSV(this.responseText);
+			window[Array] = CommonCSVCache[FullPath];
         }
     });
 }
 
 // Returns a working language if translation isn't fully ready
-function Common_GetWorkingLanguage() {
+function CommonGetWorkingLanguage() {
 	return "EN";
 }
 
 // AJAX utility
-function Common_Get(Path, Callback) {
+function CommonGet(Path, Callback) {
 	var xhr = new XMLHttpRequest();
     xhr.open("GET", Path);
     xhr.onreadystatechange = function() { if (this.readyState == 4) Callback.bind(this)(); };
     xhr.send(null);
 }
 
-// Shuffles all array elements at random
-function ArrayShuffle(a) {
-    var j, x, i;
-    for (i = a.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = a[i];
-        a[i] = a[j];
-        a[j] = x;
-    }
-    return a;
+// Catches the clicks on the main screen and forwards it to the current screen or dialog screen
+function CommonClick() {	
+	if (CurrentCharacter == null)
+		CommonDynamicFunction(CurrentScreen + "Click()");
+	else 
+		DialogClick();
 }
 
 // Calls a dynamic function (if it exists)
-function DynamicFunction(FunctionName) {
+function CommonDynamicFunction(FunctionName) {
 	if (typeof window[FunctionName.substr(0, FunctionName.indexOf("("))] == "function") {
 		var Fct = new Function(FunctionName);
 		Fct();
 	} else console.log("Trying to launch invalid function: " + FunctionName);
 }
 
-// Returns the text for the current scene associated with the tag
-function GetText(Tag) {
-
-	// Make sure the text CSV file is loaded
-	if (CurrentText != null) {
-		
-		// Cycle the text to find a matching tag and returns the text content
-		Tag = Tag.trim().toUpperCase();
-		for (var T = 0; T < CurrentText.length; T++)
-			if (CurrentText[T][TextTag].trim().toUpperCase() == Tag)
-				return CurrentText[T][TextContent].trim();
-		
-		// Returns an error message
-		return "MISSING TEXT FOR TAG: " + Tag.trim();
-
-	} else return "";
-
-}
-
-// Returns the text for a specific CSV associated with the tag
-function GetCSVText(CSVText, Tag) {
-
-	// Make sure the text CSV file is loaded
-	if (CSVText != null) {
-		
-		// Cycle the text to find a matching tag and returns the text content
-		Tag = Tag.trim().toUpperCase();
-		for (var T = 0; T < CSVText.length; T++)
-			if (CSVText[T][TextTag].trim().toUpperCase() == Tag)
-				return CSVText[T][TextContent].trim();
-		
-		// Returns an error message
-		return "MISSING TEXT FOR TAG: " + Tag.trim();
-
-	} else return "";
-
-}
-
-// Creates a path from the supplied paths parts
-function GetPath(paths) {
-    var path = arguments[0];
-    for (var index = 1; index < arguments.length; index++) {
-        path += "/" + arguments[index];
-    }
-    return path;
-}
-
-// Convert a hex color string to a RGB color
-function HexToRGB(color) {
-    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    color = color.replace(shorthandRegex, function(m, r, g, b) {
-        return r + r + g + g + b + b;
-    });
-
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
-    return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-    } : {
-        r: 0,
-        g: 0,
-        b: 0
-    };
-}
-
-// Returns the hex value of a RGB data
-function RGBToHex(rgb){
-	var rgb = rgb[2] | (rgb[1] << 8) | (rgb[0] << 16);
-    return '#' + (0x1000000 + rgb).toString(16).slice(1)  
-};
-
-// Sets the current screen and calls the loading
-function SetScreen(NewScreen) {
+// Sets the current screen and calls the loading script if needed, only allow the change screen if the player can walk
+function CommonSetScreen(NewScreen) {
 	CurrentScreen = NewScreen;
-	DynamicFunction(CurrentScreen + "_Load()");
+	if (eval("typeof " + CurrentScreen + "Load") == "function")
+		CommonDynamicFunction(CurrentScreen + "Load()");
 }
 
 // Sorts a list of objects based on a key property
-function SortObjectList(list, key) {
+function CommonSortObjectList(list, key) {
     function compare(a, b) {
         a = a[key];
         b = b[key];

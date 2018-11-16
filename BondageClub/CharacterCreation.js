@@ -1,7 +1,8 @@
+var CharacterCreationBackground = "Dressing";
 var CharacterCreationMessage = "";
 
 // Loads the character login screen
-function CharacterCreation_Load() {
+function CharacterCreationLoad() {
 
 	CharacterCreationMessage = "Enter your account & character information";
 
@@ -60,7 +61,7 @@ function CharacterCreation_Load() {
 }
 
 // Run the characther creation  screen 
-function CharacterCreation_Run() {
+function CharacterCreationRun() {
 	
 	// Places the controls on the screen
 	document.getElementById("InputCharacter").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:50%; top:" + (window.innerHeight / 2 + MainCanvas.height * -0.35) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
@@ -69,9 +70,8 @@ function CharacterCreation_Run() {
 	document.getElementById("InputPassword2").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:50%; top:" + (window.innerHeight / 2 + MainCanvas.height * 0.04) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
 	document.getElementById("InputEmail").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:50%; top:" + (window.innerHeight / 2 + MainCanvas.height * 0.17) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
 		
-	// Draw the background and the character twice
-	DrawImage("Backgrounds/DressingRoom.jpg", 0, 0);
-	DrawCharacter(Character[0], 500, 0, 1);
+	// Draw the character, the labels and buttons
+	DrawCharacter(Player, 500, 0, 1);
 	DrawText(CharacterCreationMessage, 1267, 50, "White", "Black");
 	DrawText("Character name (letters & spaces)", 1267, 120, "White", "Black");
 	DrawText("Account name (letters & numbers)", 1267, 250, "White", "Black");
@@ -84,15 +84,15 @@ function CharacterCreation_Run() {
 }
 
 // When the ajax response returns, we analyze it's data
-function CharacterCreation_Response(CharacterData) {
+function CharacterCreationResponse(CharacterData) {
 	if ((CharacterData != null) && (CharacterData == "account_created")) {
 		
 		// Keep the character data and pushes it's appearance to the server
-		Character[0].Name = document.getElementById("InputCharacter").value.trim();
-		Character[0].AccountName = document.getElementById("InputName").value.trim();
-		Character[0].AccountPassword = document.getElementById("InputPassword1").value.trim();
-		InventoryLoad(Character[0], null, true);
-		CharacterAppearanceSave(Character[0]);
+		Player.Name = document.getElementById("InputCharacter").value.trim();
+		Player.AccountName = document.getElementById("InputName").value.trim();
+		Player.AccountPassword = document.getElementById("InputPassword1").value.trim();
+		InventoryLoad(Player, null, true);
+		CharacterAppearanceSave(Player);
 		
 		// Logs Sarah status from the Bondage College if needed
 		ImportBondageCollegeSarah();
@@ -103,13 +103,13 @@ function CharacterCreation_Response(CharacterData) {
 		document.getElementById("InputPassword1").parentNode.removeChild(document.getElementById("InputPassword1"));
 		document.getElementById("InputPassword2").parentNode.removeChild(document.getElementById("InputPassword2"));
 		document.getElementById("InputEmail").parentNode.removeChild(document.getElementById("InputEmail"));
-		SetScreen("MainHall");
+		CommonSetScreen("MainHall");
 		
 	} else CharacterCreationMessage = "Error: " + CharacterData;
 }
 
 // When the user clicks on the character creation screen
-function CharacterCreation_Click() {
+function CharacterCreationClick() {
 	
 	// If we must go back to the login screen
 	if ((MouseX >= 1440) && (MouseX <= 1560) && (MouseY >= 900) && (MouseY <= 960)) {
@@ -118,7 +118,7 @@ function CharacterCreation_Click() {
 		document.getElementById("InputPassword1").parentNode.removeChild(document.getElementById("InputPassword1"));
 		document.getElementById("InputPassword2").parentNode.removeChild(document.getElementById("InputPassword2"));
 		document.getElementById("InputEmail").parentNode.removeChild(document.getElementById("InputEmail"));
-		SetScreen("CharacterLogin");
+		CommonSetScreen("CharacterLogin");
 	}
 	
 	// If we must try to create a new account
@@ -144,7 +144,7 @@ function CharacterCreation_Click() {
 				var xmlhttp = new XMLHttpRequest();
 				xmlhttp.onreadystatechange = function() {
 					if (xmlhttp.readyState == XMLHttpRequest.DONE) {
-						if (xmlhttp.status == 200) CharacterCreation_Response(xmlhttp.responseText.trim().toString());
+						if (xmlhttp.status == 200) CharacterCreationResponse(xmlhttp.responseText.trim().toString());
 						else CharacterCreationMessage = "Error " + xmlhttp.status.toString() + " on account service";
 					}
 				};
@@ -156,7 +156,4 @@ function CharacterCreation_Click() {
 		} else CharacterCreationMessage = "Both passwords do not match";
 	}
 
-}
-
-function CharacterCreation_KeyDown() {	
 }

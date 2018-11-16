@@ -1,5 +1,12 @@
 var Character = [];
 
+// Sets the main player character
+function CharacterSetPlayer() {
+	CharacterReset(0, "Female3DCG");
+	Player = Character[0];
+	CharacterLoadCSVDialog(Player);	
+}
+
 // Loads a character in the buffer
 function CharacterReset(CharacterID, CharacterAssetFamily) {
 
@@ -23,7 +30,8 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		BlinkFactor: Math.round(Math.random() * 10) + 10,
 		AllowItem: true,
 		HeightModifier: 0,
-		IsGagged : function() { return ((this.Effect.indexOf("GagLight") >= 0) || (this.Effect.indexOf("GagNormal") >= 0) || (this.Effect.indexOf("GagHeavy") >= 0) || (this.Effect.indexOf("GagTotal") >= 0)) }
+		CanTalk : function() { return ((this.Effect.indexOf("GagLight") < 0) && (this.Effect.indexOf("GagNormal") < 0) && (this.Effect.indexOf("GagHeavy") < 0) && (this.Effect.indexOf("GagTotal") < 0)) },
+		CanWalk : function() { return (this.Effect.indexOf("Freeze") < 0) }
 	}
 
 	// If the character doesn't exist, we create it
@@ -69,9 +77,9 @@ function CharacterBuildDialog(C, CSV) {
 			var D = {};
 			D.Stage = CSV[L][0];
 			if ((CSV[L][1] != null) && (CSV[L][1].trim() != "")) D.NextStage = CSV[L][1];
-			if ((CSV[L][2] != null) && (CSV[L][2].trim() != "")) D.Option = CSV[L][2].replace("Dialog_CharacterName", C.Name);
-			if ((CSV[L][3] != null) && (CSV[L][3].trim() != "")) D.Result = CSV[L][3].replace("Dialog_CharacterName", C.Name);
-			if ((CSV[L][4] != null) && (CSV[L][4].trim() != "")) D.Function = ((CSV[L][4].trim().substring(0, 7) == "Dialog_") ? "" : CurrentScreen + "_") + CSV[L][4];
+			if ((CSV[L][2] != null) && (CSV[L][2].trim() != "")) D.Option = CSV[L][2].replace("DialogCharacterName", C.Name).replace("DialogPlayerName", Player.Name);
+			if ((CSV[L][3] != null) && (CSV[L][3].trim() != "")) D.Result = CSV[L][3].replace("DialogCharacterName", C.Name).replace("DialogPlayerName", Player.Name);
+			if ((CSV[L][4] != null) && (CSV[L][4].trim() != "")) D.Function = ((CSV[L][4].trim().substring(0, 6) == "Dialog") ? "" : CurrentScreen) + CSV[L][4];
 			if ((CSV[L][5] != null) && (CSV[L][5].trim() != "")) D.Prerequisite = CSV[L][5];
 			C.Dialog.push(D);
 
@@ -83,17 +91,17 @@ function CharacterBuildDialog(C, CSV) {
 function CharacterLoadCSVDialog(C) {
 
     // Finds the full path of the CSV file to use cache
-    var FullPath = ((C.ID == 0) ? "Rooms/Player" : "Rooms/" + CurrentScreen + "/" + C.AccountName) + "_" + Common_GetWorkingLanguage() + ".csv";    
-    if (Common_CSVCache[FullPath]) {
-		CharacterBuildDialog(C, Common_CSVCache[FullPath]);
+    var FullPath = ((C.ID == 0) ? "Rooms/Player" : "Rooms/" + CurrentScreen + "/" + C.AccountName) + "_" + CommonGetWorkingLanguage() + ".csv";    
+    if (CommonCSVCache[FullPath]) {
+		CharacterBuildDialog(C, CommonCSVCache[FullPath]);
         return;
     }
     
     // Opens the file, parse it and returns the result it to build the dialog
-    Common_Get(FullPath, function() {
+    CommonGet(FullPath, function() {
         if (this.status == 200) {
-            Common_CSVCache[FullPath] = Common_ParseCSV(this.responseText);
-			CharacterBuildDialog(C, Common_CSVCache[FullPath]);
+            CommonCSVCache[FullPath] = CommonParseCSV(this.responseText);
+			CharacterBuildDialog(C, CommonCSVCache[FullPath]);
         }
     });
 	

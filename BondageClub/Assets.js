@@ -78,17 +78,17 @@ function AssetBuildDescription(Family, CSV) {
 function AssetLoadDescription(Family) {
 
     // Finds the full path of the CSV file to use cache
-    var FullPath = "Assets/" + Family + "/" + Family + "_" + Common_GetWorkingLanguage() + ".csv";    
-    if (Common_CSVCache[FullPath]) {
-		AssetBuildDescription(Family, Common_CSVCache[FullPath]);
+    var FullPath = "Assets/" + Family + "/" + Family + "_" + CommonGetWorkingLanguage() + ".csv";    
+    if (CommonCSVCache[FullPath]) {
+		AssetBuildDescription(Family, CommonCSVCache[FullPath]);
         return;
     }
     
     // Opens the file, parse it and returns the result it to build the dialog
-    Common_Get(FullPath, function() {
+    CommonGet(FullPath, function() {
         if (this.status == 200) {
-            Common_CSVCache[FullPath] = Common_ParseCSV(this.responseText);
-			AssetBuildDescription(Family, Common_CSVCache[FullPath]);
+            CommonCSVCache[FullPath] = CommonParseCSV(this.responseText);
+			AssetBuildDescription(Family, CommonCSVCache[FullPath]);
         }
     });
 	

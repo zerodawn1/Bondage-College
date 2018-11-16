@@ -1,8 +1,11 @@
+var CharacterLoginBackground = "Dressing";
 var CharacterLoginMessage = "";
 
 // Loads the character login screen
-function CharacterLogin_Load() {
+function CharacterLoginLoad() {
 
+	// Resets the player
+	CharacterSetPlayer();
 	CharacterLoginMessage = "Enter your name and password";
 
 	// Creates a text box to enter the player name
@@ -28,15 +31,14 @@ function CharacterLogin_Load() {
 }
 
 // Run the character login screen 
-function CharacterLogin_Run() {
+function CharacterLoginRun() {
 	
 	// Position the login fields on the screen
 	document.getElementById("InputName").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:50%; top:" + (window.innerHeight / 2 - MainCanvas.height / 4) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
 	document.getElementById("InputPassword").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:50%; top:" + (window.innerHeight / 2 - MainCanvas.height / 10) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
 		
 	// Draw the background and the character twice
-	DrawImage("Backgrounds/DressingRoom.jpg", 0, 0);
-	DrawCharacter(Character[0], 500, 0, 1);
+	DrawCharacter(Player, 500, 0, 1);
 	DrawText("Welcome to the Bondage Club", 1265, 50, "White", "Black");
 	DrawText(CharacterLoginMessage, 1265, 100, "White", "Black");
 	DrawText("Account Name", 1265, 217, "White", "Black");
@@ -48,30 +50,30 @@ function CharacterLogin_Run() {
 }
 
 // When the character logs, we analyze the data
-function CharacterLogin_Response(CharacterData) {
+function CharacterLoginResponse(CharacterData) {
 	var C = JSON.parse(CharacterData);
 	if ((C.CharacterName != null) && (C.AccountName != null)) {
-		Character[0].Name = C.CharacterName;
-		Character[0].AccountName = C.AccountName;
-		Character[0].AccountPassword = document.getElementById("InputPassword").value.trim();
-		Character[0].AssetFamily = C.AssetFamily;
-		CharacterAppearanceLoad(Character[0], C.Appearance);
-		InventoryLoad(Character[0], C.Inventory, false);
+		Player.Name = C.CharacterName;
+		Player.AccountName = C.AccountName;
+		Player.AccountPassword = document.getElementById("InputPassword").value.trim();
+		Player.AssetFamily = C.AssetFamily;
+		CharacterAppearanceLoadFromAccount(Player, C.Appearance);
+		InventoryLoad(Player, C.Inventory, false);
 		LogLoad(C.Log);
 		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 		document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
-		SetScreen("MainHall");
+		CommonSetScreen("MainHall");
 	} else CharacterLoginMessage = "Error loading character data";
 }
 
 // When the user clicks on the character login screen
-function CharacterLogin_Click() {
+function CharacterLoginClick() {
 	
 	// If we must create a new character
 	if ((MouseX >= 1125) && (MouseX <= 1375) && (MouseY >= 800) && (MouseY <= 860)) {
 		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 		document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
-		SetScreen("CharacterAppearance");
+		CommonSetScreen("CharacterAppearance");
 	}
 	
 	// If we must try to login
@@ -87,7 +89,7 @@ function CharacterLogin_Click() {
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == XMLHttpRequest.DONE) {
 				   if (xmlhttp.status == 200) {
-					   if (xmlhttp.responseText.trim().substring(0, 1) == "{") CharacterLogin_Response(xmlhttp.responseText);
+					   if (xmlhttp.responseText.trim().substring(0, 1) == "{") CharacterLoginResponse(xmlhttp.responseText);
 					   else CharacterLoginMessage = "Incorrect name or password";
 				   } else CharacterLoginMessage = "Error " + xmlhttp.status.toString() + " on account service";
 				}
@@ -98,7 +100,4 @@ function CharacterLogin_Click() {
 		} else CharacterLoginMessage = "Invalid name or password";
 	}
 	
-}
-
-function CharacterLogin_KeyDown() {
 }

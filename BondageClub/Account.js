@@ -4,8 +4,8 @@ var AccountReady = true;
 
 // Puts the URL to call in a buffer
 function AccountRequest(Command, Params) {
-	if ((Character[0].AccountName != "") && (Character[0].AccountPassword != ""))
-		AccountURL.push(AccountAddress + "?command=" + Command + "&account=" + Character[0].AccountName + "&password=" + Character[0].AccountPassword + Params.replace(/#/g, "|"));
+	if ((Player != null) && (Player.AccountName != "") && (Player.AccountPassword != ""))
+		AccountURL.push(AccountAddress + "?command=" + Command + "&account=" + Player.AccountName + "&password=" + Player.AccountPassword + Params.replace(/#/g, "|"));
 }
 
 // When the queue is ready to process, we launch a new http request

@@ -10,6 +10,31 @@ var DrawCacheTotalImages = 0;
 var DrawScreenWidth = -1;
 var DrawScreenHeight = -1;
 
+// Convert a hex color string to a RGB color
+function DrawHexToRGB(color) {
+    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    color = color.replace(shorthandRegex, function(m, r, g, b) {
+        return r + r + g + g + b + b;
+    });
+
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : {
+        r: 0,
+        g: 0,
+        b: 0
+    };
+}
+
+// Returns the hex value of a RGB data
+function DrawRGBToHex(rgb){
+	var rgb = rgb[2] | (rgb[1] << 8) | (rgb[0] << 16);
+    return '#' + (0x1000000 + rgb).toString(16).slice(1);
+};
+
 // Loads the drawing objects
 function DrawLoad() {
 	
@@ -127,7 +152,7 @@ function DrawImageCanvasColorize(Source, Canvas, X, Y, Zoom, HexColor, FullAlpha
 		var data = imageData.data;
 
 		// Get the RGB color used to transform
-		var rgbColor = HexToRGB(HexColor);
+		var rgbColor = DrawHexToRGB(HexColor);
 		var trans;
 
 		// We transform each non transparent pixel based on the RGG value
@@ -292,32 +317,12 @@ function DrawPosNegValue(Value, X, Y) {
 	if (Value < 0) DrawText(Value.toString(), X, Y, "#BB0000");	
 }
 
-// Draw the current actor stats toward the player
-function DrawActorStats(Left, Top) {
-	
-	// Draw the actor name and icon
-	if (ActorGetValue(ActorHideName)) DrawText("Unknown", Left - 200, Top + 17, "black");
-	else DrawText(CurrentActor, Left - 200, Top + 17, "black");
-	if (CurrentActor == Common_PlayerLover) DrawImage("Icons/Lover.png", Left - 110, Top);
-	else DrawImage("Icons/Heart.png", Left - 110, Top);
-	if (ActorGetValue(ActorOwner) == "Player") DrawImage("Icons/Collared.png", Left - 10, Top);
-	else if (CurrentActor == Common_PlayerOwner) DrawImage("Icons/Owner.png", Left - 10, Top);
-	else DrawImage("Icons/Submission.png", Left - 10, Top);
-	DrawImage("Icons/Orgasm.png", Left + 90, Top);
-	DrawImage("Icons/Bondage.png", Left + 190, Top);
-	DrawPosNegValue(ActorGetValue(ActorLove), Left - 50, Top + 17);
-	DrawPosNegValue(ActorGetValue(ActorSubmission), Left + 50, Top + 17);
-	DrawText(ActorGetValue(ActorOrgasmCount).toString(), Left + 150, Top + 17, "black");
-	DrawText(ActorGetValue(ActorBondageCount).toString(), Left + 250, Top + 17, "black");
-
-}
-
 // Makes sure the screen is at the proper size
-function DrawResize() {
+function DrawProcess() {
 	
 	// Gets the Width and Height differently on mobile and regular browsers
-	var W = (Common_IsMobile) ? document.documentElement.clientWidth : window.innerWidth;
-	var H = (Common_IsMobile) ? document.documentElement.clientHeight : window.innerHeight;
+	var W = (CommonIsMobile) ? document.documentElement.clientWidth : window.innerWidth;
+	var H = (CommonIsMobile) ? document.documentElement.clientHeight : window.innerHeight;
 
 	// If we need to resize, we keep the 2x1 ratio
 	if ((DrawScreenWidth != W) || (DrawScreenHeight != H)) {
@@ -335,5 +340,14 @@ function DrawResize() {
 			MainCanvas.canvas.style.height = "100%";
 		}
 	}
+	
+	// Gets the current screen background and draw it, a darker version in character dialog mode
+	var B = window[CurrentScreen + "Background"];
+	if ((B != null) && (B != ""))
+		DrawImage("Backgrounds/" + B + ((CurrentCharacter != null) ? "Dark" : "") + ".jpg", 0, 0);
+	
+	// Draws the dialog screen or current screen if there's no loaded character
+	if (CurrentCharacter != null) DialogDraw();
+	else CommonDynamicFunction(CurrentScreen + "Run()");
 
 }

@@ -51,49 +51,41 @@
     return true;
 }*/
 
-// When the code is loaded
+// When the code is loaded, we start the game engine
 window.onload = function() {
-	Common_IsMobile = Common_DetectMobile();
+	CommonIsMobile = CommonDetectMobile();
 	DrawLoad();
 	AssetLoadAll();
-	GameInit();
+	CommonSetScreen("CharacterLogin");
 	MainRun();
 };
 
-// Game init script
-function GameInit() {
-	CharacterReset(0, "Female3DCG");
-	CharacterLoadCSVDialog(Character[0]);
-	SetScreen("CharacterLogin");
-}
-
-// Main game running state, runs the current screen code and bottom bar
+// Main game running state, runs the drawing and account functions
 function MainRun() {
-	DrawResize();
-	clearInterval(Common_CurrentTimer);
-	Common_CurrentTimer = setInterval("MainRun()", Common_RunInterval);
-	DynamicFunction(CurrentScreen + "_Run()");
+	clearInterval(CommonCurrentTimer);
+	DrawProcess();
 	AccountProcess();
+	CommonCurrentTimer = setInterval("MainRun()", CommonRunInterval);	
 }
 
-// When the user presses a key, we send the KeyDown event to the other screens
+// When the user presses a key, we send the KeyDown event to the current screen if it can accept it
 function KeyDown(event) {
 	KeyPress = event.keyCode || event.which;
-	DynamicFunction(CurrentScreen + "_KeyDown()");
+	if (eval("typeof " + CurrentScreen + "KeyDown") == "function")
+		CommonDynamicFunction(CurrentScreen + "KeyDown()");
 }
 
 // When the user clicks, we fire the click event for other screens
 function Click(event) {
-	if (!Common_IsMobile) {
+	if (!CommonIsMobile) {
 		MouseMove(event);
-		//var i = csdcsdc;
-		DynamicFunction(CurrentScreen + "_Click()");
+		CommonClick();
 	}
 }
 
-// When the user clicks, we fire the click event for other screens
+// When the user touches the screen (mobile only), we fire the click event for other screens
 function Touch(event) {
-	if (Common_IsMobile) {
+	if (CommonIsMobile) {
 		var rect = document.getElementById("MainCanvas").getBoundingClientRect();
 		if (document.body.clientWidth <= document.body.clientHeight * 2) {
 			MouseX = Math.round((event.touches[0].clientX - rect.left) * 2000 / document.body.clientWidth);
@@ -102,7 +94,7 @@ function Touch(event) {
 			MouseX = Math.round((event.touches[0].clientX - rect.left) * 1000 / document.body.clientHeight);
 			MouseY = Math.round((event.touches[0].clientY - rect.top) * 1000 / document.body.clientHeight);
 		}		
-		DynamicFunction(CurrentScreen + "_Click()");
+		CommonClick();
 	} 
 }
 

@@ -1,3 +1,4 @@
+var CharacterAppearanceBackground = "Dressing";
 var CharacterAppearanceOffset = 0;
 var CharacterAppearanceNumPerPage = 9;
 var CharacterAppearanceHeaderText = "";
@@ -134,7 +135,7 @@ function CharacterAppearanceBuildCanvas(C) {
 	} else C.CanvasBlink.getContext("2d").clearRect(0, 0, 500, 1000);
 	
 	// Sorts the list
-	C.Appearance = SortObjectList(C.Appearance, "Priority");
+	C.Appearance = CommonSortObjectList(C.Appearance, "Priority");
 	
 	// Loops in all items worn by the character
 	for (var A = 0; A < C.Appearance.length; A++) {
@@ -194,19 +195,18 @@ function CharacterAppearanceGetCurrentValue(C, Group, Type) {
 }
 
 // Loads the character appearance screen and keeps a backup of the previous appearance
-function CharacterAppearance_Load() {
+function CharacterAppearanceLoad() {
 	CharacterAppearanceHeaderText = "Select your appearance";
-	CharacterAppearanceBuildAssets(Character[0]);
-	CharacterAppearanceBackup = JSON.parse(JSON.stringify(Character[0].Appearance));
+	CharacterAppearanceBuildAssets(Player);
+	CharacterAppearanceBackup = JSON.parse(JSON.stringify(Player.Appearance));
 }
 
 // Run the characther appearance selection screen 
-function CharacterAppearance_Run() {
+function CharacterAppearanceRun() {
 	
 	// Draw the background and the character twice
-	DrawImage("Backgrounds/DressingRoom.jpg", 0, 0);
-	DrawCharacter(Character[0], -550, -100, 4);
-	DrawCharacter(Character[0], 800, 0, 1);
+	DrawCharacter(Player, -550, -100, 4);
+	DrawCharacter(Player, 800, 0, 1);
 	DrawText(CharacterAppearanceHeaderText, 450, 40, "White", "Black");
 
 	// Out of the color picker
@@ -220,9 +220,9 @@ function CharacterAppearance_Run() {
 		
 		// Creates buttons for all groups	
 		for (var A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + CharacterAppearanceNumPerPage; A++)
-			if ((AssetGroup[A].Family == Character[0].AssetFamily) && (AssetGroup[A].Category == "Appearance")) {
-				DrawButton(1300, 145 + (A - CharacterAppearanceOffset) * 95, 400, 65, AssetGroup[A].Description + ": " + CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Description"), "White", "");
-				var Color = CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Color", "");
+			if ((AssetGroup[A].Family == Player.AssetFamily) && (AssetGroup[A].Category == "Appearance")) {
+				DrawButton(1300, 145 + (A - CharacterAppearanceOffset) * 95, 400, 65, AssetGroup[A].Description + ": " + CharacterAppearanceGetCurrentValue(Player, AssetGroup[A].Name, "Description"), "White", "");
+				var Color = CharacterAppearanceGetCurrentValue(Player, AssetGroup[A].Name, "Color", "");
 				DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, Color, ((Color.indexOf("#") == 0) ? Color : "White"));
 				DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", ((Color.indexOf("#") == 0) ? Color : "White"), AssetGroup[A].AllowColorize ? "Icons/Color.png" : "Icons/ColorBlocked.png");
 			}
@@ -230,7 +230,7 @@ function CharacterAppearance_Run() {
 	} else {
 
 		// Draws the color picker
-		DrawText(CharacterAppearanceGetCurrentValue(Character[0], CharacterAppearanceColorPicker, "Color"), 1450, 75, "white", "black");
+		DrawText(CharacterAppearanceGetCurrentValue(Player, CharacterAppearanceColorPicker, "Color"), 1450, 75, "white", "black");
 		DrawImage("Images/ColorPicker.png", 1300, 145);
 
 	}
@@ -354,7 +354,7 @@ function CharacterAppearanceSetColorForGroup(C, Color, Group) {
 }
 
 // When the user clicks on the character appearance selection screen
-function CharacterAppearance_Click() {
+function CharacterAppearanceClick() {
 
 	// In regular mode
 	if (CharacterAppearanceColorPicker == "") {
@@ -362,41 +362,41 @@ function CharacterAppearance_Click() {
 		// If we must switch to the next item in the assets
 		if ((MouseX >= 1300) && (MouseX < 1700) && (MouseY >= 145) && (MouseY < 975))
 			for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + CharacterAppearanceNumPerPage; A++)
-				if ((AssetGroup[A].Family == Character[0].AssetFamily) && (AssetGroup[A].Category == "Appearance"))
+				if ((AssetGroup[A].Family == Player.AssetFamily) && (AssetGroup[A].Category == "Appearance"))
 					if ((MouseY >= 145 + (A - CharacterAppearanceOffset) * 95) && (MouseY <= 210 + (A - CharacterAppearanceOffset) * 95))
-						CharacterAppearanceNextItem(Character[0], AssetGroup[A].Name);
+						CharacterAppearanceNextItem(Player, AssetGroup[A].Name);
 
 		// If we must switch to the next item in the assets
 		if ((MouseX >= 1725) && (MouseX < 1885) && (MouseY >= 145) && (MouseY < 975))
 			for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + CharacterAppearanceNumPerPage; A++)
-				if ((AssetGroup[A].Family == Character[0].AssetFamily) && (AssetGroup[A].Category == "Appearance"))
+				if ((AssetGroup[A].Family == Player.AssetFamily) && (AssetGroup[A].Category == "Appearance"))
 					if ((MouseY >= 145 + (A - CharacterAppearanceOffset) * 95) && (MouseY <= 210 + (A - CharacterAppearanceOffset) * 95))
-						CharacterAppearanceNextColor(Character[0], AssetGroup[A].Name);
+						CharacterAppearanceNextColor(Player, AssetGroup[A].Name);
 
 		// If we must switch to the next item in the assets
 		if ((MouseX >= 1910) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 975))
 			for (A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + CharacterAppearanceNumPerPage; A++)
-				if ((AssetGroup[A].Family == Character[0].AssetFamily) && (AssetGroup[A].Category == "Appearance") && AssetGroup[A].AllowColorize)
+				if ((AssetGroup[A].Family == Player.AssetFamily) && (AssetGroup[A].Category == "Appearance") && AssetGroup[A].AllowColorize)
 					if ((MouseY >= 145 + (A - CharacterAppearanceOffset) * 95) && (MouseY <= 210 + (A - CharacterAppearanceOffset) * 95)) {
 						CharacterAppearanceColorPicker = AssetGroup[A].Name;
-						CharacterAppearanceColorPickerBackup = CharacterAppearanceGetCurrentValue(Character[0], CharacterAppearanceColorPicker, "Color");
+						CharacterAppearanceColorPickerBackup = CharacterAppearanceGetCurrentValue(Player, CharacterAppearanceColorPicker, "Color");
 					}
 
 		// If we must set back the default outfit or set a random outfit
-		if ((MouseX >= 1300) && (MouseX < 1390) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceSetDefault(Character[0]);
-		if ((MouseX >= 1417) && (MouseX < 1507) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceFullRandom(Character[0]);
-		if ((MouseX >= 1534) && (MouseX < 1624) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceNaked(Character[0]);
+		if ((MouseX >= 1300) && (MouseX < 1390) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceSetDefault(Player);
+		if ((MouseX >= 1417) && (MouseX < 1507) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceFullRandom(Player);
+		if ((MouseX >= 1534) && (MouseX < 1624) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceNaked(Player);
 		if ((MouseX >= 1651) && (MouseX < 1741) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceMoveOffset(CharacterAppearanceNumPerPage);
-		if ((MouseX >= 1768) && (MouseX < 1858) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceExit(Character[0]);
-		if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceReady(Character[0]);
+		if ((MouseX >= 1768) && (MouseX < 1858) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceExit(Player);
+		if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceReady(Player);
 
 	} else {
 		
 		// In color picker mode, we can pick a color, cancel or accept the new color
 		if ((MouseX >= 1300) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 975))
-			CharacterAppearanceSetColorForGroup(Character[0], RGBToHex(MainCanvas.getImageData(MouseX, MouseY, 1, 1).data), CharacterAppearanceColorPicker);
+			CharacterAppearanceSetColorForGroup(Player, DrawRGBToHex(MainCanvas.getImageData(MouseX, MouseY, 1, 1).data), CharacterAppearanceColorPicker);
 		if ((MouseX >= 1768) && (MouseX < 1858) && (MouseY >= 25) && (MouseY < 115)) {
-			CharacterAppearanceSetColorForGroup(Character[0], CharacterAppearanceColorPickerBackup, CharacterAppearanceColorPicker);
+			CharacterAppearanceSetColorForGroup(Player, CharacterAppearanceColorPickerBackup, CharacterAppearanceColorPicker);
 			CharacterAppearanceColorPicker = "";			
 		}
 		if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) 
@@ -410,8 +410,8 @@ function CharacterAppearance_Click() {
 function CharacterAppearanceExit(C) {
 	C.Appearance = CharacterAppearanceBackup;
 	CharacterLoadCanvas(C);
-	if ((C.AccountName != "") && (C.AccountPassword != "")) SetScreen("MainHall");
-	else SetScreen("CharacterLogin");
+	if ((C.AccountName != "") && (C.AccountPassword != "")) CommonSetScreen("MainHall");
+	else CommonSetScreen("CharacterLogin");
 }
 
 // When the player is ready, we make sure she at least has an outfit
@@ -440,8 +440,8 @@ function CharacterAppearanceReady(C) {
 	// If there's no error, we continue to the login or main hall if already logged
 	if ((C.AccountName != "") && (C.AccountPassword != "")) {
 		CharacterAppearanceSave(C);
-		SetScreen("MainHall");
-	} else SetScreen("CharacterCreation");
+		CommonSetScreen("MainHall");
+	} else CommonSetScreen("CharacterCreation");
 
 }
 
@@ -459,7 +459,7 @@ function CharacterAppearanceSave(C) {
 }
 
 // Loads the character appearance from the JSON file
-function CharacterAppearanceLoad(C, Appearance) {
+function CharacterAppearanceLoadFromAccount(C, Appearance) {
 	
 	// Make sure we have something to load
 	if (Appearance != null) {
@@ -490,7 +490,4 @@ function CharacterAppearanceLoad(C, Appearance) {
 
 	}
 
-}
-
-function CharacterAppearance_KeyDown() {
 }
