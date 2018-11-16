@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>Bondage Club</title>
-<link rel="icon" type="image/png" href="Icons/Rope_Active.png">
+<link rel="icon" type="image/png" href="Icons/Logo.png">
 </head>
 
 <style>
@@ -40,7 +40,7 @@
 <script src="Inventory.js"></script>
 <script src="Import.js"></script>
 <script src="Assets.js"></script>
-<script src="Assets/Female3DCG/Assets.js"></script>
+<script src="Assets/Female3DCG/Female3DCG.js"></script>
 <script src="Rooms/MainHall/MainHall.js"></script>
 <script src="Rooms/Introduction/Introduction.js"></script>
 <script>
@@ -63,6 +63,7 @@ window.onload = function() {
 // Game init script
 function GameInit() {
 	CharacterReset(0, "Female3DCG");
+	CharacterLoadCSVDialog(Character[0]);
 	SetScreen("CharacterLogin");
 }
 

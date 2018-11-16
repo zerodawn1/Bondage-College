@@ -207,31 +207,32 @@ function DrawTextWrap(Text, X, Y, Width, Height, ForeColor, BackColor) {
 
 }
 
+// Draw a text that will fit on the specified width
+function DrawTextFit(Text, X, Y, Width, Color) {
+
+	for (var S = 36; S >= 10; S = S - 2) {
+		MainCanvas.font = S.toString() + "px Arial";
+		var metrics = MainCanvas.measureText(Text);
+		if (metrics.width <= Width)
+			break;
+	}
+	MainCanvas.fillStyle = Color;
+	MainCanvas.fillText(Text, X, Y);
+	MainCanvas.font = "36px Arial";	
+}
+
 // Draw a text in the canvas
 function DrawText(Text, X, Y, Color, BackColor) {
 
 	// Draw a back color relief text if needed
 	if ((BackColor != null) && (BackColor != "")) {
-
-		// Split the text on two lines if there's a |
 		MainCanvas.fillStyle = BackColor;
-		if (Text.indexOf("|") == -1)
-			MainCanvas.fillText(Text, X + 1, Y + 1);
-		else {
-			MainCanvas.fillText(Text.substring(0, Text.indexOf("|")), X + 1, Y + 1 - 25);
-			MainCanvas.fillText(Text.substring(Text.indexOf("|") + 1, 1000), X + 1, Y + 1 + 25);
-		}					
-	
+		MainCanvas.fillText(Text, X + 1, Y + 1);	
 	}
 
 	// Split the text on two lines if there's a |
 	MainCanvas.fillStyle = Color;
-	if (Text.indexOf("|") == -1)
-		MainCanvas.fillText(Text, X, Y);
-	else {
-		MainCanvas.fillText(Text.substring(0, Text.indexOf("|")), X, Y - 19);
-		MainCanvas.fillText(Text.substring(Text.indexOf("|") + 1, 1000), X, Y + 19);
-	}					
+	MainCanvas.fillText(Text, X, Y);
 
 }
 

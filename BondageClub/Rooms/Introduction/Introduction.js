@@ -2,7 +2,6 @@ var IntroductionMaid = null;
 var IntroductionSub = null;
 var IntroductionSubRestrained = false;
 var IntroductionMaidOpinion = 0;
-var IntroductionBodyRect = null;
 var IntroductionHasBasicItems = false;
 
 // Loads the introduction room
@@ -36,14 +35,6 @@ function Introduction_Run() {
 		// We draw the dialog setup
 		DrawImage("Backgrounds/IntroductionDark.jpg", 0, 0);
 		DialogDraw();
-		if (IntroductionBodyRect != null) {
-			DrawEmptyRect(IntroductionBodyRect[0], IntroductionBodyRect[1], IntroductionBodyRect[2], IntroductionBodyRect[3], "cyan");
-			DrawEmptyRect(IntroductionBodyRect[0] + 500, IntroductionBodyRect[1], IntroductionBodyRect[2], IntroductionBodyRect[3], "cyan");
-			if (CurrentCharacter.Stage == "35") {
-				DrawEmptyRect(IntroductionBodyRect[0] + 300, IntroductionBodyRect[1], IntroductionBodyRect[2], IntroductionBodyRect[3], "cyan");
-				DrawEmptyRect(IntroductionBodyRect[0] + 800, IntroductionBodyRect[1], IntroductionBodyRect[2], IntroductionBodyRect[3], "cyan");				
-			}
-		}
 
 	}
 	
@@ -54,6 +45,7 @@ function Introduction_Click() {
 
 	// Activates the character or the interaction events
 	if (CurrentCharacter == null) {
+		if ((MouseX >= 250) && (MouseX < 750) && (MouseY >= 0) && (MouseY < 1000)) CurrentCharacter = Character[0];
 		if ((MouseX >= 750) && (MouseX < 1250) && (MouseY >= 0) && (MouseY < 1000)) CurrentCharacter = IntroductionMaid;
 		if ((MouseX >= 1250) && (MouseX < 1750) && (MouseY >= 0) && (MouseY < 1000)) CurrentCharacter = IntroductionSub;
 		if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) SetScreen("MainHall");

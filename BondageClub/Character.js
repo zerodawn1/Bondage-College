@@ -15,13 +15,15 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		Stage: "0",
 		CurrentDialog: "",
 		Dialog: [],
+		Pose: [],
+		Effect: [],
 		FocusGroup: null,
 		Canvas: null,
 		CanvasBlink: null,
 		BlinkFactor: Math.round(Math.random() * 10) + 10,
 		AllowItem: true,
 		HeightModifier: 0,
-		Effect: []
+		IsGagged : function() { return ((this.Effect.indexOf("GagLight") >= 0) || (this.Effect.indexOf("GagNormal") >= 0) || (this.Effect.indexOf("GagHeavy") >= 0) || (this.Effect.indexOf("GagTotal") >= 0)) }
 	}
 
 	// If the character doesn't exist, we create it
@@ -81,7 +83,7 @@ function CharacterBuildDialog(C, CSV) {
 function CharacterLoadCSVDialog(C) {
 
     // Finds the full path of the CSV file to use cache
-    var FullPath = "Rooms/" + CurrentScreen + "/" + C.AccountName + "_" + Common_GetWorkingLanguage() + ".csv";    
+    var FullPath = ((C.ID == 0) ? "Rooms/Player" : "Rooms/" + CurrentScreen + "/" + C.AccountName) + "_" + Common_GetWorkingLanguage() + ".csv";    
     if (Common_CSVCache[FullPath]) {
 		CharacterBuildDialog(C, Common_CSVCache[FullPath]);
         return;
@@ -118,7 +120,7 @@ function CharacterLoadNPC(NPCType) {
 		InventoryAdd(C, "MaidOutfit1", "Cloth");
 		CharacterAppearanceSetItem(C, "Cloth", C.Inventory[C.Inventory.length - 1].Asset);
 		CharacterAppearanceSetColorForGroup(C, "Default", "Cloth");
-		InventoryAdd(C, "MaidHat1", "Hat");
+		InventoryAdd(C, "MaidHairband1", "Hat");
 		CharacterAppearanceSetItem(C, "Hat", C.Inventory[C.Inventory.length - 1].Asset);
 		CharacterAppearanceSetColorForGroup(C, "Default", "Hat");
 	}
@@ -126,6 +128,25 @@ function CharacterLoadNPC(NPCType) {
 	// Returns the new character
 	return C;
 	
+}
+
+// Adds new effects on a character if it's not already there
+function CharacterAddPose(C, NewPose) {
+	for (var E = 0; E < NewPose.length; E++)
+		if (C.Pose.indexOf(NewPose[E]) < 0)
+			C.Pose.push(NewPose[E]);
+}
+
+// Resets the current pose list on a character
+function CharacterLoadPose(C) {	
+	C.Pose = [];
+	for (var A = 0; A < C.Appearance.length; A++) {
+		if (C.Appearance[A].Asset.SetPose != null)
+			CharacterAddPose(C, C.Appearance[A].Asset.SetPose);
+		else
+			if (C.Appearance[A].Asset.Group.SetPose != null)
+				CharacterAddPose(C, C.Appearance[A].Asset.Group.SetPose);
+	}	
 }
 
 // Adds new effects on a character if it's not already there

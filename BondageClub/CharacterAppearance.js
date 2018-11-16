@@ -60,11 +60,14 @@ function CharacterAppearanceSetDefault(C) {
 function CharacterAppearanceFullRandom(C) {
 
 	// Clear the current appearance
-	C.Appearance = [];
+	for (var A = 0; A < C.Appearance.length; A++)
+		if (C.Appearance[A].Asset.Group.Category == "Appearance") {
+			C.Appearance.splice(A, 1);
+			A--;
+		}
 
 	// For each item group (non default items only show at a 20% rate)
-	var A;
-	for (A = 0; A < AssetGroup.length; A++)
+	for (var A = 0; A < AssetGroup.length; A++)
 		if ((AssetGroup[A].Category == "Appearance") && (AssetGroup[A].IsDefault || (Math.random() < 0.2))) {
 			
 			// Get the parent size
@@ -105,7 +108,7 @@ function CharacterAppearanceNaked(C) {
 	// For each item group (non default items only show at a 20% rate)
 	var A;
 	for (A = 0; A < C.Appearance.length; A++)
-		if (C.Appearance[A].Asset.Group.AllowNone && !C.Appearance[A].Asset.Group.KeepNaked) {
+		if (C.Appearance[A].Asset.Group.AllowNone && !C.Appearance[A].Asset.Group.KeepNaked && (C.Appearance[A].Asset.Group.Category == "Appearance")) {
 			C.Appearance.splice(A, 1);
 			A--;
 		}
@@ -134,32 +137,39 @@ function CharacterAppearanceBuildCanvas(C) {
 	C.Appearance = SortObjectList(C.Appearance, "Priority");
 	
 	// Loops in all items worn by the character
-	var A;
-	for (A = 0; A < C.Appearance.length; A++) {
+	for (var A = 0; A < C.Appearance.length; A++) {
 
 		// If there's a father group, we must add it to find the correct image
 		var CA = C.Appearance[A];
 		var G = "";
-		if (CA.Asset.Group.ParentGroupName != "") {
-			var FG;
-			for (FG = 0; FG < C.Appearance.length; FG++)
+		if (CA.Asset.Group.ParentGroupName != "")
+			for (var FG = 0; FG < C.Appearance.length; FG++)
 				if (CA.Asset.Group.ParentGroupName == C.Appearance[FG].Asset.Group.Name)
 					G = "_" + C.Appearance[FG].Asset.Name;
-		}
-	
+		
+		// If there's a pose style we must add
+		var Pose = "";
+		if ((CA.Asset.Group.AllowPose != null) && (CA.Asset.Group.AllowPose.length > 0) && (C.Pose != null) && (C.Pose.length > 0))
+			for (var AP = 0; AP < CA.Asset.Group.AllowPose.length; AP++)
+				for (var P = 0; P < C.Pose.length; P++)
+					if (C.Pose[P] == CA.Asset.Group.AllowPose[AP])
+						Pose = C.Pose[P] + "/";
+		
 		// Draw the item on the canvas (default or empty means no special color, # means apply a color, regular text means we apply that text)
-		if ((CA.Color == "Default") || (CA.Color == "")) {
-			DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + CA.Asset.Name + G + ".png", C.Canvas.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);
-			if (!CA.Asset.Group.DrawingBlink) DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + CA.Asset.Name + G + ".png", C.CanvasBlink.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);
-		}
-	    else {
-			if (CA.Color.indexOf("#") != 0) {
-				DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + CA.Asset.Name + G + "_" + CA.Color + ".png", C.Canvas.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);
-				if (!CA.Asset.Group.DrawingBlink) DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + CA.Asset.Name + G + "_" + CA.Color + ".png", C.CanvasBlink.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);				
+		if (CA.Asset.Visible) {
+			if ((CA.Color == "Default") || (CA.Color == "")) {
+				DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + ".png", C.Canvas.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);
+				if (!CA.Asset.Group.DrawingBlink) DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + ".png", C.CanvasBlink.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);
 			}
 			else {
-				DrawImageCanvasColorize("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + CA.Asset.Name + G + ".png", C.Canvas.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop, 1, CA.Color, CA.Asset.Group.DrawingFullAlpha);
-				if (!CA.Asset.Group.DrawingBlink) DrawImageCanvasColorize("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + CA.Asset.Name + G + ".png", C.CanvasBlink.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop, 1, CA.Color, CA.Asset.Group.DrawingFullAlpha);				
+				if (CA.Color.indexOf("#") != 0) {
+					DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + "_" + CA.Color + ".png", C.Canvas.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);
+					if (!CA.Asset.Group.DrawingBlink) DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + "_" + CA.Color + ".png", C.CanvasBlink.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);				
+				}
+				else {
+					DrawImageCanvasColorize("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + ".png", C.Canvas.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop, 1, CA.Color, CA.Asset.Group.DrawingFullAlpha);
+					if (!CA.Asset.Group.DrawingBlink) DrawImageCanvasColorize("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + ".png", C.CanvasBlink.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop, 1, CA.Color, CA.Asset.Group.DrawingFullAlpha);				
+				}			
 			}			
 		}
 
@@ -175,6 +185,7 @@ function CharacterAppearanceGetCurrentValue(C, Group, Type) {
 	for (A = 0; A < C.Appearance.length; A++)
 		if ((C.Appearance[A].Asset.Group.Family == C.AssetFamily) && (C.Appearance[A].Asset.Group.Name == Group)) {
 			if (Type == "Name") return C.Appearance[A].Asset.Name;
+			if (Type == "Description") return C.Appearance[A].Asset.Description;
 			if (Type == "Color") return C.Appearance[A].Color;
 			if (Type == "ID") return A;
 		}
@@ -210,7 +221,7 @@ function CharacterAppearance_Run() {
 		// Creates buttons for all groups	
 		for (var A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + CharacterAppearanceNumPerPage; A++)
 			if ((AssetGroup[A].Family == Character[0].AssetFamily) && (AssetGroup[A].Category == "Appearance")) {
-				DrawButton(1300, 145 + (A - CharacterAppearanceOffset) * 95, 400, 65, AssetGroup[A].Name + ": " + CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Name"), "White", "");
+				DrawButton(1300, 145 + (A - CharacterAppearanceOffset) * 95, 400, 65, AssetGroup[A].Description + ": " + CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Description"), "White", "");
 				var Color = CharacterAppearanceGetCurrentValue(Character[0], AssetGroup[A].Name, "Color", "");
 				DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, Color, ((Color.indexOf("#") == 0) ? Color : "White"));
 				DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", ((Color.indexOf("#") == 0) ? Color : "White"), AssetGroup[A].AllowColorize ? "Icons/Color.png" : "Icons/ColorBlocked.png");
@@ -255,8 +266,10 @@ function CharacterAppearanceSetItem(C, Group, ItemAsset) {
 
 	// Draw the character canvas and calculate the effects on the character
 	CharacterLoadEffect(C);
+	CharacterLoadPose(C);	
 	CharacterLoadCanvas(C);
-	
+	if (CurrentScreen != "CharacterAppearance") CharacterAppearanceSave(C);
+
 }
 
 // Cycle in the appearance assets to find the next item in a group and wear it
@@ -471,8 +484,10 @@ function CharacterAppearanceLoad(C, Appearance) {
 		}
 
 		// Draw the character canvas
+		CharacterLoadEffect(C);
+		CharacterLoadPose(C);
 		CharacterLoadCanvas(C);
-		
+
 	}
 
 }
