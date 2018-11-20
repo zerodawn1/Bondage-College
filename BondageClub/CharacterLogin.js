@@ -69,6 +69,9 @@ function CharacterLoginResponse(CharacterData) {
 
 // When the user clicks on the character login screen
 function CharacterLoginClick() {
+
+	if ((MouseX >= 0) && (MouseX < 200))
+		MiniGameLockPick();
 	
 	// If we must create a new character
 	if ((MouseX >= 1125) && (MouseX <= 1375) && (MouseY >= 800) && (MouseY <= 860)) {

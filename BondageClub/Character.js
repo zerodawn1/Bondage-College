@@ -24,7 +24,8 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		AllowItem: true,
 		HeightModifier: 0,
 		CanTalk : function() { return ((this.Effect.indexOf("GagLight") < 0) && (this.Effect.indexOf("GagNormal") < 0) && (this.Effect.indexOf("GagHeavy") < 0) && (this.Effect.indexOf("GagTotal") < 0)) },
-		CanWalk : function() { return (this.Effect.indexOf("Freeze") < 0) }
+		CanWalk : function() { return (this.Effect.indexOf("Freeze") < 0) },
+		CanInteract : function() { return (this.Effect.indexOf("Block") < 0) }
 	}
 
 	// If the character doesn't exist, we create it
@@ -195,4 +196,12 @@ function CharacterLoadCanvas(C) {
 function CharacterLoadCanvasAll() {
 	for (var C = 0; C < Character.length; C++)
 		CharacterLoadCanvas(Character[C]);
+}
+
+// Sets the current character for conversation with introduction
+function CharacterSetCurrent(C) {
+	CurrentCharacter = C;
+	var NewDialog = DialogIntro();
+	if (!Player.CanTalk()) NewDialog = DialogFind(CurrentCharacter, "PlayerGagged", "");
+	if (NewDialog != "") C.CurrentDialog = NewDialog;
 }

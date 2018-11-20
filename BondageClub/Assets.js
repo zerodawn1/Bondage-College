@@ -32,13 +32,14 @@ function AssetGroupAdd(NewAssetFamily, NewAsset) {
 }
 
 // Adds a new asset to the main list
-function AssetAdd(NewAssetName, NewAssetVisible, NewAssetEffect, NewAssetValue, NewAssetHeightModifier) {
+function AssetAdd(NewAssetName, NewAssetVisible, NewAssetEffect, NewAssetSetPose, NewAssetValue, NewAssetHeightModifier) {
 	var A = {
 		Name: NewAssetName,
 		Description: NewAssetName,
 		Group: AssetCurrentGroup,
 		Visible: (NewAssetVisible == null) ? true : NewAssetVisible,
 		Effect: NewAssetEffect,
+		SetPose: NewAssetSetPose,
 		Value: (NewAssetValue == null) ? 0 : NewAssetValue,
 		HeightModifier: (NewAssetHeightModifier == null) ? 0 : NewAssetHeightModifier
 	}
@@ -108,9 +109,9 @@ function AssetLoad(A, Family) {
 		var I;
 		for (I = 0; I < A[G].Asset.length; I++)
 			if (A[G].Asset[I].Name == null)
-				AssetAdd(A[G].Asset[I], true, null, 0, 0)
+				AssetAdd(A[G].Asset[I], true, null, null, 0, 0)
 			else
-				AssetAdd(A[G].Asset[I].Name, A[G].Asset[I].Visible, A[G].Asset[I].Effect, A[G].Asset[I].Value, A[G].Asset[I].Height);
+				AssetAdd(A[G].Asset[I].Name, A[G].Asset[I].Visible, A[G].Asset[I].Effect, A[G].Asset[I].SetPose, A[G].Asset[I].Value, A[G].Asset[I].Height);
 
 	}
 	

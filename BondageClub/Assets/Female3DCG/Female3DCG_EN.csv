@@ -13,7 +13,7 @@ Cloth,CollegeOutfit1,College
 Cloth,MaidOutfit1,Maid
 Cloth,StudentOutfit1,Student Black
 Cloth,StudentOutfit2,Student Bow
-Cloth,SummerDress1,Summer Dress
+Cloth,TopSkirt1,Top & Skirt
 Cloth,BabydollDress1,Babydoll Dress
 Cloth,TeacherOutfit1,Teacher
 Cloth,TennisOutfit1,Tennis
@@ -136,7 +136,7 @@ ItemArms,LeatherArmbinder,Leather Armbinder
 ItemNeck,,Neck
 ItemNeck,LeatherCollar,Leather Collar
 ItemMouth,,Mouth
-ItemMouth,BeginnersClothGag,Beginners Cloth Gag
+ItemMouth,SmallClothGag,Small Cloth Gag
 ItemMouth,ClothCleaveGag,Cloth Cleave Gag
 ItemMouth,ClothOTMGag,Cloth OTM Gag
 ItemMouth,ClothOTNGag,Cloth OTN Gag

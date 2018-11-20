@@ -6,6 +6,7 @@ var AssetFemale3DCG = [
 		Priority: 2,
 		AllowNone: false,
 		AllowColorize: false,
+		AllowPose: ["BackBoxTie"],
 		Color: ["White", "Asian", "Black"],
 		Asset: ["Small", "Normal", "Large", "XLarge"],
 	},
@@ -25,10 +26,11 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Cloth",
-		Priority: 19,
+		Priority: 18,
 		ParentGroup: "BodyUpper",
+		AllowPose: ["BackBoxTie"],
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
-		Asset: [ { Name: "CollegeOutfit1", Value: -1 }, { Name: "MaidOutfit1", Value: -1 }, "StudentOutfit1", "StudentOutfit2", "SummerDress1", "BabydollDress1", "TeacherOutfit1", "TennisOutfit1", "ChineseDress1"]
+		Asset: [ { Name: "CollegeOutfit1", Value: -1 }, { Name: "MaidOutfit1", Value: -1 }, "StudentOutfit1", "StudentOutfit2", "TopSkirt1", "BabydollDress1", "TeacherOutfit1", "TennisOutfit1", "ChineseDress1"]
 	},
 	 
 	{
@@ -100,6 +102,7 @@ var AssetFemale3DCG = [
 		Priority: 16,
 		ParentGroup: "BodyUpper",
 		Default: false,
+		AllowPose: ["BackBoxTie"],
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 125,
 		Top: 275,
@@ -237,15 +240,17 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "ItemArms",
+		ParentGroup: "BodyUpper",
 		Category: "Item",
-		Priority: 18,
+		Priority: 19,
 		Default: false,
 		Effect: ["Block", "Prone"],
 		Color: ["Default"],
-		Left: 150,
-		Top: 50,
+		SetPose: ["BackBoxTie"],
+		Left: 125,		
+		Top: 200,
 		Zone: [[50, 250, 100, 250], [350, 250, 100, 250]],
-		Asset: [ { Name: "NylonRope", Value: -1 }, { Name: "HempRope", Value: -1 }, { Name: "MetalCuffs", Value: -1}, { Name: "MetalCuffsKey", Effect: ["Unlock"], Value: -1}, { Name: "LeatherArmbinder", Value: -1} ]
+		Asset: [ { Name: "NylonRope", Value: -1 }, { Name: "HempRope", Value: -1 }, { Name: "MetalCuffs", Visible: false, Value: -1}, { Name: "MetalCuffsKey", Effect: ["Unlock"], SetPose: [""], Visible: false, Value: -1}, { Name: "LeatherArmbinder", Visible: false, Value: -1} ]
 	},
 
 	{
@@ -282,7 +287,7 @@ var AssetFemale3DCG = [
 		Color: ["Default"],
 		Left: 150,
 		Top: 50,
-		Zone: [[150, 35, 200, 110]],
+		Zone: [[150, 35, 200, 125]],
 		Asset: [ { Name: "LeatherBlindfold", Value: -1 }, { Name: "LeatherHood", Value: -1 } ]
 	}
 	

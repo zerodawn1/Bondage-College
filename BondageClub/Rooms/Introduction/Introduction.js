@@ -1,8 +1,9 @@
-var IntroductionBackground = "MainHall";
+var IntroductionBackground = "Introduction";
 var IntroductionMaid = null;
 var IntroductionSub = null;
 var IntroductionMaidOpinion = 0;
 var IntroductionHasBasicItems = false;
+var IntroductionSubRestrained = false;
 
 // Loads the introduction room
 function IntroductionLoad() {
@@ -19,18 +20,18 @@ function IntroductionLoad() {
 
 // Run the main introduction room, draw all 3 characters
 function IntroductionRun() {
-	DrawImage("Backgrounds/Introduction.jpg", 0, 0);
+	IntroductionSubRestrained = (!IntroductionSub.CanTalk() && !IntroductionSub.CanWalk() && !IntroductionSub.CanInteract());
 	DrawCharacter(Player, 250, 0, 1);
-	DrawCharacter(IntroductionMaid, 750, 0, 1);		
+	DrawCharacter(IntroductionMaid, 750, 0, 1);
 	DrawCharacter(IntroductionSub, 1250, 0, 1);
-	if (Player.CanWalk()) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
+	if (Player.CanWalk()) DrawButton(1885, 25, 90, 90, "", ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) ? "Cyan" : "White", "Icons/Exit.png");
 }
 
 // When the user clicks in the introduction room
 function IntroductionClick() {
-	if ((MouseX >= 250) && (MouseX < 750) && (MouseY >= 0) && (MouseY < 1000)) CurrentCharacter = Player;
-	if ((MouseX >= 750) && (MouseX < 1250) && (MouseY >= 0) && (MouseY < 1000)) CurrentCharacter = IntroductionMaid;
-	if ((MouseX >= 1250) && (MouseX < 1750) && (MouseY >= 0) && (MouseY < 1000)) CurrentCharacter = IntroductionSub;
+	if ((MouseX >= 250) && (MouseX < 750) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(Player);
+	if ((MouseX >= 750) && (MouseX < 1250) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(IntroductionMaid);
+	if ((MouseX >= 1250) && (MouseX < 1750) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(IntroductionSub);
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) CommonSetScreen("MainHall");
 }
 
@@ -43,7 +44,7 @@ function IntroductionChangeMaidOpinion(Bonus) {
 function IntroductionSetZone(NewZone) {
 	for (var A = 0; A < AssetGroup.length; A++)
 		if (AssetGroup[A].Name == NewZone) {
-			Player.FocusGroup = AssetGroup[A];
+			//Player.FocusGroup = AssetGroup[A];
 			CurrentCharacter.FocusGroup = AssetGroup[A];
 			break;
 		}
@@ -51,7 +52,7 @@ function IntroductionSetZone(NewZone) {
 
 // Clears the body part focus rectangles
 function IntroductionClearZone() {
-	Player.FocusGroup = null;
+	//Player.FocusGroup = null;
 	CurrentCharacter.FocusGroup = null;
 }
 
@@ -61,4 +62,5 @@ function IntroductionGetBasicItems() {
 	InventoryAdd(Player, "NylonRope", "ItemLegs");
 	InventoryAdd(Player, "NylonRope", "ItemArms");
 	InventoryAdd(Player, "SmallClothGag", "ItemMouth");
+	IntroductionHasBasicItems = true;
 }

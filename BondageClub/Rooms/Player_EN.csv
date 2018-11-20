@@ -1,3 +1,2 @@
-PlayerGagged,,,(You can use items on yourself or try to struggle out.),
-0,,,(You can use items on yourself or try to struggle out.),
-0,,(Go back to the room.),,DialogLeave()
+PlayerGagged,,,(You can use or remove items by selecting specific body regions.)
+0,,,(You can use or remove items by selecting specific body regions.)
