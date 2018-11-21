@@ -24,7 +24,7 @@ function IntroductionRun() {
 	DrawCharacter(Player, 250, 0, 1);
 	DrawCharacter(IntroductionMaid, 750, 0, 1);
 	DrawCharacter(IntroductionSub, 1250, 0, 1);
-	if (Player.CanWalk()) DrawButton(1885, 25, 90, 90, "", ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) ? "Cyan" : "White", "Icons/Exit.png");
+	if (Player.CanWalk()) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
 }
 
 // When the user clicks in the introduction room
@@ -44,7 +44,7 @@ function IntroductionChangeMaidOpinion(Bonus) {
 function IntroductionSetZone(NewZone) {
 	for (var A = 0; A < AssetGroup.length; A++)
 		if (AssetGroup[A].Name == NewZone) {
-			//Player.FocusGroup = AssetGroup[A];
+			Player.FocusGroup = AssetGroup[A];
 			CurrentCharacter.FocusGroup = AssetGroup[A];
 			break;
 		}
@@ -52,7 +52,7 @@ function IntroductionSetZone(NewZone) {
 
 // Clears the body part focus rectangles
 function IntroductionClearZone() {
-	//Player.FocusGroup = null;
+	Player.FocusGroup = null;
 	CurrentCharacter.FocusGroup = null;
 }
 
@@ -63,4 +63,12 @@ function IntroductionGetBasicItems() {
 	InventoryAdd(Player, "NylonRope", "ItemArms");
 	InventoryAdd(Player, "SmallClothGag", "ItemMouth");
 	IntroductionHasBasicItems = true;
+}
+
+// Saves the maid opinion of the player to the server
+function IntroductionSaveMaidOpinion() {
+	if (!LogQuery("MaidOpinion", "Introduction")) {
+		LogAdd("MaidOpinion", "Introduction");
+		ReputationChange("Dominant", IntroductionMaidOpinion);
+	}
 }

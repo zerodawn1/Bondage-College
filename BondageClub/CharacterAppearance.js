@@ -218,7 +218,7 @@ function CharacterAppearanceRun() {
 				DrawButton(1300, 145 + (A - CharacterAppearanceOffset) * 95, 400, 65, AssetGroup[A].Description + ": " + CharacterAppearanceGetCurrentValue(Player, AssetGroup[A].Name, "Description"), "White", "");
 				var Color = CharacterAppearanceGetCurrentValue(Player, AssetGroup[A].Name, "Color", "");
 				DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, Color, ((Color.indexOf("#") == 0) ? Color : "White"));
-				DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", ((Color.indexOf("#") == 0) ? Color : "White"), AssetGroup[A].AllowColorize ? "Icons/Color.png" : "Icons/ColorBlocked.png");
+				DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", "White", AssetGroup[A].AllowColorize ? "Icons/Color.png" : "Icons/ColorBlocked.png");
 			}
 
 	} else {

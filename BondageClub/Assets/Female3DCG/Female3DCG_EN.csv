@@ -123,10 +123,12 @@ ItemLegs,HempRope,Hemp Rope
 ItemPelvis,,Pelvis
 ItemPelvis,MetalChastityBelt,Metal Chastity Belt
 ItemPelvis,RegularVibratingEgg,Regular Vibrating Egg
+ItemPelvis,LeatherCrop,Leather Crop
 ItemTorso,,Torso
 ItemTorso,NylonRopeHarness,Nylon Rope Harness
 ItemTorso,HempRopeHarness,Hemp Rope Harness
 ItemTorso,LeatherHarness,Leather Harness
+ItemTorso,LeatherCrop,Leather Crop
 ItemArms,,Arms
 ItemArms,NylonRope,Nylon Rope
 ItemArms,HempRope,Hemp Rope
@@ -142,6 +144,7 @@ ItemMouth,ClothOTMGag,Cloth OTM Gag
 ItemMouth,ClothOTNGag,Cloth OTN Gag
 ItemMouth,HarnessBallGag,Harness Ball Gag
 ItemMouth,DuctTapeGag,Duct Tape Gag
+ItemMouth,RegularSleepingPill,Sleeping Pill
 ItemHead,,Head
 ItemHead,LeatherBlindfold,Leather Blindfold
 ItemHead,LeatherHood,Leather Hood

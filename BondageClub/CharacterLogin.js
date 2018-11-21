@@ -4,9 +4,10 @@ var CharacterLoginMessage = "";
 // Loads the character login screen
 function CharacterLoginLoad() {
 
-	// Resets the player
+	// Resets the player and other characters
+	Character = [];
 	CharacterReset(0, "Female3DCG");
-	CharacterLoadCSVDialog(Player);	
+	CharacterLoadCSVDialog(Player);
 	CharacterLoginMessage = "Enter your name and password";
 
 	// Creates a text box to enter the player name
@@ -61,6 +62,8 @@ function CharacterLoginResponse(CharacterData) {
 		CharacterAppearanceLoadFromAccount(Player, C.Appearance);
 		InventoryLoad(Player, C.Inventory, false);
 		LogLoad(C.Log);
+		ReputationLoad(C.Reputation);
+		CharacterLoadCSVDialog(Player);
 		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 		document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
 		CommonSetScreen("MainHall");

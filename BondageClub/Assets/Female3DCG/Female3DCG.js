@@ -78,7 +78,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Glasses",
-		Priority: 12,
+		Priority: 11,
 		Default: false,
 		KeepNaked: true,
 		Color: ["#303030", "#808080", "#e0e0e0", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
@@ -99,7 +99,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Gloves",
-		Priority: 16,
+		Priority: 15,
 		ParentGroup: "BodyUpper",
 		Default: false,
 		AllowPose: ["BackBoxTie"],
@@ -111,7 +111,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Nipples",
-		Priority: 8,
+		Priority: 7,
 		ParentGroup: "BodyUpper",
 		AllowNone: false,
 		Color: ["Default", "#a6665b", "#803d26", "#d68777", "#9b4a2e", "#bb6655"],
@@ -122,7 +122,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Bra",
-		Priority: 13,
+		Priority: 12,
 		ParentGroup: "BodyUpper",
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 150,
@@ -132,7 +132,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Pussy",
-		Priority: 9,
+		Priority: 8,
 		AllowNone: false,
 		Color: ["Default", "#6a3628", "#443330", "#222222"],
 		Left: 225,
@@ -143,7 +143,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Panties",
-		Priority: 14,
+		Priority: 13,
 		ParentGroup: "BodyLower",
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 150,
@@ -153,7 +153,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Socks",
-		Priority: 15,
+		Priority: 14,
 		ParentGroup: "BodyLower",
 		AllowPose: ["LegsClosed"],
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
@@ -164,7 +164,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Shoes",
-		Priority: 17,
+		Priority: 16,
 		ParentGroup: "BodyLower",
 		AllowPose: ["LegsClosed"],
 		Color: ["Default", "#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
@@ -216,26 +216,26 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemPelvis",
 		Category: "Item",
-		Priority: 10,
+		Priority: 9,
 		Default: false,
 		Effect: ["Chaste"],
 		Color: ["Default"],
 		Left: 150,
 		Top: 50,
 		Zone: [[150, 425, 200, 125]],
-		Asset: [ { Name: "MetalChastityBelt", Value: -1, Visible: false }, { Name: "RegularVibratingEgg", Value: -1, Effect: [], Visible: false } ]
+		Asset: [ { Name: "MetalChastityBelt", Value: -1, Enable: false, Visible: false }, { Name: "RegularVibratingEgg", Value: -1, Effect: [], Enable: false, Visible: false }, { Name: "LeatherCrop", Value: -1, Enable: false} ]
 	},
 
 	{
 		Group: "ItemTorso",
 		Category: "Item",
-		Priority: 11,
+		Priority: 10,
 		Default: false,
 		Color: ["Default"],
 		Left: 150,
 		Top: 50,
 		Zone: [[150, 260, 200, 165]],
-		Asset: [ { Name: "NylonRopeHarness", Value: -1 }, { Name: "HempRopeHarness", Value: -1 }, { Name: "LeatherHarness", Value: -1 } ]
+		Asset: [ { Name: "NylonRopeHarness", Value: -1 }, { Name: "HempRopeHarness", Value: -1 }, { Name: "LeatherHarness", Value: -1 }, { Name: "LeatherCrop", Value: -1, Enable: false} ]
 	},
 
 	{
@@ -250,13 +250,13 @@ var AssetFemale3DCG = [
 		Left: 125,		
 		Top: 200,
 		Zone: [[50, 250, 100, 250], [350, 250, 100, 250]],
-		Asset: [ { Name: "NylonRope", Value: -1 }, { Name: "HempRope", Value: -1 }, { Name: "MetalCuffs", Visible: false, Value: -1}, { Name: "MetalCuffsKey", Effect: ["Unlock"], SetPose: [""], Visible: false, Value: -1}, { Name: "LeatherArmbinder", Visible: false, Value: -1} ]
+		Asset: [ { Name: "NylonRope", Value: -1 }, { Name: "HempRope", Value: -1 }, { Name: "MetalCuffs", Enable: false, Visible: false, Value: -1}, { Name: "MetalCuffsKey", Effect: ["Unlock"], SetPose: [""], Enable: false, Visible: false, Value: -1}, { Name: "LeatherArmbinder", Enable: false, Visible: false, Value: -1} ]
 	},
 
 	{
 		Group: "ItemNeck",
 		Category: "Item",
-		Priority: 6,
+		Priority: 17,
 		Default: false,
 		Color: ["Default"],
 		Left: 200,
@@ -268,14 +268,14 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemMouth",
 		Category: "Item",
-		Priority: 7,
+		Priority: 6,
 		Default: false,
 		Effect: ["GagNormal"],
 		Color: ["Default"],
 		Left: 150,
 		Top: 50,
 		Zone: [[150, 160, 200, 50]],
-		Asset: [ { Name: "SmallClothGag", Effect: ["GagLight"], Value: -1 }, { Name: "ClothCleaveGag", Effect: ["GagLight"], Value: -1 }, { Name: "ClothOTMGag", Value: -1 }, { Name: "ClothOTNGag", Value: -1 }, { Name: "HarnessBallGag", Effect: ["GagHeavy"], Value: -1 }, { Name: "DuctTapeGag", Value: -1 } ]
+		Asset: [ { Name: "SmallClothGag", Effect: ["GagLight"], Value: -1 }, { Name: "ClothCleaveGag", Effect: ["GagLight"], Value: -1 }, { Name: "ClothOTMGag", Value: -1 }, { Name: "ClothOTNGag", Value: -1 }, { Name: "HarnessBallGag", Effect: ["GagHeavy"], Value: -1 }, { Name: "DuctTapeGag", Value: -1 }, { Name: "RegularSleepingPill", Enable: false, Value: -1 } ]
 	},
 
 	{
@@ -288,7 +288,7 @@ var AssetFemale3DCG = [
 		Left: 150,
 		Top: 50,
 		Zone: [[150, 35, 200, 125]],
-		Asset: [ { Name: "LeatherBlindfold", Value: -1 }, { Name: "LeatherHood", Value: -1 } ]
+		Asset: [ { Name: "LeatherBlindfold", Enable: false, Value: -1 }, { Name: "LeatherHood", Enable: false, Value: -1 } ]
 	}
 	
 ];

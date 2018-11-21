@@ -22,12 +22,14 @@ function ValidLogin(&$data) {
 		$file = GetFileName();
 		if (file_exists($file)) {
 			$myfile = fopen($file, "r") or die("Unable to open file!");
-			$data = fread($myfile, filesize($file));
-			fclose($myfile);
-			$arr = json_decode($data);
-			if (password_verify($_GET["password"], $arr->Password)) {
-				return true;
-			} else echo "invalid_password";
+			if (filesize($file) > 0) {
+				$data = fread($myfile, filesize($file));
+				fclose($myfile);
+				$arr = json_decode($data);
+				if (password_verify($_GET["password"], $arr->Password)) {
+					return true;
+				} else echo "invalid_password";
+			} else echo "empty_account";
 		} else echo "account_doesnt_exist";
 	} else echo "parameter_error";
 	return false;
@@ -146,6 +148,39 @@ if (isset($_GET["command"])) {
 				fwrite($myfile, json_encode($arr));
 				fclose($myfile);
 				echo "log_added";
+
+			} else echo "parameter_error";
+
+		
+	// Update the reputation for the character
+	if ($_GET["command"] == "reputation_set") 
+		if (ValidLogin($data))
+			if (isset($_GET["type"]) && isset($_GET["value"]) && ($_GET["type"] != "") && ($_GET["value"] != "")) {
+
+				// If the entry is already in the reputation array, we update it
+				$arr = json_decode($data);
+				$found = false;
+				if (!isset($arr->Reputation)) $arr->Reputation = [];
+				foreach ($arr->Reputation as $item)
+					if ($item->Type == $_GET["type"]) {
+						$item->Value = $_GET["value"];
+						$found = true;
+					}
+					
+				// Create the reputation entry and add it
+				if (!$found) {
+					$rep = new stdClass();
+					$rep->Type = $_GET["type"];
+					$rep->Value = $_GET["value"];
+					array_push($arr->Reputation, $rep);
+				}
+
+				// Overwrite the file
+				$file = GetFileName();
+				$myfile = fopen($file, "w") or die("Unable to open file!");
+				fwrite($myfile, json_encode($arr));
+				fclose($myfile);
+				echo "reputation_updated";
 
 			} else echo "parameter_error";
 

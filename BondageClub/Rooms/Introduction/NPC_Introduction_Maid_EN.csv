@@ -1,10 +1,11 @@
 PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it to chat.,,
 0,,,"Hello there, welcome to the Bondage Club introduction class.",,
 0,,"Hi, my name is DialogPlayerName.","Pleased to meet you.  I'm DialogCharacterName, I work here as a maid.",DialogRemove(),
-0,10,Thanks girl!  What's going on here?,"In here, you will learn how to restrain someone and escape by yourself.",ChangeMaidOpinion(1),
+0,10,Thanks little maid.  What's going on here?,"In here, you will learn how to restrain someone and escape by yourself.",ChangeMaidOpinion(1),
 0,10,Introduction class?,"In this class, you will learn how to restrain someone and free yourself.",,
 0,100,I don't need any introduction.,"Very well, would you like to practice with us then?",,
 0,,I can't stay to chat.  (Leave her.),,DialogLeave(),
+10,,Can I strap up anyone at any time?,Yes and no.  You need their consent and you cannot do it in the middle of a conversation.,DialogRemove(),
 10,20,This is great!,I'm glad you like it.  First I will teach you about the body parts your can restrain.,,
 10,20,It sounds kinky. (Blush a little.),It's kinky and fun.  First I will teach you about the body parts your can restrain.,ChangeMaidOpinion(-1),
 10,15,Tell me about the club first.,The Bondage Club is a place for open minded adults to share their BDSM kinks.,,
@@ -47,6 +48,7 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 230,,,"Make sure to restrain her arms, her feet and to gag her.",,
 230,250,She's restrained pretty good now.,(She looks at your victim and smiles.)  Excellent!  So how does it feel to restrain someone?,,SubRestrained
 230,,Very good.  (Leave her.),,DialogLeave(),
+230,,I can tie her up at any time?,Yes and no.  You cannot strap her up in the middle of a conversation.,,
 230,240,Tell me about the body parts I can restrain.,"There are eight body parts to interact with.  To access them, select the body region I will show you.",,
 240,241,Show me the body regions I can select.,Restraining the feet will prevent your victim from moving away.,"SetZone(""ItemFeet"")",
 241,242,(Listen.),Restraining the upper legs will still allow your victim to move but make kidnappings much easier.,"SetZone(""ItemLegs"")",
@@ -67,8 +69,9 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 270,,You were a great teacher.,Well thanks a lot.  You're a good student.,DialogRemove(),
 270,,Thanks!  Have a great time.  (Leave her.),,DialogLeave(),
 270,300,I want to practice freeing myself.,Of course!  If you're ready for the challenge I will tie you up.,,
-300,,,Are you ready to struggle against the ropes?,,
-300,310,"I'm ready, you can tie me up.",(She wraps a white nylon rope around your feet and does two knots.),"DialogEquipItem(""NylonRope"", ""ItemFeet"")",
+300,,,Are you ready to struggle against the ropes?,,Player.CanInteract()
+300,,,Get your arms free first if you want to practice struggling against my ropes.  Let me know when you're ready.,,!Player.CanInteract()
+300,310,"I'm ready, you can tie me up.",(She wraps a white nylon rope around your feet and does two knots.),"DialogEquipItem(""NylonRope"", ""ItemFeet"")",Player.CanInteract()
 300,,Not yet.  Give me some time.  (Leave her.),,DialogLeave(),
 310,320,I won't be running away now.,That's for sure.  (She wraps a second rope around your legs.),"DialogEquipItem(""NylonRope"", ""ItemLegs"")",
 310,320,That's all?,Of course not.  (She wraps a second rope around your legs.),"DialogEquipItem(""NylonRope"", ""ItemLegs"")",
@@ -92,5 +95,5 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 370,,,You're ready to explore.  Remember to be courteous and respect others.,,
 370,,You were a great teacher.,Well thanks a lot.  You're a good student.,DialogRemove(),
 370,,Thanks!  Take care.  (Leave her.),,DialogLeave(),
-370,,Can I strap her up?,"Sure, my assistant here will happy to help you practice.",,
+370,,Can I strap her up?,"Sure, my assistant here will be happy to help you practice.",,
 370,300,I want to practice freeing myself.,Again?  Well of course.  Are you ready to struggle now?,,

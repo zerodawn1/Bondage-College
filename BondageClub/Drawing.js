@@ -264,10 +264,10 @@ function DrawText(Text, X, Y, Color, BackColor) {
 // Draw a button
 function DrawButton(Left, Top, Width, Height, Label, Color, Image) {
 
-	// Draw the button rectangle
+	// Draw the button rectangle (makes the background color cyan if the mouse is over it)
 	MainCanvas.beginPath();
 	MainCanvas.rect(Left, Top, Width, Height);
-    MainCanvas.fillStyle = Color; 
+    MainCanvas.fillStyle = ((MouseX >= Left) && (MouseX <= Left + Width) && (MouseY >= Top) && (MouseY <= Top + Height)) ? "Cyan" : Color; 
     MainCanvas.fillRect(Left, Top, Width, Height);
 	MainCanvas.fill();	
 	MainCanvas.lineWidth = '2';

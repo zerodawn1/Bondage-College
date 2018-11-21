@@ -1,3 +1,6 @@
+var DialogStruggleTimerStart = 0;
+var DialogStruggleTimerEnd = 0;
+
 // Equips an item on the character from dialog
 function DialogEquipItem(AssetName, AssetGroup) {
 	for (var A = 0; A < Asset.length; A++)
@@ -58,16 +61,17 @@ function DialogRemove() {
 // Leaves the item menu for both characters
 function DialogLeaveItemMenu() {
 	Player.FocusGroup = null;
-	CurrentCharacter.FocusGroup = null;	
+	CurrentCharacter.FocusGroup = null;
+	DialogStruggleTimerStart = 0;
+	DialogStruggleTimerEnd = 0;
 }
 
 // When the user clicks on a dialog option
 function DialogClick() {
 
 	// If the user clicked on the interaction character or herself, we check to use an item 
-	if ((CurrentCharacter.AllowItem || (MouseX < 500)) && (MouseX >= 0) && (MouseX <= 1000) && (MouseY >= 0) && (MouseY < 1000) && ((CurrentCharacter.ID != 0) || (MouseX > 500))) {
-		Player.FocusGroup = null;
-		CurrentCharacter.FocusGroup = null;
+	if ((CurrentCharacter.AllowItem || (MouseX < 500)) && (MouseX >= 0) && (MouseX <= 1000) && (MouseY >= 0) && (MouseY < 1000) && ((CurrentCharacter.ID != 0) || (MouseX > 500)) && (DialogIntro() != "")) {
+		DialogLeaveItemMenu();
 		var C = (MouseX < 500) ? Player : CurrentCharacter;
 		var X = (MouseX < 500) ? 0 : 500;
 		for(var A = 0; A < AssetGroup.length; A++)
@@ -78,14 +82,29 @@ function DialogClick() {
 	}
 
 	// In item menu mode VS text dialog mode
-	if ((Player.FocusGroup != null) || ((CurrentCharacter.FocusGroup != null) && CurrentCharacter.AllowItem)) {
+	if (((Player.FocusGroup != null) || ((CurrentCharacter.FocusGroup != null) && CurrentCharacter.AllowItem)) && (DialogIntro() != "")) {
 
-		// If the user removes an item the menu
+		// If the user removes an item menu
 		if ((MouseX >= 1500) && (MouseX <= 1725) && (MouseY >= 25) && (MouseY <= 100)) {
-			var C = (Player.FocusGroup != null) ? Player : CurrentCharacter;
-			C.CurrentDialog = DialogFind(C, "Remove" + C.FocusGroup.Name, "");
-			CharacterAppearanceSetItem(C, C.FocusGroup.Name, null);
-			DialogLeaveItemMenu();
+
+			// If the player can interact, we simply remove the item
+			if (Player.CanInteract()) {
+				var C = (Player.FocusGroup != null) ? Player : CurrentCharacter;
+				if ((C.FocusGroup != null) && (CharacterAppearanceGetCurrentValue(C, C.FocusGroup.Name, "Name") != "None")) {
+					C.CurrentDialog = DialogFind(C, "Remove" + C.FocusGroup.Name, "");
+					CharacterAppearanceSetItem(C, C.FocusGroup.Name, null);
+					DialogLeaveItemMenu();
+				}
+			} else {
+				
+				// If the player can struggle out
+				if ((Player.FocusGroup.Effect != null) && (Player.FocusGroup.Effect.indexOf("Block") >= 0) && (DialogStruggleTimerEnd == 0)) {
+					DialogStruggleTimerStart = new Date().getTime();
+					DialogStruggleTimerEnd = new Date().getTime() + 15000;
+				}
+				
+			}
+						
 		}
 	
 		// If the user cancels the menu
@@ -103,7 +122,7 @@ function DialogClick() {
 				if ((Player.Inventory[I].Asset != null) && (Player.Inventory[I].Asset.Group.Name == C.FocusGroup.Name) && (Player.Inventory[I].Asset.Group.Category == "Item")) {
 
 					// If the item at position is clicked
-					if ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275)) {
+					if ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && Player.Inventory[I].Asset.Enable) {
 						CharacterAppearanceSetItem(C, Player.Inventory[I].Asset.Group.Name, Player.Inventory[I].Asset);
 						C.CurrentDialog = DialogFind(C, Player.Inventory[I].Asset.Name, Player.Inventory[I].Asset.Group.Name);
 						DialogLeaveItemMenu();
@@ -123,8 +142,8 @@ function DialogClick() {
 
 	} else {
 
-		// If we need to leave the dialog
-		if ((MouseX >= 1885) && (MouseX <= 1975) && (MouseY >= 25) && (MouseY <= 110))
+		// If we need to leave the dialog (only allowed when there's an entry point to the dialog, not in the middle of a conversation)
+		if ((DialogIntro() != "") && (MouseX >= 1885) && (MouseX <= 1975) && (MouseY >= 25) && (MouseY <= 110))
 			DialogLeave();
 
 		// If the user clicked on a text dialog option, we trigger it
@@ -163,9 +182,11 @@ function DialogDrawItemMenu(C) {
 	if (Player.CanInteract()) {
 
 		// Draws the top menu
-		DrawText("Select an item to use", 1250, 62, "White", "Black");
-		DrawButton(1500, 25, 225, 75, "Remove", ((MouseX >= 1500) && (MouseX <= 1725) && (MouseY >= 25) && (MouseY <= 100)) ? "Cyan" : "White");	
-		DrawButton(1750, 25, 225, 75, "Cancel", ((MouseX >= 1750) && (MouseX <= 1975) && (MouseY >= 25) && (MouseY <= 100)) ? "Cyan" : "White");
+		if ((C.FocusGroup != null) && (CharacterAppearanceGetCurrentValue(C, C.FocusGroup.Name, "Name") != "None")) {
+			DrawText("Select an item to use", 1250, 62, "White", "Black");
+			DrawButton(1500, 25, 225, 75, "Remove", "White");
+		} else DrawText("Select an item to use", 1375, 62, "White", "Black");
+		DrawButton(1750, 25, 225, 75, "Cancel", "White");
 	
 		// For each items in the player inventory
 		var X = 1000;
@@ -185,10 +206,25 @@ function DialogDrawItemMenu(C) {
 	} else {
 		
 		// Draws the top menu
-		DrawText("Struggle to free yourself", 1250, 62, "White", "Black");
-		DrawText("You cannot access your items", 1500, 500, "White", "Black");
-		DrawButton(1500, 25, 225, 75, "Struggle", ((MouseX >= 1500) && (MouseX <= 1725) && (MouseY >= 25) && (MouseY <= 100)) ? "Cyan" : "White");	
-		DrawButton(1750, 25, 225, 75, "Cancel", ((MouseX >= 1750) && (MouseX <= 1975) && (MouseY >= 25) && (MouseY <= 100)) ? "Cyan" : "White");
+		DrawButton(1750, 25, 225, 75, "Cancel", "White");
+		if ((Player.FocusGroup != null) && (Player.FocusGroup.Effect != null) && (Player.FocusGroup.Effect.indexOf("Block") >= 0)) {			
+			DrawText("Struggle to free yourself", 1250, 62, "White", "Black");
+			DrawButton(1500, 25, 225, 75, "Struggle", "White");			
+		}
+
+		// If the player is struggling
+		if (DialogStruggleTimerEnd > 0) {
+			var Progress = (new Date().getTime() - DialogStruggleTimerStart) / (DialogStruggleTimerEnd - DialogStruggleTimerStart);
+			DrawText("Struggling...", 1500, 450, "White", "Black");	
+			DrawRect(1200, 500, 600, 100, "White");
+			DrawRect(1202, 503, 594, 94, "Red");
+			DrawRect(1202, 503, Progress * 594, 94, "#88FF88");
+			if (Progress >= 1) {
+				Player.CurrentDialog = DialogFind(Player, "Struggle" + Player.FocusGroup.Name, "");
+				CharacterAppearanceSetItem(Player, Player.FocusGroup.Name, null);
+			}
+		}
+		else DrawText("You cannot access your items", 1500, 500, "White", "Black");
 		
 	}
 
@@ -295,14 +331,16 @@ function DialogDraw() {
 	DrawCharacter(CurrentCharacter, 500, 0, 1);
 	
 	// If we must show the item menu
-	if ((Player.FocusGroup != null) || ((CurrentCharacter.FocusGroup != null) && CurrentCharacter.AllowItem))
+	if (((Player.FocusGroup != null) || ((CurrentCharacter.FocusGroup != null) && CurrentCharacter.AllowItem)) && (DialogIntro() != ""))
 		DialogDrawItemMenu((Player.FocusGroup != null) ? Player : CurrentCharacter);
 	else {
 
 		// Draws the intro text or dialog result
-		DrawTextWrap(DialogGarble(CurrentCharacter, CurrentCharacter.CurrentDialog), 1025, -10, 840, 160, "white");
-		DrawButton(1885, 25, 90, 90, "", ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) ? "Cyan" : "White", "Icons/Exit.png");
-		
+		if (DialogIntro() != "") {
+			DrawTextWrap(DialogGarble(CurrentCharacter, CurrentCharacter.CurrentDialog), 1025, -10, 840, 160, "white");
+			DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");			
+		} else DrawTextWrap(DialogGarble(CurrentCharacter, CurrentCharacter.CurrentDialog), 1025, -10, 950, 160, "white");
+
 		// Draws the possible answers
 		var pos = 0;
 		for(var D = 0; D < CurrentCharacter.Dialog.length; D++)

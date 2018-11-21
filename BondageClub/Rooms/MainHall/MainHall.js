@@ -8,9 +8,9 @@ function MainHallRun() {
 
 		// Draws the character and main hall buttons
 		DrawCharacter(Player, 750, 0, 1);
-		DrawButton(1765, 25, 90, 90, "", ((MouseX >= 1765) && (MouseX < 1855) && (MouseY >= 25) && (MouseY < 115)) ? "Cyan" : "White", "Icons/Dress.png");
-		DrawButton(1885, 25, 90, 90, "", ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) ? "Cyan" : "White", "Icons/Exit.png");
-		if (Player.CanWalk()) DrawButton(1575, 145, 400, 65, "Introduction Class", ((MouseX >= 1575) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 210) && Player.CanWalk()) ? "Cyan" : "White");
+		DrawButton(1765, 25, 90, 90, "", "White", "Icons/Dress.png");
+		DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
+		if (Player.CanWalk()) DrawButton(1575, 145, 400, 65, "Introduction Class", "White");
 
 	} else DrawText("Synchronizing with account server...", 1000, 500, "White", "Black");
 

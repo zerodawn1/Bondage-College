@@ -5,8 +5,7 @@ function LogAdd(NewLogName, NewLogGroup, Push) {
 
 	// Checks to make sure we don't duplicate a log
 	AddToLog = true;
-	var L;
-	for (L = 0; L < Log.length; L++)
+	for (var L = 0; L < Log.length; L++)
 		if ((Log[L].Name == NewLogName) && (Log[L].Group == NewLogGroup)) {
 			AddToLog = false;
 			break;
@@ -29,8 +28,7 @@ function LogAdd(NewLogName, NewLogGroup, Push) {
 
 // Checks if the log exists, return true if it does
 function LogQuery(QueryLogName, QueryLogGroup) {
-	var L;
-	for (L = 0; L < Log.length; L++)
+	for (var L = 0; L < Log.length; L++)
 		if ((Log[L].Name == QueryLogName) && (Log[L].Group == QueryLogGroup))
 			return true;
 	return false;
@@ -43,11 +41,9 @@ function LogLoad(NewLog) {
 	if (NewLog != null) {
 
 		// Add each log entry one by one
-		var L;
-		for (L = 0; L < NewLog.length; L++)
+		for (var L = 0; L < NewLog.length; L++)
 			LogAdd(NewLog[L].Name, NewLog[L].Group, false);
 
 	}
 	
 }
-
