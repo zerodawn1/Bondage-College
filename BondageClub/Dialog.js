@@ -74,7 +74,7 @@ function DialogInventoryAdd(NewInv, NewInvWorn) {
 
 	// Make sure we do not duplicate the item
 	for(var I = 0; I < DialogInventory.length; I++)
-		if ((DialogInventory[I].Group.Name == NewInv.Group.Name) && (DialogInventory[I].Name == NewInv.Name))
+		if ((DialogInventory[I].Asset.Group.Name == NewInv.Group.Name) && (DialogInventory[I].Asset.Name == NewInv.Name))
 			return;
 		
 	// Creates a new dialog inventory item
@@ -85,9 +85,9 @@ function DialogInventoryAdd(NewInv, NewInvWorn) {
 	};
 
 	// Loads the correct icon and push the item in the array
-	if (NewInvWorn && (NewInv.Effect.indexOf("Lock") >= 0)) DI.Icon = "Locked";
-	if (!NewInvWorn && (NewInv.Effect.indexOf("Lock") >= 0)) DI.Icon = "Unlocked";
-	DialogInventory.push(NewInv);
+	if (NewInvWorn && (NewInv.Effect != null) && (NewInv.Effect.indexOf("Lock") >= 0)) DI.Icon = "Locked";
+	if (!NewInvWorn && (NewInv.Effect != null) && (NewInv.Effect.indexOf("Lock") >= 0)) DI.Icon = "Unlocked";
+	DialogInventory.push(DI);
 
 }
 
@@ -185,7 +185,7 @@ function DialogClick() {
 				if ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && DialogInventory[I].Asset.Enable) {
 
 					// Cannot change item if the previous one is locked
-					if ((DialogInventory[I].Effect == null) || (DialogInventory[I].indexOf("Lock") < 0)) {
+					if ((DialogInventory[I].Asset.Effect == null) || (DialogInventory[I].Asset.Effect.indexOf("Lock") < 0)) {
 						CharacterAppearanceSetItem(C, DialogInventory[I].Asset.Group.Name, DialogInventory[I].Asset);
 						C.CurrentDialog = DialogFind(C, DialogInventory[I].Asset.Name, DialogInventory[I].Asset.Group.Name);
 						DialogLeaveItemMenu();
@@ -261,7 +261,7 @@ function DialogDrawItemMenu(C) {
 		var Y = 125;
 		for(var I = 0; I < DialogInventory.length; I++) {
 			DrawRect(X, Y, 225, 275, ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && !CommonIsMobile) ? "cyan" : DialogInventory[I].Worn ? "pink" : "white");
-			DrawImageResize("Assets/" + DialogInventory[I].Asset.Group.Family + "/" + DialogInventory[I].Asset.Group.Name + "/Preview/" + DialogInventory[I].Name + ".png", X + 2, Y + 2, 221, 221);
+			DrawImageResize("Assets/" + DialogInventory[I].Asset.Group.Family + "/" + DialogInventory[I].Asset.Group.Name + "/Preview/" + DialogInventory[I].Asset.Name + ".png", X + 2, Y + 2, 221, 221);
 			DrawTextFit(DialogInventory[I].Asset.Description, X + 112, Y + 250, 221, "black");
 			if (DialogInventory[I].Icon != "") DrawImage("Icons/" + DialogInventory[I].Icon + ".png", X + 2, Y + 110);
 			X = X + 250;
