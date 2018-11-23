@@ -91,9 +91,15 @@ function DialogClick() {
 			if (Player.CanInteract()) {
 				var C = (Player.FocusGroup != null) ? Player : CurrentCharacter;
 				if ((C.FocusGroup != null) && (CharacterAppearanceGetCurrentValue(C, C.FocusGroup.Name, "Name") != "None")) {
-					C.CurrentDialog = DialogFind(C, "Remove" + C.FocusGroup.Name, "");
-					CharacterAppearanceSetItem(C, C.FocusGroup.Name, null);
-					DialogLeaveItemMenu();
+
+					// Do not allow to remove if it's locked
+					var Effect = CharacterAppearanceGetCurrentValue(C, C.FocusGroup.Name, "Effect");
+					if ((Effect == null) || (Effect.indexOf("Lock") < 0)) {
+						C.CurrentDialog = DialogFind(C, "Remove" + C.FocusGroup.Name, "");
+						CharacterAppearanceSetItem(C, C.FocusGroup.Name, null);
+						DialogLeaveItemMenu();
+					}
+
 				}
 			} else {
 				
@@ -123,10 +129,16 @@ function DialogClick() {
 
 					// If the item at position is clicked
 					if ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && Player.Inventory[I].Asset.Enable) {
-						CharacterAppearanceSetItem(C, Player.Inventory[I].Asset.Group.Name, Player.Inventory[I].Asset);
-						C.CurrentDialog = DialogFind(C, Player.Inventory[I].Asset.Name, Player.Inventory[I].Asset.Group.Name);
-						DialogLeaveItemMenu();
-						break;
+						
+						// Cannot change item if the previous one is locked
+						var Effect = CharacterAppearanceGetCurrentValue(C, C.FocusGroup.Name, "Effect");
+						if ((Effect == null) || (Effect.indexOf("Lock") < 0)) {						
+							CharacterAppearanceSetItem(C, Player.Inventory[I].Asset.Group.Name, Player.Inventory[I].Asset);
+							C.CurrentDialog = DialogFind(C, Player.Inventory[I].Asset.Name, Player.Inventory[I].Asset.Group.Name);
+							DialogLeaveItemMenu();
+							break;
+						}
+
 					}
 
 					// Change the X and Y position to get the next square
@@ -192,10 +204,12 @@ function DialogDrawItemMenu(C) {
 		var X = 1000;
 		var Y = 125;
 		for(var I = 0; I < Player.Inventory.length; I++)
-			if ((Player.Inventory[I].Asset != null) && (Player.Inventory[I].Asset.Group.Name == C.FocusGroup.Name) && (Player.Inventory[I].Asset.Group.Category == "Item")) {			
-				DrawRect(X, Y, 225, 275, ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && !CommonIsMobile) ? "cyan" : "white");
+			if ((Player.Inventory[I].Asset != null) && (Player.Inventory[I].Asset.Group.Name == C.FocusGroup.Name) && (Player.Inventory[I].Asset.Group.Category == "Item")) {
+				var Worn = (CharacterAppearanceGetCurrentValue(C, Player.Inventory[I].Asset.Group.Name, "Name") == Player.Inventory[I].Asset.Name);
+				DrawRect(X, Y, 225, 275, ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && !CommonIsMobile) ? "cyan" : Worn ? "pink" : "white");
 				DrawImageResize("Assets/" + Player.Inventory[I].Asset.Group.Family + "/" + Player.Inventory[I].Asset.Group.Name + "/Preview/" + Player.Inventory[I].Name + ".png", X + 2, Y + 2, 221, 221);
 				DrawTextFit(Player.Inventory[I].Asset.Description, X + 112, Y + 250, 221, "black");
+				if (Worn && (Player.Inventory[I].Asset.Effect != null) && (Player.Inventory[I].Asset.Effect.indexOf("Lock") >= 0)) DrawImage("Icons/Lock.png", X + 55, Y + 55);
 				X = X + 250;
 				if (X > 1800) {
 					X = 1000;
@@ -338,7 +352,7 @@ function DialogDraw() {
 		// Draws the intro text or dialog result
 		if (DialogIntro() != "") {
 			DrawTextWrap(DialogGarble(CurrentCharacter, CurrentCharacter.CurrentDialog), 1025, -10, 840, 160, "white");
-			DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");			
+			DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
 		} else DrawTextWrap(DialogGarble(CurrentCharacter, CurrentCharacter.CurrentDialog), 1025, -10, 950, 160, "white");
 
 		// Draws the possible answers

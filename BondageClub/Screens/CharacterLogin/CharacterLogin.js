@@ -98,7 +98,7 @@ function CharacterLoginClick() {
 				if (xmlhttp.readyState == XMLHttpRequest.DONE) {
 				   if (xmlhttp.status == 200) {
 					   if (xmlhttp.responseText.trim().substring(0, 1) == "{") CharacterLoginResponse(xmlhttp.responseText);
-					   else CharacterLoginMessage = TextGet("IncorrectNamePassword");
+					   else CharacterLoginMessage = TextGet("InvalidNamePassword");
 				   } else CharacterLoginMessage = TextGet("Error") + " " + xmlhttp.status.toString();
 				}
 			};

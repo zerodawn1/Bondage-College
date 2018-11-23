@@ -218,12 +218,12 @@ var AssetFemale3DCG = [
 		Category: "Item",
 		Priority: 9,
 		Default: false,
-		Effect: ["Chaste"],
+		AllowPose: ["BackBoxTie"],
 		Color: ["Default"],
-		Left: 150,
-		Top: 50,
+		Left: 125,
+		Top: 375,
 		Zone: [[150, 425, 200, 125]],
-		Asset: [ { Name: "MetalChastityBelt", Value: 100, Enable: false, Visible: false }, { Name: "RegularVibratingEgg", Value: 25, Effect: [], Enable: false, Visible: false }, { Name: "LeatherCrop", Value: 40, Enable: false} ]
+		Asset: [ { Name: "MetalChastityBelt", Effect: ["Chaste", "Lock"], Enable: false, Value: 100 }, { Name: "RegularVibratingEgg", Value: 25, Effect: [], Enable: false, Visible: false }, { Name: "LeatherCrop", Value: 40, Enable: false} ]
 	},
 
 	{
@@ -262,7 +262,7 @@ var AssetFemale3DCG = [
 		Left: 200,
 		Top: 190,
 		Zone: [[150, 210, 200, 50]],
-		Asset: [ { Name: "LeatherCollar", Value: 40 } ]
+		Asset: [ { Name: "LeatherCollar", Value: 40 }, { Name: "SlaveCollar", Effect: ["Lock"], Enable: true, Value: -1 } ]
 	},
 	
 	{

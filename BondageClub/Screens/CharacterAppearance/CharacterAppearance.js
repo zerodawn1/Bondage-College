@@ -183,6 +183,7 @@ function CharacterAppearanceGetCurrentValue(C, Group, Type) {
 			if (Type == "Description") return C.Appearance[A].Asset.Description;
 			if (Type == "Color") return C.Appearance[A].Color;
 			if (Type == "ID") return A;
+			if (Type == "Effect") return C.Appearance[A].Asset.Effect;
 		}
 	return "None";
 
