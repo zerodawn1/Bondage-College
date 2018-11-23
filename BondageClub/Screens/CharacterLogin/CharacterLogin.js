@@ -8,7 +8,7 @@ function CharacterLoginLoad() {
 	Character = [];
 	CharacterReset(0, "Female3DCG");
 	CharacterLoadCSVDialog(Player);
-	CharacterLoginMessage = "Enter your name and password";
+	CharacterLoginMessage = "";
 
 	// Creates a text box to enter the player name
 	var InputName = document.createElement('input');
@@ -39,15 +39,16 @@ function CharacterLoginRun() {
 	document.getElementById("InputName").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:50%; top:" + (window.innerHeight / 2 - MainCanvas.height / 4) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
 	document.getElementById("InputPassword").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:50%; top:" + (window.innerHeight / 2 - MainCanvas.height / 10) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
 		
-	// Draw the background and the character twice
+	// Draw the character and labels
+	if (CharacterLoginMessage == "") CharacterLoginMessage = TextGet("EnterNamePassword");
 	DrawCharacter(Player, 500, 0, 1);
-	DrawText("Welcome to the Bondage Club", 1265, 50, "White", "Black");
+	DrawText(TextGet("Welcome"), 1265, 50, "White", "Black");
 	DrawText(CharacterLoginMessage, 1265, 100, "White", "Black");
-	DrawText("Account Name", 1265, 217, "White", "Black");
-	DrawText("Password", 1265, 368, "White", "Black");
-	DrawButton(1200, 500, 130, 60, "Login", "White", "");
-	DrawText("Or create a new character", 1265, 700, "White", "Black");
-	DrawButton(1125, 800, 280, 60, "New Character", "White", "");
+	DrawText(TextGet("AccountName"), 1265, 217, "White", "Black");
+	DrawText(TextGet("Password"), 1265, 368, "White", "Black");
+	DrawButton(1200, 500, 130, 60, TextGet("Login"), "White", "");
+	DrawText(TextGet("CreateNewCharacter"), 1265, 700, "White", "Black");
+	DrawButton(1125, 800, 280, 60, TextGet("NewCharacter"), "White", "");
 
 }
 
@@ -67,7 +68,7 @@ function CharacterLoginResponse(CharacterData) {
 		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 		document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
 		CommonSetScreen("MainHall");
-	} else CharacterLoginMessage = "Error loading character data";
+	} else CharacterLoginMessage = TextGet("ErrorLoadingCharacterData");
 }
 
 // When the user clicks on the character login screen
@@ -91,20 +92,20 @@ function CharacterLoginClick() {
 		if (Name.match(letters) && Password.match(letters) && (Name.length > 0) && (Name.length <= 20) && (Password.length > 0) && (Password.length <= 20)) {
 
 			// Calls the PHP page to check if the login is correct
-			CharacterLoginMessage = "Validating name and password..."
+			CharacterLoginMessage = TextGet("ValidatingNamePassword");
 			var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == XMLHttpRequest.DONE) {
 				   if (xmlhttp.status == 200) {
 					   if (xmlhttp.responseText.trim().substring(0, 1) == "{") CharacterLoginResponse(xmlhttp.responseText);
-					   else CharacterLoginMessage = "Incorrect name or password";
-				   } else CharacterLoginMessage = "Error " + xmlhttp.status.toString() + " on account service";
+					   else CharacterLoginMessage = TextGet("IncorrectNamePassword");
+				   } else CharacterLoginMessage = TextGet("Error") + " " + xmlhttp.status.toString();
 				}
 			};
 			xmlhttp.open("GET", AccountAddress + "?command=account_log&account=" + Name + "&password=" + Password, true);
 			xmlhttp.send();
 
-		} else CharacterLoginMessage = "Invalid name or password";
+		} else CharacterLoginMessage = TextGet("InvalidNamePassword");
 	}
 	
 }

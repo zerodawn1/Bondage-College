@@ -10,6 +10,7 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		AssetFamily: CharacterAssetFamily,
 		AccountName: "",
 		AccountPassword: "",
+		Money: 0,
 		Inventory: [],		
 		Appearance: [],
 		Stage: "0",
@@ -87,7 +88,7 @@ function CharacterBuildDialog(C, CSV) {
 function CharacterLoadCSVDialog(C) {
 
     // Finds the full path of the CSV file to use cache
-    var FullPath = ((C.ID == 0) ? "Rooms/Player" : "Rooms/" + CurrentScreen + "/" + C.AccountName) + "_" + CommonGetWorkingLanguage() + ".csv";    
+    var FullPath = ((C.ID == 0) ? "Screens/Player/Dialog_Player" : "Screens/" + CurrentScreen + "/Dialog_" + C.AccountName) + "_" + CommonGetWorkingLanguage() + ".csv";    
     if (CommonCSVCache[FullPath]) {
 		CharacterBuildDialog(C, CommonCSVCache[FullPath]);
         return;
@@ -117,6 +118,7 @@ function CharacterLoadNPC(NPCType) {
 	C.AccountName = NPCType;
 	CharacterLoadCSVDialog(C);
 	CharacterRandomName(C);
+	CharacterAppearanceBuildAssets(C);
 	CharacterAppearanceFullRandom(C);
 	
 	// Maid archetype

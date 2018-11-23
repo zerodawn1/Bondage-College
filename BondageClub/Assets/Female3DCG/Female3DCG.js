@@ -84,7 +84,7 @@ var AssetFemale3DCG = [
 		Color: ["#303030", "#808080", "#e0e0e0", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 200,
 		Top: 135,
-		Asset: ["Glasses1", "Glasses2", "Glasses3", "Glasses4", "Glasses5", "Glasses6", "Glasses7", "Glasses8"]
+		Asset: ["Glasses1", "Glasses2", "Glasses3", "Glasses4", "Glasses5", "Glasses6", { Name: "SunGlasses1", Value: 20 }, { Name: "SunGlasses2", Value: 20 }]
 	},
 
 	{
@@ -195,7 +195,7 @@ var AssetFemale3DCG = [
 		Left: 125,
 		Top: 725,
 		Zone: [[100, 730, 300, 260]],
-		Asset: [ { Name: "NylonRope", Value: -1 }, { Name: "HempRope", Value: -1 } ]
+		Asset: [ { Name: "NylonRope", Value: 15 }, { Name: "HempRope", Value: 30 } ]
 	},
 
 	{
@@ -210,7 +210,7 @@ var AssetFemale3DCG = [
 		Left: 125,
 		Top: 500,
 		Zone: [[100, 550, 300, 180]],
-		Asset: [ { Name: "NylonRope", Value: -1 }, { Name: "HempRope", Value: -1 } ]
+		Asset: [ { Name: "NylonRope", Value: 15 }, { Name: "HempRope", Value: 30 } ]
 	},
 
 	{
@@ -223,7 +223,7 @@ var AssetFemale3DCG = [
 		Left: 150,
 		Top: 50,
 		Zone: [[150, 425, 200, 125]],
-		Asset: [ { Name: "MetalChastityBelt", Value: -1, Enable: false, Visible: false }, { Name: "RegularVibratingEgg", Value: -1, Effect: [], Enable: false, Visible: false }, { Name: "LeatherCrop", Value: -1, Enable: false} ]
+		Asset: [ { Name: "MetalChastityBelt", Value: 100, Enable: false, Visible: false }, { Name: "RegularVibratingEgg", Value: 25, Effect: [], Enable: false, Visible: false }, { Name: "LeatherCrop", Value: 40, Enable: false} ]
 	},
 
 	{
@@ -235,7 +235,7 @@ var AssetFemale3DCG = [
 		Left: 150,
 		Top: 50,
 		Zone: [[150, 260, 200, 165]],
-		Asset: [ { Name: "NylonRopeHarness", Value: -1 }, { Name: "HempRopeHarness", Value: -1 }, { Name: "LeatherHarness", Value: -1 }, { Name: "LeatherCrop", Value: -1, Enable: false} ]
+		Asset: [ { Name: "NylonRopeHarness", Value: 25 }, { Name: "HempRopeHarness", Value: 50 }, { Name: "LeatherHarness", Value: 100 }, { Name: "LeatherCrop", Value: 40, Enable: false} ]
 	},
 
 	{
@@ -250,7 +250,7 @@ var AssetFemale3DCG = [
 		Left: 125,		
 		Top: 200,
 		Zone: [[50, 250, 100, 250], [350, 250, 100, 250]],
-		Asset: [ { Name: "NylonRope", Value: -1 }, { Name: "HempRope", Value: -1 }, { Name: "MetalCuffs", Enable: false, Visible: false, Value: -1}, { Name: "MetalCuffsKey", Effect: ["Unlock"], SetPose: [""], Enable: false, Visible: false, Value: -1}, { Name: "LeatherArmbinder", Enable: false, Visible: false, Value: -1} ]
+		Asset: [ { Name: "NylonRope", Value: 15 }, { Name: "HempRope", Value: 30 }, { Name: "MetalCuffs", Enable: false, Visible: false, Value: 50}, { Name: "MetalCuffsKey", Effect: ["Unlock"], SetPose: [""], Enable: false, Visible: false, Value: 25}, { Name: "LeatherArmbinder", Enable: false, Visible: false, Value: 80} ]
 	},
 
 	{
@@ -262,7 +262,7 @@ var AssetFemale3DCG = [
 		Left: 200,
 		Top: 190,
 		Zone: [[150, 210, 200, 50]],
-		Asset: [ { Name: "LeatherCollar", Value: -1 } ]
+		Asset: [ { Name: "LeatherCollar", Value: 40 } ]
 	},
 	
 	{
@@ -275,7 +275,7 @@ var AssetFemale3DCG = [
 		Left: 150,
 		Top: 50,
 		Zone: [[150, 160, 200, 50]],
-		Asset: [ { Name: "SmallClothGag", Effect: ["GagLight"], Value: -1 }, { Name: "ClothCleaveGag", Effect: ["GagLight"], Value: -1 }, { Name: "ClothOTMGag", Value: -1 }, { Name: "ClothOTNGag", Value: -1 }, { Name: "HarnessBallGag", Effect: ["GagHeavy"], Value: -1 }, { Name: "DuctTapeGag", Value: -1 }, { Name: "RegularSleepingPill", Enable: false, Value: -1 } ]
+		Asset: [ { Name: "SmallClothGag", Effect: ["GagLight"], Value: 10 }, { Name: "ClothCleaveGag", Effect: ["GagLight"], Value: 15 }, { Name: "ClothOTMGag", Value: 20 }, { Name: "ClothOTNGag", Value: 25 }, { Name: "HarnessBallGag", Effect: ["GagHeavy"], Value: 50 }, { Name: "DuctTapeGag", Value: 20 }, { Name: "RegularSleepingPill", Enable: false, Value: -1 } ]
 	},
 
 	{
@@ -288,7 +288,7 @@ var AssetFemale3DCG = [
 		Left: 150,
 		Top: 50,
 		Zone: [[150, 35, 200, 125]],
-		Asset: [ { Name: "LeatherBlindfold", Enable: false, Value: -1 }, { Name: "LeatherHood", Enable: false, Value: -1 } ]
+		Asset: [ { Name: "LeatherBlindfold", Enable: false, Value: 30 }, { Name: "LeatherHood", Enable: false, Value: 75 } ]
 	}
 	
 ];

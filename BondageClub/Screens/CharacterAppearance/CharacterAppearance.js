@@ -190,7 +190,7 @@ function CharacterAppearanceGetCurrentValue(C, Group, Type) {
 
 // Loads the character appearance screen and keeps a backup of the previous appearance
 function CharacterAppearanceLoad() {
-	CharacterAppearanceHeaderText = "Select your appearance";
+	CharacterAppearanceHeaderText = TextGet("SelectAppearance");
 	CharacterAppearanceBuildAssets(Player);
 	CharacterAppearanceBackup = JSON.parse(JSON.stringify(Player.Appearance));
 }
@@ -416,7 +416,7 @@ function CharacterAppearanceReady(C) {
 
 			// If we didn't found the group, we warn the user
 			if (!Found) {
-				CharacterAppearanceHeaderText = "You must pick an item of type: " + AssetGroup[A].Name;
+				CharacterAppearanceHeaderText = TextGet("MustPickItem") + " " + AssetGroup[A].Name;
 				return;
 			}
 

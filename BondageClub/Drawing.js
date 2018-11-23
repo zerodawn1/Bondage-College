@@ -93,8 +93,8 @@ function DrawCharacter(C, X, Y, Zoom) {
 			DrawEmptyRect(C.FocusGroup.Zone[Z][0] + X, C.FocusGroup.Zone[Z][1] + Y - C.HeightModifier, C.FocusGroup.Zone[Z][2], C.FocusGroup.Zone[Z][3], "cyan");
 	
 	// Draw the character name below herself
-	if (C.Name != "") DrawText(C.Name, X + 255, Y + 980, "White", "Black");
-	
+	if ((C.Name != "") && (CurrentScreen.indexOf("Character") < 0)) DrawText(C.Name, X + 255, Y + 980, "White", "Black");
+
 }
 		
 // Draw a zoomed image from a source to a specific canvas
@@ -267,7 +267,7 @@ function DrawButton(Left, Top, Width, Height, Label, Color, Image) {
 	// Draw the button rectangle (makes the background color cyan if the mouse is over it)
 	MainCanvas.beginPath();
 	MainCanvas.rect(Left, Top, Width, Height);
-    MainCanvas.fillStyle = ((MouseX >= Left) && (MouseX <= Left + Width) && (MouseY >= Top) && (MouseY <= Top + Height)) ? "Cyan" : Color; 
+    MainCanvas.fillStyle = ((MouseX >= Left) && (MouseX <= Left + Width) && (MouseY >= Top) && (MouseY <= Top + Height) && !CommonIsMobile) ? "Cyan" : Color; 
     MainCanvas.fillRect(Left, Top, Width, Height);
 	MainCanvas.fill();	
 	MainCanvas.lineWidth = '2';
@@ -344,7 +344,7 @@ function DrawProcess() {
 	// Gets the current screen background and draw it, a darker version in character dialog mode
 	var B = window[CurrentScreen + "Background"];
 	if ((B != null) && (B != ""))
-		DrawImage("Backgrounds/" + B + ((CurrentCharacter != null) ? "Dark" : "") + ".jpg", 0, 0);
+		DrawImage("Backgrounds/" + B + (((CurrentCharacter != null) || ShopStarted) ? "Dark" : "") + ".jpg", 0, 0);
 	
 	// Draws the dialog screen or current screen if there's no loaded character
 	if (CurrentCharacter != null) DialogDraw();

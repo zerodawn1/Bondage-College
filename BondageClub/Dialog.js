@@ -193,7 +193,7 @@ function DialogDrawItemMenu(C) {
 		var Y = 125;
 		for(var I = 0; I < Player.Inventory.length; I++)
 			if ((Player.Inventory[I].Asset != null) && (Player.Inventory[I].Asset.Group.Name == C.FocusGroup.Name) && (Player.Inventory[I].Asset.Group.Category == "Item")) {			
-				DrawRect(X, Y, 225, 275, ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275)) ? "cyan" : "white");
+				DrawRect(X, Y, 225, 275, ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && !CommonIsMobile) ? "cyan" : "white");
 				DrawImageResize("Assets/" + Player.Inventory[I].Asset.Group.Family + "/" + Player.Inventory[I].Asset.Group.Name + "/Preview/" + Player.Inventory[I].Name + ".png", X + 2, Y + 2, 221, 221);
 				DrawTextFit(Player.Inventory[I].Asset.Description, X + 112, Y + 250, 221, "black");
 				X = X + 250;
@@ -345,7 +345,7 @@ function DialogDraw() {
 		var pos = 0;
 		for(var D = 0; D < CurrentCharacter.Dialog.length; D++)
 			if ((CurrentCharacter.Dialog[D].Stage == CurrentCharacter.Stage) && (CurrentCharacter.Dialog[D].Option != null) && DialogPrerequisite(D)) {
-					DrawTextWrap(DialogGarble(Player, CurrentCharacter.Dialog[D].Option), 1025, 160 + 105 * pos, 950, 80, "black", ((MouseX >= 1025) && (MouseX <= 1975) && (MouseY >= 160 + pos * 105) && (MouseY <= 240 + pos * 105)) ? "cyan" : "white");
+					DrawTextWrap(DialogGarble(Player, CurrentCharacter.Dialog[D].Option), 1025, 160 + 105 * pos, 950, 80, "black", ((MouseX >= 1025) && (MouseX <= 1975) && (MouseY >= 160 + pos * 105) && (MouseY <= 240 + pos * 105) && !CommonIsMobile) ? "cyan" : "white");
 					pos++;
 				}
 

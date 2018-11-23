@@ -1,18 +1,18 @@
 PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it to chat.,,
 0,,,"Hello there, welcome to the Bondage Club introduction class.",,
 0,,"Hi, my name is DialogPlayerName.","Pleased to meet you.  I'm DialogCharacterName, I work here as a maid.",DialogRemove(),
-0,10,Thanks little maid.  What's going on here?,"In here, you will learn how to restrain someone and escape by yourself.",ChangeMaidOpinion(1),
+0,10,"Thanks, little maid.  What's going on here?","In here, you will learn how to restrain someone and escape by yourself.",ChangeMaidOpinion(1),
 0,10,Introduction class?,"In this class, you will learn how to restrain someone and free yourself.",,
 0,100,I don't need any introduction.,"Very well, would you like to practice with us then?",,
 0,,I can't stay to chat.  (Leave her.),,DialogLeave(),
 10,,Can I strap up anyone at any time?,Yes and no.  You need their consent and you cannot do it in the middle of a conversation.,DialogRemove(),
-10,20,This is great!,I'm glad you like it.  First I will teach you about the body parts your can restrain.,,
-10,20,It sounds kinky. (Blush a little.),It's kinky and fun.  First I will teach you about the body parts your can restrain.,ChangeMaidOpinion(-1),
+10,20,This is great!,I'm glad you like it.  I will teach you first about the body parts your can restrain.,,
+10,20,It sounds kinky. (Blush a little.),It's kinky and fun.  I will teach you first about the body parts your can restrain.,ChangeMaidOpinion(-1),
 10,15,Tell me about the club first.,The Bondage Club is a place for open minded adults to share their BDSM kinks.,,
 10,,You're both a maid and a teacher?,We maids do a lot of work here.  You'll see with time.,DialogRemove(),
 10,100,I already know that.,"Very well, would you like to practice with us then?",,
-15,20,Fair enough.,Very well.  First I will teach you about the body parts your can restrain.,,
-15,20,Awesome!,I'm glad you like it.  First I will teach you about the body parts your can restrain.,,
+15,20,Fair enough.,Very well.  I will teach you first about the body parts your can restrain.,,
+15,20,Awesome!,I'm glad you like it.  I will teach you first about the body parts your can restrain.,,
 20,30,I'm listening.,"There are eight body parts to interact with.  To access them, select the body region I will show you.",,
 20,30,Please tell me Miss.,"There are eight body parts to interact with.  To access them, select the body region I will show you.",ChangeMaidOpinion(-1),
 20,30,"Alright, but make it quick.","There are eight body parts to interact with.  To access them, select the body region I will show you.",ChangeMaidOpinion(1),
@@ -23,10 +23,10 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 33,34,(Listen.),"On the torso, you can do breast bondage or use harnesses, mostly for esthetics.","SetZone(""ItemTorso"")",
 34,35,(Listen.),The arms can be restrained using many devices.  This will prevent your victim from using her hands.,"SetZone(""ItemArms"")",
 35,36,(Listen.),You can use collars on your victim neck to leash them and walk them around.,"SetZone(""ItemNeck"")",
-36,37,(Listen.),Collars are also used to enslave someone but you will learn about it in another class.,,
+36,37,(Listen.),"Collars are also used to enslave, but you will learn about it in another class.",,
 37,38,(Listen.),"You can use gags to silence your victim, making her unable to speak.","SetZone(""ItemMouth"")",
 38,39,(Listen.),"Blindfolds, ear muffs or hoods can also be used to restrict view and hearing.","SetZone(""ItemHead"")",
-39,40,(Listen.),"This is it, remember that your arms needs to be free to restrain someone.",ClearZone(),
+39,40,(Listen.),"This is it, remember that your arms need to be free to restrain someone.",ClearZone(),
 40,100,Thanks for the info.,"My pleasure, now we can practice.  Would you prefer to restrain someone or be tied up yourself?",,
 40,100,That makes sense.,"Of course, and now we can practice.  Would you prefer to restrain someone or be tied up yourself?",,
 40,200,Can I strap you up now?,"Not me, but we have someone here who would certainly enjoy being your victim.",ChangeMaidOpinion(1),
@@ -39,7 +39,7 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 100,,Who runs this club?,The Head Mistress is in charge.  You should go present yourself if you haven't done it.,DialogRemove(),
 100,,Let's practice later.  (Leave her.),,DialogLeave(),
 200,220,I can use my favorite restraints on her?,"Of course, use anything you want on her.  She's very submissive, she will enjoy it.",,HasBasicItems
-200,210,Can I have some items to practice with?,"Use these beginers items, they are easy to use but also easy to struggle out from.",,!HasBasicItems
+200,210,Can I have some items to practice with?,"Use these basic items, they are easy to use but also easy to struggle out from.",,!HasBasicItems
 210,220,Thanks!  (Take the items.),(She gives you ropes for her arms and legs plus a basic cloth gag.),GetBasicItems(),
 210,220,This is sweet.  (Take the items.),(She gives you ropes for her arms and legs plus a basic cloth gag.),GetBasicItems(),
 220,230,I'll make it extra tight.,"Impressive.  Make sure to restrain her arms, her feet and to gag her.",ChangeMaidOpinion(1),
@@ -56,10 +56,10 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 243,244,(Listen.),"On the torso, you can do breast bondage or use harnesses, mostly for esthetics.","SetZone(""ItemTorso"")",
 244,245,(Listen.),The arms can be restrained using many devices.  This will prevent your victim from using her hands.,"SetZone(""ItemArms"")",
 245,246,(Listen.),You can use collars on your victim neck to leash them and walk them around.,"SetZone(""ItemNeck"")",
-246,247,(Listen.),Collars are also used to enslave someone but you will learn about it in another class.,,
+246,247,(Listen.),"Collars are also used to enslave, but you will learn about it in another class.",,
 247,248,(Listen.),"You can use gags to silence your victim, making her unable to speak.","SetZone(""ItemMouth"")",
 248,249,(Listen.),"Blindfolds, ear muffs or hoods can also be used to restrict view and hearing.","SetZone(""ItemHead"")",
-249,230,(Listen.),"This is it, remember that your arms needs to be free to restrain someone.",ClearZone(),
+249,230,(Listen.),"This is it, remember that your arms need to be free to restrain someone.",ClearZone(),
 250,260,It was fun to strap her up.,I'm glad you feel that way.  You're ready to explore the club now.,,
 250,260,I would ratter be restrained myself.,"Don't worry, I'm sure it will happen often.  You're ready to explore the club now.",ChangeMaidOpinion(-1),
 250,260,It's empowering!  I need to find a whip now.,A monster is born!  (She giggles.)  You're ready to explore the club now.,ChangeMaidOpinion(1),
@@ -86,7 +86,7 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 340,,"Don't look, I will escape by myself.  (Leave her.)",,DialogLeave(),!Player.CanInteract()
 340,,,Well done!  You were able to struggle out.,,Player.CanInteract()
 340,350,That was easy.,I'll make it tighter next time.  Did you enjoy being tied up?,,Player.CanInteract()
-340,350,It took a while but I've did it.,That's great.  Did you enjoy being tied up?,,Player.CanInteract()
+340,350,"It took a while, but I've did it.",That's great.  Did you enjoy being tied up?,,Player.CanInteract()
 350,360,"Sure, it was fun.",That's the spirit!  You're ready to explore the club then.,,
 350,360,"I loved it, I hope it will happen often.",That's the spirit!  You're ready to explore the club then.,ChangeMaidOpinion(-1),
 350,360,I would ratter strap you up.,"Not now, but you're ready to explore the club and do some bondage.",ChangeMaidOpinion(1),

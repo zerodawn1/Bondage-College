@@ -127,6 +127,7 @@ function CommonDynamicFunction(FunctionName) {
 // Sets the current screen and calls the loading script if needed, only allow the change screen if the player can walk
 function CommonSetScreen(NewScreen) {
 	CurrentScreen = NewScreen;
+	TextLoad();
 	if (eval("typeof " + CurrentScreen + "Load") == "function")
 		CommonDynamicFunction(CurrentScreen + "Load()");
 }

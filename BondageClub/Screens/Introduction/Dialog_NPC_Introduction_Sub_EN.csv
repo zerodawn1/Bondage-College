@@ -3,7 +3,7 @@ ItemMouth,,,(She licks her lips seeing the gag and allows you to silence her eas
 RemoveItemMouth,,,(You remove her gag and she smiles at you.)  You're quite fun Miss.  Let me know if you want me to try another gag.,
 ItemArms,,,(She turns around submissively while you restrain her arms.)  You have lots of potential in the club Miss.,
 RemoveItemArms,,,(You free her arms and she stretches a little.)  That was nice Miss.,
-ItemLegs,,,(She stands still while you restrain her legs securly.)  I love it.,
+ItemLegs,,,(She stands still while you restrain her legs securely.)  I love it.,
 RemoveItemLegs,,,(You release her legs while she wiggles her butt.)  Good bondage Miss.,
 ItemFeet,,,(She giggles while you restrain her feet.  Preventing her from walking.),
 RemoveItemFeet,,,(You release her feet and she jumps playfully.)  You can tie me up anytime Miss.,
@@ -19,10 +19,10 @@ ItemPelvis,,,(This item isn't supported yet.  It will be added in a future versi
 0,,Can I tie you up?,"(She blushes a little.)  With pleasure Miss.  If you need help with restraints, you can ask our friendly maid here.",
 0,,Will you tie me up?,"No Miss, I'm a submissive.  But our friendly maid here can help you with that.",
 0,,"I need to go, take care.  (Leave her.)",,DialogLeave()
-10,,So you're a kinky girl?,(She nods and blushes.)  Yes Miss.,DialogRemove()
+10,,"So, you're a kinky girl?",(She nods and blushes.)  Yes Miss.,DialogRemove()
 10,20,What are you doing here?,I'm helping the maid staff to introduce newcomers to the club.,
 10,,What is this room?,"This is the introduction class room, to learn about basic bondage.",DialogRemove()
-20,,So you work for the club?,"Not yet, but I hope to become a maid someday.",DialogRemove()
+20,,"So, you work for the club?","Not yet, but I hope to become a maid someday.",DialogRemove()
 20,30,Tell me about the maids.,The maids are the work force of the club.  They do everything from cleaning to releasing helpless victims.,
 30,40,Can I become a maid?,"Absolutely, go to the maid meeting room and ask for a job.",
 30,0,Thanks for the info.,It's my pleasure Miss.  Is there something else you would like to know?,

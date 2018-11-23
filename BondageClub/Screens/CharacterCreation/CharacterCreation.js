@@ -4,7 +4,7 @@ var CharacterCreationMessage = "";
 // Loads the character login screen
 function CharacterCreationLoad() {
 
-	CharacterCreationMessage = "Enter your account & character information";
+	CharacterCreationMessage = TextGet("EnterAccountCharacterInfo");
 
 	// Creates a text box to enter the character name
 	var InputCharacter = document.createElement('input');
@@ -73,14 +73,14 @@ function CharacterCreationRun() {
 	// Draw the character, the labels and buttons
 	DrawCharacter(Player, 500, 0, 1);
 	DrawText(CharacterCreationMessage, 1267, 50, "White", "Black");
-	DrawText("Character name (letters & spaces)", 1267, 120, "White", "Black");
-	DrawText("Account name (letters & numbers)", 1267, 250, "White", "Black");
-	DrawText("Account password (letters & numbers)", 1267, 380, "White", "Black");
-	DrawText("Confirm password (letters & numbers)", 1267, 510, "White", "Black");
-	DrawText("Email (optional, to recover password)", 1267, 640, "White", "Black");
-	DrawButton(1080, 770, 370, 60, "Create your account", "White", "");
-	DrawText("Your account already exists?", 1180, 930, "White", "Black");
-	DrawButton(1440, 900, 120, 60, "Login", "White", "");
+	DrawText(TextGet("CharacterName"), 1267, 120, "White", "Black");
+	DrawText(TextGet("AccountName"), 1267, 250, "White", "Black");
+	DrawText(TextGet("Password"), 1267, 380, "White", "Black");
+	DrawText(TextGet("ConfirmPassword"), 1267, 510, "White", "Black");
+	DrawText(TextGet("Email"), 1267, 640, "White", "Black");
+	DrawButton(1080, 770, 370, 60, TextGet("CreateAccount"), "White", "");
+	DrawText(TextGet("AccountAlreadyExists"), 1180, 930, "White", "Black");
+	DrawButton(1440, 900, 120, 60, TextGet("Login"), "White", "");
 }
 
 // When the ajax response returns, we analyze it's data
@@ -105,7 +105,7 @@ function CharacterCreationResponse(CharacterData) {
 		document.getElementById("InputEmail").parentNode.removeChild(document.getElementById("InputEmail"));
 		CommonSetScreen("MainHall");
 		
-	} else CharacterCreationMessage = "Error: " + CharacterData;
+	} else CharacterCreationMessage = TextGet("Error") + " " + CharacterData;
 }
 
 // When the user clicks on the character creation screen
@@ -145,15 +145,15 @@ function CharacterCreationClick() {
 				xmlhttp.onreadystatechange = function() {
 					if (xmlhttp.readyState == XMLHttpRequest.DONE) {
 						if (xmlhttp.status == 200) CharacterCreationResponse(xmlhttp.responseText.trim().toString());
-						else CharacterCreationMessage = "Error " + xmlhttp.status.toString() + " on account service";
+						else CharacterCreationMessage = TextGet("Error") + " " + xmlhttp.status.toString();
 					}
 				};
 				xmlhttp.open("GET", AccountAddress + "?command=account_create&character=" + CharacterName + "&account=" + Name + "&password=" + Password1 + "&email=" + Email, true);
 				xmlhttp.send();
-			
-			} else CharacterCreationMessage = "Invalid character, account name, password or email";
 
-		} else CharacterCreationMessage = "Both passwords do not match";
+			} else CharacterCreationMessage = TextGet("InvalidData");
+
+		} else CharacterCreationMessage = TextGet("BothPasswordDoNotMatch");
 	}
 
 }
