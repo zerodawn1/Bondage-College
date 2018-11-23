@@ -33,8 +33,7 @@ function InventoryLoad(C, Inventory, Import) {
 	
 	// Flush the current inventory and import items from the Bondage College
 	C.Inventory = [];
-	if (Import && (C.ID == 0)) ImportBondageCollegeInventory(C);
-	
+
 	// Make sure we have something to load
 	if (Inventory != null) {
 

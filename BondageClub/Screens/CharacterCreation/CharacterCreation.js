@@ -4,6 +4,12 @@ var CharacterCreationMessage = "";
 // Loads the character login screen
 function CharacterCreationLoad() {
 
+	// Gets the info to import Bondage College data
+	var DefaultName = "";
+	if ((localStorage.getItem("BondageClubImportSource") != null) && (localStorage.getItem("BondageClubImportSource") == "BondageCollege")) {
+		ImportBondageCollegeData = true;
+		if (localStorage.getItem("BondageCollegeExportName") != null) DefaultName = localStorage.getItem("BondageCollegeExportName");
+	} else ImportBondageCollegeData = null;
 	CharacterCreationMessage = TextGet("EnterAccountCharacterInfo");
 
 	// Creates a text box to enter the character name
@@ -11,7 +17,7 @@ function CharacterCreationLoad() {
 	InputCharacter.setAttribute("ID", "InputCharacter");
 	InputCharacter.setAttribute("name", "InputCharacter");
 	InputCharacter.setAttribute("type", "text");
-	InputCharacter.setAttribute("value", "");
+	InputCharacter.setAttribute("value", DefaultName);
 	InputCharacter.setAttribute("maxlength", "20");
 	InputCharacter.setAttribute("onfocus", "this.removeAttribute('readonly');");
 	InputCharacter.addEventListener("keypress", KeyDown);
@@ -72,7 +78,7 @@ function CharacterCreationRun() {
 		
 	// Draw the character, the labels and buttons
 	DrawCharacter(Player, 500, 0, 1);
-	DrawText(CharacterCreationMessage, 1267, 50, "White", "Black");
+	DrawText(CharacterCreationMessage, 1267, 60, "White", "Black");
 	DrawText(TextGet("CharacterName"), 1267, 120, "White", "Black");
 	DrawText(TextGet("AccountName"), 1267, 250, "White", "Black");
 	DrawText(TextGet("Password"), 1267, 380, "White", "Black");
@@ -81,6 +87,13 @@ function CharacterCreationRun() {
 	DrawButton(1080, 770, 370, 60, TextGet("CreateAccount"), "White", "");
 	DrawText(TextGet("AccountAlreadyExists"), 1180, 930, "White", "Black");
 	DrawButton(1440, 900, 120, 60, TextGet("Login"), "White", "");
+	
+	// Draw the importation check box
+	if (ImportBondageCollegeData != null) {
+		DrawText(TextGet("ImportBondageCollege"), 1217, 20, "White", "Black");
+		DrawButton(1425, 0, 75, 75, "", "White", ImportBondageCollegeData ? "Icons/Checked.png" : "Icons/Unchecked.png");
+	}
+
 }
 
 // When the ajax response returns, we analyze it's data
@@ -91,13 +104,12 @@ function CharacterCreationResponse(CharacterData) {
 		Player.Name = document.getElementById("InputCharacter").value.trim();
 		Player.AccountName = document.getElementById("InputName").value.trim();
 		Player.AccountPassword = document.getElementById("InputPassword1").value.trim();
-		InventoryLoad(Player, null, true);
-		CharacterAppearanceSave(Player);
 		
-		// Logs Sarah status from the Bondage College if needed
-		ImportBondageCollegeSarah();
-		
+		// Imports logs, inventory and Sarah status from the Bondage College
+		ImportBondageCollege(Player);
+
 		// Flush the controls and enters the main hall
+		CharacterAppearanceSave(Player);
 		document.getElementById("InputCharacter").parentNode.removeChild(document.getElementById("InputCharacter"));
 		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 		document.getElementById("InputPassword1").parentNode.removeChild(document.getElementById("InputPassword1"));
@@ -110,7 +122,11 @@ function CharacterCreationResponse(CharacterData) {
 
 // When the user clicks on the character creation screen
 function CharacterCreationClick() {
-	
+
+	// If we must check or uncheck the importation checkbox
+	if ((MouseX >= 1440) && (MouseX <= 1560) && (MouseY >= 900) && (MouseY <= 960) && (ImportBondageCollegeData != null))
+		ImportBondageCollegeData = !ImportBondageCollegeData;
+
 	// If we must go back to the login screen
 	if ((MouseX >= 1440) && (MouseX <= 1560) && (MouseY >= 900) && (MouseY <= 960)) {
 		document.getElementById("InputCharacter").parentNode.removeChild(document.getElementById("InputCharacter"));

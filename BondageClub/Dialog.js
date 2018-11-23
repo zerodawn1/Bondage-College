@@ -1,5 +1,6 @@
 var DialogStruggleTimerStart = 0;
 var DialogStruggleTimerEnd = 0;
+var DialogInventory = [];
 
 // Equips an item on the character from dialog
 function DialogEquipItem(AssetName, AssetGroup) {
@@ -39,6 +40,7 @@ function DialogIntro() {
 function DialogLeave() {
 	Player.FocusGroup = null;
 	CurrentCharacter.FocusGroup = null;
+	DialogInventory = null;
 	CurrentCharacter = null;
 }
 
@@ -62,8 +64,58 @@ function DialogRemove() {
 function DialogLeaveItemMenu() {
 	Player.FocusGroup = null;
 	CurrentCharacter.FocusGroup = null;
+	DialogInventory = null;
 	DialogStruggleTimerStart = 0;
 	DialogStruggleTimerEnd = 0;
+}
+
+// Adds the item in the dialog list
+function DialogInventoryAdd(NewInv, NewInvWorn) {
+
+	// Make sure we do not duplicate the item
+	for(var I = 0; I < DialogInventory.length; I++)
+		if ((DialogInventory[I].Group.Name == NewInv.Group.Name) && (DialogInventory[I].Name == NewInv.Name))
+			return;
+		
+	// Creates a new dialog inventory item
+	var DI = {
+		Asset: NewInv,
+		Worn: NewInvWorn,
+		Icon: ""
+	};
+
+	// Loads the correct icon and push the item in the array
+	if (NewInvWorn && (NewInv.Effect.indexOf("Lock") >= 0)) DI.Icon = "Locked";
+	if (!NewInvWorn && (NewInv.Effect.indexOf("Lock") >= 0)) DI.Icon = "Unlocked";
+	DialogInventory.push(NewInv);
+
+}
+
+// Build the inventory listing for the dialog which is what's equipped, the player inventory and the character inventory for that group
+function DialogInventoryBuild(C) {
+
+	// Make sure there's a focused group
+	DialogInventory = [];
+	if (C.FocusGroup != null) {
+
+		// First, we add anything that's currently equipped
+		for(var A = 0; A < C.Appearance.length; A++)
+			if (C.Appearance[A].Asset.Group.Name == C.FocusGroup.Name)
+				DialogInventoryAdd(C.Appearance[A].Asset, true);
+
+		// Second, we add everything from the victim inventory
+		for(var A = 0; A < C.Inventory.length; A++)
+			if (C.Inventory[A].Asset.Group.Name == C.FocusGroup.Name)
+				DialogInventoryAdd(C.Inventory[A].Asset, false);
+			
+		// Third, we add everything from the player inventory if the player isn't the victim
+		if (C.ID != 0)
+			for(var A = 0; A < Player.Inventory.length; A++)
+				if (Player.Inventory[A].Asset.Group.Name == Player.FocusGroup.Name)
+					DialogInventoryAdd(C.Inventory[A].Asset, false);
+
+	}
+
 }
 
 // When the user clicks on a dialog option
@@ -77,8 +129,11 @@ function DialogClick() {
 		for(var A = 0; A < AssetGroup.length; A++)
 			if ((AssetGroup[A].Category == "Item") && (AssetGroup[A].Zone != null))
 				for(var Z = 0; Z < AssetGroup[A].Zone.length; Z++)
-					if ((MouseX - X >= AssetGroup[A].Zone[Z][0]) && (MouseY >= AssetGroup[A].Zone[Z][1] - C.HeightModifier) && (MouseX - X <= AssetGroup[A].Zone[Z][0] + AssetGroup[A].Zone[Z][2]) && (MouseY <= AssetGroup[A].Zone[Z][1] + AssetGroup[A].Zone[Z][3] - C.HeightModifier))
+					if ((MouseX - X >= AssetGroup[A].Zone[Z][0]) && (MouseY >= AssetGroup[A].Zone[Z][1] - C.HeightModifier) && (MouseX - X <= AssetGroup[A].Zone[Z][0] + AssetGroup[A].Zone[Z][2]) && (MouseY <= AssetGroup[A].Zone[Z][1] + AssetGroup[A].Zone[Z][3] - C.HeightModifier)) {
 						C.FocusGroup = AssetGroup[A];
+						DialogInventoryBuild(C);
+						break;
+					}
 	}
 
 	// In item menu mode VS text dialog mode
@@ -124,31 +179,29 @@ function DialogClick() {
 			var X = 1000;
 			var Y = 125;
 			var C = (Player.FocusGroup != null) ? Player : CurrentCharacter;
-			for(var I = 0; I < Player.Inventory.length; I++)
-				if ((Player.Inventory[I].Asset != null) && (Player.Inventory[I].Asset.Group.Name == C.FocusGroup.Name) && (Player.Inventory[I].Asset.Group.Category == "Item")) {
+			for(var I = 0; I < DialogInventory.length; I++) {
 
-					// If the item at position is clicked
-					if ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && Player.Inventory[I].Asset.Enable) {
-						
-						// Cannot change item if the previous one is locked
-						var Effect = CharacterAppearanceGetCurrentValue(C, C.FocusGroup.Name, "Effect");
-						if ((Effect == null) || (Effect.indexOf("Lock") < 0)) {						
-							CharacterAppearanceSetItem(C, Player.Inventory[I].Asset.Group.Name, Player.Inventory[I].Asset);
-							C.CurrentDialog = DialogFind(C, Player.Inventory[I].Asset.Name, Player.Inventory[I].Asset.Group.Name);
-							DialogLeaveItemMenu();
-							break;
-						}
+				// If the item at position is clicked
+				if ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && DialogInventory[I].Asset.Enable) {
 
-					}
-
-					// Change the X and Y position to get the next square
-					X = X + 250;
-					if (X > 1800) {
-						X = 1000;
-						Y = Y + 300;
+					// Cannot change item if the previous one is locked
+					if ((DialogInventory[I].Effect == null) || (DialogInventory[I].indexOf("Lock") < 0)) {
+						CharacterAppearanceSetItem(C, DialogInventory[I].Asset.Group.Name, DialogInventory[I].Asset);
+						C.CurrentDialog = DialogFind(C, DialogInventory[I].Asset.Name, DialogInventory[I].Asset.Group.Name);
+						DialogLeaveItemMenu();
+						break;
 					}
 
 				}
+
+				// Change the X and Y position to get the next square
+				X = X + 250;
+				if (X > 1800) {
+					X = 1000;
+					Y = Y + 300;
+				}
+
+			}
 
 		}		
 
@@ -193,29 +246,30 @@ function DialogDrawItemMenu(C) {
 	// Inventory is only accessible if the player can struggle out
 	if (Player.CanInteract()) {
 
+		// Builds the item dialog if we need too
+		if (DialogInventory == null) DialogInventoryBuild(C);
+	
 		// Draws the top menu
 		if ((C.FocusGroup != null) && (CharacterAppearanceGetCurrentValue(C, C.FocusGroup.Name, "Name") != "None")) {
 			DrawText("Select an item to use", 1250, 62, "White", "Black");
 			DrawButton(1500, 25, 225, 75, "Remove", "White");
 		} else DrawText("Select an item to use", 1375, 62, "White", "Black");
 		DrawButton(1750, 25, 225, 75, "Cancel", "White");
-	
+
 		// For each items in the player inventory
 		var X = 1000;
 		var Y = 125;
-		for(var I = 0; I < Player.Inventory.length; I++)
-			if ((Player.Inventory[I].Asset != null) && (Player.Inventory[I].Asset.Group.Name == C.FocusGroup.Name) && (Player.Inventory[I].Asset.Group.Category == "Item")) {
-				var Worn = (CharacterAppearanceGetCurrentValue(C, Player.Inventory[I].Asset.Group.Name, "Name") == Player.Inventory[I].Asset.Name);
-				DrawRect(X, Y, 225, 275, ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && !CommonIsMobile) ? "cyan" : Worn ? "pink" : "white");
-				DrawImageResize("Assets/" + Player.Inventory[I].Asset.Group.Family + "/" + Player.Inventory[I].Asset.Group.Name + "/Preview/" + Player.Inventory[I].Name + ".png", X + 2, Y + 2, 221, 221);
-				DrawTextFit(Player.Inventory[I].Asset.Description, X + 112, Y + 250, 221, "black");
-				if (Worn && (Player.Inventory[I].Asset.Effect != null) && (Player.Inventory[I].Asset.Effect.indexOf("Lock") >= 0)) DrawImage("Icons/Lock.png", X + 55, Y + 55);
-				X = X + 250;
-				if (X > 1800) {
-					X = 1000;
-					Y = Y + 300;
-				}
+		for(var I = 0; I < DialogInventory.length; I++) {
+			DrawRect(X, Y, 225, 275, ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && !CommonIsMobile) ? "cyan" : DialogInventory[I].Worn ? "pink" : "white");
+			DrawImageResize("Assets/" + DialogInventory[I].Asset.Group.Family + "/" + DialogInventory[I].Asset.Group.Name + "/Preview/" + DialogInventory[I].Name + ".png", X + 2, Y + 2, 221, 221);
+			DrawTextFit(DialogInventory[I].Asset.Description, X + 112, Y + 250, 221, "black");
+			if (DialogInventory[I].Icon != "") DrawImage("Icons/" + DialogInventory[I].Icon + ".png", X + 2, Y + 110);
+			X = X + 250;
+			if (X > 1800) {
+				X = 1000;
+				Y = Y + 300;
 			}
+		}
 	
 	} else {
 		

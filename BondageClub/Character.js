@@ -10,6 +10,8 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		AssetFamily: CharacterAssetFamily,
 		AccountName: "",
 		AccountPassword: "",
+		Owner: "",
+		Lover: "",
 		Money: 0,
 		Inventory: [],		
 		Appearance: [],
@@ -38,7 +40,6 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 
 	// Creates the inventory and default appearance
 	if (CharacterID == 0) Player = NewCharacter;
-	InventoryLoad(NewCharacter, null, true);
 	CharacterAppearanceSetDefault(NewCharacter);
 		
 	// Load the character image
