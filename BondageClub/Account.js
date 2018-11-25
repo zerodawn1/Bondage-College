@@ -33,3 +33,8 @@ function AccountProcess() {
 function AccountQueueIsEmpty() {
 	return ((AccountURL.length == 0) && AccountReady);
 }
+
+// Sync the player data with the account server
+function AccountSync() {
+	AccountRequest("update_character", "&money=" + Player.Money.toString() + "&owner=" + Player.Owner + "&lover=" + Player.Lover);
+}

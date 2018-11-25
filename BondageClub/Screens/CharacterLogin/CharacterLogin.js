@@ -60,6 +60,9 @@ function CharacterLoginResponse(CharacterData) {
 		Player.AccountName = C.AccountName;
 		Player.AccountPassword = document.getElementById("InputPassword").value.trim();
 		Player.AssetFamily = C.AssetFamily;
+		if (CommonIsNumeric(C.Money)) Player.Money = C.Money;
+		Player.Owner = C.Owner;
+		Player.Lover = C.Lover;
 		CharacterAppearanceLoadFromAccount(Player, C.Appearance);
 		InventoryLoad(Player, C.Inventory, false);
 		LogLoad(C.Log);

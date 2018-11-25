@@ -26,4 +26,4 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 140,0,0,!IsCollared,What about|my slaves?,You cannot invite your slaves without|a permission from the Head Mistress.,150,0,0,
 150,0,0,,I understand.,Are you ready to enter the club?|I will lead you to the dressing room.,160,0,0,
 160,0,0,BeltProblem,(Blush)  I have a|metal undies problem.,Don't worry girl.  You're not the only|one wearing a belt.  You can come in.,160,0,0,
-160,0,0,NoProblem,I'm ready!|(Enter the club.),,160,0,0,EnterClub()
+160,0,0,,I'm ready!|(Enter the club.),,160,0,0,EnterClub()

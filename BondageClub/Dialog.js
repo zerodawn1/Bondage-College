@@ -105,14 +105,14 @@ function DialogInventoryBuild(C) {
 
 		// Second, we add everything from the victim inventory
 		for(var A = 0; A < C.Inventory.length; A++)
-			if (C.Inventory[A].Asset.Group.Name == C.FocusGroup.Name)
+			if ((C.Inventory[A].Asset != null) && (C.Inventory[A].Asset.Group.Name == C.FocusGroup.Name))
 				DialogInventoryAdd(C.Inventory[A].Asset, false);
 			
 		// Third, we add everything from the player inventory if the player isn't the victim
 		if (C.ID != 0)
 			for(var A = 0; A < Player.Inventory.length; A++)
-				if (Player.Inventory[A].Asset.Group.Name == Player.FocusGroup.Name)
-					DialogInventoryAdd(C.Inventory[A].Asset, false);
+				if ((Player.Inventory[A].Asset != null) && (Player.Inventory[A].Asset.Group.Name == C.FocusGroup.Name))
+					DialogInventoryAdd(Player.Inventory[A].Asset, false);
 
 	}
 
@@ -185,7 +185,8 @@ function DialogClick() {
 				if ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && DialogInventory[I].Asset.Enable) {
 
 					// Cannot change item if the previous one is locked
-					if ((DialogInventory[I].Asset.Effect == null) || (DialogInventory[I].Asset.Effect.indexOf("Lock") < 0)) {
+					var Effect = CharacterAppearanceGetCurrentValue(C, C.FocusGroup.Name, "Effect");
+					if ((Effect == null) || (Effect.indexOf("Lock") < 0)) {
 						CharacterAppearanceSetItem(C, DialogInventory[I].Asset.Group.Name, DialogInventory[I].Asset);
 						C.CurrentDialog = DialogFind(C, DialogInventory[I].Asset.Name, DialogInventory[I].Asset.Group.Name);
 						DialogLeaveItemMenu();
@@ -212,7 +213,7 @@ function DialogClick() {
 			DialogLeave();
 
 		// If the user clicked on a text dialog option, we trigger it
-		if ((MouseX >= 1025) && (MouseX <= 1975) && (MouseY >= 100) && (MouseY <= 975)) {
+		if ((MouseX >= 1025) && (MouseX <= 1975) && (MouseY >= 100) && (MouseY <= 975) && (CurrentCharacter != null)) {
 			var pos = 0;
 			for(var D = 0; D < CurrentCharacter.Dialog.length; D++)
 				if ((CurrentCharacter.Dialog[D].Stage == CurrentCharacter.Stage) && (CurrentCharacter.Dialog[D].Option != null) && DialogPrerequisite(D)) {
@@ -283,13 +284,14 @@ function DialogDrawItemMenu(C) {
 		// If the player is struggling
 		if (DialogStruggleTimerEnd > 0) {
 			var Progress = (new Date().getTime() - DialogStruggleTimerStart) / (DialogStruggleTimerEnd - DialogStruggleTimerStart);
-			DrawText("Struggling...", 1500, 450, "White", "Black");	
+			DrawText("Struggling...", 1500, 450, "White", "Black");
 			DrawRect(1200, 500, 600, 100, "White");
 			DrawRect(1202, 503, 594, 94, "Red");
 			DrawRect(1202, 503, Progress * 594, 94, "#88FF88");
 			if (Progress >= 1) {
 				Player.CurrentDialog = DialogFind(Player, "Struggle" + Player.FocusGroup.Name, "");
 				CharacterAppearanceSetItem(Player, Player.FocusGroup.Name, null);
+				DialogInventoryBuild(C);
 			}
 		}
 		else DrawText("You cannot access your items", 1500, 500, "White", "Black");

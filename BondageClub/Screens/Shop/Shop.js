@@ -20,7 +20,7 @@ function ShopRun() {
 	// Draw both characters
 	DrawCharacter(Player, 0, 0, 1);
 	DrawCharacter(ShopVendor, 500, 0, 1);
-	if (Player.CanWalk() || ShopStart) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
+	if (Player.CanWalk() || ShopStarted) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
 
 	// In shopping mode
 	if (ShopStarted) {
