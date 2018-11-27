@@ -117,9 +117,11 @@ Shoes,Boots1,Boots
 ItemFeet,,Feet
 ItemFeet,NylonRope,Nylon Rope
 ItemFeet,HempRope,Hemp Rope
+ItemFeet,LeatherBelt,Leather Belt
 ItemLegs,,Legs
 ItemLegs,NylonRope,Nylon Rope
 ItemLegs,HempRope,Hemp Rope
+ItemLegs,LeatherBelt,Leather Belt
 ItemPelvis,,Pelvis
 ItemPelvis,MetalChastityBelt,Metal Chastity Belt
 ItemPelvis,RegularVibratingEgg,Regular Vibrating Egg
@@ -144,6 +146,7 @@ ItemMouth,ClothCleaveGag,Cloth Cleave Gag
 ItemMouth,ClothOTMGag,Cloth OTM Gag
 ItemMouth,ClothOTNGag,Cloth OTN Gag
 ItemMouth,HarnessBallGag,Harness Ball Gag
+ItemMouth,HarnessPanelGag,Harness Panel Gag
 ItemMouth,DuctTapeGag,Duct Tape Gag
 ItemMouth,RegularSleepingPill,Sleeping Pill
 ItemHead,,Head

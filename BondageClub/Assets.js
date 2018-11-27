@@ -32,16 +32,18 @@ function AssetGroupAdd(NewAssetFamily, NewAsset) {
 }
 
 // Adds a new asset to the main list
-function AssetAdd(NewAssetName, NewAssetEnable, NewAssetVisible, NewAssetEffect, NewAssetSetPose, NewAssetValue, NewAssetHeightModifier) {
+function AssetAdd(NewAssetName, NewAssetEnable, NewAssetVisible, NewAssetWear, NewAssetEffect, NewAssetSetPose, NewAssetValue, NewAssetDrawingPriority, NewAssetHeightModifier) {
 	var A = {
 		Name: NewAssetName,
 		Description: NewAssetName,
 		Group: AssetCurrentGroup,
 		Enable: (NewAssetEnable == null) ? true : NewAssetEnable,
 		Visible: (NewAssetVisible == null) ? true : NewAssetVisible,
+		Wear: (NewAssetWear == null) ? true : NewAssetWear,
 		Effect: NewAssetEffect,
 		SetPose: NewAssetSetPose,
 		Value: (NewAssetValue == null) ? 0 : NewAssetValue,
+		DrawingPriority: NewAssetDrawingPriority,
 		HeightModifier: (NewAssetHeightModifier == null) ? 0 : NewAssetHeightModifier
 	}
 	Asset.push(A);
@@ -110,9 +112,9 @@ function AssetLoad(A, Family) {
 		var I;
 		for (I = 0; I < A[G].Asset.length; I++)
 			if (A[G].Asset[I].Name == null)
-				AssetAdd(A[G].Asset[I], true, true, null, null, 0, 0)
+				AssetAdd(A[G].Asset[I], true, true, true, null, null, 0, null, 0)
 			else
-				AssetAdd(A[G].Asset[I].Name, A[G].Asset[I].Enable, A[G].Asset[I].Visible, A[G].Asset[I].Effect, A[G].Asset[I].SetPose, A[G].Asset[I].Value, A[G].Asset[I].Height);
+				AssetAdd(A[G].Asset[I].Name, A[G].Asset[I].Enable, A[G].Asset[I].Visible, A[G].Asset[I].Wear, A[G].Asset[I].Effect, A[G].Asset[I].SetPose, A[G].Asset[I].Value, A[G].Asset[I].Priority, A[G].Asset[I].Height);
 
 	}
 	

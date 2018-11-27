@@ -6,7 +6,7 @@ var AssetFemale3DCG = [
 		Priority: 2,
 		AllowNone: false,
 		AllowColorize: false,
-		AllowPose: ["BackBoxTie"],
+		AllowPose: ["BackBoxTie", "BackCuffs", "BackElbowTouch"],
 		Color: ["White", "Asian", "Black"],
 		Asset: ["Small", "Normal", "Large", "XLarge"],
 	},
@@ -28,7 +28,7 @@ var AssetFemale3DCG = [
 		Group: "Cloth",
 		Priority: 18,
 		ParentGroup: "BodyUpper",
-		AllowPose: ["BackBoxTie"],
+		AllowPose: ["BackBoxTie", "BackCuffs", "BackElbowTouch"],
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Asset: [ { Name: "CollegeOutfit1", Value: -1 }, { Name: "MaidOutfit1", Value: -1 }, "StudentOutfit1", "StudentOutfit2", "TopSkirt1", "BabydollDress1", "TeacherOutfit1", "TennisOutfit1", "ChineseDress1"]
 	},
@@ -102,9 +102,9 @@ var AssetFemale3DCG = [
 		Priority: 15,
 		ParentGroup: "BodyUpper",
 		Default: false,
-		AllowPose: ["BackBoxTie"],
+		AllowPose: ["BackBoxTie", "BackCuffs", "BackElbowTouch"],
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
-		Left: 125,
+		Left: 75,
 		Top: 275,
 		Asset: ["Gloves1", "Gloves2"]
 	},
@@ -195,7 +195,7 @@ var AssetFemale3DCG = [
 		Left: 125,
 		Top: 725,
 		Zone: [[100, 730, 300, 260]],
-		Asset: [ { Name: "NylonRope", Value: 15 }, { Name: "HempRope", Value: 30 } ]
+		Asset: [ { Name: "NylonRope", Value: 15 }, { Name: "HempRope", Value: 30 }, { Name: "LeatherBelt", Value: 25 } ]
 	},
 
 	{
@@ -210,7 +210,7 @@ var AssetFemale3DCG = [
 		Left: 125,
 		Top: 500,
 		Zone: [[100, 550, 300, 180]],
-		Asset: [ { Name: "NylonRope", Value: 15 }, { Name: "HempRope", Value: 30 } ]
+		Asset: [ { Name: "NylonRope", Value: 15 }, { Name: "HempRope", Value: 30 }, { Name: "LeatherBelt", Value: 25 } ]
 	},
 
 	{
@@ -218,7 +218,7 @@ var AssetFemale3DCG = [
 		Category: "Item",
 		Priority: 9,
 		Default: false,
-		AllowPose: ["BackBoxTie"],
+		AllowPose: ["BackBoxTie", "BackCuffs", "BackElbowTouch"],
 		Color: ["Default"],
 		Left: 125,
 		Top: 375,
@@ -244,13 +244,17 @@ var AssetFemale3DCG = [
 		Category: "Item",
 		Priority: 19,
 		Default: false,
-		Effect: ["Block", "Prone"],
 		Color: ["Default"],
-		SetPose: ["BackBoxTie"],
 		Left: 125,		
 		Top: 200,
 		Zone: [[50, 250, 100, 250], [350, 250, 100, 250]],
-		Asset: [ { Name: "NylonRope", Value: 15 }, { Name: "HempRope", Value: 30 }, { Name: "MetalCuffs", Enable: false, Visible: false, Value: 50}, { Name: "MetalCuffsKey", Effect: ["Unlock"], SetPose: [""], Enable: false, Visible: false, Value: 25}, { Name: "LeatherArmbinder", Enable: false, Visible: false, Value: 80} ]
+		Asset: [ 
+			{ Name: "NylonRope", Value: 15, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Struggle"] }, 
+			{ Name: "HempRope", Value: 30, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Struggle"] }, 
+			{ Name: "MetalCuffs", Priority: 17, Value: 50, SetPose: ["BackCuffs"], Effect: ["Block", "Prone", "Lock"] }, 
+			{ Name: "MetalCuffsKey", Wear: false, Value: 25, Effect: ["Unlock-MetalCuffs"] }, 
+			{ Name: "LeatherArmbinder", Priority: 1, Value: 80, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone"] }
+		]
 	},
 
 	{
@@ -275,7 +279,16 @@ var AssetFemale3DCG = [
 		Left: 150,
 		Top: 50,
 		Zone: [[150, 160, 200, 50]],
-		Asset: [ { Name: "SmallClothGag", Effect: ["GagLight"], Value: 10 }, { Name: "ClothCleaveGag", Effect: ["GagLight"], Value: 15 }, { Name: "ClothOTMGag", Value: 20 }, { Name: "ClothOTNGag", Value: 25 }, { Name: "HarnessBallGag", Effect: ["GagHeavy"], Value: 50 }, { Name: "DuctTapeGag", Value: 20 }, { Name: "RegularSleepingPill", Enable: false, Value: -1 } ]
+		Asset: [ 
+			{ Name: "SmallClothGag", Effect: ["GagLight"], Value: 10 }, 
+			{ Name: "ClothCleaveGag", Effect: ["GagLight"], Value: 15 }, 
+			{ Name: "ClothOTMGag", Value: 20 }, 
+			{ Name: "ClothOTNGag", Value: 25 }, 
+			{ Name: "HarnessBallGag", Effect: ["GagHeavy"], Value: 60 },
+			{ Name: "HarnessPanelGag", Effect: ["GagHeavy"], Value: 80 },
+			{ Name: "DuctTapeGag", Value: 20 }, 
+			{ Name: "RegularSleepingPill", Enable: false, Wear: false, Value: -1 } 
+		]
 	},
 
 	{

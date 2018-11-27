@@ -1,4 +1,13 @@
 var MainHallBackground = "MainHall";
+var MainHallNextEventTimer = null;
+var MainHallMaid = null;
+
+// Main hall loading
+function MainHallLoad() {
+	MainHallNextEventTimer = null;
+	MainHallMaid = CharacterLoadNPC("NPC_MainHall_Maid");
+	MainHallMaid.AllowItem = false;
+}
 
 // Run the main hall screen
 function MainHallRun() {
@@ -13,6 +22,17 @@ function MainHallRun() {
 		if (Player.CanWalk()) DrawButton(1765, 25, 90, 90, "", "White", "Icons/Shop.png");
 		DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
 		if (Player.CanWalk()) DrawButton(1525, 145, 450, 65, TextGet("IntroductionClass"), "White");
+		if (Player.CanWalk()) DrawButton(1525, 240, 450, 65, TextGet("MaidQuarters"), "White");
+		
+		// Check if there's a new maid rescue event to trigger
+		if ((!Player.CanInteract() || !Player.CanWalk() || !Player.CanTalk()) && (MainHallNextEventTimer == null)) MainHallNextEventTimer = ReputationTimer("Dominant", true);
+		if ((MainHallNextEventTimer != null) && (new Date().getTime() > MainHallNextEventTimer)) {
+			MainHallNextEventTimer = null;
+			if (!Player.CanInteract() || !Player.CanWalk() || !Player.CanTalk()) {
+				MainHallMaid.Stage = "0";
+				CharacterSetCurrent(MainHallMaid);
+			}
+		}
 
 	} else DrawText(TextGet("SyncWithServer"), 1000, 500, "White", "Black");
 
@@ -24,11 +44,33 @@ function MainHallClick() {
 	// We only allow clicks if the account queue is empty
 	if (AccountQueueIsEmpty()) {
 		if ((MouseX >= 750) && (MouseX < 1250) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(Player);
-		if ((MouseX >= 1575) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 210) && Player.CanWalk()) CommonSetScreen("Introduction");
 		if ((MouseX >= 1525) && (MouseX < 1615) && (MouseY >= 25) && (MouseY < 115)) { CharacterInformationSelection = Player; CommonSetScreen("CharacterInformation"); }
 		if ((MouseX >= 1645) && (MouseX < 1735) && (MouseY >= 25) && (MouseY < 115)) CommonSetScreen("CharacterAppearance");
 		if ((MouseX >= 1765) && (MouseX < 1855) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) CommonSetScreen("Shop");		  
 		if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) CommonSetScreen("CharacterLogin");
+		if ((MouseX >= 1575) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 210) && Player.CanWalk()) CommonSetScreen("Introduction");
+		if ((MouseX >= 1575) && (MouseX < 1975) && (MouseY >= 240) && (MouseY < 315) && Player.CanWalk()) CommonSetScreen("MaidQuarters");
 	}
 
+}
+
+// The maid can release the player
+function MainHallMaidReleasePlayer() {
+	for(var D = 0; D < MainHallMaid.Dialog.length; D++)
+		if ((MainHallMaid.Dialog[D].Stage == "0") && (MainHallMaid.Dialog[D].Option == null))
+			MainHallMaid.Dialog[D].Result = DialogFind(MainHallMaid, "AlreadyReleased");
+	CharacterRelease(Player);
+}
+
+// If the maid is angry, she will gag the player
+function MainHallMaidAngry() {
+	for(var D = 0; D < MainHallMaid.Dialog.length; D++)
+		if ((MainHallMaid.Dialog[D].Stage == "PlayerGagged") && (MainHallMaid.Dialog[D].Option == null))
+			MainHallMaid.Dialog[D].Result = DialogFind(MainHallMaid, "LearnedLesson");
+	ReputationProgress("Dominant", 1);
+	CharacterWearRandomItem(Player, "ItemMouth");
+	if (Player.CanInteract()) {
+		CharacterWearItem(Player, "LeatherArmbinder", "ItemArms");
+		MainHallMaid.CurrentDialog = DialogFind(MainHallMaid, "TeachLesson");
+	}
 }

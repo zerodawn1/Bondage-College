@@ -7,6 +7,7 @@ function ReputationSave(R) {
 function ReputationChange(RepType, RepValue, Push) {
 
 	// Nothing will be done for a zero change
+	RepValue = parseInt(RepValue) || 0;
 	if (RepValue != 0) {
 		
 		// If the reputation already exists, we update and push it
@@ -45,4 +46,37 @@ function ReputationLoad(NewRep) {
 
 	}
 	
+}
+
+// Returns a specific reputation value 
+function ReputationGet(RepType) {
+	for (var R = 0; R < Player.Reputation.length; R++)
+		if (Player.Reputation[R].Type == RepType)
+			return Player.Reputation[R].Value;
+	return 0;
+}
+
+// Returns a timer length based on a reputation value
+function ReputationTimer(RepType, Reverse) {
+	var V = ReputationGet(RepType) * (((Reverse != null) && Reverse) ? -1 : 1);
+	if (V <= 0) return new Date().getTime() + (15000 * (1 + Math.random()));
+	else return new Date().getTime() + ((15 + V) * 1000 * (1 + Math.random()));
+}
+
+// Alter the reputation progress by a factor (The higher the rep, the slower it gets, a reputation is easier to break than to build)
+function ReputationProgress(RepType, Value) {
+	var V = ReputationGet(RepType);
+	if (Value > 0) {
+		if ((V >= 70) && (V <= 100)) ReputationChange(RepType, Math.floor(Value / 3));
+		if ((V >= 30) && (V < 70)) ReputationChange(RepType, Math.floor(Value / 2));
+		if ((V > -30) && (V < 30)) ReputationChange(RepType, Value);
+		if ((V > -70) && (V <= -30)) ReputationChange(RepType, Value * 2);
+		if ((V >= -100) && (V <= -70)) ReputationChange(RepType, Value * 4);
+	} else {
+		if ((V >= -100) && (V <= -70)) ReputationChange(RepType, Math.floor(Value / 3));
+		if ((V > -70) && (V <= -30)) ReputationChange(RepType, Math.floor(Value / 2));
+		if ((V > -30) && (V < 30)) ReputationChange(RepType, Value);
+		if ((V >= 30) && (V < 70)) ReputationChange(RepType, Value * 2);
+		if ((V >= 70) && (V <= 100)) ReputationChange(RepType, Value * 4);
+	}
 }

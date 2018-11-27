@@ -68,6 +68,7 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 270,,,Your introduction is done.  I hope you will have fun in the club.,,
 270,,You were a great teacher.,Well thanks a lot.  You're a good student.,DialogRemove(),
 270,,Thanks!  Have a great time.  (Leave her.),,DialogLeave(),
+270,,Tell me about the other types of restraints.,"Some items are impossible to struggle out from so you'll need to find help.  Also, items like cuffs can be locked, you'll need a key to unlock them.",,
 270,300,I want to practice freeing myself.,Of course!  If you're ready for the challenge I will tie you up.,,
 300,,,Are you ready to struggle against the ropes?,,Player.CanInteract()
 300,,,Get your arms free first if you want to practice struggling against my ropes.  Let me know when you're ready.,,!Player.CanInteract()
@@ -96,4 +97,6 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 370,,You were a great teacher.,Well thanks a lot.  You're a good student.,DialogRemove(),
 370,,Thanks!  Take care.  (Leave her.),,DialogLeave(),
 370,,Can I strap her up?,"Sure, my assistant here will be happy to help you practice.",,
+370,,Can I get better at struggling out?,"Yes, you might learn skills to escape faster if you stick around.  Others might also learn skills to make your struggling harder though.",,
+370,,Tell me about the other types of restraints.,"Some items are impossible to struggle out from so you'll need to find help.  Also, items like cuffs can be locked, you'll need a key to unlock them.",,
 370,300,I want to practice freeing myself.,Again?  Well of course.  Are you ready to struggle now?,,

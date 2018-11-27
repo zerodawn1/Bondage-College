@@ -114,6 +114,20 @@ function CharacterAppearanceNaked(C) {
 
 }
 
+// Returns the character appearance sorted by drawing priority
+function CharacterAppearanceSort(AP) {
+	var Arr = [];
+	for(var P = 0; P < 50; P++)
+		for(var A = 0; A < AP.length; A++)
+			if (AP[A].Asset.DrawingPriority != null) {
+				if (AP[A].Asset.DrawingPriority == P)
+					Arr.push(AP[A]);				
+			} else 
+				if (AP[A].Asset.Group.DrawingPriority == P)
+					Arr.push(AP[A]);
+	return Arr;
+}
+
 // Gets the character 
 function CharacterAppearanceBuildCanvas(C) {
 
@@ -130,7 +144,7 @@ function CharacterAppearanceBuildCanvas(C) {
 	} else C.CanvasBlink.getContext("2d").clearRect(0, 0, 500, 1000);
 	
 	// Sorts the list
-	C.Appearance = CommonSortObjectList(C.Appearance, "Priority");
+	C.Appearance = CharacterAppearanceSort(C.Appearance, "Priority");
 	
 	// Loops in all items worn by the character
 	for (var A = 0; A < C.Appearance.length; A++) {
@@ -184,6 +198,7 @@ function CharacterAppearanceGetCurrentValue(C, Group, Type) {
 			if (Type == "Color") return C.Appearance[A].Color;
 			if (Type == "ID") return A;
 			if (Type == "Effect") return C.Appearance[A].Asset.Effect;
+			if (Type == "Asset") return C.Appearance[A].Asset;
 		}
 	return "None";
 
@@ -191,7 +206,6 @@ function CharacterAppearanceGetCurrentValue(C, Group, Type) {
 
 // Loads the character appearance screen and keeps a backup of the previous appearance
 function CharacterAppearanceLoad() {
-	CharacterAppearanceHeaderText = TextGet("SelectAppearance");
 	CharacterAppearanceBuildAssets(Player);
 	CharacterAppearanceBackup = JSON.parse(JSON.stringify(Player.Appearance));
 }
@@ -200,6 +214,7 @@ function CharacterAppearanceLoad() {
 function CharacterAppearanceRun() {
 	
 	// Draw the background and the character twice
+	if (CharacterAppearanceHeaderText == "") CharacterAppearanceHeaderText = TextGet("SelectAppearance");
 	DrawCharacter(Player, -550, -100, 4);
 	DrawCharacter(Player, 800, 0, 1);
 	DrawText(CharacterAppearanceHeaderText, 450, 40, "White", "Black");
@@ -257,10 +272,7 @@ function CharacterAppearanceSetItem(C, Group, ItemAsset) {
 	}
 
 	// Draw the character canvas and calculate the effects on the character
-	CharacterLoadEffect(C);
-	CharacterLoadPose(C);	
-	CharacterLoadCanvas(C);
-	if (CurrentScreen != "CharacterAppearance") CharacterAppearanceSave(C);
+	CharacterRefresh(C);
 
 }
 
@@ -469,9 +481,7 @@ function CharacterAppearanceLoadFromAccount(C, Appearance) {
 		}
 
 		// Draw the character canvas
-		CharacterLoadEffect(C);
-		CharacterLoadPose(C);
-		CharacterLoadCanvas(C);
+		CharacterRefresh(C);
 
 	}
 

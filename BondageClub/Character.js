@@ -209,3 +209,40 @@ function CharacterSetCurrent(C) {
 	if (!Player.CanTalk()) NewDialog = DialogFind(CurrentCharacter, "PlayerGagged", "");
 	if (NewDialog != "") C.CurrentDialog = NewDialog;
 }
+
+// Refreshes the character parameters
+function CharacterRefresh(C) {	
+	CharacterLoadEffect(C);
+	CharacterLoadPose(C);	
+	CharacterLoadCanvas(C);
+	if (CurrentScreen != "CharacterAppearance") CharacterAppearanceSave(C);
+}
+
+// Removes any binding item from the current character
+function CharacterRelease(C) {
+	for(var E = 0; E < C.Appearance.length; E++)
+		if ((C.Appearance[E].Asset.Group.Name == "ItemMouth") || (C.Appearance[E].Asset.Group.Name == "ItemArms") || (C.Appearance[E].Asset.Group.Name == "ItemFeet") || (C.Appearance[E].Asset.Group.Name == "ItemLegs") || (C.Appearance[E].Asset.Group.Name == "ItemHead")) {
+			C.Appearance.splice(E, 1);
+			E--;
+		}
+	CharacterRefresh(C);
+}
+
+// Makes the character wear an item
+function CharacterWearItem(C, AssetName, AssetGroup) {
+	for (var A = 0; A < Asset.length; A++)
+		if ((Asset[A].Name == AssetName) && (Asset[A].Group.Name == AssetGroup))
+			CharacterAppearanceSetItem(C, AssetGroup, Asset[A]);
+	CharacterRefresh(C);
+}
+
+// Makes the character wear a random item from a group
+function CharacterWearRandomItem(C, AssetGroup) {
+	var List = [];
+	for (var A = 0; A < Asset.length; A++)
+		if ((Asset[A].Group.Name == AssetGroup) && Asset[A].Wear && Asset[A].Enable)
+			List.push(Asset[A]);
+	if (List.length == 0) return;
+	CharacterAppearanceSetItem(C, AssetGroup, List[Math.floor(Math.random() * List.length)]);
+	CharacterRefresh(C);
+}
