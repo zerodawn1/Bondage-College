@@ -10,5 +10,6 @@ Reputation,- Reputation -
 ReputationNone,None
 ReputationDominantPositive,Dominant:
 ReputationDominantNegative,Submissive:
+ReputationMaidPositive,Maid Sorority:
 Skill,- Skills -
 SkillNone,None

@@ -29,7 +29,9 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		HeightModifier: 0,
 		CanTalk : function() { return ((this.Effect.indexOf("GagLight") < 0) && (this.Effect.indexOf("GagNormal") < 0) && (this.Effect.indexOf("GagHeavy") < 0) && (this.Effect.indexOf("GagTotal") < 0)) },
 		CanWalk : function() { return (this.Effect.indexOf("Freeze") < 0) },
-		CanInteract : function() { return (this.Effect.indexOf("Block") < 0) }
+		CanInteract : function() { return (this.Effect.indexOf("Block") < 0) },
+		IsProne : function() { return (this.Effect.indexOf("Prone") > 0) },
+		IsRestrained : function() { return ((this.Effect.indexOf("Freeze") >= 0) || (this.Effect.indexOf("Block") >= 0) || (this.Effect.indexOf("Prone") >= 0)) }
 	}
 
 	// If the character doesn't exist, we create it
@@ -228,11 +230,21 @@ function CharacterRelease(C) {
 	CharacterRefresh(C);
 }
 
+// Removes a specific item from the player appearance
+function CharacterRemove(C, AssetGroup) {
+	for(var E = 0; E < C.Appearance.length; E++)
+		if (C.Appearance[E].Asset.Group.Name == AssetGroup) {
+			C.Appearance.splice(E, 1);
+			E--;
+		}
+	CharacterRefresh(C);
+}
+
 // Makes the character wear an item
-function CharacterWearItem(C, AssetName, AssetGroup) {
+function CharacterWearItem(C, AssetName, AssetGroup, ItemColor) {
 	for (var A = 0; A < Asset.length; A++)
 		if ((Asset[A].Name == AssetName) && (Asset[A].Group.Name == AssetGroup))
-			CharacterAppearanceSetItem(C, AssetGroup, Asset[A]);
+			CharacterAppearanceSetItem(C, AssetGroup, Asset[A], ItemColor);
 	CharacterRefresh(C);
 }
 

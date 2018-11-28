@@ -252,7 +252,7 @@ function CharacterAppearanceRun() {
 }
 
 // Sets an item in the character appearance
-function CharacterAppearanceSetItem(C, Group, ItemAsset) {
+function CharacterAppearanceSetItem(C, Group, ItemAsset, NewColor) {
 	
 	// Removes the previous if we need to
 	var ID = CharacterAppearanceGetCurrentValue(C, Group, "ID");
@@ -266,7 +266,7 @@ function CharacterAppearanceSetItem(C, Group, ItemAsset) {
 	if (ItemAsset != null) {
 		var NA = {
 			Asset: ItemAsset,
-			Color: ItemColor
+			Color: ((NewColor == null) ? ItemColor : NewColor)
 		}
 		C.Appearance.push(NA);
 	}

@@ -72,18 +72,18 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 270,300,I want to practice freeing myself.,Of course!  If you're ready for the challenge I will tie you up.,,
 300,,,Are you ready to struggle against the ropes?,,Player.CanInteract()
 300,,,Get your arms free first if you want to practice struggling against my ropes.  Let me know when you're ready.,,!Player.CanInteract()
-300,310,"I'm ready, you can tie me up.",(She wraps a white nylon rope around your feet and does two knots.),"DialogEquipItem(""NylonRope"", ""ItemFeet"")",Player.CanInteract()
+300,310,"I'm ready, you can tie me up.",(She wraps a white nylon rope around your feet and does two knots.),"DialogWearItem(""NylonRope"", ""ItemFeet"")",Player.CanInteract()
 300,,Not yet.  Give me some time.  (Leave her.),,DialogLeave(),
-310,320,I won't be running away now.,That's for sure.  (She wraps a second rope around your legs.),"DialogEquipItem(""NylonRope"", ""ItemLegs"")",
-310,320,That's all?,Of course not.  (She wraps a second rope around your legs.),"DialogEquipItem(""NylonRope"", ""ItemLegs"")",
-320,330,It feels good.,"(She nods and wraps a third rope around your body and arms, forcing them stuck in your back.)","DialogEquipItem(""NylonRope"", ""ItemArms"")",
-320,330,You sure know the ropes.,"(She nods and wraps a third rope around your body and arms, forcing them stuck in your back.)","DialogEquipItem(""NylonRope"", ""ItemArms"")",
+310,320,I won't be running away now.,That's for sure.  (She wraps a second rope around your legs.),"DialogWearItem(""NylonRope"", ""ItemLegs"")",
+310,320,That's all?,Of course not.  (She wraps a second rope around your legs.),"DialogWearItem(""NylonRope"", ""ItemLegs"")",
+320,330,It feels good.,"(She nods and wraps a third rope around your body and arms, forcing them stuck in your back.)","DialogWearItem(""NylonRope"", ""ItemArms"")",
+320,330,You sure know the ropes.,"(She nods and wraps a third rope around your body and arms, forcing them stuck in your back.)","DialogWearItem(""NylonRope"", ""ItemArms"")",
 330,340,It's too tight!,You'll get used to it.  Now do you think you can escape?,ChangeMaidOpinion(-1),
 330,340,That's the best you can do?,"You're very bold, I like it.  Now do you think you can escape?",ChangeMaidOpinion(1),
 330,340,This is pretty kinky.,Absolutely!  Now do you think you can escape?,,
 340,,,You're still struggling to get out?  Don't give up.,,!Player.CanInteract()
 340,,How do I escape?,Grab the rope on your arms and try to free yourself.  Good luck!,,!Player.CanInteract()
-340,,Get me out now!,You're not in control girl.  (She grabs your mouth and straps a cloth gag on you.),"DialogEquipItem(""SmallClothGag"", ""ItemMouth"")",!Player.CanInteract()
+340,,Get me out now!,You're not in control girl.  (She grabs your mouth and straps a cloth gag on you.),"DialogWearItem(""SmallClothGag"", ""ItemMouth"")",!Player.CanInteract()
 340,,"Don't look, I will escape by myself.  (Leave her.)",,DialogLeave(),!Player.CanInteract()
 340,,,Well done!  You were able to struggle out.,,Player.CanInteract()
 340,350,That was easy.,I'll make it tighter next time.  Did you enjoy being tied up?,,Player.CanInteract()

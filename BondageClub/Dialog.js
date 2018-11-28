@@ -2,15 +2,11 @@ var DialogStruggleTimerStart = 0;
 var DialogStruggleTimerEnd = 0;
 var DialogInventory = [];
 
-// Change the player reputation through dialog options (a reputation is easier to break than to build)
-function DialogChangeReputation(RepType, Value) {
-	ReputationProgress(RepType, Value);
-}
-
-// Equips an item on the player from dialog
-function DialogEquipItem(AssetName, AssetGroup) {
-	CharacterWearItem(Player, AssetName, AssetGroup);
-}
+function DialogReputationLess(RepType, Value) { return (ReputationGet(RepType) <= Value); } // Returns TRUE if a specific reputation type is less or equal than a given value
+function DialogReputationGreater(RepType, Value) { return (ReputationGet(RepType) >= Value); } // Returns FALSE if a specific reputation type is greater or equal than a given value
+function DialogChangeReputation(RepType, Value) { ReputationProgress(RepType, Value); } // Change the player reputation progressively through dialog options (a reputation is easier to break than to build)
+function DialogWearItem(AssetName, AssetGroup) { CharacterWearItem(Player, AssetName, AssetGroup); } // Equips a specific item on the player from dialog
+function DialogWearRandomItem(AssetGroup) { CharacterWearRandomItem(Player, AssetGroup); } // Equips a random item from a given group to the player from dialog
 
 // Returns TRUE if the dialog prerequisite condition is met
 function DialogPrerequisite(D) {
@@ -23,10 +19,13 @@ function DialogPrerequisite(D) {
 			if (CurrentCharacter.Dialog[D].Prerequisite.indexOf("!Player.") == 0)
 				return !Player[CurrentCharacter.Dialog[D].Prerequisite.substring(8, 250).replace("()", "").trim()]();
 			else
-				if (CurrentCharacter.Dialog[D].Prerequisite.substring(0, 1) != "!")
-					return eval(CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite);
+				if ((CurrentCharacter.Dialog[D].Prerequisite.indexOf("Dialog") == 0) || (CurrentCharacter.Dialog[D].Prerequisite.indexOf("Dialog") == 1))
+					return eval(CurrentCharacter.Dialog[D].Prerequisite);
 				else
-					return !eval(CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite.substr(1, 250));
+					if (CurrentCharacter.Dialog[D].Prerequisite.substring(0, 1) != "!")
+						return eval(CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite);
+					else
+						return !eval(CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite.substr(1, 250));
 }
 
 // Searches for an item in the player inventory to unlock a specific item

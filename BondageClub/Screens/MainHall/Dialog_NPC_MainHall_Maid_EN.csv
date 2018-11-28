@@ -2,6 +2,7 @@ PlayerGagged,,,Do you need help?  Nod if you do.,
 AlreadyReleased,,,(DialogCharacterName comes to check on you again.)  You're in trouble again?  Do you need help?,
 LearnedLesson,,,Still in trouble are we?  Have you learned your lesson?  Nod if you did.,
 TeachLesson,,,It seems that you need to learn a lesson. (She grabs your arms and forces them in a armbinder.  She then gets a gag and silences you.),
+Cower,,,(She gulps and bows her head.)  Yes Miss.  Sorry Miss.,
 0,,,(A maid walks by and greets you.)  Are you trouble?  Do you need help?,
 0,,Who are you?,"I'm DialogCharacterName, I work here as a maid to help submissives in trouble.  Do you need help?",DialogRemove()
 0,10,(Nod yes.),(She releases you and smiles.)  Here you go!  Everything is ok now?,MaidReleasePlayer()

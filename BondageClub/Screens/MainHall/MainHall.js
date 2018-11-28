@@ -62,15 +62,17 @@ function MainHallMaidReleasePlayer() {
 	CharacterRelease(Player);
 }
 
-// If the maid is angry, she will gag the player
+// If the maid is angry, she might gag or tie up the player
 function MainHallMaidAngry() {
-	for(var D = 0; D < MainHallMaid.Dialog.length; D++)
-		if ((MainHallMaid.Dialog[D].Stage == "PlayerGagged") && (MainHallMaid.Dialog[D].Option == null))
-			MainHallMaid.Dialog[D].Result = DialogFind(MainHallMaid, "LearnedLesson");
-	ReputationProgress("Dominant", 1);
-	CharacterWearRandomItem(Player, "ItemMouth");
-	if (Player.CanInteract()) {
-		CharacterWearItem(Player, "LeatherArmbinder", "ItemArms");
-		MainHallMaid.CurrentDialog = DialogFind(MainHallMaid, "TeachLesson");
-	}
+	if (ReputationGet("Dominant") < 30) {
+		for(var D = 0; D < MainHallMaid.Dialog.length; D++)
+			if ((MainHallMaid.Dialog[D].Stage == "PlayerGagged") && (MainHallMaid.Dialog[D].Option == null))
+				MainHallMaid.Dialog[D].Result = DialogFind(MainHallMaid, "LearnedLesson");
+		ReputationProgress("Dominant", 1);
+		CharacterWearRandomItem(Player, "ItemMouth");
+		if (Player.CanInteract()) {
+			CharacterWearItem(Player, "LeatherArmbinder", "ItemArms");
+			MainHallMaid.CurrentDialog = DialogFind(MainHallMaid, "TeachLesson");
+		}		
+	} else MainHallMaid.CurrentDialog = DialogFind(MainHallMaid, "Cower");
 }

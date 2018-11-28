@@ -302,6 +302,15 @@ var AssetFemale3DCG = [
 		Top: 50,
 		Zone: [[150, 35, 200, 125]],
 		Asset: [ { Name: "LeatherBlindfold", Enable: false, Value: 30 }, { Name: "LeatherHood", Enable: false, Value: 75 } ]
+	},
+
+	{
+		Group: "ItemMisc",
+		Category: "Item",
+		Priority: 25,
+		Default: false,
+		Color: ["Default"],
+		Asset: [ { Name: "WoodenMaidTray", Enable: false, Value: -1 } ]
 	}
-	
+
 ];

@@ -64,6 +64,7 @@ function CharacterLoginResponse(CharacterData) {
 		Player.Owner = C.Owner;
 		Player.Lover = C.Lover;
 		CharacterAppearanceLoadFromAccount(Player, C.Appearance);
+		CharacterRemove(Player, "ItemMisc");
 		InventoryLoad(Player, C.Inventory, false);
 		LogLoad(C.Log);
 		ReputationLoad(C.Reputation);
