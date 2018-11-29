@@ -212,6 +212,12 @@ function CharacterSetCurrent(C) {
 	if (NewDialog != "") C.CurrentDialog = NewDialog;
 }
 
+// Changes the character money and sync with the account server
+function CharacterChangeMoney(C, Value) {
+	C.Money = parseInt(C.Money) + parseInt(Value);
+	AccountSync();
+}
+
 // Refreshes the character parameters
 function CharacterRefresh(C) {	
 	CharacterLoadEffect(C);

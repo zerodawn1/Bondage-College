@@ -74,9 +74,16 @@ function ShopClick() {
 		for(var A = 0; A < Asset.length; A++)
 			if ((Asset[A] != null) && (Asset[A].Group != null) && (Asset[A].Group.Name == ShopVendor.FocusGroup.Name) && (Asset[A].Value > 0)) {
 				if ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275)) {
+					
+					// If the item isn't already owned and the player has enough money, we buy it
 					if (InventoryAvailable(Player, Asset[A].Name, Asset[A].Group.Name)) ShopText = TextGet("AlreadyOwned");
 					else if (Asset[A].Value > Player.Money) ShopText = TextGet("NotEnoughMoney");
-					else ShopText = TextGet("ThankYou");
+					else {
+						CharacterChangeMoney(Player, Asset[A].Value * -1);
+						InventoryAdd(Player, Asset[A].Name, Asset[A].Group.Name);
+						ShopText = TextGet("ThankYou");
+					}
+					
 				}
 				X = X + 250;
 				if (X > 1800) {

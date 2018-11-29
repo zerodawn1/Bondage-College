@@ -67,11 +67,12 @@ function MaidQuartersMiniGameStart(GameType, Difficulty) {
 
 // When the mini game ends, we go back to the maid
 function MaidQuartersMiniGameEnd() {
+	CommonSetScreen("MaidQuarters");
 	CharacterSetCurrent(MaidQuartersMaid);
 	if (MiniGameVictory && (MiniGameType == "MaidDrinks")) {
 		MaidQuartersMaid.Stage = "281";
 		MaidQuartersMaid.CurrentDialog = DialogFind(MaidQuartersMaid, "MaidDrinksVictory");
-	} 
+	}
 	if (!MiniGameVictory && (MiniGameType == "MaidDrinks")) {
 		MaidQuartersMaid.Stage = "282";
 		MaidQuartersMaid.CurrentDialog = DialogFind(MaidQuartersMaid, "MaidDrinksDefeat");
@@ -84,9 +85,8 @@ function MaidQuartersMiniGamePay() {
 	var M = 8;
 	if (MiniGameDifficulty == "Normal") M = M * 1.5;
 	if (MiniGameDifficulty == "Hard") M = M * 2;
-	Player.Money = parseInt(Player.Money) + parseInt(M);
 	MaidQuartersMaid.CurrentDialog = MaidQuartersMaid.CurrentDialog.replace("REPLACEMONEY", M.toString());
-	AccountSync();
+	CharacterChangeMoney(Player, M);
 }
 
 // When the maid releases the player
