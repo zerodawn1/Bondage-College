@@ -2,13 +2,15 @@ PlayerGagged,,,Lovely gag.  Do you need help with it?  Nod if you do.,,
 MaidDrinksVictory,,,(You come back to DialogCharacterName with an empty drink platter.)  Well done!,,
 MaidDrinksDefeat,,,(You come back to DialogCharacterName with spilled drinks all over your uniform.),,
 0,,,Welcome to the Maid Quarters.  How can I help you?,,"DialogReputationLess(""Maid"", 49)"
-0,,,It's great to see you sister.  Are you looking for work?,,"DialogReputationGreater(""Maid"", 50)"
+0,,,You've done a lot for the maid sorority.  You should apply to become a full sister.,,CanBecomeMaid
+0,,,It's great to see you sister!  How can I help you?,,IsMaid
 0,,(Nod yes.),(She removes your gag and smiles.)  Much better sweetie.  How can I help you?,MaidUngagPlayer(),!Player.CanTalk()
 0,,"Hello, I'm DialogPlayerName.  Pleased to meet you.","Pleased to meet you too.  I'm DialogCharacterName, I'm responsible to find work for maids.",DialogRemove(),"DialogReputationLess(""Maid"", 9)"
 0,,What's going on in here?,Maids come here to get job assignments.  They can earn some money by working for the club.,,
 0,,What kind of chores do maid do in the club?,"Cleaning, serving drinks, testing new devices, rescuing helpless people and more.",,
 0,10,Can I become a maid?,"You could, if you're not afraid of work and you don't mind the uniform.",,"DialogReputationLess(""Maid"", 0)"
 0,100,Do you have work for me?,"Absolutely, these are the chores available for you.  (She shows you a list of maid tasks to complete.)",,"DialogReputationGreater(""Maid"", 1)"
+0,40,I'd like to become a full maid in the sorority.,That's awesome!  We would be glad to have you.  You really have the maid calling?,,CanBecomeMaid
 0,,Tell me about the club.,The Bondage Club is quite old.  It was a secret club back then when BDSM was more taboo.,DialogRemove(),
 0,,I can't stay to chat.  (Leave her.),,DialogLeave(),
 10,20,I love the uniform!,"Wonderful.  I'm sure we'll find your size.  After lots of work for us, you can earn a permanent uniform that you can keep.",,
@@ -19,6 +21,7 @@ MaidDrinksDefeat,,,(You come back to DialogCharacterName with spilled drinks all
 20,30,How do I get work?,I have a list of chores that needs to be done.  Simply pick one that you can do.,,
 30,100,Sign me in!  Can I see the list?,"Welcome to the maid sorority, these are the chores available for you.  (She shows you a list of tasks.)","DialogChangeReputation(""Maid"", 1)",
 30,100,I'm ready for my first chore!,"Welcome to the maid sorority, these are the chores available for you.  (She shows you a list of tasks.)","DialogChangeReputation(""Maid"", 1)",
+40,,TO DO MAID JOIN,TO DO MAID JOIN,,
 100,,,(She gives you a list of chores.)  What kind of job are you looking for?,,
 100,,Can you please release me so I can take a job?,"Poor thing, of course I can help you.  (She releases you and shows you the chores list again.)  ",MaidReleasePlayer(),Player.IsRestrained()
 100,200,I'll go serve drinks.,Nice!  Our guests are always thirsty.,,!Player.IsRestrained()

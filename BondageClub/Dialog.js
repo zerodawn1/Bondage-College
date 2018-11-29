@@ -339,9 +339,7 @@ function DialogDrawItemMenu(C) {
 		if (DialogStruggleTimerEnd > 0) {
 			var Progress = (new Date().getTime() - DialogStruggleTimerStart) / (DialogStruggleTimerEnd - DialogStruggleTimerStart);
 			DrawText("Struggling...", 1500, 650, "White", "Black");
-			DrawRect(1200, 700, 600, 100, "White");
-			DrawRect(1202, 703, 594, 94, "Red");
-			DrawRect(1202, 703, Progress * 594, 94, "#88FF88");
+			DrawProgressBar(1200, 700, 600, 100, Progress * 100);
 			if (Progress >= 1) {
 				Player.CurrentDialog = DialogFind(Player, "Struggle" + Player.FocusGroup.Name, "");
 				CharacterAppearanceSetItem(Player, Player.FocusGroup.Name, null);

@@ -6,6 +6,8 @@ var MaidQuartersPreviousHatName = null;
 var MaidQuartersPreviousHatColor = "";
 var MaidQuartersPlayerInMaidUniform = false;
 var MaidQuartersMaidReleasedPlayer = false;
+var MaidQuartersCanBecomeMaid = false;
+var MaidQuartersIsMaid = false;
 
 // Loads the maid quarters room
 function MaidQuartersLoad() {
@@ -19,6 +21,8 @@ function MaidQuartersLoad() {
 
 // Run the maid quarters, draw both characters
 function MaidQuartersRun() {
+	MaidQuartersCanBecomeMaid = (!LogQuery("JoinedSorority", "Maid") && (ReputationGet("Maid") >= 50));
+	MaidQuartersIsMaid = LogQuery("JoinedSorority", "Maid");
 	DrawCharacter(Player, 500, 0, 1);
 	DrawCharacter(MaidQuartersMaid, 1000, 0, 1);
 	if (Player.CanWalk()) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");

@@ -1,6 +1,10 @@
 var MiniGameMaidDrinksBackground = "Bar";
 var MiniGameMaidDrinksCustomerLeft = null;
 var MiniGameMaidDrinksCustomerRight = null;
+var MiniGameMaidDrinksCustomerLeftTimer = -1;
+var MiniGameMaidDrinksCustomerRightTimer = -1;
+var MiniGameMaidDrinksCustomerLeftVisible = false;
+var MiniGameMaidDrinksCustomerRightVisible = false;
 var MiniGameMaidDrinksMaxSequence = 1000;
 var MiniGameMaidDrinksMove = [];
 var MiniGameMaidDrinksLastMoveType = -1;
@@ -30,6 +34,15 @@ function MiniGameMaidDrinksGenerateMove(StartTime) {
 
 // Loads the maid drinks mini game
 function MiniGameMaidDrinksLoad() {
+	CharacterWearItem(Player, "WoodenMaidTrayFull", "ItemMisc");
+	MiniGameMaidDrinksCustomerLeftVisible = false;
+	MiniGameMaidDrinksCustomerLeftTimer = -1;
+	MiniGameMaidDrinksCustomerLeft = CharacterLoadNPC("NPC_Customer_Left");
+	CharacterAppearanceFullRandom(MiniGameMaidDrinksCustomerLeft);
+	MiniGameMaidDrinksCustomerRightVisible = false;
+	MiniGameMaidDrinksCustomerRightTimer = -1;
+	MiniGameMaidDrinksCustomerRight = CharacterLoadNPC("NPC_Customer_Right");
+	CharacterAppearanceFullRandom(MiniGameMaidDrinksCustomerRight);
 	MiniGameMaidDrinksGenerateMove(5000);
 	if (MiniGameDifficulty == "Easy") MiniGameDifficultyRatio = 0.8;
 	if (MiniGameDifficulty == "Normal") MiniGameDifficultyRatio = 1.2;
@@ -76,20 +89,41 @@ function MiniGameMaidDrinksDrawBar(SquareType) {
 
 }
 
-// Draw the progress in the bottom of the scene
-function MiniGameMaidDrinksDrawProgress() {
-	DrawRect(1200, 980, 400, 1, "white");
-	DrawRect(1200, 981, MiniGameProgress * 8, 18, "#66FF66");
-	DrawRect(1200 + (MiniGameProgress * 8), 981, (100 - MiniGameProgress) * 8, 18, "red");
-}
+// Generates random customers for the mini game
+function MiniGameMaidDrinksCustomers() {
+	
+	// Manages the left customer
+	if (MiniGameTimer >= MiniGameMaidDrinksCustomerLeftTimer) {
+		if (MiniGameMaidDrinksCustomerLeftVisible == false) {
+			MiniGameMaidDrinksCustomerLeftVisible = true;
+			MiniGameMaidDrinksCustomerLeftTimer = MiniGameTimer + 6000 + Math.random() * 8000;
+		} else {
+			CharacterAppearanceFullRandom(MiniGameMaidDrinksCustomerLeft);
+			MiniGameMaidDrinksCustomerLeftVisible = false;
+			MiniGameMaidDrinksCustomerLeftTimer = MiniGameTimer + 3000 + Math.random() * 4000;			
+		}
+	}
 
+	// Manages the right customer
+	if (MiniGameTimer >= MiniGameMaidDrinksCustomerRightTimer) {
+		if (MiniGameMaidDrinksCustomerRightVisible == false) {
+			MiniGameMaidDrinksCustomerRightVisible = true;
+			MiniGameMaidDrinksCustomerRightTimer = MiniGameTimer + 6000 + Math.random() * 8000;
+		} else {
+			CharacterAppearanceFullRandom(MiniGameMaidDrinksCustomerRight);
+			MiniGameMaidDrinksCustomerRightVisible = false;
+			MiniGameMaidDrinksCustomerRightTimer = MiniGameTimer + 3000 + Math.random() * 4000;			
+		}
+	}
+
+}
 
 // Run the maid drinks mini game
 function MiniGameMaidDrinksRun() {
 	
 	// Draw the characters
-	if (MiniGameMaidDrinksCustomerLeft != null) DrawCharacter(MiniGameMaidDrinksCustomerLeft, -50, 0, 1);
-	if (MiniGameMaidDrinksCustomerRight != null) DrawCharacter(MiniGameMaidDrinksCustomerRight, 750, 0, 1);
+	if (MiniGameMaidDrinksCustomerLeftVisible) DrawCharacter(MiniGameMaidDrinksCustomerLeft, -50, 0, 1);
+	if (MiniGameMaidDrinksCustomerRightVisible) DrawCharacter(MiniGameMaidDrinksCustomerRight, 750, 0, 1);
 	DrawCharacter(Player, 350, 0, 1);
 	DrawRect(1200, 0, 800, 1000, "Black");
 	
@@ -114,8 +148,9 @@ function MiniGameMaidDrinksRun() {
 	// Draw the mini game icons and bottom info when the game is running
 	if (!MiniGameEnded) {
 		if (MiniGameTimer >= 5000) {
+			MiniGameMaidDrinksCustomers();
 			MiniGameMaidDrinksDrawIcons();
-			MiniGameMaidDrinksDrawProgress();
+			DrawProgressBar(1200, 975, 800, 25, MiniGameProgress);
 		} 
 		else {
 			DrawText(TextGet("StartsIn") + " " + (5 - Math.floor(MiniGameTimer / 1000)).toString(), 1600, 910, "white");
@@ -133,6 +168,10 @@ function MiniGameMaidDrinksRun() {
 
 // Ends the game and sends the result back to the screen
 function MiniGameMaidDrinksEnd(Victory) {
+	MiniGameMaidDrinksLastMoveType = -1;
+	MiniGameMaidDrinksCustomerLeft = null;
+	MiniGameMaidDrinksCustomerRight = null;
+	CharacterWearItem(Player, "WoodenMaidTray", "ItemMisc");
 	if (Victory) MiniGameProgress = 100;
 	else MiniGameProgress = 0;
 	MiniGameVictory = Victory;

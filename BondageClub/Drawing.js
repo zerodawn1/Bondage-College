@@ -79,21 +79,26 @@ function DrawGetImage(Source) {
 // Refreshes the character if not all images are loaded and draw the character canvas on the main game screen
 function DrawCharacter(C, X, Y, Zoom) {
 
-	// The file name changes if the player is gagged or blinks at specified intervals
-	var seconds = new Date().getTime();
-	var Canvas = (Math.round(seconds / 400) % C.BlinkFactor == 0) ? C.CanvasBlink : C.Canvas;
-	if ((Zoom == undefined) || (Zoom == 1))
-		DrawCanvas(Canvas, X, Y - C.HeightModifier);
-    else
-		DrawCanvasZoom(Canvas, X, Y - (C.HeightModifier * Zoom), Zoom);
+	// Make sure we have a character
+	if (C != null) {
 
-	// Draws the character focus zones if we need too
-	if ((C.FocusGroup != null) && (C.FocusGroup.Zone != null))
-		for(var Z = 0; Z < C.FocusGroup.Zone.length; Z++)
-			DrawEmptyRect(C.FocusGroup.Zone[Z][0] + X, C.FocusGroup.Zone[Z][1] + Y - C.HeightModifier, C.FocusGroup.Zone[Z][2], C.FocusGroup.Zone[Z][3], "cyan");
-	
-	// Draw the character name below herself
-	if ((C.Name != "") && (CurrentScreen.indexOf("Character") < 0)) DrawText(C.Name, X + 255, Y + 980, "White", "Black");
+		// The file name changes if the player is gagged or blinks at specified intervals
+		var seconds = new Date().getTime();
+		var Canvas = (Math.round(seconds / 400) % C.BlinkFactor == 0) ? C.CanvasBlink : C.Canvas;
+		if ((Zoom == undefined) || (Zoom == 1))
+			DrawCanvas(Canvas, X, Y - C.HeightModifier);
+		else
+			DrawCanvasZoom(Canvas, X, Y - (C.HeightModifier * Zoom), Zoom);
+
+		// Draws the character focus zones if we need too
+		if ((C.FocusGroup != null) && (C.FocusGroup.Zone != null))
+			for(var Z = 0; Z < C.FocusGroup.Zone.length; Z++)
+				DrawEmptyRect(C.FocusGroup.Zone[Z][0] + X, C.FocusGroup.Zone[Z][1] + Y - C.HeightModifier, C.FocusGroup.Zone[Z][2], C.FocusGroup.Zone[Z][3], "cyan");
+		
+		// Draw the character name below herself
+		if ((C.Name != "") && (CurrentScreen.indexOf("Character") < 0) && (CurrentScreen.indexOf("MiniGame") < 0)) DrawText(C.Name, X + 255, Y + 980, "White", "Black");
+		
+	}
 
 }
 		
@@ -310,11 +315,11 @@ function DrawCircle(CenterX, CenterY, Radius, LineWidth, LineColor) {
 	MainCanvas.stroke();	
 }
 
-// Draw --- if zero, +value in green if positive, -value in red if negative
-function DrawPosNegValue(Value, X, Y) {	
-	if (Value == 0) DrawText("---", X, Y, "black");
-	if (Value > 0) DrawText("+" + Value.toString(), X, Y, "#00BB00");
-	if (Value < 0) DrawText(Value.toString(), X, Y, "#BB0000");	
+// Draw a progress bar
+function DrawProgressBar(X, Y, W, H, Progress) {
+	DrawRect(X, Y, W, H, "white");
+	DrawRect(X + 2, Y + 2, Math.floor((W - 4) * Progress / 100), H - 4, "#66FF66");
+	DrawRect(Math.floor(1200 + (W - 4) * Progress / 100), Y + 2, Math.floor((W - 4) * (100 - Progress) / 100 + 2), H - 4, "red");
 }
 
 // Makes sure the screen is at the proper size
