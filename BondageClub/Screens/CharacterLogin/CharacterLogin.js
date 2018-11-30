@@ -69,6 +69,7 @@ function CharacterLoginResponse(CharacterData) {
 		LogLoad(C.Log);
 		ReputationLoad(C.Reputation);
 		CharacterLoadCSVDialog(Player);
+		CharacterAppearanceValidate(Player);
 		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 		document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
 		CommonSetScreen("MainHall");

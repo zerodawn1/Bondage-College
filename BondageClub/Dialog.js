@@ -1,3 +1,6 @@
+var DialogText = "";
+var DialogTextDefault = "";
+var DialogTextDefaultTimer = -1;
 var DialogStruggleTimerStart = 0;
 var DialogStruggleTimerEnd = 0;
 var DialogInventory = [];
@@ -7,6 +10,8 @@ function DialogReputationGreater(RepType, Value) { return (ReputationGet(RepType
 function DialogChangeReputation(RepType, Value) { ReputationProgress(RepType, Value); } // Change the player reputation progressively through dialog options (a reputation is easier to break than to build)
 function DialogWearItem(AssetName, AssetGroup) { CharacterWearItem(Player, AssetName, AssetGroup); } // Equips a specific item on the player from dialog
 function DialogWearRandomItem(AssetGroup) { CharacterWearRandomItem(Player, AssetGroup); } // Equips a random item from a given group to the player from dialog
+function DialogRelease(C) { CharacterRelease(C); } // Releases a character from restraints
+function DialogNaked(C) { CharacterNaked(C); } // Strips a character naked and removes the restrains
 
 // Returns TRUE if the dialog prerequisite condition is met
 function DialogPrerequisite(D) {
@@ -143,6 +148,7 @@ function DialogClick() {
 					if ((MouseX - X >= AssetGroup[A].Zone[Z][0]) && (MouseY >= AssetGroup[A].Zone[Z][1] - C.HeightModifier) && (MouseX - X <= AssetGroup[A].Zone[Z][0] + AssetGroup[A].Zone[Z][2]) && (MouseY <= AssetGroup[A].Zone[Z][1] + AssetGroup[A].Zone[Z][3] - C.HeightModifier)) {
 						C.FocusGroup = AssetGroup[A];
 						DialogInventoryBuild(C);
+						DialogText = DialogTextDefault;
 						break;
 					}
 	}
@@ -205,11 +211,12 @@ function DialogClick() {
 					// Cannot change item if the previous one is locked
 					var Effect = CharacterAppearanceGetCurrentValue(C, C.FocusGroup.Name, "Effect");
 					if ((Effect == null) || (Effect.indexOf("Lock") < 0)) {
-						if (DialogInventory[I].Asset.Wear) {
-							CharacterAppearanceSetItem(C, DialogInventory[I].Asset.Group.Name, DialogInventory[I].Asset);
-							C.CurrentDialog = DialogFind(C, DialogInventory[I].Asset.Name, DialogInventory[I].Asset.Group.Name);
-							DialogLeaveItemMenu();
-						}
+						if (DialogInventory[I].Asset.Wear) 
+							if ((DialogInventory[I].Asset.Prerequisite == null) || eval(DialogInventory[I].Asset.Prerequisite.replace("CharacterObject", "C"))) {
+								CharacterAppearanceSetItem(C, DialogInventory[I].Asset.Group.Name, DialogInventory[I].Asset);
+								C.CurrentDialog = DialogFind(C, DialogInventory[I].Asset.Name, DialogInventory[I].Asset.Group.Name);
+								DialogLeaveItemMenu();
+							}
 					} else {
 						
 						// Check if we can unlock the item
@@ -273,8 +280,18 @@ function DialogClick() {
 
 }
 
+// Sets the dialog 5 seconds text
+function DialogSetText(NewText) {
+	DialogTextDefaultTimer = new Date().getTime() + 5000;
+	DialogText = DialogFind(Player, NewText);
+}
+
 // Draw the item menu dialog
 function DialogDrawItemMenu(C) {
+
+	// Gets the default text that will reset after 5 seconds
+	if (DialogTextDefault == "") DialogTextDefault = DialogFind(Player, "SelectItem");
+	if (DialogTextDefaultTimer < new Date().getTime()) DialogText = DialogTextDefault;
 
 	// Inventory is only accessible if the player can interact
 	if (Player.CanInteract()) {
@@ -284,9 +301,9 @@ function DialogDrawItemMenu(C) {
 	
 		// Draws the top menu
 		if ((C.FocusGroup != null) && (CharacterAppearanceGetCurrentValue(C, C.FocusGroup.Name, "Name") != "None")) {
-			DrawText("Select an item to use", 1250, 62, "White", "Black");
+			DrawText(DialogText, 1250, 62, "White", "Black");
 			DrawButton(1500, 25, 225, 75, "Remove", "White");
-		} else DrawText("Select an item to use", 1375, 62, "White", "Black");
+		} else DrawText(DialogText, 1375, 62, "White", "Black");
 		DrawButton(1750, 25, 225, 75, "Cancel", "White");
 
 		// For each items in the player inventory

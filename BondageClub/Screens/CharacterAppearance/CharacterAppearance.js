@@ -21,6 +21,33 @@ function CharacterAppearanceBuildAssets(C) {
 
 }
 
+// Makes sure the character appearance is valid from inventory and cloth requirement
+function CharacterAppearanceValidate(C) {
+	
+	// Remove any appearance item that's not in inventory
+	var Refresh = false;
+	for(var A = 0; A < C.Appearance.length; A++)
+		if ((C.Appearance[A].Asset.Value != 0) && (C.Appearance[A].Asset.Group.Category == "Appearance") && !InventoryAvailable(C, C.Appearance[A].Asset, C.Appearance[A].Asset)) {
+			C.Appearance.splice(A, 1);
+			Refresh = true;
+			A--;
+		}
+
+	// Dress back if there are missing appearance items
+	for(var A = 0; A < AssetGroup.length; A++)
+		if (AssetGroup[A].IsDefault && (CharacterAppearanceGetCurrentValue(C, AssetGroup[A].Name, "Name") == "None"))			
+			for(var B = 0; B < Asset.length; B++)
+				if (Asset[B].Group.Name == AssetGroup[A].Name) {
+					C.Appearance.push({ Asset: Asset[B], Color: Asset[B].Group.ColorSchema[0] });
+					Refresh = true;
+					break;
+				}
+				
+	// If we must refresh the character and push the appearance to the server
+	if (Refresh) CharacterRefresh(C);
+
+}
+
 // Resets the character to it's default appearance
 function CharacterAppearanceSetDefault(C) {
 
@@ -44,7 +71,7 @@ function CharacterAppearanceSetDefault(C) {
 					Asset: CharacterAppearanceAssets[I],
 					Color: CharacterAppearanceAssets[I].Group.ColorSchema[0]
 				}
-				C.Appearance.push(NA);				
+				C.Appearance.push(NA);
 			}
 
 		}

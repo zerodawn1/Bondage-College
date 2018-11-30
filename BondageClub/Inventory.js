@@ -52,3 +52,9 @@ function InventoryAvailable(C, InventoryName, InventoryGroup) {
 			return true;
 	return false;
 }
+
+// Returns TRUE if we can equip a pelvis item (needs no clothes and no panties)
+function InventoryAllowPelvisItem(C) {
+	DialogSetText("RemoveClothesForItem");
+	return false;
+}

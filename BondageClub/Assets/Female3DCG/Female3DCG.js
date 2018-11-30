@@ -223,7 +223,7 @@ var AssetFemale3DCG = [
 		Left: 125,
 		Top: 375,
 		Zone: [[150, 425, 200, 125]],
-		Asset: [ { Name: "MetalChastityBelt", Effect: ["Chaste", "Lock"], Enable: false, Value: 100 }, { Name: "RegularVibratingEgg", Value: 25, Effect: [], Enable: false, Visible: false }, { Name: "LeatherCrop", Value: 40, Enable: false} ]
+		Asset: [ { Name: "MetalChastityBelt", Effect: ["Chaste", "Lock"], Value: 100, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);" }, { Name: "RegularVibratingEgg", Value: 25, Effect: [], Prerequisite: "InventoryAllowPelvisItem(CharacterObject);" }, { Name: "LeatherCrop", Value: 40, Enable: false, Wear: false } ]
 	},
 
 	{

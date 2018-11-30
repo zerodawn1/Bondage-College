@@ -226,10 +226,16 @@ function CharacterRefresh(C) {
 	if (CurrentScreen != "CharacterAppearance") CharacterAppearanceSave(C);
 }
 
-// Removes any binding item from the current character
+// Removes any binding item and strips from the character
+function CharacterNaked(C) {
+	CharacterAppearanceNaked(C);
+	CharacterRefresh(C);
+}
+
+// Removes any binding item from the character
 function CharacterRelease(C) {
 	for(var E = 0; E < C.Appearance.length; E++)
-		if ((C.Appearance[E].Asset.Group.Name == "ItemMouth") || (C.Appearance[E].Asset.Group.Name == "ItemArms") || (C.Appearance[E].Asset.Group.Name == "ItemFeet") || (C.Appearance[E].Asset.Group.Name == "ItemLegs") || (C.Appearance[E].Asset.Group.Name == "ItemHead")) {
+		if ((C.Appearance[E].Asset.Group.Name == "ItemMouth") || (C.Appearance[E].Asset.Group.Name == "ItemArms") || (C.Appearance[E].Asset.Group.Name == "ItemFeet") || (C.Appearance[E].Asset.Group.Name == "ItemLegs") || (C.Appearance[E].Asset.Group.Name == "ItemHead") || (C.Appearance[E].Asset.Group.Name == "ItemMisc")) {
 			C.Appearance.splice(E, 1);
 			E--;
 		}

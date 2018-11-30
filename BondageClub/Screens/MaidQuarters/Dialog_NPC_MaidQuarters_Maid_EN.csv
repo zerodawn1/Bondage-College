@@ -21,7 +21,17 @@ MaidDrinksDefeat,,,(You come back to DialogCharacterName with spilled drinks all
 20,30,How do I get work?,I have a list of chores that needs to be done.  Simply pick one that you can do.,,
 30,100,Sign me in!  Can I see the list?,"Welcome to the maid sorority, these are the chores available for you.  (She shows you a list of tasks.)","DialogChangeReputation(""Maid"", 1)",
 30,100,I'm ready for my first chore!,"Welcome to the maid sorority, these are the chores available for you.  (She shows you a list of tasks.)","DialogChangeReputation(""Maid"", 1)",
-40,,TO DO MAID JOIN,TO DO MAID JOIN,,
+40,50,"Yes, I was born to serve.",Perfect!  Your initiation can begin.  (She rings a bell and other maids comes in.),DominantRep(-2),
+40,50,"Yes, I love your sorority.",Excellent!  Your initiation can begin.  (She rings a bell and other maids comes in.),,
+40,0,"I'm not sure, let me think about it.","No problem, you don't have to join now.",,
+50,51,What?  Nobody told me about an initiation!,"It won't hurt... too much.  First, you need to get naked.  Strip for us.",,
+50,51,Very well Miss.  (Bow your head.),"First, you need to get naked.  Strip for us.",DominantRep(-2),
+51,52,"Alright, but don't try anything funky.  (Strip naked.)",Don't worry.  (She turns to the other maids.)  Sisters!  Today we introduce a new member in our sorority.,DialogNaked(Player),Player.CanInteract()
+51,52,You girls are so kinky.  (Strip naked.),(She smiles and turns to the other maids.)  Sisters!  Today we introduce a new member in our sorority.,DialogNaked(Player),Player.CanInteract()
+51,52,Sweet!  Who will fuck me first?  (Strip naked.),(She giggles and turns to the other maids.)  Sisters!  Today we introduce a new member in our sorority.,DialogNaked(Player),Player.CanInteract()
+51,,No way!  Can't I stay clothed?,No you can't.  Strip girl.  We've all did it before.,DialogRemove(),
+51,,I'll need some help girls.,Of course sweetie.  (She releases you and gives you a thumbs up.)  No get naked.,DialogRelease(Player),!Player.CanInteract()
+52,,TO DO,TO DO,,
 100,,,(She gives you a list of chores.)  What kind of job are you looking for?,,
 100,,Can you please release me so I can take a job?,"Poor thing, of course I can help you.  (She releases you and shows you the chores list again.)  ",MaidReleasePlayer(),Player.IsRestrained()
 100,200,I'll go serve drinks.,Nice!  Our guests are always thirsty.,,!Player.IsRestrained()
