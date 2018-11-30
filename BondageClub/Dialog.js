@@ -12,6 +12,7 @@ function DialogWearItem(AssetName, AssetGroup) { CharacterWearItem(Player, Asset
 function DialogWearRandomItem(AssetGroup) { CharacterWearRandomItem(Player, AssetGroup); } // Equips a random item from a given group to the player from dialog
 function DialogRelease(C) { CharacterRelease(C); } // Releases a character from restraints
 function DialogNaked(C) { CharacterNaked(C); } // Strips a character naked and removes the restrains
+function DialogSetCharacter(C) { CharacterSetCurrent(C); } // Sets a new character as the current one in the dialog
 
 // Returns TRUE if the dialog prerequisite condition is met
 function DialogPrerequisite(D) {

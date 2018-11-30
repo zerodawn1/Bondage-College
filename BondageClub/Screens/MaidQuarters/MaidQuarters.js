@@ -1,5 +1,6 @@
 var MaidQuartersBackground = "MaidQuarters";
 var MaidQuartersMaid = null;
+var MaidQuartersMaidInitiation = null;
 var MaidQuartersPreviousClothName = null;
 var MaidQuartersPreviousClothColor = "";
 var MaidQuartersPreviousHatName = null;
@@ -8,13 +9,14 @@ var MaidQuartersPlayerInMaidUniform = false;
 var MaidQuartersMaidReleasedPlayer = false;
 var MaidQuartersCanBecomeMaid = false;
 var MaidQuartersIsMaid = false;
+var MaidQuartersDominantRep = 0;
 
 // Loads the maid quarters room
 function MaidQuartersLoad() {
 
 	// Creates the maid that gives work
 	MaidQuartersMaid = CharacterLoadNPC("NPC_MaidQuarters_Maid");
-	MaidQuartersMaid.AllowItem = false;
+	MaidQuartersMaidInitiation = CharacterLoadNPC("NPC_MaidQuarters_InitiationMaids");
 	MaidQuartersPlayerInMaidUniform = ((CharacterAppearanceGetCurrentValue(Player, "Cloth", "Name") == "MaidOutfit1") && (CharacterAppearanceGetCurrentValue(Player, "Hat", "Name") == "MaidHairband1"));
 
 }
@@ -100,4 +102,14 @@ function MaidQuartersMaidReleasePlayer() {
 		MaidQuartersMaidReleasedPlayer = true;
 	}
 	CharacterRelease(Player);
+}
+
+// Prepares a counter that will affect the dominant reputation of the player
+function MaidQuartersDominantRepChange(Value) {
+	MaidQuartersDominantRep = MaidQuartersDominantRep + Value;
+}
+
+// Change the initiation maid appearance on the spot to simulate a new character
+function ChangeInitiationMaid() {
+	MaidQuartersMaidInitiation = RANDOM;
 }

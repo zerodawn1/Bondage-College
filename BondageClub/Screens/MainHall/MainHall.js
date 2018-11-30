@@ -6,7 +6,6 @@ var MainHallMaid = null;
 function MainHallLoad() {
 	MainHallNextEventTimer = null;
 	MainHallMaid = CharacterLoadNPC("NPC_MainHall_Maid");
-	MainHallMaid.AllowItem = false;
 }
 
 // Run the main hall screen

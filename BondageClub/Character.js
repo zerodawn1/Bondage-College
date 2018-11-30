@@ -132,6 +132,7 @@ function CharacterLoadNPC(NPCType) {
 		InventoryAdd(C, "MaidHairband1", "Hat");
 		CharacterAppearanceSetItem(C, "Hat", C.Inventory[C.Inventory.length - 1].Asset);
 		CharacterAppearanceSetColorForGroup(C, "Default", "Hat");
+		C.AllowItem = (LogQuery("LeadSorority", "Maid"));
 	}
 
 	// Returns the new character

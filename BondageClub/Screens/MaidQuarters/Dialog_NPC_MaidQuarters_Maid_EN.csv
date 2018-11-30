@@ -21,17 +21,35 @@ MaidDrinksDefeat,,,(You come back to DialogCharacterName with spilled drinks all
 20,30,How do I get work?,I have a list of chores that needs to be done.  Simply pick one that you can do.,,
 30,100,Sign me in!  Can I see the list?,"Welcome to the maid sorority, these are the chores available for you.  (She shows you a list of tasks.)","DialogChangeReputation(""Maid"", 1)",
 30,100,I'm ready for my first chore!,"Welcome to the maid sorority, these are the chores available for you.  (She shows you a list of tasks.)","DialogChangeReputation(""Maid"", 1)",
-40,50,"Yes, I was born to serve.",Perfect!  Your initiation can begin.  (She rings a bell and other maids comes in.),DominantRep(-2),
+40,50,"Yes, I was born to serve.",Perfect!  Your initiation can begin.  (She rings a bell and other maids comes in.),DominantRepChange(-2),
 40,50,"Yes, I love your sorority.",Excellent!  Your initiation can begin.  (She rings a bell and other maids comes in.),,
 40,0,"I'm not sure, let me think about it.","No problem, you don't have to join now.",,
 50,51,What?  Nobody told me about an initiation!,"It won't hurt... too much.  First, you need to get naked.  Strip for us.",,
-50,51,Very well Miss.  (Bow your head.),"First, you need to get naked.  Strip for us.",DominantRep(-2),
+50,51,Very well Miss.  (Bow your head.),"First, you need to get naked.  Strip for us.",DominantRepChange(-2),
 51,52,"Alright, but don't try anything funky.  (Strip naked.)",Don't worry.  (She turns to the other maids.)  Sisters!  Today we introduce a new member in our sorority.,DialogNaked(Player),Player.CanInteract()
 51,52,You girls are so kinky.  (Strip naked.),(She smiles and turns to the other maids.)  Sisters!  Today we introduce a new member in our sorority.,DialogNaked(Player),Player.CanInteract()
 51,52,Sweet!  Who will fuck me first?  (Strip naked.),(She giggles and turns to the other maids.)  Sisters!  Today we introduce a new member in our sorority.,DialogNaked(Player),Player.CanInteract()
 51,,No way!  Can't I stay clothed?,No you can't.  Strip girl.  We've all did it before.,DialogRemove(),
-51,,I'll need some help girls.,Of course sweetie.  (She releases you and gives you a thumbs up.)  No get naked.,DialogRelease(Player),!Player.CanInteract()
-52,,TO DO,TO DO,,
+51,,I'll need some help to undress.,Of course sweetie.  (She releases you and gives you a thumbs up.)  Now get naked.,DialogRelease(Player),!Player.CanInteract()
+52,53,We will rule the club together my sisters.,"You're pretty ambitious, I like it.  Let the initiation begin!  We can restrain her.",DominantRepChange(2),
+52,53,I'm really happy to join you all.,We are happy to have you.  Let the initiation begin!  We can restrain her.,,
+52,53,Let's do our best to serve the club.,That's the spirit.  Let the initiation begin!  We can restrain her.,DominantRepChange(-1),
+53,54,Restrain me?  I'm already naked.  Isn't that enough?,"You're in the Bondage Club sweetie, it's a regular initiation.",DialogRemove(),
+53,54,Very well.  (Allow them to restrain you.),(She grabs your arms and restrain them behind your back.),"DialogWearRandomItem(""ItemArms"")",
+54,55,You sure know how to do an initiation.,It's only the beginning.  (She quickly restrains your feet.),"DialogWearRandomItem(""ItemFeet"")",
+54,55,(Struggle playfully.),(They all giggle looking at you while DialogCharacterName restrains your feet.),"DialogWearRandomItem(""ItemFeet"")",
+55,56,I can still move my legs!,Not for long.  (She restrains your legs and smiles.),"DialogWearRandomItem(""ItemLegs"")",
+55,56,What's next?,I'm sure you can guess.  (She restrains your legs and smiles.),"DialogWearRandomItem(""ItemLegs"")",
+56,57,I'm all bundled up now.,Almost!  Open wide little sister.,,
+56,57,"This is so kinky, I love it.",Great!  Now open wide little sister.,DominantRepChange(-1),
+56,57,I can't wait to initiate other maids.,It's your turn now.  Open wide little sister.,DominantRepChange(2),
+57,58,Hey!  I can't talk during my own initiation?,(She quickly silences you with a gag and everyone cheers.),"DialogWearRandomItem(""ItemMouth"")",
+57,58,(Stay silent and open your mouth.),(She silences you with a gag and everyone cheers.),"DialogWearRandomItem(""ItemMouth"")",
+58,59,(Blush and look down.),My sisters!  It's time to show your strength!  Bring the paddle!,DominantRepChange(-2),
+58,59,(Look at them and wait.),My sisters!  It's time to show your strength!  Bring the paddle!,,
+59,60,(Scream in your gag.),,DialogSetCharacter(MaidQuartersMaidInitiation),
+59,60,(Struggle in your restraints.),,DialogSetCharacter(MaidQuartersMaidInitiation),
+59,60,(Try to look tough.),,DialogSetCharacter(MaidQuartersMaidInitiation),
 100,,,(She gives you a list of chores.)  What kind of job are you looking for?,,
 100,,Can you please release me so I can take a job?,"Poor thing, of course I can help you.  (She releases you and shows you the chores list again.)  ",MaidReleasePlayer(),Player.IsRestrained()
 100,200,I'll go serve drinks.,Nice!  Our guests are always thirsty.,,!Player.IsRestrained()

@@ -254,10 +254,10 @@ function MiniGameMaidDrinksClick() {
 	// If the game has started, we check the click position and send it as a move
 	if ((MiniGameTimer > 5000) && (MiniGameProgress != -1) && !MiniGameEnded && CommonIsMobile) {
 		var MoveType = -1;
-		if ((MouseX >= 1200) && (MouseX < 1400) && (MouseY >= 700) && (MouseY <= 800)) MoveType = 0;
-		if ((MouseX >= 1400) && (MouseX < 1600) && (MouseY >= 700) && (MouseY <= 800)) MoveType = 1;
-		if ((MouseX >= 1600) && (MouseX < 1800) && (MouseY >= 700) && (MouseY <= 800)) MoveType = 2;
-		if ((MouseX >= 1800) && (MouseX < 2000) && (MouseY >= 700) && (MouseY <= 800)) MoveType = 3;
+		if ((MouseX >= 1200) && (MouseX < 1400) && (MouseY >= 700) && (MouseY <= 850)) MoveType = 0;
+		if ((MouseX >= 1400) && (MouseX < 1600) && (MouseY >= 700) && (MouseY <= 850)) MoveType = 1;
+		if ((MouseX >= 1600) && (MouseX < 1800) && (MouseY >= 700) && (MouseY <= 850)) MoveType = 2;
+		if ((MouseX >= 1800) && (MouseX < 2000) && (MouseY >= 700) && (MouseY <= 850)) MoveType = 3;
 		MiniGameMaidDrinksDoMove(MoveType);
 	}
 

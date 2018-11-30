@@ -14,7 +14,6 @@ function IntroductionLoad() {
 	// Creates two characters to begin with
 	IntroductionMaid = CharacterLoadNPC("NPC_Introduction_Maid");
 	IntroductionSub = CharacterLoadNPC("NPC_Introduction_Sub");
-	IntroductionMaid.AllowItem = false;
 
 }
 
