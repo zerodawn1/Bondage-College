@@ -310,7 +310,7 @@ var AssetFemale3DCG = [
 		Priority: 25,
 		Default: false,
 		Color: ["Default"],
-		Asset: [ { Name: "WoodenMaidTray", Enable: false, Value: -1 }, { Name: "WoodenMaidTrayFull", Enable: false, Value: -1 } ]
+		Asset: [ { Name: "WoodenMaidTray", Enable: false, Value: -1 }, { Name: "WoodenMaidTrayFull", Enable: false, Value: -1 }, { Name: "WoodenPaddle", Enable: false, Value: -1 } ]
 	}
 
 ];
