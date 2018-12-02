@@ -1,5 +1,5 @@
 PlayerGagged,,,(The maids laughs at your mumbles and tries to cheer you up.),
-0,,,(A maid come closes to you with a large wooden paddle.)  I'm first today?  Sweet!  Show me your butt.,
+MaidInitiationTransition,,,(A maid comes close to you with a large wooden paddle.)  I'm first today?  Sweet!  Show me your butt.,
 0,,Wait!  Are you serious?,,DialogRemove()
 0,10,(Present your butt.),(She lightly hits your butt with the paddle and giggle.)  Welcome to the sorority!,
 10,20,(Whimper lightly.),(She gives the paddle to another maid which steps forward.)  My turn!,ChangeInitiationMaid()
@@ -23,6 +23,6 @@ PlayerGagged,,,(The maids laughs at your mumbles and tries to cheer you up.),
 80,90,(Whimper and try to beg for mercy.),"(She smashes the paddle with strength, almost making you fall.)  You've did it!  Welcome to the maid sorority!",DominantRepChange(-2)
 80,90,(Defy them and present your butt proudly.),"(She smashes the paddle with strength, almost making you fall.)  You've did it!  Welcome to the maid sorority!",DominantRepChange(2)
 80,,Oh my god!,,DialogRemove()
-90,,(Catch your breath.),,DialogSetCharacter(MaidQuartersMaid)
-90,,(Jump of joy clumsily.),,DialogSetCharacter(MaidQuartersMaid)
-90,,(Cry a few tears.),,DialogSetCharacter(MaidQuartersMaid)
+90,,(Catch your breath.),,InitiationTransition(MaidQuartersMaid)
+90,,(Jump of joy clumsily.),,InitiationTransition(MaidQuartersMaid)
+90,,(Cry a few tears.),,InitiationTransition(MaidQuartersMaid)

@@ -179,7 +179,7 @@ function DialogClick() {
 				// If the player can struggle out
 				if ((C.ID == 0) && (Effect != null) && (Effect.indexOf("Block") >= 0) && (Effect.indexOf("Struggle") >= 0) && (DialogStruggleTimerEnd == 0)) {
 					DialogStruggleTimerStart = new Date().getTime();
-					DialogStruggleTimerEnd = new Date().getTime() + 15000;
+					DialogStruggleTimerEnd = new Date().getTime() + 30000;
 				}
 				
 				// If the player can unlock herself
@@ -263,7 +263,7 @@ function DialogClick() {
 						else CurrentCharacter.CurrentDialog = CurrentCharacter.Dialog[D].Result;
 						
 						// A dialog option can change the conversation stage, show text or launch a custom function						
-						if ((Player.CanTalk() && CurrentCharacter.CanTalk()) || (DialogGarble(Player, CurrentCharacter.Dialog[D].Option) == CurrentCharacter.Dialog[D].Option)) {
+						if ((Player.CanTalk() && CurrentCharacter.CanTalk()) || ((DialogGarble(Player, CurrentCharacter.Dialog[D].Option) == CurrentCharacter.Dialog[D].Option) && CurrentCharacter.CanTalk())) {
 							CurrentCharacter.CurrentDialog = CurrentCharacter.Dialog[D].Result;
 							if (CurrentCharacter.Dialog[D].NextStage != null) CurrentCharacter.Stage = CurrentCharacter.Dialog[D].NextStage;
 							if (CurrentCharacter.Dialog[D].Function != null) CommonDynamicFunction(CurrentCharacter.Dialog[D].Function);

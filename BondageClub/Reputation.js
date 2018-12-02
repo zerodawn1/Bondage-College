@@ -59,8 +59,8 @@ function ReputationGet(RepType) {
 // Returns a timer length based on a reputation value
 function ReputationTimer(RepType, Reverse) {
 	var V = ReputationGet(RepType) * (((Reverse != null) && Reverse) ? -1 : 1);
-	if (V <= 0) return new Date().getTime() + (15000 * (1 + Math.random()));
-	else return new Date().getTime() + ((15 + V) * 1000 * (1 + Math.random()));
+	if (V <= 0) return new Date().getTime() + (30000 * (1 + Math.random()));
+	else return new Date().getTime() + ((30 + (V / 2)) * 1000 * (1 + Math.random()));
 }
 
 // Alter the reputation progress by a factor (The higher the rep, the slower it gets, a reputation is easier to break than to build)

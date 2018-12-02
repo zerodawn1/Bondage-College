@@ -1,11 +1,15 @@
 var MainHallBackground = "MainHall";
 var MainHallNextEventTimer = null;
 var MainHallMaid = null;
+var MainHallIsMaid = false;
+var MainHallIsHeadMaid = false;
 
 // Main hall loading
 function MainHallLoad() {
 	MainHallNextEventTimer = null;
 	MainHallMaid = CharacterLoadNPC("NPC_MainHall_Maid");
+	MainHallIsMaid = LogQuery("JoinedSorority", "Maid");
+	MainHallIsHeadMaid = LogQuery("LeadSorority", "Maid");
 }
 
 // Run the main hall screen
@@ -55,15 +59,18 @@ function MainHallClick() {
 
 // The maid can release the player
 function MainHallMaidReleasePlayer() {
-	for(var D = 0; D < MainHallMaid.Dialog.length; D++)
-		if ((MainHallMaid.Dialog[D].Stage == "0") && (MainHallMaid.Dialog[D].Option == null))
-			MainHallMaid.Dialog[D].Result = DialogFind(MainHallMaid, "AlreadyReleased");
-	CharacterRelease(Player);
+	if (MainHallMaid.CanInteract()) {
+		for(var D = 0; D < MainHallMaid.Dialog.length; D++)
+			if ((MainHallMaid.Dialog[D].Stage == "0") && (MainHallMaid.Dialog[D].Option == null))
+				MainHallMaid.Dialog[D].Result = DialogFind(MainHallMaid, "AlreadyReleased");
+		CharacterRelease(Player);
+		MainHallMaid.Stage = "10";
+	} else MainHallMaid.CurrentDialog = DialogFind(MainHallMaid, "CannotRelease");
 }
 
 // If the maid is angry, she might gag or tie up the player
 function MainHallMaidAngry() {
-	if (ReputationGet("Dominant") < 30) {
+	if ((ReputationGet("Dominant") < 30) && !MainHallIsHeadMaid) {
 		for(var D = 0; D < MainHallMaid.Dialog.length; D++)
 			if ((MainHallMaid.Dialog[D].Stage == "PlayerGagged") && (MainHallMaid.Dialog[D].Option == null))
 				MainHallMaid.Dialog[D].Result = DialogFind(MainHallMaid, "LearnedLesson");

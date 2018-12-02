@@ -4,12 +4,16 @@ var IntroductionSub = null;
 var IntroductionMaidOpinion = 0;
 var IntroductionHasBasicItems = false;
 var IntroductionSubRestrained = false;
+var IntroductionIsMaid = false;
+var IntroductionIsHeadMaid = false;
 
 // Loads the introduction room
 function IntroductionLoad() {
 
 	// Checks if the player already has the basic items
 	IntroductionHasBasicItems = (InventoryAvailable(Player, "NylonRope", "ItemFeet") && InventoryAvailable(Player, "NylonRope", "ItemLegs") && InventoryAvailable(Player, "NylonRope", "ItemArms") && InventoryAvailable(Player, "SmallClothGag", "ItemMouth"));
+	IntroductionIsMaid = LogQuery("JoinedSorority", "Maid");
+	IntroductionIsHeadMaid = LogQuery("LeadSorority", "Maid");
 	
 	// Creates two characters to begin with
 	IntroductionMaid = CharacterLoadNPC("NPC_Introduction_Maid");
@@ -70,4 +74,18 @@ function IntroductionSaveMaidOpinion() {
 		LogAdd("MaidOpinion", "Introduction");
 		ReputationChange("Dominant", IntroductionMaidOpinion);
 	}
+}
+
+// Returns TRUE if the maid can restrain the player
+function IntroductionAllowRestrainPlayer() {
+	return (Player.CanInteract() && IntroductionMaid.CanInteract());
+}
+
+// Gags the player unless she's head maid
+function IntroductionGagPlayer() {
+	if (IntroductionIsHeadMaid) {
+		CharacterRelease(Player);
+		IntroductionMaid.CurrentDialog = DialogFind(IntroductionMaid, "ReleaseHeadMaid");
+		IntroductionMaid.Stage = "370";
+	} else DialogWearItem("SmallClothGag", "ItemMouth")
 }

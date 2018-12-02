@@ -228,12 +228,14 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "ItemTorso",
+		ParentGroup: "BodyUpper",
 		Category: "Item",
 		Priority: 10,
 		Default: false,
+		AllowPose: ["BackBoxTie", "BackCuffs", "BackElbowTouch"],
 		Color: ["Default"],
-		Left: 150,
-		Top: 50,
+		Left: 125,
+		Top: 200,
 		Zone: [[150, 260, 200, 165]],
 		Asset: [ { Name: "NylonRopeHarness", Value: 25 }, { Name: "HempRopeHarness", Value: 50 }, { Name: "LeatherHarness", Value: 100 }, { Name: "LeatherCrop", Value: 40, Enable: false} ]
 	},

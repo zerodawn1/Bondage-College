@@ -27,7 +27,7 @@ function CharacterAppearanceValidate(C) {
 	// Remove any appearance item that's not in inventory
 	var Refresh = false;
 	for(var A = 0; A < C.Appearance.length; A++)
-		if ((C.Appearance[A].Asset.Value != 0) && (C.Appearance[A].Asset.Group.Category == "Appearance") && !InventoryAvailable(C, C.Appearance[A].Asset, C.Appearance[A].Asset)) {
+		if ((C.Appearance[A].Asset.Value != 0) && (C.Appearance[A].Asset.Group.Category == "Appearance") && !InventoryAvailable(C, C.Appearance[A].Asset.Name, C.Appearance[A].Asset.Group.Name)) {
 			C.Appearance.splice(A, 1);
 			Refresh = true;
 			A--;

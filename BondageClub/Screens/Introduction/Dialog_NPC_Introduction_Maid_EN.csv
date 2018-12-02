@@ -1,6 +1,20 @@
 PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it to chat.,,
-0,,,"Hello there, welcome to the Bondage Club introduction class.",,
-0,,"Hi, my name is DialogPlayerName.","Pleased to meet you.  I'm DialogCharacterName, I work here as a maid.",DialogRemove(),
+ReleaseHeadMaid,,,Of course head maid DialogPlayerName.  (She releases you.),,
+ItemMouth,,,(Her eyes widen when she sees the gag but she doesn't resist as you silence her.),,
+RemoveItemMouth,,,"(You remove her gag while she stretches her mouth.)  Thanks, it's hard to introduce newcomers with that gag.",,
+ItemArms,,,(She sighs and turns around while you restrain her arms.)  It might be a little hard to work like that Miss.,,
+RemoveItemArms,,,"(You free her arms and she nods slowly.)  Thanks a lot Miss, this is much better.",,
+ItemLegs,,,(She submits to you while you restrain her legs.)  Do I get paid overtime if I'm stuck here?,,
+RemoveItemLegs,,,(You release her legs from the restraint.)  You're quite good with restraints Miss.,,
+ItemFeet,,,(She looks puzzled as you restrain her feet.)  I won't run anytime soon.,,
+RemoveItemFeet,,,(You release her feet.)  Wonderful!,,
+ItemNeck,,,(You strap the collar on her while she blushes.)  I bet you're a great Mistress.,,
+RemoveItemNeck,,,(You remove the collar around her neck while she nods slowly.),,
+ItemPelvis,,,(This item isn't supported yet.  It will be added in a future version.),,
+0,,,"Hello head maid DialogPlayerName, welcome to the introduction class.",,IsHeadMaid
+0,,,"Hi sister, welcome to the introduction class.",,IsMaid
+0,,,"Hello there, welcome to the introduction class.",,!IsMaid
+0,,"Hi, my name is DialogPlayerName.","Pleased to meet you.  I'm DialogCharacterName, I work here as a maid.",DialogRemove(),!IsMaid
 0,10,"Thanks, little maid.  What's going on here?","In here, you will learn how to restrain someone and escape by yourself.",ChangeMaidOpinion(1),
 0,10,Introduction class?,"In this class, you will learn how to restrain someone and free yourself.",,
 0,100,I don't need any introduction.,"Very well, would you like to practice with us then?",,
@@ -9,7 +23,7 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 10,20,This is great!,I'm glad you like it.  I will teach you first about the body parts your can restrain.,,
 10,20,It sounds kinky. (Blush a little.),It's kinky and fun.  I will teach you first about the body parts your can restrain.,ChangeMaidOpinion(-1),
 10,15,Tell me about the club first.,The Bondage Club is a place for open minded adults to share their BDSM kinks.,,
-10,,You're both a maid and a teacher?,We maids do a lot of work here.  You'll see with time.,DialogRemove(),
+10,,You're both a maid and a teacher?,We maids do a lot of work here.  You'll see with time.,DialogRemove(),!IsMaid
 10,100,I already know that.,"Very well, would you like to practice with us then?",,
 15,20,Fair enough.,Very well.  I will teach you first about the body parts your can restrain.,,
 15,20,Awesome!,I'm glad you like it.  I will teach you first about the body parts your can restrain.,,
@@ -29,11 +43,13 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 39,40,(Listen.),"This is it, remember that your arms need to be free to restrain someone.",ClearZone(),
 40,100,Thanks for the info.,"My pleasure, now we can practice.  Would you prefer to restrain someone or be tied up yourself?",,
 40,100,That makes sense.,"Of course, and now we can practice.  Would you prefer to restrain someone or be tied up yourself?",,
-40,200,Can I strap you up now?,"Not me, but we have someone here who would certainly enjoy being your victim.",ChangeMaidOpinion(1),
+40,200,Can I strap you up now?,"Not me, but we have someone here who would certainly enjoy being your victim.",ChangeMaidOpinion(1),!IsHeadMaid
+40,100,Can I strap you up now?,If you want head maid DialogPlayerName.  I will not resist you.,ChangeMaidOpinion(1),IsHeadMaid
 40,100,Can we practice?,Absolutely.  Would you prefer to restrain someone or be tied up yourself?,,
 40,300,Can you tie me up now?,I can certainly tie you up.  It's a good time to practice.,ChangeMaidOpinion(-1),
 100,,,You can practice your bondage skills here.  Would you prefer to restrain someone or be tied up yourself?,,
-100,200,I want to practice tying you up.,"You won't tie me up, but we have someone here who would certainly enjoy being your victim.",ChangeMaidOpinion(1),
+100,,I want to practice tying you up.,(She blushes.)  Yes head maid DialogPlayerName.  I will not resist you.,,IsHeadMaid
+100,200,I want to practice tying you up.,"You won't tie me up, but we have someone here who would certainly enjoy being your victim.",ChangeMaidOpinion(1),!IsHeadMaid
 100,200,Can I tie her up?,"Absolutely, you have the perfect candidate here to practice on.",ChangeMaidOpinion(1),
 100,300,I want to practice freeing myself.,Awesome!  If you're ready for the challenge I will tie you up.,ChangeMaidOpinion(-1),
 100,,Who runs this club?,The Head Mistress is in charge.  You should go present yourself if you haven't done it.,DialogRemove(),
@@ -64,7 +80,8 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 250,260,I would ratter be restrained myself.,"Don't worry, I'm sure it will happen often.  You're ready to explore the club now.",ChangeMaidOpinion(-1),
 250,260,It's empowering!  I need to find a whip now.,A monster is born!  (She giggles.)  You're ready to explore the club now.,ChangeMaidOpinion(1),
 260,270,I can tie up on anyone?,"Anyone that's into bondage, yes.  Have fun causing trouble.",SaveMaidOpinion(),
-260,270,Can I tie you up now?,"(She giggles.)  Not now, I have work to do here.  But I'm sure you'll find victims if you wander around.",SaveMaidOpinion(),
+260,270,Can I tie you up now?,"(She giggles.)  Not now, I have work to do here.  But I'm sure you'll find victims if you wander around.",SaveMaidOpinion(),!IsHeadMaid
+260,270,Can I tie you up now?,(She giggles.)  If you wish head maid DialogPlayerName.,SaveMaidOpinion(),IsHeadMaid
 270,,,Your introduction is done.  I hope you will have fun in the club.,,
 270,,You were a great teacher.,Well thanks a lot.  You're a good student.,DialogRemove(),
 270,,Thanks!  Have a great time.  (Leave her.),,DialogLeave(),
@@ -72,7 +89,7 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 270,300,I want to practice freeing myself.,Of course!  If you're ready for the challenge I will tie you up.,,
 300,,,Are you ready to struggle against the ropes?,,Player.CanInteract()
 300,,,Get your arms free first if you want to practice struggling against my ropes.  Let me know when you're ready.,,!Player.CanInteract()
-300,310,"I'm ready, you can tie me up.",(She wraps a white nylon rope around your feet and does two knots.),"DialogWearItem(""NylonRope"", ""ItemFeet"")",Player.CanInteract()
+300,310,"I'm ready, you can tie me up.",(She wraps a white nylon rope around your feet and does two knots.),"DialogWearItem(""NylonRope"", ""ItemFeet"")",AllowRestrainPlayer()
 300,,Not yet.  Give me some time.  (Leave her.),,DialogLeave(),
 310,320,I won't be running away now.,That's for sure.  (She wraps a second rope around your legs.),"DialogWearItem(""NylonRope"", ""ItemLegs"")",
 310,320,That's all?,Of course not.  (She wraps a second rope around your legs.),"DialogWearItem(""NylonRope"", ""ItemLegs"")",
@@ -83,7 +100,7 @@ PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it
 330,340,This is pretty kinky.,Absolutely!  Now do you think you can escape?,,
 340,,,You're still struggling to get out?  Don't give up.,,!Player.CanInteract()
 340,,How do I escape?,Grab the rope on your arms and try to free yourself.  Good luck!,,!Player.CanInteract()
-340,,Get me out now!,You're not in control girl.  (She grabs your mouth and straps a cloth gag on you.),"DialogWearItem(""SmallClothGag"", ""ItemMouth"")",!Player.CanInteract()
+340,,Get me out now!,You're not in control girl.  (She grabs your mouth and straps a cloth gag on you.),GagPlayer(),!Player.CanInteract()
 340,,"Don't look, I will escape by myself.  (Leave her.)",,DialogLeave(),!Player.CanInteract()
 340,,,Well done!  You were able to struggle out.,,Player.CanInteract()
 340,350,That was easy.,I'll make it tighter next time.  Did you enjoy being tied up?,,Player.CanInteract()
