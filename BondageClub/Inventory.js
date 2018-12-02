@@ -58,3 +58,9 @@ function InventoryAllowPelvisItem(C) {
 	DialogSetText("RemoveClothesForItem");
 	return false;
 }
+
+// Returns TRUE if we can equip a torso item (needs no clothes and no bra)
+function InventoryAllowTorsoItem(C) {
+	DialogSetText("RemoveClothesForItem");
+	return false;
+}

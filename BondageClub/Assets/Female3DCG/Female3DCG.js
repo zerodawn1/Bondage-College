@@ -78,7 +78,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Glasses",
-		Priority: 11,
+		Priority: 13,
 		Default: false,
 		KeepNaked: true,
 		Color: ["#303030", "#808080", "#e0e0e0", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
@@ -122,7 +122,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Bra",
-		Priority: 12,
+		Priority: 10,
 		ParentGroup: "BodyUpper",
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 150,
@@ -143,7 +143,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Panties",
-		Priority: 13,
+		Priority: 11,
 		ParentGroup: "BodyLower",
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 150,
@@ -230,14 +230,19 @@ var AssetFemale3DCG = [
 		Group: "ItemTorso",
 		ParentGroup: "BodyUpper",
 		Category: "Item",
-		Priority: 10,
+		Priority: 12,
 		Default: false,
 		AllowPose: ["BackBoxTie", "BackCuffs", "BackElbowTouch"],
 		Color: ["Default"],
 		Left: 125,
 		Top: 200,
 		Zone: [[150, 260, 200, 165]],
-		Asset: [ { Name: "NylonRopeHarness", Value: 25 }, { Name: "HempRopeHarness", Value: 50 }, { Name: "LeatherHarness", Value: 100 }, { Name: "LeatherCrop", Value: 40, Enable: false} ]
+		Asset: [ 
+			{ Name: "NylonRopeHarness", Value: 25, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);" }, 
+			{ Name: "HempRopeHarness", Value: 50, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);" }, 
+			{ Name: "LeatherHarness", Value: 100, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);" }, 
+			{ Name: "LeatherCrop", Value: 40, Enable: false} 
+		]
 	},
 
 	{
