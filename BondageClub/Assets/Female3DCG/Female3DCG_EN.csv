@@ -77,9 +77,9 @@ Mouth,Mouth4,Style 4
 Gloves,,Gloves
 Gloves,Gloves1,Short Gloves
 Gloves,Gloves1,Long Gloves
-Nipples,,Nipples
-Nipples,Nipples1,Small Nipples
-Nipples,Nipples2,Large Nipples
+Nipples,,Nipples Style
+Nipples,Nipples1,Small
+Nipples,Nipples2,Large
 Bra,,Bra
 Bra,Bra1,Style 1
 Bra,Bra2,Style 2
@@ -118,6 +118,7 @@ ItemFeet,,Feet
 ItemFeet,NylonRope,Nylon Rope
 ItemFeet,HempRope,Hemp Rope
 ItemFeet,LeatherBelt,Leather Belt
+ItemFeet,SuspensionHempRope,Suspension Hemp Rope
 ItemLegs,,Legs
 ItemLegs,NylonRope,Nylon Rope
 ItemLegs,HempRope,Hemp Rope

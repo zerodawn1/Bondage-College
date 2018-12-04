@@ -55,12 +55,18 @@ function InventoryAvailable(C, InventoryName, InventoryGroup) {
 
 // Returns TRUE if we can equip a pelvis item (needs no clothes and no panties)
 function InventoryAllowPelvisItem(C) {
-	DialogSetText("RemoveClothesForItem");
-	return false;
+	if ((CharacterAppearanceGetCurrentValue(C, "Cloth", "Name") != "None") && (CharacterAppearanceGetCurrentValue(C, "Panties", "Name") != "None")) {
+		DialogSetText("RemoveClothesForItem");
+		return false;
+	}
+	return true;
 }
 
 // Returns TRUE if we can equip a torso item (needs no clothes and no bra)
 function InventoryAllowTorsoItem(C) {
-	DialogSetText("RemoveClothesForItem");
-	return false;
+	if (CharacterAppearanceGetCurrentValue(C, "Cloth", "Name") != "None") {
+		DialogSetText("RemoveClothesForItem");
+		return false;
+	}
+	return true;
 }

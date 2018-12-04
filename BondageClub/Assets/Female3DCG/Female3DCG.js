@@ -38,6 +38,7 @@ var AssetFemale3DCG = [
 		Priority: 1,
 		KeepNaked: true,
 		Color: ["#6a3628", "#202020", "#dcc787", "#6c2132", "#999999", "#dddddd", "#e781b1", "#81e7b1", "#81b1e7", "#eeee99", "#ee9999", "#ee99ee"],
+		AllowPose: ["Suspension"],
 		Left: 50,
 		Top: 0,
 		Asset: ["HairBack1", "HairBack2", "HairBack4", "HairBack10", "HairBack14", "HairBack15", "HairBack16", "HairBack17", "HairBack18", "HairBack19"]
@@ -80,7 +81,6 @@ var AssetFemale3DCG = [
 		Group: "Glasses",
 		Priority: 13,
 		Default: false,
-		KeepNaked: true,
 		Color: ["#303030", "#808080", "#e0e0e0", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 200,
 		Top: 135,
@@ -113,7 +113,7 @@ var AssetFemale3DCG = [
 		Group: "Nipples",
 		Priority: 7,
 		ParentGroup: "BodyUpper",
-		AllowNone: false,
+		Default: false,
 		Color: ["Default", "#a6665b", "#803d26", "#d68777", "#9b4a2e", "#bb6655"],
 		Left: 175,
 		Top: 285,
@@ -195,7 +195,12 @@ var AssetFemale3DCG = [
 		Left: 125,
 		Top: 725,
 		Zone: [[100, 730, 300, 260]],
-		Asset: [ { Name: "NylonRope", Value: 15 }, { Name: "HempRope", Value: 30 }, { Name: "LeatherBelt", Value: 25 } ]
+		Asset: [ 
+			{ Name: "NylonRope", Value: 15 },
+			{ Name: "HempRope", Value: 30 },
+			{ Name: "LeatherBelt", Value: 25 },
+			{ Name: "SuspensionHempRope", SetPose: ["Suspension", "LegsClosed"], Value: -1, Height: 150 }
+		]
 	},
 
 	{
@@ -223,7 +228,7 @@ var AssetFemale3DCG = [
 		Left: 125,
 		Top: 375,
 		Zone: [[150, 425, 200, 125]],
-		Asset: [ { Name: "MetalChastityBelt", Effect: ["Chaste", "Lock"], Value: 100, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);" }, { Name: "RegularVibratingEgg", Value: 25, Effect: [], Prerequisite: "InventoryAllowPelvisItem(CharacterObject);" }, { Name: "LeatherCrop", Value: 40, Enable: false, Wear: false } ]
+		Asset: [ { Name: "MetalChastityBelt", Effect: ["Chaste", "Lock"], Value: 100, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);" }, { Name: "RegularVibratingEgg", Enable: false, Value: 25, Effect: [], Prerequisite: "InventoryAllowPelvisItem(CharacterObject);" }, { Name: "LeatherCrop", Value: 40, Enable: false, Wear: false } ]
 	},
 
 	{
@@ -317,7 +322,11 @@ var AssetFemale3DCG = [
 		Priority: 25,
 		Default: false,
 		Color: ["Default"],
-		Asset: [ { Name: "WoodenMaidTray", Enable: false, Value: -1 }, { Name: "WoodenMaidTrayFull", Enable: false, Value: -1 }, { Name: "WoodenPaddle", Enable: false, Value: -1 } ]
+		Asset: [ 
+			{ Name: "WoodenMaidTray", Enable: false, Value: -1 },
+			{ Name: "WoodenMaidTrayFull", Enable: false, Value: -1 },
+			{ Name: "WoodenPaddle", Enable: false, Value: -1 },
+		]
 	}
 
 ];
