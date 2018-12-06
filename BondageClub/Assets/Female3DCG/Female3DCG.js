@@ -196,10 +196,10 @@ var AssetFemale3DCG = [
 		Top: 725,
 		Zone: [[100, 730, 300, 260]],
 		Asset: [ 
-			{ Name: "NylonRope", Value: 15 },
-			{ Name: "HempRope", Value: 30 },
-			{ Name: "LeatherBelt", Value: 25 },
-			{ Name: "SuspensionHempRope", SetPose: ["Suspension", "LegsClosed"], Value: -1, Height: 150 }
+			{ Name: "NylonRope", Value: 15, Time: 10 },
+			{ Name: "HempRope", Value: 30, Time: 10, RemoveTime: 15 },
+			{ Name: "LeatherBelt", Value: 25, Time: 5 },
+			{ Name: "SuspensionHempRope", SetPose: ["Suspension", "LegsClosed"], Effect: ["Freeze", "Prone", "Struggle"], Value: -1, Height: 150, Time: 30, RemoveTime: 60 }
 		]
 	},
 
@@ -215,7 +215,11 @@ var AssetFemale3DCG = [
 		Left: 125,
 		Top: 500,
 		Zone: [[100, 550, 300, 180]],
-		Asset: [ { Name: "NylonRope", Value: 15 }, { Name: "HempRope", Value: 30 }, { Name: "LeatherBelt", Value: 25 } ]
+		Asset: [ 
+			{ Name: "NylonRope", Value: 15, Time: 10 },
+			{ Name: "HempRope", Value: 30, Time: 10, RemoveTime: 15 },
+			{ Name: "LeatherBelt", Value: 25, Time: 5 }
+		]
 	},
 
 	{
@@ -228,7 +232,11 @@ var AssetFemale3DCG = [
 		Left: 125,
 		Top: 375,
 		Zone: [[150, 425, 200, 125]],
-		Asset: [ { Name: "MetalChastityBelt", Effect: ["Chaste", "Lock"], Value: 100, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);" }, { Name: "RegularVibratingEgg", Enable: false, Value: 25, Effect: [], Prerequisite: "InventoryAllowPelvisItem(CharacterObject);" }, { Name: "LeatherCrop", Value: 40, Enable: false, Wear: false } ]
+		Asset: [ 
+			{ Name: "MetalChastityBelt", Effect: ["Chaste", "Lock"], Value: 100, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 20, RemoveTime: 10 },
+			{ Name: "RegularVibratingEgg", Enable: false, Value: 25, Effect: [], Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 5 },
+			{ Name: "LeatherCrop", Value: 40, Enable: false, Wear: false }
+		]
 	},
 
 	{
@@ -243,10 +251,10 @@ var AssetFemale3DCG = [
 		Top: 200,
 		Zone: [[150, 260, 200, 165]],
 		Asset: [ 
-			{ Name: "NylonRopeHarness", Value: 25, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);" }, 
-			{ Name: "HempRopeHarness", Value: 50, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);" }, 
-			{ Name: "LeatherHarness", Value: 100, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);" }, 
-			{ Name: "LeatherCrop", Value: 40, Enable: false} 
+			{ Name: "NylonRopeHarness", Value: 25, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 20 },
+			{ Name: "HempRopeHarness", Value: 50, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 20, RemoveTime: 30 },
+			{ Name: "LeatherHarness", Value: 100, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 10 },
+			{ Name: "LeatherCrop", Value: 40, Enable: false }
 		]
 	},
 
@@ -261,11 +269,11 @@ var AssetFemale3DCG = [
 		Top: 200,
 		Zone: [[50, 250, 100, 250], [350, 250, 100, 250]],
 		Asset: [ 
-			{ Name: "NylonRope", Value: 15, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Struggle"] }, 
-			{ Name: "HempRope", Value: 30, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Struggle"] }, 
-			{ Name: "MetalCuffs", Priority: 17, Value: 50, SetPose: ["BackCuffs"], Effect: ["Block", "Prone", "Lock"] }, 
-			{ Name: "MetalCuffsKey", Wear: false, Value: 25, Effect: ["Unlock-MetalCuffs"] }, 
-			{ Name: "LeatherArmbinder", Priority: 1, Value: 80, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone"] }
+			{ Name: "NylonRope", SelfBondage: false, Value: 15, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Struggle"], Time: 15, RemoveTime: 30 },
+			{ Name: "HempRope", SelfBondage: false, Value: 30, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Struggle"], Time: 20, RemoveTime: 40 },
+			{ Name: "MetalCuffs", Priority: 17, Value: 50, SetPose: ["BackCuffs"], Effect: ["Block", "Prone", "Lock"], Time: 5 },
+			{ Name: "MetalCuffsKey", Wear: false, Value: 25, Effect: ["Unlock-MetalCuffs"], Time: 5 },
+			{ Name: "LeatherArmbinder", SelfBondage: false, Priority: 1, Value: 80, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone"], Time: 20, RemoveTime: 5 }
 		]
 	},
 
@@ -278,7 +286,10 @@ var AssetFemale3DCG = [
 		Left: 200,
 		Top: 190,
 		Zone: [[150, 210, 200, 50]],
-		Asset: [ { Name: "LeatherCollar", Value: 40 }, { Name: "SlaveCollar", Effect: ["Lock"], Enable: true, Value: -1 } ]
+		Asset: [ 
+			{ Name: "LeatherCollar", Value: 40, Time: 5 },
+			{ Name: "SlaveCollar", Effect: ["Lock"], Enable: true, Value: -1, Time: 5 }
+		]
 	},
 	
 	{
@@ -292,13 +303,13 @@ var AssetFemale3DCG = [
 		Top: 50,
 		Zone: [[150, 160, 200, 50]],
 		Asset: [ 
-			{ Name: "SmallClothGag", Effect: ["GagLight"], Value: 10 }, 
-			{ Name: "ClothCleaveGag", Effect: ["GagLight"], Value: 15 }, 
-			{ Name: "ClothOTMGag", Value: 20 }, 
-			{ Name: "ClothOTNGag", Value: 25 }, 
-			{ Name: "HarnessBallGag", Effect: ["GagHeavy"], Value: 60 },
-			{ Name: "HarnessPanelGag", Effect: ["GagHeavy"], Value: 80 },
-			{ Name: "DuctTapeGag", Value: 20 }, 
+			{ Name: "SmallClothGag", Effect: ["GagLight"], Value: 10, Time: 10 }, 
+			{ Name: "ClothCleaveGag", Effect: ["GagLight"], Value: 15, Time: 10 }, 
+			{ Name: "ClothOTMGag", Value: 20, Time: 10 }, 
+			{ Name: "ClothOTNGag", Value: 25, Time: 10 }, 
+			{ Name: "HarnessBallGag", Effect: ["GagHeavy"], Value: 60, Time: 20 },
+			{ Name: "HarnessPanelGag", Effect: ["GagHeavy"], Value: 80, Time: 20 },
+			{ Name: "DuctTapeGag", Value: 20, Time: 5, RemoveTime: 2 }, 
 			{ Name: "RegularSleepingPill", Enable: false, Wear: false, Value: -1 } 
 		]
 	},
@@ -313,7 +324,10 @@ var AssetFemale3DCG = [
 		Left: 150,
 		Top: 50,
 		Zone: [[150, 35, 200, 125]],
-		Asset: [ { Name: "LeatherBlindfold", Enable: false, Value: 30 }, { Name: "LeatherHood", Enable: false, Value: 75 } ]
+		Asset: [ 
+			{ Name: "LeatherBlindfold", Enable: false, Value: 30, Time: 10 },
+			{ Name: "LeatherHood", Enable: false, Value: 75, Time: 20 }
+		]
 	},
 
 	{
