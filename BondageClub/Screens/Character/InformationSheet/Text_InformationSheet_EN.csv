@@ -1,5 +1,7 @@
 Name,Name: 
 Title,Title:
+TitleHeadMaid,Head Maid
+TitleMaid,Maid
 TitleNone,None
 Lover,Lover:
 Owner,Owner:
@@ -13,3 +15,5 @@ ReputationDominantNegative,Submissive:
 ReputationMaidPositive,Maid Sorority:
 Skill,- Skills -
 SkillNone,None
+SkillBondage,Bondage:
+SkillEvasion,Evasion:

@@ -199,7 +199,7 @@ var AssetFemale3DCG = [
 			{ Name: "NylonRope", Value: 15, Time: 10 },
 			{ Name: "HempRope", Value: 30, Time: 10, RemoveTime: 15 },
 			{ Name: "LeatherBelt", Value: 25, Time: 5 },
-			{ Name: "SuspensionHempRope", SetPose: ["Suspension", "LegsClosed"], Effect: ["Freeze", "Prone", "Struggle"], Value: -1, Height: 150, Time: 30, RemoveTime: 60 }
+			{ Name: "SuspensionHempRope", SelfBondage: false, SetPose: ["Suspension", "LegsClosed"], Effect: ["Freeze", "Prone", "Struggle"], Value: -1, Height: 150, Time: 30 }
 		]
 	},
 
@@ -251,9 +251,9 @@ var AssetFemale3DCG = [
 		Top: 200,
 		Zone: [[150, 260, 200, 165]],
 		Asset: [ 
-			{ Name: "NylonRopeHarness", Value: 25, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 20 },
-			{ Name: "HempRopeHarness", Value: 50, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 20, RemoveTime: 30 },
-			{ Name: "LeatherHarness", Value: 100, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 10 },
+			{ Name: "NylonRopeHarness", Value: 25, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 25 },
+			{ Name: "HempRopeHarness", Value: 50, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 25, RemoveTime: 35 },
+			{ Name: "LeatherHarness", Value: 100, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 15, RemoveTime: 10 },
 			{ Name: "LeatherCrop", Value: 40, Enable: false }
 		]
 	},
@@ -269,11 +269,11 @@ var AssetFemale3DCG = [
 		Top: 200,
 		Zone: [[50, 250, 100, 250], [350, 250, 100, 250]],
 		Asset: [ 
-			{ Name: "NylonRope", SelfBondage: false, Value: 15, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Struggle"], Time: 15, RemoveTime: 30 },
-			{ Name: "HempRope", SelfBondage: false, Value: 30, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Struggle"], Time: 20, RemoveTime: 40 },
+			{ Name: "NylonRope", SelfBondage: false, Value: 15, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Struggle"], Time: 15 },
+			{ Name: "HempRope", SelfBondage: false, Value: 30, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Struggle"], Time: 20 },
 			{ Name: "MetalCuffs", Priority: 17, Value: 50, SetPose: ["BackCuffs"], Effect: ["Block", "Prone", "Lock"], Time: 5 },
 			{ Name: "MetalCuffsKey", Wear: false, Value: 25, Effect: ["Unlock-MetalCuffs"], Time: 5 },
-			{ Name: "LeatherArmbinder", SelfBondage: false, Priority: 1, Value: 80, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone"], Time: 20, RemoveTime: 5 }
+			{ Name: "LeatherArmbinder", SelfBondage: false, Priority: 1, Value: 80, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone"], Time: 25, RemoveTime: 5 }
 		]
 	},
 

@@ -4,6 +4,10 @@ var DialogTextDefaultTimer = -1;
 var DialogProgress = -1;
 var DialogProgressAuto = 0;
 var DialogProgressClick = 0;
+var DialogProgressOperation = "...";
+var DialogProgressPrevItem = null;
+var DialogProgressNextItem = null;
+var DialogProgressSkill = 0;
 var DialogInventory = [];
 
 function DialogReputationLess(RepType, Value) { return (ReputationGet(RepType) <= Value); } // Returns TRUE if a specific reputation type is less or equal than a given value
@@ -135,11 +139,44 @@ function DialogInventoryBuild(C) {
 
 }
 
-// Starts the dialog timer
-function DialogProgressStart(Timer) {
+// Gets the correct label for the current operation (struggling, removing, swaping, adding, etc.)
+function DialogProgressGetOperation(PrevItem, NextItem) {
+	if ((PrevItem != null) && (NextItem != null)) return DialogFind(Player, "Swapping");
+	if ((PrevItem != null) && (PrevItem.Asset != null) && (PrevItem.Asset.Effect != null) && (Player.FocusGroup != null) && (PrevItem.Asset.Effect.indexOf("Struggle") >= 0)) return DialogFind(Player, "Struggling");
+	if ((PrevItem != null) && (PrevItem.Asset != null) && (PrevItem.Asset.Effect != null) && (PrevItem.Asset.Effect.indexOf("Lock") >= 0)) return DialogFind(Player, "Unlocking");
+	if (PrevItem != null) return DialogFind(Player, "Removing");
+	if ((PrevItem == null) && (NextItem != null) && (NextItem.Asset != null) && (NextItem.Asset.Effect != null) && (NextItem.Asset.Effect.indexOf("Lock") >= 0)) return DialogFind(Player, "Locking");
+	if ((PrevItem == null) && (NextItem != null)) return DialogFind(Player, "Adding");
+	return "...";
+}
+
+// Starts the dialog progress bar and keeps the items that needs to be added / swaped / removed
+function DialogProgressStart(C, PrevItem, NextItem) {
+	
+	// Gets the standard time to do the operation (minimum 1 second) and the player skill level associated
+	var Timer = 0;
+	var S = 0;
+	if (PrevItem != null) {
+		if ((PrevItem.Asset != null) && (PrevItem.Asset.RemoveTime != null)) Timer = Timer + PrevItem.Asset.RemoveTime;
+		if (C.ID == 0) {
+			S = S + SkillGetLevel(Player, "Evasion");
+			if (PrevItem.Difficulty != null) S = S - PrevItem.Difficulty;
+			if (!C.CanInteract() || (C.Effect.indexOf("Suspension") >= 0)) Timer = Timer * 2;
+		}
+	}
+	if ((NextItem != null) && (NextItem.Asset != null) && (NextItem.Asset.WearTime != null)) Timer = Timer + NextItem.Asset.WearTime;
+	if ((C.ID != 0) || ((C.ID == 0) && (PrevItem == null))) S = S + SkillGetLevel(Player, "Bondage");
+	if (Timer < 1) Timer = 1;
+
+	// Prepares the progress bar and timer
 	DialogProgress = 0;
-	DialogProgressAuto = 2 / Timer;
-	DialogProgressClick = 50 / Timer;
+	DialogProgressAuto = CommonRunInterval * (0.1133 + (S * 0.0567)) / Timer;
+	DialogProgressClick = CommonRunInterval * 2.5 / Timer;
+	DialogProgressPrevItem = PrevItem;
+	DialogProgressNextItem = NextItem;
+	DialogProgressOperation = DialogProgressGetOperation(PrevItem, NextItem);
+	DialogProgressSkill = Timer;
+
 }
 
 // When the user clicks on a dialog option
@@ -166,12 +203,12 @@ function DialogClick() {
 	// In item menu mode VS text dialog mode
 	if (((Player.FocusGroup != null) || ((CurrentCharacter.FocusGroup != null) && CurrentCharacter.AllowItem)) && (DialogIntro() != "")) {
 
-		// If the user removes wants to remove an item
+		// If the user wants to speed up the add / swap / remove progress
 		if ((MouseX >= 1000) && (MouseX < 2000) && (MouseY >= 0) && (MouseY < 1000) && (DialogProgress >= 0))
 			DialogProgress = DialogProgress + DialogProgressClick;
 	
 		// If the user removes wants to remove an item
-		if ((MouseX >= 1500) && (MouseX <= 1725) && (MouseY >= 25) && (MouseY <= 100)) {
+		if ((MouseX >= 1500) && (MouseX <= 1725) && (MouseY >= 25) && (MouseY <= 100) && (DialogProgress < 0)) {
 
 			// If the player can interact, we simply remove the item
 			var C = (Player.FocusGroup != null) ? Player : CurrentCharacter;
@@ -180,28 +217,18 @@ function DialogClick() {
 				if ((C.FocusGroup != null) && (Item != null)) {
 
 					// Do not allow to remove if it's locked
-					if ((Item.Asset.Effect == null) || (Item.Asset.Effect.indexOf("Lock") < 0)) {
-						C.CurrentDialog = DialogFind(C, "Remove" + Item.Asset.Name, "Remove" + C.FocusGroup.Name);
-						InventoryRemove(C, C.FocusGroup.Name);
-						DialogLeaveItemMenu();
-					}
+					if ((Item.Asset.Effect == null) || (Item.Asset.Effect.indexOf("Lock") < 0))
+						DialogProgressStart(C, Item, null);
 
 				}
 			} else {
 				
-				// If the player can struggle out
-				if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Struggle") >= 0) && (DialogProgress == -1))
-					DialogProgressStart(Item.Asset.RemoveTime);
-				
-				// If the player can unlock herself
-				if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Lock") >= 0) && DialogCanUnlock(C)) {
-					C.CurrentDialog = DialogFind(C, "Remove" + Item.Asset.Name, "Remove" + C.FocusGroup.Name);
-					InventoryRemove(C, C.FocusGroup.Name);
-					DialogLeaveItemMenu();
-				}
+				// If the player can struggle out or unlock herself
+				if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Struggle") >= 0) && (DialogProgress == -1)) DialogProgressStart(C, Item, null);
+				if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Lock") >= 0) && DialogCanUnlock(C)) DialogProgressStart(C, Item, null);
 
 			}
-						
+
 		}
 	
 		// If the user cancels the menu
@@ -209,7 +236,7 @@ function DialogClick() {
 			DialogLeaveItemMenu();
 
 		// If the user clicks on one of the items
-		if ((MouseX >= 1025) && (MouseX <= 1975) && (MouseY >= 125) && (MouseY <= 850) && Player.CanInteract()) {
+		if ((MouseX >= 1025) && (MouseX <= 1975) && (MouseY >= 125) && (MouseY <= 850) && Player.CanInteract() && (DialogProgress < 0)) {
 
 			// For each items in the player inventory
 			var X = 1000;
@@ -224,22 +251,16 @@ function DialogClick() {
 					var Item = InventoryGet(C, C.FocusGroup.Name);
 					if ((Item == null) || (Item.Asset.Effect == null) || (Item.Asset.Effect.indexOf("Lock") < 0)) {
 						if (DialogInventory[I].Asset.Wear)
-							if ((DialogInventory[I].Asset.Prerequisite == null) || eval(DialogInventory[I].Asset.Prerequisite.replace("CharacterObject", "C"))) 
-								if (DialogInventory[I].Asset.SelfBondage || (C.ID != 0)) {
-									CharacterAppearanceSetItem(C, DialogInventory[I].Asset.Group.Name, DialogInventory[I].Asset);
-									C.CurrentDialog = DialogFind(C, DialogInventory[I].Asset.Name, DialogInventory[I].Asset.Group.Name);
-									DialogLeaveItemMenu();
-								} else DialogSetText("CannotUseOnSelf");
+							if ((DialogInventory[I].Asset.Prerequisite == null) || eval(DialogInventory[I].Asset.Prerequisite.replace("CharacterObject", "C")))
+								if ((Item == null) || (Item.Asset.Name != DialogInventory[I].Asset.Name))
+									if (DialogInventory[I].Asset.SelfBondage || (C.ID != 0)) DialogProgressStart(C, Item, DialogInventory[I]);
+									else DialogSetText("CannotUseOnSelf");
 					} else {
-						
-						// Check if we can unlock the item
-						if ((DialogInventory[I].Asset.Effect != null) && (DialogInventory[I].Asset.Effect.indexOf("Unlock-" + Item.Asset.Name) >= 0)) {
-							C.CurrentDialog = DialogFind(C, "Remove" + DialogInventory[I].Asset.Name, "Remove" + C.FocusGroup.Name);
-							InventoryRemove(C, C.FocusGroup.Name);
-							DialogLeaveItemMenu();
-							break;
-						}
-							
+
+						// If the item can unlock another item
+						if ((DialogInventory[I].Asset.Effect != null) && (DialogInventory[I].Asset.Effect.indexOf("Unlock-" + Item.Asset.Name) >= 0))
+							DialogProgressStart(C, Item, null);
+
 					}
 					break;
 
@@ -305,8 +326,8 @@ function DialogDrawItemMenu(C) {
 	if (DialogTextDefault == "") DialogTextDefault = DialogFind(Player, "SelectItem");
 	if (DialogTextDefaultTimer < CommonTime()) DialogText = DialogTextDefault;
 
-	// Inventory is only accessible if the player can interact
-	if (Player.CanInteract()) {
+	// Inventory is only accessible if the player can interact and there's no progress bar
+	if (Player.CanInteract() && (DialogProgress < 0)) {
 
 		// Builds the item dialog if we need too
 		if (DialogInventory == null) DialogInventoryBuild(C);
@@ -334,50 +355,79 @@ function DialogDrawItemMenu(C) {
 		}
 	
 	} else {
-				
-		// If we must draw the struggle/unlock dialog
-		var Item = InventoryGet(C, C.FocusGroup.Name);
+
+		// Can always cancel out
+		var C = (Player.FocusGroup != null) ? Player : CurrentCharacter;
 		DrawButton(1750, 25, 225, 75, "Cancel", "White");
-		if (Item != null) {
-
-			// Draw it
-			DrawRect(1400, 250, 225, 275, "pink");
-			DrawImageResize("Assets/" + Item.Asset.Group.Family + "/" + Item.Asset.Group.Name + "/Preview/" + Item.Asset.Name + ".png", 1402, 252, 221, 221);
-			DrawTextFit(Item.Asset.Description, 1512, 500, 221, "black");
-
-			// Draw the struggle option
-			if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Struggle") >= 0)) {
-				DrawText("Struggle to free yourself", 1250, 62, "White", "Black");
-				DrawButton(1500, 25, 225, 75, "Struggle", "White");			
-			}
-
-			// Draw the unlock option
-			if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Lock") >= 0)) {
-				if (DialogCanUnlock(C)) {
-					DrawText("You can unlock yourself", 1250, 62, "White", "Black");
-					DrawButton(1500, 25, 225, 75, "Unlock", "White");
-				} else DrawText("You don't have the proper key", 1350, 62, "White", "Black");
-			}
-
-			// Draw the no struggle option
-			if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Lock") < 0) && (Item.Asset.Effect.indexOf("Struggle") < 0))
-				DrawText("You'll need help to get out", 1250, 62, "White", "Black");
-		}
-		
-		// If the player is struggling
+	
+		// If the player is progressing
 		if (DialogProgress >= 0) {
+
+			// Draw one or both items
+			if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null)) {
+				DrawItemPreview(1200, 250, DialogProgressPrevItem);
+				DrawItemPreview(1575, 250, DialogProgressNextItem);
+			} else DrawItemPreview(1387, 250, (DialogProgressPrevItem != null) ? DialogProgressPrevItem : DialogProgressNextItem);
+		
+			// Add or subtract to the automatic progression
 			DialogProgress = DialogProgress + DialogProgressAuto;
 			if (DialogProgress < 0) DialogProgress = 0;
-			DrawText("Struggling...", 1500, 650, "White", "Black");
+
+			// Draw the current operation and progress
+			DrawText(DialogProgressOperation, 1500, 650, "White", "Black");
 			DrawProgressBar(1200, 700, 600, 100, DialogProgress);
+			DrawText("Click to speed up the progress", 1500, 900, "White", "Black");
+
+			// If the operation is completed
 			if (DialogProgress >= 100) {
-				Player.CurrentDialog = DialogFind(Player, "Struggle" + Player.FocusGroup.Name);
-				InventoryRemove(Player, Player.FocusGroup.Name);
-				DialogInventoryBuild(C);
-				DialogProgress = -1;
+
+				// Add / swap / remove the item
+				if (DialogProgressNextItem == null) InventoryRemove(C, C.FocusGroup.Name);
+				else InventoryWear(C, DialogProgressNextItem.Asset.Name, DialogProgressNextItem.Asset.Group.Name);
+
+				// The player can use another item right away, for another character we jump back to her reaction
+				if (C.ID == 0) {
+					if (DialogProgressNextItem == null) SkillProgress("Evasion", DialogProgressSkill);
+					DialogInventoryBuild(C);
+					DialogProgress = -1;
+				} else {
+					if (DialogProgressNextItem != null) SkillProgress("Bondage", DialogProgressSkill);
+					C.CurrentDialog = DialogFind(C, ((DialogProgressNextItem == null) ? ("Remove" + DialogProgressPrevItem.Asset.Name) : DialogProgressNextItem.Asset.Name), ((DialogProgressNextItem == null) ? "Remove" : "") + C.FocusGroup.Name);
+					DialogLeaveItemMenu();
+				}
+
+			}		
+
+		} else {
+			
+			// If we must draw the struggle/unlock dialog
+			var Item = InventoryGet(C, C.FocusGroup.Name);
+			if (Item != null) {
+
+				// Draw the item preview
+				DrawItemPreview(1387, 250, Item);
+
+				// Draw the struggle option
+				if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Struggle") >= 0)) {
+					DrawText("Struggle to free yourself", 1250, 62, "White", "Black");
+					DrawButton(1500, 25, 225, 75, "Struggle", "White");
+				}
+
+				// Draw the unlock option
+				if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Lock") >= 0)) {
+					if (DialogCanUnlock(C)) {
+						DrawText("You can unlock yourself", 1250, 62, "White", "Black");
+						DrawButton(1500, 25, 225, 75, "Unlock", "White");
+					} else DrawText("You don't have the proper key", 1350, 62, "White", "Black");
+				}
+
+				// Draw the no struggle option
+				if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Lock") < 0) && (Item.Asset.Effect.indexOf("Struggle") < 0))
+					DrawText("You'll need help to get out", 1250, 62, "White", "Black");
 			}
+			DrawText("You cannot access your items", 1500, 700, "White", "Black");
+			
 		}
-		else DrawText("You cannot access your items", 1500, 700, "White", "Black");
 		
 	}
 

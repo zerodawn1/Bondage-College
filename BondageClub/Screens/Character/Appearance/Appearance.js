@@ -294,6 +294,7 @@ function CharacterAppearanceSetItem(C, Group, ItemAsset, NewColor) {
 	if (ItemAsset != null) {
 		var NA = {
 			Asset: ItemAsset,
+			Difficulty: ((ItemAsset == null) ? 0 : ItemAsset.Difficulty),
 			Color: ((NewColor == null) ? ItemColor : NewColor)
 		}
 		C.Appearance.push(NA);

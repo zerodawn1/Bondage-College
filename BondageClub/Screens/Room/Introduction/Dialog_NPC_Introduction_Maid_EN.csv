@@ -10,7 +10,7 @@ ItemFeet,,,(She looks puzzled as you restrain her feet.)  I won't run anytime so
 RemoveItemFeet,,,(You release her feet.)  Wonderful!,,
 ItemNeck,,,(You strap the collar on her while she blushes.)  I bet you're a great Mistress.,,
 RemoveItemNeck,,,(You remove the collar around her neck while she nods slowly.),,
-ItemPelvis,,,(This item isn't supported yet.  It will be added in a future version.),,
+ItemPelvis,,,(She gasps as you lock the belt around her waist.)  Wait!  You can't use that in the introduction class!,,
 0,,,"Hello head maid DialogPlayerName, welcome to the introduction class.",,IsHeadMaid
 0,,,"Hi sister, welcome to the introduction class.",,IsMaid
 0,,,"Hello there, welcome to the introduction class.",,!IsMaid

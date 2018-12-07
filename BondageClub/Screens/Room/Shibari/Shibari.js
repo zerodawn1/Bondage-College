@@ -14,6 +14,8 @@ function ShibariAllowTeacherBondage() { return (!ShibariAllowTeacherItem && Dial
 function ShibariAllowTeacherStrip() { return (ShibariAllowTeacherItem && !ShibariTeacher.IsRestrained() && (InventoryGet(ShibariTeacher, "Cloth") != null)); }
 function ShibariAllowPlayerBondage() { return !Player.IsRestrained() && !ShibariTeacher.IsRestrained() }
 function ShibariAllowSpank() { return (((CurrentCharacter.ID == ShibariTeacher.ID) ? (ShibariTeacher.Pose.indexOf("Suspension") >= 0) : (ShibariStudent.Pose.indexOf("Suspension") >= 0)) && Player.CanInteract()) }
+function ShibariAllowAskRope() { return (!InventoryAvailable(Player, "SuspensionHempRope", "ItemFeet") && (SkillGetLevel(Player, "Bondage") < 7)) }
+function ShibariAllowGetRope() { return (!InventoryAvailable(Player, "SuspensionHempRope", "ItemFeet") && (SkillGetLevel(Player, "Bondage") >= 7)) }
 
 // Loads the shibari dojo characters with many restrains
 function ShibariLoad() {
@@ -80,6 +82,7 @@ function ShibariRestrainPlayer(Level) {
 	if (Level >= 3) InventoryWear(Player, "SuspensionHempRope", "ItemFeet");
 	if ((Level >= 4) && (InventoryGet(Player, "Cloth") == null) && (InventoryGet(Player, "ItemTorso") == null)) InventoryWear(Player, "HempRopeHarness", "ItemTorso");
 	if (Level >= 4) InventoryWearRandom(Player, "ItemMouth");
+	InventorySetDifficulty(Player, "ItemArms", (Level - 1) * 3);
 	ShibariTeacherReleaseTimer = CommonTime() + ((Level + 1) * 30000);
 }
 
@@ -118,4 +121,9 @@ function ShibariSpank() {
 		ReputationProgress("Dominant", 2);
 		ShibariSpankDone = true;
 	}
+}
+
+// When the teacher gives the suspension hemp rope to the player
+function ShibariGetRope() {
+	InventoryAdd(Player, "SuspensionHempRope", "ItemFeet");
 }

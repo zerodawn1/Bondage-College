@@ -19,6 +19,7 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		CurrentDialog: "",
 		Dialog: [],
 		Reputation: [],
+		Skill: [],
 		Pose: [],
 		Effect: [],
 		FocusGroup: null,

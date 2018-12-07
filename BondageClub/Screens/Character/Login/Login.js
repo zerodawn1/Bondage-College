@@ -68,8 +68,8 @@ function LoginResponse(CharacterData) {
 		InventoryLoad(Player, C.Inventory, false);
 		LogLoad(C.Log);
 		ReputationLoad(C.Reputation);
+		SkillLoad(C.Skill);
 		CharacterLoadCSVDialog(Player);
-		CharacterAppearanceValidate(Player);
 		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 		document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
 		CommonSetScreen("Room", "MainHall");

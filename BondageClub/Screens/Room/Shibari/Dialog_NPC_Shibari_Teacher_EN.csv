@@ -19,11 +19,13 @@ RemoveItemPelvis,,,(She seems relieved as you unlock the device.)  Domo arigato 
 0,,"Hello there, I'm DialogPlayerName.","Welcome to the Dojo, I'm teacher DialogCharacterName.",DialogRemove(),
 0,,What's going on here?,I teach Shibari and Kinbaku in this Dojo.  I mostly restrain and release submissives.,,
 0,,What is Shabari?,"Shibari can roughfly be translated as: ""to tie"".  It's an ancient form of rope bondage art coming from Japan.",,
-0,,Can I tie you up?,"No, as the Dominant in the room, I need my freedom.",,"DialogReputationLess(""Dominant"", 74)"
+0,,Can I tie you up?,"No, as the Dominant in the room, I need my freedom to supervise.",,"DialogReputationLess(""Dominant"", 74)"
 0,,Can I tie you up?,Your reputation as a Domme preceeds you.  Yes you may tie me up and take control of the Dojo.,StartTeacherBondage(),AllowTeacherBondage()
 0,,Get naked for your shibari session.,Very well Miss DialogPlayerName.  (She strips down for you.),DialogNaked(ShibariTeacher),AllowTeacherStrip()
 0,10,Will you tie me up?,"Of course, with practice you will become a true escape artist.  Should I go easy on you or make it tight?",,AllowPlayerBondage()
 0,,(Spank her on the butt.),"(You spank her on the butt as she dangles on the rope.)  Ow!  Miss, I'm not a masochist.",Spank(),AllowSpank()
+0,,Can I have some suspension ropes of my own?,Only the best bondage masters can have such ropes to use everywhere.  You're not skilled enough.,,AllowAskRope()
+0,,Can I have some suspension ropes of my own?,"Yes, you're skilled enough to use these ropes everywhere.  (She gives you some ropes for suspension bondage.)",GetRope(),AllowGetRope()
 0,,Let's talk later.  (Leave her.),,DialogLeave(),
 10,20,Please go easy on me.,Sure.  (She picks a hemp rope and restrain your arms losely.)  Try to free yourself.,RestrainPlayer(1),
 10,20,A regular tie I guess.,Of course.  (She picks a few hemp ropes and restrain your arms and legs.)  Time to struggle.,RestrainPlayer(2),

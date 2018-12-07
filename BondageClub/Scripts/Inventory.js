@@ -87,6 +87,14 @@ function InventoryWear(C, AssetName, AssetGroup, ItemColor) {
 	CharacterRefresh(C);
 }
 
+// Sets the difficulty to remove an item
+function InventorySetDifficulty(C, AssetGroup, Difficulty) {
+	if ((Difficulty >= 0) && (Difficulty <= 100))
+		for (var A = 0; A < C.Appearance.length; A++)
+			if ((C.Appearance[A].Asset != null) && (C.Appearance[A].Asset.Group.Name == AssetGroup))
+				C.Appearance[A].Difficulty = Difficulty;
+}
+
 // Makes the character wear a random item from a group
 function InventoryWearRandom(C, AssetGroup) {
 	var List = [];

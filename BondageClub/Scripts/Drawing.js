@@ -336,7 +336,7 @@ function DrawCircle(CenterX, CenterY, Radius, LineWidth, LineColor) {
 function DrawProgressBar(X, Y, W, H, Progress) {
 	DrawRect(X, Y, W, H, "white");
 	DrawRect(X + 2, Y + 2, Math.floor((W - 4) * Progress / 100), H - 4, "#66FF66");
-	DrawRect(Math.floor(1200 + (W - 4) * Progress / 100), Y + 2, Math.floor((W - 4) * (100 - Progress) / 100 + 2), H - 4, "red");
+	DrawRect(Math.floor(1202 + (W - 4) * Progress / 100), Y + 2, Math.floor((W - 4) * (100 - Progress) / 100), H - 4, "red");
 }
 
 // Makes sure the screen is at the proper size
@@ -372,4 +372,11 @@ function DrawProcess() {
 	if (CurrentCharacter != null) DialogDraw();
 	else CommonDynamicFunction(CurrentScreen + "Run()");
 
+}
+
+// Draw the item preview box
+function DrawItemPreview(X, Y, Item) {
+	DrawRect(X, Y, 225, 275, "white");
+	DrawImageResize("Assets/" + Item.Asset.Group.Family + "/" + Item.Asset.Group.Name + "/Preview/" + Item.Asset.Name + ".png", X + 2, Y + 2, 221, 221);
+	DrawTextFit(Item.Asset.Description, X + 110, Y + 250, 221, "black");
 }
