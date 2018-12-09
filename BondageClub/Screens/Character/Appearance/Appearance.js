@@ -155,6 +155,13 @@ function CharacterAppearanceSort(AP) {
 	return Arr;
 }
 
+function CharacterAppearanceVisibke(C, GroupName) {
+	for (var A = 0; A < C.Appearance.length; A++)
+		if ((C.Appearance[A].Asset.Hide != null) && (C.Appearance[A].Asset.Hide.indexOf(GroupName) >= 0))
+			return false;
+	return true;
+}
+
 // Gets the character 
 function CharacterAppearanceBuildCanvas(C) {
 
@@ -174,43 +181,44 @@ function CharacterAppearanceBuildCanvas(C) {
 	C.Appearance = CharacterAppearanceSort(C.Appearance);
 	
 	// Loops in all items worn by the character
-	for (var A = 0; A < C.Appearance.length; A++) {
+	for (var A = 0; A < C.Appearance.length; A++) 
+		if (CharacterAppearanceVisibke(C, C.Appearance[A].Asset.Group.Name)) {
 
-		// If there's a father group, we must add it to find the correct image
-		var CA = C.Appearance[A];
-		var G = "";
-		if (CA.Asset.Group.ParentGroupName != "")
-			for (var FG = 0; FG < C.Appearance.length; FG++)
-				if (CA.Asset.Group.ParentGroupName == C.Appearance[FG].Asset.Group.Name)
-					G = "_" + C.Appearance[FG].Asset.Name;
-		
-		// If there's a pose style we must add
-		var Pose = "";
-		if ((CA.Asset.Group.AllowPose != null) && (CA.Asset.Group.AllowPose.length > 0) && (C.Pose != null) && (C.Pose.length > 0))
-			for (var AP = 0; AP < CA.Asset.Group.AllowPose.length; AP++)
-				for (var P = 0; P < C.Pose.length; P++)
-					if (C.Pose[P] == CA.Asset.Group.AllowPose[AP])
-						Pose = C.Pose[P] + "/";
-		
-		// Draw the item on the canvas (default or empty means no special color, # means apply a color, regular text means we apply that text)
-		if (CA.Asset.Visible) {
-			if ((CA.Color == "Default") || (CA.Color == "")) {
-				DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + ".png", C.Canvas.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);
-				if (!CA.Asset.Group.DrawingBlink) DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + ".png", C.CanvasBlink.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);
-			}
-			else {
-				if (CA.Color.indexOf("#") != 0) {
-					DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + "_" + CA.Color + ".png", C.Canvas.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);
-					if (!CA.Asset.Group.DrawingBlink) DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + "_" + CA.Color + ".png", C.CanvasBlink.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);				
+			// If there's a father group, we must add it to find the correct image
+			var CA = C.Appearance[A];
+			var G = "";
+			if (CA.Asset.Group.ParentGroupName != "")
+				for (var FG = 0; FG < C.Appearance.length; FG++)
+					if (CA.Asset.Group.ParentGroupName == C.Appearance[FG].Asset.Group.Name)
+						G = "_" + C.Appearance[FG].Asset.Name;
+			
+			// If there's a pose style we must add
+			var Pose = "";
+			if ((CA.Asset.Group.AllowPose != null) && (CA.Asset.Group.AllowPose.length > 0) && (C.Pose != null) && (C.Pose.length > 0))
+				for (var AP = 0; AP < CA.Asset.Group.AllowPose.length; AP++)
+					for (var P = 0; P < C.Pose.length; P++)
+						if (C.Pose[P] == CA.Asset.Group.AllowPose[AP])
+							Pose = C.Pose[P] + "/";
+			
+			// Draw the item on the canvas (default or empty means no special color, # means apply a color, regular text means we apply that text)
+			if (CA.Asset.Visible) {
+				if ((CA.Color == "Default") || (CA.Color == "")) {
+					DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + ".png", C.Canvas.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);
+					if (!CA.Asset.Group.DrawingBlink) DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + ".png", C.CanvasBlink.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);
 				}
 				else {
-					DrawImageCanvasColorize("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + ".png", C.Canvas.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop, 1, CA.Color, CA.Asset.Group.DrawingFullAlpha);
-					if (!CA.Asset.Group.DrawingBlink) DrawImageCanvasColorize("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + ".png", C.CanvasBlink.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop, 1, CA.Color, CA.Asset.Group.DrawingFullAlpha);				
+					if (CA.Color.indexOf("#") != 0) {
+						DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + "_" + CA.Color + ".png", C.Canvas.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);
+						if (!CA.Asset.Group.DrawingBlink) DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + "_" + CA.Color + ".png", C.CanvasBlink.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);				
+					}
+					else {
+						DrawImageCanvasColorize("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + ".png", C.Canvas.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop, 1, CA.Color, CA.Asset.Group.DrawingFullAlpha);
+						if (!CA.Asset.Group.DrawingBlink) DrawImageCanvasColorize("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + ".png", C.CanvasBlink.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop, 1, CA.Color, CA.Asset.Group.DrawingFullAlpha);				
+					}			
 				}			
-			}			
-		}
+			}
 
-	}
+		}
 
 }
 

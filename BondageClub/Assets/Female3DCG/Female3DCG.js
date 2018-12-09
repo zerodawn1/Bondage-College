@@ -26,7 +26,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Cloth",
-		Priority: 18,
+		Priority: 19,
 		ParentGroup: "BodyUpper",
 		AllowPose: ["BackBoxTie", "BackCuffs", "BackElbowTouch"],
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
@@ -46,7 +46,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "HairFront",
-		Priority: 20,
+		Priority: 21,
 		AllowNone: false,
 		ParentColor: "HairBack",
 		Color: ["#6a3628", "#202020", "#dcc787", "#6c2132", "#999999", "#dddddd", "#e781b1", "#81e7b1", "#81b1e7", "#eeee99", "#ee9999", "#ee99ee"],
@@ -57,7 +57,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Hat",
-		Priority: 21,
+		Priority: 22,
 		Default: false,
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 125,
@@ -186,7 +186,7 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemFeet",
 		Category: "Item",
-		Priority: 22,
+		Priority: 23,
 		ParentGroup: "BodyLower",
 		Default: false,
 		Effect: ["Freeze", "Prone"],
@@ -206,7 +206,7 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemLegs",
 		Category: "Item",
-		Priority: 23,
+		Priority: 24,
 		ParentGroup: "BodyLower",
 		Default: false,
 		Effect: ["Prone"],
@@ -262,7 +262,7 @@ var AssetFemale3DCG = [
 		Group: "ItemArms",
 		ParentGroup: "BodyUpper",
 		Category: "Item",
-		Priority: 19,
+		Priority: 20,
 		Default: false,
 		Color: ["Default"],
 		Left: 125,		
@@ -317,16 +317,16 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemHead",
 		Category: "Item",
-		Priority: 24,
+		Priority: 18,
 		Default: false,
-		Effect: ["Blind", "Prone"],
 		Color: ["Default"],
 		Left: 150,
 		Top: 50,
 		Zone: [[150, 35, 200, 125]],
 		Asset: [ 
-			{ Name: "LeatherBlindfold", Enable: false, Value: 30, Time: 10 },
-			{ Name: "LeatherHood", Enable: false, Value: 75, Time: 20 }
+			{ Name: "LeatherBlindfold", Effect: ["BlindLight", "Prone"], Hide: ["Glasses"], Value: 30, Time: 5 },
+			{ Name: "LeatherHood", Effect: ["BlindHeavy", "Prone", "GagLight"], Hide: ["HairFront", "HairBack", "Glasses", "ItemMouth", "Eyes"], Value: 75, Time: 15 },
+			{ Name: "LeatherHoodOpenEyes", Effect: ["Prone", "GagLight"], Hide: ["HairFront", "HairBack", "Glasses", "ItemMouth"], Value: 60, Time: 15 }
 		]
 	},
 

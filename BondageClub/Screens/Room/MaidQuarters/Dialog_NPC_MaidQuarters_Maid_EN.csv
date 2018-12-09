@@ -90,8 +90,8 @@ ItemPelvis,,,(This item isn't supported yet.  It will be added in a future versi
 100,200,I'll go serve drinks.,Nice!  Our guests are always thirsty.,,AllowMaidDrinks()
 100,0,Let's talk some more first.,Sure.  How can I help you?,,
 100,,Give me a few minutes first.  (Leave her.),,DialogLeave(),
-200,210,I'm already dressed up.,Perfect!  Let me restrain you then.,WearMaidUniform(),PlayerInMaidUniform
-200,210,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Perfect!  Let me restrain you then.,WearMaidUniform(),!PlayerInMaidUniform
+200,210,I'm already dressed up.,Perfect!  Let me restrain you then.,WearMaidUniform(),PlayerInMaidUniform()
+200,210,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Perfect!  Let me restrain you then.,WearMaidUniform(),!PlayerInMaidUniform()
 210,,Wait!  Restrain me?  Why?,You're in the Bondage Club sweetie.  Waitresses need to be restrained.,DialogRemove(),
 210,220,Very well Miss.  (Allow her to restrain you.),"Very good, first I will restrain your legs but not your feet.  You need to be able to walk around.","DialogChangeReputation(""Dominant"", -3)",
 210,220,I know the drill.  (Allow her to restrain you.),"Very good, first I will restrain your legs but not your feet.  You need to be able to walk around.","DialogChangeReputation(""Dominant"", -2)",

@@ -80,42 +80,45 @@ function DrawGetImage(Source) {
 function DrawCharacter(C, X, Y, Zoom) {
 
 	// Make sure we have a character
-	if (C != null) {
+	if (C != null) 
+		if ((C.ID == 0) || (Player.Effect.indexOf("BlindHeavy") < 0)) {
 
-		// There's 2 different canvas, one blinking and one that doesn't
-		var seconds = new Date().getTime();
-		var Canvas = (Math.round(seconds / 400) % C.BlinkFactor == 0) ? C.CanvasBlink : C.Canvas;
-		
-		// If we must flip the canvas vertically
-		if (C.Pose.indexOf("Suspension") >= 0)	{
-			var CanvasH = document.createElement("canvas");
-			var CtxH = CanvasH.getContext("2d");
-			CanvasH.width = Canvas.width;
-			CanvasH.height = Canvas.height;
-			CtxH.scale(1, -1);
-			CtxH.translate(0, -Canvas.height);
-			CtxH.drawImage(Canvas, 0, 0);
-			Canvas = CanvasH;
+			// There's 2 different canvas, one blinking and one that doesn't
+			var seconds = new Date().getTime();
+			var Canvas = (Math.round(seconds / 400) % C.BlinkFactor == 0) ? C.CanvasBlink : C.Canvas;
+			
+			// If we must flip the canvas vertically
+			if (C.Pose.indexOf("Suspension") >= 0)	{
+				var CanvasH = document.createElement("canvas");
+				var CtxH = CanvasH.getContext("2d");
+				CanvasH.width = Canvas.width;
+				CanvasH.height = Canvas.height;
+				CtxH.scale(1, -1);
+				CtxH.translate(0, -Canvas.height);
+				CtxH.drawImage(Canvas, 0, 0);
+				Canvas = CanvasH;
+			}
+			
+			// Draw the character
+			if ((Zoom == undefined) || (Zoom == 1))
+				DrawCanvas(Canvas, X, Y - C.HeightModifier);
+			else
+				DrawCanvasZoom(Canvas, X, Y - (C.HeightModifier * Zoom), Zoom);
+
+			// Draws the character focus zones if we need too
+			if ((C.FocusGroup != null) && (C.FocusGroup.Zone != null))
+				for(var Z = 0; Z < C.FocusGroup.Zone.length; Z++)
+					if (C.Pose.indexOf("Suspension") >= 0)
+						DrawEmptyRect(C.FocusGroup.Zone[Z][0] + X, 1000 - (C.FocusGroup.Zone[Z][1] + Y + C.FocusGroup.Zone[Z][3]) - C.HeightModifier, C.FocusGroup.Zone[Z][2], C.FocusGroup.Zone[Z][3], "cyan");
+					else
+						DrawEmptyRect(C.FocusGroup.Zone[Z][0] + X, C.FocusGroup.Zone[Z][1] + Y - C.HeightModifier, C.FocusGroup.Zone[Z][2], C.FocusGroup.Zone[Z][3], "cyan");
+			
+			// Draw the character name below herself
+			if ((C.Name != "") && (CurrentModule == "Room")) 
+				if (!Player.IsBlind())
+					DrawText(C.Name, X + 255, Y + 980, "White", "Black");
+			
 		}
-		
-		// Draw the character
-		if ((Zoom == undefined) || (Zoom == 1))
-			DrawCanvas(Canvas, X, Y - C.HeightModifier);
-		else
-			DrawCanvasZoom(Canvas, X, Y - (C.HeightModifier * Zoom), Zoom);
-
-		// Draws the character focus zones if we need too
-		if ((C.FocusGroup != null) && (C.FocusGroup.Zone != null))
-			for(var Z = 0; Z < C.FocusGroup.Zone.length; Z++)
-				if (C.Pose.indexOf("Suspension") >= 0)
-					DrawEmptyRect(C.FocusGroup.Zone[Z][0] + X, 1000 - (C.FocusGroup.Zone[Z][1] + Y + C.FocusGroup.Zone[Z][3]) - C.HeightModifier, C.FocusGroup.Zone[Z][2], C.FocusGroup.Zone[Z][3], "cyan");
-				else
-					DrawEmptyRect(C.FocusGroup.Zone[Z][0] + X, C.FocusGroup.Zone[Z][1] + Y - C.HeightModifier, C.FocusGroup.Zone[Z][2], C.FocusGroup.Zone[Z][3], "cyan");
-		
-		// Draw the character name below herself
-		if ((C.Name != "") && (CurrentModule == "Room")) DrawText(C.Name, X + 255, Y + 980, "White", "Black");
-		
-	}
 
 }
 		
@@ -366,7 +369,10 @@ function DrawProcess() {
 	// Gets the current screen background and draw it, a darker version in character dialog mode
 	var B = window[CurrentScreen + "Background"];
 	if ((B != null) && (B != ""))
-		DrawImage("Backgrounds/" + B + (((CurrentCharacter != null) || ShopStarted) ? "Dark" : "") + ".jpg", 0, 0);
+		if ((Player.Effect.indexOf("BlindHeavy") >= 0) && (CurrentModule != "Character"))
+			DrawRect(0, 0, 2000, 1000, "Black");
+		else
+			DrawImage("Backgrounds/" + B + (((CurrentCharacter != null) || ShopStarted || (Player.Effect.indexOf("BlindLight") >= 0)) ? "Dark" : "") + ".jpg", 0, 0);
 	
 	// Draws the dialog screen or current screen if there's no loaded character
 	if (CurrentCharacter != null) DialogDraw();

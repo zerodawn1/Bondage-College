@@ -3,7 +3,6 @@ var MaidQuartersMaid = null;
 var MaidQuartersMaidInitiation = null;
 var MaidQuartersPreviousCloth = null;
 var MaidQuartersPreviousHat = null;
-var MaidQuartersPlayerInMaidUniform = false;
 var MaidQuartersMaidReleasedPlayer = false;
 var MaidQuartersCanBecomeMaid = false;
 var MaidQuartersCannotBecomeMaidYet = false
@@ -12,6 +11,9 @@ var MaidQuartersCannotBecomeHeadMaidYet = false
 var MaidQuartersIsMaid = false;
 var MaidQuartersDominantRep = 0;
 
+// Returns TRUE if the player is dressed in a maid uniform
+function MaidQuartersPlayerInMaidUniform() { return ((CharacterAppearanceGetCurrentValue(Player, "Cloth", "Name") == "MaidOutfit1") && (CharacterAppearanceGetCurrentValue(Player, "Hat", "Name") == "MaidHairband1")) }
+
 // Loads the maid quarters room
 function MaidQuartersLoad() {
 
@@ -19,7 +21,6 @@ function MaidQuartersLoad() {
 	MaidQuartersMaid = CharacterLoadNPC("NPC_MaidQuarters_Maid");
 	MaidQuartersMaidInitiation = CharacterLoadNPC("NPC_MaidQuarters_InitiationMaids");
 	InventoryWear(MaidQuartersMaidInitiation, "WoodenPaddle", "ItemMisc");
-	MaidQuartersPlayerInMaidUniform = ((CharacterAppearanceGetCurrentValue(Player, "Cloth", "Name") == "MaidOutfit1") && (CharacterAppearanceGetCurrentValue(Player, "Hat", "Name") == "MaidHairband1"));
 
 }
 

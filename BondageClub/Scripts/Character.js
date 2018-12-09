@@ -32,7 +32,9 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		CanWalk : function() { return (this.Effect.indexOf("Freeze") < 0) },
 		CanInteract : function() { return (this.Effect.indexOf("Block") < 0) },
 		IsProne : function() { return (this.Effect.indexOf("Prone") > 0) },
-		IsRestrained : function() { return ((this.Effect.indexOf("Freeze") >= 0) || (this.Effect.indexOf("Block") >= 0) || (this.Effect.indexOf("Prone") >= 0)) }
+		IsRestrained : function() { return ((this.Effect.indexOf("Freeze") >= 0) || (this.Effect.indexOf("Block") >= 0) || (this.Effect.indexOf("Prone") >= 0)) },
+		IsBlind : function() { return ((Player.Effect.indexOf("BlindLight") >= 0) || (Player.Effect.indexOf("BlindHeavy") >= 0)) }
+		
 	}
 
 	// If the character doesn't exist, we create it
