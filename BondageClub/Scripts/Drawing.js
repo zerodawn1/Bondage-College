@@ -87,6 +87,23 @@ function DrawCharacter(C, X, Y, Zoom) {
 			var seconds = new Date().getTime();
 			var Canvas = (Math.round(seconds / 400) % C.BlinkFactor == 0) ? C.CanvasBlink : C.Canvas;
 			
+			// If we must dark the Canvas characters
+			if ((C.ID != 0) && Player.IsBlind()) {
+				var CanvasH = document.createElement("canvas");
+				CanvasH.width = Canvas.width;
+				CanvasH.height = Canvas.height;
+				CanvasH.getContext('2d').drawImage(Canvas, 0, 0);
+				var imageData = CanvasH.getContext('2d').getImageData(0, 0, CanvasH.width, CanvasH.height);
+				var pixels = imageData.data;
+				for(var i = 0; i < pixels.length; i += 4) {
+				   pixels[i] = pixels[i] * 0.5;
+				   pixels[i+1] = pixels[i+1] * 0.5;
+				   pixels[i+2] = pixels[i+2] * 0.5;
+				}
+				CanvasH.getContext('2d').putImageData(imageData, 0, 0);				
+				Canvas = CanvasH;
+			}
+			
 			// If we must flip the canvas vertically
 			if (C.Pose.indexOf("Suspension") >= 0)	{
 				var CanvasH = document.createElement("canvas");
