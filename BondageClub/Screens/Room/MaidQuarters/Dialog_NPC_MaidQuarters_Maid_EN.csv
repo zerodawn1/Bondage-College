@@ -13,7 +13,10 @@ ItemFeet,,,(She looks puzzled as you restrain her feet.)  I'll stay on guard her
 RemoveItemFeet,,,"(You release her feet and she wiggles them.)  Thanks Miss, it was troublesome.",,
 ItemNeck,,,(You strap the collar on her while she blushes.)  You're quite a Dominant Miss.,,
 RemoveItemNeck,,,(You remove the collar around her neck.)  Thanks Miss.,,
-ItemPelvis,,,(This item isn't supported yet.  It will be added in a future version.),,
+ItemPelvis,,,(You snap the belt around her waist and crotch while she sighs.)  No fun for the crew I guess.,,
+RemoveItemPelvis,,,(You unlock the belt from her waist and she smiles.)  Thanks a lot Miss DialogPlayerName.,,
+ItemHead,,,(You strap the device on her head as she nods slowly.)  This will not make my job easier Miss.,,
+RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a million, this is much better.",,
 0,,,Greetings head maid DialogPlayerName.  How can I help you?,,IsHeadMaid
 0,,,Welcome to the Maid Quarters.  How can I help you?,,"DialogReputationLess(""Maid"", 49)"
 0,,,You've done a lot for the maid sorority.  You should apply to become a full sister.,,CanBecomeMaid
@@ -88,6 +91,7 @@ ItemPelvis,,,(This item isn't supported yet.  It will be added in a future versi
 100,,,(She shows you a list of chores.)  What kind of job are you looking for?,,
 100,,Can you please release me so I can take a job?,"Poor thing, of course I can help you.  (She releases you and shows you the chores list again.)  ",MaidReleasePlayer(),Player.IsRestrained()
 100,200,I'll go serve drinks.,Nice!  Our guests are always thirsty.,,AllowMaidDrinks()
+100,300,I'll take a rescue mission.,Excellent!  We need to make sure our members are safe.,,AllowRescue()
 100,0,Let's talk some more first.,Sure.  How can I help you?,,
 100,,Give me a few minutes first.  (Leave her.),,DialogLeave(),
 200,210,I'm already dressed up.,Perfect!  Let me restrain you then.,WearMaidUniform(),PlayerInMaidUniform()
@@ -116,3 +120,9 @@ ItemPelvis,,,(This item isn't supported yet.  It will be added in a future versi
 281,290,(Nod happily.),Here's your share of the tips.  (She gives you REPLACEMONEY $),MiniGamePay(),
 282,290,(Bow your head.),"Nice try, but maybe you're not fit for that job.  I can't pay you.","DialogChangeReputation(""Maid"", 1)",
 290,0,(Struggle in your restraints.),(She releases you and helps you to get dressed.)  All set!  Are you ready for more chores?,RemoveMaidUniform(),
+300,,How does it work?,You'll have to patrol around the club and release members that are stuck.,DialogRemove(),
+300,310,Where do I start?,I've heard rumors of trouble going on at the Shibari Dojo.  Can you make sure everyone is fine?,,
+310,320,I'm already dressed up for the job.,Wonderful.  Never forget that you represent the sorority.,WearMaidUniform(),PlayerInMaidUniform()
+310,320,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Wonderful!  Make the sorority proud.,WearMaidUniform(),!PlayerInMaidUniform()
+320,,,Have you inspected the Shibari Dojo?  Is everything alright?,,
+320,,I'll go check the Shibari Dojo.  (Leave her.),,DialogLeave(),

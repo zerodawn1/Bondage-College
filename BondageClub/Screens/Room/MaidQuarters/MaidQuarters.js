@@ -11,8 +11,10 @@ var MaidQuartersCannotBecomeHeadMaidYet = false
 var MaidQuartersIsMaid = false;
 var MaidQuartersDominantRep = 0;
 
-// Returns TRUE if the player is dressed in a maid uniform
+// Returns TRUE if the player is dressed in a maid uniform or can take a specific chore
 function MaidQuartersPlayerInMaidUniform() { return ((CharacterAppearanceGetCurrentValue(Player, "Cloth", "Name") == "MaidOutfit1") && (CharacterAppearanceGetCurrentValue(Player, "Hat", "Name") == "MaidHairband1")) }
+function MaidQuartersAllowMaidDrinks() { return (!Player.IsRestrained() && !MaidQuartersMaid.IsRestrained()); }
+function MaidQuartersAllowRescue() { return (!Player.IsRestrained()); }
 
 // Loads the maid quarters room
 function MaidQuartersLoad() {
@@ -154,9 +156,4 @@ function MaidQuartersBecomMaid() {
 function MaidQuartersBecomHeadMaid() {
 	MaidQuartersIsHeadMaid = true;
 	LogAdd("LeadSorority", "Maid");
-}
-
-// Returns TRUE if the maid drink mini game is available
-function MaidQuartersAllowMaidDrinks() {
-	return (!Player.IsRestrained() && !MaidQuartersMaid.IsRestrained());
 }
