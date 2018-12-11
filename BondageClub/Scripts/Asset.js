@@ -41,6 +41,7 @@ function AssetAdd(NewAsset) {
 		Visible: (NewAsset.Visible == null) ? true : NewAsset.Visible,
 		Wear: (NewAsset.Wear == null) ? true : NewAsset.Wear,
 		Effect: NewAsset.Effect,
+		Block: NewAsset.Block,
 		Hide: NewAsset.Hide,
 		SetPose: NewAsset.SetPose,
 		Value: (NewAsset.Value == null) ? 0 : NewAsset.Value,

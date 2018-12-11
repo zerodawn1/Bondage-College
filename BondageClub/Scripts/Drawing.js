@@ -95,10 +95,11 @@ function DrawCharacter(C, X, Y, Zoom) {
 				CanvasH.getContext('2d').drawImage(Canvas, 0, 0);
 				var imageData = CanvasH.getContext('2d').getImageData(0, 0, CanvasH.width, CanvasH.height);
 				var pixels = imageData.data;
+				var DarkFactor = (Player.Effect.indexOf("BlindNormal") >= 0) ? 0.3 : 0.6;
 				for(var i = 0; i < pixels.length; i += 4) {
-				   pixels[i] = pixels[i] * 0.5;
-				   pixels[i+1] = pixels[i+1] * 0.5;
-				   pixels[i+2] = pixels[i+2] * 0.5;
+				   pixels[i] = pixels[i] * DarkFactor;
+				   pixels[i+1] = pixels[i+1] * DarkFactor;
+				   pixels[i+2] = pixels[i+2] * DarkFactor;
 				}
 				CanvasH.getContext('2d').putImageData(imageData, 0, 0);				
 				Canvas = CanvasH;
@@ -386,10 +387,10 @@ function DrawProcess() {
 	// Gets the current screen background and draw it, a darker version in character dialog mode
 	var B = window[CurrentScreen + "Background"];
 	if ((B != null) && (B != ""))
-		if ((Player.Effect.indexOf("BlindHeavy") >= 0) && (CurrentModule != "Character"))
+		if (((Player.Effect.indexOf("BlindNormal") >= 0) || (Player.Effect.indexOf("BlindHeavy") >= 0)) && (CurrentModule != "Character"))
 			DrawRect(0, 0, 2000, 1000, "Black");
 		else
-			DrawImage("Backgrounds/" + B + (((CurrentCharacter != null) || ShopStarted || (Player.Effect.indexOf("BlindLight") >= 0)) ? "Dark" : "") + ".jpg", 0, 0);
+			DrawImage("Backgrounds/" + B + ((((CurrentCharacter != null) || ShopStarted || (Player.Effect.indexOf("BlindLight") >= 0)) && (CurrentModule != "Character")) ? "Dark" : "") + ".jpg", 0, 0);
 	
 	// Draws the dialog screen or current screen if there's no loaded character
 	if (CurrentCharacter != null) DialogDraw();

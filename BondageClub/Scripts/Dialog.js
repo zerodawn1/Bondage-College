@@ -219,7 +219,8 @@ function DialogClick() {
 
 					// Do not allow to remove if it's locked
 					if ((Item.Asset.Effect == null) || (Item.Asset.Effect.indexOf("Lock") < 0))
-						DialogProgressStart(C, Item, null);
+						if (!InventoryGroupIsBlocked(C))
+							DialogProgressStart(C, Item, null);
 
 				}
 			} else {
@@ -251,7 +252,7 @@ function DialogClick() {
 					// Cannot change item if the previous one is locked
 					var Item = InventoryGet(C, C.FocusGroup.Name);
 					if ((Item == null) || (Item.Asset.Effect == null) || (Item.Asset.Effect.indexOf("Lock") < 0)) {
-						if (DialogInventory[I].Asset.Wear)
+						if (DialogInventory[I].Asset.Wear && !InventoryGroupIsBlocked(C))
 							if ((DialogInventory[I].Asset.Prerequisite == null) || eval(DialogInventory[I].Asset.Prerequisite.replace("CharacterObject", "C")))
 								if ((Item == null) || (Item.Asset.Name != DialogInventory[I].Asset.Name))
 									if (DialogInventory[I].Asset.SelfBondage || (C.ID != 0)) DialogProgressStart(C, Item, DialogInventory[I]);
@@ -326,9 +327,9 @@ function DialogDrawItemMenu(C) {
 	// Gets the default text that will reset after 5 seconds
 	if (DialogTextDefault == "") DialogTextDefault = DialogFind(Player, "SelectItem");
 	if (DialogTextDefaultTimer < CommonTime()) DialogText = DialogTextDefault;
-
+	
 	// Inventory is only accessible if the player can interact and there's no progress bar
-	if (Player.CanInteract() && (DialogProgress < 0)) {
+	if (Player.CanInteract() && (DialogProgress < 0) && !InventoryGroupIsBlocked(C)) {
 
 		// Builds the item dialog if we need too
 		if (DialogInventory == null) DialogInventoryBuild(C);
@@ -426,7 +427,10 @@ function DialogDrawItemMenu(C) {
 				if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Lock") < 0) && (Item.Asset.Effect.indexOf("Struggle") < 0))
 					DrawText("You'll need help to get out", 1250, 62, "White", "Black");
 			}
-			DrawText("You cannot access your items", 1500, 700, "White", "Black");
+			
+			// Show the no access text
+			if (InventoryGroupIsBlocked(C)) DrawText("This zone is out of reach from another item", 1500, 700, "White", "Black");
+			else DrawText("You cannot access your items", 1500, 700, "White", "Black");
 			
 		}
 		

@@ -14,6 +14,8 @@ ItemNeck,,,"(You strap the collar on her neck while she frowns.)  Collars are ni
 RemoveItemNeck,,,(You remove the collar around her neck.)  You should find submissives for that collar.,,
 ItemPelvis,,,(She struggles and shakes her head no while you lock the device on her.)  Crap!  Why did you do that?,,
 RemoveItemPelvis,,,(She seems relieved as you unlock the device.)  Domo arigato Miss DialogPlayerName.,,
+ItemHead,,,(You strap the device on her head as she grumbles.)  Can you watch over the Dojo for me?,,
+RemoveItemHead,,,"(You remove the device and she nods politely.)  Good, that was a little freaky.",,
 0,,,Konichiwa Miss.  You may restrain me however you want.  Take good care of the Dojo.,,AllowTeacherItem
 0,,,"Konichiwa, are you here to learn the fine art of shibari?",,
 0,,"Hello there, I'm DialogPlayerName.","Welcome to the Dojo, I'm teacher DialogCharacterName.",DialogRemove(),
@@ -42,3 +44,6 @@ RemoveItemPelvis,,,(She seems relieved as you unlock the device.)  Domo arigato 
 20,,I'll escape on my own.  (Leave her.),,DialogLeave(),Player.IsRestrained()
 20,0,I've did it.  (Cheer and smile.),Well done.  I hope you learned some tricks.  Would you like to try again?,,!Player.IsRestrained()
 20,0,Piece of cake!  (Be cocky.),(She laughs.)  I hope you learned some tricks.  Would you like to try again?,DomComment(),!Player.IsRestrained()
+MaidRescue,,,(She struggles in her restraints.)  Can you release us?,,
+MaidRescue,,(Spank her on the butt.),"(You spank her on the butt as she dangles on the rope.)  Ow!  Miss, I'm not a masochist.",Spank(),AllowSpank()
+MaidRescue,,I'll go get help.  (Leave her.),,DialogLeave(),

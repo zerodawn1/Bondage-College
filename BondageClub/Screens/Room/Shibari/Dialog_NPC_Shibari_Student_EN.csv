@@ -13,6 +13,8 @@ ItemNeck,,,"(You strap the collar on her neck while she frowns.)  I'm a free sub
 RemoveItemNeck,,,(You remove the collar around her neck.)  Much better!  I love bondage but I'm not ready to commit.,,
 ItemPelvis,,,(Her eyes widen as she sees the device.  She struggles while you lock it on her.),,
 RemoveItemPelvis,,,(She seems relieved as you unlock the device.)  Domo arigato Miss DialogPlayerName.,,
+ItemHead,,,(You strap the device on her head as she hums a happy song.)  This will enhance the helplessness.,,
+RemoveItemHead,,,(You remove the device and she looks at you.)  That was quite an experience.,,
 0,,,Konichiwa Miss.  I hope you're enjoying the Dojo.,,
 0,,"Hi girl, I'm DialogPlayerName.","It's a pleasure to meet you Miss, I'm DialogCharacterName.",DialogRemove(),
 0,,Are you ok up there?,"(She nods.)  Yes, as long as I don't spin too much I'm fine.",,AllowSpank()
@@ -25,3 +27,6 @@ RemoveItemPelvis,,,(She seems relieved as you unlock the device.)  Domo arigato 
 10,,Can I tie you up?,"Absolutely, I'm ready for any challenge.  I especially love rope bondage and suspension.",,
 10,,Will you tie me up?,"No Miss, I'm sorry, I'm a submissive.",,
 10,0,Let's talk about something else.,Yes Miss.,,
+MaidRescue,,,(She struggles playfully.)  Konichiwa Miss!  It seems that we got in trouble.,,
+MaidRescue,,(Spank her on the butt.),(You spank her on the butt as she dangles on the rope.)  Oooooh!  I love the way it stings Miss.,Spank(),AllowSpank()
+MaidRescue,,I'll go get help.  (Leave her.),,DialogLeave(),

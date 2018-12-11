@@ -19,6 +19,8 @@ function ShibariAllowGetRope() { return (!InventoryAvailable(Player, "Suspension
 
 // Loads the shibari dojo characters with many restrains
 function ShibariLoad() {
+	
+	// Default load
 	ShibariPlayerAppearance = Player.Appearance.slice();
 	if (ShibariTeacher == null) {
 		ShibariTeacher = CharacterLoadNPC("NPC_Shibari_Teacher");
@@ -44,6 +46,29 @@ function ShibariLoad() {
 		InventoryWear(ShibariStudent, "HempRopeHarness", "ItemTorso");
 		InventoryWear(ShibariStudent, "ClothCleaveGag", "ItemMouth");
 	}
+	
+	// Rescue mission load
+	if ((MaidQuartersCurrentRescue == "ShibariDojo") && !MaidQuartersCurrentRescueStarted) {
+		MaidQuartersCurrentRescueStarted = true;
+		CharacterNaked(ShibariStudent);
+		InventoryWear(ShibariStudent, "HempRope", "ItemArms");
+		InventoryWear(ShibariStudent, "HempRope", "ItemLegs");
+		InventoryWear(ShibariStudent, "SuspensionHempRope", "ItemFeet");
+		InventoryWear(ShibariStudent, "HempRopeHarness", "ItemTorso");
+		InventoryWearRandom(ShibariStudent, "ItemMouth");
+		InventoryWearRandom(ShibariStudent, "ItemHead");
+		ShibariStudent.Stage = "MaidRescue";
+		CharacterNaked(ShibariTeacher);
+		InventoryWear(ShibariTeacher, "HempRope", "ItemArms");
+		InventoryWear(ShibariTeacher, "HempRope", "ItemLegs");
+		InventoryWear(ShibariTeacher, "SuspensionHempRope", "ItemFeet");
+		InventoryWear(ShibariTeacher, "HempRopeHarness", "ItemTorso");
+		InventoryWearRandom(ShibariTeacher, "ItemMouth");
+		InventoryWearRandom(ShibariTeacher, "ItemHead");		
+		ShibariTeacher.Stage = "MaidRescue";
+		ShibariStartTeacherBondage();
+	}
+
 }
 
 // Run the shibari dojo, draw all 3 characters

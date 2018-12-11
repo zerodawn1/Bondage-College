@@ -1,4 +1,6 @@
 PlayerGagged,,,Lovely gag.  Do you need help with it?  Nod if you do.,,
+RescueIntroductionClass,,,Can you go check on the Introduction Class?  Sometimes new members get out of control.,,
+RescueShibariDojo,,,I've heard rumors of trouble going on at the Shibari Dojo.  Can you make sure everyone is fine?,,
 MaidDrinksVictory,,,(You come back to DialogCharacterName with an empty drink platter.)  Well done!,,
 MaidDrinksDefeat,,,(You come back to DialogCharacterName with spilled drinks all over your uniform.),,
 MaidInitiationTransition,,,(DialogCharacterName hugs you and gropes your red butt.)  You're now a full maid my sister.,,
@@ -120,9 +122,11 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 281,290,(Nod happily.),Here's your share of the tips.  (She gives you REPLACEMONEY $),MiniGamePay(),
 282,290,(Bow your head.),"Nice try, but maybe you're not fit for that job.  I can't pay you.","DialogChangeReputation(""Maid"", 1)",
 290,0,(Struggle in your restraints.),(She releases you and helps you to get dressed.)  All set!  Are you ready for more chores?,RemoveMaidUniform(),
-300,,How does it work?,You'll have to patrol around the club and release members that are stuck.,DialogRemove(),
-300,310,Where do I start?,I've heard rumors of trouble going on at the Shibari Dojo.  Can you make sure everyone is fine?,,
-310,320,I'm already dressed up for the job.,Wonderful.  Never forget that you represent the sorority.,WearMaidUniform(),PlayerInMaidUniform()
-310,320,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Wonderful!  Make the sorority proud.,WearMaidUniform(),!PlayerInMaidUniform()
+300,,How does it work?,You'll have to patrol around the club and release members that are stuck.  I'll give you a specific location to monitor.,DialogRemove(),
+300,,Where should I go?,,StartRescue(),
+310,,,Did you went to the Introduction Class?  Is there anything to report?,,
+310,,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Wonderful!  Make the sorority proud.,WearMaidUniform(),!PlayerInMaidUniform()
+310,,I'll go check the Introduction Class.  (Leave her.),,DialogLeave(),PlayerInMaidUniform()
 320,,,Have you inspected the Shibari Dojo?  Is everything alright?,,
-320,,I'll go check the Shibari Dojo.  (Leave her.),,DialogLeave(),
+320,,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Wonderful!  Make the sorority proud.,WearMaidUniform(),!PlayerInMaidUniform()
+320,,I'll go check the Shibari Dojo.  (Leave her.),,DialogLeave(),PlayerInMaidUniform()

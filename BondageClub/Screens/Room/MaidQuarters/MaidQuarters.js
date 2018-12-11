@@ -10,6 +10,10 @@ var MaidQuartersCanBecomeHeadMaid = false;
 var MaidQuartersCannotBecomeHeadMaidYet = false
 var MaidQuartersIsMaid = false;
 var MaidQuartersDominantRep = 0;
+var MaidQuartersCurrentRescue = "";
+var MaidQuartersRescueList = ["IntroductionClass", "ShibariDojo"];
+var MaidQuartersRescueStage = ["310", "320"];
+var MaidQuartersCurrentRescueStarted = false;
 
 // Returns TRUE if the player is dressed in a maid uniform or can take a specific chore
 function MaidQuartersPlayerInMaidUniform() { return ((CharacterAppearanceGetCurrentValue(Player, "Cloth", "Name") == "MaidOutfit1") && (CharacterAppearanceGetCurrentValue(Player, "Hat", "Name") == "MaidHairband1")) }
@@ -156,4 +160,18 @@ function MaidQuartersBecomMaid() {
 function MaidQuartersBecomHeadMaid() {
 	MaidQuartersIsHeadMaid = true;
 	LogAdd("LeadSorority", "Maid");
+}
+
+// Starts a maid rescue mission in a random room
+function MaidQuartersStartRescue() {
+	
+	// Make sure we don't select the same room twice
+	var NewRescue = MaidQuartersCurrentRescue;
+	while (NewRescue == MaidQuartersCurrentRescue)
+		NewRescue = MaidQuartersRescueList[Math.floor(Math.random() * MaidQuartersRescueList.length)];
+	MaidQuartersCurrentRescue = NewRescue;
+	MaidQuartersMaid.Stage = MaidQuartersRescueStage[MaidQuartersRescueList.indexOf(NewRescue)];
+	MaidQuartersMaid.CurrentDialog = DialogFind(MaidQuartersMaid, "Rescue" + NewRescue);
+	MaidQuartersCurrentRescueStarted = false;
+
 }
