@@ -404,3 +404,26 @@ function DrawItemPreview(X, Y, Item) {
 	DrawImageResize("Assets/" + Item.Asset.Group.Family + "/" + Item.Asset.Group.Name + "/Preview/" + Item.Asset.Name + ".png", X + 2, Y + 2, 221, 221);
 	DrawTextFit(Item.Asset.Description, X + 110, Y + 250, 221, "black");
 }
+
+// Draw a regular HTML element at a specific position
+function DrawElementPosition(ElementID, X, Y, W) {
+	
+	// Different positions based on the width/height ratio
+	if (DrawScreenWidth <= DrawScreenHeight * 2) {
+		Font = (DrawScreenWidth / 50);
+		Height = Font * 1.2;
+		Left = ((X - (W / 2)) * DrawScreenWidth / 2000);
+		Width = (W * DrawScreenWidth / 2000) - 10;
+		Top = (Y * DrawScreenWidth / 2000) + ((DrawScreenHeight * 2 - DrawScreenWidth) / 4) - (Height / 2) - 8;
+	} else {
+		Font = (DrawScreenHeight / 25);
+		Height = Font * 1.2;
+		Left = ((X - (W / 2)) * DrawScreenHeight / 1000) + (DrawScreenWidth - DrawScreenHeight * 2) / 2;
+		Width = (W * DrawScreenHeight / 1000) - 18;
+		Top = (Y * DrawScreenHeight / 1000) - (Height / 2) - 8;
+	}
+
+	// Sets the element style
+	document.getElementById(ElementID).setAttribute("style", "font-size:" + Font + "px; font-family:Arial; position:absolute; padding-left:10px; left:" + Left + "px; top:" + Top + "px; width:" + Width + "px; height:" + Height + "px;");
+	
+}

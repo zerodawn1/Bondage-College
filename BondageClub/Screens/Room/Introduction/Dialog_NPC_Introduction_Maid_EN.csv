@@ -124,6 +124,7 @@ RemoveItemHead,,,(You remove the device as she shakes her head joyfully.)  Wonde
 370,300,I want to practice freeing myself.,Again?  Well of course.  Are you ready to struggle now?,,
 MaidRescue,,,(She struggles and tries to get out.)  Can you please help me?,,IsMaidRestrained()
 MaidRescue,,,(She bows her head respectfully.)  Can you also help our friend here?,,!IsBothFree()
+MaidRescue,,,I will spread the good word on you in the sorority.  Thanks for helping.,,IsBothFree()
 MaidRescue,,Do you need help?,"(She shakes her head yes.)  Indeed, can you release us both?",,!IsBothFree()
 MaidRescue,,Should I help your friend?,"Yes, please release both of us.",,!IsBothFree()
 MaidRescue,MaidRescueComplete,Is everything alright now?,"Everything is great, please report to my sisters of your fine work here.",CompleteRescue(),IsBothFree()

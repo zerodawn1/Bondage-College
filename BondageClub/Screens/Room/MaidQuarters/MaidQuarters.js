@@ -114,6 +114,7 @@ function MaidQuartersMiniGamePay() {
 
 // When the rescue is successful, the player gets paid
 function MaidQuartersRescuePay() {
+	MaidQuartersRemoveMaidUniform();
 	ReputationProgress("Maid", 4);
 	var M = 8 + Math.floor(Math.random() * 9);
 	MaidQuartersMaid.CurrentDialog = MaidQuartersMaid.CurrentDialog.replace("REPLACEMONEY", M.toString());
@@ -186,7 +187,8 @@ function MaidQuartersStartRescue() {
 
 // Cancels the current rescue mission
 function MaidQuartersCancelRescue() {
-	if (MaidQuartersCurrentRescue == "IntroductionClass") IntroductionCompleteRescue();
-	if (MaidQuartersCurrentRescue == "ShibariDojo") ShibariCompleteRescue();
-	if (MaidQuartersCurrentRescue == "Shop") ShopCompleteRescue();
+	MaidQuartersRemoveMaidUniform();
+	if (MaidQuartersCurrentRescue == "IntroductionClass") { IntroductionCompleteRescue(); IntroductionMaid.Stage = "0"; }
+	if (MaidQuartersCurrentRescue == "ShibariDojo") { ShibariCompleteRescue(); ShibariTeacher.Stage = "0"; }
+	if (MaidQuartersCurrentRescue == "Shop") { ShopCompleteRescue(); ShopVendor.Stage = "0"; }
 }

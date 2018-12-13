@@ -138,6 +138,7 @@ function ShibariDomComment() {
 function ShibariSurrenderToTeacher() {
 	if (CommonTime() >= ShibariTeacherReleaseTimer) {
 		CharacterRelease(Player);
+		if (InventoryGet(Player, "Cloth") == null) InventoryRemove(Player, "ItemTorso");
 		if (!ShibariSurrenderDone) {
 			ReputationProgress("Dominant", -2);
 			ShibariSurrenderDone = true;

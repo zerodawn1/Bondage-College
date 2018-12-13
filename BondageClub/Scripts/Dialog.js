@@ -168,12 +168,11 @@ function DialogProgressStart(C, PrevItem, NextItem) {
 	if ((C.ID != 0) || ((C.ID == 0) && (PrevItem == null))) S = S + SkillGetLevel(Player, "Bondage");
 	if (Timer < 1) Timer = 1;
 	if (Player.IsBlind()) Timer = Timer * 2;
-	Timer = Timer * ((CheatAllow && CheatDoubleItemSpeed) ? 0.5 : 1);
 
 	// Prepares the progress bar and timer
 	DialogProgress = 0;
-	DialogProgressAuto = CommonRunInterval * (0.1133 + (S * 0.1133)) / Timer;
-	DialogProgressClick = CommonRunInterval * 2.5 / Timer;
+	DialogProgressAuto = CommonRunInterval * (0.1133 + (S * 0.1133)) / (Timer * CheatFactor("DoubleItemSpeed", 0.5));
+	DialogProgressClick = CommonRunInterval * 2.5 / (Timer * CheatFactor("DoubleItemSpeed", 0.5));
 	DialogProgressPrevItem = PrevItem;
 	DialogProgressNextItem = NextItem;
 	DialogProgressOperation = DialogProgressGetOperation(PrevItem, NextItem);

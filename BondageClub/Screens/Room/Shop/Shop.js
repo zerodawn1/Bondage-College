@@ -25,8 +25,6 @@ function ShopLoad() {
 		MaidQuartersCurrentRescueStarted = true;
 		InventoryWearRandom(ShopVendor, "ItemFeet");
 		InventoryWearRandom(ShopVendor, "ItemLegs");
-		InventoryWearRandom(ShopVendor, "ItemPelvis");
-		InventoryWearRandom(ShopVendor, "ItemTorso");
 		InventoryWearRandom(ShopVendor, "ItemArms");
 		InventoryWearRandom(ShopVendor, "ItemNeck");
 		InventoryWearRandom(ShopVendor, "ItemMouth");

@@ -1,11 +1,31 @@
 var CheatBackground = "Sheet";
 var CheatAllow = false;
 var CheatList = ["DoubleReputation", "DoubleSkill", "DoubleMoney", "DoubleItemSpeed"];
-var CheatActivated = ["DoubleReputation", "DoubleSkill", "DoubleMoney", "DoubleItemSpeed"];
+var CheatActivated = [];
 
 // Returns TRUE if the cheat is currently active
 function CheatActive(CheatName) {
 	return (CheatAllow && (CheatActivated.indexOf(CheatName) >= 0));
+}
+
+// Returns the factor if the cheat is activated
+function CheatFactor(CheatName, Factor) {
+	return (CheatAllow && (CheatActivated.indexOf(CheatName) >= 0)) ? Factor : 1;
+}
+
+// Imports the cheats from the local storage
+function CheatImport() {
+	CheatAllow = true;
+	for(var C = 0; C < CheatList.length; C++) {
+		var AC = localStorage.getItem("BondageClubCheat" + CheatList[C]);
+		if ((AC != null) && (AC.toUpperCase() == "TRUE")) CheatActivated.push(CheatList[C]);
+	}
+}
+
+// Exports the cheats to the local storage
+function CheatExport() {
+	for(var C = 0; C < CheatList.length; C++)
+		localStorage.setItem("BondageClubCheat" + CheatList[C], (CheatActivated.indexOf(CheatList[C]) >= 0) ? "true" : "false");
 }
 
 // Run the character info screen
@@ -26,5 +46,22 @@ function CheatRun() {
 
 // When the user clicks on the character info screen
 function CheatClick() {
-	if ((MouseX >= 1815) && (MouseX < 1905) && (MouseY >= 75) && (MouseY < 165)) CommonSetScreen("Character", "Login");
+	
+	// When the user exits
+	if ((MouseX >= 1815) && (MouseX < 1905) && (MouseY >= 75) && (MouseY < 165)) {
+		CheatExport();
+		CommonSetScreen("Character", "Login");	
+	}
+	
+	// When the user activates an option
+	for(var C = 0; C < CheatList.length; C++)
+		if ((MouseX >= 150) && (MouseX <= 800) && (MouseY >= 150 + (C * 100)) && (MouseY <= 214 + (C * 100))) {
+			var CheatName = CheatList[C];
+			if (CheatActivated.indexOf(CheatName) >= 0)
+				CheatActivated.splice(CheatActivated.indexOf(CheatName), 1);
+			else
+				CheatActivated.push(CheatName);
+			return;
+		}
+
 }

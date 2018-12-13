@@ -68,7 +68,7 @@ function SkillProgress(SkillType, SkillProgress) {
 	// Makes sure there's a progress, we cannot go beyond level 10
 	var L = SkillGetLevel(Player, SkillType);
 	var P = Math.round(SkillProgress * 3 / ((L * L) + 1));
-	P = P * ((CheatAllow && CheatDoubleSkill) ? 2 : 1);
+	P = P * CheatFactor("DoubleSkill", 2);
 	if ((P > 0) && (L < 10)) {
 
 		// Raises the actual progress and gains a level if 1000 or more

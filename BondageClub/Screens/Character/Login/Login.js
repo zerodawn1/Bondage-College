@@ -10,6 +10,9 @@ var LoginThankYouNext = 0;
 function LoginDoNextThankYou() {
 	LoginThankYou = CommonRandomItemFromList(LoginThankYou, LoginThankYouList);
 	CharacterAppearanceFullRandom(Player);
+	if (Math.random() >= 0.5) InventoryWearRandom(Player, "ItemFeet"); else InventoryRemove(Player, "ItemFeet");
+	if (Math.random() >= 0.5) InventoryWearRandom(Player, "ItemLegs"); else InventoryRemove(Player, "ItemLegs");
+	if (Math.random() >= 0.5) InventoryWearRandom(Player, "ItemArms"); else InventoryRemove(Player, "ItemArms");
 	LoginThankYouNext = CommonTime() + 4000;
 }
 
@@ -18,6 +21,7 @@ function LoginDrawCredits() {
 
 	// For each credits in the list
 	LoginCreditsPosition++;
+	MainCanvas.font = "30px Arial";
 	for(var C = 0; C < LoginCredits.length; C++) {
 
 		// Sets the Y position (it scrolls from bottom to top)
@@ -32,12 +36,12 @@ function LoginDrawCredits() {
 				LoginCreditsPosition = 0;
 				return;
 			} else {
-				if (Cred.substr(0, 10) == "CreditType") DrawText(TextGet(Cred), 370, Y, "white");
+				if (Cred.substr(0, 10) == "CreditType") DrawText(TextGet(Cred), 320, Y, "white");
 				else {
-					if (Cred.indexOf("|") == -1) DrawText(Cred, 370, Y, "white");
+					if (Cred.indexOf("|") == -1) DrawText(Cred, 320, Y, "white");
 					else {
-						DrawText(Cred.substring(0, Cred.indexOf("|")), 220, Y, "white");
-						DrawText(Cred.substring(Cred.indexOf("|") + 1, 1000), 520, Y, "white");
+						DrawText(Cred.substring(0, Cred.indexOf("|")), 180, Y, "white");
+						DrawText(Cred.substring(Cred.indexOf("|") + 1, 1000), 460, Y, "white");
 					}
 				}
 			}
@@ -46,6 +50,9 @@ function LoginDrawCredits() {
 
 	}
 
+	// Restore the canvas font
+	MainCanvas.font = "36px Arial";
+	
 }
 
 // Loads the character login screen
@@ -83,28 +90,28 @@ function LoginLoad() {
 
 // Run the character login screen 
 function LoginRun() {
-	
-	// Position the login fields on the screen
-	document.getElementById("InputName").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:65%; top:" + (window.innerHeight / 2 - MainCanvas.height / 4) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
-	document.getElementById("InputPassword").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:65%; top:" + (window.innerHeight / 2 - MainCanvas.height / 10) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
-		
-	// Draw the character and labels
-	if (LoginMessage == "") LoginMessage = TextGet("EnterNamePassword");
-	if (LoginCredits != null) LoginDrawCredits();
-	DrawCharacter(Player, 725, 100, 0.9);
-	DrawText(TextGet("Welcome"), 1565, 50, "White", "Black");
-	DrawText(LoginMessage, 1565, 100, "White", "Black");
-	DrawText(TextGet("AccountName"), 1565, 217, "White", "Black");
-	DrawText(TextGet("Password"), 1565, 368, "White", "Black");
-	DrawButton(1500, 500, 130, 60, TextGet("Login"), "White", "");
-	DrawText(TextGet("CreateNewCharacter"), 1565, 670, "White", "Black");
-	DrawButton(1425, 740, 280, 60, TextGet("NewCharacter"), "White", "");
-	if (CheatAllow) DrawButton(1425, 870, 280, 60, TextGet("Cheats"), "White", "");
 
-	// Draw the credits and thank you bubble, a new character is shown every 5 seconds
+	// Draw the credits
+	if (LoginCredits != null) LoginDrawCredits();
+	
+	// Draw the login controls
+	if (LoginMessage == "") LoginMessage = TextGet("EnterNamePassword");
+	DrawText(TextGet("Welcome"), 1000, 50, "White", "Black");
+	DrawText(LoginMessage, 1000, 100, "White", "Black");
+	DrawText(TextGet("AccountName"), 1000, 200, "White", "Black");
+	DrawElementPosition("InputName", 1000, 275, 500);
+	DrawText(TextGet("Password"), 1000, 350, "White", "Black");
+	DrawElementPosition("InputPassword", 1000, 425, 500);
+	DrawButton(925, 500, 150, 60, TextGet("Login"), "White", "");
+	DrawText(TextGet("CreateNewCharacter"), 1000, 670, "White", "Black");
+	DrawButton(850, 740, 300, 60, TextGet("NewCharacter"), "White", "");
+	if (CheatAllow) DrawButton(850, 870, 300, 60, TextGet("Cheats"), "White", "");
+
+	// Draw the character and thank you bubble
+	DrawCharacter(Player, 1400, 100, 0.9);
 	if (LoginThankYouNext < CommonTime()) LoginDoNextThankYou();
-	DrawImage("Screens/" + CurrentModule + "/" + CurrentScreen + "/Bubble.png", 725, 16);
-	DrawText(TextGet("ThankYou") + " " + LoginThankYou, 950, 53, "Black", "Gray");
+	DrawImage("Screens/" + CurrentModule + "/" + CurrentScreen + "/Bubble.png", 1400, 16);
+	DrawText(TextGet("ThankYou") + " " + LoginThankYou, 1625, 53, "Black", "Gray");
 
 }
 
@@ -136,22 +143,26 @@ function LoginResponse(CharacterData) {
 // When the user clicks on the character login screen
 function LoginClick() {
 	
-	if (CheatAllow) {
+	// Opens the cheat panel
+	if (CheatAllow && ((MouseX >= 850) && (MouseX <= 1150) && (MouseY >= 870) && (MouseY <= 930))) {
 		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 		document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
 		CommonSetScreen("Character", "Cheat");
 	}
 	
 	// If we must create a new character
-	if ((MouseX >= 1425) && (MouseX <= 1705) && (MouseY >= 740) && (MouseY <= 800)) {
+	if ((MouseX >= 850) && (MouseX <= 1150) && (MouseY >= 740) && (MouseY <= 800)) {
 		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 		document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
 		CharacterAppearanceSetDefault(Player);
+		InventoryRemove(Player, "ItemFeet");
+		InventoryRemove(Player, "ItemLegs");
+		InventoryRemove(Player, "ItemArms");
 		CommonSetScreen("Character", "Appearance");
 	}
 	
 	// If we must try to login
-	if ((MouseX >= 1500) && (MouseX <= 1600) && (MouseY >= 500) && (MouseY <= 560)) {
+	if ((MouseX >= 925) && (MouseX <= 1075) && (MouseY >= 500) && (MouseY <= 560)) {
 		var Name = document.getElementById("InputName").value.trim();
 		var Password = document.getElementById("InputPassword").value.trim();
 		var letters = /^[a-zA-Z0-9]+$/;
