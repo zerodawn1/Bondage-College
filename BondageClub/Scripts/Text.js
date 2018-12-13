@@ -19,8 +19,8 @@ function TextBuild(CSV) {
 
 			// Creates a text object and adds it to the buffer
 			var T = {};
-			T.Tag = CSV[L][0];
-			if ((CSV[L][1] != null) && (CSV[L][1].trim() != "")) T.Value = CSV[L][1];
+			T.Tag = CSV[L][0].trim();
+			if ((CSV[L][1] != null) && (CSV[L][1].trim() != "")) T.Value = CSV[L][1].trim();
 			else T.Value = "";
 			Text.push(T);
 

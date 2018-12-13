@@ -1,16 +1,40 @@
 var ShopBackground = "Shop";
 var ShopVendor = null;
+var ShopVendorAllowItem = false;
+var ShopBoughtEverything = false;
 var ShopStarted = false;
 var ShopText = "";
+var ShopRescueScenario = "";
+var ShopRescueScenarioList = ["BoughtEverything", "CatBurglar", "BoredVendor", "SleepingAtWork"];
+
+// Returns TRUE if a dialog is permitted
+function ShopIsVendorRestrained() { return (ShopVendor.IsRestrained() || !ShopVendor.CanTalk()) }
+function ShopIsRescueScenario(ScenarioName) { return (ShopRescueScenario == ScenarioName) }
 
 // Loads the shop room
 function ShopLoad() {
 
 	// Creates the shop vendor
 	ShopVendor = CharacterLoadNPC("NPC_Shop_Vendor");
-	ShopVendor.AllowItem = false;
+	ShopVendor.AllowItem = ShopVendorAllowItem;
 	ShopStarted = false;
 	ShopText = TextGet("SelectItemBuy");
+
+	// Rescue mission load
+	if ((MaidQuartersCurrentRescue == "Shop") && !MaidQuartersCurrentRescueStarted) {
+		MaidQuartersCurrentRescueStarted = true;
+		InventoryWearRandom(ShopVendor, "ItemFeet");
+		InventoryWearRandom(ShopVendor, "ItemLegs");
+		InventoryWearRandom(ShopVendor, "ItemPelvis");
+		InventoryWearRandom(ShopVendor, "ItemTorso");
+		InventoryWearRandom(ShopVendor, "ItemArms");
+		InventoryWearRandom(ShopVendor, "ItemNeck");
+		InventoryWearRandom(ShopVendor, "ItemMouth");
+		InventoryWearRandom(ShopVendor, "ItemHead");
+		ShopVendor.Stage = "MaidRescue";
+		ShopVendor.AllowItem = true;
+		ShopRescueScenario = CommonRandomItemFromList(ShopRescueScenario, ShopRescueScenarioList);
+	}
 
 }
 
@@ -21,7 +45,7 @@ function ShopRun() {
 	DrawCharacter(Player, 0, 0, 1);
 	DrawCharacter(ShopVendor, 500, 0, 1);
 	if (Player.CanWalk() || ShopStarted) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
-	DrawButton(1885, 145, 90, 90, "", "White", "Icons/Character.png");
+	if (!ShopStarted) DrawButton(1885, 145, 90, 90, "", "White", "Icons/Character.png");
 
 	// In shopping mode
 	if (ShopStarted) {
@@ -123,4 +147,26 @@ function ShopStart(ItemGroup) {
 		ShopText = TextGet("SelectItemBuy");
 	}
 
+}
+
+// When the player rescues the shop vendor
+function ShopCompleteRescue() {
+	ShopVendor.AllowItem = ShopVendorAllowItem;
+	CharacterRelease(ShopVendor);
+	MaidQuartersCurrentRescueCompleted = true;
+}
+
+// Checks if the player bought all items that can be bought, including appearance items
+function ShopCheckBoughtEverything() {
+	ShopBoughtEverything = false;
+	for(var A = 0; A < Asset.length; A++)
+		if ((Asset[A] != null) && (Asset[A].Group != null) && (Asset[A].Value > 0) && !InventoryAvailable(Player, Asset[A].Name, Asset[A].Group.Name))
+			return;
+	ShopBoughtEverything = true;
+}
+
+// The vendor can be restrained if the player bought everything
+function ShopVendorBondage() {
+	ShopVendorAllowItem = true;
+	ShopVendor.AllowItem = true;
 }

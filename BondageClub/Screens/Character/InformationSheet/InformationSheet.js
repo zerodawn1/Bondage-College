@@ -19,8 +19,8 @@ function InformationSheetRun() {
 	MainCanvas.textAlign = "left";
 	DrawText(TextGet("Name") + " " + C.Name, 550, 125, "Black", "Gray");
 	DrawText(TextGet("Title") + " " + InformationSheetGetTitle(), 550, 200, "Black", "Gray");
-	DrawText(TextGet("Owner") + " " + (((C.Owner == null) || (C.Owner == "")) ? TextGet("OwnerNone") : C.Owner.replace("NPC-", "")), 550, 275, "Black", "Gray");
-	DrawText(TextGet("Lover") + " " + (((C.Lover == null) || (C.Lover == "")) ? TextGet("LoverNone") : C.Lover.replace("NPC-", "")), 550, 350, "Black", "Gray");
+	DrawText(TextGet("Owner") + " " + (((C.Owner == null) || (C.Owner == "") || (C.Owner == "undefined")) ? TextGet("OwnerNone") : C.Owner.replace("NPC-", "")), 550, 275, "Black", "Gray");
+	DrawText(TextGet("Lover") + " " + (((C.Lover == null) || (C.Lover == "") || (C.Lover == "undefined")) ? TextGet("LoverNone") : C.Lover.replace("NPC-", "")), 550, 350, "Black", "Gray");
 	DrawText(TextGet("Money") + " " + ((C.ID == 0) ? C.Money.toString() + " $" : "?"), 550, 425, "Black", "Gray");
 
 	// Draw the reputation section

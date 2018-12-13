@@ -46,6 +46,8 @@ function AssetAdd(NewAsset) {
 		SetPose: NewAsset.SetPose,
 		Value: (NewAsset.Value == null) ? 0 : NewAsset.Value,
 		SelfBondage: (NewAsset.SelfBondage == null) ? true : NewAsset.SelfBondage,
+		Random: (NewAsset.Random == null) ? true : NewAsset.Random,
+		RemoveAtLogin: (NewAsset.RemoveAtLogin == null) ? false : NewAsset.RemoveAtLogin,
 		WearTime: (NewAsset.Time == null) ? 0 : NewAsset.Time,
 		RemoveTime: (NewAsset.RemoveTime == null) ? ((NewAsset.Time == null) ? 0 : NewAsset.Time) : NewAsset.RemoveTime,
 		DrawingPriority: NewAsset.Priority,

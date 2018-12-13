@@ -27,6 +27,11 @@ RemoveItemHead,,,(You remove the device and she looks at you.)  That was quite a
 10,,Can I tie you up?,"Absolutely, I'm ready for any challenge.  I especially love rope bondage and suspension.",,
 10,,Will you tie me up?,"No Miss, I'm sorry, I'm a submissive.",,
 10,0,Let's talk about something else.,Yes Miss.,,
-MaidRescue,,,(She struggles playfully.)  Konichiwa Miss!  It seems that we got in trouble.,,
+MaidRescue,,,Konichiwa Miss.  It seems that we got in trouble.,,
+MaidRescue,,Do you need help?,"(She shakes her head no.)  I'm fine, things like that happen all the time.  Check with the teacher.",,
+MaidRescue,,What happened here?,"A japanese speaking girl came in and argued with the teacher.  She did some judo, stripped and restrained our poor teacher.",,"IsRescueScenario(""JapaneseGirl"")"
+MaidRescue,,What happened here?,A bratty student challenged the teacher to be suspended.  Our good teacher accepted and well... was left like that.  (She giggles.),,"IsRescueScenario(""RebelStudent"")"
+MaidRescue,,What happened here?,"Our teacher wanted to see if she could suspend and restrain herself.  She managed to do it, but I think she got stuck.",,"IsRescueScenario(""SelfBondage"")"
+MaidRescue,,What happened here?,"The Head Mistress came with customers.  The clients wanted to try shibari on the teacher but didn't had time to release her, so they called the maids.",,"IsRescueScenario(""HeadMistress"")"
 MaidRescue,,(Spank her on the butt.),(You spank her on the butt as she dangles on the rope.)  Oooooh!  I love the way it stings Miss.,Spank(),AllowSpank()
 MaidRescue,,I'll go get help.  (Leave her.),,DialogLeave(),

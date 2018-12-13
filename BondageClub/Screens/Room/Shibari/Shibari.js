@@ -1,5 +1,6 @@
 var ShibariBackground = "ShibariDojo";
 var ShibariTeacher = null;
+var ShibariTeacherAppearance = null;
 var ShibariAllowTeacherItem = false;
 var ShibariStudent = null;
 var ShibariPlayerAppearance = null;
@@ -8,14 +9,18 @@ var ShibariDomCommentDone = false;
 var ShibariSurrenderDone = false;
 var ShibariSpankDone = false;
 var ShibariTeacherReleaseTimer = false;
+var ShibariRescueScenario = "";
+var ShibariRescueScenarioList = ["JapaneseGirl", "RebelStudent", "SelfBondage", "HeadMistress"];
 
 // Returns TRUE if a specific dialog action is allowed
 function ShibariAllowTeacherBondage() { return (!ShibariAllowTeacherItem && DialogReputationGreater("Dominant", 75)); }
 function ShibariAllowTeacherStrip() { return (ShibariAllowTeacherItem && !ShibariTeacher.IsRestrained() && (InventoryGet(ShibariTeacher, "Cloth") != null)); }
 function ShibariAllowPlayerBondage() { return !Player.IsRestrained() && !ShibariTeacher.IsRestrained() }
 function ShibariAllowSpank() { return (((CurrentCharacter.ID == ShibariTeacher.ID) ? (ShibariTeacher.Pose.indexOf("Suspension") >= 0) : (ShibariStudent.Pose.indexOf("Suspension") >= 0)) && Player.CanInteract()) }
-function ShibariAllowAskRope() { return (!InventoryAvailable(Player, "SuspensionHempRope", "ItemFeet") && (SkillGetLevel(Player, "Bondage") < 7)) }
-function ShibariAllowGetRope() { return (!InventoryAvailable(Player, "SuspensionHempRope", "ItemFeet") && (SkillGetLevel(Player, "Bondage") >= 7)) }
+function ShibariAllowAskRope() { return (!InventoryAvailable(Player, "SuspensionHempRope", "ItemFeet") && (SkillGetLevel(Player, "Bondage") < 6)) }
+function ShibariAllowGetRope() { return (!InventoryAvailable(Player, "SuspensionHempRope", "ItemFeet") && (SkillGetLevel(Player, "Bondage") >= 6)) }
+function ShibariIsRescueScenario(ScenarioName) { return (ShibariRescueScenario == ScenarioName) }
+function ShibariIsTeacherRestrained() { return (ShibariTeacher.IsRestrained() || !ShibariTeacher.CanTalk()) }
 
 // Loads the shibari dojo characters with many restrains
 function ShibariLoad() {
@@ -26,6 +31,7 @@ function ShibariLoad() {
 		ShibariTeacher = CharacterLoadNPC("NPC_Shibari_Teacher");
 		ShibariTeacher.AllowItem = ShibariAllowTeacherItem;
 		InventoryWear(ShibariTeacher, "ChineseDress1", "Cloth");
+		ShibariTeacherAppearance = ShibariTeacher.Appearance.slice();
 		ShibariStudent = CharacterLoadNPC("NPC_Shibari_Student");
 		CharacterNaked(ShibariStudent);
 		InventoryAdd(ShibariTeacher, "HempRope", "ItemArms");
@@ -67,6 +73,7 @@ function ShibariLoad() {
 		InventoryWearRandom(ShibariTeacher, "ItemHead");		
 		ShibariTeacher.Stage = "MaidRescue";
 		ShibariStartTeacherBondage();
+		ShibariRescueScenario = CommonRandomItemFromList(ShibariRescueScenario, ShibariRescueScenarioList);
 	}
 
 }
@@ -151,4 +158,14 @@ function ShibariSpank() {
 // When the teacher gives the suspension hemp rope to the player
 function ShibariGetRope() {
 	InventoryAdd(Player, "SuspensionHempRope", "ItemFeet");
+}
+
+// When the player rescue the teacher and completes the mission
+function ShibariCompleteRescue() {
+	ShibariAllowTeacherItem = false;
+	ShibariTeacher.AllowItem = false;
+	CharacterRelease(ShibariTeacher);
+	CharacterDress(ShibariTeacher, ShibariTeacherAppearance);
+	MaidQuartersCurrentRescueCompleted = true;
+	ShibariStudent.Stage = "0";
 }

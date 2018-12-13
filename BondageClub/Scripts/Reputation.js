@@ -66,6 +66,7 @@ function ReputationTimer(RepType, Reverse) {
 // Alter the reputation progress by a factor (The higher the rep, the slower it gets, a reputation is easier to break than to build)
 function ReputationProgress(RepType, Value) {
 	var V = ReputationGet(RepType);
+	Value = Value * ((CheatAllow && CheatDoubleReputation) ? 2 : 1);
 	if (Value > 0) {
 		if ((V >= 70) && (V <= 100)) ReputationChange(RepType, Math.floor(Value / 3));
 		if ((V >= 30) && (V < 70)) ReputationChange(RepType, Math.floor(Value / 2));

@@ -99,7 +99,7 @@ function InventorySetDifficulty(C, AssetGroup, Difficulty) {
 function InventoryWearRandom(C, AssetGroup) {
 	var List = [];
 	for (var A = 0; A < Asset.length; A++)
-		if ((Asset[A].Group.Name == AssetGroup) && Asset[A].Wear && Asset[A].Enable)
+		if ((Asset[A].Group.Name == AssetGroup) && Asset[A].Wear && Asset[A].Enable && Asset[A].Random)
 			List.push(Asset[A]);
 	if (List.length == 0) return;
 	CharacterAppearanceSetItem(C, AssetGroup, List[Math.floor(Math.random() * List.length)]);

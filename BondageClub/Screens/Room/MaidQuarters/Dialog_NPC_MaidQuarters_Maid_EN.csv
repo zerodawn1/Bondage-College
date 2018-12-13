@@ -1,6 +1,7 @@
 PlayerGagged,,,Lovely gag.  Do you need help with it?  Nod if you do.,,
 RescueIntroductionClass,,,Can you go check on the Introduction Class?  Sometimes new members get out of control.,,
 RescueShibariDojo,,,I've heard rumors of trouble going on at the Shibari Dojo.  Can you make sure everyone is fine?,,
+RescueShop,,,I think that something went wrong at the store.  Can you go there to help the vendor?,,
 MaidDrinksVictory,,,(You come back to DialogCharacterName with an empty drink platter.)  Well done!,,
 MaidDrinksDefeat,,,(You come back to DialogCharacterName with spilled drinks all over your uniform.),,
 MaidInitiationTransition,,,(DialogCharacterName hugs you and gropes your red butt.)  You're now a full maid my sister.,,
@@ -77,8 +78,8 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 70,80,I will wear it with pride.,(You dress up in your own maid uniform while the maids claps their hands.),BecomMaid(),
 70,80,Thank you so much.,(You dress up in your own maid uniform while the maids claps their hands.),BecomMaid(),
 80,0,I love you my sisters.,(The other maids cheers and go back to work.)  This is great!  Do you want some chores now or simply chat?,,
-80,0,I will start to climb up in the sorority ladder right now!,(The other maids cheers and go back to work.)  This is great!  Do you want some chores now or simply chat?,"DialogChangeReputation(""Dominant"", 3)",
-80,0,I hope we will protect each other.,(The other maids cheers and go back to work.)  This is great!  Do you want some chores now or simply chat?,"DialogChangeReputation(""Dominant"", -3)",
+80,0,I will start to climb up in the sorority ladder right now!,(The other maids cheers and go back to work.)  This is great!  Do you want some chores now or simply chat?,"DialogChangeReputation(""Dominant"", 4)",
+80,0,I hope we will protect each other.,(The other maids cheers and go back to work.)  This is great!  Do you want some chores now or simply chat?,"DialogChangeReputation(""Dominant"", -4)",
 90,91,I'm ready to become head maid.,You would be a wonderful head maid Miss.,,CanBecomeHeadMaid
 90,90,Can I become head maid?,You'll need to have a perfect repuration in the sorority and be recognized as a dominant in the club first.,,!CanBecomeHeadMaid
 90,90,Tell me of the head maids responsibilities.,The head maids have regular meetings with the club head Mistress.  They must make sure that the maids are working properly.,,
@@ -92,14 +93,14 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 93,0,I will rule with an iron first.,Excellent Miss.  Is there anything else I can do for you?,"DialogChangeReputation(""Dominant"", 4)",
 100,,,(She shows you a list of chores.)  What kind of job are you looking for?,,
 100,,Can you please release me so I can take a job?,"Poor thing, of course I can help you.  (She releases you and shows you the chores list again.)  ",MaidReleasePlayer(),Player.IsRestrained()
-100,200,I'll go serve drinks.,Nice!  Our guests are always thirsty.,,AllowMaidDrinks()
 100,300,I'll take a rescue mission.,Excellent!  We need to make sure our members are safe.,,AllowRescue()
+100,200,I'll go serve drinks.,Nice!  Our guests are always thirsty.,,AllowMaidDrinks()
 100,0,Let's talk some more first.,Sure.  How can I help you?,,
 100,,Give me a few minutes first.  (Leave her.),,DialogLeave(),
 200,210,I'm already dressed up.,Perfect!  Let me restrain you then.,WearMaidUniform(),PlayerInMaidUniform()
 200,210,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Perfect!  Let me restrain you then.,WearMaidUniform(),!PlayerInMaidUniform()
 210,,Wait!  Restrain me?  Why?,You're in the Bondage Club sweetie.  Waitresses need to be restrained.,DialogRemove(),
-210,220,Very well Miss.  (Allow her to restrain you.),"Very good, first I will restrain your legs but not your feet.  You need to be able to walk around.","DialogChangeReputation(""Dominant"", -3)",
+210,220,Very well Miss.  (Blush and allow her to restrain you.),"Very good, first I will restrain your legs but not your feet.  You need to be able to walk around.","DialogChangeReputation(""Dominant"", -4)",
 210,220,I know the drill.  (Allow her to restrain you.),"Very good, first I will restrain your legs but not your feet.  You need to be able to walk around.","DialogChangeReputation(""Dominant"", -2)",
 220,230,I understand.,"Good.  (She restrains your legs and smiles.)  Next is your arms, you won't need them since your drink platter comes with straps.","DialogWearRandomItem(""ItemLegs"")",
 220,230,It won't be easy to walk.,"Indeed.  (She restrains your legs and smiles.)  Next is your arms, you won't need them since your drink platter comes with straps.","DialogWearRandomItem(""ItemLegs"")",
@@ -125,8 +126,23 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 300,,How does it work?,You'll have to patrol around the club and release members that are stuck.  I'll give you a specific location to monitor.,DialogRemove(),
 300,,Where should I go?,,StartRescue(),
 310,,,Did you went to the Introduction Class?  Is there anything to report?,,
+310,390,Everything is under control.,Perfect!  Let me pay you for your efforts then.  (She gives you REPLACEMONEY $),RescuePay(),CurrentRescueCompleted
 310,,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Wonderful!  Make the sorority proud.,WearMaidUniform(),!PlayerInMaidUniform()
 310,,I'll go check the Introduction Class.  (Leave her.),,DialogLeave(),PlayerInMaidUniform()
+310,395,"I went there, but I couldn't do the rescue mission.","This is disappointing, but I can send someone else.  You understand that you won't get paid.  What happened?",CancelRescue(),AllowCancelRescue()
 320,,,Have you inspected the Shibari Dojo?  Is everything alright?,,
+320,390,Everything is under control.,Perfect!  Let me pay you for your efforts then.  (She gives you REPLACEMONEY $),RescuePay(),CurrentRescueCompleted
 320,,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Wonderful!  Make the sorority proud.,WearMaidUniform(),!PlayerInMaidUniform()
 320,,I'll go check the Shibari Dojo.  (Leave her.),,DialogLeave(),PlayerInMaidUniform()
+320,395,"I went there, but I couldn't do the rescue mission.","This is disappointing, but I can send someone else.  You understand that you won't get paid.  What happened?",CancelRescue(),AllowCancelRescue()
+330,,,Did you went to the Bondage Club store?  Did the vendor got in trouble?,,
+330,390,Everything is under control.,Perfect!  Let me pay you for your efforts then.  (She gives you REPLACEMONEY $),RescuePay(),CurrentRescueCompleted
+330,,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Wonderful!  Make the sorority proud.,WearMaidUniform(),!PlayerInMaidUniform()
+330,,I'll go check the Bondage Club store.  (Leave her.),,DialogLeave(),PlayerInMaidUniform()
+330,395,"I went there, but I couldn't do the rescue mission.","This is disappointing, but I can send someone else.  You understand that you won't get paid.  What happened?",CancelRescue(),AllowCancelRescue()
+390,0,Everyone will be safe as long as I'm in control.,That's very comforting to hear.  Are you ready for more chores?,"DialogChangeReputation(""Dominant"", 4)",
+390,0,I'm happy I could serve the sorority Miss.,You're such a sweet servant.  Are you ready for more chores?,"DialogChangeReputation(""Dominant"", -2)",
+390,0,Don't mention it.,Excellent!  Are you ready for more chores?,,
+395,0,I didn't had the proper tools or techniques.,You still have a lot to learn don't you?  I can give you another chore if you're up for it.,"DialogChangeReputation(""Dominant"", -1)",
+395,0,"I'm sorry, I don't have any excuses.","It's alright girl, don't worry.  I can give you another chore if you're up for it.","DialogChangeReputation(""Dominant"", -2)",
+395,0,The rescue was already done.,"Very well, it happens from time to time.  I can give you another chore if you're up for it.",,

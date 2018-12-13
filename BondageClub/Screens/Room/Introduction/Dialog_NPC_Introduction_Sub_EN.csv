@@ -9,7 +9,10 @@ ItemFeet,,,(She giggles while you restrain her feet.  Preventing her from walkin
 RemoveItemFeet,,,(You release her feet and she jumps playfully.)  You can tie me up anytime Miss.,,
 ItemNeck,,,"(You strap the collar on her while she blushes.)  Collars have a special meaning, someday you might find a sub for you in the club.",,
 RemoveItemNeck,,,(You remove the collar around her neck.)  You can also lock collars on willing submissives.,,
-ItemPelvis,,,(This item isn't supported yet.  It will be added in a future version.),,
+ItemPelvis,,,(You snap the belt around her waist while she wiggles her butt.)  This is so kinky!  Thanks Miss.,,
+RemoveItemPelvis,,,(You unlock the belt from her waist and crotch.)  I can't wait to see what you'll use on me next.,,
+ItemHead,,,(You strap the device on her head as she tries to look around.)  It will heighten any other bondage.,,
+RemoveItemHead,,,(You remove the device and she looks at you.)  That was pretty intense.  What else can we try?,,
 0,,,Greetings head maid DialogPlayerName.  Welcome to the introduction class.,,IsHeadMaid
 0,,,Greetings maid DialogPlayerName.  Welcome to the introduction class.,,IsMaid
 0,,,Greetings Miss.  Welcome to the Bondage Club.,,!IsMaid
@@ -30,3 +33,11 @@ ItemPelvis,,,(This item isn't supported yet.  It will be added in a future versi
 30,40,Can I become a maid?,"Absolutely, go to the maid quarters and ask for a job.  After a while they may let you join their sorority.",,
 30,0,Thanks for the info.,It's my pleasure Miss.  Is there something else you would like to know?,,
 40,0,Thanks for the tip.,Maybe we'll work together someday.  Is there something else you would like to know?,,
+MaidRescue,,,Thanks for coming to the rescue Miss.,,
+MaidRescue,,Do you need help?,"(She nods slowly.)  Yes please, can you release me and our friendly maid here?  Check with her if everything is fine.",,!IsBothFree()
+MaidRescue,,Is everything alright now?,I think everything is fine.  Please check with the maid to make sure.,,IsBothFree()
+MaidRescue,,What happened here?,"An intimidating woman dressed in latex came in.  Without a word, she forced us into armbinders, belts and gagged us before leaving.",,"IsRescueScenario(""LatexWoman"")"
+MaidRescue,,What happened here?,A newcomer wanted to learn about armbinders and got a little too carried away.  She left for the maid quarters to ask for help.,,"IsRescueScenario(""Newcomer"")"
+MaidRescue,,What happened here?,"Another maid came in and started a fight with our friendly maid here.  As you can guess, the other girl won.",,"IsRescueScenario(""MaidFight"")"
+MaidRescue,,What happened here?,"A sales woman came to sell us armbinders and some belts.  As you can see, she was very convincing.  (She giggles.)",,"IsRescueScenario(""SalesWoman"")"
+MaidRescue,,I'll go get help.  (Leave her.),,DialogLeave(),

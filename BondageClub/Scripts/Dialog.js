@@ -168,10 +168,11 @@ function DialogProgressStart(C, PrevItem, NextItem) {
 	if ((C.ID != 0) || ((C.ID == 0) && (PrevItem == null))) S = S + SkillGetLevel(Player, "Bondage");
 	if (Timer < 1) Timer = 1;
 	if (Player.IsBlind()) Timer = Timer * 2;
+	Timer = Timer * ((CheatAllow && CheatDoubleItemSpeed) ? 0.5 : 1);
 
 	// Prepares the progress bar and timer
 	DialogProgress = 0;
-	DialogProgressAuto = CommonRunInterval * (0.1133 + (S * 0.0567)) / Timer;
+	DialogProgressAuto = CommonRunInterval * (0.1133 + (S * 0.1133)) / Timer;
 	DialogProgressClick = CommonRunInterval * 2.5 / Timer;
 	DialogProgressPrevItem = PrevItem;
 	DialogProgressNextItem = NextItem;
@@ -205,7 +206,7 @@ function DialogClick() {
 	if (((Player.FocusGroup != null) || ((CurrentCharacter.FocusGroup != null) && CurrentCharacter.AllowItem)) && (DialogIntro() != "")) {
 
 		// If the user wants to speed up the add / swap / remove progress
-		if ((MouseX >= 1000) && (MouseX < 2000) && (MouseY >= 0) && (MouseY < 1000) && (DialogProgress >= 0))
+		if ((MouseX >= 1000) && (MouseX < 2000) && (MouseY >= 600) && (MouseY < 1000) && (DialogProgress >= 0))
 			DialogProgress = DialogProgress + DialogProgressClick;
 	
 		// If the user removes wants to remove an item
@@ -219,8 +220,9 @@ function DialogClick() {
 
 					// Do not allow to remove if it's locked
 					if ((Item.Asset.Effect == null) || (Item.Asset.Effect.indexOf("Lock") < 0))
-						if (!InventoryGroupIsBlocked(C))
-							DialogProgressStart(C, Item, null);
+						if ((Item.Asset.Prerequisite == null) || eval(Item.Asset.Prerequisite.replace("CharacterObject", "C")))
+							if (!InventoryGroupIsBlocked(C))
+								DialogProgressStart(C, Item, null);
 
 				}
 			} else {
@@ -378,7 +380,7 @@ function DialogDrawItemMenu(C) {
 			// Draw the current operation and progress
 			DrawText(DialogProgressOperation, 1500, 650, "White", "Black");
 			DrawProgressBar(1200, 700, 600, 100, DialogProgress);
-			DrawText("Click to speed up the progress", 1500, 900, "White", "Black");
+			DrawText("Click here to speed up the progress", 1500, 900, "White", "Black");
 
 			// If the operation is completed
 			if (DialogProgress >= 100) {

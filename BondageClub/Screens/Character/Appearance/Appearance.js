@@ -33,6 +33,15 @@ function CharacterAppearanceValidate(C) {
 			A--;
 		}
 
+	// Remove items flagged as "Remove At Login"
+	var Refresh = false;
+	for(var A = 0; A < C.Appearance.length; A++)
+		if (C.Appearance[A].Asset.RemoveAtLogin) {
+			C.Appearance.splice(A, 1);
+			Refresh = true;
+			A--;
+		}
+
 	// Dress back if there are missing appearance items
 	for(var A = 0; A < AssetGroup.length; A++)
 		if (AssetGroup[A].IsDefault && (CharacterAppearanceGetCurrentValue(C, AssetGroup[A].Name, "Name") == "None"))

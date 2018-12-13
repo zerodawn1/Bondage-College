@@ -77,11 +77,11 @@ function CommonParseCSV(str) {
 }
 
 // Read a CSV file from the web site
-function CommonReadCSV(Array, Path, Screen, File) {
+function CommonReadCSV(Array, Path, Screen, File, Language) {
 	
     // Changed from a single path to various arguments and internally concatenate them
     // This ternary operator is used to keep backward compatibility
-    var FullPath = Path + "/" + Screen + "/" + File + "_" + CommonGetWorkingLanguage() + ".csv";    
+    var FullPath = "Screens/" + Path + "/" + Screen + "/" + File + (((Language == null) || (Language == false)) ? "" : "_" + CommonGetWorkingLanguage()) + ".csv";    
     if (CommonCSVCache[FullPath]) {
 		window[Array] = CommonCSVCache[FullPath];
         return;
@@ -137,4 +137,12 @@ function CommonSetScreen(NewModule, NewScreen) {
 // Return the current time
 function CommonTime() {
 	return new Date().getTime();
+}
+
+// Returns a random item from a list but make sure we don't pick the previous item again
+function CommonRandomItemFromList(ItemPrevious, ItemList) {
+	var NewItem = ItemPrevious;
+	while (NewItem == ItemPrevious)
+		NewItem = ItemList[Math.floor(Math.random() * ItemList.length)];
+	return NewItem;
 }

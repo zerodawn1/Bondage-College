@@ -44,6 +44,17 @@ RemoveItemHead,,,"(You remove the device and she nods politely.)  Good, that was
 20,,I'll escape on my own.  (Leave her.),,DialogLeave(),Player.IsRestrained()
 20,0,I've did it.  (Cheer and smile.),Well done.  I hope you learned some tricks.  Would you like to try again?,,!Player.IsRestrained()
 20,0,Piece of cake!  (Be cocky.),(She laughs.)  I hope you learned some tricks.  Would you like to try again?,DomComment(),!Player.IsRestrained()
-MaidRescue,,,(She struggles in her restraints.)  Can you release us?,,
+MaidRescue,,,(She struggles in her restraints.)  Can you release me?,,IsTeacherRestrained()
+MaidRescue,,,(She bows her head respectfully.)  Arigato to you and to the maid sorority.,,!IsTeacherRestrained()
+MaidRescue,,Do you need help?,"(She shakes her head yes.)  Yes please, can you release me?",,IsTeacherRestrained()
+MaidRescue,,Should I help your student?,"No, just release me and I'll take care of her.",,IsTeacherRestrained()
+MaidRescue,MaidRescueComplete,Is everything alright now?,"Yes, Domo Arigato.  Please inform the sorority that everything is fine at the Dojo.  (She dresses back.)",CompleteRescue(),!IsTeacherRestrained()
+MaidRescue,,What happened here?,"A japanese girl started to mess with my ropes.  I've tried to stopped her but she threw me on the floor.  She stripped, restrained and left me dangling.",,"IsRescueScenario(""JapaneseGirl"")"
+MaidRescue,,What happened here?,A student dared me to try shibari.  I thought she couldn't do it but she did and left to get her camera.  I couldn't escape by myself.,,"IsRescueScenario(""RebelStudent"")"
+MaidRescue,,What happened here?,"(She blushes.)  I wanted to try self-suspension and I somehow put the knots out of reach.  So I got stuck like that, this is embarrassing.",,"IsRescueScenario(""SelfBondage"")"
+MaidRescue,,What happened here?,Milady Head Mistress came in with customers and they wanted to try shibari on me.  They had to hurry so they called the sorority to get me down.,,"IsRescueScenario(""HeadMistress"")"
 MaidRescue,,(Spank her on the butt.),"(You spank her on the butt as she dangles on the rope.)  Ow!  Miss, I'm not a masochist.",Spank(),AllowSpank()
 MaidRescue,,I'll go get help.  (Leave her.),,DialogLeave(),
+MaidRescueComplete,0,Great!  A chore well done.,Absolutely.  Is there something I can do for you?,,
+MaidRescueComplete,0,No problem.  We are there to serve you.,This is great!  Is there something I can do for you?,"DialogChangeReputation(""Dominant"", -2)",
+MaidRescueComplete,0,"Alright, but be more careful next time.","I will, thanks.  Is there something I can do for you?","DialogChangeReputation(""Dominant"", 2)",

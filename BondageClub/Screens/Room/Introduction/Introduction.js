@@ -6,6 +6,13 @@ var IntroductionHasBasicItems = false;
 var IntroductionSubRestrained = false;
 var IntroductionIsMaid = false;
 var IntroductionIsHeadMaid = false;
+var IntroductionRescueScenario = "";
+var IntroductionRescueScenarioList = ["LatexWoman", "Newcomer", "MaidFight", "SalesWoman"];
+
+// Returns TRUE if the dialog situation is allowed
+function IntroductionIsRescueScenario(ScenarioName) { return (IntroductionRescueScenario == ScenarioName) }
+function IntroductionIsBothFree() { return (!IntroductionMaid.IsRestrained() && IntroductionMaid.CanTalk() && !IntroductionSub.IsRestrained() && IntroductionMaid.CanTalk()) }
+function IntroductionIsMaidRestrained() { return (IntroductionMaid.IsRestrained() || !IntroductionMaid.CanTalk()) }
 
 // Loads the introduction room
 function IntroductionLoad() {
@@ -18,6 +25,29 @@ function IntroductionLoad() {
 	// Creates two characters to begin with
 	IntroductionMaid = CharacterLoadNPC("NPC_Introduction_Maid");
 	IntroductionSub = CharacterLoadNPC("NPC_Introduction_Sub");
+
+	// Rescue mission load
+	if ((MaidQuartersCurrentRescue == "IntroductionClass") && !MaidQuartersCurrentRescueStarted) {
+		MaidQuartersCurrentRescueStarted = true;
+		InventoryAdd(IntroductionMaid, "LeatherArmbinder", "ItemArms");
+		InventoryAdd(IntroductionMaid, "LeatherBelt", "ItemLegs");
+		InventoryAdd(IntroductionMaid, "LeatherBelt", "ItemFeet");
+		InventoryWear(IntroductionMaid, "LeatherArmbinder", "ItemArms");
+		InventoryWear(IntroductionMaid, "LeatherBelt", "ItemLegs");
+		InventoryWear(IntroductionMaid, "LeatherBelt", "ItemFeet");
+		InventoryWearRandom(IntroductionMaid, "ItemMouth");
+		InventoryAdd(IntroductionSub, "LeatherArmbinder", "ItemArms");
+		InventoryAdd(IntroductionSub, "LeatherBelt", "ItemLegs");
+		InventoryAdd(IntroductionSub, "LeatherBelt", "ItemFeet");
+		InventoryWear(IntroductionSub, "LeatherArmbinder", "ItemArms");
+		InventoryWear(IntroductionSub, "LeatherBelt", "ItemLegs");
+		InventoryWear(IntroductionSub, "LeatherBelt", "ItemFeet");
+		InventoryWearRandom(IntroductionSub, "ItemMouth");
+		IntroductionMaid.Stage = "MaidRescue";
+		IntroductionMaid.AllowItem = true;
+		IntroductionSub.Stage = "MaidRescue";
+		IntroductionRescueScenario = CommonRandomItemFromList(IntroductionRescueScenario, IntroductionRescueScenarioList);
+	}
 
 }
 
@@ -90,4 +120,13 @@ function IntroductionGagPlayer() {
 		IntroductionMaid.CurrentDialog = DialogFind(IntroductionMaid, "ReleaseHeadMaid");
 		IntroductionMaid.Stage = "370";
 	} else DialogWearItem("SmallClothGag", "ItemMouth")
+}
+
+// When the player rescue both girls and completes the mission
+function IntroductionCompleteRescue() {
+	IntroductionMaid.AllowItem = LogQuery("LeadSorority", "Maid");
+	CharacterRelease(IntroductionMaid);
+	CharacterRelease(IntroductionSub);
+	MaidQuartersCurrentRescueCompleted = true;
+	IntroductionSub.Stage = "0";
 }

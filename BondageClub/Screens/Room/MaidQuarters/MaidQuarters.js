@@ -11,19 +11,21 @@ var MaidQuartersCannotBecomeHeadMaidYet = false
 var MaidQuartersIsMaid = false;
 var MaidQuartersDominantRep = 0;
 var MaidQuartersCurrentRescue = "";
-var MaidQuartersRescueList = ["IntroductionClass", "ShibariDojo"];
-var MaidQuartersRescueStage = ["310", "320"];
+var MaidQuartersRescueList = ["IntroductionClass", "ShibariDojo", "Shop"];
+var MaidQuartersRescueStage = ["310", "320", "330"];
 var MaidQuartersCurrentRescueStarted = false;
+var MaidQuartersCurrentRescueCompleted = false;
 
 // Returns TRUE if the player is dressed in a maid uniform or can take a specific chore
 function MaidQuartersPlayerInMaidUniform() { return ((CharacterAppearanceGetCurrentValue(Player, "Cloth", "Name") == "MaidOutfit1") && (CharacterAppearanceGetCurrentValue(Player, "Hat", "Name") == "MaidHairband1")) }
 function MaidQuartersAllowMaidDrinks() { return (!Player.IsRestrained() && !MaidQuartersMaid.IsRestrained()); }
 function MaidQuartersAllowRescue() { return (!Player.IsRestrained()); }
+function MaidQuartersAllowCancelRescue() { return (MaidQuartersCurrentRescueStarted && !MaidQuartersCurrentRescueCompleted); }
 
 // Loads the maid quarters room
 function MaidQuartersLoad() {
 
-	// Creates the maid that gives work
+	// Creates the maid that gives work and the initiation maids
 	MaidQuartersMaid = CharacterLoadNPC("NPC_MaidQuarters_Maid");
 	MaidQuartersMaidInitiation = CharacterLoadNPC("NPC_MaidQuarters_InitiationMaids");
 	InventoryWear(MaidQuartersMaidInitiation, "WoodenPaddle", "ItemMisc");
@@ -110,6 +112,14 @@ function MaidQuartersMiniGamePay() {
 	CharacterChangeMoney(Player, M);
 }
 
+// When the rescue is successful, the player gets paid
+function MaidQuartersRescuePay() {
+	ReputationProgress("Maid", 4);
+	var M = 8 + Math.floor(Math.random() * 9);
+	MaidQuartersMaid.CurrentDialog = MaidQuartersMaid.CurrentDialog.replace("REPLACEMONEY", M.toString());
+	CharacterChangeMoney(Player, M);
+}
+
 // When the maid releases the player
 function MaidQuartersMaidReleasePlayer() {
 	if (MaidQuartersMaid.CanInteract()) {
@@ -165,13 +175,18 @@ function MaidQuartersBecomHeadMaid() {
 // Starts a maid rescue mission in a random room
 function MaidQuartersStartRescue() {
 	
-	// Make sure we don't select the same room twice
-	var NewRescue = MaidQuartersCurrentRescue;
-	while (NewRescue == MaidQuartersCurrentRescue)
-		NewRescue = MaidQuartersRescueList[Math.floor(Math.random() * MaidQuartersRescueList.length)];
-	MaidQuartersCurrentRescue = NewRescue;
-	MaidQuartersMaid.Stage = MaidQuartersRescueStage[MaidQuartersRescueList.indexOf(NewRescue)];
-	MaidQuartersMaid.CurrentDialog = DialogFind(MaidQuartersMaid, "Rescue" + NewRescue);
+	// Make sure we don't select the same room twice and prepares the rescue scenario
+	MaidQuartersCurrentRescue = CommonRandomItemFromList(MaidQuartersCurrentRescue, MaidQuartersRescueList);
+	MaidQuartersMaid.Stage = MaidQuartersRescueStage[MaidQuartersRescueList.indexOf(MaidQuartersCurrentRescue)];
+	MaidQuartersMaid.CurrentDialog = DialogFind(MaidQuartersMaid, "Rescue" + MaidQuartersCurrentRescue);
 	MaidQuartersCurrentRescueStarted = false;
+	MaidQuartersCurrentRescueCompleted = false;
 
+}
+
+// Cancels the current rescue mission
+function MaidQuartersCancelRescue() {
+	if (MaidQuartersCurrentRescue == "IntroductionClass") IntroductionCompleteRescue();
+	if (MaidQuartersCurrentRescue == "ShibariDojo") ShibariCompleteRescue();
+	if (MaidQuartersCurrentRescue == "Shop") ShopCompleteRescue();
 }

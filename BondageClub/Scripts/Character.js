@@ -218,7 +218,7 @@ function CharacterSetCurrent(C) {
 
 // Changes the character money and sync with the account server
 function CharacterChangeMoney(C, Value) {
-	C.Money = parseInt(C.Money) + parseInt(Value);
+	C.Money = parseInt(C.Money) + parseInt(Value) * ((CheatAllow && CheatDoubleMoney) ? 2 : 1);
 	AccountSync();
 }
 
