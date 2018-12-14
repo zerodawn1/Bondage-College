@@ -57,10 +57,10 @@ RemoveItemHead,,,(You remove the device and she looks relived.)  Thanks.  Nothin
 MaidRescue,,,(She struggles in her restraints.)  Help!,,IsVendorRestrained()
 MaidRescue,,,"(She gives you a thumbs up.)  Everything is back to normal, thanks to you and the sorority.",,!IsVendorRestrained()
 MaidRescue,,Do you need help?,"(She nods quickly.)  Yes, yes, yes!  Please help.",,IsVendorRestrained()
-MaidRescue,,Anything was stolent?,(She shrugs.)  I sure hope not.,,
+MaidRescue,,Anything was stolen?,(She shrugs.)  I sure hope not.,,
 MaidRescue,MaidRescueComplete,Is everything alright now?,You've took care of everything.  Please send my regards to the maids of the sorority.,CompleteRescue(),!IsVendorRestrained()
-MaidRescue,,What happened here?,"I've made a deal with a client that if she bought everything, she could used the items on me.  So she did just that.",,"IsRescueScenario(""BoughtEverything"")"
-MaidRescue,,What happened here?,A burglar surprised and restrained me.  The maids caught her and they went away.  I guess they sent you to help.,,"IsRescueScenario(""CatBurglar"")"
+MaidRescue,,What happened here?,"I've made a deal with a client that if she bought everything, she could use the items on me.  So, she did just that.",,"IsRescueScenario(""BoughtEverything"")"
+MaidRescue,,What happened here?,A burglar surprised and restrained me.  The maids caught her and dragged her away.  I guess they sent you to help me.,,"IsRescueScenario(""CatBurglar"")"
 MaidRescue,,What happened here?,I was bored and wanted to try a few items.  I think I got a little carried away.,,"IsRescueScenario(""BoredVendor"")"
 MaidRescue,,What happened here?,There wasn't any customer and I fell asleep.  The Head Mistress caught me and restrained me like that until she called the maids.,,"IsRescueScenario(""SleepingAtWork"")"
 MaidRescue,,I'll go get help.  (Leave her.),,DialogLeave(),

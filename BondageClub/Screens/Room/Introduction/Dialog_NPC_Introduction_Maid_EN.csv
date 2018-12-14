@@ -1,6 +1,6 @@
 PlayerGagged,,,Communicating with a gag is quite hard.  You'll need to remove it to chat.,,
-ReleaseHeadMaid,,,Of course head maid DialogPlayerName.  (She releases you.),,
-ItemMouth,,,(Her eyes widen when she sees the gag but she doesn't resist as you silence her.),,
+ReleaseHeadMaid,,,"Of course, head maid DialogPlayerName.  (She releases you.)",,
+ItemMouth,,,"(Her eyes widen when she sees the gag, but she doesn't resist as you silence her.)",,
 RemoveItemMouth,,,"(You remove her gag while she stretches her mouth.)  Thanks, it's hard to introduce newcomers with that gag.",,
 ItemArms,,,(She sighs and turns around while you restrain her arms.)  It might be a little hard to work like that Miss.,,
 RemoveItemArms,,,"(You free her arms and she nods slowly.)  Thanks a lot Miss, this is much better.",,
@@ -51,7 +51,7 @@ RemoveItemHead,,,(You remove the device as she shakes her head joyfully.)  Wonde
 40,100,Can we practice?,Absolutely.  Would you prefer to restrain someone or be tied up yourself?,,
 40,300,Can you tie me up now?,I can certainly tie you up.  It's a good time to practice.,ChangeMaidOpinion(-1),
 100,,,You can practice your bondage skills here.  Would you prefer to restrain someone or be tied up yourself?,,
-100,,I want to practice tying you up.,(She blushes.)  Yes head maid DialogPlayerName.  I will not resist you.,,IsHeadMaid
+100,,I want to practice tying you up.,"(She blushes.)  Yes, head maid DialogPlayerName.  I will not resist you.",,IsHeadMaid
 100,200,I want to practice tying you up.,"You won't tie me up, but we have someone here who would certainly enjoy being your victim.",ChangeMaidOpinion(1),!IsHeadMaid
 100,200,Can I tie her up?,"Absolutely, you have the perfect candidate here to practice on.",ChangeMaidOpinion(1),
 100,300,I want to practice freeing myself.,Awesome!  If you're ready for the challenge I will tie you up.,ChangeMaidOpinion(-1),

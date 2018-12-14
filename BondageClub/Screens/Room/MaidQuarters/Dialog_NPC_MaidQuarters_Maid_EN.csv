@@ -4,11 +4,11 @@ RescueShibariDojo,,,I've heard rumors of trouble going on at the Shibari Dojo.  
 RescueShop,,,I think that something went wrong at the store.  Can you go there to help the vendor?,,
 MaidDrinksVictory,,,(You come back to DialogCharacterName with an empty drink platter.)  Well done!,,
 MaidDrinksDefeat,,,(You come back to DialogCharacterName with spilled drinks all over your uniform.),,
-MaidCleaningVictory,,,(DialogCharacterName comes to get you back to the maid quarters and smiles.)  You've did it!,,
-MaidCleaningDefeat,,,(DialogCharacterName comes to get you back to the maid quarters and frowns.)  You failed to clean up in time.,,
+MaidCleaningVictory,,,(DialogCharacterName gets you back to the maid quarters and smiles.)  You've did it!,,
+MaidCleaningDefeat,,,(DialogCharacterName gets you back to the maid quarters and frowns.)  You failed to clean up in time.,,
 MaidInitiationTransition,,,(DialogCharacterName hugs you and gropes your red butt.)  You're now a full maid my sister.,,
 CantReleasePlayer,,,I'm sorry Miss.  I cannot help you.,,
-ItemMouth,,,(Her eyes widen when she sees the gag but she submits while you silence her.),,
+ItemMouth,,,"(Her eyes widen when she sees the gag, but she submits while you silence her.)",,
 RemoveItemMouth,,,"(You remove her gag while she stretches her mouth.)  Thanks Miss, it's hard to dispatch maids with that gag.",,
 ItemArms,,,(She sighs and turns around while you restrain her arms.)  It might be a little hard to work like that Miss.,,
 RemoveItemArms,,,(You free her arms and she nods happily.)  Thanks a lot Miss.,,
@@ -18,7 +18,7 @@ ItemFeet,,,(She looks puzzled as you restrain her feet.)  I'll stay on guard her
 RemoveItemFeet,,,"(You release her feet and she wiggles them.)  Thanks Miss, it was troublesome.",,
 ItemNeck,,,(You strap the collar on her while she blushes.)  You're quite a Dominant Miss.,,
 RemoveItemNeck,,,(You remove the collar around her neck.)  Thanks Miss.,,
-ItemPelvis,,,(You snap the belt around her waist and crotch while she sighs.)  No fun for the crew I guess.,,
+ItemPelvis,,,(You snap the belt around her waist and crotch while she sighs.)  No more fun for the crew.,,
 RemoveItemPelvis,,,(You unlock the belt from her waist and she smiles.)  Thanks a lot Miss DialogPlayerName.,,
 ItemHead,,,(You strap the device on her head as she nods slowly.)  This will not make my job easier Miss.,,
 RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a million, this is much better.",,
@@ -36,7 +36,7 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 0,,I'd like to become a full maid in the sorority.,You need to prove yourself first.  Do more work for the sorority and we'll accept you.,,CannotBecomeMaidYet
 0,90,Who are the leaders in the sorority?,"The leaders are the head maids, they are dominant and experienced maids like you Miss.",,CanBecomeHeadMaid
 0,90,Who are the leaders in the sorority?,"The leaders are the head maids, they are dominant and experienced maids.  Maybe someday you could be head maid if you work hard enough.",,CannotBecomeHeadMaidYet
-0,,Tell me about the club.,The Bondage Club is quite old.  It was a secret club back then when BDSM was more taboo.,DialogRemove(),
+0,,Tell me about the club.,The Bondage Club has a long history.  It was a secret club back then when BDSM was taboo and forbidden.,DialogRemove(),
 0,,I can't stay to chat.  (Leave her.),,DialogLeave(),
 10,20,I love the uniform!,"Wonderful.  I'm sure we'll find your size.  After lots of work for us, you can earn a permanent uniform that you can keep.",,
 10,20,I'll need to dress like you?,"Only when you're doing a chore.  After lots of work for us, you can earn a permanent uniform that you can keep.",,
@@ -54,9 +54,9 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 51,52,"Alright, but don't try anything funky.  (Strip naked.)",Don't worry.  (She turns to the other maids.)  Sisters!  Today we introduce a new member in our sorority.,DialogNaked(Player),Player.CanInteract()
 51,52,You girls are so kinky.  (Strip naked.),(She smiles and turns to the other maids.)  Sisters!  Today we introduce a new member in our sorority.,DialogNaked(Player),Player.CanInteract()
 51,52,Sweet!  Who will fuck me first?  (Strip naked.),(She giggles and turns to the other maids.)  Sisters!  Today we introduce a new member in our sorority.,DialogNaked(Player),Player.CanInteract()
-51,,No way!  Can't I stay clothed?,No you can't.  Strip girl.  We've all did it before.,DialogRemove(),
-51,,I'll need some help to undress.,Of course sweetie.  (She releases you and gives you a thumbs up.)  Now get naked.,DialogRelease(Player),!Player.CanInteract()
-52,53,We will rule the club together my sisters.,"You're pretty ambitious, I like it.  Let the initiation begin!  We can restrain her.",DominantRepChange(2),
+51,,No way!  Can't I stay clothed?,"Strip girl, we've all did it before.  ",DialogRemove(),
+51,,I'll need some help to undress.,"Of course, sweetie.  (She releases you and gives you a thumbs up.)  Now get naked.",DialogRelease(Player),!Player.CanInteract()
+52,53,We will rule the club together my sisters.,"You're quite ambitious, I like it.  Let the initiation begin!  We can restrain her.",DominantRepChange(2),
 52,53,I'm really happy to join you all.,We are happy to have you.  Let the initiation begin!  We can restrain her.,,
 52,53,Let's do our best to serve the club.,That's the spirit.  Let the initiation begin!  We can restrain her.,DominantRepChange(-1),
 53,,Restrain me?  I'm already naked.  Isn't that enough?,"You're in the Bondage Club sweetie, it's a regular initiation.",DialogRemove(),
@@ -77,13 +77,13 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 59,60,(Try to look tough.),,InitiationTransition(MaidQuartersMaidInitiation),
 60,70,(Nod happily.),(She releases you and smiles.)  You will now get your own uniform to keep.,DialogRelease(Player),
 60,70,(Struggle to get out.),(She releases you and smiles.)  You will now get your own uniform to keep.,DialogRelease(Player),
-70,80,I will wear it with pride.,(You dress up in your own maid uniform while the maids claps their hands.),BecomMaid(),
-70,80,Thank you so much.,(You dress up in your own maid uniform while the maids claps their hands.),BecomMaid(),
+70,80,I will wear it with pride.,(You dress up in your own maid uniform while the maids clap their hands.),BecomMaid(),
+70,80,Thank you so much.,(You dress up in your own maid uniform while the maids clap their hands.),BecomMaid(),
 80,0,I love you my sisters.,(The other maids cheers and go back to work.)  This is great!  Do you want some chores now or simply chat?,,
 80,0,I will start to climb up in the sorority ladder right now!,(The other maids cheers and go back to work.)  This is great!  Do you want some chores now or simply chat?,"DialogChangeReputation(""Dominant"", 4)",
 80,0,I hope we will protect each other.,(The other maids cheers and go back to work.)  This is great!  Do you want some chores now or simply chat?,"DialogChangeReputation(""Dominant"", -4)",
 90,91,I'm ready to become head maid.,You would be a wonderful head maid Miss.,,CanBecomeHeadMaid
-90,90,Can I become head maid?,You'll need to have a perfect repuration in the sorority and be recognized as a dominant in the club first.,,!CanBecomeHeadMaid
+90,90,Can I become head maid?,You'll need to have a perfect reputation in the sorority and be recognized as a dominant in the club first.,,!CanBecomeHeadMaid
 90,90,Tell me of the head maids responsibilities.,The head maids have regular meetings with the club head Mistress.  They must make sure that the maids are working properly.,,
 90,90,Tell me of the head maids powers.,They rule over the regular maids and can restrain them whenever they want.,,
 90,0,Let's talk about something else.,Of course.  How can I help you?,,
@@ -128,7 +128,7 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 290,0,(Struggle in your restraints.),(She releases you and helps you to get dressed.)  All set!  Are you ready for more chores?,RemoveMaidUniform(),
 300,,How does it work?,You'll have to patrol around the club and release members that are stuck.  I'll give you a specific location to monitor.,DialogRemove(),
 300,,Where should I go?,,StartRescue(),
-310,,,Did you went to the Introduction Class?  Is there anything to report?,,
+310,,,Did you go to the Introduction Class?  Is there anything to report?,,
 310,390,Everything is under control.,Perfect!  Let me pay you for your efforts then.  (She gives you REPLACEMONEY $),RescuePay(),CurrentRescueCompleted
 310,,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Wonderful!  Make the sorority proud.,WearMaidUniform(),!PlayerInMaidUniform()
 310,,I'll go check the Introduction Class.  (Leave her.),,DialogLeave(),PlayerInMaidUniform()
@@ -138,7 +138,7 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 320,,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Wonderful!  Make the sorority proud.,WearMaidUniform(),!PlayerInMaidUniform()
 320,,I'll go check the Shibari Dojo.  (Leave her.),,DialogLeave(),PlayerInMaidUniform()
 320,395,"I went there, but I couldn't do the rescue mission.","This is disappointing, but I can send someone else.  You understand that you won't get paid.  What happened?",CancelRescue(),AllowCancelRescue()
-330,,,Did you went to the Bondage Club store?  Did the vendor got in trouble?,,
+330,,,What's going on at the Bondage Club store?  Did the vendor got in trouble?,,
 330,390,Everything is under control.,Perfect!  Let me pay you for your efforts then.  (She gives you REPLACEMONEY $),RescuePay(),CurrentRescueCompleted
 330,,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Wonderful!  Make the sorority proud.,WearMaidUniform(),!PlayerInMaidUniform()
 330,,I'll go check the Bondage Club store.  (Leave her.),,DialogLeave(),PlayerInMaidUniform()
@@ -146,7 +146,7 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 390,0,Everyone will be safe as long as I'm in control.,That's very comforting to hear.  Are you ready for more chores?,"DialogChangeReputation(""Dominant"", 4)",
 390,0,I'm happy I could serve the sorority Miss.,You're such a sweet servant.  Are you ready for more chores?,"DialogChangeReputation(""Dominant"", -2)",
 390,0,Don't mention it.,Excellent!  Are you ready for more chores?,,
-395,0,I didn't had the proper tools or techniques.,You still have a lot to learn don't you?  I can give you another chore if you're up for it.,"DialogChangeReputation(""Dominant"", -1)",
+395,0,I didn't had the proper tools or techniques.,"You still have a lot to learn, don't you?  I can give you another chore if you're up for it.","DialogChangeReputation(""Dominant"", -1)",
 395,0,"I'm sorry, I don't have any excuses.","It's alright girl, don't worry.  I can give you another chore if you're up for it.","DialogChangeReputation(""Dominant"", -2)",
 395,0,The rescue was already done.,"Very well, it happens from time to time.  I can give you another chore if you're up for it.",,
 400,410,I'm already dressed up.,Perfect!  Let me restrain you then.,WearMaidUniform(),PlayerInMaidUniform()
@@ -158,7 +158,7 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 420,430,"Very well, you can tie my feet.","(She nods and restrains your feet.)  Next is your legs, for the complete effect.","DialogWearRandomItem(""ItemFeet"")",
 430,440,I should have guessed.,"(She giggles and restrains your legs.)  Next is your arms, you won't need either.","DialogWearRandomItem(""ItemLegs"")",
 430,440,You really enjoy your job don't you?,"(She giggles and restrains your legs.)  Next is your arms, you won't need either.","DialogWearRandomItem(""ItemLegs"")",
-440,,This is ridiculous!  How will I be able to clean?,You will understand pretty soon.  Give me your arms girl.,DialogRemove(),
+440,,This is ridiculous!  How will I be able to clean?,You will understand soon.  Give me your arms girl.,DialogRemove(),
 440,450,"Fine, you can tie my arms.",(She restrains your arms behind your back.)  How does it feel to be restrained for work?,"DialogWearRandomItem(""ItemArms"")",
 440,450,This is crazy.  (Give your arms.),(She restrains your arms behind your back.)  How does it feel to be restrained for work?,"DialogWearRandomItem(""ItemArms"")",
 450,460,I try to focus on the money.,"Go check the store after your shift.  Next is the gag, your cleaning tool, open wide!",,

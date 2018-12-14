@@ -40,12 +40,13 @@ function MaidCleaningLoad() {
 	if (Room == 3) MaidCleaningBackground = "Introduction";
 	if (Room == 4) MaidCleaningBackground = "Dressing";
 
-	// The higher the difficulty, the more spots there will be
+	// The higher the difficulty, the more spots there will be (less spots on mobile since we cannot swipe the mouse)
 	MaidCleaningPlayerX = 500;
 	MaidCleaningPlayerY = 0;
-	var MaxSpot = 220;
-	if (MiniGameDifficulty == "Normal") MaxSpot = 360;
-	if (MiniGameDifficulty == "Hard") MaxSpot = 500;
+	var Factor = (CommonIsMobile) ? 0.5 : 1;
+	var MaxSpot = 220 * Factor;
+	if (MiniGameDifficulty == "Normal") MaxSpot = 360 * Factor;
+	if (MiniGameDifficulty == "Hard") MaxSpot = 500 * Factor;
 	MiniGameTimer = CommonTime() + 60000;
 	MaidCleaningGenerateSpots(MaxSpot);
 
@@ -101,6 +102,7 @@ function MaidCleaningDoMove() {
 
 }
 
-// Nothing to do on user clicks
+// On mobile, we need to move the player on click
 function MaidCleaningClick() {
+	if (CommonIsMobile) MaidCleaningDoMove();
 }

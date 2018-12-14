@@ -180,6 +180,11 @@ function DialogProgressStart(C, PrevItem, NextItem) {
 
 }
 
+// The player can use the space bar to speed up the dialog progress, just like clicking
+function DialogKeyDown() {
+	if ((KeyPress == 32) && (DialogProgress >= 0)) DialogProgress = DialogProgress + DialogProgressClick;
+}
+
 // When the user clicks on a dialog option
 function DialogClick() {
 
@@ -379,7 +384,7 @@ function DialogDrawItemMenu(C) {
 			// Draw the current operation and progress
 			DrawText(DialogProgressOperation, 1500, 650, "White", "Black");
 			DrawProgressBar(1200, 700, 600, 100, DialogProgress);
-			DrawText("Click here to speed up the progress", 1500, 900, "White", "Black");
+			DrawText((CommonIsMobile) ? "Click here to speed up the progress" : "Click here or hit the space bar to speed up", 1500, 900, "White", "Black");
 
 			// If the operation is completed
 			if (DialogProgress >= 100) {
