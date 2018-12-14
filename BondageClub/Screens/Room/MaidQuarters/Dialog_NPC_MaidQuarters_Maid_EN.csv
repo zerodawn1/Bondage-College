@@ -4,6 +4,8 @@ RescueShibariDojo,,,I've heard rumors of trouble going on at the Shibari Dojo.  
 RescueShop,,,I think that something went wrong at the store.  Can you go there to help the vendor?,,
 MaidDrinksVictory,,,(You come back to DialogCharacterName with an empty drink platter.)  Well done!,,
 MaidDrinksDefeat,,,(You come back to DialogCharacterName with spilled drinks all over your uniform.),,
+MaidCleaningVictory,,,(DialogCharacterName comes to get you back to the maid quarters and smiles.)  You've did it!,,
+MaidCleaningDefeat,,,(DialogCharacterName comes to get you back to the maid quarters and frowns.)  You failed to clean up in time.,,
 MaidInitiationTransition,,,(DialogCharacterName hugs you and gropes your red butt.)  You're now a full maid my sister.,,
 CantReleasePlayer,,,I'm sorry Miss.  I cannot help you.,,
 ItemMouth,,,(Her eyes widen when she sees the gag but she submits while you silence her.),,
@@ -95,6 +97,7 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 100,,Can you please release me so I can take a job?,"Poor thing, of course I can help you.  (She releases you and shows you the chores list again.)  ",MaidReleasePlayer(),Player.IsRestrained()
 100,300,I'll take a rescue mission.,Excellent!  We need to make sure our members are safe.,,AllowRescue()
 100,200,I'll go serve drinks.,Nice!  Our guests are always thirsty.,,AllowMaidDrinks()
+100,400,I'll take the cleaning chore.,Awesome!  There's a lot of cleaning to do.,,AllowMaidCleaning()
 100,0,Let's talk some more first.,Sure.  How can I help you?,,
 100,,Give me a few minutes first.  (Leave her.),,DialogLeave(),
 200,210,I'm already dressed up.,Perfect!  Let me restrain you then.,WearMaidUniform(),PlayerInMaidUniform()
@@ -146,3 +149,30 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 395,0,I didn't had the proper tools or techniques.,You still have a lot to learn don't you?  I can give you another chore if you're up for it.,"DialogChangeReputation(""Dominant"", -1)",
 395,0,"I'm sorry, I don't have any excuses.","It's alright girl, don't worry.  I can give you another chore if you're up for it.","DialogChangeReputation(""Dominant"", -2)",
 395,0,The rescue was already done.,"Very well, it happens from time to time.  I can give you another chore if you're up for it.",,
+400,410,I'm already dressed up.,Perfect!  Let me restrain you then.,WearMaidUniform(),PlayerInMaidUniform()
+400,410,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Perfect!  Let me restrain you then.,WearMaidUniform(),!PlayerInMaidUniform()
+410,,I can't clean while being restrained.,"Don't worry sweetie, we have the perfect cleaning tools for you.",DialogRemove(),
+410,420,I'll be happy to be restrained by you Miss.,"To start, I will restrain your feet.  You won't need to move far.","DialogChangeReputation(""Dominant"", -4)",
+410,420,I guess I have no choice.  (Allow her to restrain you.),"To start, I will restrain your feet.  You won't need to move far.","DialogChangeReputation(""Dominant"", -2)",
+420,,How can I clean if I can't walk?,You'll learn to hop around.  You won't need to leave the room anyway.,DialogRemove(),
+420,430,"Very well, you can tie my feet.","(She nods and restrains your feet.)  Next is your legs, for the complete effect.","DialogWearRandomItem(""ItemFeet"")",
+430,440,I should have guessed.,"(She giggles and restrains your legs.)  Next is your arms, you won't need either.","DialogWearRandomItem(""ItemLegs"")",
+430,440,You really enjoy your job don't you?,"(She giggles and restrains your legs.)  Next is your arms, you won't need either.","DialogWearRandomItem(""ItemLegs"")",
+440,,This is ridiculous!  How will I be able to clean?,You will understand pretty soon.  Give me your arms girl.,DialogRemove(),
+440,450,"Fine, you can tie my arms.",(She restrains your arms behind your back.)  How does it feel to be restrained for work?,"DialogWearRandomItem(""ItemArms"")",
+440,450,This is crazy.  (Give your arms.),(She restrains your arms behind your back.)  How does it feel to be restrained for work?,"DialogWearRandomItem(""ItemArms"")",
+450,460,I try to focus on the money.,"Go check the store after your shift.  Next is the gag, your cleaning tool, open wide!",,
+450,460,I would ratter restrain you.,"Maybe it will happen soon.  (She smiles.)  Next is the gag, your cleaning tool, open wide!","DialogChangeReputation(""Dominant"", 2)",
+450,460,It's a dream job for me.,"This club is perfect for you.  (She smiles.)  Next is the gag, your cleaning tool, open wide!","DialogChangeReputation(""Dominant"", -2)",
+460,,Can we skip the gag?,"Absolutely not, this is your cleaning tool after all.",DialogRemove(),
+460,470,"Very well, you can gag me.",(She gets a gag with a duster attached in front of it and straps it around your head.)  Ready to go?,"DialogWearItem(""DusterGag"", ""ItemMouth"")",
+460,470,(Open your mouth.),(She gets a gag with a duster attached in front of it and straps it around your head.)  Ready to go?,"DialogWearItem(""DusterGag"", ""ItemMouth"")",
+470,,(Wave the duster gag with your head.),(She looks at you and laughs.)  You're learning the job pretty fast.  Are you ready now?,DialogRemove(),
+470,480,(Frown at her.),Come sweetie!  I'll drag you to your work space.  You need to clean the room before I come to get your back.,"DialogChangeReputation(""Dominant"", 1)",
+470,480,(Nod slowly.),Come sweetie!  I'll drag you to your work space.  You need to clean your area before I come to get your back.,,
+480,,(Pick an easy place to clean.),,"MiniGameStart(""MaidCleaning"", ""Easy"")",
+480,,(Let her choose your work area.),,"MiniGameStart(""MaidCleaning"", ""Normal"")",
+480,,(Pick the dirtiest place to impress her.),,"MiniGameStart(""MaidCleaning"", ""Hard"")",
+481,490,(Nod happily.),Here's your pay for your hard work.  (She gives you REPLACEMONEY $),MiniGamePay(),
+482,490,(Bow your head.),I hope you understand why I can't reward you.  You can try again though.,"DialogChangeReputation(""Maid"", 1)",
+490,0,(Struggle in your restraints.),(She releases you and helps you to get dressed.)  All set!  Are you ready for more chores?,RemoveMaidUniform(),

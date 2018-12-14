@@ -26,7 +26,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Cloth",
-		Priority: 18,
+		Priority: 16,
 		ParentGroup: "BodyUpper",
 		AllowPose: ["BackBoxTie", "BackCuffs", "BackElbowTouch"],
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
@@ -79,7 +79,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Glasses",
-		Priority: 13,
+		Priority: 18,
 		Default: false,
 		Color: ["#303030", "#808080", "#e0e0e0", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 200,
@@ -99,7 +99,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Gloves",
-		Priority: 15,
+		Priority: 13,
 		ParentGroup: "BodyUpper",
 		Default: false,
 		AllowPose: ["BackBoxTie", "BackCuffs", "BackElbowTouch"],
@@ -111,7 +111,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Nipples",
-		Priority: 7,
+		Priority: 6,
 		ParentGroup: "BodyUpper",
 		Default: false,
 		Color: ["Default", "#a6665b", "#803d26", "#d68777", "#9b4a2e", "#bb6655"],
@@ -132,7 +132,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Pussy",
-		Priority: 8,
+		Priority: 7,
 		AllowNone: false,
 		Color: ["Default", "#6a3628", "#443330", "#222222"],
 		Left: 225,
@@ -143,7 +143,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Panties",
-		Priority: 11,
+		Priority: 9,
 		ParentGroup: "BodyLower",
 		Color: ["#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 150,
@@ -164,7 +164,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Shoes",
-		Priority: 16,
+		Priority: 15,
 		ParentGroup: "BodyLower",
 		AllowPose: ["LegsClosed"],
 		Color: ["Default", "#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
@@ -225,7 +225,7 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemPelvis",
 		Category: "Item",
-		Priority: 9,
+		Priority: 8,
 		Default: false,
 		AllowPose: ["BackBoxTie", "BackCuffs", "BackElbowTouch"],
 		Color: ["Default"],
@@ -262,7 +262,7 @@ var AssetFemale3DCG = [
 		Group: "ItemArms",
 		ParentGroup: "BodyUpper",
 		Category: "Item",
-		Priority: 20,
+		Priority: 17,
 		Default: false,
 		Color: ["Default"],
 		Left: 125,		
@@ -271,7 +271,7 @@ var AssetFemale3DCG = [
 		Asset: [ 
 			{ Name: "NylonRope", SelfBondage: false, Value: 15, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Struggle"], Time: 15 },
 			{ Name: "HempRope", SelfBondage: false, Value: 30, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Struggle"], Time: 20 },
-			{ Name: "MetalCuffs", Priority: 17, Value: 50, SetPose: ["BackCuffs"], Effect: ["Block", "Prone", "Lock"], Time: 5 },
+			{ Name: "MetalCuffs", Priority: 15, Value: 50, SetPose: ["BackCuffs"], Effect: ["Block", "Prone", "Lock"], Time: 5 },
 			{ Name: "MetalCuffsKey", Wear: false, Value: 25, Effect: ["Unlock-MetalCuffs"], Time: 5 },
 			{ Name: "LeatherArmbinder", SelfBondage: false, Priority: 1, Value: 80, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone"], Time: 25, RemoveTime: 5 }
 		]
@@ -280,7 +280,7 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemNeck",
 		Category: "Item",
-		Priority: 17,
+		Priority: 11,
 		Default: false,
 		Color: ["Default"],
 		Left: 200,
@@ -295,7 +295,7 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemMouth",
 		Category: "Item",
-		Priority: 6,
+		Priority: 19,
 		Default: false,
 		Effect: ["GagNormal"],
 		Color: ["Default"],
@@ -310,6 +310,7 @@ var AssetFemale3DCG = [
 			{ Name: "HarnessBallGag", Effect: ["GagHeavy"], Value: 60, Time: 20 },
 			{ Name: "HarnessPanelGag", Effect: ["GagHeavy"], Value: 80, Time: 20 },
 			{ Name: "DuctTapeGag", Value: 20, Time: 5, RemoveTime: 2 }, 
+			{ Name: "DusterGag", Random: false, RemoveAtLogin: true, Value: -1, Time: 20 }, 
 			{ Name: "RegularSleepingPill", Enable: false, Wear: false, Value: -1 } 
 		]
 	},
@@ -317,7 +318,7 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemHead",
 		Category: "Item",
-		Priority: 19,
+		Priority: 20,
 		Default: false,
 		Color: ["Default"],
 		Left: 150,

@@ -19,6 +19,7 @@ var MaidQuartersCurrentRescueCompleted = false;
 // Returns TRUE if the player is dressed in a maid uniform or can take a specific chore
 function MaidQuartersPlayerInMaidUniform() { return ((CharacterAppearanceGetCurrentValue(Player, "Cloth", "Name") == "MaidOutfit1") && (CharacterAppearanceGetCurrentValue(Player, "Hat", "Name") == "MaidHairband1")) }
 function MaidQuartersAllowMaidDrinks() { return (!Player.IsRestrained() && !MaidQuartersMaid.IsRestrained()); }
+function MaidQuartersAllowMaidCleaning() { return (!Player.IsRestrained() && !MaidQuartersMaid.IsRestrained()); }
 function MaidQuartersAllowRescue() { return (!Player.IsRestrained()); }
 function MaidQuartersAllowCancelRescue() { return (MaidQuartersCurrentRescueStarted && !MaidQuartersCurrentRescueCompleted); }
 
@@ -92,14 +93,11 @@ function MaidQuartersMiniGameStart(GameType, Difficulty) {
 function MaidQuartersMiniGameEnd() {
 	CommonSetScreen("Room", "MaidQuarters");
 	CharacterSetCurrent(MaidQuartersMaid);
-	if (MiniGameVictory && (MiniGameType == "MaidDrinks")) {
-		MaidQuartersMaid.Stage = "281";
-		MaidQuartersMaid.CurrentDialog = DialogFind(MaidQuartersMaid, "MaidDrinksVictory");
-	}
-	if (!MiniGameVictory && (MiniGameType == "MaidDrinks")) {
-		MaidQuartersMaid.Stage = "282";
-		MaidQuartersMaid.CurrentDialog = DialogFind(MaidQuartersMaid, "MaidDrinksDefeat");
-	}
+	if (MiniGameVictory && (MiniGameType == "MaidDrinks")) MaidQuartersMaid.Stage = "281";
+	if (!MiniGameVictory && (MiniGameType == "MaidDrinks")) MaidQuartersMaid.Stage = "282";
+	if (MiniGameVictory && (MiniGameType == "MaidCleaning")) MaidQuartersMaid.Stage = "481";
+	if (!MiniGameVictory && (MiniGameType == "MaidCleaning")) MaidQuartersMaid.Stage = "482";
+	MaidQuartersMaid.CurrentDialog = DialogFind(MaidQuartersMaid, MiniGameType + (MiniGameVictory ? "Victory" : "Defeat"));
 }
 
 // When the mini game / maid chore is successful, the player gets paid

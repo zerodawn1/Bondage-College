@@ -357,7 +357,7 @@ function DrawCircle(CenterX, CenterY, Radius, LineWidth, LineColor) {
 function DrawProgressBar(X, Y, W, H, Progress) {
 	DrawRect(X, Y, W, H, "white");
 	DrawRect(X + 2, Y + 2, Math.floor((W - 4) * Progress / 100), H - 4, "#66FF66");
-	DrawRect(Math.floor(1202 + (W - 4) * Progress / 100), Y + 2, Math.floor((W - 4) * (100 - Progress) / 100), H - 4, "red");
+	DrawRect(Math.floor(X + 2 + (W - 4) * Progress / 100), Y + 2, Math.floor((W - 4) * (100 - Progress) / 100), H - 4, "red");
 }
 
 // Makes sure the screen is at the proper size
