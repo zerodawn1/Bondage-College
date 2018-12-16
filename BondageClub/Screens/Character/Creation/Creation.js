@@ -69,29 +69,29 @@ function CreationLoad() {
 function CreationRun() {
 	
 	// Places the controls on the screen
-	document.getElementById("InputCharacter").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:50%; top:" + (window.innerHeight / 2 + MainCanvas.height * -0.35) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
-	document.getElementById("InputName").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:50%; top:" + (window.innerHeight / 2 + MainCanvas.height * -0.22) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
-	document.getElementById("InputPassword1").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:50%; top:" + (window.innerHeight / 2 + MainCanvas.height * -0.09) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
-	document.getElementById("InputPassword2").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:50%; top:" + (window.innerHeight / 2 + MainCanvas.height * 0.04) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
-	document.getElementById("InputEmail").setAttribute("style", "font-size:" + (MainCanvas.width / 50) + "px; font-family:Arial; position:absolute; padding-left:10px; left:50%; top:" + (window.innerHeight / 2 + MainCanvas.height * 0.17) + "px; width:" + (MainCanvas.width / 4) + "px; height:" + (MainCanvas.width / 40) + "px;");
+	DrawElementPosition("InputCharacter", 1250, 175, 500);
+	DrawElementPosition("InputName", 1250, 305, 500);
+	DrawElementPosition("InputPassword1", 1250, 435, 500);
+	DrawElementPosition("InputPassword2", 1250, 565, 500);
+	DrawElementPosition("InputEmail", 1250, 695, 500);
 		
 	// Draw the character, the labels and buttons
 	if (CreationMessage == "") CreationMessage = TextGet("EnterAccountCharacterInfo");
 	DrawCharacter(Player, 500, 0, 1);
-	DrawText(CreationMessage, 1267, 50, "White", "Black");
-	DrawText(TextGet("CharacterName"), 1267, 120, "White", "Black");
-	DrawText(TextGet("AccountName"), 1267, 250, "White", "Black");
-	DrawText(TextGet("Password"), 1267, 380, "White", "Black");
-	DrawText(TextGet("ConfirmPassword"), 1267, 510, "White", "Black");
-	DrawText(TextGet("Email"), 1267, 640, "White", "Black");
-	DrawButton(1080, 820, 370, 60, TextGet("CreateAccount"), "White", "");
+	DrawText(CreationMessage, 1250, 50, "White", "Black");
+	DrawText(TextGet("CharacterName"), 1250, 120, "White", "Black");
+	DrawText(TextGet("AccountName"), 1250, 250, "White", "Black");
+	DrawText(TextGet("Password"), 1250, 380, "White", "Black");
+	DrawText(TextGet("ConfirmPassword"), 1250, 510, "White", "Black");
+	DrawText(TextGet("Email"), 1250, 640, "White", "Black");
+	DrawButton(1050, 825, 400, 60, TextGet("CreateAccount"), "White", "");
 	DrawText(TextGet("AccountAlreadyExists"), 1180, 950, "White", "Black");
 	DrawButton(1440, 920, 120, 60, TextGet("Login"), "White", "");
 	
 	// Draw the importation check box
 	if (ImportBondageCollegeData != null) {
-		DrawText(TextGet("ImportBondageCollege"), 1217, 774, "White", "Black");
-		DrawButton(1480, 740, 64, 64, "", "White", ImportBondageCollegeData ? "Icons/Checked.png" : "");
+		DrawText(TextGet("ImportBondageCollege"), 1217, 783, "White", "Black");
+		DrawButton(1480, 750, 64, 64, "", "White", ImportBondageCollegeData ? "Icons/Checked.png" : "");
 	}
 
 }
@@ -124,7 +124,7 @@ function CreationResponse(CharacterData) {
 function CreationClick() {
 
 	// If we must check or uncheck the importation checkbox
-	if ((MouseX >= 1480) && (MouseX <= 1544) && (MouseY >= 740) && (MouseY <= 804) && (ImportBondageCollegeData != null))
+	if ((MouseX >= 1480) && (MouseX <= 1544) && (MouseY >= 750) && (MouseY <= 814) && (ImportBondageCollegeData != null))
 		ImportBondageCollegeData = !ImportBondageCollegeData;
 
 	// If we must go back to the login screen
@@ -138,7 +138,7 @@ function CreationClick() {
 	}
 	
 	// If we must try to create a new account
-	if ((MouseX >= 1080) && (MouseX <= 1450) && (MouseY >= 820) && (MouseY <= 880)) {
+	if ((MouseX >= 1050) && (MouseX <= 1450) && (MouseY >= 825) && (MouseY <= 885)) {
 		
 		// First, we make sure both passwords are the same
 		var CharacterName = document.getElementById("InputCharacter").value.trim();

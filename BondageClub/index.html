@@ -84,8 +84,7 @@ function MainRun() {
 // When the user presses a key, we send the KeyDown event to the current screen if it can accept it
 function KeyDown(event) {
 	KeyPress = event.keyCode || event.which;
-	if (eval("typeof " + CurrentScreen + "KeyDown") == "function")
-		CommonDynamicFunction(CurrentScreen + "KeyDown()");
+	CommonKeyDown();
 }
 
 // When the user clicks, we fire the click event for other screens

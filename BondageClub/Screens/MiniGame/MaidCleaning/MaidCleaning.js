@@ -43,7 +43,7 @@ function MaidCleaningLoad() {
 	// The higher the difficulty, the more spots there will be (less spots on mobile since we cannot swipe the mouse)
 	MaidCleaningPlayerX = 500;
 	MaidCleaningPlayerY = 0;
-	var Factor = (CommonIsMobile) ? 0.5 : 1;
+	var Factor = (CommonIsMobile) ? 0.25 : 1;
 	var MaxSpot = 220 * Factor;
 	if (MiniGameDifficulty == "Normal") MaxSpot = 360 * Factor;
 	if (MiniGameDifficulty == "Hard") MaxSpot = 500 * Factor;
@@ -88,11 +88,12 @@ function MaidCleaningDoMove() {
 		// Sets the player position		
 		MaidCleaningPlayerX = MouseX - 500;
 		MaidCleaningPlayerY = MouseY - 500;
+		var Range = ((CommonIsMobile) ? (MaidCleaningSpotSize / 1.5) : (MaidCleaningSpotSize / 2));
 
 		// If the game has started, we check the click position and remove a spot at that position
 		if (!MiniGameEnded)
 			for(var S = 0; S < MaidCleaningSpots.length; S++)
-				if ((MouseX >= MaidCleaningSpots[S].X - (MaidCleaningSpotSize / 2)) && (MouseX <= MaidCleaningSpots[S].X + (MaidCleaningSpotSize / 2)) && (MouseY >= MaidCleaningSpots[S].Y - (MaidCleaningSpotSize / 2)) && (MouseY <= MaidCleaningSpots[S].Y + (MaidCleaningSpotSize / 2))) {
+				if ((MouseX >= MaidCleaningSpots[S].X - Range) && (MouseX <= MaidCleaningSpots[S].X + Range) && (MouseY >= MaidCleaningSpots[S].Y - Range) && (MouseY <= MaidCleaningSpots[S].Y + Range)) {
 					if (MaidCleaningSpots[S].T == 1) MaidCleaningSpots.splice(S, 1);
 					else MaidCleaningSpots[S].T--;
 					return;

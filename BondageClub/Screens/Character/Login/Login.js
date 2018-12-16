@@ -99,9 +99,9 @@ function LoginRun() {
 	DrawText(TextGet("Welcome"), 1000, 50, "White", "Black");
 	DrawText(LoginMessage, 1000, 100, "White", "Black");
 	DrawText(TextGet("AccountName"), 1000, 200, "White", "Black");
-	DrawElementPosition("InputName", 1000, 275, 500);
+	DrawElementPosition("InputName", 1000, 260, 500);
 	DrawText(TextGet("Password"), 1000, 350, "White", "Black");
-	DrawElementPosition("InputPassword", 1000, 425, 500);
+	DrawElementPosition("InputPassword", 1000, 410, 500);
 	DrawButton(925, 500, 150, 60, TextGet("Login"), "White", "");
 	DrawText(TextGet("CreateNewCharacter"), 1000, 670, "White", "Black");
 	DrawButton(850, 740, 300, 60, TextGet("NewCharacter"), "White", "");

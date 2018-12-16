@@ -117,6 +117,16 @@ function CommonClick() {
 		DialogClick();
 }
 
+// Catches the clicks on the main screen and forwards it to the current screen or dialog screen
+function CommonKeyDown() {	
+	if (CurrentCharacter == null) {
+		if (eval("typeof " + CurrentScreen + "KeyDown") == "function")
+			CommonDynamicFunction(CurrentScreen + "KeyDown()");
+	}
+	else 
+		DialogKeyDown();
+}
+
 // Calls a dynamic function (if it exists)
 function CommonDynamicFunction(FunctionName) {
 	if (typeof window[FunctionName.substr(0, FunctionName.indexOf("("))] == "function") {

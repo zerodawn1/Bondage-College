@@ -411,16 +411,16 @@ function DrawElementPosition(ElementID, X, Y, W) {
 	// Different positions based on the width/height ratio
 	if (DrawScreenWidth <= DrawScreenHeight * 2) {
 		Font = (DrawScreenWidth / 50);
-		Height = Font * 1.2;
+		Height = Font * 1.15;
 		Left = ((X - (W / 2)) * DrawScreenWidth / 2000);
-		Width = (W * DrawScreenWidth / 2000) - 10;
-		Top = (Y * DrawScreenWidth / 2000) + ((DrawScreenHeight * 2 - DrawScreenWidth) / 4) - (Height / 2) - 8;
+		Width = (W * DrawScreenWidth / 2000) - 18;
+		Top = (Y * DrawScreenWidth / 2000) + ((DrawScreenHeight * 2 - DrawScreenWidth) / 4) - (Height / 2);
 	} else {
 		Font = (DrawScreenHeight / 25);
-		Height = Font * 1.2;
+		Height = Font * 1.15;
 		Left = ((X - (W / 2)) * DrawScreenHeight / 1000) + (DrawScreenWidth - DrawScreenHeight * 2) / 2;
 		Width = (W * DrawScreenHeight / 1000) - 18;
-		Top = (Y * DrawScreenHeight / 1000) - (Height / 2) - 8;
+		Top = (Y * DrawScreenHeight / 1000) - (Height / 2);
 	}
 
 	// Sets the element style

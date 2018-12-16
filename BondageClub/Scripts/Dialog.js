@@ -8,6 +8,7 @@ var DialogProgressOperation = "...";
 var DialogProgressPrevItem = null;
 var DialogProgressNextItem = null;
 var DialogProgressSkill = 0;
+var DialogProgressLastKeyPress = 0;
 var DialogInventory = [];
 
 function DialogReputationLess(RepType, Value) { return (ReputationGet(RepType) <= Value); } // Returns TRUE if a specific reputation type is less or equal than a given value
@@ -177,12 +178,17 @@ function DialogProgressStart(C, PrevItem, NextItem) {
 	DialogProgressNextItem = NextItem;
 	DialogProgressOperation = DialogProgressGetOperation(PrevItem, NextItem);
 	DialogProgressSkill = Timer;
+	DialogProgressLastKeyPress = 0;
 
 }
 
 // The player can use the space bar to speed up the dialog progress, just like clicking
 function DialogKeyDown() {
-	if ((KeyPress == 32) && (DialogProgress >= 0)) DialogProgress = DialogProgress + DialogProgressClick;
+	if (((KeyPress == 65) || (KeyPress == 83) || (KeyPress == 97) || (KeyPress == 115)) && (DialogProgress >= 0)) {
+		DialogProgress = DialogProgress + DialogProgressClick * ((DialogProgressLastKeyPress == KeyPress) ? -0.5 : 0.5);
+		if (DialogProgress < 0) DialogProgress = 0;
+		DialogProgressLastKeyPress = KeyPress;
+	}
 }
 
 // When the user clicks on a dialog option
@@ -384,7 +390,7 @@ function DialogDrawItemMenu(C) {
 			// Draw the current operation and progress
 			DrawText(DialogProgressOperation, 1500, 650, "White", "Black");
 			DrawProgressBar(1200, 700, 600, 100, DialogProgress);
-			DrawText((CommonIsMobile) ? "Click here to speed up the progress" : "Click here or hit the space bar to speed up", 1500, 900, "White", "Black");
+			DrawText((CommonIsMobile) ? "Click here to speed up the progress" : "Click here or hit keys A and S to speed up", 1500, 900, "White", "Black");
 
 			// If the operation is completed
 			if (DialogProgress >= 100) {
