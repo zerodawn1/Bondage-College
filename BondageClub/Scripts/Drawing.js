@@ -1,4 +1,5 @@
 // The main game canvas where everything will be drawn
+"use strict";
 var MainCanvas;
 var TempCanvas;
 var ColorCanvas;
@@ -108,12 +109,11 @@ function DrawCharacter(C, X, Y, Zoom) {
 			// If we must flip the canvas vertically
 			if (C.Pose.indexOf("Suspension") >= 0)	{
 				var CanvasH = document.createElement("canvas");
-				var CtxH = CanvasH.getContext("2d");
 				CanvasH.width = Canvas.width;
 				CanvasH.height = Canvas.height;
-				CtxH.scale(1, -1);
-				CtxH.translate(0, -Canvas.height);
-				CtxH.drawImage(Canvas, 0, 0);
+				CanvasH.getContext("2d").scale(1, -1);
+				CanvasH.getContext("2d").translate(0, -Canvas.height);
+				CanvasH.getContext("2d").drawImage(Canvas, 0, 0);
 				Canvas = CanvasH;
 			}
 			
@@ -319,7 +319,7 @@ function DrawButton(Left, Top, Width, Height, Label, Color, Image) {
 	MainCanvas.closePath();
 	
 	// Draw the text
-	DrawText(Label, Left + Width / 2, Top + Height / 2, "black");
+	DrawText(Label, Left + Width / 2, Top + (Height / 2) + 1, "black");
 	if ((Image != null) && (Image != "")) DrawImage(Image, Left + 2, Top + 2);
 	
 }
@@ -409,6 +409,11 @@ function DrawItemPreview(X, Y, Item) {
 function DrawElementPosition(ElementID, X, Y, W) {
 	
 	// Different positions based on the width/height ratio
+	var Font;
+	var Height;
+	var Left;
+	var Width;
+	var Top;
 	if (DrawScreenWidth <= DrawScreenHeight * 2) {
 		Font = (DrawScreenWidth / 50);
 		Height = Font * 1.15;

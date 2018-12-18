@@ -1,3 +1,5 @@
+"use strict";
+
 // Add a new item by group & name to character inventory
 function InventoryAdd(C, NewItemName, NewItemGroup, Push) {
 

@@ -1,3 +1,4 @@
+"use strict";
 var ShopBackground = "Shop";
 var ShopVendor = null;
 var ShopVendorAllowItem = false;

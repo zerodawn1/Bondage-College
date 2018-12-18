@@ -1,3 +1,4 @@
+"use strict";
 var MaidQuartersBackground = "MaidQuarters";
 var MaidQuartersMaid = null;
 var MaidQuartersMaidInitiation = null;
@@ -9,6 +10,7 @@ var MaidQuartersCannotBecomeMaidYet = false
 var MaidQuartersCanBecomeHeadMaid = false;
 var MaidQuartersCannotBecomeHeadMaidYet = false
 var MaidQuartersIsMaid = false;
+var MaidQuartersIsHeadMaid = false
 var MaidQuartersDominantRep = 0;
 var MaidQuartersCurrentRescue = "";
 var MaidQuartersRescueList = ["IntroductionClass", "ShibariDojo", "Shop"];

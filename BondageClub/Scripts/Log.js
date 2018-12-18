@@ -1,10 +1,11 @@
+"use strict";
 var Log = [];
 
 // Add a new log to the server side
 function LogAdd(NewLogName, NewLogGroup, Push) {
 
 	// Checks to make sure we don't duplicate a log
-	AddToLog = true;
+	var AddToLog = true;
 	for (var L = 0; L < Log.length; L++)
 		if ((Log[L].Name == NewLogName) && (Log[L].Group == NewLogGroup)) {
 			AddToLog = false;

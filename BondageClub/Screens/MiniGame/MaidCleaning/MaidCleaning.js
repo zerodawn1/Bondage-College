@@ -1,3 +1,4 @@
+"use strict";
 var MaidCleaningBackground = "";
 var MaidCleaningSpots = null;
 var MaidCleaningPlayerX = 0;

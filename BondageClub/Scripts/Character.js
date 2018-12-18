@@ -1,3 +1,4 @@
+"use strict";
 var Character = [];
 
 // Loads a character in the buffer
@@ -60,8 +61,8 @@ function CharacterRandomName(C) {
 	C.Name = NewName;
 	
 	// If the name is already taken, we generate a new one
-	for (var C = 0; C < Character.length; C++)
-		if ((Character[C].Name == NewName) && (Character[C].ID != C.ID)) {
+	for (var CN = 0; CN < Character.length; CN++)
+		if ((Character[CN].Name == NewName) && (Character[CN].ID != C.ID)) {
 			CharacterRandomName(C)
 			return;
 		}
@@ -218,7 +219,7 @@ function CharacterSetCurrent(C) {
 
 // Changes the character money and sync with the account server
 function CharacterChangeMoney(C, Value) {
-	C.Money = parseInt(C.Money) + parseInt(Value) * CheatFactor("DoubleMoney", 2);
+	C.Money = parseInt(C.Money) + parseInt(Value) * ((Value > 0) ? CheatFactor("DoubleMoney", 2) : 1);
 	AccountSync();
 }
 

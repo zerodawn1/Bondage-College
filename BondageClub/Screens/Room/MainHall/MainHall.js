@@ -1,3 +1,4 @@
+"use strict";
 var MainHallBackground = "MainHall";
 var MainHallNextEventTimer = null;
 var MainHallMaid = null;
@@ -27,6 +28,7 @@ function MainHallRun() {
 		if (Player.CanWalk()) DrawButton(1525, 145, 450, 65, TextGet("IntroductionClass"), "White");
 		if (Player.CanWalk()) DrawButton(1525, 240, 450, 65, TextGet("MaidQuarters"), "White");
 		if (Player.CanWalk()) DrawButton(1525, 335, 450, 65, TextGet("ShibariDojo"), "White");
+		if (Player.CanWalk()) DrawButton(1525, 430, 450, 65, TextGet("KidnapLeague"), "White");
 		
 		// Check if there's a new maid rescue event to trigger
 		if ((!Player.CanInteract() || !Player.CanWalk() || !Player.CanTalk()) && (MainHallNextEventTimer == null)) MainHallNextEventTimer = ReputationTimer("Dominant", true);
@@ -56,6 +58,7 @@ function MainHallClick() {
 		if ((MouseX >= 1575) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 210) && Player.CanWalk()) CommonSetScreen("Room", "Introduction");
 		if ((MouseX >= 1575) && (MouseX < 1975) && (MouseY >= 240) && (MouseY < 305) && Player.CanWalk()) CommonSetScreen("Room", "MaidQuarters");
 		if ((MouseX >= 1575) && (MouseX < 1975) && (MouseY >= 335) && (MouseY < 400) && Player.CanWalk()) CommonSetScreen("Room", "Shibari");
+		if ((MouseX >= 1575) && (MouseX < 1975) && (MouseY >= 430) && (MouseY < 495) && Player.CanWalk()) CommonSetScreen("Room", "KidnapLeague");
 	}
 
 }

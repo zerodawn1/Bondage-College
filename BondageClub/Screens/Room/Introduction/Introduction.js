@@ -1,3 +1,4 @@
+"use strict";
 var IntroductionBackground = "Introduction";
 var IntroductionMaid = null;
 var IntroductionSub = null;

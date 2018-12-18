@@ -1,3 +1,4 @@
+"use strict";
 var CheatBackground = "Sheet";
 var CheatAllow = false;
 var CheatList = ["DoubleReputation", "DoubleSkill", "DoubleMoney", "DoubleItemSpeed"];

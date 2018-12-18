@@ -1,3 +1,4 @@
+"use strict";
 var DialogText = "";
 var DialogTextDefault = "";
 var DialogTextDefaultTimer = -1;
@@ -20,6 +21,35 @@ function DialogRelease(C) { CharacterRelease(C); } // Releases a character from 
 function DialogNaked(C) { CharacterNaked(C); } // Strips a character naked and removes the restrains
 function DialogSetCharacter(C) { CharacterSetCurrent(C); } // Sets a new character as the current one in the dialog
 
+// Launches a custom Dialog Function from a variable
+function DialogFunction(F) {
+
+	// Gets the reverse ! sign, function name and parameters
+	var Reverse = false;
+	var ParamCount = 1;
+	if (F.substring(0, 1) == "!") Reverse = true;
+	F = F.replace("'", "");
+	if (F.indexOf("()") >= 0) ParamCount = 0;
+	else ParamCount = F.split(",").length;
+	var openParenthesisIndex = F.indexOf("(");
+	var closedParenthesisIndex = F.indexOf(")", openParenthesisIndex);
+	var Params = F.substring(openParenthesisIndex + 1, closedParenthesisIndex).split(",");
+	for(var P = 0; P < Params.length; P++)
+		Params[P] = Params[P].trim().replace('"', '').replace('"', '')
+	F = F.substring(0, openParenthesisIndex);
+	if (F.indexOf("Dialog") != 0) F = CurrentScreen + F;
+
+	// Launches the function and returns the result
+	var Result = true;
+	if (ParamCount == 0) Result = window[F]();
+	if (ParamCount == 1) Result = window[F](Params[0]);
+	if (ParamCount == 2) Result = window[F](Params[0], Params[1]);
+	if (ParamCount == 3) Result = window[F](Params[0], Params[1], Params[2]);
+	if (Reverse) return !Result;
+	else return Result;
+
+}
+
 // Returns TRUE if the dialog prerequisite condition is met
 function DialogPrerequisite(D) {
 	if (CurrentCharacter.Dialog[D].Prerequisite == null)
@@ -31,8 +61,8 @@ function DialogPrerequisite(D) {
 			if (CurrentCharacter.Dialog[D].Prerequisite.indexOf("!Player.") == 0)
 				return !Player[CurrentCharacter.Dialog[D].Prerequisite.substring(8, 250).replace("()", "").trim()]();
 			else
-				if ((CurrentCharacter.Dialog[D].Prerequisite.indexOf("Dialog") == 0) || (CurrentCharacter.Dialog[D].Prerequisite.indexOf("Dialog") == 1))
-					return eval(CurrentCharacter.Dialog[D].Prerequisite);
+				if (CurrentCharacter.Dialog[D].Prerequisite.indexOf("(") >= 0)
+					return DialogFunction(CurrentCharacter.Dialog[D].Prerequisite);
 				else
 					if (CurrentCharacter.Dialog[D].Prerequisite.substring(0, 1) != "!")
 						return eval(CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite);
@@ -52,10 +82,8 @@ function DialogCanUnlock(C) {
 // Returns the current character dialog intro
 function DialogIntro() {
 	for(var D = 0; D < CurrentCharacter.Dialog.length; D++)
-		if ((CurrentCharacter.Dialog[D].Stage == CurrentCharacter.Stage) && (CurrentCharacter.Dialog[D].Option == null) && (CurrentCharacter.Dialog[D].Result != null) && DialogPrerequisite(D)) {
+		if ((CurrentCharacter.Dialog[D].Stage == CurrentCharacter.Stage) && (CurrentCharacter.Dialog[D].Option == null) && (CurrentCharacter.Dialog[D].Result != null) && DialogPrerequisite(D))
 			return CurrentCharacter.Dialog[D].Result;
-			break;
-		}
 	return "";
 }
 

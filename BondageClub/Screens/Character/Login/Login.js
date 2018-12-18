@@ -1,3 +1,4 @@
+"use strict";
 var LoginBackground = "Dressing";
 var LoginMessage = "";
 var LoginCredits = null;

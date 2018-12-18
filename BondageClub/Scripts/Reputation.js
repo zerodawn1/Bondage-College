@@ -1,3 +1,5 @@
+"use strict";
+
 // Pushes the reputation to the server
 function ReputationSave(R) {
 	AccountRequest("reputation_set", "&type=" + R.Type + "&value=" + R.Value);

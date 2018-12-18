@@ -1,3 +1,4 @@
+"use strict";
 var ShibariBackground = "ShibariDojo";
 var ShibariTeacher = null;
 var ShibariTeacherAppearance = null;

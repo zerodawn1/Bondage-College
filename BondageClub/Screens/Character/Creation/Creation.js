@@ -1,3 +1,4 @@
+"use strict";
 var CreationBackground = "Dressing";
 var CreationMessage = "";
 

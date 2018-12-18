@@ -1,3 +1,4 @@
+"use strict";
 var MaidDrinksBackground = "Bar";
 var MaidDrinksCustomerLeft = null;
 var MaidDrinksCustomerRight = null;
@@ -44,9 +45,9 @@ function MaidDrinksLoad() {
 	MaidDrinksCustomerRight = CharacterLoadNPC("NPC_Customer_Right");
 	CharacterAppearanceFullRandom(MaidDrinksCustomerRight);
 	MaidDrinksGenerateMove(5000);
-	if (MiniGameDifficulty == "Easy") MiniGameDifficultyRatio = 0.8;
-	if (MiniGameDifficulty == "Normal") MiniGameDifficultyRatio = 1.2;
-	if (MiniGameDifficulty == "Hard") MiniGameDifficultyRatio = 1.6;
+	if (MiniGameDifficulty == "Easy") MiniGameDifficultyRatio = 1.0;
+	if (MiniGameDifficulty == "Normal") MiniGameDifficultyRatio = 1.5;
+	if (MiniGameDifficulty == "Hard") MiniGameDifficultyRatio = 2.0;
 }
 
 // Draw the mini game icons

@@ -1,3 +1,4 @@
+"use strict";
 var AppearanceBackground = "Dressing";
 var CharacterAppearanceOffset = 0;
 var CharacterAppearanceNumPerPage = 9;
@@ -495,7 +496,7 @@ function CharacterAppearanceSave(C) {
 	// Creates a big parameter string of every appearance items 
 	if ((C.ID == 0) && (C.AccountName != "") && (C.AccountPassword != "")) {
 		var P = "&family=" + C.AssetFamily;
-		for (A = 0; A < C.Appearance.length; A++)
+		for (var A = 0; A < C.Appearance.length; A++)
 			P = P + "&group" + A.toString() + "=" + C.Appearance[A].Asset.Group.Name + "&name" + A.toString() + "=" + C.Appearance[A].Asset.Name + "&color" + A.toString() + "=" + C.Appearance[A].Color;
 		AccountRequest("appearance_update", P);
 	}	

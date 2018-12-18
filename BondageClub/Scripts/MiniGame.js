@@ -1,3 +1,4 @@
+"use strict";
 var MiniGameType = "";
 var MiniGameVictory = false;
 var MiniGamePerfect = true;

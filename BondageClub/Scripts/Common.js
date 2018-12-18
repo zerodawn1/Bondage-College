@@ -1,4 +1,5 @@
 // Main variables
+"use strict";
 var Player;
 var MouseX = 0;
 var MouseY = 0;
@@ -48,6 +49,8 @@ function CommonParseCSV(str) {
 		
     var arr = [];
     var quote = false;  // true means we're inside a quoted field
+	var c;
+	var col;
 
     // iterate over each character, keep track of current row and column (of the returned array)
     for (var row = col = c = 0; c < str.length; c++) {
@@ -129,10 +132,10 @@ function CommonKeyDown() {
 
 // Calls a dynamic function (if it exists)
 function CommonDynamicFunction(FunctionName) {
-	if (typeof window[FunctionName.substr(0, FunctionName.indexOf("("))] == "function") {
-		var Fct = new Function(FunctionName);
-		Fct();
-	} else console.log("Trying to launch invalid function: " + FunctionName);
+	if (typeof window[FunctionName.substr(0, FunctionName.indexOf("("))] == "function")
+		window[FunctionName.replace("()", "")]();
+	else 
+		console.log("Trying to launch invalid function: " + FunctionName);
 }
 
 // Sets the current screen and calls the loading script if needed, only allow the change screen if the player can walk

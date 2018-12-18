@@ -1,3 +1,4 @@
+"use strict";
 var Text = null;
 
 // Finds the text value linked to the tag in the buffer

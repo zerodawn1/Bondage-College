@@ -1,3 +1,4 @@
+"use strict";
 var ImportBondageCollegeData = false;
 
 // Import the inventory from the Bondage College

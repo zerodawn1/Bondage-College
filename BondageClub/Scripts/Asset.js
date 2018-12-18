@@ -1,3 +1,4 @@
+"use strict";
 var Asset = [];
 var AssetGroup = [];
 var AssetCurrentGroup;

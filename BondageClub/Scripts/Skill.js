@@ -1,3 +1,5 @@
+"use strict";
+
 // Pushes the skill progression to the server
 function SkillSave(S) {
 	AccountRequest("skill_set", "&type=" + S.Type + "&level=" + S.Level + "&progress=" + S.Progress);
