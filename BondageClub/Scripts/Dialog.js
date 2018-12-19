@@ -21,35 +21,6 @@ function DialogRelease(C) { CharacterRelease(C); } // Releases a character from 
 function DialogNaked(C) { CharacterNaked(C); } // Strips a character naked and removes the restrains
 function DialogSetCharacter(C) { CharacterSetCurrent(C); } // Sets a new character as the current one in the dialog
 
-// Launches a custom Dialog Function from a variable
-function DialogFunction(F) {
-
-	// Gets the reverse ! sign, function name and parameters
-	var Reverse = false;
-	var ParamCount = 1;
-	if (F.substring(0, 1) == "!") Reverse = true;
-	F = F.replace("'", "");
-	if (F.indexOf("()") >= 0) ParamCount = 0;
-	else ParamCount = F.split(",").length;
-	var openParenthesisIndex = F.indexOf("(");
-	var closedParenthesisIndex = F.indexOf(")", openParenthesisIndex);
-	var Params = F.substring(openParenthesisIndex + 1, closedParenthesisIndex).split(",");
-	for(var P = 0; P < Params.length; P++)
-		Params[P] = Params[P].trim().replace('"', '').replace('"', '')
-	F = F.substring(0, openParenthesisIndex);
-	if (F.indexOf("Dialog") != 0) F = CurrentScreen + F;
-
-	// Launches the function and returns the result
-	var Result = true;
-	if (ParamCount == 0) Result = window[F]();
-	if (ParamCount == 1) Result = window[F](Params[0]);
-	if (ParamCount == 2) Result = window[F](Params[0], Params[1]);
-	if (ParamCount == 3) Result = window[F](Params[0], Params[1], Params[2]);
-	if (Reverse) return !Result;
-	else return Result;
-
-}
-
 // Returns TRUE if the dialog prerequisite condition is met
 function DialogPrerequisite(D) {
 	if (CurrentCharacter.Dialog[D].Prerequisite == null)
@@ -62,12 +33,12 @@ function DialogPrerequisite(D) {
 				return !Player[CurrentCharacter.Dialog[D].Prerequisite.substring(8, 250).replace("()", "").trim()]();
 			else
 				if (CurrentCharacter.Dialog[D].Prerequisite.indexOf("(") >= 0)
-					return DialogFunction(CurrentCharacter.Dialog[D].Prerequisite);
+					return CommonDynamicFunctionParams(CurrentCharacter.Dialog[D].Prerequisite);
 				else
 					if (CurrentCharacter.Dialog[D].Prerequisite.substring(0, 1) != "!")
-						return eval(CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite);
+						return window[CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite.trim()];
 					else
-						return !eval(CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite.substr(1, 250));
+						return !window[CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite.substr(1, 250)];
 }
 
 // Searches for an item in the player inventory to unlock a specific item
@@ -258,7 +229,7 @@ function DialogClick() {
 
 					// Do not allow to remove if it's locked
 					if ((Item.Asset.Effect == null) || (Item.Asset.Effect.indexOf("Lock") < 0))
-						if ((Item.Asset.Prerequisite == null) || eval(Item.Asset.Prerequisite.replace("CharacterObject", "C")))
+						if ((Item.Asset.Prerequisite == null) || CommonDynamicFunctionParams(Item.Asset.Prerequisite.replace("CharacterObject", "C")))
 							if (!InventoryGroupIsBlocked(C))
 								DialogProgressStart(C, Item, null);
 
@@ -293,7 +264,7 @@ function DialogClick() {
 					var Item = InventoryGet(C, C.FocusGroup.Name);
 					if ((Item == null) || (Item.Asset.Effect == null) || (Item.Asset.Effect.indexOf("Lock") < 0)) {
 						if (DialogInventory[I].Asset.Wear && !InventoryGroupIsBlocked(C))
-							if ((DialogInventory[I].Asset.Prerequisite == null) || eval(DialogInventory[I].Asset.Prerequisite.replace("CharacterObject", "C")))
+							if ((DialogInventory[I].Asset.Prerequisite == null) || CommonDynamicFunctionParams(DialogInventory[I].Asset.Prerequisite.replace("CharacterObject", "C")))
 								if ((Item == null) || (Item.Asset.Name != DialogInventory[I].Asset.Name))
 									if (DialogInventory[I].Asset.SelfBondage || (C.ID != 0)) DialogProgressStart(C, Item, DialogInventory[I]);
 									else DialogSetText("CannotUseOnSelf");
@@ -340,7 +311,7 @@ function DialogClick() {
 						if ((Player.CanTalk() && CurrentCharacter.CanTalk()) || DialogFullEmote(CurrentCharacter.Dialog[D].Option)) {
 							CurrentCharacter.CurrentDialog = CurrentCharacter.Dialog[D].Result;
 							if (CurrentCharacter.Dialog[D].NextStage != null) CurrentCharacter.Stage = CurrentCharacter.Dialog[D].NextStage;
-							if (CurrentCharacter.Dialog[D].Function != null) CommonDynamicFunction(CurrentCharacter.Dialog[D].Function);
+							if (CurrentCharacter.Dialog[D].Function != null) CommonDynamicFunctionParams(CurrentCharacter.Dialog[D].Function);
 						} else 
 							if ((CurrentCharacter.Dialog[D].Function != null) && (CurrentCharacter.Dialog[D].Function.trim() == "DialogLeave()"))
 								DialogLeave();

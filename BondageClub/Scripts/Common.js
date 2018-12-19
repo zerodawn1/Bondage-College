@@ -123,27 +123,70 @@ function CommonClick() {
 // Catches the clicks on the main screen and forwards it to the current screen or dialog screen
 function CommonKeyDown() {	
 	if (CurrentCharacter == null) {
-		if (eval("typeof " + CurrentScreen + "KeyDown") == "function")
+		if (typeof window[CurrentScreen + "KeyDown"] === "function")
 			CommonDynamicFunction(CurrentScreen + "KeyDown()");
 	}
-	else 
+	else
 		DialogKeyDown();
 }
 
-// Calls a dynamic function (if it exists)
+// Calls a basic dynamic function (if it exists), for complex functions, use: CommonDynamicFunctionParams
 function CommonDynamicFunction(FunctionName) {
-	if (typeof window[FunctionName.substr(0, FunctionName.indexOf("("))] == "function")
+	if (typeof window[FunctionName.substr(0, FunctionName.indexOf("("))] === "function")
 		window[FunctionName.replace("()", "")]();
 	else 
 		console.log("Trying to launch invalid function: " + FunctionName);
 }
+
+// Calls a dynamic function with parameters (if it exists), also allow ! in front to reverse the result
+function CommonDynamicFunctionParams(FunctionName) {
+
+	// Gets the reverse (!) sign
+	var Reverse = false;
+	if (FunctionName.substring(0, 1) == "!") Reverse = true;
+	FunctionName = FunctionName.replace("!", "");
+	
+	// Gets the real function name and parameters
+	var ParamCount = 1;
+	if (FunctionName.indexOf("()") >= 0) ParamCount = 0;
+	else ParamCount = FunctionName.split(",").length;
+	var openParenthesisIndex = FunctionName.indexOf("(");
+	var closedParenthesisIndex = FunctionName.indexOf(")", openParenthesisIndex);
+	var Params = FunctionName.substring(openParenthesisIndex + 1, closedParenthesisIndex).split(",");
+	for(var P = 0; P < Params.length; P++)
+		Params[P] = Params[P].trim().replace('"', '').replace('"', '')
+	FunctionName = FunctionName.substring(0, openParenthesisIndex);
+	if ((FunctionName.indexOf("Dialog") != 0) && (FunctionName.indexOf(CurrentScreen) != 0)) FunctionName = CurrentScreen + FunctionName;
+
+	// If it's really a function, we continue
+	if (typeof window[FunctionName] === "function") {
+		
+		// Launches the function with the params and returns the result
+		var Result = true;
+		if (ParamCount == 0) Result = window[FunctionName]();
+		if (ParamCount == 1) Result = window[FunctionName](Params[0]);
+		if (ParamCount == 2) Result = window[FunctionName](Params[0], Params[1]);
+		if (ParamCount == 3) Result = window[FunctionName](Params[0], Params[1], Params[2]);
+		if (Reverse) return !Result;
+		else return Result;
+
+	} else {
+
+		// Log the error in the console
+		console.log("Trying to launch invalid function: " + FunctionName);
+		return false;
+
+	}
+
+}
+
 
 // Sets the current screen and calls the loading script if needed, only allow the change screen if the player can walk
 function CommonSetScreen(NewModule, NewScreen) {
 	CurrentModule = NewModule;
 	CurrentScreen = NewScreen;
 	TextLoad();
-	if (eval("typeof " + CurrentScreen + "Load") == "function")
+	if (typeof window[CurrentScreen + "Load"] === "function")
 		CommonDynamicFunction(CurrentScreen + "Load()");
 }
 

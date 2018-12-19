@@ -14,7 +14,7 @@ ItemPelvis,,,(You snap the belt around her waist and crotch while she sighs.)  N
 RemoveItemPelvis,,,(You unlock the belt from her waist and she smiles.)  Thanks a lot Miss DialogPlayerName.,
 ItemHead,,,(You strap the device on her head as she nods slowly.)  This will not make my job easier Miss.,
 RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a million, this is much better.",
-0,,,Welcome to the Kidnap League.  Are you here to register as a kidnapper?,
+0,,,Welcome to the Kidnappers League.  Are you here to register as a kidnapper?,
 0,10,I want to practice kidnappings with you.,Great!  I can go easy on you or use all my tricks if you're confident enough.  How will it be?,
 0,,Let's talk later.  (Leave her.),,DialogLeave()
 10,,Please go really easy on me.,,StartKidnap(-3)
