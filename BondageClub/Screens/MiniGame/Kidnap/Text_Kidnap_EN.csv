@@ -5,6 +5,33 @@ Domination,Domination
 Sneakiness,Sneakiness
 Manipulation,Manipulation
 Surrender,Surrender
+Passive,Passive
+Lost,lost
+Willpower,willpower
+NoLost,didn't lose any willpower
+UpperHand,has the upper hand
+UpperHandMove,Upper hand moves:
+SuddenDeath,Sudden Death
+Wins,Wins
+Cloth,Remove her cloth
+ItemNeck,Use a collar item
+ItemFeet,Use a feet item
+ItemMouth,Use a gag item
+UndoCloth,Dress back up
+UndoItemNeck,Remove your collar
+UndoItemFeet,Release your legs
+UndoItemMouth,Remove your gag
+Mercy,Have mercy
+SelectItemToUse,Select the item to use on her
+UpperHandCloth,"(Using her upper hand, she focerfully removes your clothes.)"
+UpperHandItemNeck,(She produces a collar and force it around your neck.)
+UpperHandItemFeet,(She quickly use her upper hand to restrain your feet.)
+UpperHandItemMouth,(She uses her advantage to silence you with a gag.)
+UpperHandUndoCloth,(She uses her advantage on you to dress back up.)
+UpperHandUndoItemNeck,"(Using her upper hand on you, she removes her collar.)"
+UpperHandUndoItemFeet,(She uses the opportunity to release her feet.)
+UpperHandUndoItemMouth,(She's able to remove her gag using her upper hand.)
+UpperHandMercy,(She looks at your current situation and gives you some mercy.)
 PlayerBruteForceOpponentBruteForceAction,(You try to get a good grip on her but she fights back and pushes you away.)
 PlayerBruteForceOpponentBruteForcePlayer,Fight for real girl!
 PlayerBruteForceOpponentBruteForceOpponent,That's the best you can do?

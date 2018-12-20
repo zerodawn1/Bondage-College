@@ -244,7 +244,7 @@ function DrawTextWrap(Text, X, Y, Width, Height, ForeColor, BackColor) {
 		MainCanvas.rect(X, Y, Width, Height);
 		MainCanvas.fillStyle = BackColor; 
 		MainCanvas.fillRect(X, Y, Width, Height);
-		MainCanvas.fill();	
+		MainCanvas.fill();
 		MainCanvas.lineWidth = '2';
 		MainCanvas.strokeStyle = ForeColor;
 		MainCanvas.stroke();
@@ -256,12 +256,24 @@ function DrawTextWrap(Text, X, Y, Width, Height, ForeColor, BackColor) {
 	if (MainCanvas.measureText(Text).width > Width) {
 		var words = Text.split(' ');
 		var line = '';
-		Y += 46;
+		
+		// Find the number of lines
+		var LineCount = 1;
 		for(var n = 0; n < words.length; n++) {
 		  var testLine = line + words[n] + ' ';
-		  var metrics = MainCanvas.measureText(testLine);
-		  var testWidth = metrics.width;
-		  if (testWidth > Width && n > 0) {
+		  if (MainCanvas.measureText(testLine).width > Width && n > 0) {
+			line = words[n] + ' ';			  
+  		    LineCount++;
+		  } else line = testLine;
+		}
+		
+		// Splits the words and draw the text
+		words = Text.split(' ');
+		line = '';
+		Y = Y - ((LineCount - 1) * 23) + (Height / 2);
+		for(var n = 0; n < words.length; n++) {
+		  var testLine = line + words[n] + ' ';
+		  if (MainCanvas.measureText(testLine).width > Width && n > 0) {
 			MainCanvas.fillText(line, X + Width / 2, Y);
 			line = words[n] + ' ';
 			Y += 46;
@@ -271,6 +283,7 @@ function DrawTextWrap(Text, X, Y, Width, Height, ForeColor, BackColor) {
 		  }
 		}
 		MainCanvas.fillText(line, X + Width / 2, Y);
+		
 	} else MainCanvas.fillText(Text, X + Width / 2, Y + Height / 2);
 
 }

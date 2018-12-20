@@ -8,6 +8,7 @@ function KidnapLeagueAllowKidnap() { return (!Player.IsRestrained() && !KidnapLe
 // Loads the kidnap league NPC
 function KidnapLeagueLoad() {
 	KidnapLeagueTrainer = CharacterLoadNPC("NPC_KidnapLeague_Trainer");
+	KidnapLeagueTrainer.AllowItem = false;
 }
 
 // Run the kidnap league
@@ -28,5 +29,23 @@ function KidnapLeagueClick() {
 
 // When the player starts a kidnap game against the trainer
 function KidnapLeagueStartKidnap(Difficulty) {
-	KidnapStart(KidnapLeagueTrainer, "KidnapLeagueDark", Difficulty);
+	KidnapStart(KidnapLeagueTrainer, "KidnapLeagueDark", Difficulty, "KidnapLeagueEndKidnap()");
+}
+
+// When the kidnap match ends
+function KidnapLeagueEndKidnap() {
+	KidnapLeagueTrainer.AllowItem = KidnapVictory;
+	KidnapLeagueTrainer.Stage = (KidnapVictory) ? "100" : "200";
+	if (!KidnapVictory) CharacterRelease(KidnapLeagueTrainer);
+	CommonSetScreen("Room", "KidnapLeague");
+	CharacterSetCurrent(KidnapLeagueTrainer);
+	KidnapLeagueTrainer.CurrentDialog = DialogFind(KidnapLeagueTrainer, (KidnapVictory) ? "KidnapVictory" : "KidnapDefeat");
+}
+
+// Resets the player and teacher for another kidnapping
+function KidnapLeagueResetTrainer() {
+	CharacterRelease(Player);
+	CharacterRelease(KidnapLeagueTrainer);
+	if ((InventoryGet(Player, "Cloth") == null) && (KidnapPlayerCloth != null)) InventoryWear(Player, KidnapPlayerCloth.Asset.Name, "Cloth", KidnapPlayerCloth.Color);
+	if ((InventoryGet(KidnapLeagueTrainer, "Cloth") == null) && (KidnapOpponentCloth != null)) InventoryWear(KidnapLeagueTrainer, KidnapOpponentCloth.Asset.Name, "Cloth", KidnapOpponentCloth.Color);
 }

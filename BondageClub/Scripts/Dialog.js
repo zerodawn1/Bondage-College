@@ -17,6 +17,7 @@ function DialogReputationGreater(RepType, Value) { return (ReputationGet(RepType
 function DialogChangeReputation(RepType, Value) { ReputationProgress(RepType, Value); } // Change the player reputation progressively through dialog options (a reputation is easier to break than to build)
 function DialogWearItem(AssetName, AssetGroup) { InventoryWear(Player, AssetName, AssetGroup); } // Equips a specific item on the player from dialog
 function DialogWearRandomItem(AssetGroup) { InventoryWearRandom(Player, AssetGroup); } // Equips a random item from a given group to the player from dialog
+function DialogRemoveItem(AssetGroup) { InventoryRemove(Player, AssetGroup); } // Removes an item of a specific item group from the player 
 function DialogRelease(C) { CharacterRelease(C); } // Releases a character from restraints
 function DialogNaked(C) { CharacterNaked(C); } // Strips a character naked and removes the restrains
 function DialogSetCharacter(C) { CharacterSetCurrent(C); } // Sets a new character as the current one in the dialog
@@ -38,7 +39,7 @@ function DialogPrerequisite(D) {
 					if (CurrentCharacter.Dialog[D].Prerequisite.substring(0, 1) != "!")
 						return window[CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite.trim()];
 					else
-						return !window[CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite.substr(1, 250)];
+						return !window[CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite.substr(1, 250).trim()];
 }
 
 // Searches for an item in the player inventory to unlock a specific item
