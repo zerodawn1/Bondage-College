@@ -5,7 +5,6 @@ var KidnapReturnFunction = "";
 var KidnapOpponent = null;
 var KidnapPlayerCloth = null;
 var	KidnapOpponentCloth = null;
-var KidnapMaxWillpower = 20;
 var KidnapTimer = 0;
 var KidnapMode = "";
 var KidnapDialog = "";
@@ -31,6 +30,19 @@ function KidnapLoadStats(C, Bonus) {
 	C.KidnapStat = [SkillGetLevel(C, KidnapMoveType[0]) + Bonus + 5, SkillGetLevel(C, KidnapMoveType[1]) + Bonus + 5, SkillGetLevel(C, KidnapMoveType[2]) + Bonus + 5, SkillGetLevel(C, KidnapMoveType[3]) + Bonus + 5];
 }
 
+// Build the inventory listing that's available when kidnapping
+function KidnapInventoryBuild() {
+
+	// Loop in the player inventory for that group for items that can be worn, is enable and is allowed for random events
+	DialogInventory = [];
+	if (KidnapOpponent.FocusGroup != null)
+		for(var A = 0; A < Player.Inventory.length; A++)
+			if ((Player.Inventory[A].Asset != null) && (Player.Inventory[A].Asset.Group.Name == KidnapOpponent.FocusGroup.Name) && Player.Inventory[A].Asset.Enable && Player.Inventory[A].Asset.Wear && Player.Inventory[A].Asset.Random)
+				DialogInventoryAdd(Player.Inventory[A].Asset, false);
+
+}
+
+
 // Sets the new kidnap mode and timer
 function KidnapSetMode(NewMode) {
 
@@ -55,15 +67,17 @@ function KidnapSetMode(NewMode) {
 		NewMode = "End"; 
 	}
 	
-	// If we must end the mini game in victory, one last item can be equiped
+	// If we must end the mini game in victory, one last item can be equipped
 	if ((NewMode == "SelectMove") && (KidnapOpponent.KidnapWillpower <= 0)) {
 		if (!KidnapVictory) {
 			for(var A = 0; A < AssetGroup.length; A++)
-				if (AssetGroup[A].Name == "ItemArms")
+				if (AssetGroup[A].Name == "ItemArms") {
 					KidnapOpponent.FocusGroup = AssetGroup[A];
-			if (KidnapOpponent.FocusGroup != null) NewMode = "SelectItem";
-			else NewMode = "End";
-			KidnapVictory = true;			
+					KidnapInventoryBuild();
+					break;
+				}
+			NewMode = (KidnapOpponent.FocusGroup != null) ? "SelectItem" : "End";
+			KidnapVictory = true;
 		} else NewMode = "End";
 	}	
 	
@@ -212,14 +226,15 @@ function KidnapSelectMoveUpperHand(PlayerMove) {
 		
 	// Apply an item enters another mode with a focused group
 	if ((PlayerMove == 1) || (PlayerMove == 2) || (PlayerMove == 3))
-		if (KidnapUpperHandMoveAvailable(PlayerMove, false)) {
+		if (KidnapUpperHandMoveAvailable(PlayerMove, false))
 			for(var A = 0; A < AssetGroup.length; A++)
-				if (AssetGroup[A].Name == KidnapUpperHandMoveType[PlayerMove])
+				if (AssetGroup[A].Name == KidnapUpperHandMoveType[PlayerMove]) {
 					KidnapOpponent.FocusGroup = AssetGroup[A];
-			if (KidnapOpponent.FocusGroup != null)
-				KidnapSetMode("SelectItem");
-		}
-		
+					KidnapInventoryBuild();
+					KidnapSetMode("SelectItem");
+					break;
+				}
+
 	// Mercy is always available
 	if (PlayerMove == 8) KidnapSetMode("SelectMove");
 }
@@ -240,10 +255,12 @@ function KidnapStart(Opponent, Background, Difficulty, ReturnFunction) {
 	KidnapOpponent = Opponent;
 	KidnapBackground = Background;
 	CurrentCharacter = null;
-	Player.KidnapWillpower = KidnapMaxWillpower;
-	KidnapOpponent.KidnapWillpower = KidnapMaxWillpower;
-	KidnapLoadStats(Player, (Difficulty < 0) ? Difficulty * -1 : 0);
-	KidnapLoadStats(KidnapOpponent, (Difficulty > 0) ? Difficulty : 0);
+	Player.KidnapMaxWillpower = 20 + (SkillGetLevel(Player, "Willpower") * 2);
+	Player.KidnapWillpower = Player.KidnapMaxWillpower;
+	KidnapOpponent.KidnapMaxWillpower = 20 + (Difficulty * 2);
+	KidnapOpponent.KidnapWillpower = KidnapOpponent.KidnapMaxWillpower;
+	KidnapLoadStats(Player, 0);
+	KidnapLoadStats(KidnapOpponent, Math.floor(Difficulty / 2));
 	KidnapSetMode("Intro");
 	CommonSetScreen("MiniGame", "Kidnap");
 }
@@ -285,7 +302,26 @@ function KidnapTitle(Title) {
 
 // Show the items
 function KidnapShowItem() {
-	DrawText(TextGet("SelectItemToUse"), 1500, 50, "white", "black");
+	
+	// Draw the header
+	DrawText(TextGet("SelectItemToUse"), 1375, 50, "white", "black");
+	DrawButton(1750, 25, 225, 65, TextGet("Cancel"), "White");
+	
+	// For each items in the player inventory
+	var X = 1000;
+	var Y = 125;
+	for(var I = 0; I < DialogInventory.length; I++) {
+		DrawRect(X, Y, 225, 275, ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && !CommonIsMobile) ? "cyan" : DialogInventory[I].Worn ? "pink" : "white");
+		DrawImageResize("Assets/" + DialogInventory[I].Asset.Group.Family + "/" + DialogInventory[I].Asset.Group.Name + "/Preview/" + DialogInventory[I].Asset.Name + ".png", X + 2, Y + 2, 221, 221);
+		DrawTextFit(DialogInventory[I].Asset.Description, X + 112, Y + 250, 221, "black");
+		if (DialogInventory[I].Icon != "") DrawImage("Icons/" + DialogInventory[I].Icon + ".png", X + 2, Y + 110);
+		X = X + 250;
+		if (X > 1800) {
+			X = 1000;
+			Y = Y + 300;
+		}
+	}
+	
 }
 
 // Run the kidnap league
@@ -296,8 +332,8 @@ function KidnapRun() {
 	if (KidnapMode == "SelectItem") X = 0;
 	DrawCharacter(Player, X, 0, 1);
 	DrawCharacter(KidnapLeagueTrainer, X + 500, 0, 1);
-	DrawProgressBar(X + 100, 960, 300, 35, Math.round(Player.KidnapWillpower / KidnapMaxWillpower * 100));
-	DrawProgressBar(X + 600, 960, 300, 35, Math.round(KidnapOpponent.KidnapWillpower / KidnapMaxWillpower * 100));
+	DrawProgressBar(X + 100, 960, 300, 35, Math.round(Player.KidnapWillpower / Player.KidnapMaxWillpower * 100));
+	DrawProgressBar(X + 600, 960, 300, 35, Math.round(KidnapOpponent.KidnapWillpower / KidnapOpponent.KidnapMaxWillpower * 100));
 	DrawText(Player.KidnapWillpower.toString(), X + 250, 978, "white", "black");
 	DrawText(KidnapOpponent.KidnapWillpower.toString(), X + 750, 978, "white", "black");
 	if (KidnapMode == "Intro") KidnapTitle(Player.Name + " vs " + KidnapOpponent.Name);
@@ -311,6 +347,7 @@ function KidnapRun() {
 	// If the time is over, we go to the next step
 	if (CommonTime() >= KidnapTimer) {
 		if (KidnapMode == "SelectMove") { KidnapSelectMove(4); return; }
+		if (KidnapMode == "End") { CommonDynamicFunction(KidnapReturnFunction); return }
 		if ((KidnapMode == "Intro") || (KidnapMode == "SuddenDeath") || (KidnapMode == "ShowMove") || (KidnapMode == "UpperHand") || (KidnapMode == "SelectItem")) KidnapSetMode("SelectMove");
 	} else KidnapShowTimer();
 
@@ -319,8 +356,8 @@ function KidnapRun() {
 // When the user clicks in the kidnap mini game
 function KidnapClick() {
 
-	// If we end in a defeat
-	if (KidnapMode == "End") CommonDynamicFunction(KidnapReturnFunction);
+	// If we must end the fight
+	if (KidnapMode == "End") { CommonDynamicFunction(KidnapReturnFunction); return; }
 
 	// When the user wants to skip the result or upper hand selection from the AI
 	if ((KidnapMode == "Intro") || (KidnapMode == "SuddenDeath") || (KidnapMode == "ShowMove") || ((KidnapMode == "UpperHand") && (KidnapUpperHandVictim.ID == 0))) {
@@ -344,6 +381,36 @@ function KidnapClick() {
 			if ((MouseX >= 50) && (MouseX <= 450) && (MouseY >= 100 + (M * 100)) && (MouseY <= 170 + (M * 100)))
 				KidnapSelectMoveUpperHand(M);
 		return;
+	}
+
+	// If we must cancel out and don't select any item
+	if ((MouseX >= 1750) && (MouseX <= 1975) && (MouseY >= 25) && (MouseY <= 90))
+		KidnapSetMode("SelectMove");
+	
+	// If the user clicks on one of the items to be applied to the opponent
+	if ((KidnapMode == "SelectItem") && (MouseX >= 1000) && (MouseX <= 1975) && (MouseY >= 125) && (MouseY <= 1000)) {
+
+		// For each items in the player/opponent inventory
+		var X = 1000;
+		var Y = 125;
+		for(var I = 0; I < DialogInventory.length; I++) {
+
+			// If the item at position is clicked, we add the item to the opponent
+			if ((MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275)) {
+				InventoryWear(KidnapOpponent, DialogInventory[I].Asset.Name, DialogInventory[I].Asset.Group.Name);
+				KidnapSetMode("SelectMove");
+				break;
+			}
+
+			// Change the X and Y position to get the next square
+			X = X + 250;
+			if (X > 1800) {
+				X = 1000;
+				Y = Y + 300;
+			}
+
+		}
+		
 	}
 
 }

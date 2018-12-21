@@ -230,7 +230,7 @@ function DialogClick() {
 
 					// Do not allow to remove if it's locked
 					if ((Item.Asset.Effect == null) || (Item.Asset.Effect.indexOf("Lock") < 0))
-						if ((Item.Asset.Prerequisite == null) || CommonDynamicFunctionParams(Item.Asset.Prerequisite.replace("CharacterObject", "C")))
+						if ((Item.Asset.Prerequisite == null) || InventoryAllow(C, Item.Asset.Prerequisite))
 							if (!InventoryGroupIsBlocked(C))
 								DialogProgressStart(C, Item, null);
 
@@ -250,7 +250,7 @@ function DialogClick() {
 			DialogLeaveItemMenu();
 
 		// If the user clicks on one of the items
-		if ((MouseX >= 1025) && (MouseX <= 1975) && (MouseY >= 125) && (MouseY <= 850) && Player.CanInteract() && (DialogProgress < 0)) {
+		if ((MouseX >= 1000) && (MouseX <= 1975) && (MouseY >= 125) && (MouseY <= 1000) && Player.CanInteract() && (DialogProgress < 0)) {
 
 			// For each items in the player inventory
 			var X = 1000;
@@ -265,7 +265,7 @@ function DialogClick() {
 					var Item = InventoryGet(C, C.FocusGroup.Name);
 					if ((Item == null) || (Item.Asset.Effect == null) || (Item.Asset.Effect.indexOf("Lock") < 0)) {
 						if (DialogInventory[I].Asset.Wear && !InventoryGroupIsBlocked(C))
-							if ((DialogInventory[I].Asset.Prerequisite == null) || CommonDynamicFunctionParams(DialogInventory[I].Asset.Prerequisite.replace("CharacterObject", "C")))
+							if ((DialogInventory[I].Asset.Prerequisite == null) || InventoryAllow(C, DialogInventory[I].Asset.Prerequisite))
 								if ((Item == null) || (Item.Asset.Name != DialogInventory[I].Asset.Name))
 									if (DialogInventory[I].Asset.SelfBondage || (C.ID != 0)) DialogProgressStart(C, Item, DialogInventory[I]);
 									else DialogSetText("CannotUseOnSelf");

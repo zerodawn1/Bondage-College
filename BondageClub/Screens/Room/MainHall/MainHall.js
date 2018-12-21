@@ -29,6 +29,9 @@ function MainHallRun() {
 		if (Player.CanWalk()) DrawButton(1525, 240, 450, 65, TextGet("MaidQuarters"), "White");
 		if (Player.CanWalk()) DrawButton(1525, 335, 450, 65, TextGet("ShibariDojo"), "White");
 		if (Player.CanWalk()) DrawButton(1525, 430, 450, 65, TextGet("KidnapLeague"), "White");
+
+		// Draws the custom content rooms
+		if (Player.CanWalk()) DrawButton(25, 25, 450, 65, TextGet("Gambling"), "White");
 		
 		// Check if there's a new maid rescue event to trigger
 		if ((!Player.CanInteract() || !Player.CanWalk() || !Player.CanTalk()) && (MainHallNextEventTimer == null)) MainHallNextEventTimer = ReputationTimer("Dominant", true);
@@ -50,15 +53,23 @@ function MainHallClick() {
 
 	// We only allow clicks if the account queue is empty
 	if (AccountQueueIsEmpty()) {
+		
+		// Character and main buttons
 		if ((MouseX >= 750) && (MouseX < 1250) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(Player);
 		if ((MouseX >= 1525) && (MouseX < 1615) && (MouseY >= 25) && (MouseY < 115)) InformationSheetLoadCharacter(Player);
 		if ((MouseX >= 1645) && (MouseX < 1735) && (MouseY >= 25) && (MouseY < 115)) CommonSetScreen("Character", "Appearance");
 		if ((MouseX >= 1765) && (MouseX < 1855) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) CommonSetScreen("Room", "Shop");		  
 		if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) CommonSetScreen("Character", "Login");
-		if ((MouseX >= 1575) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 210) && Player.CanWalk()) CommonSetScreen("Room", "Introduction");
-		if ((MouseX >= 1575) && (MouseX < 1975) && (MouseY >= 240) && (MouseY < 305) && Player.CanWalk()) CommonSetScreen("Room", "MaidQuarters");
-		if ((MouseX >= 1575) && (MouseX < 1975) && (MouseY >= 335) && (MouseY < 400) && Player.CanWalk()) CommonSetScreen("Room", "Shibari");
-		if ((MouseX >= 1575) && (MouseX < 1975) && (MouseY >= 430) && (MouseY < 495) && Player.CanWalk()) CommonSetScreen("Room", "KidnapLeague");
+
+		// Main game rooms
+		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 210) && Player.CanWalk()) CommonSetScreen("Room", "Introduction");
+		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 240) && (MouseY < 305) && Player.CanWalk()) CommonSetScreen("Room", "MaidQuarters");
+		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 335) && (MouseY < 400) && Player.CanWalk()) CommonSetScreen("Room", "Shibari");
+		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 430) && (MouseY < 495) && Player.CanWalk()) CommonSetScreen("Room", "KidnapLeague");
+
+		// Custom content rooms
+		if ((MouseX >= 25) && (MouseX < 475) && (MouseY >= 25) && (MouseY < 90) && Player.CanWalk()) CommonSetScreen("Room", "Gambling");
+
 	}
 
 }

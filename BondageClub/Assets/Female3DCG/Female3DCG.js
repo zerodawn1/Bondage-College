@@ -233,8 +233,8 @@ var AssetFemale3DCG = [
 		Top: 375,
 		Zone: [[150, 425, 200, 125]],
 		Asset: [ 
-			{ Name: "MetalChastityBelt", Effect: ["Chaste", "Lock"], Value: 100, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 20, RemoveTime: 10 },
-			{ Name: "RegularVibratingEgg", Enable: false, Value: 25, Effect: [], Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 5 },
+			{ Name: "MetalChastityBelt", Effect: ["Chaste", "Lock"], Value: 100, Prerequisite: "AccessPussy", Time: 20, RemoveTime: 10 },
+			{ Name: "RegularVibratingEgg", Enable: false, Value: 25, Effect: [], Prerequisite: "AccessPussy", Time: 5 },
 			{ Name: "LeatherCrop", Value: 40, Enable: false, Wear: false }
 		]
 	},
@@ -251,9 +251,9 @@ var AssetFemale3DCG = [
 		Top: 200,
 		Zone: [[150, 260, 200, 165]],
 		Asset: [ 
-			{ Name: "NylonRopeHarness", Value: 25, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 25 },
-			{ Name: "HempRopeHarness", Value: 50, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 25, RemoveTime: 35 },
-			{ Name: "LeatherHarness", Value: 100, Prerequisite: "InventoryAllowPelvisItem(CharacterObject);", Time: 15, RemoveTime: 10 },
+			{ Name: "NylonRopeHarness", Value: 25, Prerequisite: "AccessTorso", Time: 25 },
+			{ Name: "HempRopeHarness", Value: 50, Prerequisite: "AccessTorso", Time: 25, RemoveTime: 35 },
+			{ Name: "LeatherHarness", Value: 100, Prerequisite: "AccessTorso", Time: 15, RemoveTime: 10 },
 			{ Name: "LeatherCrop", Value: 40, Enable: false }
 		]
 	},

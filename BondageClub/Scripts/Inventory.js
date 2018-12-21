@@ -55,21 +55,10 @@ function InventoryAvailable(C, InventoryName, InventoryGroup) {
 	return false;
 }
 
-// Returns TRUE if we can equip a pelvis item (needs no clothes and no panties)
-function InventoryAllowPelvisItem(C) {
-	if ((InventoryGet(C, "Cloth") != null) || (InventoryGet(C, "Panties") != null)) {
-		DialogSetText("RemoveClothesForItem");
-		return false;
-	}
-	return true;
-}
-
-// Returns TRUE if we can equip a torso item (needs no clothes and no bra)
-function InventoryAllowTorsoItem(C) {
-	if (InventoryGet(C, "Cloth") != null) {
-		DialogSetText("RemoveClothesForItem");
-		return false;
-	}
+// Returns TRUE if we can equip the item
+function InventoryAllow(C, Prerequisite) {
+	if ((Prerequisite == "AccessTorso") && (InventoryGet(C, "Cloth") != null)) { DialogSetText("RemoveClothesForItem"); return false; }
+	if ((Prerequisite == "AccessPussy") && ((InventoryGet(C, "Cloth") != null) || (InventoryGet(C, "Panties") != null))) { DialogSetText("RemoveClothesForItem"); return false; }
 	return true;
 }
 
