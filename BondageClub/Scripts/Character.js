@@ -144,6 +144,15 @@ function CharacterLoadNPC(NPCType) {
 	
 }
 
+// Deletes an NPC from the buffer
+function CharacterDelete(NPCType) {
+	for (var C = 0; C < Character.length; C++)
+		if (Character[C].AccountName == NPCType) {
+			Character.splice(C, 1);
+			return;
+		}
+}
+
 // Adds new effects on a character if it's not already there
 function CharacterAddPose(C, NewPose) {
 	for (var E = 0; E < NewPose.length; E++)

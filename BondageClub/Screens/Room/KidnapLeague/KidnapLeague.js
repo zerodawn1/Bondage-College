@@ -1,6 +1,10 @@
 "use strict";
 var KidnapLeagueBackground = "KidnapLeague";
 var KidnapLeagueTrainer = null;
+var KidnapLeagueRandomKidnapper = null;
+var KidnapLeagueRandomKidnapperScenario = 0;
+var KidnapLeagueRandomKidnapperDifficulty = 0;
+var KidnapLeagueRandomKidnapperTimer = 0;
 
 // Returns TRUE if the dialog option are available
 function KidnapLeagueAllowKidnap() { return (!Player.IsRestrained() && !KidnapLeagueTrainer.IsRestrained()); }
@@ -8,6 +12,7 @@ function KidnapLeagueIsTrainerRestrained() { return KidnapLeagueTrainer.IsRestra
 
 // Loads the kidnap league NPC
 function KidnapLeagueLoad() {
+	KidnapLeagueBackground = "KidnapLeague";
 	KidnapLeagueTrainer = CharacterLoadNPC("NPC_KidnapLeague_Trainer");
 	KidnapLeagueTrainer.AllowItem = ((KidnapLeagueTrainer.Stage == "100") || (KidnapLeagueTrainer.Stage == "110"));
 }
@@ -31,8 +36,39 @@ function KidnapLeagueClick() {
 	}
 }
 
-// When the player starts a kidnap game against the trainer
+// When the player gets in a random kidnap match
+function KidnapLeagueRandomKidnap() {
+	KidnapLeagueBackground = "MainHall";
+	KidnapLeagueRandomKidnapper = null;
+	CharacterDelete("NPC_KidnapLeague_RandomKidnapper");
+	KidnapLeagueRandomKidnapper = CharacterLoadNPC("NPC_KidnapLeague_RandomKidnapper");
+	CharacterSetCurrent(KidnapLeagueRandomKidnapper);
+	KidnapLeagueRandomKidnapperScenario = 0
+	if (Player.CanInteract()) {
+		KidnapLeagueRandomKidnapper.Stage = KidnapLeagueRandomKidnapperScenario.toString();
+		KidnapLeagueRandomKidnapper.CurrentDialog = TextGet("RandomKidnapIntro" + KidnapLeagueRandomKidnapperScenario.toString());
+	} else {
+		KidnapLeagueRandomKidnapper.Stage = "200";
+		KidnapLeagueRandomKidnapper.CurrentDialog = TextGet("RandomKidnapAutomatic" + KidnapLeagueRandomKidnapperScenario.toString());
+	}
+}
+
+// When a random kidnap match ends
+function KidnapLeagueEndRandomKidnap(Surrender) {
+	KidnapLeagueRandomKidnapper.AllowItem = KidnapVictory;
+	KidnapLeagueRandomKidnapper.Stage = (KidnapVictory) ? "100" : "200";
+	if (!KidnapVictory) CharacterRelease(KidnapLeagueRandomKidnapper);
+	CommonSetScreen("Room", "MainHall");
+	CharacterSetCurrent(KidnapLeagueRandomKidnapper);
+	if ((Surrender != null) && (Surrender == true)) {
+		InventoryWearRandom(Player, "ItemArms");
+		KidnapLeagueRandomKidnapper.CurrentDialog = DialogFind(KidnapLeagueRandomKidnapper, "KidnapSurrender" + KidnapLeagueRandomKidnapperScenario.toString());
+	} else KidnapLeagueRandomKidnapper.CurrentDialog = DialogFind(KidnapLeagueRandomKidnapper, ((KidnapVictory) ? "KidnapVictory" : "KidnapDefeat") + KidnapLeagueRandomKidnapperScenario.toString());
+}
+
+// When the player starts a kidnap game against the trainer (an easy fight will lower the player dominant reputation)
 function KidnapLeagueStartKidnap(Difficulty) {
+	if (Difficulty < 0) ReputationProgress("Dominant", -2);
 	KidnapStart(KidnapLeagueTrainer, "KidnapLeagueDark", Difficulty, "KidnapLeagueEndKidnap()");
 }
 

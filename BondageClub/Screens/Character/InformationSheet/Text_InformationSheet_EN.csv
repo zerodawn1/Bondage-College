@@ -13,6 +13,7 @@ ReputationNone,None
 ReputationDominantPositive,Dominant:
 ReputationDominantNegative,Submissive:
 ReputationMaidPositive,Maid Sorority:
+ReputationKidnapPositive,Kidnappers League:
 Skill,- Skills -
 SkillNone,None
 SkillBondage,Bondage:

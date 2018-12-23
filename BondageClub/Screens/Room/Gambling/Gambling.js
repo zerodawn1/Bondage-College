@@ -1,12 +1,15 @@
+"use strict";
+
 var GamblingBackground = "Gambling";
-var GamblingPlayer = null;
+var GamblingSub = null;
+
 var PlayerDice = null;
-var GamblingPlayerDice = null;
-var GameResultState = null;
+var GamblingSubDice = null;
+var PlayerDiceStack = [];
+var GamblingSubDiceStack = [];
 var PlayerTwentyOneLevel = 0;
-var GamblingPlayerTwentyOneLevel = 0;
-var PlayerTwentyOnePoints = 0;
-var GamblingTwentyOnePoints = 0;
+var GamblingSubTwentyOneLevel = 0;
+
 var PlayerPreviousHat = null;
 var PlayerPreviousShoes = null;
 var PlayerPreviousGloves = null;
@@ -14,42 +17,52 @@ var PlayerPreviousCloth = null;
 var PlayerPreviousBra = null;
 var PlayerPreviousPanties = null;
 var PlayerPreviousSocks = null;
-var GamblingPlayerPreviousHat = null;
-var GamblingPlayerPreviousShoes = null;
-var GamblingPlayerPreviousGloves = null;
-var GamblingPlayerPreviousCloth = null;
-var GamblingPlayerPreviousBra = null;
-var GamblingPlayerPreviousPanties = null;
-var GamblingPlayerPreviousSocks = null;
+var GamblingSubPreviousHat = null;
+var GamblingSubPreviousShoes = null;
+var GamblingSubPreviousGloves = null;
+var GamblingSubPreviousCloth = null;
+var GamblingSubPreviousBra = null;
+var GamblingSubPreviousPanties = null;
+var GamblingSubPreviousSocks = null;
 
-/* 
-1 Cloth
-2 Underware
-3 Feet + Legs
-4 Mounth + Arms
-*/
-
-function GamblingCanPlay() {return (!Player.IsRestrained() && !GamblingPlayer.IsRestrained());}
+// Returns TRUE if a dialog is permitted
+function ShopIsGamblingSubRestrained() { return (GamblingSub.IsRestrained() || !GamblingSub.CanTalk()) }
+function GamblingCanPlay() {return (!Player.IsRestrained() && !GamblingSub.IsRestrained());}
 
 // Loads the Gambling Hall
 function GamblingLoad() {
-	GamblingPlayer = CharacterLoadNPC("NPC_Gambling_Sub");
+		// Default load
+	if (GamblingSub == null) {
+		GamblingSub = CharacterLoadNPC("NPC_Gambling_Sub");
+		GamblingSub.AllowItem = false;
+	}
+	// Rescue mission load
+	if ((MaidQuartersCurrentRescue == "ShibariDojo") && !MaidQuartersCurrentRescueStarted) {
+		MaidQuartersCurrentRescueStarted = true;
+		CharacterNaked(GamblingSub);
+		InventoryWearRandom(GamblingSub, "ItemLegs"); 
+		InventoryWearRandom(GamblingSub, "ItemFeet"); 
+		InventoryWearRandom(GamblingSub, "ItemArms"); 
+		InventoryWearRandom(GamblingSub, "ItemMouth"); 
+		InventoryWear(GamblingSub, "LeatherBlindfold", "ItemHead");
+		GamblingSub.AllowItem = true;
+	}
+
 }
 
 // Run the Gambling Hall, draw both characters
 function GamblingRun() {
 	DrawCharacter(Player, 500, 0, 1);
-	DrawCharacter(GamblingPlayer, 1000, 0, 1);
+	DrawCharacter(GamblingSub, 1000, 0, 1);
 	if (Player.CanWalk()) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
 	DrawButton(1885, 145, 90, 90, "", "White", "Icons/Character.png");
 	if (Player.CanInteract()) DrawButton(1885, 265, 90, 90, "", "White", "Icons/Dress.png");
-
 }
 
 // When the user clicks in the Gambling Hall
 function GamblingClick() {
 	if ((MouseX >= 500) && (MouseX < 1000) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(Player);
-	if ((MouseX >= 1000) && (MouseX < 1500) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(GamblingPlayer);
+	if ((MouseX >= 1000) && (MouseX < 1500) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(GamblingSub);
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) CommonSetScreen("Room", "MainHall");
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 235)) InformationSheetLoadCharacter(Player);
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 265) && (MouseY < 355)) CommonSetScreen("Character", "Appearance");
@@ -58,51 +71,40 @@ function GamblingClick() {
 // Controller for the Simple Dice Game
 function GamblingSimpleDiceController(SimpleDiceState) {
 	if (SimpleDiceState == "new"){
+		PlayerDiceStack = [];
+		GamblingSubDiceStack = [];
 		PlayerDice = Math.floor(Math.random() * (6 - 1)) + 1;
-		GamblingPlayerDice = Math.floor(Math.random() * (6 - 1)) + 1;
-		CurrentCharacter.Stage = "" + PlayerDice + GamblingPlayerDice;
-	} else if (SimpleDiceState == "result"){
-		if (PlayerDice > GamblingPlayerDice) {
-			GamblingPlayer.AllowItem = true;
-			CurrentCharacter.Stage = 81;
+		PlayerDiceStack[PlayerDiceStack.length] = PlayerDice;
+		GamblingSubDice = Math.floor(Math.random() * (6 - 1)) + 1;
+		GamblingSubDiceStack[GamblingSubDiceStack.length] = GamblingSubDice;
+		if (PlayerDice > GamblingSubDice) {
+			GamblingSub.AllowItem = true;
+			GamblingSub.Stage = 81;
 			}
-		if (PlayerDice < GamblingPlayerDice) {
-			GamblingPlayer.AllowItem = false;
-			CurrentCharacter.Stage = 82;
+		if (PlayerDice < GamblingSubDice) {
+			GamblingSub.AllowItem = false;
+			GamblingSub.Stage = 82;
 			}
-		if (PlayerDice == GamblingPlayerDice) { 
-			GamblingPlayer.AllowItem = false;
-			CurrentCharacter.Stage = 83;
+		if (PlayerDice == GamblingSubDice) { 
+			GamblingSub.AllowItem = false;
+			GamblingSub.Stage = 83;
 			}
 	} else if (SimpleDiceState == "win"){
-			CurrentCharacter.Stage = 0;
+			GamblingSub.Stage = 0;
 	} else if (SimpleDiceState == "lost"){
 			InventoryWearRandom(Player, "ItemArms");
 			InventoryWearRandom(Player, "ItemLegs");
 			InventoryWearRandom(Player, "ItemFeet");
-			CurrentCharacter.Stage = 0;
+			GamblingSub.Stage = 0;
 	} else if (SimpleDiceState == "equal"){
 			InventoryRemove(Player, "ItemArms");
 			InventoryRemove(Player, "ItemLegs");
 			InventoryRemove(Player, "ItemFeet");
-			InventoryRemove(GamblingPlayer, "ItemArms");
-			InventoryRemove(GamblingPlayer, "ItemLegs");
-			InventoryRemove(GamblingPlayer, "ItemFeet");
-			CurrentCharacter.Stage = 0;
+			InventoryRemove(GamblingSub, "ItemArms");
+			InventoryRemove(GamblingSub, "ItemLegs");
+			InventoryRemove(GamblingSub, "ItemFeet");
+			GamblingSub.Stage = 0;
 	}
-}
-
-//Release Player and give Cloths back
-function GamblingReleasePlayer() {
-	CharacterRelease(Player);
-	if (PlayerPreviousSocks != null) InventoryWear(Player, PlayerPreviousSocks.Asset.Name, "Socks", PlayerPreviousSocks.Color);
-	if (PlayerPreviousPanties != null) InventoryWear(Player, PlayerPreviousPanties.Asset.Name, "Panties", PlayerPreviousPanties.Color);
-	if (PlayerPreviousBra != null) InventoryWear(Player, PlayerPreviousBra.Asset.Name, "Bra", PlayerPreviousBra.Color);
-	if (PlayerPreviousCloth != null) InventoryWear(Player, PlayerPreviousCloth.Asset.Name, "Cloth", PlayerPreviousCloth.Color);
-	if (PlayerPreviousGloves != null) InventoryWear(Player, PlayerPreviousGloves.Asset.Name, "Gloves", PlayerPreviousGloves.Color);
-	if (PlayerPreviousShoes != null) InventoryWear(Player, PlayerPreviousShoes.Asset.Name, "Shoes", PlayerPreviousShoes.Color);
-	if (PlayerPreviousHat != null) InventoryWear(Player, PlayerPreviousHat.Asset.Name, "Hat", PlayerPreviousHat.Color);
-	ReputationProgress("Dominant", -1);
 }
 
 //Controller for fifteen and six
@@ -111,81 +113,87 @@ function GamblingTwentyOneController(TwentyOneState) {
 	if (TwentyOneState == "new"){
 		// Start a New Game
 		PlayerTwentyOneLevel = 0;
-		GamblingPlayerTwentyOneLevel = 0;
-		PlayerTwentyOnePoints = Math.floor(Math.random() * (6 - 1)) + Math.floor(Math.random() * (6 - 1)) + Math.floor(Math.random() * (6 - 1)) + 3;
-		CurrentCharacter.Stage = 100 + PlayerTwentyOnePoints;
+		GamblingSubTwentyOneLevel = 0;
+		PlayerDiceStack = [];
+		GamblingSubDiceStack = [];
+		GamblingReleasePlayer();
+		GamblingSubDressBack();
+
+		for (var i = 1; i <= 3; i++) {
+			PlayerDice = Math.floor(Math.random() * (6 - 1)) + 1;
+			PlayerDiceStack[PlayerDiceStack.length] = PlayerDice;
+		}
+		GamblingSub.Stage = 100 + GamblingDiceStackSum(PlayerDiceStack);
 	
 	} else if (TwentyOneState == "add"){
 		//Get on more Dice
-		PlayerTwentyOnePoints = PlayerTwentyOnePoints + Math.floor(Math.random() * (6 - 1)) + 1;
-		CurrentCharacter.Stage = 100 + PlayerTwentyOnePoints;
+		PlayerDice = Math.floor(Math.random() * (6 - 1)) + 1;
+		PlayerDiceStack[PlayerDiceStack.length] = PlayerDice; 
+		GamblingSub.Stage = 100 + GamblingDiceStackSum(PlayerDiceStack);
+		if (GamblingDiceStackSum(PlayerDiceStack) > 21) {
+			PlayerTwentyOneLevel = PlayerTwentyOneLevel +1;
+			GamblingSub.Stage = 170 + PlayerTwentyOneLevel;
+		}
 	
 	} else if (TwentyOneState == "fin") {
 		//The Player is fin in this turn
-		//The GamblingPlayer dices as she win or over 21
-		GamblingTwentyOnePoints = Math.floor(Math.random() * (6 - 1)) + Math.floor(Math.random() * (6 - 1)) + Math.floor(Math.random() * (6 - 1)) + 3;
-		while (GamblingTwentyOnePoints <= PlayerTwentyOnePoints && GamblingTwentyOnePoints < 22) {
-			GamblingTwentyOnePoints = GamblingTwentyOnePoints + Math.floor(Math.random() * (6 - 1)) + 1;
+		//The GamblingSub dices as she win or over 21
+		while (GamblingDiceStackSum(GamblingSubDiceStack) <= GamblingDiceStackSum(PlayerDiceStack) && GamblingDiceStackSum(GamblingSubDiceStack) < 22) {
+			GamblingSubDice = Math.floor(Math.random() * (6 - 1)) + 1;
+			GamblingSubDiceStack[GamblingSubDiceStack.length] = GamblingSubDice; 
 		}
-		CurrentCharacter.Stage = 130 + GamblingTwentyOnePoints;
-	
-	} else if (TwentyOneState == "lost") {
-		//The Player lost the Turn
-		PlayerTwentyOneLevel = PlayerTwentyOneLevel +1;
-		CurrentCharacter.Stage = 170 + PlayerTwentyOneLevel;
-	
-	} else if (TwentyOneState == "win") {
-		//The Player win the Turn
-		GamblingPlayerTwentyOneLevel = GamblingPlayerTwentyOneLevel +1;
-		CurrentCharacter.Stage = 160 + GamblingPlayerTwentyOneLevel;
+		if (GamblingDiceStackSum(GamblingSubDiceStack) > GamblingDiceStackSum(PlayerDiceStack) && GamblingDiceStackSum(GamblingSubDiceStack) < 22){
+			PlayerTwentyOneLevel = PlayerTwentyOneLevel +1;
+			GamblingSub.Stage = 170 + PlayerTwentyOneLevel;
+		} else {
+			GamblingSubTwentyOneLevel = GamblingSubTwentyOneLevel +1;
+			GamblingSub.Stage = 160 + GamblingSubTwentyOneLevel;
+		}
 	
 	} else if (TwentyOneState == "win_next"){
 		//The winner Player stiped the loser
 		//the next turn started automaticly
-		if (GamblingPlayerTwentyOneLevel == 1) {
-			GamblingPlayerPreviousHat = InventoryGet(GamblingPlayer, "Hat");
-			GamblingPlayerPreviousShoes = InventoryGet(GamblingPlayer, "Shoes");
-			GamblingPlayerPreviousGloves = InventoryGet(GamblingPlayer, "Gloves");
-			InventoryRemove(GamblingPlayer, "Hat"); 
-			InventoryRemove(GamblingPlayer, "Shoes"); 
-			InventoryRemove(GamblingPlayer, "Gloves"); 
+		if (GamblingSubTwentyOneLevel == 1) {
+			GamblingSubPreviousHat = InventoryGet(GamblingSub, "Hat");
+			GamblingSubPreviousShoes = InventoryGet(GamblingSub, "Shoes");
+			GamblingSubPreviousGloves = InventoryGet(GamblingSub, "Gloves");
+			InventoryRemove(GamblingSub, "Hat"); 
+			InventoryRemove(GamblingSub, "Shoes"); 
+			InventoryRemove(GamblingSub, "Gloves"); 
 			}
-		if (GamblingPlayerTwentyOneLevel == 2) {
-			GamblingPlayerPreviousCloth = InventoryGet(GamblingPlayer, "Cloth");
-			InventoryRemove(GamblingPlayer, "Cloth"); 
+		else if (GamblingSubTwentyOneLevel == 2) {
+			GamblingSubPreviousCloth = InventoryGet(GamblingSub, "Cloth");
+			InventoryRemove(GamblingSub, "Cloth"); 
 			}
-		else if (GamblingPlayerTwentyOneLevel == 3) {
-			GamblingPlayerPreviousBra = InventoryGet(GamblingPlayer, "Bra");
-			GamblingPlayerPreviousPanties = InventoryGet(GamblingPlayer, "Panties");
-			GamblingPlayerPreviousSocks = InventoryGet(GamblingPlayer, "Socks");
-			InventoryRemove(GamblingPlayer, "Bra"); 
-			InventoryRemove(GamblingPlayer, "Panties"); 
-			InventoryRemove(GamblingPlayer, "Socks"); 
+		else if (GamblingSubTwentyOneLevel == 3) {
+			GamblingSubPreviousBra = InventoryGet(GamblingSub, "Bra");
+			GamblingSubPreviousPanties = InventoryGet(GamblingSub, "Panties");
+			GamblingSubPreviousSocks = InventoryGet(GamblingSub, "Socks");
+			InventoryRemove(GamblingSub, "Bra"); 
+			InventoryRemove(GamblingSub, "Panties"); 
+			InventoryRemove(GamblingSub, "Socks"); 
 			}
-		else if (GamblingPlayerTwentyOneLevel == 4) {
-			InventoryWearRandom(GamblingPlayer, "ItemLegs"); 
-			InventoryWearRandom(GamblingPlayer, "ItemFeet"); 
+		else if (GamblingSubTwentyOneLevel == 4) {
+			InventoryWearRandom(GamblingSub, "ItemLegs"); 
+			InventoryWearRandom(GamblingSub, "ItemFeet"); 
 			}
-		else if (GamblingPlayerTwentyOneLevel == 5) {
-			InventoryWearRandom(GamblingPlayer, "ItemArms"); 
+		else if (GamblingSubTwentyOneLevel == 5) {
+			InventoryWearRandom(GamblingSub, "ItemArms"); 
 			}		
-		else if (GamblingPlayerTwentyOneLevel == 6) {
-			InventoryWearRandom(GamblingPlayer, "ItemMouth"); 
-			InventoryRemove(Player, "ItemArms"); 
-			InventoryRemove(Player, "ItemFeet"); 
-			InventoryRemove(Player, "ItemLegs"); 
-			if (PlayerPreviousSocks != null) InventoryWear(Player, PlayerPreviousSocks.Asset.Name, "Socks", PlayerPreviousSocks.Color);
-			if (PlayerPreviousPanties != null) InventoryWear(Player, PlayerPreviousPanties.Asset.Name, "Panties", PlayerPreviousPanties.Color);
-			if (PlayerPreviousBra != null) InventoryWear(Player, PlayerPreviousBra.Asset.Name, "Bra", PlayerPreviousBra.Color);
-			if (PlayerPreviousCloth != null) InventoryWear(Player, PlayerPreviousCloth.Asset.Name, "Cloth", PlayerPreviousCloth.Color);
-			if (PlayerPreviousGloves != null) InventoryWear(Player, PlayerPreviousGloves.Asset.Name, "Gloves", PlayerPreviousGloves.Color);
-			if (PlayerPreviousShoes != null) InventoryWear(Player, PlayerPreviousShoes.Asset.Name, "Shoes", PlayerPreviousShoes.Color);
-			if (PlayerPreviousHat != null) InventoryWear(Player, PlayerPreviousHat.Asset.Name, "Hat", PlayerPreviousHat.Color);
-			GamblingPlayer.AllowItem = true;
-			CurrentCharacter.Stage = 0; 
+		else if (GamblingSubTwentyOneLevel == 6) {
+			InventoryWearRandom(GamblingSub, "ItemMouth"); 
+			GamblingReleasePlayer();
+			GamblingSub.AllowItem = true;
+			GamblingSub.Stage = 0; 
 			}		
-		PlayerTwentyOnePoints = Math.floor(Math.random() * (6 - 1)) + Math.floor(Math.random() * (6 - 1)) + Math.floor(Math.random() * (6 - 1)) + 3;
-		if (CurrentCharacter.Stage != 0) {CurrentCharacter.Stage = 100 + PlayerTwentyOnePoints; }
+		
+		PlayerDiceStack = [];
+		GamblingSubDiceStack = [];
+		for (var i = 1; i <= 3; i++) {
+			PlayerDice = Math.floor(Math.random() * (6 - 1)) + 1;
+			PlayerDiceStack[PlayerDiceStack.length] = PlayerDice;
+		}
+		if (GamblingSub.Stage != 0) {GamblingSub.Stage = 100 + GamblingDiceStackSum(PlayerDiceStack); }
 	
 	} else if (TwentyOneState == "lost_next"){
 		//the loser Player ist stipped by winner
@@ -219,19 +227,78 @@ function GamblingTwentyOneController(TwentyOneState) {
 			}
 		else if (PlayerTwentyOneLevel == 6) {
 			InventoryWearRandom(Player, "ItemMouth"); 
-			InventoryRemove(GamblingPlayer, "ItemArms"); 
-			InventoryRemove(GamblingPlayer, "ItemFeet"); 
-			InventoryRemove(GamblingPlayer, "ItemLegs"); 
-			if (GamblingPlayerPreviousSocks != null) InventoryWear(GamblingPlayer, GamblingPlayerPreviousSocks.Asset.Name, "Socks", GamblingPlayerPreviousSocks.Color);
-			if (GamblingPlayerPreviousPanties != null) InventoryWear(GamblingPlayer, GamblingPlayerPreviousPanties.Asset.Name, "Panties", GamblingPlayerPreviousPanties.Color);
-			if (GamblingPlayerPreviousBra != null) InventoryWear(GamblingPlayer, GamblingPlayerPreviousBra.Asset.Name, "Bra", GamblingPlayerPreviousBra.Color);
-			if (GamblingPlayerPreviousCloth != null) InventoryWear(GamblingPlayer, GamblingPlayerPreviousCloth.Asset.Name, "Cloth", GamblingPlayerPreviousCloth.Color);
-			if (GamblingPlayerPreviousGloves != null) InventoryWear(GamblingPlayer, GamblingPlayerPreviousGloves.Asset.Name, "Gloves", GamblingPlayerPreviousGloves.Color);
-			if (GamblingPlayerPreviousShoes != null) InventoryWear(GamblingPlayer, GamblingPlayerPreviousShoes.Asset.Name, "Shoes", GamblingPlayerPreviousShoes.Color);
-			if (GamblingPlayerPreviousHat != null) InventoryWear(GamblingPlayer, GamblingPlayerPreviousHat.Asset.Name, "Hat", GamblingPlayerPreviousHat.Color);
-			CurrentCharacter.Stage = 0; 
+			InventoryRemove(GamblingSub, "ItemArms"); 
+			InventoryRemove(GamblingSub, "ItemFeet"); 
+			InventoryRemove(GamblingSub, "ItemLegs"); 
+			GamblingSubDressBack();
+			GamblingSub.Stage = 0; 
 			}
-		PlayerTwentyOnePoints = Math.floor(Math.random() * (6 - 1)) + Math.floor(Math.random() * (6 - 1)) + Math.floor(Math.random() * (6 - 1)) + 3;
-		if (CurrentCharacter.Stage != 0) {CurrentCharacter.Stage = 100 + PlayerTwentyOnePoints; }
+
+		PlayerDiceStack = [];
+		GamblingSubDiceStack = [];
+		for (var i = 1; i <= 3; i++) {
+			PlayerDice = Math.floor(Math.random() * (6 - 1)) + 1;
+			PlayerDiceStack[PlayerDiceStack.length] = PlayerDice;
+		}
+		if (GamblingSub.Stage != 0) {GamblingSub.Stage = 100 + GamblingDiceStackSum(PlayerDiceStack); }
 	}
+}
+
+// Print the Stock of Dices and the Sum of Ponits
+function GamblingShowDiceStack(){
+	for (var i = 0; i < PlayerDiceStack.length ; i++) {
+		DrawImageResize("Screens/Room/Gambling/dice_" + PlayerDiceStack[i] + ".png", 25, (25 + i * 60), 60, 60);
+		}
+	DrawText(GamblingDiceStackSum(PlayerDiceStack), 125, 55, "white", "black");
+	for (var i = 0; i < GamblingSubDiceStack.length ; i++) {
+		DrawImageResize("Screens/Room/Gambling/dice_" + GamblingSubDiceStack[i] + ".png", 525, (25 + i * 60), 60, 60);
+		}
+	DrawText(GamblingDiceStackSum(GamblingSubDiceStack), 625, 55, "white", "black");
+	return true;
+}
+
+//Calculate the Summ of Points in the Stock of Dices
+function GamblingDiceStackSum(DiceStack){
+	var GamblingDiceStackSum = 0;
+	for (var i = 0; i < DiceStack.length ; i++) {
+		GamblingDiceStackSum = GamblingDiceStackSum + DiceStack[i];
+	}
+	return GamblingDiceStackSum;
+}
+
+// The GamblingSub blindfold the Player
+function GamblingAnnoyGamblingSub(){
+	InventoryWear(Player, "LeatherBlindfold", "ItemHead");
+	CharacterSetCurrent(Player);
+}
+
+//Release Player and give Cloths back
+function GamblingReleasePlayer() {
+	CharacterRelease(Player);
+	if (PlayerPreviousSocks != null) InventoryWear(Player, PlayerPreviousSocks.Asset.Name, "Socks", PlayerPreviousSocks.Color);
+	if (PlayerPreviousPanties != null) InventoryWear(Player, PlayerPreviousPanties.Asset.Name, "Panties", PlayerPreviousPanties.Color);
+	if (PlayerPreviousBra != null) InventoryWear(Player, PlayerPreviousBra.Asset.Name, "Bra", PlayerPreviousBra.Color);
+	if (PlayerPreviousCloth != null) InventoryWear(Player, PlayerPreviousCloth.Asset.Name, "Cloth", PlayerPreviousCloth.Color);
+	if (PlayerPreviousGloves != null) InventoryWear(Player, PlayerPreviousGloves.Asset.Name, "Gloves", PlayerPreviousGloves.Color);
+	if (PlayerPreviousShoes != null) InventoryWear(Player, PlayerPreviousShoes.Asset.Name, "Shoes", PlayerPreviousShoes.Color);
+	if (PlayerPreviousHat != null) InventoryWear(Player, PlayerPreviousHat.Asset.Name, "Hat", PlayerPreviousHat.Color);
+	ReputationProgress("Dominant", -1);
+}
+
+//Dress GamblingSub back
+function GamblingSubDressBack() {
+			if (GamblingSubPreviousSocks != null) InventoryWear(GamblingSub, GamblingSubPreviousSocks.Asset.Name, "Socks", GamblingSubPreviousSocks.Color);
+			if (GamblingSubPreviousPanties != null) InventoryWear(GamblingSub, GamblingSubPreviousPanties.Asset.Name, "Panties", GamblingSubPreviousPanties.Color);
+			if (GamblingSubPreviousBra != null) InventoryWear(GamblingSub, GamblingSubPreviousBra.Asset.Name, "Bra", GamblingSubPreviousBra.Color);
+			if (GamblingSubPreviousCloth != null) InventoryWear(GamblingSub, GamblingSubPreviousCloth.Asset.Name, "Cloth", GamblingSubPreviousCloth.Color);
+			if (GamblingSubPreviousGloves != null) InventoryWear(GamblingSub, GamblingSubPreviousGloves.Asset.Name, "Gloves", GamblingSubPreviousGloves.Color);
+			if (GamblingSubPreviousShoes != null) InventoryWear(GamblingSub, GamblingSubPreviousShoes.Asset.Name, "Shoes", GamblingSubPreviousShoes.Color);
+			if (GamblingSubPreviousHat != null) InventoryWear(GamblingSub, GamblingSubPreviousHat.Asset.Name, "Hat", GamblingSubPreviousHat.Color);
+}
+
+// When the player rescues the shop vendor
+function GamblingCompleteRescue() {
+	GamblingSub.AllowItem = false;
+	CharacterRelease(GamblingSub);
+	MaidQuartersCurrentRescueCompleted = true;
 }

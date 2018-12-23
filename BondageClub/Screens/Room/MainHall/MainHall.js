@@ -48,6 +48,30 @@ function MainHallRun() {
 
 }
 
+// When the player walks to another room, she can be attacked by a random kidnapper
+function MainHallWalk(RoomName) {
+	if ((Math.random() > 0.95) && (KidnapLeagueRandomKidnapperTimer < CommonTime())) KidnapLeagueRandomKidnap();
+	else CommonSetScreen("Room", RoomName);
+}
+
+// When a random kidnap match starts
+function MainHallStartRandomKidnap() {
+	KidnapStart(KidnapLeagueRandomKidnapper, "MainHallDark", KidnapLeagueRandomKidnapperDifficulty, "KidnapLeagueEndRandomKidnap()");
+}
+
+// When a random kidnap match is surrendered
+function MainHallSurrenderRandomKidnap() {
+	KidnapVictory = false;
+	KidnapLeagueEndRandomKidnap(true);
+}
+
+// When a random kidnap match event ends, we dress the player back and no more kidnappings for 2 minutes
+function MainHallEndRandomKidnap() {
+	if ((InventoryGet(Player, "Cloth") == null) && (KidnapPlayerCloth != null)) InventoryWear(Player, KidnapPlayerCloth.Asset.Name, "Cloth", KidnapPlayerCloth.Color);
+	KidnapLeagueRandomKidnapperTimer = CommonTime() + 120000;
+	DialogLeave();
+}
+
 // When the user clicks in the main hall screen
 function MainHallClick() {
 
@@ -58,17 +82,17 @@ function MainHallClick() {
 		if ((MouseX >= 750) && (MouseX < 1250) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(Player);
 		if ((MouseX >= 1525) && (MouseX < 1615) && (MouseY >= 25) && (MouseY < 115)) InformationSheetLoadCharacter(Player);
 		if ((MouseX >= 1645) && (MouseX < 1735) && (MouseY >= 25) && (MouseY < 115)) CommonSetScreen("Character", "Appearance");
-		if ((MouseX >= 1765) && (MouseX < 1855) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) CommonSetScreen("Room", "Shop");		  
 		if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) CommonSetScreen("Character", "Login");
 
 		// Main game rooms
-		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 210) && Player.CanWalk()) CommonSetScreen("Room", "Introduction");
-		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 240) && (MouseY < 305) && Player.CanWalk()) CommonSetScreen("Room", "MaidQuarters");
-		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 335) && (MouseY < 400) && Player.CanWalk()) CommonSetScreen("Room", "Shibari");
-		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 430) && (MouseY < 495) && Player.CanWalk()) CommonSetScreen("Room", "KidnapLeague");
+		if ((MouseX >= 1765) && (MouseX < 1855) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) MainHallWalk("Shop");
+		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 210) && Player.CanWalk()) MainHallWalk("Introduction"); 
+		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 240) && (MouseY < 305) && Player.CanWalk()) MainHallWalk("MaidQuarters");
+		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 335) && (MouseY < 400) && Player.CanWalk()) MainHallWalk("Shibari");
+		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 430) && (MouseY < 495) && Player.CanWalk()) MainHallWalk("KidnapLeague");
 
 		// Custom content rooms
-		if ((MouseX >= 25) && (MouseX < 475) && (MouseY >= 25) && (MouseY < 90) && Player.CanWalk()) CommonSetScreen("Room", "Gambling");
+		if ((MouseX >= 25) && (MouseX < 475) && (MouseY >= 25) && (MouseY < 90) && Player.CanWalk()) MainHallWalk("Gambling");
 
 	}
 

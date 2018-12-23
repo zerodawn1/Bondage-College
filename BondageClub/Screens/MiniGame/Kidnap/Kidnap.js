@@ -178,15 +178,17 @@ function KidnapSelectMove(PlayerMove) {
 	// If the move is effective, we lower the willpower and show it as text
 	if (PM >= 1) {
 		var Damage = parseInt(Player.KidnapStat[PlayerMove]);
+		if (!KidnapMoveEffective(Player, PlayerMove)) Damage = Math.round(Damage / 2);
 		if (PlayerMove == OpponentMove) Damage = Damage - parseInt(KidnapOpponent.KidnapStat[OpponentMove]);
-		if ((Damage < 0) || !KidnapMoveEffective(Player, PlayerMove)) Damage = 0;
+		if (Damage < 0) Damage = 0;
 		KidnapOpponent.KidnapWillpower = parseInt(KidnapOpponent.KidnapWillpower) - Damage;
 		KidnapResultOpponent = KidnapOpponent.Name + " " + TextGet("Lost") + " " + Damage.toString() + " " + TextGet("Willpower");
 	} else KidnapResultOpponent = KidnapOpponent.Name + " " + TextGet("NoLost");
 	if (OM >= 1) {
 		var Damage = parseInt(KidnapOpponent.KidnapStat[OpponentMove]);
+		if (!KidnapMoveEffective(KidnapOpponent, OpponentMove)) Damage = Math.round(Damage / 2);
 		if (PlayerMove == OpponentMove) Damage = Damage - parseInt(Player.KidnapStat[PlayerMove]);
-		if ((Damage < 0) || !KidnapMoveEffective(KidnapOpponent, OpponentMove)) Damage = 0;
+		if (Damage < 0) Damage = 0;
 		Player.KidnapWillpower = parseInt(Player.KidnapWillpower) - Damage;
 		KidnapResultPlayer = Player.Name + " " + TextGet("Lost") + " " + Damage.toString() + " " + TextGet("Willpower");		
 	} else KidnapResultPlayer = Player.Name + " " + TextGet("NoLost");
@@ -260,7 +262,7 @@ function KidnapStart(Opponent, Background, Difficulty, ReturnFunction) {
 	KidnapOpponent.KidnapMaxWillpower = 20 + (Difficulty * 2);
 	KidnapOpponent.KidnapWillpower = KidnapOpponent.KidnapMaxWillpower;
 	KidnapLoadStats(Player, 0);
-	KidnapLoadStats(KidnapOpponent, Math.floor(Difficulty / 2));
+	KidnapLoadStats(KidnapOpponent, 0);
 	KidnapSetMode("Intro");
 	CommonSetScreen("MiniGame", "Kidnap");
 }
@@ -269,7 +271,7 @@ function KidnapStart(Opponent, Background, Difficulty, ReturnFunction) {
 function KidnapDrawMove(C, Header, X) {
 	DrawText(TextGet(Header), X, 50, "White", "Gray");
 	for(var M = 0; M < 4; M++)
-		DrawButton(X - 200, (M * 100) + 100, 400, 70, TextGet(KidnapMoveType[M]) + " ( " + ((KidnapMoveEffective(C, M)) ? C.KidnapStat[M] : 0) + " )", (C.ID == 0) ? (KidnapMoveEffective(C, M) ? "White" : "Silver") : "Pink");
+		DrawButton(X - 200, (M * 100) + 100, 400, 70, TextGet(KidnapMoveType[M]) + " ( " + C.KidnapStat[M].toString() + ((KidnapMoveEffective(C, M)) ? "" : " / 2") + " )", (C.ID == 0) ? (KidnapMoveEffective(C, M) ? "White" : "Silver") : "Pink");
 	DrawButton(X - 200, 900, 400, 70, TextGet("Surrender"), (C.ID == 0) ? "White" : "Pink");
 }
 
@@ -279,7 +281,7 @@ function KidnapDrawMoveUpperHand() {
 	if (KidnapUpperHandVictim.ID == 0) DrawTextWrap(TextGet("UpperHand" + KidnapUpperHandMoveType[KidnapUpperHandSelection]), 10, 300, 580, 200, "White");
 	DrawText(TextGet("UpperHandMove"), X + 250, 50, "white", "gray");
 	for(var M = 0; M <= 9; M++)
-		DrawButton(X + 50, (M * 100) + 100, 400, 70, TextGet(KidnapUpperHandMoveType[M]), (KidnapUpperHandVictim.ID != 0) ? "White" : ((KidnapUpperHandSelection == M) ? "Aquamarine" : "Pink"));
+		DrawButton(X + 50, (M * 100) + 100, 400, 70, TextGet(KidnapUpperHandMoveType[M]), (KidnapUpperHandVictim.ID != 0) ? ((KidnapUpperHandMoveAvailable(M, false)) ? "White" : "Pink") : ((KidnapUpperHandSelection == M) ? "Aquamarine" : "Pink"));
 }
 
 // Shows a huge timer in the middle of the screen
@@ -331,15 +333,15 @@ function KidnapRun() {
 	var X = 500;
 	if (KidnapMode == "SelectItem") X = 0;
 	DrawCharacter(Player, X, 0, 1);
-	DrawCharacter(KidnapLeagueTrainer, X + 500, 0, 1);
+	DrawCharacter(KidnapOpponent, X + 500, 0, 1);
 	DrawProgressBar(X + 100, 960, 300, 35, Math.round(Player.KidnapWillpower / Player.KidnapMaxWillpower * 100));
 	DrawProgressBar(X + 600, 960, 300, 35, Math.round(KidnapOpponent.KidnapWillpower / KidnapOpponent.KidnapMaxWillpower * 100));
-	DrawText(Player.KidnapWillpower.toString(), X + 250, 978, "white", "black");
-	DrawText(KidnapOpponent.KidnapWillpower.toString(), X + 750, 978, "white", "black");
+	DrawText(Player.KidnapWillpower.toString(), X + 250, 979, "black", "white");
+	DrawText(KidnapOpponent.KidnapWillpower.toString(), X + 750, 979, "black", "white");
 	if (KidnapMode == "Intro") KidnapTitle(Player.Name + " vs " + KidnapOpponent.Name);
 	if (KidnapMode == "SuddenDeath") KidnapTitle(TextGet("SuddenDeath"));
 	if (KidnapMode == "End") KidnapTitle(((KidnapVictory) ? Player.Name : KidnapOpponent.Name) + " " + TextGet("Wins"));
-	if (KidnapMode == "SelectMove") { KidnapDrawMove(Player, "SelectMove", 250); KidnapDrawMove(KidnapLeagueTrainer, "OpponentMove", 1750); }
+	if (KidnapMode == "SelectMove") { KidnapDrawMove(Player, "SelectMove", 250); KidnapDrawMove(KidnapOpponent, "OpponentMove", 1750); }
 	if (KidnapMode == "UpperHand") KidnapDrawMoveUpperHand();
 	if (KidnapMode == "ShowMove") KidnapShowMove();
 	if (KidnapMode == "SelectItem") KidnapShowItem();

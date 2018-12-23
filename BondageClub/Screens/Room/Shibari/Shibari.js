@@ -27,7 +27,7 @@ function ShibariIsTeacherRestrained() { return (ShibariTeacher.IsRestrained() ||
 function ShibariLoad() {
 	
 	// Default load
-	ShibariPlayerAppearance = Player.Appearance.slice();
+	if (ShibariPlayerAppearance == null) ShibariPlayerAppearance = Player.Appearance.slice();
 	if (ShibariTeacher == null) {
 		ShibariTeacher = CharacterLoadNPC("NPC_Shibari_Teacher");
 		ShibariTeacher.AllowItem = ShibariAllowTeacherItem;
@@ -95,10 +95,14 @@ function ShibariClick() {
 	if ((MouseX >= 250) && (MouseX < 750) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(Player);
 	if ((MouseX >= 750) && (MouseX < 1250) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(ShibariTeacher);
 	if ((MouseX >= 1250) && (MouseX < 1750) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(ShibariStudent);
-	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) { CharacterDress(Player, ShibariPlayerAppearance); CommonSetScreen("Room", "MainHall"); }
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 235)) InformationSheetLoadCharacter(Player);
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 265) && (MouseY < 355) && Player.CanInteract()) CharacterDress(Player, ShibariPlayerAppearance);
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 385) && (MouseY < 475) && Player.CanInteract()) CharacterNaked(Player);
+	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) {
+		CharacterDress(Player, ShibariPlayerAppearance);
+		ShibariPlayerAppearance = null;
+		CommonSetScreen("Room", "MainHall");
+	}
 }
 
 // When we allow the player to restrain the teacher
