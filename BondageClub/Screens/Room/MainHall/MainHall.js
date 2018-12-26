@@ -7,10 +7,12 @@ var MainHallIsHeadMaid = false;
 
 // Main hall loading
 function MainHallLoad() {
+	MainHallBackground = "MainHall";
 	MainHallNextEventTimer = null;
 	MainHallMaid = CharacterLoadNPC("NPC_MainHall_Maid");
 	MainHallIsMaid = LogQuery("JoinedSorority", "Maid");
 	MainHallIsHeadMaid = LogQuery("LeadSorority", "Maid");
+	CommonReadCSV("NoArravVar", "Room", "KidnapLeague", "Dialog_NPC_KidnapLeague_RandomKidnapper_" + CommonGetWorkingLanguage());	
 }
 
 // Run the main hall screen
@@ -50,26 +52,8 @@ function MainHallRun() {
 
 // When the player walks to another room, she can be attacked by a random kidnapper
 function MainHallWalk(RoomName) {
-	if ((Math.random() > 0.95) && (KidnapLeagueRandomKidnapperTimer < CommonTime())) KidnapLeagueRandomKidnap();
+	if ((Math.random() > 0.05) && (KidnapLeagueRandomKidnapperTimer < CommonTime())) KidnapLeagueRandomIntro();
 	else CommonSetScreen("Room", RoomName);
-}
-
-// When a random kidnap match starts
-function MainHallStartRandomKidnap() {
-	KidnapStart(KidnapLeagueRandomKidnapper, "MainHallDark", KidnapLeagueRandomKidnapperDifficulty, "KidnapLeagueEndRandomKidnap()");
-}
-
-// When a random kidnap match is surrendered
-function MainHallSurrenderRandomKidnap() {
-	KidnapVictory = false;
-	KidnapLeagueEndRandomKidnap(true);
-}
-
-// When a random kidnap match event ends, we dress the player back and no more kidnappings for 2 minutes
-function MainHallEndRandomKidnap() {
-	if ((InventoryGet(Player, "Cloth") == null) && (KidnapPlayerCloth != null)) InventoryWear(Player, KidnapPlayerCloth.Asset.Name, "Cloth", KidnapPlayerCloth.Color);
-	KidnapLeagueRandomKidnapperTimer = CommonTime() + 120000;
-	DialogLeave();
 }
 
 // When the user clicks in the main hall screen

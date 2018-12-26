@@ -114,13 +114,14 @@ if (isset($_GET["command"])) {
 				
 				// Fills the appearance array
 				$p = 0;
-				while (isset($_GET["name".$p]) && isset($_GET["group".$p]) && isset($_GET["color".$p]) && ($_GET["name".$p] != "") && ($_GET["group".$p] != "") && ($_GET["color".$p] != "")) {
-
+				while (isset($_GET["name".$p]) && isset($_GET["group".$p]) && ($_GET["name".$p] != "") && ($_GET["group".$p] != "")) {
+				
 					// Adds the appearance in the array
 					$appearance = new stdClass();
 					$appearance->Name = $_GET["name".$p];
 					$appearance->Group = $_GET["group".$p];
-					$appearance->Color = str_replace("|", "#", $_GET["color".$p]);
+					if (isset($_GET["color".$p]) && ($_GET["color".$p] != "")) $appearance->Color = str_replace("|", "#", $_GET["color".$p]);
+					if (isset($_GET["difficulty".$p]) && ($_GET["difficulty".$p] != "")) $appearance->Difficulty = $_GET["difficulty".$p];
 					array_push($arr->Appearance, $appearance);
 					$p++;
 				
@@ -164,7 +165,7 @@ if (isset($_GET["command"])) {
 
 		
 	// Update the reputation for the character
-	if ($_GET["command"] == "reputation_set") 
+	if ($_GET["command"] == "reputation_set")
 		if (ValidLogin($data))
 			if (isset($_GET["type"]) && isset($_GET["value"]) && ($_GET["type"] != "") && ($_GET["value"] != "")) {
 
@@ -195,6 +196,40 @@ if (isset($_GET["command"])) {
 
 			} else echo "parameter_error";
 
+	// Update the skill for the character
+	if ($_GET["command"] == "skill_set")
+		if (ValidLogin($data))
+			if (isset($_GET["type"]) && isset($_GET["level"]) && isset($_GET["progress"]) && ($_GET["type"] != "") && ($_GET["level"] != "") && ($_GET["progress"] != "")) {
+
+				// If the entry is already in the skill array, we update it
+				$arr = json_decode($data);
+				$found = false;
+				if (!isset($arr->Skill)) $arr->Skill = [];
+				foreach ($arr->Skill as $item)
+					if ($item->Type == $_GET["type"]) {
+						$item->Level = $_GET["level"];
+						$item->Progress = $_GET["progress"];
+						$found = true;
+					}
+					
+				// Create the skill entry and add it
+				if (!$found) {
+					$skill = new stdClass();
+					$skill->Type = $_GET["type"];
+					$skill->Level = $_GET["level"];
+					$skill->Progress = $_GET["progress"];
+					array_push($arr->Skill, $skill);
+				}
+
+				// Overwrite the file
+				$file = GetFileName();
+				$myfile = fopen($file, "w") or die("Unable to open file!");
+				fwrite($myfile, json_encode($arr));
+				fclose($myfile);
+				echo "skill_updated";
+
+			} else echo "parameter_error";
+			
 	// Update many character values
 	if ($_GET["command"] == "update_character") 
 		if (ValidLogin($data)) {

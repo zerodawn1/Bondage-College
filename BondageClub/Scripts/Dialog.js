@@ -14,6 +14,7 @@ var DialogInventory = [];
 
 function DialogReputationLess(RepType, Value) { return (ReputationGet(RepType) <= Value); } // Returns TRUE if a specific reputation type is less or equal than a given value
 function DialogReputationGreater(RepType, Value) { return (ReputationGet(RepType) >= Value); } // Returns FALSE if a specific reputation type is greater or equal than a given value
+function DialogMoneyGreater(Amount) { return (parseInt(Player.Money) >= parseInt(Amount)); } // Returns TRUE if the player has enough money
 function DialogSetReputation(RepType, Value) { ReputationChange(RepType, (parseInt(ReputationGet(RepType)) * -1) + parseInt(Value)); } // Sets a fixed number for the player specific reputation
 function DialogChangeReputation(RepType, Value) { ReputationProgress(RepType, Value); } // Change the player reputation progressively through dialog options (a reputation is easier to break than to build)
 function DialogWearItem(AssetName, AssetGroup) { InventoryWear(Player, AssetName, AssetGroup); } // Equips a specific item on the player from dialog
@@ -181,12 +182,15 @@ function DialogProgressStart(C, PrevItem, NextItem) {
 	DialogProgressSkill = Timer;
 	DialogProgressLastKeyPress = 0;
 
+	// Struggling in negative only comes if there's a struggling option
+	if ((DialogProgressAuto < 0) && (PrevItem != null) && ((PrevItem.Asset.Effect == null) || (PrevItem.Asset.Effect.indexOf("Struggle") < 0))) DialogProgressAuto = 0;
+	
 }
 
 // The player can use the space bar to speed up the dialog progress, just like clicking
 function DialogKeyDown() {
 	if (((KeyPress == 65) || (KeyPress == 83) || (KeyPress == 97) || (KeyPress == 115)) && (DialogProgress >= 0)) {
-		DialogProgress = DialogProgress + DialogProgressClick * ((DialogProgressLastKeyPress == KeyPress) ? -0.5 : 0.5);
+		DialogProgress = DialogProgress + DialogProgressClick * ((DialogProgressLastKeyPress == KeyPress) ? -1 : 1);
 		if (DialogProgress < 0) DialogProgress = 0;
 		DialogProgressLastKeyPress = KeyPress;
 	}
@@ -217,7 +221,7 @@ function DialogClick() {
 	if (((Player.FocusGroup != null) || ((CurrentCharacter.FocusGroup != null) && CurrentCharacter.AllowItem)) && (DialogIntro() != "")) {
 
 		// If the user wants to speed up the add / swap / remove progress
-		if ((MouseX >= 1000) && (MouseX < 2000) && (MouseY >= 600) && (MouseY < 1000) && (DialogProgress >= 0))
+		if ((MouseX >= 1000) && (MouseX < 2000) && (MouseY >= 600) && (MouseY < 1000) && (DialogProgress >= 0) && CommonIsMobile)
 			DialogProgress = DialogProgress + DialogProgressClick;
 	
 		// If the user removes wants to remove an item
@@ -295,7 +299,7 @@ function DialogClick() {
 	} else {
 
 		// If we need to leave the dialog (only allowed when there's an entry point to the dialog, not in the middle of a conversation)
-		if ((DialogIntro() != "") && (MouseX >= 1885) && (MouseX <= 1975) && (MouseY >= 25) && (MouseY <= 110))
+		if ((DialogIntro() != "") && (DialogIntro() != "NOEXIT") && (MouseX >= 1885) && (MouseX <= 1975) && (MouseY >= 25) && (MouseY <= 110))
 			DialogLeave();
 
 		// If the user clicked on a text dialog option, we trigger it
@@ -391,7 +395,7 @@ function DialogDrawItemMenu(C) {
 			// Draw the current operation and progress
 			DrawText(DialogProgressOperation, 1500, 650, "White", "Black");
 			DrawProgressBar(1200, 700, 600, 100, DialogProgress);
-			DrawText((CommonIsMobile) ? "Click here to speed up the progress" : "Click here or hit keys A and S to speed up", 1500, 900, "White", "Black");
+			DrawText((CommonIsMobile) ? "Click here to speed up the progress" : "Alternate keys A and S to speed up", 1500, 900, "White", "Black");
 
 			// If the operation is completed
 			if (DialogProgress >= 100) {
@@ -563,7 +567,7 @@ function DialogDraw() {
 	else {
 
 		// Draws the intro text or dialog result
-		if (DialogIntro() != "") {
+		if ((DialogIntro() != "") && (DialogIntro() != "NOEXIT")) {
 			DrawTextWrap(DialogGarble(CurrentCharacter, CurrentCharacter.CurrentDialog), 1025, -10, 840, 160, "white");
 			DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
 		} else DrawTextWrap(DialogGarble(CurrentCharacter, CurrentCharacter.CurrentDialog), 1025, -10, 950, 160, "white");

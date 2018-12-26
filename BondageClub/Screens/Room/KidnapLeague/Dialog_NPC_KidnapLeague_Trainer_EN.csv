@@ -57,6 +57,7 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 40,41,Tell me of the different moves.,"Certainly.  We call them the ""BDSM"" moves, they are: Brute Force, Domination, Sneakiness and Manipulation.",,
 40,49,How does move strength works?,"The stronger the move, the harder it will break your opponent willpower.",,
 40,,What's a upper hand in a fight?,You get the upper hand when you do a good move against your opponent.  It will allow you to restrain your opponent or get free yourself.,,
+40,,Can I use items that are not restraints?,"Yes, if you have items such as whips, crops or vibrators, they will give you a starting advantage on different moves.",,
 40,0,I know everything I need.,Excellent.  Can I help you with anything else?,,
 41,42,(Listen.),"Brute force is about using phiscal strength and endurance against your opponent.  You can slap, kick, punch and choke but don't go too far.",,
 42,43,(Listen.),"Brute force is good versus Domination, fair versus Manipulation and bad versus Sneakiness.  It's halved if clothes are removed.",,
@@ -75,7 +76,7 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 100,,Let's talk later.  (Leave her.),,DialogLeave(),
 110,,,"(She struggles some more.)  If you release me, we can do another match.",,IsTrainerRestrained()
 110,,,Would you like to talk some more?  Or do another fight?,,!IsTrainerRestrained()
-110,,What can I do with my victims?,"Anything you want, as long as you don't go over their limits.  You can tickle, spank, whip or even make love with them.",,
+110,,What can I do with my victims?,"Anything you want, as long as you don't go over their limits.  You can tickle, spank or even make love with them.",,
 110,,Struggle some more!,(She struggles but doesn't really try to escape.)  It's all part of the fun.,,IsTrainerRestrained()
 110,0,Let's chit chat.,What would you like to talk about?,ResetTrainer(),!IsTrainerRestrained()
 110,10,I want to try another practice fight.,Great!  I can go easy on you or use all my tricks if you're confident enough.  How will it be?,ResetTrainer(),AllowKidnap()

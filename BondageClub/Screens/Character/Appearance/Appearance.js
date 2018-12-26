@@ -212,7 +212,7 @@ function CharacterAppearanceBuildCanvas(C) {
 			
 			// Draw the item on the canvas (default or empty means no special color, # means apply a color, regular text means we apply that text)
 			if (CA.Asset.Visible) {
-				if ((CA.Color == "Default") || (CA.Color == "")) {
+				if ((CA.Color == null) || (CA.Color == "Default") || (CA.Color == "")) {
 					DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + ".png", C.Canvas.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);
 					if (!CA.Asset.Group.DrawingBlink) DrawImageCanvas("Assets/" + CA.Asset.Group.Family + "/" + CA.Asset.Group.Name + "/" + Pose + CA.Asset.Name + G + ".png", C.CanvasBlink.getContext("2d"), CA.Asset.Group.DrawingLeft, CA.Asset.Group.DrawingTop);
 				}
@@ -298,7 +298,10 @@ function AppearanceRun() {
 }
 
 // Sets an item in the character appearance
-function CharacterAppearanceSetItem(C, Group, ItemAsset, NewColor) {
+function CharacterAppearanceSetItem(C, Group, ItemAsset, NewColor, DifficultyFactor) {
+	
+	// Sets the difficulty factor
+	if (DifficultyFactor == null) DifficultyFactor = 0;
 	
 	// Removes the previous if we need to
 	var ID = CharacterAppearanceGetCurrentValue(C, Group, "ID");
@@ -312,7 +315,7 @@ function CharacterAppearanceSetItem(C, Group, ItemAsset, NewColor) {
 	if (ItemAsset != null) {
 		var NA = {
 			Asset: ItemAsset,
-			Difficulty: ((ItemAsset == null) ? 0 : ItemAsset.Difficulty),
+			Difficulty: parseInt((ItemAsset.Difficulty == null) ? 0 : ItemAsset.Difficulty) + parseInt(DifficultyFactor),
 			Color: ((NewColor == null) ? ItemColor : NewColor)
 		}
 		C.Appearance.push(NA);
@@ -496,8 +499,11 @@ function CharacterAppearanceSave(C) {
 	// Creates a big parameter string of every appearance items 
 	if ((C.ID == 0) && (C.AccountName != "") && (C.AccountPassword != "")) {
 		var P = "&family=" + C.AssetFamily;
-		for (var A = 0; A < C.Appearance.length; A++)
-			P = P + "&group" + A.toString() + "=" + C.Appearance[A].Asset.Group.Name + "&name" + A.toString() + "=" + C.Appearance[A].Asset.Name + "&color" + A.toString() + "=" + C.Appearance[A].Color;
+		for (var A = 0; A < C.Appearance.length; A++) {
+			P = P + "&group" + A.toString() + "=" + C.Appearance[A].Asset.Group.Name + "&name" + A.toString() + "=" + C.Appearance[A].Asset.Name;
+			if ((C.Appearance[A].Color != null) && (C.Appearance[A].Color != "Default")) P = P + "&color" + A.toString() + "=" + C.Appearance[A].Color;
+			if ((C.Appearance[A].Difficulty != null) && (C.Appearance[A].Difficulty != 0)) P = P + "&difficulty" + A.toString() + "=" + C.Appearance[A].Difficulty.toString();
+		}
 		AccountRequest("appearance_update", P);
 	}	
 
@@ -519,7 +525,8 @@ function CharacterAppearanceLoadFromAccount(C, Appearance) {
 				if ((Asset[I].Name == Appearance[A].Name) && (Asset[I].Group.Name == Appearance[A].Group) && (Asset[I].Group.Family == C.AssetFamily)) {
 					var NA = {
 						Asset: Asset[I],
-						Color: Appearance[A].Color
+						Difficulty: parseInt((Appearance[A].Difficulty == null) ? 0 : Appearance[A].Difficulty),
+						Color: (Appearance[A].Color == null) ? "Default" : Appearance[A].Color
 					}
 					C.Appearance.push(NA);
 					break;

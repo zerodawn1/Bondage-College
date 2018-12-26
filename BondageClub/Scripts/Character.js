@@ -265,3 +265,14 @@ function CharacterRelease(C) {
 		}
 	CharacterRefresh(C);
 }
+
+// Returns the best bonus factor available
+function CharacterGetBonus(C, BonusType) {
+	var Bonus = 0;
+	for(var I = 0; I < C.Inventory.length; I++)
+		if ((C.Inventory[I].Asset != null) && (C.Inventory[I].Asset.Bonus != null))
+			for(var B = 0; B < C.Inventory[I].Asset.Bonus.length; B++)
+				if ((C.Inventory[I].Asset.Bonus[B].Type == BonusType) && (C.Inventory[I].Asset.Bonus[B].Factor > Bonus))
+					Bonus = C.Inventory[I].Asset.Bonus[B].Factor;
+	return Bonus;
+}

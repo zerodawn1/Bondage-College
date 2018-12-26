@@ -113,13 +113,12 @@ function ShibariStartTeacherBondage() {
 
 // When the player gets restrained by the teacher
 function ShibariRestrainPlayer(Level) {
-	if (Level >= 1) InventoryWear(Player, "HempRope", "ItemArms");
-	if (Level >= 2) InventoryWear(Player, "HempRope", "ItemLegs");
-	if (Level == 2) InventoryWear(Player, "HempRope", "ItemFeet");
-	if (Level >= 3) InventoryWear(Player, "SuspensionHempRope", "ItemFeet");
-	if ((Level >= 4) && (InventoryGet(Player, "Cloth") == null) && (InventoryGet(Player, "ItemTorso") == null)) InventoryWear(Player, "HempRopeHarness", "ItemTorso");
+	if (Level >= 1) InventoryWear(Player, "HempRope", "ItemArms", "Default", (Level - 1) * 3);
+	if (Level >= 2) InventoryWear(Player, "HempRope", "ItemLegs", "Default", (Level - 1) * 3);
+	if (Level == 2) InventoryWear(Player, "HempRope", "ItemFeet", "Default", (Level - 1) * 3);
+	if (Level >= 3) InventoryWear(Player, "SuspensionHempRope", "ItemFeet", "Default", (Level - 1) * 3);
+	if ((Level >= 4) && (InventoryGet(Player, "Cloth") == null) && (InventoryGet(Player, "ItemTorso") == null)) InventoryWear(Player, "HempRopeHarness", "ItemTorso", "Default", (Level - 1) * 3);
 	if (Level >= 4) InventoryWearRandom(Player, "ItemMouth");
-	InventorySetDifficulty(Player, "ItemArms", (Level - 1) * 3);
 	ShibariTeacherReleaseTimer = CommonTime() + ((Level + 1) * 30000);
 }
 

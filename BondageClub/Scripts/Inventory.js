@@ -71,10 +71,10 @@ function InventoryGet(C, AssetGroup) {
 }
 
 // Makes the character wear an item, color can be undefined
-function InventoryWear(C, AssetName, AssetGroup, ItemColor) {
+function InventoryWear(C, AssetName, AssetGroup, ItemColor, Difficulty) {
 	for (var A = 0; A < Asset.length; A++)
 		if ((Asset[A].Name == AssetName) && (Asset[A].Group.Name == AssetGroup))
-			CharacterAppearanceSetItem(C, AssetGroup, Asset[A], ItemColor);
+			CharacterAppearanceSetItem(C, AssetGroup, Asset[A], ItemColor, Difficulty);
 	CharacterRefresh(C);
 }
 
@@ -84,16 +84,17 @@ function InventorySetDifficulty(C, AssetGroup, Difficulty) {
 		for (var A = 0; A < C.Appearance.length; A++)
 			if ((C.Appearance[A].Asset != null) && (C.Appearance[A].Asset.Group.Name == AssetGroup))
 				C.Appearance[A].Difficulty = Difficulty;
+	if (CurrentModule != "Character") CharacterAppearanceSave(C);
 }
 
 // Makes the character wear a random item from a group
-function InventoryWearRandom(C, AssetGroup) {
+function InventoryWearRandom(C, AssetGroup, Difficulty) {
 	var List = [];
 	for (var A = 0; A < Asset.length; A++)
 		if ((Asset[A].Group.Name == AssetGroup) && Asset[A].Wear && Asset[A].Enable && Asset[A].Random)
 			List.push(Asset[A]);
 	if (List.length == 0) return;
-	CharacterAppearanceSetItem(C, AssetGroup, List[Math.floor(Math.random() * List.length)]);
+	CharacterAppearanceSetItem(C, AssetGroup, List[Math.floor(Math.random() * List.length)], null, Difficulty);
 	CharacterRefresh(C);
 }
 

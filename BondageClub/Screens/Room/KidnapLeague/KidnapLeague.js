@@ -2,13 +2,15 @@
 var KidnapLeagueBackground = "KidnapLeague";
 var KidnapLeagueTrainer = null;
 var KidnapLeagueRandomKidnapper = null;
-var KidnapLeagueRandomKidnapperScenario = 0;
+var KidnapLeagueRandomKidnapperScenario = "0";
 var KidnapLeagueRandomKidnapperDifficulty = 0;
 var KidnapLeagueRandomKidnapperTimer = 0;
+var KidnapLeagueWillPayForFreedom = false;
 
 // Returns TRUE if the dialog option are available
 function KidnapLeagueAllowKidnap() { return (!Player.IsRestrained() && !KidnapLeagueTrainer.IsRestrained()); }
 function KidnapLeagueIsTrainerRestrained() { return KidnapLeagueTrainer.IsRestrained(); }
+function KidnapLeagueResetTimer() { KidnapLeagueRandomKidnapperTimer = CommonTime() + 180000; }
 
 // Loads the kidnap league NPC
 function KidnapLeagueLoad() {
@@ -32,38 +34,9 @@ function KidnapLeagueClick() {
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 235)) InformationSheetLoadCharacter(Player);
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) {
 		if ((InventoryGet(Player, "Cloth") == null) && (KidnapPlayerCloth != null)) InventoryWear(Player, KidnapPlayerCloth.Asset.Name, "Cloth", KidnapPlayerCloth.Color);
+		KidnapLeagueResetTimer();
 		CommonSetScreen("Room", "MainHall");
 	}
-}
-
-// When the player gets in a random kidnap match
-function KidnapLeagueRandomKidnap() {
-	KidnapLeagueBackground = "MainHall";
-	KidnapLeagueRandomKidnapper = null;
-	CharacterDelete("NPC_KidnapLeague_RandomKidnapper");
-	KidnapLeagueRandomKidnapper = CharacterLoadNPC("NPC_KidnapLeague_RandomKidnapper");
-	CharacterSetCurrent(KidnapLeagueRandomKidnapper);
-	KidnapLeagueRandomKidnapperScenario = 0
-	if (Player.CanInteract()) {
-		KidnapLeagueRandomKidnapper.Stage = KidnapLeagueRandomKidnapperScenario.toString();
-		KidnapLeagueRandomKidnapper.CurrentDialog = TextGet("RandomKidnapIntro" + KidnapLeagueRandomKidnapperScenario.toString());
-	} else {
-		KidnapLeagueRandomKidnapper.Stage = "200";
-		KidnapLeagueRandomKidnapper.CurrentDialog = TextGet("RandomKidnapAutomatic" + KidnapLeagueRandomKidnapperScenario.toString());
-	}
-}
-
-// When a random kidnap match ends
-function KidnapLeagueEndRandomKidnap(Surrender) {
-	KidnapLeagueRandomKidnapper.AllowItem = KidnapVictory;
-	KidnapLeagueRandomKidnapper.Stage = (KidnapVictory) ? "100" : "200";
-	if (!KidnapVictory) CharacterRelease(KidnapLeagueRandomKidnapper);
-	CommonSetScreen("Room", "MainHall");
-	CharacterSetCurrent(KidnapLeagueRandomKidnapper);
-	if ((Surrender != null) && (Surrender == true)) {
-		InventoryWearRandom(Player, "ItemArms");
-		KidnapLeagueRandomKidnapper.CurrentDialog = DialogFind(KidnapLeagueRandomKidnapper, "KidnapSurrender" + KidnapLeagueRandomKidnapperScenario.toString());
-	} else KidnapLeagueRandomKidnapper.CurrentDialog = DialogFind(KidnapLeagueRandomKidnapper, ((KidnapVictory) ? "KidnapVictory" : "KidnapDefeat") + KidnapLeagueRandomKidnapperScenario.toString());
 }
 
 // When the player starts a kidnap game against the trainer (an easy fight will lower the player dominant reputation)
@@ -74,6 +47,7 @@ function KidnapLeagueStartKidnap(Difficulty) {
 
 // When the kidnap match ends
 function KidnapLeagueEndKidnap() {
+	SkillProgress("Willpower", ((Player.KidnapMaxWillpower - Player.KidnapWillpower) + (KidnapLeagueRandomKidnapper.KidnapMaxWillpower - KidnapLeagueRandomKidnapper.KidnapWillpower)));
 	KidnapLeagueTrainer.AllowItem = KidnapVictory;
 	KidnapLeagueTrainer.Stage = (KidnapVictory) ? "100" : "200";
 	if (!KidnapVictory) CharacterRelease(KidnapLeagueTrainer);
@@ -89,4 +63,79 @@ function KidnapLeagueResetTrainer() {
 	CharacterRelease(KidnapLeagueTrainer);
 	if ((InventoryGet(Player, "Cloth") == null) && (KidnapPlayerCloth != null)) InventoryWear(Player, KidnapPlayerCloth.Asset.Name, "Cloth", KidnapPlayerCloth.Color);
 	if ((InventoryGet(KidnapLeagueTrainer, "Cloth") == null) && (KidnapOpponentCloth != null)) InventoryWear(KidnapLeagueTrainer, KidnapOpponentCloth.Asset.Name, "Cloth", KidnapOpponentCloth.Color);
+}
+
+// When the player gets in a random kidnap match
+function KidnapLeagueRandomIntro() {
+	CommonSetScreen("Room", "KidnapLeague");
+	KidnapLeagueBackground = "MainHall";
+	KidnapLeagueRandomKidnapper = null;
+	CharacterDelete("NPC_KidnapLeague_RandomKidnapper");
+	KidnapLeagueRandomKidnapper = CharacterLoadNPC("NPC_KidnapLeague_RandomKidnapper");	
+	CharacterSetCurrent(KidnapLeagueRandomKidnapper);
+	KidnapLeagueRandomKidnapperDifficulty = Math.floor(Math.random() * 6);
+	KidnapLeagueRandomKidnapperScenario = (Math.floor(Math.random() * 6)).toString();
+	if (Player.CanInteract()) {
+		KidnapLeagueRandomKidnapper.Stage = KidnapLeagueRandomKidnapperScenario.toString();
+		KidnapLeagueRandomKidnapper.CurrentDialog = DialogFind(KidnapLeagueRandomKidnapper, "Intro" + KidnapLeagueRandomKidnapperScenario);
+	} else {
+		KidnapLeagueRandomKidnapper.Stage = "200";
+		KidnapLeagueRandomKidnapper.CurrentDialog = DialogFind(KidnapLeagueRandomKidnapper, "Automatic" + KidnapLeagueRandomKidnapperScenario);
+	}
+}
+
+// When a random kidnap match ends
+function KidnapLeagueRandomOutro(Surrender) {
+	CommonSetScreen("Room", "KidnapLeague");	
+	SkillProgress("Willpower", ((Player.KidnapMaxWillpower - Player.KidnapWillpower) + (KidnapLeagueRandomKidnapper.KidnapMaxWillpower - KidnapLeagueRandomKidnapper.KidnapWillpower)) * 2);
+	KidnapLeagueBackground = "MainHall";
+	if ((Surrender == null) || (Surrender == false)) ReputationProgress("Kidnap", KidnapVictory ? 4 : 1);
+	KidnapLeagueRandomKidnapper.AllowItem = KidnapVictory;
+	KidnapLeagueRandomKidnapper.Stage = (KidnapVictory) ? "100" : "200";	
+	KidnapLeagueWillPayForFreedom = (Math.random() >= 0.5);
+	if (!KidnapVictory) CharacterRelease(KidnapLeagueRandomKidnapper);
+	CharacterSetCurrent(KidnapLeagueRandomKidnapper);
+	if ((Surrender != null) && (Surrender == true)) {
+		InventoryWearRandom(Player, "ItemArms");
+		KidnapLeagueRandomKidnapper.CurrentDialog = DialogFind(KidnapLeagueRandomKidnapper, "Surrender" + KidnapLeagueRandomKidnapperScenario);
+	} else KidnapLeagueRandomKidnapper.CurrentDialog = DialogFind(KidnapLeagueRandomKidnapper, ((KidnapVictory) ? "Victory" : "Defeat") + KidnapLeagueRandomKidnapperScenario);
+}
+
+// When a random kidnap match starts
+function KidnapLeagueRandomStart() {
+	KidnapStart(KidnapLeagueRandomKidnapper, "MainHallDark", KidnapLeagueRandomKidnapperDifficulty, "KidnapLeagueRandomOutro()");
+}
+
+// When a the player bribes her way out of a fight
+function KidnapLeagueRandomBribe(Amount) {
+	CharacterChangeMoney(Player, Amount * -1);
+	KidnapLeagueResetTimer();
+	DialogLeave();
+	CommonSetScreen("Room", "MainHall");
+}
+
+// When a random kidnap match is surrendered
+function KidnapLeagueRandomSurrender() {
+	KidnapVictory = false;
+	KidnapLeagueRandomOutro(true);
+}
+
+// When a random kidnap match event ends, we dress the player back and no more kidnappings for 3 minutes
+function KidnapLeagueRandomEnd() {
+	if ((InventoryGet(Player, "Cloth") == null) && (KidnapPlayerCloth != null)) InventoryWear(Player, KidnapPlayerCloth.Asset.Name, "Cloth", KidnapPlayerCloth.Color);
+	KidnapLeagueResetTimer();
+	DialogLeave();
+	CommonSetScreen("Room", "MainHall");
+}
+
+// When we need to show the amount of money offered to get out
+function KidnapLeagueRandomMoneyAmount() {
+	KidnapLeagueRandomKidnapper.CurrentDialog = KidnapLeagueRandomKidnapper.CurrentDialog.replace("DIALOGMONEY", (10 + KidnapLeagueRandomKidnapperDifficulty * 2).toString());
+}
+
+// When we need to show the amount of money offered to get out
+function KidnapLeagueRandomEndMoney() {
+	CharacterChangeMoney(Player, 10 + KidnapLeagueRandomKidnapperDifficulty * 2);
+	ReputationProgress("Kidnap", -2);
+	KidnapLeagueRandomEnd();
 }

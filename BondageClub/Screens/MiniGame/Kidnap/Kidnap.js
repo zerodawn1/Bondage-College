@@ -1,5 +1,6 @@
 "use strict";
 var KidnapVictory = false;
+var KidnapDifficulty = 0;
 var KidnapBackground = "KidnapLeagueDark";
 var KidnapReturnFunction = "";
 var KidnapOpponent = null;
@@ -27,7 +28,12 @@ var KidnapMoveMap = [
 
 // Generates the character or player kidnap stats
 function KidnapLoadStats(C, Bonus) {
-	C.KidnapStat = [SkillGetLevel(C, KidnapMoveType[0]) + Bonus + 5, SkillGetLevel(C, KidnapMoveType[1]) + Bonus + 5, SkillGetLevel(C, KidnapMoveType[2]) + Bonus + 5, SkillGetLevel(C, KidnapMoveType[3]) + Bonus + 5];
+	C.KidnapStat = [
+		SkillGetLevel(C, KidnapMoveType[0]) + CharacterGetBonus(C, "Kidnap" + KidnapMoveType[0]) + Bonus + 5, 
+		SkillGetLevel(C, KidnapMoveType[1]) + CharacterGetBonus(C, "Kidnap" + KidnapMoveType[1]) + Bonus + 5, 
+		SkillGetLevel(C, KidnapMoveType[2]) + CharacterGetBonus(C, "Kidnap" + KidnapMoveType[2]) + Bonus + 5, 
+		SkillGetLevel(C, KidnapMoveType[3]) + CharacterGetBonus(C, "Kidnap" + KidnapMoveType[3]) + Bonus + 5
+	];
 }
 
 // Build the inventory listing that's available when kidnapping
@@ -63,7 +69,7 @@ function KidnapSetMode(NewMode) {
 
 	// If we must end the mini game in defeat
 	if ((NewMode == "SelectMove") && (Player.KidnapWillpower <= 0)) { 
-		InventoryWearRandom(Player, "ItemArms"); 
+		InventoryWearRandom(Player, "ItemArms", KidnapDifficulty);
 		NewMode = "End"; 
 	}
 	
@@ -107,7 +113,7 @@ function KidnapUpperHandMoveAvailable(MoveType, DoMove) {
 
 	// If we need to check to apply a restrain
 	if ((MoveType >= 1) && (MoveType <= 3) && (InventoryGet(KidnapUpperHandVictim, KidnapUpperHandMoveType[MoveType]) == null)) {
-		if (DoMove) InventoryWearRandom(KidnapUpperHandVictim, KidnapUpperHandMoveType[MoveType]);
+		if (DoMove) InventoryWearRandom(KidnapUpperHandVictim, KidnapUpperHandMoveType[MoveType], (KidnapUpperHandVictim.ID == 0) ? KidnapDifficulty : 0);
 		return true;
 	}
 
@@ -249,7 +255,7 @@ function KidnapSurrender() {
 
 // Starts a kidnap match
 function KidnapStart(Opponent, Background, Difficulty, ReturnFunction) {
-	if (Difficulty == null) Difficulty = 0;
+	KidnapDifficulty = (Difficulty == null) ? 0 : Difficulty;
 	KidnapVictory = false;
 	KidnapReturnFunction = ReturnFunction;
 	KidnapPlayerCloth = InventoryGet(Player, "Cloth");
@@ -259,10 +265,10 @@ function KidnapStart(Opponent, Background, Difficulty, ReturnFunction) {
 	CurrentCharacter = null;
 	Player.KidnapMaxWillpower = 20 + (SkillGetLevel(Player, "Willpower") * 2);
 	Player.KidnapWillpower = Player.KidnapMaxWillpower;
-	KidnapOpponent.KidnapMaxWillpower = 20 + (Difficulty * 2);
+	KidnapOpponent.KidnapMaxWillpower = 20 + (KidnapDifficulty * 2);
 	KidnapOpponent.KidnapWillpower = KidnapOpponent.KidnapMaxWillpower;
 	KidnapLoadStats(Player, 0);
-	KidnapLoadStats(KidnapOpponent, 0);
+	KidnapLoadStats(KidnapOpponent, Math.floor(KidnapDifficulty / 2));
 	KidnapSetMode("Intro");
 	CommonSetScreen("MiniGame", "Kidnap");
 }

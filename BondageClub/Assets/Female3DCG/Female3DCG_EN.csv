@@ -14,6 +14,7 @@ Cloth,MaidOutfit1,Maid
 Cloth,StudentOutfit1,Student Black
 Cloth,StudentOutfit2,Student Bow
 Cloth,TopSkirt1,Top & Skirt
+Cloth,TopShorts1,Top & Shorts
 Cloth,BabydollDress1,Babydoll Dress
 Cloth,TeacherOutfit1,Teacher
 Cloth,TennisOutfit1,Tennis
@@ -96,7 +97,6 @@ Panties,Panties1,Style 1
 Panties,Panties7,Style 2
 Panties,Panties8,Style 3
 Panties,Panties11,Style 4
-Panties,Shorts1,Shorts
 Socks,,Socks
 Socks,Socks1,Short
 Socks,Socks2,Regular
@@ -127,11 +127,13 @@ ItemPelvis,,Pelvis
 ItemPelvis,MetalChastityBelt,Metal Chastity Belt
 ItemPelvis,RegularVibratingEgg,Regular Vibrating Egg
 ItemPelvis,LeatherCrop,Leather Crop
+ItemPelvis,LeatherWhip,Leather Whip
 ItemTorso,,Torso
 ItemTorso,NylonRopeHarness,Nylon Rope Harness
 ItemTorso,HempRopeHarness,Hemp Rope Harness
 ItemTorso,LeatherHarness,Leather Harness
 ItemTorso,LeatherCrop,Leather Crop
+ItemTorso,LeatherWhip,Leather Whip
 ItemArms,,Arms
 ItemArms,NylonRope,Nylon Rope
 ItemArms,HempRope,Hemp Rope
