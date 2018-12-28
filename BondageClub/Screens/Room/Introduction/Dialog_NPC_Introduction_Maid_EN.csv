@@ -80,7 +80,7 @@ RemoveItemHead,,,(You remove the device as she shakes her head joyfully.)  Wonde
 248,249,(Listen.),"Blindfolds, ear muffs or hoods can also be used to restrict view and hearing.","SetZone(""ItemHead"")",
 249,230,(Listen.),"This is it, remember that your arms need to be free to restrain someone.",ClearZone(),
 250,260,It was fun to strap her up.,I'm glad you feel that way.  You're ready to explore the club now.,,
-250,260,I would ratter be restrained myself.,"Don't worry, I'm sure it will happen often.  You're ready to explore the club now.",ChangeMaidOpinion(-1),
+250,260,I would rather be restrained myself.,"Don't worry, I'm sure it will happen often.  You're ready to explore the club now.",ChangeMaidOpinion(-1),
 250,260,It's empowering!  I need to find a whip now.,A monster is born!  (She giggles.)  You're ready to explore the club now.,ChangeMaidOpinion(1),
 260,270,I can tie up on anyone?,"Anyone that's into bondage, yes.  Have fun causing trouble.",SaveMaidOpinion(),
 260,270,Can I tie you up now?,"(She giggles.)  Not now, I have work to do here.  But I'm sure you'll find victims if you wander around.",SaveMaidOpinion(),!IsHeadMaid
@@ -111,7 +111,7 @@ RemoveItemHead,,,(You remove the device as she shakes her head joyfully.)  Wonde
 340,350,"It took a while, but I've did it.",That's great.  Did you enjoy being tied up?,,!Player.IsRestrained()
 350,360,"Sure, it was fun.",That's the spirit!  You're ready to explore the club then.,,
 350,360,"I loved it, I hope it will happen often.",That's the spirit!  You're ready to explore the club then.,ChangeMaidOpinion(-1),
-350,360,I would ratter strap you up.,"Not now, but you're ready to explore the club and do some bondage.",ChangeMaidOpinion(1),
+350,360,I would rather strap you up.,"Not now, but you're ready to explore the club and do some bondage.",ChangeMaidOpinion(1),
 360,370,I'm sure it will be fun to explore the club.,"Oh yes, remember to be courteous and respect others.",SaveMaidOpinion(),HasBasicItems
 360,360,Can I have some items to start with?,"Sure, have these ropes and this gag.  (She gives you some ropes and a cloth gag.)",GetBasicItems(),!HasBasicItems
 370,,,You're ready to explore.  Remember to be courteous and respect others.,,

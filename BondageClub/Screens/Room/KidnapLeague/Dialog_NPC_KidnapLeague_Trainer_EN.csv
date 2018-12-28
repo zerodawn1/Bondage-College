@@ -1,6 +1,10 @@
 PlayerGagged,,,It seems that someone got kidnapped recently.  (She giggles.)  I can't understand you though.,,
 KidnapVictory,,,(She bows her head.)  Congratulations on your victory!  I'm your victim.,,
 KidnapDefeat,,,(She smiles.)  That was a fun fight wasn't it?,,
+BountyIntroduction,,,"You need to find and kidnap BOUNTYNAME.  She usually kidnaps newcommers.  If you succeed, you'll get paid BOUNTYAMOUNT$.",,
+BountyShibari,,,Your bounty is BOUNTYNAME.  She really likes rope bondage and suspension.  The bounty amout is BOUNTYAMOUNT$.,,
+BountyShop,,,Find and restrain BOUNTYNAME for a bounty of BOUNTYAMOUNT$.  She's a big spender and loves to shop.,,
+BountyMaidQuarters,,,"There's a bounty of BOUNTYAMOUNT$ for BOUNTYNAME.  From what I've heard, she's really into maids.",,
 CantReleasePlayer,,,"Look at me, I cannot help you now.",,
 ItemMouth,,,"(She first shakes her head to avoid the gag, but finally surrenders as you silence her.)",,
 RemoveItemMouth,,,"(You remove her gag while she stretches her mouth.)  Thanks Miss, it's hard to dispatch maids with that gag.",,
@@ -25,6 +29,8 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 0,30,Tell me about the league.,Sure!  What would you like to know?,,
 0,20,I want to join the Kidnappers League.,Excellent!  We are always eager to get new members.  You know the league rules and accept them?,,"DialogReputationLess(""Kidnap"", 0)"
 0,29,I want to leave the league.,"I'm sorry to hear that, but you can come back later.  You will lose your reputation in the league though, are you sure you want to leave?",,"DialogReputationGreater(""Kidnap"", 1)"
+0,50,I will take a bounty hunter job.,We have a many kidnapping bounty available.  Are you looking for an easy target or a challenge?,,CanTakeBounty()
+0,,Who's my bounty target again?,,BountyRemind(),BountyTaken()
 0,10,I want to practice kidnappings with you.,Great!  I can go easy on you or use all my tricks if you're confident enough.  How will it be?,ResetTrainer(),AllowKidnap()
 0,,Let's talk later.  (Leave her.),,DialogLeave(),
 10,,Please go easy on me.,,StartKidnap(-3),
@@ -68,6 +74,13 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 47,48,(Listen.),"Manipulation is all about deceiving, fooling, charming and seducing your opponent so she will submit to you.",,
 48,40,(Listen.),"Manipulation is good against Sneakiness, fair against Brute force and bad against Domination.  Manipulation is halved if you're gagged.",,
 49,40,(Listen.),"Each time you use a move, it's strength will be halved so it's good to alternate.  Each moves slowly recuperate with time.",,
+50,51,I want an easy bounty.,,TakeBounty(0),
+50,51,Give me some challenge.,,TakeBounty(3),
+50,51,I'll take the your top bounty.,,TakeBounty(6),
+50,0,I've changed my mind.,Very well.  Is there something else you want?,,
+51,0,I'll go get her.,Good!  Come back when you've kidnapped her for your reward.,,
+51,0,That girl is in deep trouble!,Perfect!  Come back when you've kidnapped her for your reward.,"DialogChangeReputation(""Dominant"", 1)",
+51,0,I'll try my best.,Alright.  Come back when you've kidnapped her for your reward.,"DialogChangeReputation(""Dominant"", -1)",
 100,,,(She struggles for fun.)  I hope you enjoyed our practice fight.,,IsTrainerRestrained()
 100,,,I hope you enjoyed our practice fight.,,!IsTrainerRestrained()
 100,110,Now you know who's boss.,(She nods politely.)  Yes Miss.,"DialogChangeReputation(""Dominant"", 3)",

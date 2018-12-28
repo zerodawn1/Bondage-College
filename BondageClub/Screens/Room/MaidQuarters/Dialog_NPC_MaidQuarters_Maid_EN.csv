@@ -162,7 +162,7 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 440,450,"Fine, you can tie my arms.",(She restrains your arms behind your back.)  How does it feel to be restrained for work?,"DialogWearRandomItem(""ItemArms"")",
 440,450,This is crazy.  (Give your arms.),(She restrains your arms behind your back.)  How does it feel to be restrained for work?,"DialogWearRandomItem(""ItemArms"")",
 450,460,I try to focus on the money.,"Go check the store after your shift.  Next is the gag, your cleaning tool, open wide!",,
-450,460,I would ratter restrain you.,"Maybe it will happen soon.  (She smiles.)  Next is the gag, your cleaning tool, open wide!","DialogChangeReputation(""Dominant"", 2)",
+450,460,I would rather restrain you.,"Maybe it will happen soon.  (She smiles.)  Next is the gag, your cleaning tool, open wide!","DialogChangeReputation(""Dominant"", 2)",
 450,460,It's a dream job for me.,"This club is perfect for you.  (She smiles.)  Next is the gag, your cleaning tool, open wide!","DialogChangeReputation(""Dominant"", -2)",
 460,,Can we skip the gag?,"Absolutely not, this is your cleaning tool after all.",DialogRemove(),
 460,470,"Very well, you can gag me.",(She gets a gag with a duster attached in front of it and straps it around your head.)  Ready to go?,"DialogWearItem(""DusterGag"", ""ItemMouth"")",

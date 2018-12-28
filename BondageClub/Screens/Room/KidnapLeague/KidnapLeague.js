@@ -6,11 +6,20 @@ var KidnapLeagueRandomKidnapperScenario = "0";
 var KidnapLeagueRandomKidnapperDifficulty = 0;
 var KidnapLeagueRandomKidnapperTimer = 0;
 var KidnapLeagueWillPayForFreedom = false;
+var KidnapLeagueRandomActivityList = ["AddGag", "RemoveGag", "AddFeet", "RemoveFeet", "AddLegs", "RemoveLegs", "Tickle", "Spank", "Kiss", "Fondle"];
+var KidnapLeagueRandomActivity = "";
+var KidnapLeagueRandomActivityCount = 0;
+var KidnapLeagueBounty = null;
+var KidnapLeagueBountyDifficulty = null;
+var KidnapLeagueBountyLocation = "";
+var KidnapLeagueBountyLocationList = ["Introduction", "MaidQuarters", "Shibari", "Shop"];
 
 // Returns TRUE if the dialog option are available
 function KidnapLeagueAllowKidnap() { return (!Player.IsRestrained() && !KidnapLeagueTrainer.IsRestrained()); }
 function KidnapLeagueIsTrainerRestrained() { return KidnapLeagueTrainer.IsRestrained(); }
 function KidnapLeagueResetTimer() { KidnapLeagueRandomKidnapperTimer = CommonTime() + 180000; }
+function KidnapLeagueCanTakeBounty() { return ((ReputationGet("Kidnap") > 0) && (KidnapLeagueBounty == null)) }
+function KidnapLeagueBountyTaken() { return ((ReputationGet("Kidnap") > 0) && (KidnapLeagueBounty != null)) }
 
 // Loads the kidnap league NPC
 function KidnapLeagueLoad() {
@@ -37,6 +46,21 @@ function KidnapLeagueClick() {
 		KidnapLeagueResetTimer();
 		CommonSetScreen("Room", "MainHall");
 	}
+}
+
+// When the player starts a kidnap game against the trainer (an easy fight will lower the player dominant reputation)
+function KidnapLeagueTakeBounty(Difficulty) {
+	KidnapLeagueBountyDifficulty = parseInt(Difficulty) + Math.floor(Math.random() * 4);
+	KidnapLeagueBounty = null;
+	CharacterDelete("NPC_KidnapLeague_RandomKidnapper");
+	KidnapLeagueBounty = CharacterLoadNPC("NPC_KidnapLeague_RandomKidnapper");
+	KidnapLeagueBountyLocation = CommonRandomItemFromList(KidnapLeagueBountyLocation, KidnapLeagueBountyLocationList);
+	KidnapLeagueBountyRemind();
+}
+
+// Reminds the player on the bounty taken
+function KidnapLeagueBountyRemind() {
+	KidnapLeagueTrainer.CurrentDialog = DialogFind(KidnapLeagueTrainer, "Bounty" + KidnapLeagueBountyLocation).replace("BOUNTYNAME", KidnapLeagueBounty.Name).replace("BOUNTYAMOUNT", (10 + KidnapLeagueBountyDifficulty * 2).toString());
 }
 
 // When the player starts a kidnap game against the trainer (an easy fight will lower the player dominant reputation)
@@ -86,17 +110,19 @@ function KidnapLeagueRandomIntro() {
 
 // When a random kidnap match ends
 function KidnapLeagueRandomOutro(Surrender) {
+	KidnapLeagueRandomActivityCount = 0;
 	CommonSetScreen("Room", "KidnapLeague");	
 	SkillProgress("Willpower", ((Player.KidnapMaxWillpower - Player.KidnapWillpower) + (KidnapLeagueRandomKidnapper.KidnapMaxWillpower - KidnapLeagueRandomKidnapper.KidnapWillpower)) * 2);
 	KidnapLeagueBackground = "MainHall";
-	if ((Surrender == null) || (Surrender == false)) ReputationProgress("Kidnap", KidnapVictory ? 4 : 1);
+	if ((Surrender == null) || (Surrender == false)) ReputationProgress("Kidnap", KidnapVictory ? 4 : 2);
 	KidnapLeagueRandomKidnapper.AllowItem = KidnapVictory;
 	KidnapLeagueRandomKidnapper.Stage = (KidnapVictory) ? "100" : "200";	
 	KidnapLeagueWillPayForFreedom = (Math.random() >= 0.5);
 	if (!KidnapVictory) CharacterRelease(KidnapLeagueRandomKidnapper);
 	CharacterSetCurrent(KidnapLeagueRandomKidnapper);
 	if ((Surrender != null) && (Surrender == true)) {
-		InventoryWearRandom(Player, "ItemArms");
+		KidnapLeagueRandomKidnapper.Stage = "205";
+		InventoryWearRandom(Player, "ItemArms", KidnapLeagueRandomKidnapperDifficulty);
 		KidnapLeagueRandomKidnapper.CurrentDialog = DialogFind(KidnapLeagueRandomKidnapper, "Surrender" + KidnapLeagueRandomKidnapperScenario);
 	} else KidnapLeagueRandomKidnapper.CurrentDialog = DialogFind(KidnapLeagueRandomKidnapper, ((KidnapVictory) ? "Victory" : "Defeat") + KidnapLeagueRandomKidnapperScenario);
 }
@@ -138,4 +164,43 @@ function KidnapLeagueRandomEndMoney() {
 	CharacterChangeMoney(Player, 10 + KidnapLeagueRandomKidnapperDifficulty * 2);
 	ReputationProgress("Kidnap", -2);
 	KidnapLeagueRandomEnd();
+}
+
+// When a random activity starts
+function KidnapLeagueRandomActivityStart(A) {
+	KidnapLeagueRandomKidnapper.CurrentDialog = DialogFind(KidnapLeagueRandomKidnapper, "Activity" + A + "Intro");
+	KidnapLeagueRandomKidnapper.Stage = "Activity" + A;
+}
+
+// When there's a random activity to do on the player from the kidnapper
+function KidnapLeagueRandomActivityLaunch() {
+	
+	// After 4 activities, there's more and more chances that the player will be released
+	KidnapLeagueRandomActivityCount++;
+	if (Math.random() * KidnapLeagueRandomActivityCount >= 4) {
+		if ((InventoryGet(Player, "Cloth") == null) && (KidnapPlayerCloth != null)) InventoryWear(Player, KidnapPlayerCloth.Asset.Name, "Cloth", KidnapPlayerCloth.Color);
+		CharacterRelease(Player);
+		KidnapLeagueRandomActivityStart("End");
+		return;
+	}
+	
+	// Finds an activity to do on the player
+	while (true) {
+		
+		// Picks an activity at random
+		KidnapLeagueRandomActivity = CommonRandomItemFromList(KidnapLeagueRandomActivity, KidnapLeagueRandomActivityList);
+				
+		// Add or remove an item
+		if ((KidnapLeagueRandomActivity == "AddGag") && (InventoryGet(Player, "ItemMouth") == null)) { InventoryWearRandom(Player, "ItemMouth", KidnapLeagueRandomKidnapperDifficulty); KidnapLeagueRandomActivityStart(KidnapLeagueRandomActivity); return; }
+		if ((KidnapLeagueRandomActivity == "RemoveGag") && (InventoryGet(Player, "ItemMouth") != null)) { InventoryRemove(Player, "ItemMouth"); KidnapLeagueRandomActivityStart(KidnapLeagueRandomActivity); return; }
+		if ((KidnapLeagueRandomActivity == "AddFeet") && (InventoryGet(Player, "ItemFeet") == null)) { InventoryWearRandom(Player, "ItemFeet", KidnapLeagueRandomKidnapperDifficulty); KidnapLeagueRandomActivityStart(KidnapLeagueRandomActivity); return; }
+		if ((KidnapLeagueRandomActivity == "RemoveFeet") && (InventoryGet(Player, "ItemFeet") != null)) { InventoryRemove(Player, "ItemFeet"); KidnapLeagueRandomActivityStart(KidnapLeagueRandomActivity); return; }
+		if ((KidnapLeagueRandomActivity == "AddLegs") && (InventoryGet(Player, "ItemLegs") == null)) { InventoryWearRandom(Player, "ItemLegs", KidnapLeagueRandomKidnapperDifficulty); KidnapLeagueRandomActivityStart(KidnapLeagueRandomActivity); return; }
+		if ((KidnapLeagueRandomActivity == "RemoveLegs") && (InventoryGet(Player, "ItemLegs") != null)) { InventoryRemove(Player, "ItemLegs"); KidnapLeagueRandomActivityStart(KidnapLeagueRandomActivity); return; }
+		
+		// Physical activities
+		if ((KidnapLeagueRandomActivity == "Kiss") && (InventoryGet(Player, "ItemMouth") == null)) { KidnapLeagueRandomActivityStart(KidnapLeagueRandomActivity); return; }
+		if ((KidnapLeagueRandomActivity == "Spank") || (KidnapLeagueRandomActivity == "Fondle") || (KidnapLeagueRandomActivity == "Tickle")) { KidnapLeagueRandomActivityStart(KidnapLeagueRandomActivity); return; }
+		
+	}
 }

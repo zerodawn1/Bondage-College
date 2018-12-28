@@ -181,7 +181,7 @@ function MaidDrinksEnd(Victory) {
 
 // When the player hits
 function MaidDrinksHit() {
-	MiniGameProgress = MiniGameProgress + 2;
+	MiniGameProgress = MiniGameProgress + 1;
 	if (MiniGameProgress >= 100)
 		MaidDrinksEnd(true);
 }

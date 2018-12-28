@@ -52,7 +52,7 @@ function MainHallRun() {
 
 // When the player walks to another room, she can be attacked by a random kidnapper
 function MainHallWalk(RoomName) {
-	if ((Math.random() > 0.05) && (KidnapLeagueRandomKidnapperTimer < CommonTime())) KidnapLeagueRandomIntro();
+	if ((Math.random() > 0.92) && (KidnapLeagueRandomKidnapperTimer < CommonTime())) KidnapLeagueRandomIntro();
 	else CommonSetScreen("Room", RoomName);
 }
 
