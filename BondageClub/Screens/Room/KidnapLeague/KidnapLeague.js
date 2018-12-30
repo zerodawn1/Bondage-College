@@ -12,7 +12,8 @@ var KidnapLeagueRandomActivityCount = 0;
 var KidnapLeagueBounty = null;
 var KidnapLeagueBountyDifficulty = null;
 var KidnapLeagueBountyLocation = "";
-var KidnapLeagueBountyLocationList = ["Introduction", "MaidQuarters", "Shibari", "Shop"];
+var KidnapLeagueBountyLocationList = ["Introduction", "MaidQuarters", "ShibariDojo", "Shop"];
+var KidnapLeagueBountyVictory = null;
 
 // Returns TRUE if the dialog option are available
 function KidnapLeagueAllowKidnap() { return (!Player.IsRestrained() && !KidnapLeagueTrainer.IsRestrained()); }
@@ -56,11 +57,42 @@ function KidnapLeagueTakeBounty(Difficulty) {
 	KidnapLeagueBounty = CharacterLoadNPC("NPC_KidnapLeague_RandomKidnapper");
 	KidnapLeagueBountyLocation = CommonRandomItemFromList(KidnapLeagueBountyLocation, KidnapLeagueBountyLocationList);
 	KidnapLeagueBountyRemind();
+	KidnapLeagueBountyVictory = null;
+	if (KidnapLeagueBountyLocation == "MaidQuarters") { InventoryWear(KidnapLeagueBounty, "MaidOutfit1", "Cloth", "Default"); InventoryWear(KidnapLeagueBounty, "MaidHairband1", "Hat", "Default"); }
+	if (KidnapLeagueBountyLocation == "ShibariDojo") InventoryWear(KidnapLeagueBounty, "ChineseDress1", "Cloth");
 }
 
 // Reminds the player on the bounty taken
 function KidnapLeagueBountyRemind() {
 	KidnapLeagueTrainer.CurrentDialog = DialogFind(KidnapLeagueTrainer, "Bounty" + KidnapLeagueBountyLocation).replace("BOUNTYNAME", KidnapLeagueBounty.Name).replace("BOUNTYAMOUNT", (10 + KidnapLeagueBountyDifficulty * 2).toString());
+}
+
+// Starts the bounty hunter mission
+function KidnapLeagueBountyStart() {
+	CommonSetScreen("Room", "KidnapLeague");
+	KidnapLeagueBackground = KidnapLeagueBountyLocation;
+	KidnapLeagueBounty.Stage = "50";
+	CharacterSetCurrent(KidnapLeagueBounty);
+	KidnapLeagueBounty.CurrentDialog = DialogFind(KidnapLeagueBounty, "Bounty" + KidnapLeagueBountyLocation);
+}
+
+// Starts the bounty hunter fight
+function KidnapLeagueBountyFightStart() {
+	KidnapStart(KidnapLeagueBounty, KidnapLeagueBountyLocation + "Dark", KidnapLeagueBountyDifficulty, "KidnapLeagueBountyFightEnd()");
+}
+
+// Ends the bounty hunter fight
+function KidnapLeagueBountyFightEnd() {
+	SkillProgress("Willpower", ((Player.KidnapMaxWillpower - Player.KidnapWillpower) + (KidnapLeagueBounty.KidnapMaxWillpower - KidnapLeagueBounty.KidnapWillpower)));
+	KidnapLeagueBounty.AllowItem = KidnapVictory;
+	KidnapLeagueBountyVictory = KidnapVictory;
+	KidnapLeagueBounty.Stage = (KidnapVictory) ? "101" : "201";
+	if (!KidnapVictory) CharacterRelease(KidnapLeagueBounty);
+	CommonSetScreen("Room", "KidnapLeague");	
+	KidnapLeagueBackground = KidnapLeagueBountyLocation;
+	CharacterSetCurrent(KidnapLeagueBounty);
+	KidnapLeagueBounty.CurrentDialog = DialogFind(KidnapLeagueBounty, (KidnapVictory) ? "BountyVictory" : "BountyDefeat");
+	KidnapLeagueWillPayForFreedom = false;
 }
 
 // When the player starts a kidnap game against the trainer (an easy fight will lower the player dominant reputation)

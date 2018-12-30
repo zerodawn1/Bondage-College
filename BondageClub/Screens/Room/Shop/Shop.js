@@ -22,6 +22,7 @@ function ShopLoad() {
 	ShopText = TextGet("SelectItemBuy");
 
 	// Rescue mission load
+	if ((MaidQuartersCurrentRescue == "Shop") && !MaidQuartersCurrentRescueCompleted) ShopVendor.AllowItem = true;
 	if ((MaidQuartersCurrentRescue == "Shop") && !MaidQuartersCurrentRescueStarted) {
 		MaidQuartersCurrentRescueStarted = true;
 		InventoryWearRandom(ShopVendor, "ItemFeet");
@@ -31,7 +32,6 @@ function ShopLoad() {
 		InventoryWearRandom(ShopVendor, "ItemMouth");
 		InventoryWearRandom(ShopVendor, "ItemHead");
 		ShopVendor.Stage = "MaidRescue";
-		ShopVendor.AllowItem = true;
 		ShopRescueScenario = CommonRandomItemFromList(ShopRescueScenario, ShopRescueScenarioList);
 	}
 

@@ -20,9 +20,8 @@ function DialogChangeReputation(RepType, Value) { ReputationProgress(RepType, Va
 function DialogWearItem(AssetName, AssetGroup) { InventoryWear(Player, AssetName, AssetGroup); } // Equips a specific item on the player from dialog
 function DialogWearRandomItem(AssetGroup) { InventoryWearRandom(Player, AssetGroup); } // Equips a random item from a given group to the player from dialog
 function DialogRemoveItem(AssetGroup) { InventoryRemove(Player, AssetGroup); } // Removes an item of a specific item group from the player 
-function DialogRelease(C) { CharacterRelease(C); } // Releases a character from restraints
-function DialogNaked(C) { CharacterNaked(C); } // Strips a character naked and removes the restrains
-function DialogSetCharacter(C) { CharacterSetCurrent(C); } // Sets a new character as the current one in the dialog
+function DialogRelease(C) { CharacterRelease((C.toUpperCase().trim() == "PLAYER") ? Player : CurrentCharacter); } // Releases a character from restraints
+function DialogNaked(C) { CharacterNaked((C.toUpperCase().trim() == "PLAYER") ? Player : CurrentCharacter); } // Strips a character naked and removes the restrains
 
 // Returns TRUE if the dialog prerequisite condition is met
 function DialogPrerequisite(D) {

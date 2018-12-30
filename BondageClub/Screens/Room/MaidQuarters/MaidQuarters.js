@@ -182,6 +182,8 @@ function MaidQuartersStartRescue() {
 	MaidQuartersMaid.CurrentDialog = DialogFind(MaidQuartersMaid, "Rescue" + MaidQuartersCurrentRescue);
 	MaidQuartersCurrentRescueStarted = false;
 	MaidQuartersCurrentRescueCompleted = false;
+	MaidQuartersPreviousCloth = InventoryGet(Player, "Cloth");
+	MaidQuartersPreviousHat = InventoryGet(Player, "Hat");
 
 }
 

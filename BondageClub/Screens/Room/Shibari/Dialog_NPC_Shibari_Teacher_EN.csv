@@ -25,7 +25,7 @@ RemoveItemHead,,,"(You remove the device and she nods politely.)  Good, that was
 0,,What is Shibari?,"Shibari can roughly be translated as: ""to tie"".  It's an ancient form of rope bondage art coming from Japan.",,
 0,,Can I tie you up?,"No, as the Dominant in the room, I need my freedom to supervise.",,"DialogReputationLess(""Dominant"", 74)"
 0,,Can I tie you up?,"Your reputation as a Domme precedes you.  Yes, you may tie me up and take control of the Dojo.",StartTeacherBondage(),AllowTeacherBondage()
-0,,Get naked for your Shibari session.,Very well Miss DialogPlayerName.  (She strips down for you.),DialogNaked(ShibariTeacher),AllowTeacherStrip()
+0,,Get naked for your Shibari session.,Very well Miss DialogPlayerName.  (She strips down for you.),DialogNaked(CurrentCharacter),AllowTeacherStrip()
 0,10,Will you tie me up?,"Of course, with practice you will become a true escape artist.  Should I go easy on you or make it tight?",,AllowPlayerBondage()
 0,,(Spank her on the butt.),"(You spank her on the butt as she dangles on the rope.)  Ow!  Miss, I'm not a masochist.",Spank(),AllowSpank()
 0,,Can I have some suspension ropes of my own?,Only the best bondage masters can have such ropes to use everywhere.  You're not skilled enough.,,AllowAskRope()
