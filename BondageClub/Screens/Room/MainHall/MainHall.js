@@ -52,8 +52,8 @@ function MainHallRun() {
 
 // When the player walks to another room, she can be attacked by a random kidnapper
 function MainHallWalk(RoomName) {
-	if ((Math.random() > 0.95) && (KidnapLeagueRandomKidnapperTimer < CommonTime())) KidnapLeagueRandomIntro();
-	else if ((KidnapLeagueBountyLocation != "") && (KidnapLeagueBounty != null) && (KidnapLeagueBountyVictory == null) && Player.CanInteract()) KidnapLeagueBountyStart();
+	if ((Math.random() > 0.45) && (KidnapLeagueRandomKidnapperTimer < CommonTime()) && (ReputationGet("Kidnap") > 0)) KidnapLeagueRandomIntro();
+	else if ((KidnapLeagueBountyLocation == RoomName) && (KidnapLeagueBounty != null) && (KidnapLeagueBountyVictory == null) && Player.CanInteract() && (RepuationGet("Kidnap") > 0)) KidnapLeagueBountyStart();
 	else CommonSetScreen("Room", RoomName);
 }
 

@@ -2,6 +2,7 @@ PlayerGagged,,,Lovely gag.  Do you need help with it?  Nod if you do.,,
 RescueIntroductionClass,,,Can you go check on the Introduction Class?  Sometimes new members get out of control.,,
 RescueShibariDojo,,,I've heard rumors of trouble going on at the Shibari Dojo.  Can you make sure everyone is fine?,,
 RescueShop,,,I think that something went wrong at the store.  Can you go there to help the vendor?,,
+RescueGambling,,,I think that something went wrong at the Gambling Hall.  Can you go there to help the players?,,
 MaidDrinksVictory,,,(You come back to DialogCharacterName with an empty drink platter.)  Well done!,,
 MaidDrinksDefeat,,,(You come back to DialogCharacterName with spilled drinks all over your uniform.),,
 MaidCleaningVictory,,,(DialogCharacterName gets you back to the maid quarters and smiles.)  You've did it!,,
@@ -143,6 +144,11 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 330,,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Wonderful!  Make the sorority proud.,WearMaidUniform(),!PlayerInMaidUniform()
 330,,I'll go check the Bondage Club store.  (Leave her.),,DialogLeave(),PlayerInMaidUniform()
 330,395,"I went there, but I couldn't do the rescue mission.","This is disappointing, but I can send someone else.  You understand that you won't get paid.  What happened?",CancelRescue(),AllowCancelRescue()
+340,,,What's going on at the Gambling Hall?  Did some Player got in trouble?,,
+340,390,Everything is under control.,Perfect!  Let me pay you for your efforts then.  (She gives you REPLACEMONEY $),RescuePay(),CurrentRescueCompleted
+340,,I'll change first.  (Wear the maid uniform.),(You change into the maid uniform.)  Wonderful!  Make the sorority proud.,WearMaidUniform(),!PlayerInMaidUniform()
+340,,I'll go check the Gambling Hall.  (Leave her.),,DialogLeave(),PlayerInMaidUniform()
+340,395,"I went there, but I couldn't do the rescue mission.","This is disappointing, but I can send someone else.  You understand that you won't get paid.  What happened?",CancelRescue(),AllowCancelRescue()
 390,0,Everyone will be safe as long as I'm in control.,That's very comforting to hear.  Are you ready for more chores?,"DialogChangeReputation(""Dominant"", 4)",
 390,0,I'm happy I could serve the sorority Miss.,You're such a sweet servant.  Are you ready for more chores?,"DialogChangeReputation(""Dominant"", -2)",
 390,0,Don't mention it.,Excellent!  Are you ready for more chores?,,

@@ -87,15 +87,23 @@ function InventorySetDifficulty(C, AssetGroup, Difficulty) {
 	if (CurrentModule != "Character") CharacterAppearanceSave(C);
 }
 
+// Returns TRUE if there's already a locked item at a given position
+function InventoryLocked(C, AssetGroup) {
+	var I = InventoryGet(C, AssetGroup);
+	return ((I != null) && (I.Asset.Effect != null) && (I.Asset.Effect.indexOf("Lock") >= 0));
+}
+
 // Makes the character wear a random item from a group
 function InventoryWearRandom(C, AssetGroup, Difficulty) {
-	var List = [];
-	for (var A = 0; A < Asset.length; A++)
-		if ((Asset[A].Group.Name == AssetGroup) && Asset[A].Wear && Asset[A].Enable && Asset[A].Random)
-			List.push(Asset[A]);
-	if (List.length == 0) return;
-	CharacterAppearanceSetItem(C, AssetGroup, List[Math.floor(Math.random() * List.length)], null, Difficulty);
-	CharacterRefresh(C);
+	if (!InventoryLocked(C, AssetGroup)) {
+		var List = [];
+		for (var A = 0; A < Asset.length; A++)
+			if ((Asset[A].Group.Name == AssetGroup) && Asset[A].Wear && Asset[A].Enable && Asset[A].Random)
+				List.push(Asset[A]);
+		if (List.length == 0) return;
+		CharacterAppearanceSetItem(C, AssetGroup, List[Math.floor(Math.random() * List.length)], null, Difficulty);
+		CharacterRefresh(C);
+	}
 }
 
 // Removes a specific item from the player appearance

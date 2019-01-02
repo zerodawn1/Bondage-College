@@ -39,6 +39,7 @@ function LogQuery(QueryLogName, QueryLogGroup) {
 function LogLoad(NewLog) {
 
 	// Make sure we have something to load
+	Log = [];
 	if (NewLog != null) {
 
 		// Add each log entry one by one

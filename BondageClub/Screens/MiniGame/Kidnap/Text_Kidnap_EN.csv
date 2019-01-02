@@ -36,7 +36,7 @@ UpperHandMercy,(She looks at your current situation and gives you some mercy.)
 PlayerBruteForceOpponentBruteForceAction,(You try to get a good grip on her but she fights back and pushes you away.)
 PlayerBruteForceOpponentBruteForcePlayer,Fight for real girl!
 PlayerBruteForceOpponentBruteForceOpponent,That's the best you can do?
-PlayerBruteForceOpponentDominationAction,(She smirks and gives you a pompous look as you sucker punch and stun her.) 
+PlayerBruteForceOpponentDominationAction,(She smirks and gives you a pompous look as you pinch her nipples and stun her with the pain.)
 PlayerBruteForceOpponentDominationPlayer,Learn to enjoy the pain.
 PlayerBruteForceOpponentDominationOpponent,Ow!  That really hurts.
 PlayerBruteForceOpponentSneakinessAction,(You charge her like a bull.  She dodges you and makes you trip on the floor.)
@@ -66,10 +66,10 @@ PlayerDominationOpponentPassiveOpponent,(She nods her head very slowly.)
 PlayerSneakinessOpponentBruteForceAction,"(She tries to punch you hard, but you grab her arm using judo and throw her on the floor.)"
 PlayerSneakinessOpponentBruteForcePlayer,You're so predictable.
 PlayerSneakinessOpponentBruteForceOpponent,Just you wait!
-PlayerSneakinessOpponentDominationAction,(She makes you kneel with her menacing look but you manage to spit on her.)
+PlayerSneakinessOpponentDominationAction,(She makes you kneel with her menacing look but you manage to trip her from the floor.)
 PlayerSneakinessOpponentDominationPlayer,I'm not going down that easily.
 PlayerSneakinessOpponentDominationOpponent,Spitting?  That's a new low.
-PlayerSneakinessOpponentSneakinessAction,(You grab each other and try to make the other trip but you both fall down.)
+PlayerSneakinessOpponentSneakinessAction,(You grab each other and try to make the other fall down but you both get to the ground.)
 PlayerSneakinessOpponentSneakinessPlayer,Ugly move Bruce Lea.
 PlayerSneakinessOpponentSneakinessOpponent,You suck Jackie Shauna.
 PlayerSneakinessOpponentManipulationAction,"(You try to strip her, but she flashes her body and mesmerize you right before it.)"
@@ -87,7 +87,7 @@ PlayerManipulationOpponentDominationOpponent,I already own them girl.
 PlayerManipulationOpponentSneakinessAction,"(She tries to tickle you but you quickly push your breast in her face, stunning her.)"
 PlayerManipulationOpponentSneakinessPlayer,You know you crave these!
 PlayerManipulationOpponentSneakinessOpponent,Mmmmmmmh!
-PlayerManipulationOpponentManipulationAction,(You give each other a long french kiss.  It's very pleasant but won't settle anything.)
+PlayerManipulationOpponentManipulationAction,(You give each other a long french kiss.  Leaving each other flustered and breathless.)
 PlayerManipulationOpponentManipulationPlayer,That wasn't too bad.
 PlayerManipulationOpponentManipulationOpponent,That's my kind of fight.
 PlayerManipulationOpponentPassiveAction,"(You dance slowly and lovingly for her, making her tremble from desire.)"
@@ -96,13 +96,13 @@ PlayerManipulationOpponentPassiveOpponent,Oh my!  This is so hot.
 PlayerPassiveOpponentBruteForceAction,(You get distracted by a girl passing by as she pulls your hair and gains the upper hand.)
 PlayerPassiveOpponentBruteForcePlayer,Aaayyee!  Have you seen that girl?
 PlayerPassiveOpponentBruteForceOpponent,If you can't focus I will crush you.
-PlayerPassiveOpponentDominationAction,"(She snaps her fingers and you can't resist her, you kneel down.)"
+PlayerPassiveOpponentDominationAction,"(She snaps her fingers and you can't resist her control, you kneel down.)"
 PlayerPassiveOpponentDominationPlayer,Yes Miss.  Of course.
 PlayerPassiveOpponentDominationOpponent,"Good girl, soon you'll lick my heels."
-PlayerPassiveOpponentSneakinessAction,"(She moves way too quickly for you and sneaks behind you, gaining a grip on you.)"
+PlayerPassiveOpponentSneakinessAction,"(She moves too quickly for you and sneaks behind you, gaining a grip on you.)"
 PlayerPassiveOpponentSneakinessPlayer,What?  How did you do that?
 PlayerPassiveOpponentSneakinessOpponent,You're way too slow for me girl.
-PlayerPassiveOpponentManipulationAction,"(You stand there idle, stunned by her charms as she caresses you lovingly.)"
+PlayerPassiveOpponentManipulationAction,"(You stand idle, stunned by her charms as she caresses you lovingly.)"
 PlayerPassiveOpponentManipulationPlayer,You're so pretty.
 PlayerPassiveOpponentManipulationOpponent,Listen to your heart and surrender.
 PlayerPassiveOpponentPassiveAction,(You both look at your phones and check for cat videos.)

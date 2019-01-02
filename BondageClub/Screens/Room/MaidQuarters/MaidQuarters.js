@@ -13,8 +13,8 @@ var MaidQuartersIsMaid = false;
 var MaidQuartersIsHeadMaid = false
 var MaidQuartersDominantRep = 0;
 var MaidQuartersCurrentRescue = "";
-var MaidQuartersRescueList = ["IntroductionClass", "ShibariDojo", "Shop"];
-var MaidQuartersRescueStage = ["310", "320", "330"];
+var MaidQuartersRescueList = ["IntroductionClass", "ShibariDojo", "Shop", "Gambling"];
+var MaidQuartersRescueStage = ["310", "320", "330", "340"];
 var MaidQuartersCurrentRescueStarted = false;
 var MaidQuartersCurrentRescueCompleted = false;
 
@@ -193,4 +193,5 @@ function MaidQuartersCancelRescue() {
 	if (MaidQuartersCurrentRescue == "IntroductionClass") { IntroductionCompleteRescue(); IntroductionMaid.Stage = "0"; }
 	if (MaidQuartersCurrentRescue == "ShibariDojo") { ShibariCompleteRescue(); ShibariTeacher.Stage = "0"; }
 	if (MaidQuartersCurrentRescue == "Shop") { ShopCompleteRescue(); ShopVendor.Stage = "0"; }
+	if (MaidQuartersCurrentRescue == "Gambling") { GamblingCompleteRescue(); GamblingFirstSub.Stage = "0"; }
 }

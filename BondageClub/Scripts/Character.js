@@ -276,3 +276,13 @@ function CharacterGetBonus(C, BonusType) {
 					Bonus = C.Inventory[I].Asset.Bonus[B].Factor;
 	return Bonus;
 }
+
+// Fully restrain a character with random items
+function CharacterFullRandomRestrain(C) {
+	InventoryWearRandom(Player, "ItemArms");
+	if (Math.random() >= 0.6) InventoryWearRandom(Player, "ItemHead");
+	if (Math.random() >= 0.3) InventoryWearRandom(Player, "ItemMouth");
+	if (Math.random() >= 0.6) InventoryWearRandom(Player, "ItemNeck");
+	if (Math.random() >= 0.3) InventoryWearRandom(Player, "ItemLegs");
+	if (Math.random() >= 0.3) InventoryWearRandom(Player, "ItemFeet");
+}

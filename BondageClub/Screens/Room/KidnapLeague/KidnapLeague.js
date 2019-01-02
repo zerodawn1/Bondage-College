@@ -12,7 +12,7 @@ var KidnapLeagueRandomActivityCount = 0;
 var KidnapLeagueBounty = null;
 var KidnapLeagueBountyDifficulty = null;
 var KidnapLeagueBountyLocation = "";
-var KidnapLeagueBountyLocationList = ["Introduction", "MaidQuarters", "ShibariDojo", "Shop"];
+var KidnapLeagueBountyLocationList = ["Introduction", "MaidQuarters", "Shibari", "Shop"];
 var KidnapLeagueBountyVictory = null;
 
 // Returns TRUE if the dialog option are available
@@ -20,7 +20,9 @@ function KidnapLeagueAllowKidnap() { return (!Player.IsRestrained() && !KidnapLe
 function KidnapLeagueIsTrainerRestrained() { return KidnapLeagueTrainer.IsRestrained(); }
 function KidnapLeagueResetTimer() { KidnapLeagueRandomKidnapperTimer = CommonTime() + 180000; }
 function KidnapLeagueCanTakeBounty() { return ((ReputationGet("Kidnap") > 0) && (KidnapLeagueBounty == null)) }
-function KidnapLeagueBountyTaken() { return ((ReputationGet("Kidnap") > 0) && (KidnapLeagueBounty != null)) }
+function KidnapLeagueBountyTaken() { return ((ReputationGet("Kidnap") > 0) && (KidnapLeagueBounty != null) && (KidnapLeagueBountyVictory == null)) }
+function KidnapLeagueBountyWasVictory() { return ((ReputationGet("Kidnap") > 0) && (KidnapLeagueBounty != null) && (KidnapLeagueBountyVictory == true)) }
+function KidnapLeagueBountyWasDefeat() { return ((ReputationGet("Kidnap") > 0) && (KidnapLeagueBounty != null) && (KidnapLeagueBountyVictory == false)) }
 
 // Loads the kidnap league NPC
 function KidnapLeagueLoad() {
@@ -59,7 +61,7 @@ function KidnapLeagueTakeBounty(Difficulty) {
 	KidnapLeagueBountyRemind();
 	KidnapLeagueBountyVictory = null;
 	if (KidnapLeagueBountyLocation == "MaidQuarters") { InventoryWear(KidnapLeagueBounty, "MaidOutfit1", "Cloth", "Default"); InventoryWear(KidnapLeagueBounty, "MaidHairband1", "Hat", "Default"); }
-	if (KidnapLeagueBountyLocation == "ShibariDojo") InventoryWear(KidnapLeagueBounty, "ChineseDress1", "Cloth");
+	if (KidnapLeagueBountyLocation == "Shibari") InventoryWear(KidnapLeagueBounty, "ChineseDress1", "Cloth");
 }
 
 // Reminds the player on the bounty taken
@@ -83,16 +85,32 @@ function KidnapLeagueBountyFightStart() {
 
 // Ends the bounty hunter fight
 function KidnapLeagueBountyFightEnd() {
-	SkillProgress("Willpower", ((Player.KidnapMaxWillpower - Player.KidnapWillpower) + (KidnapLeagueBounty.KidnapMaxWillpower - KidnapLeagueBounty.KidnapWillpower)));
+	KidnapLeagueRandomActivityCount = 0;
+	SkillProgress("Willpower", ((Player.KidnapMaxWillpower - Player.KidnapWillpower) + (KidnapLeagueBounty.KidnapMaxWillpower - KidnapLeagueBounty.KidnapWillpower)) * 2);
 	KidnapLeagueBounty.AllowItem = KidnapVictory;
 	KidnapLeagueBountyVictory = KidnapVictory;
 	KidnapLeagueBounty.Stage = (KidnapVictory) ? "101" : "201";
+	KidnapLeagueRandomKidnapper = KidnapLeagueBounty;
 	if (!KidnapVictory) CharacterRelease(KidnapLeagueBounty);
 	CommonSetScreen("Room", "KidnapLeague");	
 	KidnapLeagueBackground = KidnapLeagueBountyLocation;
 	CharacterSetCurrent(KidnapLeagueBounty);
 	KidnapLeagueBounty.CurrentDialog = DialogFind(KidnapLeagueBounty, (KidnapVictory) ? "BountyVictory" : "BountyDefeat");
 	KidnapLeagueWillPayForFreedom = false;
+}
+
+// Pays the player bounty
+function KidnapLeagueBountyPay() {
+	KidnapLeagueTrainer.CurrentDialog = DialogFind(KidnapLeagueTrainer, "BountyPay").replace("BOUNTYAMOUNT", (10 + KidnapLeagueBountyDifficulty * 2).toString());
+	CharacterChangeMoney(Player, 10 + KidnapLeagueBountyDifficulty * 2);
+	KidnapLeagueBountyReset();
+}
+
+// Resets the bounty so another one can be taken
+function KidnapLeagueBountyReset() {
+	ReputationProgress("Kidnap", KidnapLeagueBountyVictory ? 2 + Math.floor(KidnapLeagueBountyDifficulty / 2) : 1);
+	KidnapLeagueBounty = null;
+	KidnapLeagueBountyVictory = null;
 }
 
 // When the player starts a kidnap game against the trainer (an easy fight will lower the player dominant reputation)
@@ -103,7 +121,7 @@ function KidnapLeagueStartKidnap(Difficulty) {
 
 // When the kidnap match ends
 function KidnapLeagueEndKidnap() {
-	SkillProgress("Willpower", ((Player.KidnapMaxWillpower - Player.KidnapWillpower) + (KidnapLeagueRandomKidnapper.KidnapMaxWillpower - KidnapLeagueRandomKidnapper.KidnapWillpower)));
+	SkillProgress("Willpower", ((Player.KidnapMaxWillpower - Player.KidnapWillpower) + (KidnapLeagueTrainer.KidnapMaxWillpower - KidnapLeagueTrainer.KidnapWillpower)));
 	KidnapLeagueTrainer.AllowItem = KidnapVictory;
 	KidnapLeagueTrainer.Stage = (KidnapVictory) ? "100" : "200";
 	if (!KidnapVictory) CharacterRelease(KidnapLeagueTrainer);
@@ -215,7 +233,7 @@ function KidnapLeagueRandomActivityLaunch() {
 		KidnapLeagueRandomActivityStart("End");
 		return;
 	}
-	
+
 	// Finds an activity to do on the player
 	while (true) {
 		

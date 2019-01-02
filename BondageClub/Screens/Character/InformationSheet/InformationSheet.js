@@ -7,7 +7,9 @@ var InformationSheetPreviousScreen = "";
 // Gets the best title for the player and returns it
 function InformationSheetGetTitle() {
 	if (LogQuery("LeadSorority", "Maid")) return TextGet("TitleHeadMaid");
+	if (ReputationGet("Kidnap") >= 100) return TextGet("TitleMasterKidnapper");
 	if (LogQuery("JoinedSorority", "Maid")) return TextGet("TitleMaid");
+	if (ReputationGet("Kidnap") >= 50) return TextGet("TitleKidnapper");
 	return TextGet("TitleNone");
 }
 

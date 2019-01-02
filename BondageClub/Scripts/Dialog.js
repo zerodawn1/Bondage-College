@@ -22,6 +22,7 @@ function DialogWearRandomItem(AssetGroup) { InventoryWearRandom(Player, AssetGro
 function DialogRemoveItem(AssetGroup) { InventoryRemove(Player, AssetGroup); } // Removes an item of a specific item group from the player 
 function DialogRelease(C) { CharacterRelease((C.toUpperCase().trim() == "PLAYER") ? Player : CurrentCharacter); } // Releases a character from restraints
 function DialogNaked(C) { CharacterNaked((C.toUpperCase().trim() == "PLAYER") ? Player : CurrentCharacter); } // Strips a character naked and removes the restrains
+function DialogFullRandomRestrain(C) { CharacterFullRandomRestrain((C.toUpperCase().trim() == "PLAYER") ? Player : CurrentCharacter); } // Strips a character naked and removes the restrains
 
 // Returns TRUE if the dialog prerequisite condition is met
 function DialogPrerequisite(D) {
@@ -175,6 +176,7 @@ function DialogProgressStart(C, PrevItem, NextItem) {
 	DialogProgress = 0;
 	DialogProgressAuto = CommonRunInterval * (0.1133 + (S * 0.1133)) / (Timer * CheatFactor("DoubleItemSpeed", 0.5));
 	DialogProgressClick = CommonRunInterval * 2.5 / (Timer * CheatFactor("DoubleItemSpeed", 0.5));
+	if (S <= -5) DialogProgressClick = 0;
 	DialogProgressPrevItem = PrevItem;
 	DialogProgressNextItem = NextItem;
 	DialogProgressOperation = DialogProgressGetOperation(PrevItem, NextItem);
