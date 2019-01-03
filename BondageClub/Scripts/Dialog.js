@@ -270,11 +270,16 @@ function DialogClick() {
 					// Cannot change item if the previous one is locked
 					var Item = InventoryGet(C, C.FocusGroup.Name);
 					if ((Item == null) || (Item.Asset.Effect == null) || (Item.Asset.Effect.indexOf("Lock") < 0)) {
-						if (DialogInventory[I].Asset.Wear && !InventoryGroupIsBlocked(C))
+						if (!InventoryGroupIsBlocked(C))
 							if ((DialogInventory[I].Asset.Prerequisite == null) || InventoryAllow(C, DialogInventory[I].Asset.Prerequisite))
 								if ((Item == null) || (Item.Asset.Name != DialogInventory[I].Asset.Name))
-									if (DialogInventory[I].Asset.SelfBondage || (C.ID != 0)) DialogProgressStart(C, Item, DialogInventory[I]);
-									else DialogSetText("CannotUseOnSelf");
+									if (DialogInventory[I].Asset.Wear) {
+										if (DialogInventory[I].Asset.SelfBondage || (C.ID != 0)) DialogProgressStart(C, Item, DialogInventory[I]);
+										else DialogSetText("CannotUseOnSelf");
+									} else {
+										C.CurrentDialog = DialogFind(C, DialogInventory[I].Asset.Group.Name + DialogInventory[I].Asset.Name);
+										DialogLeaveItemMenu();
+									}
 					} else {
 
 						// If the item can unlock another item
@@ -354,9 +359,9 @@ function DialogDrawItemMenu(C) {
 	
 		// Draws the top menu
 		if ((C.FocusGroup != null) && (InventoryGet(C, C.FocusGroup.Name) != null)) {
-			DrawText(DialogText, 1250, 62, "White", "Black");
+			DrawTextWrap(DialogText, 1000, 0, 500, 125, "White");
 			DrawButton(1500, 25, 225, 75, "Remove", "White");
-		} else DrawText(DialogText, 1375, 62, "White", "Black");
+		} else DrawTextWrap(DialogText, 1000, 0, 750, 125, "White");
 		DrawButton(1750, 25, 225, 75, "Cancel", "White");
 
 		// For each items in the player inventory

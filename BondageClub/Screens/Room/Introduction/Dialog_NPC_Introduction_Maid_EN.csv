@@ -14,6 +14,10 @@ ItemPelvis,,,(She struggles as you lock the device on her.)  No!  I don't have t
 RemoveItemPelvis,,,(She looks really happy as you unlock the device.)  Thank you so much Miss DialogPlayerName.,,
 ItemHead,,,(You strap the device on her head as she sighs.)  It will be a long and complicated shift.,,
 RemoveItemHead,,,(You remove the device as she shakes her head joyfully.)  Wonderful!  You've made my day much easier.,,
+ItemTorsoLeatherWhip,,,(She jumps from the searing pain on her breast.)  Ouch!  Miss Head Maid!,,
+ItemTorsoLeatherCrop,,,(You whip her breast with the leather crop as she whimpers and bows her head.),,
+ItemPelvisLeatherWhip,,,(You whip her butt hard as she sighs.)  I promise I'll work harder Miss Head Maid.,,
+ItemPelvisLeatherCrop,,,(She grumbles as you strike her butt with the crop.)  A maid work isn't easy.,,
 0,,,"Hello head maid DialogPlayerName, welcome to the introduction class.",,IsHeadMaid
 0,,,"Hi sister, welcome to the introduction class.",,IsMaid
 0,,,"Hello there, welcome to the introduction class.",,!IsMaid

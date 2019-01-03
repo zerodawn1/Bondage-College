@@ -18,6 +18,10 @@ ItemTorso,,,"(You prepare a full body harness on her torso.)  Shibari isn't all 
 RemoveItemTorso,,,(You remove the body harness from her torso as she nods.)  You can try different shapes and patterns.,,
 ItemHead,,,(You strap the device on her head as she grumbles.)  Can you watch over the Dojo for me?,,
 RemoveItemHead,,,"(You remove the device and she nods politely.)  Good, that was a little freaky.",,
+ItemTorsoLeatherWhip,,,(She grumbles and endures the pain as you whip her breast.),,
+ItemTorsoLeatherCrop,,,(You swing the crop on her breast.)  I've had tough sensei before Miss.,,
+ItemPelvisLeatherWhip,,,(You whip her butt but she doesn't scream much from the stinging pain.),,
+ItemPelvisLeatherCrop,,,(You whip her butt with the leather crop but she doesn't react much.),,
 0,,,Konichiwa Miss.  You may restrain me however you want.  Take good care of the Dojo.,,AllowTeacherItem
 0,,,"Konichiwa, are you here to learn the fine art of Shibari?",,
 0,,"Hello there, I'm DialogPlayerName.","Welcome to the Dojo, I'm teacher DialogCharacterName.",DialogRemove(),

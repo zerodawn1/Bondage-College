@@ -91,6 +91,22 @@ function CharacterAppearanceSetDefault(C) {
 	
 }
 
+// Returns TRUE if the item group is required from 
+function CharacterAppearanceRequired(C, GroupName) {
+	for (var A = 0; A < C.Appearance.length; A++)
+		if ((C.Appearance[A].Asset.Require != null) && (C.Appearance[A].Asset.Require.indexOf(GroupName) >= 0))
+			return true;
+	return false;
+}
+
+// Returns TRUE if the item group must be hidden and not chosen
+function CharacterAppearanceMustHide(C, GroupName) {
+	for (var A = 0; A < C.Appearance.length; A++)
+		if ((C.Appearance[A].Asset.Hide != null) && (C.Appearance[A].Asset.Hide.indexOf(GroupName) >= 0))
+			return true;
+	return false;
+}
+
 // Sets a full random set of items for a character
 function CharacterAppearanceFullRandom(C) {
 
@@ -103,7 +119,7 @@ function CharacterAppearanceFullRandom(C) {
 
 	// For each item group (non default items only show at a 20% rate)
 	for (var A = 0; A < AssetGroup.length; A++)
-		if ((AssetGroup[A].Category == "Appearance") && (AssetGroup[A].IsDefault || (Math.random() < 0.2))) {
+		if ((AssetGroup[A].Category == "Appearance") && (AssetGroup[A].IsDefault || (Math.random() < 0.2) || CharacterAppearanceRequired(C, AssetGroup[A].Name)) && !CharacterAppearanceMustHide(C, AssetGroup[A].Name)) {
 			
 			// Get the parent size
 			var ParentSize = "";
@@ -469,7 +485,7 @@ function CharacterAppearanceReady(C) {
 	
 	// Make sure the character has one item of each default type
 	for (var A = 0; A < AssetGroup.length; A++)
-		if (AssetGroup[A].IsDefault) {
+		if ((AssetGroup[A].IsDefault) || CharacterAppearanceRequired(C, AssetGroup[A].Name)) {
 
 			// Check to find at least one item from the group
 			var Found = false;

@@ -45,6 +45,7 @@ function AssetAdd(NewAsset) {
 		Bonus: NewAsset.Bonus,
 		Block: NewAsset.Block,
 		Hide: NewAsset.Hide,
+		Require: NewAsset.Require,
 		SetPose: NewAsset.SetPose,
 		Value: (NewAsset.Value == null) ? 0 : NewAsset.Value,
 		Difficulty: (NewAsset.Difficulty == null) ? 0 : NewAsset.Difficulty,

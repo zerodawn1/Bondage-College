@@ -8,17 +8,24 @@ BodyLower,Small,Small
 BodyLower,Normal,Normal
 BodyLower,Large,Large
 BodyLower,Xlarge,Xlarge
+Hands,,Hands
+Hands,Default,Default
 Cloth,,Cloth
 Cloth,CollegeOutfit1,College
 Cloth,MaidOutfit1,Maid
 Cloth,StudentOutfit1,Student Black
 Cloth,StudentOutfit2,Student Bow
-Cloth,TopSkirt1,Top & Skirt
-Cloth,TopShorts1,Top & Shorts
 Cloth,BabydollDress1,Babydoll Dress
 Cloth,TeacherOutfit1,Teacher
-Cloth,TennisOutfit1,Tennis
 Cloth,ChineseDress1,Chinese Dress
+Cloth,TShirt1,T-Shirt
+Cloth,TennisShirt1,Tennis Shirt
+Cloth,Sweater1,Sweater
+ClothLower,,Lower Cloth
+ClothLower,Skirt1,Skirt
+ClothLower,TennisSkirt1,Tennis Skirt
+ClothLower,Jeans1,Jeans
+ClothLower,Shorts1,Shorts
 HairBack,,Back Hair
 HairBack,HairBack1,Style 1
 HairBack,HairBack2,Style 2
@@ -76,9 +83,6 @@ Mouth,Mouth1,Style 1
 Mouth,Mouth2,Style 2
 Mouth,Mouth3,Style 3
 Mouth,Mouth4,Style 4
-Gloves,,Gloves
-Gloves,Gloves1,Short Gloves
-Gloves,Gloves1,Long Gloves
 Nipples,,Nipples Style
 Nipples,Nipples1,Small
 Nipples,Nipples2,Large
@@ -86,6 +90,9 @@ Bra,,Bra
 Bra,Bra1,Style 1
 Bra,Bra2,Style 2
 Bra,Bra7,Style 3
+Gloves,,Gloves
+Gloves,Gloves1,Short Gloves
+Gloves,Gloves1,Long Gloves
 Pussy,,Pussy
 Pussy,PussyLight1,Light 1
 Pussy,PussyLight2,Light 2
@@ -151,6 +158,7 @@ ItemMouth,ClothOTMGag,Cloth OTM Gag
 ItemMouth,ClothOTNGag,Cloth OTN Gag
 ItemMouth,HarnessBallGag,Harness Ball Gag
 ItemMouth,HarnessPanelGag,Harness Panel Gag
+ItemMouth,RingGag,Ring Gag
 ItemMouth,DuctTapeGag,Duct Tape Gag
 ItemMouth,DusterGag,Duster Gag
 ItemMouth,RegularSleepingPill,Sleeping Pill
