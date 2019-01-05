@@ -126,12 +126,20 @@ function CharacterAppearanceFullRandom(C) {
 			if (AssetGroup[A].ParentSize != "") 
 				ParentSize = CharacterAppearanceGetCurrentValue(C, AssetGroup[A].ParentSize, "Name");
 		
-			// Prepares an array of all possible items
+			// Check for a parent
 			var R = [];
 			for (var I = 0; I < CharacterAppearanceAssets.length; I++)
-				if ((CharacterAppearanceAssets[I].Group.Name == AssetGroup[A].Name) && ((ParentSize == "") || (CharacterAppearanceAssets[I].Name == ParentSize)))
-					R.push(CharacterAppearanceAssets[I]);
-
+				if ((CharacterAppearanceAssets[I].Group.Name == AssetGroup[A].Name) && (CharacterAppearanceAssets[I].ParentItem != null) && ((ParentSize == "") || (CharacterAppearanceAssets[I].Name == ParentSize)))
+					for (var P = 0; P < C.Appearance.length; P++)
+						if (C.Appearance[P].Asset.Name == CharacterAppearanceAssets[I].ParentItem)
+							R.push(CharacterAppearanceAssets[I]);
+			
+			// Since there was no parent, get all the possible items
+			if (R.length == 0)
+				for (var I = 0; I < CharacterAppearanceAssets.length; I++)
+					if ((CharacterAppearanceAssets[I].Group.Name == AssetGroup[A].Name) && (CharacterAppearanceAssets[I].ParentItem == null) && ((ParentSize == "") || (CharacterAppearanceAssets[I].Name == ParentSize)))
+						R.push(CharacterAppearanceAssets[I]);
+				
 			// Picks a random item and color and add it
 			if (R.length > 0) {
 				var SelectedAsset = R[Math.round(Math.random() * (R.length - 1))];			

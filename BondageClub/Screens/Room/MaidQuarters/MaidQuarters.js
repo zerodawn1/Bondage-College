@@ -65,6 +65,7 @@ function MaidQuartersMaidUngagPlayer() {
 			MaidQuartersMaidReleasedPlayer = true;
 		}
 		InventoryRemove(Player, "ItemMouth");
+		InventoryRemove(Player, "ItemHead");
 	} else MaidQuartersMaid.CurrentDialog = DialogFind(MaidQuartersMaid, "CantReleasePlayer");
 }
 
@@ -138,7 +139,8 @@ function MaidQuartersDominantRepChange(Value) {
 }
 
 // When we switch from one maid to another in the initiation
-function MaidQuartersInitiationTransition(C) {
+function MaidQuartersInitiationTransition(MaidType) {
+	var C = ((MaidType == "MainMaid") ? MaidQuartersMaid : MaidQuartersMaidInitiation);
 	CharacterSetCurrent(C);
 	C.CurrentDialog = DialogFind(C, "MaidInitiationTransition");
 }

@@ -26,7 +26,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Hands",
-		Priority: 16,
+		Priority: 15,
 		AllowNone: false,
 		AllowColorize: false,
 		ParentColor: "BodyUpper",
@@ -37,7 +37,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Cloth",
-		Priority: 18,
+		Priority: 20,
 		ParentGroup: "BodyUpper",
 		AllowPose: ["BackBoxTie", "BackCuffs", "BackElbowTouch"],
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
@@ -49,6 +49,7 @@ var AssetFemale3DCG = [
 			{ Name: "BabydollDress1", Hide: ["ClothLower"] },
 			{ Name: "TeacherOutfit1", Hide: ["ClothLower"] },
 			{ Name: "ChineseDress1", Hide: ["ClothLower"] },
+			{ Name: "ChineseDress2", Value: 100 },
 			{ Name: "TShirt1", Require: ["ClothLower"] },
 			{ Name: "TennisShirt1", Require: ["ClothLower"] },
 			{ Name: "Sweater1", Require: ["ClothLower"] }
@@ -65,7 +66,12 @@ var AssetFemale3DCG = [
 		Color: ["Default", "#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 125,
 		Top: 400,
-		Asset: ["Skirt1", "TennisSkirt1", "Jeans1", "Shorts1"]
+		Asset: [
+			{ Name: "Skirt1" },
+			{ Name: "TennisSkirt1", ParentItem: "TennisShirt1" },
+			{ Name: "Jeans1" },
+			{ Name: "Shorts1" }
+		]
 	},
 	 
 	{
@@ -81,7 +87,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "HairFront",
-		Priority: 23,
+		Priority: 25,
 		AllowNone: false,
 		ParentColor: "HairBack",
 		Color: ["#6a3628", "#202020", "#dcc787", "#6c2132", "#999999", "#dddddd", "#e781b1", "#81e7b1", "#81b1e7", "#eeee99", "#ee9999", "#ee99ee"],
@@ -92,7 +98,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Hat",
-		Priority: 24,
+		Priority: 26,
 		Default: false,
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		AllowPose: ["Suspension"],
@@ -115,7 +121,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Glasses",
-		Priority: 20,
+		Priority: 22,
 		Default: false,
 		Color: ["#303030", "#808080", "#e0e0e0", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 200,
@@ -156,7 +162,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "Gloves",
-		Priority: 16,
+		Priority: 19,
 		ParentGroup: "BodyUpper",
 		ParentColor: "Bra",
 		Default: false,
@@ -225,7 +231,7 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemFeet",
 		Category: "Item",
-		Priority: 25,
+		Priority: 18,
 		ParentGroup: "BodyLower",
 		Default: false,
 		Effect: ["Freeze", "Prone"],
@@ -238,14 +244,14 @@ var AssetFemale3DCG = [
 			{ Name: "NylonRope", Value: 15, Time: 10 },
 			{ Name: "HempRope", Value: 30, Time: 10, RemoveTime: 15, Difficulty: 2 },
 			{ Name: "LeatherBelt", Value: 25, Time: 5 },
-			{ Name: "SuspensionHempRope", SelfBondage: false, Random: false, RemoveAtLogin: true, SetPose: ["Suspension", "LegsClosed"], Effect: ["Freeze", "Prone", "Struggle"], Value: -1, Height: 150, Time: 30 }
+			{ Name: "SuspensionHempRope", SelfBondage: false, Random: false, RemoveAtLogin: true, SetPose: ["Suspension", "LegsClosed"], Effect: ["Freeze", "Prone", "Struggle"], Value: -1, Height: 150, Time: 30, Difficulty: 2 }
 		]
 	},
 
 	{
 		Group: "ItemLegs",
 		Category: "Item",
-		Priority: 26,
+		Priority: 17,
 		ParentGroup: "BodyLower",
 		Default: false,
 		Effect: ["Prone"],
@@ -303,7 +309,7 @@ var AssetFemale3DCG = [
 		Group: "ItemArms",
 		ParentGroup: "BodyUpper",
 		Category: "Item",
-		Priority: 19,
+		Priority: 21,
 		Default: false,
 		Color: ["Default"],
 		Left: 125,		
@@ -312,9 +318,9 @@ var AssetFemale3DCG = [
 		Asset: [ 
 			{ Name: "NylonRope", SelfBondage: false, Value: 15, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Struggle"], Time: 15 },
 			{ Name: "HempRope", SelfBondage: false, Value: 30, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Struggle"], Time: 20, Difficulty: 2 },
-			{ Name: "MetalCuffs", Priority: 17, Value: 50, SetPose: ["BackCuffs"], Effect: ["Block", "Prone", "Lock"], Time: 5 },
+			{ Name: "MetalCuffs", Priority: 19, Value: 50, SetPose: ["BackCuffs"], Effect: ["Block", "Prone", "Lock"], Time: 5 },
 			{ Name: "MetalCuffsKey", Wear: false, Value: 25, Effect: ["Unlock-MetalCuffs"], Time: 5 },
-			{ Name: "LeatherArmbinder", SelfBondage: false, Priority: 1, Value: 80, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone", "Struggle"], Time: 25, RemoveTime: 5, Difficulty: 10 }
+			{ Name: "LeatherArmbinder", SelfBondage: false, Priority: 1, Value: 80, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone", "Struggle"], Time: 25, RemoveTime: 10, Difficulty: 10 }
 		]
 	},
 
@@ -336,7 +342,7 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemMouth",
 		Category: "Item",
-		Priority: 21,
+		Priority: 23,
 		Default: false,
 		Effect: ["GagNormal"],
 		Color: ["Default"],
@@ -360,7 +366,7 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemHead",
 		Category: "Item",
-		Priority: 22,
+		Priority: 24,
 		Default: false,
 		Color: ["Default"],
 		Left: 150,

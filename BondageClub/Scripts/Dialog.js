@@ -3,6 +3,7 @@ var DialogText = "";
 var DialogTextDefault = "";
 var DialogTextDefaultTimer = -1;
 var DialogProgress = -1;
+var DialogProgressStruggleCount = 0;
 var DialogProgressAuto = 0;
 var DialogProgressClick = 0;
 var DialogProgressOperation = "...";
@@ -154,6 +155,17 @@ function DialogProgressGetOperation(PrevItem, NextItem) {
 }
 
 // Starts the dialog progress bar and keeps the items that needs to be added / swaped / removed
+function DialogStruggle(Reverse) {
+	if (DialogProgressAuto >= 0)
+		DialogProgress = DialogProgress + DialogProgressClick * (Reverse ? -1 : 1);
+	else
+		DialogProgress = DialogProgress + DialogProgressClick * (Reverse ? -1 : 1) + ((100 - DialogProgress) / 50);
+	if (DialogProgress < 0) DialogProgress = 0;
+	DialogProgressStruggleCount++;
+	if ((DialogProgressStruggleCount >= 50) && (DialogProgressClick == 0)) DialogProgressOperation = DialogFind(Player, "Impossible");
+}
+
+// Starts the dialog progress bar and keeps the items that needs to be added / swaped / removed
 function DialogProgressStart(C, PrevItem, NextItem) {
 	
 	// Gets the standard time to do the operation (minimum 1 second) and the player skill level associated
@@ -174,25 +186,28 @@ function DialogProgressStart(C, PrevItem, NextItem) {
 
 	// Prepares the progress bar and timer
 	DialogProgress = 0;
-	DialogProgressAuto = CommonRunInterval * (0.1133 + (S * 0.1133)) / (Timer * CheatFactor("DoubleItemSpeed", 0.5));
+	DialogProgressAuto = CommonRunInterval * (0.1333 + (S * 0.1333)) / (Timer * CheatFactor("DoubleItemSpeed", 0.5));
 	DialogProgressClick = CommonRunInterval * 2.5 / (Timer * CheatFactor("DoubleItemSpeed", 0.5));
-	if (S <= -5) DialogProgressClick = 0;
+	if (S < 0) { DialogProgressAuto = DialogProgressAuto / 2; DialogProgressClick = DialogProgressClick / 2; }
 	DialogProgressPrevItem = PrevItem;
 	DialogProgressNextItem = NextItem;
 	DialogProgressOperation = DialogProgressGetOperation(PrevItem, NextItem);
 	DialogProgressSkill = Timer;
 	DialogProgressLastKeyPress = 0;
+	DialogProgressStruggleCount = 0;
 
 	// Struggling in negative only comes if there's a struggling option
 	if ((DialogProgressAuto < 0) && (PrevItem != null) && ((PrevItem.Asset.Effect == null) || (PrevItem.Asset.Effect.indexOf("Struggle") < 0))) DialogProgressAuto = 0;
+	
+	// At a level difficulty level beyond 6, there's no possible struggling
+	if ((PrevItem != null) && (PrevItem.Asset.Effect != null) && (PrevItem.Asset.Effect.indexOf("Struggle") >= 0) && (S <= -6)) DialogProgressClick = 0;
 	
 }
 
 // The player can use the space bar to speed up the dialog progress, just like clicking
 function DialogKeyDown() {
 	if (((KeyPress == 65) || (KeyPress == 83) || (KeyPress == 97) || (KeyPress == 115)) && (DialogProgress >= 0)) {
-		DialogProgress = DialogProgress + DialogProgressClick * ((DialogProgressLastKeyPress == KeyPress) ? -1 : 1);
-		if (DialogProgress < 0) DialogProgress = 0;
+		DialogStruggle((DialogProgressLastKeyPress == KeyPress));
 		DialogProgressLastKeyPress = KeyPress;
 	}
 }
@@ -222,8 +237,8 @@ function DialogClick() {
 	if (((Player.FocusGroup != null) || ((CurrentCharacter.FocusGroup != null) && CurrentCharacter.AllowItem)) && (DialogIntro() != "")) {
 
 		// If the user wants to speed up the add / swap / remove progress
-		if ((MouseX >= 1000) && (MouseX < 2000) && (MouseY >= 600) && (MouseY < 1000) && (DialogProgress >= 0) && CommonIsMobile)
-			DialogProgress = DialogProgress + DialogProgressClick;
+		if ((MouseX >= 1000) && (MouseX < 2000) && (MouseY >= 600) && (MouseY < 1000) && (DialogProgress >= 0) && CommonIsMobile) 
+			DialogStruggle(false);
 	
 		// If the user removes wants to remove an item
 		if ((MouseX >= 1500) && (MouseX <= 1725) && (MouseY >= 25) && (MouseY <= 100) && (DialogProgress < 0)) {
