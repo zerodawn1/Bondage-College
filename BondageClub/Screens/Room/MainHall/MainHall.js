@@ -31,6 +31,7 @@ function MainHallRun() {
 		if (Player.CanWalk()) DrawButton(1525, 240, 450, 65, TextGet("MaidQuarters"), "White");
 		if (Player.CanWalk()) DrawButton(1525, 335, 450, 65, TextGet("ShibariDojo"), "White");
 		if (Player.CanWalk()) DrawButton(1525, 430, 450, 65, TextGet("KidnapLeague"), "White");
+		if (Player.CanWalk()) DrawButton(1525, 525, 450, 65, TextGet("PrivateRoom"), "White");
 
 		// Draws the custom content rooms
 		if (Player.CanWalk()) DrawButton(25, 25, 450, 65, TextGet("Gambling"), "White");
@@ -75,6 +76,7 @@ function MainHallClick() {
 		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 240) && (MouseY < 305) && Player.CanWalk()) MainHallWalk("MaidQuarters");
 		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 335) && (MouseY < 400) && Player.CanWalk()) MainHallWalk("Shibari");
 		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 430) && (MouseY < 495) && Player.CanWalk()) MainHallWalk("KidnapLeague");
+		if ((MouseX >= 1525) && (MouseX < 1975) && (MouseY >= 525) && (MouseY < 590) && Player.CanWalk()) MainHallWalk("Private");
 
 		// Custom content rooms
 		if ((MouseX >= 25) && (MouseX < 475) && (MouseY >= 25) && (MouseY < 90) && Player.CanWalk()) MainHallWalk("Gambling");
