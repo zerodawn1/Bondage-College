@@ -7,6 +7,7 @@ var CharacterAppearanceBackup = null;
 var CharacterAppearanceAssets = [];
 var CharacterAppearanceColorPicker = "";
 var CharacterAppearanceColorPickerBackup = "";
+var CharacterAppearanceReturnRoom = "MainHall";
 
 // Builds all the assets that can be used to dress up the character
 function CharacterAppearanceBuildAssets(C) {
@@ -484,36 +485,60 @@ function AppearanceClick() {
 function CharacterAppearanceExit(C) {
 	C.Appearance = CharacterAppearanceBackup;
 	CharacterLoadCanvas(C);
-	if ((C.AccountName != "") && (C.AccountPassword != "")) CommonSetScreen("Room", "MainHall");
+	if ((C.AccountName != "") && (C.AccountPassword != "")) CommonSetScreen("Room", CharacterAppearanceReturnRoom);
 	else CommonSetScreen("Character", "Login");
+	CharacterAppearanceReturnRoom = "MainHall";
 }
 
 // When the player is ready, we make sure she at least has an outfit
 function CharacterAppearanceReady(C) {
 	
 	// Make sure the character has one item of each default type
-	for (var A = 0; A < AssetGroup.length; A++)
-		if ((AssetGroup[A].IsDefault) || CharacterAppearanceRequired(C, AssetGroup[A].Name)) {
+	if (CharacterAppearanceReturnRoom == "MainHall")
+		for (var A = 0; A < AssetGroup.length; A++)
+			if ((AssetGroup[A].IsDefault) || CharacterAppearanceRequired(C, AssetGroup[A].Name)) {
 
-			// Check to find at least one item from the group
-			var Found = false;
-			for (var P = 0; P < C.Appearance.length; P++)
-				if (C.Appearance[P].Asset.Group.Name == AssetGroup[A].Name)
-					Found = true;
+				// Check to find at least one item from the group
+				var Found = false;
+				for (var P = 0; P < C.Appearance.length; P++)
+					if (C.Appearance[P].Asset.Group.Name == AssetGroup[A].Name)
+						Found = true;
 
-			// If we didn't found the group, we warn the user
-			if (!Found) {
-				CharacterAppearanceHeaderText = TextGet("MustPickItem") + " " + AssetGroup[A].Name;
-				return;
+				// If we didn't found the group, we warn the user
+				if (!Found) {
+					CharacterAppearanceHeaderText = TextGet("MustPickItem") + " " + AssetGroup[A].Name;
+					return;
+				}
+
 			}
-
-		}
 
 	// If there's no error, we continue to the login or main hall if already logged
 	if ((C.ID == 0) && (C.AccountName != "") && (C.AccountPassword != "")) {
 		CharacterAppearanceSave(C);
-		CommonSetScreen("Room", "MainHall");
+		CommonSetScreen("Room", CharacterAppearanceReturnRoom);
+		CharacterAppearanceReturnRoom = "MainHall";
 	} else CommonSetScreen("Character", "Creation");
+
+}
+
+// Copy the appearance from a character to another
+function CharacterAppearanceCopy(FromC, ToC) {
+
+	// Removes any previous appearance asset
+	for(var A = 0; A < ToC.Appearance.length; A++)
+		if ((ToC.Appearance[A].Asset != null) && (ToC.Appearance[A].Asset.Group.Category == "Appearance")) {
+			ToC.Appearance.splice(A, 1);
+			A--;
+		}
+
+	// Adds all appearance assets from the first character to the second
+	for(var A = 0; A < FromC.Appearance.length; A++)
+		if ((FromC.Appearance[A].Asset != null) && (FromC.Appearance[A].Asset.Group.Category == "Appearance"))
+			ToC.Appearance.push(FromC.Appearance[A]);
+
+	// Refreshes the second character and saves it if it's the player
+	CharacterRefresh(ToC);
+	if (ToC.ID == 0) CharacterAppearanceSave(ToC);
 
 }
 
