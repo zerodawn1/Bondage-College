@@ -2,12 +2,21 @@
 var PrivateBackground = "Private";
 var PrivateVendor = null;
 var PrivateCharacter = [];
+var PrivateCharacterTypeList = ["NPC_Private_VisitorShy", "NPC_Private_VisitorHorny", "NPC_Private_VisitorTough"];
+
+// Returns TRUE if a 
+function PrivateIsCaged() { return (CurrentCharacter.Cage == null) ? false : true }
 
 // Loads the private room vendor NPC
 function PrivateLoad() {
 	PrivateVendor = CharacterLoadNPC("NPC_Private_Vendor");
 	PrivateVendor.AllowItem = false;
-	if (PrivateCharacter.length == 0) PrivateCharacter.push(Player);
+	if (PrivateCharacter.length == 0) {
+		PrivateCharacter.push(Player);
+		PrivateLoadCharacter(1);
+		PrivateLoadCharacter(2);
+		PrivateLoadCharacter(3);
+	}
 }
 
 // Draw all the characters in the private room
@@ -107,22 +116,60 @@ function PrivateGetCage() {
 	LogAdd("Cage", "PrivateRoom");
 }
 
+// Loads the private room character
+function PrivateLoadCharacter(ID) {
+	var Char = JSON.parse(localStorage.getItem("BondageClubPrivateRoomCharacter" + Player.AccountName + ID.toString()));
+	if (Char != null) {
+		var C = CharacterLoadNPC(Char.AccountName);
+		C.Name = Char.Name;
+		C.Appearance = Char.Appearance.slice();
+		CharacterRefresh(C);
+		PrivateCharacter.push(C);
+	}
+}
+
 // Saves the private room character info
 function PrivateSaveCharacter(ID) {
-	var C = {
-		Name: PrivateCharacter[ID].Name,
-		AccountName: PrivateCharacter[ID].AccountName,
-		Appearance: PrivateCharacter[ID].Appearance.slice()
-	};
-	localStorage.setItem("BondageClubPrivateRoomCharacter" + Player.AccountName + ID.toString(), JSON.stringify(C));
+	if (PrivateCharacter[ID] != null) {
+		var C = {
+			Name: PrivateCharacter[ID].Name,
+			AccountName: PrivateCharacter[ID].AccountName,
+			Appearance: PrivateCharacter[ID].Appearance.slice()
+		};
+		localStorage.setItem("BondageClubPrivateRoomCharacter" + Player.AccountName + ID.toString(), JSON.stringify(C));
+	} else localStorage.removeItem("BondageClubPrivateRoomCharacter" + Player.AccountName + ID.toString());
 };
+
+// Returns a random personality from the character types
+function PrivateGetCharacterType() {
+	while (true) {
+		var CT = CommonRandomItemFromList("", PrivateCharacterTypeList);
+		if (((PrivateCharacter[1] == null) || (PrivateCharacter[1].AccountName != CT)) &&
+		   ((PrivateCharacter[2] == null) || (PrivateCharacter[2].AccountName != CT)) &&
+		   ((PrivateCharacter[3] == null) || (PrivateCharacter[3].AccountName != CT)))
+		   return CT;
+	}	
+}
 
 // When a new character is added to the room
 function PrivateAddCharacter(Template) {
-	var C = CharacterLoadNPC("NPC_Private_Visitor");
+	var C = CharacterLoadNPC(PrivateGetCharacterType());
 	C.Name = Template.Name;
 	C.Appearance = Template.Appearance.slice();
 	CharacterRefresh(C);
 	PrivateCharacter.push(C);
 	PrivateSaveCharacter(PrivateCharacter.length - 1);
+}
+
+// When the player kicks out a character
+function PrivateKickOut() {
+	var ID = 1;
+	if ((PrivateCharacter[2] != null) && (CurrentCharacter.Name == PrivateCharacter[2].Name)) ID = 2;
+	if ((PrivateCharacter[3] != null) && (CurrentCharacter.Name == PrivateCharacter[3].Name)) ID = 3;
+	PrivateCharacter[ID] = null;
+	PrivateCharacter.splice(ID, 1);
+	PrivateSaveCharacter(1);
+	PrivateSaveCharacter(2);
+	PrivateSaveCharacter(3);
+	DialogLeave();
 }
