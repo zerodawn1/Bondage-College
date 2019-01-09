@@ -7,7 +7,7 @@ var WardrobeSelection = -1;
 function WardrobeLoad() {
 	WardrobeSelection = -1;
 	for(var C = 0; C < 12; C++)
-		WardrobeCharacter[C] = CharacterLoadFromStorage("BondageClubWardrobe" + C.toString());
+		WardrobeCharacter[C] = CharacterLoadFromStorage("BondageClubWardrobe" + Player.AccountName + C.toString());
 }
 
 // Shows the wardrobe screen
@@ -42,7 +42,7 @@ function WardrobeClick() {
 	// If we must save an outfit
 	if ((MouseX >= 750) && (MouseX < 975) && (MouseY >= 25) && (MouseY < 90) && (WardrobeSelection >= 0)) {
 		CharacterAppearanceCopy(Player, WardrobeCharacter[WardrobeSelection]);
-		localStorage.setItem("BondageClubWardrobe" + WardrobeSelection.toString(), JSON.stringify(Player.Appearance));
+		localStorage.setItem("BondageClubWardrobe" + Player.AccountName + WardrobeSelection.toString(), JSON.stringify(Player.Appearance));
 	}
 	
 	// If we must select a different wardrobe

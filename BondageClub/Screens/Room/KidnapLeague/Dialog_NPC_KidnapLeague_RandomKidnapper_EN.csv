@@ -44,6 +44,8 @@ ItemPelvis,,,(She struggles to avoid the belt but you're able to strap it on her
 RemoveItemPelvis,,,(She seems happy as you unlock the belt from her waist.)  Thanks DialogPlayerName.,,
 ItemHead,,,(You strap the device on her head as she sighs.)  Next time I won't lose against you.,,
 RemoveItemHead,,,(You release her head as she nods rapidly.)  You do carry lots of items with you.,,
+ItemTorso,,,(You strap the harness on her torso as she blushes.)  You're quite a kinky kidnapper.,,
+RemoveItemTorso,,,(She stretches as you release her from the harness.)  It will be easier to breath like that.,,
 ItemTorsoLeatherWhip,,,(She whimpers and cries as you whip her breast.)  My revenge will be sweet!,,
 ItemTorsoLeatherCrop,,,"(You lash the crop on her torso, hitting her breast.)  Ow!  Careful with that crop.",,
 ItemPelvisLeatherWhip,,,(You whip her butt as she grumbles.)  I'll make sure to get a whip next time I'm facing you.,,
@@ -104,6 +106,7 @@ BountyShop,,,(Your bounty is currently shopping and seems to be annoyed by you.)
 105,,Do you enjoy being restrained?,(She nods slowly.)  I wouldn't be in the Kidnappers League if I didn't like it.,,
 105,120,How much do you value your freedom?,You will let me go if I give you some money?,,
 105,110,(Play with her.),"(You move closer to her, ready to play with her.)",,
+105,,Come with me girl.  (Bring her to your room.),,TransferToRoom(),CanTransferToRoom()
 105,,(Let her go.),,RandomEnd(),
 110,,,NOEXIT,,
 110,,(Tickle her.),"(You tickle her on the ribs and tummy.  She giggles, laughs and cries a little.)",,Player.CanInteract()
