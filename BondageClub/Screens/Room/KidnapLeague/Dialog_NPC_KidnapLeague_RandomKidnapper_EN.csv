@@ -106,6 +106,7 @@ BountyShop,,,(Your bounty is currently shopping and seems to be annoyed by you.)
 105,,Do you enjoy being restrained?,(She nods slowly.)  I wouldn't be in the Kidnappers League if I didn't like it.,,
 105,120,How much do you value your freedom?,Will you let me go if I give you some money?,,
 105,110,(Play with her.),"(You move closer to her, ready to play with her.)",,
+105,,Come with me.  (Bring her to your room.),,TransferToRoom(),CanTransferToRoom()
 105,,(Let her go.),,RandomEnd(),
 110,,,NOEXIT,,
 110,,(Tickle her.),"(You tickle her on the ribs and tummy.  She giggles, laughs, and squirms around, trying to escape.)",,Player.CanInteract()
@@ -192,6 +193,9 @@ ActivityFondle,,(Stay silent and cold.),,RandomActivityLaunch(),
 ActivityEndIntro,,,"(She releases you and sighs.)  Sadly, I need to go. But I'll kidnap you again another time.",,
 ActivityEnd,,Take care.,,RandomEnd(),
 ActivityEnd,,Thanks!  That was fun.,,RandomEnd(),
+ActivityEnd,ActivityEnd3,Would you like to visit my room?,You have your own room?  I'm curious to see it.,,VisitRoom
+ActivityEnd,ActivityEnd2,Would you like to visit my room?,"Not now, I need to go.  Take care!",,!VisitRoom
 ActivityEnd,ActivityEnd2,I'll get you next time bitch.,Oh yeah?  Better leave you restrained then.  (She picks a few items to restrain you.),DialogFullRandomRestrain(Player),
 ActivityEnd,,(Leave her.),,RandomEnd(),
 ActivityEnd2,,(Leave her.),,RandomEnd(),
+ActivityEnd3,,Follow me!  (Bring her to your room.),,TransferToRoom(),

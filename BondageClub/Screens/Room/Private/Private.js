@@ -34,7 +34,7 @@ function PrivateDrawCharacter() {
 		if (PrivateCharacter[C].Cage != null) DrawImage("Screens/Room/Private/CageFront.png", X + C * S, 0);
 		if (LogQuery("Cage", "PrivateRoom")) 
 			if ((Player.Cage == null) || (C == 0))
-				DrawButton(X + 390 + C * S, 900, 90, 90, "", "White", "Icons/Cage.png");
+				DrawButton(X + 380 + C * S, 900, 90, 90, "", "White", "Icons/Cage.png");
 	}
 	
 }
@@ -74,7 +74,7 @@ function PrivateClickCage() {
 
 	// For each character, we find the one to cage, doesn't allow to do it if already in a cage
 	for(var C = 0; C < PrivateCharacter.length; C++)
-		if ((MouseX >= X + 390 + C * S) && (MouseX <= X + 480 + C * S)) 
+		if ((MouseX >= X + 380 + C * S) && (MouseX <= X + 470 + C * S)) 
 			if ((Player.Cage == null) || (C == 0)) {
 				PrivateCharacter[C].Cage = (PrivateCharacter[C].Cage == null) ? true : null;
 				PrivateSaveCharacter(C);

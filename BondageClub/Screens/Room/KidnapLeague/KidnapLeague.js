@@ -14,6 +14,7 @@ var KidnapLeagueBountyDifficulty = null;
 var KidnapLeagueBountyLocation = "";
 var KidnapLeagueBountyLocationList = ["Introduction", "MaidQuarters", "Shibari", "Shop"];
 var KidnapLeagueBountyVictory = null;
+var KidnapLeagueVisitRoom = false;
 
 // Returns TRUE if the dialog option are available
 function KidnapLeagueAllowKidnap() { return (!Player.IsRestrained() && !KidnapLeagueTrainer.IsRestrained()); }
@@ -233,6 +234,7 @@ function KidnapLeagueRandomActivityLaunch() {
 		if ((InventoryGet(Player, "Cloth") == null) && (KidnapPlayerCloth != null)) InventoryWear(Player, KidnapPlayerCloth.Asset.Name, "Cloth", KidnapPlayerCloth.Color);
 		CharacterRelease(Player);
 		KidnapLeagueRandomActivityStart("End");
+		KidnapLeagueVisitRoom = ((Math.random() >= 0.5) && KidnapLeagueCanTransferToRoom());
 		return;
 	}
 
