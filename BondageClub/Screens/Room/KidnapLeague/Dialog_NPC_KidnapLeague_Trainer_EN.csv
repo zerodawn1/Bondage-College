@@ -20,6 +20,8 @@ ItemPelvis,,,(You lock the belt on her as she panics.)  Oh come on!  That's not 
 RemoveItemPelvis,,,"(You unlock the device from her waist and she nods.)  That was cruel, even for a kidnapper.",,
 ItemHead,,,(You strap it on her head as she sighs.)  Please don't leave me like this for too long.,,
 RemoveItemHead,,,(You remove the device as she hums a happy song.)  Thanks!  I appreciate it.,,
+ItemTorso,,,(You strap the harness on her torso as she blushes.)  This is pretty kinky Miss.,,
+RemoveItemTorso,,,(She stretches as you release her from the harness.)  It will be easier to breath like that.,,
 ItemTorsoLeatherWhip,,,(She whimpers as you whip her breast.)  Hey!  I'm only here to help you practice!,,
 ItemTorsoLeatherCrop,,,"(You swing the crop on her torso.)  Ow! I wouldn't do that to you, use it on the other kidnappers.",,
 ItemPelvisLeatherWhip,,,"(You whip her butt as she grumbles.)  Whip the kidnappers, not the teacher!",,

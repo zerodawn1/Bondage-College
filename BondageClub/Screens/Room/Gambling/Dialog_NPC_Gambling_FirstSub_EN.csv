@@ -13,6 +13,10 @@ ItemPelvis,,,"(She struggles as you lock the device on her.)  No, please!  I don
 RemoveItemPelvis,,,(She looks really happy as you unlock the device.)  Thank you so much Miss DialogPlayerName.,,
 ItemHead,,,(You remove the device as she shakes her head joyfully.)  Wonderful!  You've made my day much easier.,,
 RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a million, this is much better.",,
+ItemTorsoLeatherWhip,,,(She trembles of painas you whip her breast.) This is a gambling hall no torture chamber.,,
+ItemTorsoLeatherCrop,,,"(You swing the crop on her torso as she moans.) Oh, that's not a game anymore.",,
+ItemPelvisLeatherWhip,,,(You whip her butt as she jumps from the pain.) I do not find that funny.,,
+ItemPelvisLeatherCrop,,,(She moans each time the crop lands on it.) How can I still sit like this?,,
 0,,,Welcome to the Gambling Hall. Shall we play a game?,,
 0,,"Hello, I'm DialogPlayerName. Pleased to meet you.",Pleased to meet you too.  I'm DialogCharacterName.,DialogRemove(),
 0,,What's going on here?,In the Gambling Hall we play kinky games of chance.,DialogRemove(),
@@ -29,8 +33,8 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 10,,Will you restrain me?,"Most certainly, if I win.",,
 10,0,I don't have any more questions.,Alright. Shall we play a game?,,
 11,10,(Listen.),"At a higher reputation still fifteen and six, and eventually more games with other players.",,
-20,10,What are the rules of the simple dice game?,"We both roll a dice. Whoever has the higher number may tie the opponent",,
-20,50,What are the rules of fifteen and six?,"You roll three or more dice and count the points. Then I roll, and whoever has the most points wins." ,,
+20,10,What are the rules of the simple dice game?,We both roll a dice. Whoever has the higher number may tie the opponent,,
+20,50,What are the rules of fifteen and six?,"You roll three or more dice and count the points. Then I roll, and whoever has the most points wins. ",,
 30,,(Tickle her.),"(You tickle her around the underarms and rubs.  She giggles, laughs and cries a little.)",,
 30,,(Kiss her.),(You put your hand behind her head and pull her to your lips for a long and kinky kiss.),,Player.CanInteract()
 30,,(Fondle her.),(You playfully tease her breasts as she gasps softly and blushes.),,Player.CanTalk()
@@ -53,7 +57,7 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 72,0,"No, please! No dice!","Fine, stay like that then.",,Player.CanTalk()
 72,0,(Shake your head),"Oh, you want to stay as you are? Fine with me.",,!Player.CanTalk()
 81,0,"Yeah, I won!",You were lucky. I guess you get to tie me up.,"SimpleDiceController(""win"")",ShowDiceStack()
-82,0,"Dammit! You win.",I want to test some items...,"SimpleDiceController(""lost"")",ShowDiceStack()
+82,0,Dammit! You win.,I want to test some items...,"SimpleDiceController(""lost"")",ShowDiceStack()
 83,0,It's a draw., I'll definitely win next time!,"SimpleDiceController(""eqaul"")",ShowDiceStack()
 103,,I want to add a dice. ,(She gives you another dice.),"TwentyOneController(""add"")",ShowDiceStack()
 103,,3 points are enough,My roll. ,"TwentyOneController(""fin"")",ShowDiceStack()
@@ -105,7 +109,7 @@ RemoveItemHead,,,"(You remove the device and she nods rapidly.)  Thanks a millio
 165,,I win. You don't need to use your arms for this game.,(She struggles while you bind her arms behind her back.),"TwentyOneController(""win_next"")",ShowDiceStack()
 166,,"I win. Come on, open up.",(She reluctantly accepts the gag.),"TwentyOneController(""win_next"")",ShowDiceStack()
 171,,"Oh, I lost. (Take off your accessories)",(She grins.),"TwentyOneController(""lost_next"")",ShowDiceStack()
-172,,"Oh, I lost. (Take off your clothes)","Whoops, time to lose some clothes!" ,"TwentyOneController(""lost_next"")",ShowDiceStack()
+172,,"Oh, I lost. (Take off your clothes)","Whoops, time to lose some clothes! ","TwentyOneController(""lost_next"")",ShowDiceStack()
 173,,"Oh, I lost. (Take off your underwear)",Are you starting to feel exposed? ,"TwentyOneController(""lost_next"")",ShowDiceStack()
 174,,"Oh, I lost. (Let her tie your legs)",Looks like you're not going anywhere. ,"TwentyOneController(""lost_next"")",ShowDiceStack()
 175,,"Oh, I lost. (Let her tie your arms)",Not much before you can't move at all... ,"TwentyOneController(""lost_next"")",ShowDiceStack()

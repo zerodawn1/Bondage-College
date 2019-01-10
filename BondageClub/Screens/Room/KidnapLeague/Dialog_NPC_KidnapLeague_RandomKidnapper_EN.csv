@@ -44,6 +44,8 @@ ItemPelvis,,,(She struggles to avoid the belt but you're able to strap it on her
 RemoveItemPelvis,,,(She seems happy as you unlock the belt from her waist.)  Thanks DialogPlayerName.,,
 ItemHead,,,(You strap the device on her head as she sighs.)  Next time I won't lose against you.,,
 RemoveItemHead,,,(You release her head as she nods rapidly.)  How do you fit all these items in such a small outfit?,,
+ItemTorso,,,(You strap the harness on her torso as she blushes.)  You're quite a kinky kidnapper.,,
+RemoveItemTorso,,,(She stretches as you release her from the harness.)  It will be easier to breath like that.,,
 ItemTorsoLeatherWhip,,,(She whimpers and cries as you whip her breast.)  Revenge will be sweet!,,
 ItemTorsoLeatherCrop,,,"(You lash the crop on her torso, hitting her breast.)  Ow!  Careful with that crop.",,
 ItemPelvisLeatherWhip,,,(You whip her butt as she grumbles.)  I'll make sure to get a whip next time I'm facing you.,,
@@ -73,7 +75,7 @@ RemoveSuspensionHempRope,,,(You let her down from the ceiling and untie her feet
 4,,(Surrender.),,RandomSurrender(),
 5,,Who put a bounty on me?,"Who cares?  I'm here for the money, not to chat.",DialogRemove(),
 5,,No bounty hunter will ever get me.,,RandomStart(),
-5,,"Take this 20$ and leave, bounty hunter".,,RandomBribe(20),DialogMoneyGreater(20)
+5,,"Take this 20$ and leave, bounty hunter.",,RandomBribe(20),DialogMoneyGreater(20)
 5,,(Fight her.),,RandomStart(),
 5,,(Surrender.),,RandomSurrender(),
 BountyVictory,,,"(She bows her head and submits to you.)  Well done bounty hunter, you can have me and collect your money.",,
