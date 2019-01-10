@@ -25,7 +25,7 @@ function PrivateDrawCharacter() {
 
 	// Defines the character position in the private screen
 	var X = 1000 - PrivateCharacter.length * 250;
-	var S = (PrivateCharacter.length == 4) ? 475 : 500;
+	var S = (PrivateCharacter.length == 4) ? 470 : 500;
 
 	// For each character to draw
 	for(var C = 0; C < PrivateCharacter.length; C++) {
@@ -70,7 +70,7 @@ function PrivateClickCage() {
 	
 	// Defines the character position in the private screen
 	var X = 1000 - PrivateCharacter.length * 250;
-	var S = (PrivateCharacter.length == 4) ? 475 : 500;
+	var S = (PrivateCharacter.length == 4) ? 470 : 500;
 
 	// For each character, we find the one to cage, doesn't allow to do it if already in a cage
 	for(var C = 0; C < PrivateCharacter.length; C++)
@@ -87,7 +87,7 @@ function PrivateClickCharacter() {
 
 	// Defines the character position in the private screen
 	var X = 1000 - PrivateCharacter.length * 250;
-	var S = (PrivateCharacter.length == 4) ? 475 : 500;
+	var S = (PrivateCharacter.length == 4) ? 470 : 500;
 
 	// For each character, we find the one that was clicked and open it's dialog
 	for(var C = 0; C < PrivateCharacter.length; C++)
