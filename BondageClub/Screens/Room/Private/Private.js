@@ -3,6 +3,7 @@ var PrivateBackground = "Private";
 var PrivateVendor = null;
 var PrivateCharacter = [];
 var PrivateCharacterTypeList = ["NPC_Private_VisitorShy", "NPC_Private_VisitorHorny", "NPC_Private_VisitorTough"];
+var PrivateCharacterToSave = 0;
 
 // Returns TRUE if a 
 function PrivateIsCaged() { return (CurrentCharacter.Cage == null) ? false : true }
@@ -31,7 +32,9 @@ function PrivateDrawCharacter() {
 		if (PrivateCharacter[C].Cage != null) DrawImage("Screens/Room/Private/CageBack.png", X + C * S, 0);
 		DrawCharacter(PrivateCharacter[C], X + C * S, 0, 1);
 		if (PrivateCharacter[C].Cage != null) DrawImage("Screens/Room/Private/CageFront.png", X + C * S, 0);
-		if (LogQuery("Cage", "PrivateRoom")) DrawButton(X + 390 + C * S, 900, 90, 90, "", "White", "Icons/Cage.png");
+		if (LogQuery("Cage", "PrivateRoom")) 
+			if ((Player.Cage == null) || (C == 0))
+				DrawButton(X + 390 + C * S, 900, 90, 90, "", "White", "Icons/Cage.png");
 	}
 	
 }
@@ -53,6 +56,12 @@ function PrivateRun() {
 	// Standard buttons
 	if (Player.CanWalk() && (Player.Cage == null)) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
 	DrawButton(1885, 145, 90, 90, "", "White", "Icons/Character.png");
+	
+	// If we must save a character status after a dialog
+	if (PrivateCharacterToSave > 0) {
+		PrivateSaveCharacter(PrivateCharacterToSave);
+		PrivateCharacterToSave = 0;
+	}
 
 }
 
@@ -63,11 +72,13 @@ function PrivateClickCage() {
 	var X = 1000 - PrivateCharacter.length * 250;
 	var S = (PrivateCharacter.length == 4) ? 475 : 500;
 
-	// For each character, we find the one to cage
+	// For each character, we find the one to cage, doesn't allow to do it if already in a cage
 	for(var C = 0; C < PrivateCharacter.length; C++)
-		if ((MouseX >= X + 390 + C * S) && (MouseX <= X + 480 + C * S))
-			PrivateCharacter[C].Cage = (PrivateCharacter[C].Cage == null) ? true : null;
-
+		if ((MouseX >= X + 390 + C * S) && (MouseX <= X + 480 + C * S)) 
+			if ((Player.Cage == null) || (C == 0)) {
+				PrivateCharacter[C].Cage = (PrivateCharacter[C].Cage == null) ? true : null;
+				PrivateSaveCharacter(C);
+			}
 
 }
 
@@ -80,8 +91,10 @@ function PrivateClickCharacter() {
 
 	// For each character, we find the one that was clicked and open it's dialog
 	for(var C = 0; C < PrivateCharacter.length; C++)
-		if ((MouseX >= X + C * S) && (MouseX <= X + S + C * S))
+		if ((MouseX >= X + C * S) && (MouseX <= X + S + C * S)) {
+			PrivateCharacterToSave = C;
 			CharacterSetCurrent(PrivateCharacter[C]);
+		}
 
 }
 
@@ -94,7 +107,7 @@ function PrivateClick() {
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 265) && (MouseY < 355) && LogQuery("RentRoom", "PrivateRoom") && (Player.Cage == null)) CharacterSetCurrent(PrivateVendor);
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 385) && (MouseY < 475) && LogQuery("RentRoom", "PrivateRoom")) { CharacterAppearanceReturnRoom = "Private"; CommonSetScreen("Character", "Appearance"); }
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 505) && (MouseY < 595) && LogQuery("RentRoom", "PrivateRoom") && LogQuery("Wardrobe", "PrivateRoom")) CommonSetScreen("Character", "Wardrobe");
-	if ((MouseX <= 1885) && (MouseY < 900) && LogQuery("RentRoom", "PrivateRoom")) PrivateClickCharacter();
+	if ((MouseX <= 1885) && (MouseY < 900) && LogQuery("RentRoom", "PrivateRoom") && (Player.Cage == null)) PrivateClickCharacter();
 	if ((MouseX <= 1885) && (MouseY >= 900) && LogQuery("RentRoom", "PrivateRoom") && LogQuery("Cage", "PrivateRoom")) PrivateClickCage();
 }
 
@@ -120,9 +133,13 @@ function PrivateGetCage() {
 function PrivateLoadCharacter(ID) {
 	var Char = JSON.parse(localStorage.getItem("BondageClubPrivateRoomCharacter" + Player.AccountName + ID.toString()));
 	if (Char != null) {
-		var C = CharacterLoadNPC(Char.AccountName);
+		var C = CharacterLoadNPC("NPC_Private_Custom");
 		C.Name = Char.Name;
+		C.AccountName = "NPC_Private_Custom" + ID.toString();
 		C.Appearance = Char.Appearance.slice();
+		if (Char.Trait != null) C.Trait = Char.Trait.slice();
+		if (Char.Cage != null) C.Cage = Char.Cage;
+		NPCTraitDialog(C);
 		CharacterRefresh(C);
 		PrivateCharacter.push(C);
 	}
@@ -133,6 +150,8 @@ function PrivateSaveCharacter(ID) {
 	if (PrivateCharacter[ID] != null) {
 		var C = {
 			Name: PrivateCharacter[ID].Name,
+			Trait: PrivateCharacter[ID].Trait,
+			Cage: PrivateCharacter[ID].Cage,
 			AccountName: PrivateCharacter[ID].AccountName,
 			Appearance: PrivateCharacter[ID].Appearance.slice()
 		};
@@ -140,36 +159,35 @@ function PrivateSaveCharacter(ID) {
 	} else localStorage.removeItem("BondageClubPrivateRoomCharacter" + Player.AccountName + ID.toString());
 };
 
-// Returns a random personality from the character types
-function PrivateGetCharacterType() {
-	while (true) {
-		var CT = CommonRandomItemFromList("", PrivateCharacterTypeList);
-		if (((PrivateCharacter[1] == null) || (PrivateCharacter[1].AccountName != CT)) &&
-		   ((PrivateCharacter[2] == null) || (PrivateCharacter[2].AccountName != CT)) &&
-		   ((PrivateCharacter[3] == null) || (PrivateCharacter[3].AccountName != CT)))
-		   return CT;
-	}	
-}
-
 // When a new character is added to the room
 function PrivateAddCharacter(Template) {
-	var C = CharacterLoadNPC(PrivateGetCharacterType());
+	var C = CharacterLoadNPC("NPC_Private_Custom");
 	C.Name = Template.Name;
+	C.AccountName = "NPC_Private_Custom" + PrivateCharacter.length.toString();
 	C.Appearance = Template.Appearance.slice();
+	NPCTraitGenerate(C);
+	NPCTraitDialog(C);
 	CharacterRefresh(C);
 	PrivateCharacter.push(C);
 	PrivateSaveCharacter(PrivateCharacter.length - 1);
 }
 
+// Returns the ID of the private room current character
+function PrivateGetCurrentID() {
+	if ((PrivateCharacter[3] != null) && (CurrentCharacter.Name == PrivateCharacter[3].Name)) return 3;
+	if ((PrivateCharacter[2] != null) && (CurrentCharacter.Name == PrivateCharacter[2].Name)) return 2;
+	return 1;
+}
+
 // When the player kicks out a character
 function PrivateKickOut() {
-	var ID = 1;
-	if ((PrivateCharacter[2] != null) && (CurrentCharacter.Name == PrivateCharacter[2].Name)) ID = 2;
-	if ((PrivateCharacter[3] != null) && (CurrentCharacter.Name == PrivateCharacter[3].Name)) ID = 3;
+	var ID = PrivateGetCurrentID();
 	PrivateCharacter[ID] = null;
 	PrivateCharacter.splice(ID, 1);
 	PrivateSaveCharacter(1);
 	PrivateSaveCharacter(2);
 	PrivateSaveCharacter(3);
+	if (PrivateCharacter[1] != null) PrivateCharacter[1].AccountName = "NPC_Private_Custom1";
+	if (PrivateCharacter[2] != null) PrivateCharacter[2].AccountName = "NPC_Private_Custom2";
 	DialogLeave();
 }

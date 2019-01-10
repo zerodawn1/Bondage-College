@@ -13,6 +13,7 @@ function MainHallLoad() {
 	MainHallIsMaid = LogQuery("JoinedSorority", "Maid");
 	MainHallIsHeadMaid = LogQuery("LeadSorority", "Maid");
 	CommonReadCSV("NoArravVar", "Room", "KidnapLeague", "Dialog_NPC_KidnapLeague_RandomKidnapper_" + CommonGetWorkingLanguage());
+	CommonReadCSV("NoArravVar", "Room", "Private", "Dialog_NPC_Private_Custom_" + CommonGetWorkingLanguage());
 }
 
 // Run the main hall screen

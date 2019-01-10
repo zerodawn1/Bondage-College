@@ -1,0 +1,55 @@
+PlayerGagged,,,Your gag is hot!  Gags are such a turn on for me.,,,,
+ItemMouth,,,(She tries to avoid the gag for a few seconds but surrenders quickly as you insist.),,,,
+RemoveItemMouth,,,(You remove her gag and she smiles.)  Thanks!  Would you like to do another practice fight?,,,,
+ItemArms,,,(She struggles for fun but allows you to restrain her.)  I can't count the number of times I've been tied up this month.,,,,
+RemoveItemArms,,,(You free her arms and she cracks her fingers.)  Ready for another round?,,,,
+ItemLegs,,,(She wiggles her butt as you restrain her legs.)  A good kidnapper never forgets the legs.,,,,
+RemoveItemLegs,,,(You release her legs from the bondage device.)  Anything else before we can continue?,,,,
+ItemFeet,,,(She stands on her toes as you restrain her feet.)  Bondage is great isn't it?,,,,
+RemoveItemFeet,,,"(You release her feet and she wiggles them.)  Thanks a lot, it's not easy to be forced like that.",,,,
+ItemNeck,,,(You strap the collar on her while she blushes.)  Collars are important in both BDSM and kidnappings.,,,,
+RemoveItemNeck,,,(You remove the collar fastened around her neck.)  Much better!,,,,
+ItemPelvis,,,(You lock the belt on her as she panics.)  Oh common!  That's not fair or funny.,,,,
+RemoveItemPelvis,,,"(You unlock the device from her waist and she nods.)  That was cruel, even for kidnappers.",,,,
+ItemHead,,,(You strap it on her head as she sighs.)  Please don't leave me like that for too long.,,,,
+RemoveItemHead,,,(You remove the device as she hums a happy song.)  Thanks!  I appreciate.,,,,
+ItemTorso,,,TO DO,,,,
+RemoveItemTorso,,,TO DO,,,,
+ItemTorsoLeatherWhip,,,(She whimpers as you whip her breast.)  Hey!  I'm only here to help you practice!,,,,
+ItemTorsoLeatherCrop,,,"(You swing the crop on her torso.)  That's not really fair, use it on the other kidnappers.",,,,
+ItemPelvisLeatherWhip,,,"(You whip her butt as she grumbles.)  Whip the kidnappers, not the teacher!",,,,
+ItemPelvisLeatherCrop,,,(You lash the leather crop pretty hard on her butt.)  I'm glad I'm not facing you in a real match.,,,,
+SuspensionHempRope,,,(You restrain her feet with the rope and suspend her from the ceiling.)  Woah!  Maybe you should go to the Dojo.,,,,
+RemoveSuspensionHempRope,,,(You let her down from the ceiling and release her feet.)  Thanks a lot!  I was slowly getting dizzy.,,,,
+0,,,Will you let me out of the cage?,,IsCaged(),IntroCage,
+0,,,I love this cage you've found for me.  Too bad there's not enough room for two.,,IsCaged(),IntroCage,Submissive|Horny
+0,,,Enough!  Get me out of that fucking cage!,,IsCaged(),IntroCage,Dominant|Rude
+0,,,(She shakes and rattles the cage.)  Do I look like an animal?  If you don't let me out I'll break it.,,IsCaged(),IntroCage,Violent|Dumb
+0,,,(She looks down and tries to avoid touching the cage.),,,IntroCage,Peaceful|Shy
+0,,,What's on your mind?,,,Intro,
+0,,,This place is kind of sexy.  What would you like to do?,,,Intro,Horny
+0,,,Cool room you have there.  So what's up?,,,Intro,Rude
+0,,,You have a lovely room Miss.  What's on your mind?,,,Intro,Submissive
+0,,,You have a nice lair to kidnap subs.  What would you like to do?,,,Intro,Dominant
+0,,,This room is certainly worth the 250$ rent.  Now tell me what's on your mind.,,,Intro,Wise
+0,,Tell me about you.,There's not much to tell.  I enjoy BDSM like everyone here.,DialogRemove(),,NPCProfile,
+0,,Tell me about you.,You should know that I'm mostly known as a Domme around here.  I love to see girls in tight bondage.,DialogRemove(),,NPCProfile,Dominant
+0,,Tell me about you.,Of course Miss.  I love the Bondage Club and BDSM.  Being tied up is a huge turn on for me.,DialogRemove(),,NPCProfile,Submissive
+0,,Tell me about you.,"Everyone has it's fetishes, one of mine is pain.  I love to put other people in pain and harsh positions.",DialogRemove(),,NPCProfile,Violent
+0,,Tell me about you.,What can I tell you?  I like BDSM but I usually prefer the softer side of it.  I'm known to care for others.,DialogRemove(),,NPCProfile,Peaceful
+0,,Tell me about you.,"I'll be honest and go straight to the point, I mostly come here for sex.",DialogRemove(),,NPCProfile,Horny
+0,,Tell me about you.,"Unlike most people, BDSM isn't sexual for me.  I love the control and the restraints but I'm not here for sex.",DialogRemove(),,NPCProfile,Frigid
+0,,Tell me about you.,What the fuck can I tell you?  I'm a kinky girl yo.,DialogRemove(),,NPCProfile,Rude
+0,,Tell me about you.,"(She nods.)  For me, the club is fascinating, but I don't have many acquaintances yet.  I'm glad we've had the chance to meet.",DialogRemove(),,NPCProfile,Shy
+0,,Tell me about you.,I love to learn and study.  And BDSM reveal insteresting aspects of human nature.  It's a mirror of who we are and our social evolution.,DialogRemove(),,NPCProfile,Wise
+0,,Tell me about you.,I don't know what tell you.  I'm DialogCharacterName and that's it.,DialogRemove(),,NPCProfile,Dumb
+0,10,You should go.,You want me to leave now?,,,KickOut,
+0,10,You should go.,Oh!  You want some privacy?  (She winks.),,,KickOut,Dominant|Horny
+0,10,You should go.,Should I leave you alone Miss?,,,KickOut,Submissive|Shy
+0,10,You should go.,(She seems angry.)  You're fucking kicking me out?,,,KickOut,Rude|Violent
+0,,(Leave her.),,DialogLeave(),,,
+10,0,"Yes, get out.  (Kick her out.)",,KickOut(),,,
+10,0,"No, you can stay.",Alright.  What would you like to do?,,,CancelKickOut,
+10,0,"No, you can stay.",You got me scared Miss.  What would you like to do?,,,CancelKickOut,Submissive|Peaceful
+10,0,"No, you can stay.",Make up your mind girl.  So what's up?,,,CancelKickOut,Dominant|Rude
+10,0,"No, you can stay.","Sorry, I'm kind of confused now.  What would you like to do?",,,CancelKickOut,Dumb|Shy
