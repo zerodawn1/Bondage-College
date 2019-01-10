@@ -7,6 +7,7 @@ var PrivateCharacterToSave = 0;
 
 // Returns TRUE if a 
 function PrivateIsCaged() { return (CurrentCharacter.Cage == null) ? false : true }
+function PrivateVendorCanPlay() { return (LogQuery("RentRoom", "PrivateRoom") && LogQuery("Wardrobe", "PrivateRoom") && LogQuery("Cage", "PrivateRoom") && Player.CanInteract() && Vendor.CanInteract()) }
 
 // Loads the private room vendor NPC
 function PrivateLoad() {

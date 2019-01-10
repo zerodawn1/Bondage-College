@@ -29,9 +29,12 @@ RemoveSuspensionHempRope,,,(You let her down from the ceiling and release her fe
 0,,,Welcome to the Bondage Club private rooms.  Are you looking to rent a room?,,"!DialogLogQuery(""RentRoom"", ""PrivateRoom"")"
 0,,,Welcome to the Bondage Club private rooms.  Do you want to improve your room?,,"DialogLogQuery(""RentRoom"", ""PrivateRoom"")"
 0,,"Hi, I'm DialogPlayerName.","Nice to meet you, I'm DialogCharacterName.  I rent private rooms and rooms improvements.",DialogRemove(),
+0,,Can you help me?,"No, I'm not allowed to play with customers.  And I prefer to see you like that.  (She winks.)",,!Player.CanInteract()
 0,10,I have a few questions.,Of course.  What would you like to know?,,
 0,100,I'd like to rent my own room.,The rent is 250 $.  Do you have enough money?,,"!DialogLogQuery(""RentRoom"", ""PrivateRoom"")"
 0,200,I'd like to improve my room.,Excellent!  The club can provide wardrobes and cages for private rooms.  What would you like?,,"DialogLogQuery(""RentRoom"", ""PrivateRoom"")"
+0,20,Can we play some kinky games?,I don't have much to do and it's a quiet day.  I guess we can play.,,VendorCanPlay()
+0,,Can we play some kinky games?,"I'd love too, but I have rooms and items to rent.",,!VendorCanPlay()
 0,,Let's talk later.  (Leave her.),,DialogLeave(),
 10,,How much is a room?,The price for a regular room is 250$.,,
 10,,For how long do I have the room?,For as long as you're a club member.,,
@@ -39,6 +42,11 @@ RemoveSuspensionHempRope,,,(You let her down from the ceiling and release her fe
 10,,Can I get naked in my room?,"Absolutely, it's your room after all.  You can get naked or have sex.",,
 10,,What are the improvements I can get?,"Wardrobe and cages for now.  But the club is always improving, you can check later.",,
 10,0,Enough questions.,Alright.  What can I do for you then?,,
+20,0,Can I tie you up?,"Alright, you can use anything you want on me.  I won't complain too much.",DialogAllowItem(true),"DialogReputationGreater(""Dominant"", -29)"
+20,0,Can I tie you up?,A subbie like you?  No way!  (She grabs your arms and restrains them.)  This is much better.,,"DialogReputationLess(""Dominant"", -30)"
+20,0,Will you tie me up?,Sure!  Give me your hands.  (She restrains your arms.)  Anything else I can do for you?,"DialogWearRandomItem(""ItemArms"")","DialogReputationLess(""Dominant"", 29)"
+20,0,Will you tie me up?,"Miss, I cannot tie you up.  I don't want to get in trouble with a Domme.",,"DialogReputationGreater(""Dominant"", 30)"
+20,0,I've changed my mind.,Alright.  What can I do for you then?,,
 100,110,Here's the money. (Pay 250$),Marvelous!  Here are your room keys.  (She gives you keys for your own room.),RentRoom(),DialogMoneyGreater(250)
 100,0,I don't have enough money.,You can get work as a maid or take kidnapping bounties if you need money.,,!DialogMoneyGreater(250)
 100,0,I've changed my mind.,Alright.  What can I do for you then?,,

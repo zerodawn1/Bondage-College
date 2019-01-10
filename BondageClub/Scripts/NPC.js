@@ -3,15 +3,16 @@ var NPCTrait = [
 	["Dominant", "Submissive"],
 	["Violent", "Peaceful"],
 	["Horny", "Frigid"],
-	["Rude", "Shy"],
-	["Wise", "Dumb"]
+	["Rude", "Polite"],
+	["Wise", "Dumb"],
+	["Serious", "Playful"],
 ]
 
-// Generate random traits for a NPC (80% odds for each traits, can switch on both sides, strength is from 1 to 100)
+// Generate random traits for a NPC (70% odds for each traits, can switch on both sides, strength is from 1 to 100)
 function NPCTraitGenerate(C) {
 	C.Trait = [];
 	for(var T = 0; T < NPCTrait.length; T++)
-		if (Math.random() >= 0.2) {
+		if (Math.random() >= 0.3) {
 			var NewTrait = {
 				Name: NPCTrait[T][Math.floor(Math.random() * 2)],
 				Value: Math.floor(Math.random() * 100) + 1
