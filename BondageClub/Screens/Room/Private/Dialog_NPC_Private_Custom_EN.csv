@@ -44,12 +44,30 @@ RemoveItemNeck,,,(You remove the collar fastened around her neck.)  This is bett
 RemoveItemNeck,,,(You remove the collar as she nods.)  This collar isn't for me yo.  Find another bitch.,,,RemoveItemNeck,Dominant|Rude
 RemoveItemNeck,,,"(You remove the collar from her neck.)  Miss, please don't toy with my emotions with collars, this is a strong BDSM symbol.",,,RemoveItemNeck,Submissive|Serious
 RemoveItemNeck,,,(You unfasten the collar from her neck.)  Collars are actually a form of protection for submissives.  It tells Dominants to keep their hands away without offending them.,,,RemoveItemNeck,Frigid|Polite
-ItemPelvis,,,(You lock the belt on her as she panics.)  Oh common!  That's not fair or funny.,,,,
-RemoveItemPelvis,,,"(You unlock the device from her waist and she nods.)  That was cruel, even for kidnappers.",,,,
-ItemHead,,,(You strap it on her head as she sighs.)  Please don't leave me like that for too long.,,,,
-RemoveItemHead,,,(You remove the device as she hums a happy song.)  Thanks!  I appreciate.,,,,
-ItemTorso,,,TO DO,,,,
-RemoveItemTorso,,,TO DO,,,,
+ItemPelvis,,,(She shakes her head as you lock the belt on her.)  That's no fun!,,,ItemPelvis,
+ItemPelvis,,,(You lock the belt on her as she panics and trashes in vain to make it slip.)  Big mistake girl!,,,ItemPelvis,Dominant|Violent
+ItemPelvis,,,(She almost cries as you lock the belt around her waist.)  This is cruel Miss!  How can I relieve myself now?,,,ItemPelvis,Submissive|Horny
+ItemPelvis,,,(She seems very calm as you lock the belt.)  I don't mind at all.  This item is a shield against rape and unwanted hands.,,,ItemPelvis,Frigid|Peaceful
+RemoveItemPelvis,,,(You unlock the device from her waist and she nods.)  That belt was kind of cruel.,,,RemoveItemPelvis,
+RemoveItemPelvis,,,(She nods as you unlock the belt from her.)  This device wasn't intended for me.  I don't need shelter from myself or from others.,,,RemoveItemPelvis,Dominant|Polite
+RemoveItemPelvis,,,"(You unlock the belt as she sighs.)  Miss, will you lock the belt again soon?  I love the sex protection and it reminds me of my place.",,,RemoveItemPelvis,Submissive|Frigid
+RemoveItemPelvis,,,(She seems relived as you remove the device.)  Oh hell yeah!  I need to fuck now.,,,RemoveItemPelvis,Rude|Horny
+ItemHead,,,(You strap the item on her head as she sighs.)  Please don't leave me like that for too long.,,,ItemHead,
+ItemHead,,,,,,ItemHead,
+ItemHead,,,,,,ItemHead,
+ItemHead,,,,,,ItemHead,
+RemoveItemHead,,,(You remove the device from her as she hums a song.)  Thanks!  I appreciate.,,,RemoveItemHead,
+RemoveItemHead,,,,,,RemoveItemHead,
+RemoveItemHead,,,,,,RemoveItemHead,
+RemoveItemHead,,,,,,RemoveItemHead,
+ItemTorso,,,TO DO,,,ItemTorso,
+ItemTorso,,,,,,ItemTorso,
+ItemTorso,,,,,,ItemTorso,
+ItemTorso,,,,,,ItemTorso,
+RemoveItemTorso,,,TO DO,,,RemoveItemTorso,
+RemoveItemTorso,,,,,,RemoveItemTorso,
+RemoveItemTorso,,,,,,RemoveItemTorso,
+RemoveItemTorso,,,,,,RemoveItemTorso,
 ItemTorsoLeatherWhip,,,(She whimpers as you whip her breast.)  Hey!  I'm only here to help you practice!,,,,
 ItemTorsoLeatherCrop,,,"(You swing the crop on her torso.)  That's not really fair, use it on the other kidnappers.",,,,
 ItemPelvisLeatherWhip,,,"(You whip her butt as she grumbles.)  Whip the kidnappers, not the teacher!",,,,
