@@ -93,7 +93,7 @@ BountyShop,,,(Your bounty is currently shopping and seems to be annoyed by you.)
 100,105,That was a good fight.,(She nods happily.),,
 100,105,"Girl, you're in big trouble.",(She gulps and bows her head.),"DialogChangeReputation(""Dominant"", 3)",
 100,105,"EIther I was lucky, or you let me win.",(She shakes her head no.),"DialogChangeReputation(""Dominant"", -1)",
-100,110,(Play with her.),"(You move closer to her, ready to play with her.)",,
+100,110,(Play with her.),"(You move closer, ready to play with her.)",,
 100,,(Let her go.),,RandomEnd(),
 101,,,NOEXIT,,
 101,105,You're in big trouble my bounty.,(She gulps and bows her head.),"DialogChangeReputation(""Dominant"", 3)",
@@ -114,7 +114,6 @@ BountyShop,,,(Your bounty is currently shopping and seems to be annoyed by you.)
 110,,(Fondle her.),(You playfully fondle her breasts and butt as she moans softly and blushes.),,Player.CanTalk()
 110,,(Slap her.),(You harshly slap her in the face.  She bows down her head and lets out a little moan.),,Player.CanInteract()
 110,,(Spank her.),(You spank her hard on the butt and she sharply inhales from the pain.),,Player.CanInteract()
-110,,(Masturbate her.),(You masturbate her slowly and lovingly.  She trembles and breathes faster and faster.),,Player.CanInteract()
 110,105,(Talk with her.),(You move back to talk with her.),,
 110,,(Let her go.),,RandomEnd(),
 120,121,Pay me and I'll let you go.,"Fine, be a bully then!  I'll give you DIALOGMONEY $ if you release me and leave me alone.",RandomMoneyAmount(),WillPayForFreedom
