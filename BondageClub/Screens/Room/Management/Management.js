@@ -20,6 +20,7 @@ function ManagementLoad() {
 		ManagementMistress = CharacterLoadNPC("NPC_Management_Mistress");
 		ManagementMistress.Name = TextGet("Mistress") + " " + ManagementMistress.Name;
 		ManagementMistress.AllowItem = false;
+		ManagementMistressAngryCount = 0;
 		ManagementSub = CharacterLoadNPC("NPC_Management_Sub");
 		CharacterNaked(ManagementSub);
 		InventoryWear(ManagementSub, "SlaveCollar", "ItemNeck");
