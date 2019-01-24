@@ -46,7 +46,7 @@ function PrisonLoad() {
 		PrisonMaid =  CharacterLoadNPC("NPC_Prison_Maid");
 		PrisonMaidCharacter = CommonRandomItemFromList(PrisonMaidCharacter, PrisonMaidCharacterList);
 		PrisonMaidAppearance = PrisonMaid.Appearance.slice();
-		if (LogQuery("LeadSorority", "Maid")) {
+		if (LogQuery("LeadSorority", "Maid") && !PrisonPlayerBehindBars) {
 			PrisonMaid.AllowItem = true;
 		} else {
 			PrisonMaid.AllowItem = false;
@@ -64,9 +64,14 @@ function PrisonLoad() {
 // Run the Prison, draw all characters
 function PrisonRun() {
 	if ((MaidQuartersCurrentRescue == "Prison") && MaidQuartersCurrentRescueCompleted == false) {
-		if (!PrisonSubBehindBars) DrawImage("Screens/Room/Prison/Cage_open.png", 0, 0);
-		if (PrisonSubIsPresent) DrawCharacter(PrisonSub, 500, 0, 1);
-		if (PrisonSubBehindBars) DrawImage("Screens/Room/Prison/Cage_close.png", 0, 0);
+		if (!PrisonSubBehindBars) {
+			DrawImage("Screens/Room/Prison/Cage_open.png", 0, 0);
+			if (PrisonSubIsPresent) DrawCharacter(PrisonSub, 500, 0, 1);
+		} else {
+			//Draw Prisoner smaller
+			if (PrisonSubIsPresent) DrawCharacter(PrisonSub, 500, 50, 0.95);
+			DrawImage("Screens/Room/Prison/Cage_close.png", 0, 0);
+		}
 		DrawCharacter(Player, 1000, 0, 1);
 		DrawButton(1885, 145, 90, 90, "", "White", "Icons/Character.png");
 		if (MaidQuartersCurrentRescue == "Prison" && MaidQuartersCurrentRescueCompleted == false && PrisonSubIsPresent == true) {
@@ -85,9 +90,13 @@ function PrisonRun() {
 			PrisonNextEventTimer = null;
 		} 
 	} else {
-		if (!PrisonPlayerBehindBars) DrawImage("Screens/Room/Prison/Cage_open.png", 0, 0);
-		DrawCharacter(Player, 500, 0, 1);
-		if (PrisonPlayerBehindBars) DrawImage("Screens/Room/Prison/Cage_close.png", 0, 0);
+		if (PrisonPlayerBehindBars) {
+			DrawCharacter(Player, 500, 50, 0.95);
+			DrawImage("Screens/Room/Prison/Cage_close.png", 0, 0);
+		} else {
+			DrawImage("Screens/Room/Prison/Cage_open.png", 0, 0);
+			DrawCharacter(Player, 500, 0, 1);
+		}
 		if (PrisonMaidIsPresent) DrawCharacter(PrisonMaid, 1000, 0, 1);
 		if (Player.CanWalk() && !PrisonPlayerBehindBars) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
 		if (PrisonPlayerBehindBars) DrawButton(1885, 25, 90, 90, "", "White", "Screens/Room/Prison/ButtonBar.png");
