@@ -187,5 +187,5 @@ function LoginClick() {
 
 		} else LoginMessage = TextGet("InvalidNamePassword");
 	}
-	
+
 }
