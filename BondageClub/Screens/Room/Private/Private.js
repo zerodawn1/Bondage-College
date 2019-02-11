@@ -5,7 +5,7 @@ var PrivateCharacter = [];
 var PrivateCharacterTypeList = ["NPC_Private_VisitorShy", "NPC_Private_VisitorHorny", "NPC_Private_VisitorTough"];
 var PrivateCharacterToSave = 0;
 var PrivateReleaseTimer = 0;
-var PrivateRandomActivityList = ["Gag", "Ungag", "Restrain", "Release"];
+var PrivateRandomActivityList = ["Gag", "Ungag", "Restrain", "FullRestrain", "Release"];
 var PrivateRandomActivity = "";
 
 // Returns TRUE if a specific dialog option is allowed
@@ -298,18 +298,19 @@ function PrivateStartActivity() {
 	// Finds a valid activity for the player
 	var Act = "";
 	while (true) {
-		
+
 		// Picks an activity at random
 		Act = CommonRandomItemFromList(PrivateRandomActivity, PrivateRandomActivityList);
-				
+
 		// If the activity is valid
 		if ((Act == "Gag") && (InventoryGet(Player, "ItemMouth") == null)) break;
 		if ((Act == "Ungag") && (!InventoryGet(Player, "ItemMouth") == null)) break;
 		if ((Act == "Restrain") && (InventoryGet(Player, "ItemArms") == null)) break;
+		if ((Act == "FullRestrain") && (InventoryGet(Player, "ItemArms") == null)) break;
 		if ((Act == "Release") && Player.IsRestrained()) break;
-		
+
 	}
-	
+
 	// Starts the activity
 	PrivateRandomActivity = Act;
 	CurrentCharacter.Stage = "Activity" + PrivateRandomActivity;

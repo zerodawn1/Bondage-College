@@ -165,7 +165,7 @@ function KidnapLeagueRandomIntro() {
 	CharacterSetCurrent(KidnapLeagueRandomKidnapper);
 	
 	// A Mistress can pop if the player is a master kidnapper
-	if ((ReputationGet("Kidnap") >= 100) && (Math.floor(Math.random() * 2) == 0)) {
+	if ((ReputationGet("Kidnap") >= 100) && (Math.floor(Math.random() * 10) == 0)) {
 		CharacterArchetypeClothes(KidnapLeagueRandomKidnapper, "Mistress");
 		KidnapLeagueRandomKidnapperScenario = "6";
 		KidnapLeagueRandomKidnapperDifficulty = 10;
