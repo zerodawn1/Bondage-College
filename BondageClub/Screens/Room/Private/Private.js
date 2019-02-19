@@ -32,9 +32,9 @@ function PrivateWontKneel() { return (CurrentCharacter.CanKneel() && !CurrentCha
 function PrivateCannotKneel() { return (!CurrentCharacter.CanKneel() && !CurrentCharacter.IsKneeling()) }
 function PrivateCanStandUp() { return (CurrentCharacter.CanKneel() && CurrentCharacter.IsKneeling()) }
 function PrivateCannotStandUp() { return (!CurrentCharacter.CanKneel() && CurrentCharacter.IsKneeling()) }
-function PrivateWouldTakePlayerAsSub() { return (!PrivatePlayerIsOwned() && !PrivateIsCaged() && !CurrentCharacter.IsKneeling() && !CurrentCharacter.IsRestrained() && (ReputationGet("Dominant") + 50 <= NPCTraitGet(CurrentCharacter, "Dominant")) && (CurrentTime >= NPCEventGet(CurrentCharacter, "PrivateRoomEntry") + NPCLongEventDelay(CurrentCharacter))) }
-function PrivateWontTakePlayerAsSub() { return (!PrivatePlayerIsOwned() && !PrivateIsCaged() && !CurrentCharacter.IsKneeling() && !CurrentCharacter.IsRestrained() && (ReputationGet("Dominant") + 50 > NPCTraitGet(CurrentCharacter, "Dominant"))) }
-function PrivateNeedTimeToTakePlayerAsSub() { return (!PrivatePlayerIsOwned() && !PrivateIsCaged() && !CurrentCharacter.IsKneeling() && !CurrentCharacter.IsRestrained() && (ReputationGet("Dominant") + 50 <= NPCTraitGet(CurrentCharacter, "Dominant")) && (CurrentTime < NPCEventGet(CurrentCharacter, "PrivateRoomEntry") + NPCLongEventDelay(CurrentCharacter))) }
+function PrivateWouldTakePlayerAsSub() { return (!PrivatePlayerIsOwned() && !PrivateIsCaged() && !CurrentCharacter.IsKneeling() && !CurrentCharacter.IsRestrained() && (CurrentCharacter.Love >= 50) && (ReputationGet("Dominant") + 50 <= NPCTraitGet(CurrentCharacter, "Dominant")) && (CurrentTime >= NPCEventGet(CurrentCharacter, "PrivateRoomEntry") + NPCLongEventDelay(CurrentCharacter))) }
+function PrivateWontTakePlayerAsSub() { return (!PrivatePlayerIsOwned() && !PrivateIsCaged() && !CurrentCharacter.IsKneeling() && !CurrentCharacter.IsRestrained() && ((ReputationGet("Dominant") + 50 > NPCTraitGet(CurrentCharacter, "Dominant")) || (CurrentCharacter.Love < 50))) }
+function PrivateNeedTimeToTakePlayerAsSub() { return (!PrivatePlayerIsOwned() && !PrivateIsCaged() && !CurrentCharacter.IsKneeling() && !CurrentCharacter.IsRestrained() && (CurrentCharacter.Love >= 50) && (ReputationGet("Dominant") + 50 <= NPCTraitGet(CurrentCharacter, "Dominant")) && (CurrentTime < NPCEventGet(CurrentCharacter, "PrivateRoomEntry") + NPCLongEventDelay(CurrentCharacter))) }
 function PrivateTrialInProgress() { return ((CurrentTime < NPCEventGet(CurrentCharacter, "EndSubTrial")) && (NPCEventGet(CurrentCharacter, "EndSubTrial") > 0)) }
 function PrivateTrialDone() { return ((CurrentTime >= NPCEventGet(CurrentCharacter, "EndSubTrial")) && (NPCEventGet(CurrentCharacter, "EndSubTrial") > 0)) }
 function PrivateTrialCanCancel() { return (NPCEventGet(CurrentCharacter, "EndSubTrial") > 0) }
@@ -62,6 +62,7 @@ function PrivateLoad() {
 	if (PrivateCharacter.length >= 2) PrivateCharacter[1].AllowItem = ((ReputationGet("Dominant") + 25 >= NPCTraitGet(PrivateCharacter[1], "Dominant")) || PrivateCharacter[1].IsRestrained());
 	if (PrivateCharacter.length >= 3) PrivateCharacter[2].AllowItem = ((ReputationGet("Dominant") + 25 >= NPCTraitGet(PrivateCharacter[2], "Dominant")) || PrivateCharacter[2].IsRestrained());
 	if (PrivateCharacter.length >= 4) PrivateCharacter[3].AllowItem = ((ReputationGet("Dominant") + 25 >= NPCTraitGet(PrivateCharacter[3], "Dominant")) || PrivateCharacter[3].IsRestrained());
+	PrivateRelationDecay();
 
 }
 
@@ -280,6 +281,26 @@ function PrivateOwnerInRoom() {
 function PrivateRestrainPlayer() {
 	CharacterFullRandomRestrain(Player);
 	PrivateReleaseTimer = CommonTime() + (Math.random() * 60000) + 60000;
+}
+
+// Relationship with any NPC will decay with time, below -100, the NPC leaves if she's not caged
+function PrivateRelationDecay() {
+	for(var C = 1; C < PrivateCharacter.length; C++) {
+		var LastDecay = NPCEventGet(PrivateCharacter[C], "LastDecay");
+		if (LastDecay == 0) 
+			NPCEventAdd(PrivateCharacter[C], "LastDecay", CurrentTime);
+		else 
+			if (LastDecay <= CurrentTime - 7200000) {
+				var Decay = Math.floor((CurrentTime - LastDecay) / 7200000);
+				NPCEventAdd(PrivateCharacter[C], "LastDecay", LastDecay + (Decay * 7200000));
+				NPCLoveChange(PrivateCharacter[C], Decay * -1);
+				PrivateSaveCharacter(C);
+				if ((PrivateCharacter[C].Love <= -100) && (PrivateCharacter[C].Cage == null)) {
+					CurrentCharacter = PrivateCharacter[C];
+					PrivateKickOut();
+				}
+			}
+	}
 }
 
 // When the player starts a submissive trial with an NPC
