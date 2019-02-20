@@ -107,6 +107,11 @@ SuspensionHempRope,,,(You restrain her feet and suspend her from the ceiling.)  
 RemoveSuspensionHempRope,,,(You let her down from the ceiling.)  Much better!  I was slowly getting dizzy.,,,RemoveSuspensionHempRope,
 RemoveSuspensionHempRope,,,(You let her down from the ceiling.)  Next time you should be suspended.  I have contact at the Shibari Dojo.,,,RemoveSuspensionHempRope,Dominant|Serious
 RemoveSuspensionHempRope,,,(You let her down from the ceiling.)  That was fun!  Do you have more crazy positions like this one?,,,RemoveSuspensionHempRope,Submissive|Playful
+MistressVow,,,I vow to be a good Mistress for you my girl.  To be fair and honnest.,,,MistressVow,
+MistressVow,,,I vow to be a good Mistress for you my slave.  To be strict but fair.,,,MistressVow,Serious|Dominant
+MistressVow,,,I vow to be a good Mistress for you my subbie.  I hope we will have fun together and meets lots of friends.,,,MistressVow,Playful|Frigid
+MistressVow,,,I vow to be a good Mistress for you bitch.  The make you my sex slave.,,,MistressVow,Horny|Rude
+MistressVow,,,I vow to be a good Mistress for you my precious.  To protect and nurture you.  To be honnest and just.,,,MistressVow,Peaceful|Wise
 0,,,Will you let me out of the cage?,,IsCaged(),IntroCage,
 0,,,I love this cage you've found for me.  Too bad there's not enough room for two.,,IsCaged(),IntroCage,Submissive|Horny
 0,,,Enough!  Get me out of that fucking cage!,,IsCaged(),IntroCage,Dominant|Rude
@@ -393,9 +398,12 @@ RemoveSuspensionHempRope,,,(You let her down from the ceiling.)  That was fun!  
 1010,,When is our D/s trial period done?,(She thinks for a little while.)  In DialogHours hours my sub.  Be patient.,ShowTrialHours(),TrialInProgress(),DomTrialNotDone,
 1010,,When is our D/s trial period done?,In DialogHours hours little one.  Patience is the key for your collar.,ShowTrialHours(),TrialInProgress(),DomTrialNotDone,Wise
 1010,,When is our D/s trial period done?,Uuuuuh.  (She thinks for a long time.)  I think it's in DialogHours hours slave.,ShowTrialHours(),TrialInProgress(),DomTrialNotDone,Dumb
-1010,1011,Is our D/s trial period done?,Yes is it.  And I'm ready to do the last step and collar you.  Do you still want me as your owner?,,TrialDone(),DomTrialDone,
-1010,1011,Is our D/s trial period done?,You've waited long enough and proved your loyalty.  I'm ready to collar you if you still want me as your Mistress.,,TrialDone(),DomTrialDone,Serious
-1010,1011,Is our D/s trial period done?,Yes!  That wasn't too long.  You are still willing to be collared by me?,,TrialDone(),DomTrialDone,Playful
+1010,1011,Is our D/s trial period done?,Yes is it.  And I'm ready to do the last step and collar you.  Do you still want me as your owner?,,TrialDoneEnoughLove(),DomTrialDoneEnoughLove,
+1010,1011,Is our D/s trial period done?,You've waited long enough and proved your loyalty.  I'm ready to collar you if you still want me as your Mistress.,,TrialDoneEnoughLove(),DomTrialDoneEnoughLove,Serious
+1010,1011,Is our D/s trial period done?,Yes!  That wasn't too long.  You are still willing to be collared by me?,,TrialDoneEnoughLove(),DomTrialDoneEnoughLove,Playful
+1010,,Is our D/s trial period done?,Yes is it.  But I'm still unsure if I want to collar you.  I need more time to get to know you.,,TrialDoneNotEnoughLove(),DomTrialDoneNotEnoughLove,
+1010,,Is our D/s trial period done?,"You've waited long enough and proved your loyalty, but I'm still unsure if I want to be your full Mistress.  I need more time with you.",,TrialDoneNotEnoughLove(),DomTrialDoneNotEnoughLove,Serious
+1010,,Is our D/s trial period done?,Yes!  That was quick.  I do need more time to think about our relationship before I collar you though.,,TrialDoneNotEnoughLove(),DomTrialDoneNotEnoughLove,Playful
 1010,1019,Our trial isn't working for me.  Can we stop it?,"I'm sorry to hear that, of course we can stop the trial.  Are you sure you don't want me as your Mistress?",,TrialCanCancel(),DomTrialStopAsk,
 1010,1019,Our trial isn't working for me.  Can we stop it?,It chagrins me to hear that.  We can absolutely stop the trial if you don't want me as your Mistress.,,TrialCanCancel(),DomTrialStopAsk,Polite
 1010,1019,Our trial isn't working for me.  Can we stop it?,"Shit, are you for real?  Bitch, we can scrap the trial if you don't want me as your Mistress.",,TrialCanCancel(),DomTrialStopAsk,Rude
@@ -406,12 +414,19 @@ RemoveSuspensionHempRope,,,(You let her down from the ceiling.)  That was fun!  
 1010,1000,That's all I wanted to talk about.,Yeah!  Let's go find some beer or something else to drink my girl.,,,DomEndTalk,Dumb
 1010,,(Leave her.),,DialogLeave(),,,
 1020,1010,Can we talk about something else?,(She nods.)  Don't be shy.,,,,
-1011,1012,Yes Mistress.  I'm ready for the collar.,TO DO ,,,DomReadyForCollar,
-1011,1012,Yes Mistress.  I'm ready for the collar.,TO DO ,,,DomReadyForCollar,Horny
-1011,1012,Yes Mistress.  I'm ready for the collar.,TO DO ,,,DomReadyForCollar,Frigid
+1011,1012,Yes Mistress.  I'm ready for the collar.,"This is great!  Come with me girl, I will arrange the collaring ceremony with the club management.",,,DomReadyForCollar,
+1011,1012,Yes Mistress.  I'm ready for the collar.,"Hell yeah!  Get moving bitch, I will setup the collar party with the club management.",,,DomReadyForCollar,Rude
+1011,1012,Yes Mistress.  I'm ready for the collar.,"Tremendous!  Follow me my submissive, I will prepare the official collaring ceremony with the club management.",,,DomReadyForCollar,Polite
 1011,1010,"Not yet, can we continue the trial?","(She nods and smiles.)  Absolutely, take your time my sub.",,,DomContinueTrial,
 1011,1010,"Not yet, can we continue the trial?",(She slaps your butt and laughs.)  Sure we can slave girl.  No rush.,,,DomContinueTrial,Violent
 1011,1010,"Not yet, can we continue the trial?",(She caresses your cheek and smiles.)  Take all the time you need my precious girl.,,,DomContinueTrial,Peaceful
+1012,1013,Oh yes Mistress!  (Get collared.),,,PlayerCollaring(),,
+1012,1013,It's a dream come true.  (Get collared.),,,PlayerCollaring(),,
+1012,1013,(Stay silent and follow her to get collared.),,,PlayerCollaring(),,
+1013,1000,I vow to be honest.,"Honesty will be very important in our relationship.  Welcome to my family, this collar looks lovely on you.",,,,
+1013,1000,I vow to be obedient.,"I'll make sure you respect the rules and limits.  Welcome to my family, this collar looks lovely on you.",,,,
+1013,1000,I vow to be open-minded.,"It's a great quality for a sub.  Welcome to my family, this collar looks lovely on you.",,,,
+1013,1000,I vow to be loyal.,"You're expected to be loyal.  Welcome to my family, this collar looks lovely on you.",,,,
 1019,0,"Sorry, I want my freedom.","Very well, don't call me ""Mistress"" anymore.  We are back as friends.",StopTrial(6),,DomStopTrial,
 1019,0,"Sorry, I want my freedom.","I understand your calling for freedom and adventure my friend.  The trial is over, do not address me as Mistress anymore.",StopTrial(6),,DomStopTrial,Wise
 1019,0,"Sorry, I want my freedom.","I don't understand but I can't do much I guess.  The trial is over, I'm not your Mistress anymore.",StopTrial(6),,DomStopTrial,Dumb
@@ -635,38 +650,41 @@ PunishStripBefore,,Yes Mistress.,,SelectPunishment(),,,
 PunishStripBefore,,This is too much!,,SelectPunishment(),,,
 PunishStripBefore,,(Try to look away.),,SelectPunishment(),,,
 PunishCageIntro,,,"My submissive, since you have cages around here, you're going to spend some time into one.  I'll give you the keys back when I'm satisfied.",,,,
-PunishCage,1001,Alright Mistress.  (Get in the cage.),,RunPunishment(),,,
-PunishCage,1001,Cages are cold.  (Get in the cage.),,RunPunishment(),,,
-PunishCage,1001,(Stay silent and get in the cage.),,RunPunishment(),,,
-PunishBoundIntro,,,Bound,,,,
-PunishBound,1001,TO DO,TO DO,RunPunishment(),,,
-PunishBound,1001,TO DO,TO DO,RunPunishment(),,,
-PunishBound,1001,TO DO,TO DO,RunPunishment(),,,
-PunishBoundPetIntro,,,BoundPet,,,,
-PunishBoundPet,1001,TO DO,TO DO,RunPunishment(),,,
-PunishBoundPet,1001,TO DO,TO DO,RunPunishment(),,,
-PunishBoundPet,1001,TO DO,TO DO,RunPunishment(),,,
-PunishChastityBeltIntro,,,ChastityBelt,,,,
-PunishChastityBelt,1001,TO DO,TO DO,RunPunishment(),,,
-PunishChastityBelt,1001,TO DO,TO DO,RunPunishment(),,,
-PunishChastityBelt,1001,TO DO,TO DO,RunPunishment(),,,
-PunishChastityBraIntro,,,ChastityBra,,,,
-PunishChastityBra,1001,TO DO,TO DO,RunPunishment(),,,
-PunishChastityBra,1001,TO DO,TO DO,RunPunishment(),,,
-PunishChastityBra,1001,TO DO,TO DO,RunPunishment(),,,
-PunishForceNakedIntro,,,ForceNaked,,,,
-PunishForceNaked,1001,TO DO,TO DO,RunPunishment(),,,
-PunishForceNaked,1001,TO DO,TO DO,RunPunishment(),,,
-PunishForceNaked,1001,TO DO,TO DO,RunPunishment(),,,
-PunishConfiscateKeyIntro,,,ConfiscateKey,,,,
-PunishConfiscateKey,1001,TO DO,TO DO,RunPunishment(),,,
-PunishConfiscateKey,1001,TO DO,TO DO,RunPunishment(),,,
-PunishConfiscateKey,1001,TO DO,TO DO,RunPunishment(),,,
-PunishConfiscateCropIntro,,,ConfiscateCrop,,,,
-PunishConfiscateCrop,1001,TO DO,TO DO,RunPunishment(),,,
-PunishConfiscateCrop,1001,TO DO,TO DO,RunPunishment(),,,
-PunishConfiscateCrop,1001,TO DO,TO DO,RunPunishment(),,,
-PunishConfiscateWhipIntro,,,ConfiscateWhip,,,,
-PunishConfiscateWhip,1001,TO DO,TO DO,RunPunishment(),,,
-PunishConfiscateWhip,1001,TO DO,TO DO,RunPunishment(),,,
-PunishConfiscateWhip,1001,TO DO,TO DO,RunPunishment(),,,
+PunishCage,1001,Alright Mistress.  (Get in the cage.),,RunPunishment(0),,,
+PunishCage,1001,Cages are cold.  (Get in the cage.),,RunPunishment(-2),,,
+PunishCage,1001,(Stay silent and get in the cage.),,RunPunishment(1),,,
+PunishBoundIntro,,,"Girl, I'll keep you bound and gagged very tightly for a while and I'll make sure you won't escape.  I'll release you when I'm satisfied.",,,,
+PunishBound,1001,Please don't make it too tight.,"Trust me, it will be tight.  (She tightly binds your arms with hemp ropes and adds more items to restrict you.)  You're not getting out for a while.",RunPunishment(-2),,,
+PunishBound,1001,Very well Mistress.,Stay still.  (She tightly binds your arms with hemp ropes and adds more items to restrict you.)  You're not getting out for a while.,RunPunishment(0),,,
+PunishBound,1001,(Nod and put your hands behind your back.),Good girl.  (She tightly binds your arms with hemp ropes and adds more items to restrict you.)  You're not getting out for a while.,RunPunishment(1),,,
+PunishBoundPetIntro,,,"Girl, you'll be bound very tightly as my pet for a while and I'll make sure you won't escape.  I'll release you when I'm satisfied.",,,,
+PunishBoundPet,1001,As your pet Mistress?,"You'll be fine.  (She straps an armbinder and a belt on your legs, forcing you to kneel.  She finishes with a tail butt plug.)  Struggle for me pet.",RunPunishment(0),,,
+PunishBoundPet,1001,What does that mean?,"Let me show you.  (She straps an armbinder and a belt on your legs, forcing you to kneel.  She finishes with a tail butt plug.)  Struggle for me pet.",RunPunishment(-2),,,
+PunishBoundPet,1001,(Purr slowly.),"Good kitty.  (She straps an armbinder and a belt on your legs, forcing you to kneel.  She finishes with a tail butt plug.)  Struggle for me pet.",RunPunishment(1),,,
+PunishBoundPet,1001,(Nod and put your hands behind your back.),"Good girl.  (She straps an armbinder and a belt on your legs, forcing you to kneel.  She finishes with a tail butt plug.)  Struggle for me pet.",RunPunishment(0),,,
+PunishChastityBeltIntro,,,"My sub, you need to learn that sexual freedom is valuable and can be taken away.  I'll lock you up in a chastity belt to demonstrate.",,,,
+PunishChastityBelt,1001,Yes Mistress.  (Open your legs.),"(She gets a metal chastity belt, straps it around your waist and locks the crotch shield in place.)  Enjoy your metal chastity.",RunPunishment(1),,,
+PunishChastityBelt,1001,Oh please!  Can we negotiate?,"(She gets a metal chastity belt, straps it around your waist and locks the crotch shield in place.)  I don't negotiate with bad subs.",RunPunishment(-2),,,
+PunishChastityBelt,1001,This is cruel!,"(She gets a metal chastity belt, straps it around your waist and locks the crotch shield in place.)  Cruel and secure.",RunPunishment(-2),,,
+PunishChastityBelt,1001,(Nod and open your legs.),"(She gets a metal chastity belt, straps it around your waist and locks the crotch shield in place.)  Enjoy your metal chastity.",RunPunishment(0),,,
+PunishChastityBraIntro,,,You should know that sexual freedom is valuable and can be taken away.  This chastity bra will remind you of your lack of power.,,,,
+PunishChastityBra,1001,That is so unfair!,"(She gets a metal chastity bra, straps it around your breast and locks the chains over your shoulders.)  Stop whinning and be a better sub.",RunPunishment(-2),,,
+PunishChastityBra,1001,You will trap my breast in metal?,"Indeed.  (She gets a metal chastity bra, straps it around your breast and locks the chains over your shoulders.)  No more touching for you.",RunPunishment(0),,,
+PunishChastityBra,1001,(Nod and bow your head.),"Good girl.  (She gets a metal chastity bra, straps it around your breast and locks the chains over your shoulders.)  Remember that lesson.",RunPunishment(1),,,
+PunishForceNakedIntro,,,"Since you're already naked, why not make this your punishment?  You're forbidden to change for half an hour slave.",,,,
+PunishForceNaked,1001,Half an hour naked!,Absolutely.  And I will enforce the rule myself.  I hope you will learn a lesson.,RunPunishment(-2),,,
+PunishForceNaked,1001,Yes Mistress.  I'll stay naked.,"Very good, I will enforce the rule myself.  I hope you will learn a lesson.",RunPunishment(1),,,
+PunishForceNaked,1001,This is too long!,"My decision stands, and I will enforce the rule myself.  I hope you will learn a lesson.",RunPunishment(-2),,,
+PunishForceNaked,1001,(Blush and bow your head.),"Excellent, I will enforce the rule myself.  I hope you will learn a lesson.",RunPunishment(0),,,
+PunishConfiscateKeyIntro,,,"Girl, you're getting punished for taking too many liberties.  This key isn't suitable for you, I will confiscate it.",,,,
+PunishConfiscateKey,1001,Yes Mistress. (Give your key.),(She grabs the key and keeps it in her purse.)  Good girl.  Submissives don't need keys anyway.,RunPunishment(1),,,
+PunishConfiscateKey,1001,You're stealing my key?,Absolutely.  (She grabs the key and keeps it in her purse.)  Submissives don't need keys anyway.,RunPunishment(-2),,,
+PunishConfiscateKey,1001,"Fine, you can have it.",Good.  (She grabs the key and keeps it in her purse.)  Submissives don't need keys anyway.,RunPunishment(0),,,
+PunishConfiscateCropIntro,,,"Sub, you're getting punished for taking too many liberties.  This crop doesn't isn't proper for you, I will take it.",,,,
+PunishConfiscateCrop,1001,Yes Mistress. (Give your crop.),"(She grabs the crop and swings it a few times on your tummy.)  Good girl, always remember who's in charge.",RunPunishment(1),,,
+PunishConfiscateCrop,1001,You're stealing my crop?,"(She grabs the crop and swings it a few times on your tummy.)  I'm not stealing, this item simply doesn't belong to you.",RunPunishment(-2),,,
+PunishConfiscateCrop,1001,"Fine, you can have it.",(She grabs the crop and swings it a few times on your tummy.)  This item might come handy later anyway.,RunPunishment(0),,,
+PunishConfiscateWhipIntro,,,"Slave, you're getting punished for taking too many liberties.  This whip isn't for subs, I will confiscate it.",,,,
+PunishConfiscateWhip,1001,Yes Mistress. (Give your whip.),"(She grabs the item and whips your butt a few times.)  Good girl, always remember who's in charge.",RunPunishment(1),,,
+PunishConfiscateWhip,1001,You're stealing my whip?,"(She grabs the item and whips your butt a few times.)  I'm not stealing, this item simply doesn't belong to you.",RunPunishment(-2),,,
+PunishConfiscateWhip,1001,"Fine, you can have it.",(She grabs the item and whips your butt a few times.)  This item might come handy later anyway.,RunPunishment(0),,,

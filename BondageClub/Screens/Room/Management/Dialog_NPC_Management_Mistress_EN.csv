@@ -156,7 +156,7 @@ KneelToTalk,,,"Submissive girl, what are you doing standing up in my presence?  
 200,,Will you be my Mistress?,"No, my D/s family is complete.  I'm not looking for a new slave.",DialogRemove(),
 200,,Can I collar and own anyone?,"BDSM is consensual.  As long as the person isn't already owned and consent to be your slave, you can collar her.",,
 200,,I want to collar a submissive.,Perfect!  You'll have to wait though.  The club is restructuring.  Please come back later.,,
-200,,A Dominant wants to collar me.,You must be thrilled sub girl.  You'll have to wait though.  The club is restructuring.  Come back later.,,!Player.IsOwned()
+200,,A Dominant wants to collar me.,"You must be thrilled sub girl, but your Dominant will arrange the collaring ceremony, not you.  Ask her politely to contact us.",,!Player.IsOwned()
 200,210,I want to be released from my owner.,"I'm sorry to hear that.  Breaking a BDSM bond is serious.  Tell me your story, why do you want to leave?",,Player.IsOwned()
 200,0,Let's talk about something else.,As long as you don't ask anything idiotic.,,
 210,211,My Mistress doesn't want to join the club.,"I understand.  BDSM is consensual, you have the right to leave your owner.  Since we don't encourage flyby slaves, there's a fee for your freedom.",,OwnerFromBondageCollege()
