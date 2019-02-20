@@ -112,6 +112,10 @@ MistressVow,,,I vow to be a good Mistress for you my slave.  To be strict but fa
 MistressVow,,,I vow to be a good Mistress for you my subbie.  I hope we will have fun together and meets lots of friends.,,,MistressVow,Playful|Frigid
 MistressVow,,,I vow to be a good Mistress for you bitch.  The make you my sex slave.,,,MistressVow,Horny|Rude
 MistressVow,,,I vow to be a good Mistress for you my precious.  To protect and nurture you.  To be honnest and just.,,,MistressVow,Peaceful|Wise
+PlayerMustKneel,,,"Girl, what are you doing standing up?  Get on your knees.",,,PlayerMustKneel,
+PlayerMustKneel,,,"(She looks at you and grins.)  My precious slave, you should know better than standing up in front of me.  Get on your knees.",,,PlayerMustKneel,Serious|Peaceful
+PlayerMustKneel,,,Foolish slave girl!  Don't you know your social status and fucking etiquette?  On your knees!,,,PlayerMustKneel,Rude|Wise
+PlayerMustKneel,,,"(She licks her lips.)  Hey sexy sub, you know what would turn me on?  To see you on your knees.",,,PlayerMustKneel,Playful|Horny
 0,,,Will you let me out of the cage?,,IsCaged(),IntroCage,
 0,,,I love this cage you've found for me.  Too bad there's not enough room for two.,,IsCaged(),IntroCage,Submissive|Horny
 0,,,Enough!  Get me out of that fucking cage!,,IsCaged(),IntroCage,Dominant|Rude
@@ -243,10 +247,10 @@ MistressVow,,,I vow to be a good Mistress for you my precious.  To protect and n
 11,0,Get naked.,(She blushes and gets fully naked.)  Something kinky is brewing!,"Change(""Naked"")",,,
 11,0,Stay like that.,Alright.  What would you like to do then?,,,,
 12,0,"Yes, get out.  (Kick her out.)",,KickOut(),,,
-12,0,"No, you can stay.",Alright.  What would you like to do?,,,CancelKickOut,
-12,0,"No, you can stay.",You got me scared Miss.  What would you like to do?,,,CancelKickOut,Submissive|Peaceful
-12,0,"No, you can stay.","Make up your mind girl.  So, what's up?",,,CancelKickOut,Dominant|Rude
-12,0,"No, you can stay.","Sorry, I'm kind of confused now.  What would you like to do?",,,CancelKickOut,Dumb|Polite
+12,0,"No, you can stay.",(She seems confused.)  Alright.  What would you like to do?,NPCInteraction(-5),,CancelKickOut,
+12,0,"No, you can stay.",You got me scared Miss.  What would you like to do?,NPCInteraction(-5),,CancelKickOut,Submissive|Peaceful
+12,0,"No, you can stay.","Make up your mind girl.  So, what's up?",NPCInteraction(-5),,CancelKickOut,Dominant|Rude
+12,0,"No, you can stay.","Sorry, I'm kind of confused now.  What would you like to do?",NPCInteraction(-5),,CancelKickOut,Dumb|Polite
 20,,Do you have a D/s family in the club?,I don't have a D/s family.  And I'm not sure I'm interested in having one.,,,FamilyNotOwner,
 20,,Do you have a D/s family in the club?,"Sadly, I don't have any owner.  I hope I'll find the perfect Mistress someday.",,,FamilyNotOwner,Submissive
 20,,Do you have a D/s family in the club?,I don't have any submissive.  Finding the perfect BDSM match is quite a quest.,,,FamilyNotOwner,Dominant
@@ -368,6 +372,9 @@ MistressVow,,,I vow to be a good Mistress for you my precious.  To protect and n
 1001,,I'm sorry Mistress.,(She shakes her head no.)  I'm still angry at you.,,!WillForgive(),,
 1001,,(Whimper and beg.),(She shakes her head no.)  I'm still angry at you.,,!WillForgive(),,
 1001,,(Leave her.),,DialogLeave(),,,
+1005,,That's a new rule?,Don't argue girl.  So do you kneel or I need to force you?,DialogRemove(),,,
+1005,1000,I'm sorry Mistress.  (Kneel for her.),(She smirks as your kneel down for her.)  Good girl.  What do you want?,"DialogSetPose(Player, ""Kneel"")",,,
+1005,1000,(Bow your head and kneel.),(She smirks as your kneel down for her.)  Good girl.  What do you want?,"DialogSetPose(Player, ""Kneel"")",,,
 1010,,,Is there anything else you want to talk about my submissive?,,,DomIntroTalk,
 1010,,,"Girl, do you still want to talk?",,,DomIntroTalk,Dominant|Dumb
 1010,,,"Hey bitch, be direct if ya need to speak.",,,DomIntroTalk,Rude|Serious
@@ -385,11 +392,16 @@ MistressVow,,,I vow to be a good Mistress for you my precious.  To protect and n
 1010,,Please tell me about you.,I don't know what tell you.  I'm a club member and I like BDSM.,DialogRemove(),,DomNPCProfile,Dumb
 1010,,Please tell me about you.,"I'm not known to be the life a party.  For me, BDSM should be taken seriously to avoid any harm or pitfalls.",DialogRemove(),,DomNPCProfile,Serious
 1010,,Please tell me about you.,"I like clubs, parties, bondage and life in general.  I have many wonderful friends like you in the club.",DialogRemove(),,DomNPCProfile,Playful
-1010,,Are you happy to have me as your sub?,"Yes, it's fun to have a sub like you.  (She smiles.)",DialogRemove(),,DomHappy,
-1010,,Are you happy to have me as your sub?,"(She slaps your ass and gives you a stern.)  Don't worry girl, you'll know when I'm unhappy with you.",DialogRemove(),,DomHappy,Violent|Serious
-1010,,Are you happy to have me as your sub?,(She caresses your hair slowly.)  I'm beyond pleased to own such a wonderful submissive as you little one.,DialogRemove(),,DomHappy,Peaceful|Polite
-1010,,Are you happy to have me as your sub?,"Oh hell yeah, owning you makes me all wet.",DialogRemove(),,DomHappy,Horny|Rude
-1010,,Are you happy to have me as your sub?,"I am, we share a bond that's beyond the physical realm.",DialogRemove(),,DomHappy,Frigid|Wise
+1010,,Are you happy to have me as your sub?,"Yes, it's fun to have a sub like you.  (She smiles.)",,IsHappy(),DomHappy,
+1010,,Are you happy to have me as your sub?,"(She slaps your ass and gives you a stern look.)  Don't worry girl, you'll know when I'm unhappy with you.",,IsHappy(),DomHappy,Violent|Serious
+1010,,Are you happy to have me as your sub?,(She caresses your hair slowly.)  I'm beyond pleased to own such a wonderful submissive as you little one.,,IsHappy(),DomHappy,Peaceful|Polite
+1010,,Are you happy to have me as your sub?,"Oh hell yeah, owning you makes me all wet.",,IsHappy(),DomHappy,Horny|Rude
+1010,,Are you happy to have me as your sub?,"I am, we share a bond that's beyond the physical realm.",,IsHappy(),DomHappy,Frigid|Wise
+1010,,Are you happy to have me as your sub?,"I do have some regrets, maybe it wasn't the best of ideas.",,!IsHappy(),DomNotHappy,
+1010,,Are you happy to have me as your sub?,(She slaps your face and gives you a stern look.)  No!  You need to please me better slave.,,!IsHappy(),DomNotHappy,Violent|Serious
+1010,,Are you happy to have me as your sub?,"(She caresses your hair.)  I'll be honest with you, I'm not that happy about our relationship.  I hope it gets better with time.",,!IsHappy(),DomNotHappy,Peaceful|Polite
+1010,,Are you happy to have me as your sub?,No slut!  If you can't get me wet you're not worth much.,,!IsHappy(),DomNotHappy,Horny|Rude
+1010,,Are you happy to have me as your sub?,"Not really dear submissive.  Strangely enough, our platonic relationship isn't working for me.",,!IsHappy(),DomNotHappy,Frigid|Wise
 1010,,Do you have a D/s family in the club?,I only have one submissive and it's you girl.,,,DomFamilyOwner,
 1010,,Do you have a D/s family in the club?,I have one subbie and it's best.  (She winks at you.),,,DomFamilyOwner,Playful
 1010,,Do you have a D/s family in the club?,Don't ask questions when you already know the answer.  I have you and that's enough.,,,DomFamilyOwner,Serious
@@ -407,32 +419,41 @@ MistressVow,,,I vow to be a good Mistress for you my precious.  To protect and n
 1010,1019,Our trial isn't working for me.  Can we stop it?,"I'm sorry to hear that, of course we can stop the trial.  Are you sure you don't want me as your Mistress?",,TrialCanCancel(),DomTrialStopAsk,
 1010,1019,Our trial isn't working for me.  Can we stop it?,It chagrins me to hear that.  We can absolutely stop the trial if you don't want me as your Mistress.,,TrialCanCancel(),DomTrialStopAsk,Polite
 1010,1019,Our trial isn't working for me.  Can we stop it?,"Shit, are you for real?  Bitch, we can scrap the trial if you don't want me as your Mistress.",,TrialCanCancel(),DomTrialStopAsk,Rude
+1010,1018,Being your sub isn't for me.  I need freedom.,"It really makes me sad to hear that.  Are you serious?  If so, I will leave your life forever.",,CanAskUncollar(),DomAskUncollar,
+1010,1018,Being your sub isn't for me.  I need freedom.,"(She gives you a menacing look.)  Slave, you knew of the commitment.  If I go, you'll never see me again.",,CanAskUncollar(),DomAskUncollar,Serious|Violent
+1010,1018,Being your sub isn't for me.  I need freedom.,"(She seems disappointed.)  Seriously?  I thought you were having fun.  If you're serious, I'll disappear.",,CanAskUncollar(),DomAskUncollar,Playful|Peaceful
+1010,1018,Being your sub isn't for me.  I need freedom.,"So my slut isn't getting wet anymore?  Bitch, if I go I'll never come back.  Are you serious?",,CanAskUncollar(),DomAskUncollar,Rude|Horny
+1010,,Being your sub isn't for me.  I need freedom.,We've only been together for a short while.  Give it some time girl.,NPCInteraction(-2),CannotAskUncollar(),,
 1010,1000,That's all I wanted to talk about.,(She nods.)  Anything else is on your mind my sub?,,,DomEndTalk,
 1010,1000,That's all I wanted to talk about.,"I agree, let's stop the trival conversations that leads nowhere.",,,DomEndTalk,Serious
 1010,1000,That's all I wanted to talk about.,Yep!  Time for some action and some fun!,,,DomEndTalk,Playful
 1010,1000,That's all I wanted to talk about.,"Good, cause I was about to gag your ass to stop you from yacking.",,,DomEndTalk,Rude
 1010,1000,That's all I wanted to talk about.,Yeah!  Let's go find some beer or something else to drink my girl.,,,DomEndTalk,Dumb
 1010,,(Leave her.),,DialogLeave(),,,
-1020,1010,Can we talk about something else?,(She nods.)  Don't be shy.,,,,
 1011,1012,Yes Mistress.  I'm ready for the collar.,"This is great!  Come with me girl, I will arrange the collaring ceremony with the club management.",,,DomReadyForCollar,
 1011,1012,Yes Mistress.  I'm ready for the collar.,"Hell yeah!  Get moving bitch, I will setup the collar party with the club management.",,,DomReadyForCollar,Rude
 1011,1012,Yes Mistress.  I'm ready for the collar.,"Tremendous!  Follow me my submissive, I will prepare the official collaring ceremony with the club management.",,,DomReadyForCollar,Polite
 1011,1010,"Not yet, can we continue the trial?","(She nods and smiles.)  Absolutely, take your time my sub.",,,DomContinueTrial,
 1011,1010,"Not yet, can we continue the trial?",(She slaps your butt and laughs.)  Sure we can slave girl.  No rush.,,,DomContinueTrial,Violent
 1011,1010,"Not yet, can we continue the trial?",(She caresses your cheek and smiles.)  Take all the time you need my precious girl.,,,DomContinueTrial,Peaceful
-1012,1013,Oh yes Mistress!  (Get collared.),,,PlayerCollaring(),,
-1012,1013,It's a dream come true.  (Get collared.),,,PlayerCollaring(),,
-1012,1013,(Stay silent and follow her to get collared.),,,PlayerCollaring(),,
+1012,1013,Oh yes Mistress!  (Get collared.),,PlayerCollaring(),,,
+1012,1013,It's a dream come true.  (Get collared.),,PlayerCollaring(),,,
+1012,1013,(Stay silent and follow her to get collared.),,PlayerCollaring(),,,
+1012,1010,Wait!  I need to prepare first.,"(She laughs out loud.)  Alright girl, take your time.",,,,
 1013,1000,I vow to be honest.,"Honesty will be very important in our relationship.  Welcome to my family, this collar looks lovely on you.",,,,
 1013,1000,I vow to be obedient.,"I'll make sure you respect the rules and limits.  Welcome to my family, this collar looks lovely on you.",,,,
 1013,1000,I vow to be open-minded.,"It's a great quality for a sub.  Welcome to my family, this collar looks lovely on you.",,,,
 1013,1000,I vow to be loyal.,"You're expected to be loyal.  Welcome to my family, this collar looks lovely on you.",,,,
+1018,1010,"Yes, it's the end.  (Abandon her.)",,KickOut(),,,
+1018,1010,Let's remain together.  (Stay with her.),You've got me worried for a while girl.  Don't play with my nerves.,NPCInteraction(-5),,DomDontRemoveCollar,
+1018,1010,Let's remain together.  (Stay with her.),"Very good my submissive.  If you're scared or unsure, we can always talk about it.",NPCInteraction(-5),,DomDontRemoveCollar,Peaceful|Wise
+1018,1010,Let's remain together.  (Stay with her.),(She cracks her knuckles in anger.)  Ok!  Stop making me mad.,NPCInteraction(-5),,DomDontRemoveCollar,Violent|Dumb
 1019,0,"Sorry, I want my freedom.","Very well, don't call me ""Mistress"" anymore.  We are back as friends.",StopTrial(6),,DomStopTrial,
 1019,0,"Sorry, I want my freedom.","I understand your calling for freedom and adventure my friend.  The trial is over, do not address me as Mistress anymore.",StopTrial(6),,DomStopTrial,Wise
 1019,0,"Sorry, I want my freedom.","I don't understand but I can't do much I guess.  The trial is over, I'm not your Mistress anymore.",StopTrial(6),,DomStopTrial,Dumb
-1019,1010,Let's continue the trial Mistress.,You've got me scared for a while.  I'm happy you've changed your mind my sub.,,,DomDontStopTrial,
-1019,1010,Let's continue the trial Mistress.,"Very good my submissive.  If you're scared or unsure, we can always talk about it.",,,DomDontStopTrial,Serious
-1019,1010,Let's continue the trial Mistress.,Great!  I can't wait to collar you my subbie.,,,DomDontStopTrial,Playful
+1019,1010,Let's continue the trial Mistress.,You've got me scared for a while.  I'm happy you've changed your mind my sub.,NPCInteraction(-5),,DomDontStopTrial,
+1019,1010,Let's continue the trial Mistress.,"Very good my submissive.  If you're scared or unsure, we can always talk about it.",NPCInteraction(-5),,DomDontStopTrial,Serious
+1019,1010,Let's continue the trial Mistress.,Great!  I can't wait to collar you my subbie.,NPCInteraction(-5),,DomDontStopTrial,Playful
 ActivityStop,,,Fine!  (She pushes you back.)  You can play without me girl.,,,DomActivityStop,
 ActivityStop,,,(She pushes you back.)  If you cannot obey then you're not worth my time.,,,DomActivityStop,Wise
 ActivityStop,,,(She pushes you back.)  Back off!,,,DomActivityStop,Dumb
