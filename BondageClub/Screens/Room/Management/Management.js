@@ -15,7 +15,7 @@ function ManagementGetMistressAngryCount(InCount) { return (InCount == Managemen
 function ManagementMistressAngryAdd() { ManagementMistressAngryCount++ }
 function ManagementMistressWillRelease() { return (CommonTime() >= ManagementMistressReleaseTimer) }
 function ManagementFriendIsChaste() { return (((PrivateCharacter.length > 1) && PrivateCharacter[1].IsChaste()) || ((PrivateCharacter.length > 2) && PrivateCharacter[2].IsChaste()) || ((PrivateCharacter.length > 3) && PrivateCharacter[3].IsChaste())); }
-function ManagementCanPlayWithoutPermission() { return (!ManagementMistressAllowPlay && Player.CanInteract() && (ManagementMistressReleaseTimer == 0)) } 
+function ManagementCanPlayWithoutPermission() { return (!ManagementMistressAllowPlay && Player.CanInteract() && (ManagementMistressReleaseTimer == 0) && !ManagementIsClubSlave()) } 
 function ManagementOwnerFromBondageCollege() { return ((Player.Owner == "NPC-Sidney") || (Player.Owner == "NPC-Amanda") || (Player.Owner == "NPC-Jennifer")) }
 function ManagementOwnerInPrivateRoom() { return PrivateOwnerInRoom() }
 function ManagementOwnerAway() { return !((Player.Owner == "NPC-Sidney") || (Player.Owner == "NPC-Amanda") || (Player.Owner == "NPC-Jennifer")) }
@@ -34,6 +34,7 @@ function ManagementCannotBeReleased() { return ((Player.Owner != "") && PrivateO
 function ManagementWillOwnPlayer() { return ((Player.Owner == "") && (ReputationGet("Dominant") <= -100) && (ManagementMistressAngryCount == 0) && (PrivateCharacter.length <= 3) && !PrivatePlayerIsOwned() && ManagementNoMistressInPrivateRoom()) }
 function ManagementWontOwnPlayer() { return ((Player.Owner == "") && (ReputationGet("Dominant") <= -1) && (ReputationGet("Dominant") >= -99) && (PrivateCharacter.length <= 3) && !PrivatePlayerIsOwned() && ManagementNoMistressInPrivateRoom()) }
 function ManagementNoMistressInPrivateRoom() { return (((PrivateCharacter.length <= 1) || (PrivateCharacter[1].Title == null) || (PrivateCharacter[1].Title != "Mistress")) && ((PrivateCharacter.length <= 2) || (PrivateCharacter[2].Title == null) || (PrivateCharacter[2].Title != "Mistress"))) }
+function ManagementIsClubSlave() { return ((InventoryGet(Player, "ItemNeck") != null) && (InventoryGet(Player, "ItemNeck").Asset.Name == "ClubSlaveCollar")) }
 
 // Loads the club management room, creates the Mistress and sub character
 function ManagementLoad() {
@@ -69,7 +70,9 @@ function ManagementRun() {
 // When the user clicks in the management room
 function ManagementClick() {
 	if ((MouseX >= 250) && (MouseX < 750) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(Player);
-	if ((MouseX >= 750) && (MouseX < 1250) && (MouseY >= 0) && (MouseY < 1000) && !ManagementEmpty) {
+	if ((MouseX >= 750) && (MouseX < 1250) && (MouseY >= 0) && (MouseY < 1000) && !ManagementEmpty) {		
+		if ((ManagementMistress.Stage == "0") && ManagementIsClubSlave())
+			ManagementMistress.Stage = "350";
 		if (((ManagementMistress.Stage == "0") || (ManagementMistress.Stage == "5")) && (ReputationGet("Dominant") < 0) && !Player.IsKneeling()) {
 			ReputationProgress("Dominant", 1);
 			ManagementMistress.CurrentDialog = DialogFind(ManagementMistress, "KneelToTalk");
@@ -178,4 +181,22 @@ function ManagementSendMistressToPrivateRoom(RepChange) {
 	PrivateAddCharacter(ManagementMistress, "Mistress");
 	CurrentScreen = "Management";
 	DialogLeave();
+}
+
+// When the Mistress locks the club slave collar on the player
+function ManagementClubSlaveCollar(RepChange) {
+	ReputationProgress("Dominant", RepChange);
+	CharacterRelease(Player);
+	InventoryWear(Player, "ClubSlaveCollar", "ItemNeck");
+	LogAdd("ClubSlave", "Management", CurrentTime + 3600000);
+	LogAdd("BlockChange", "Rule", CurrentTime + 3600000);
+}
+
+// When the player finishes the club slave contract
+function ManagementFinishClubSlave(RepChange) {
+	ReputationProgress("Dominant", RepChange);
+	CharacterChangeMoney(Player, 80);
+	if (Player.IsOwned()) InventoryWear(Player, "SlaveCollar", "ItemNeck");
+	else InventoryRemove(Player, "ItemNeck");
+	if (Player.IsNaked()) CharacterDress(Player, ManagementPlayerAppearance);
 }
