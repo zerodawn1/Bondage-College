@@ -38,17 +38,22 @@ KneelToTalk,,,"Submissive girl, what are you doing standing up in my presence?  
 11,12,What does that mean?,It means you're going to strip right now.,"DialogChangeReputation(""Dominant"", 2)",
 11,12,(Stay silent.),You need to know your place.  Strip girl.,,
 12,,Strip here?  No way!,(She slaps your face pretty hard.)  Oh yes you will!,DialogRemove(),
-12,13,Yes Mistress.  (Strip for her.),(You slowly strip for her as she smiles.),PlayerStrip(),
+12,13,Yes Mistress.,(You slowly strip for her as she smiles.),PlayerStrip(),
 12,13,I'm not stripping!,We'll see about that!  (She painfully locks your arm behind your back until you give up and strip.),PlayerStrip(),
+12,13,(Strip slowly.),(You slowly strip for her as she smiles.),PlayerStrip(),
 13,14,That's embarrassing.,And it's about to get worse.  (She forces an armbinder on you and straps it tight.),PlayerArmbinder(0),
 13,14,Are you happy now?,Not yet.  (She forces an armbinder on you and straps it tight.),PlayerArmbinder(2),
 13,14,(Blush and bow your head.),Good girl.  (She forces an armbinder on you and straps it tight.),PlayerArmbinder(-2),
 14,15,This is really tight.,"Have you learned your lesson?  Will you be good, or I need to restrict you even more?",,
 14,15,(Tug on the binder.),"Have you learned your lesson?  Will you be good, or I need to restrict you even more?",,
-15,16,"Yes, I've learned my lesson.","Alright.  (She straps your legs with a belt.)  I will release you later, you can struggle for my amusement.","DialogWearItem(""LeatherBelt"", ""ItemFeet"")",
-15,16,Yes Mistress.,"Alright.  (She straps your legs with a belt.)  I will release you later, you can struggle for my amusement.","DialogWearItem(""LeatherBelt"", ""ItemFeet"")",
+15,16,"Yes, I've learned my lesson.","Alright.  (She straps your legs with a belt.)  I will release you later, you can struggle for my amusement.","DialogWearItem(""LeatherBelt"", ""ItemFeet"")",!Player.IsKneeling()
+15,16,"Yes, I've learned my lesson.","Alright.  (She straps your legs with a belt.)  I will release you later, you can struggle for my amusement.","DialogWearItem(""LeatherBelt"", ""ItemLegs"")",Player.IsKneeling()
+15,16,Yes Mistress.,"Alright.  (She straps your legs with a belt.)  I will release you later, you can struggle for my amusement.","DialogWearItem(""LeatherBelt"", ""ItemFeet"")",!Player.IsKneeling()
+15,16,Yes Mistress.,"Alright.  (She straps your legs with a belt.)  I will release you later, you can struggle for my amusement.","DialogWearItem(""LeatherBelt"", ""ItemLegs"")",Player.IsKneeling()
 15,16,What lesson?,"I'll show you.  (She uses many more items on you.)  I will release you later, you can struggle for my amusement.",PlayerRandomRestrain(),
 15,16,Fuck you!,"Oh yeah?  (She uses many more items on you.)  I will release you later, you can struggle for my amusement.",PlayerRandomRestrain(),
+15,16,(Nod and blush.),"Alright.  (She straps your legs with a belt.)  I will release you later, you can struggle for my amusement.","DialogWearItem(""LeatherBelt"", ""ItemFeet"")",!Player.IsKneeling()
+15,16,(Nod and blush.),"Alright.  (She straps your legs with a belt.)  I will release you later, you can struggle for my amusement.","DialogWearItem(""LeatherBelt"", ""ItemLegs"")",Player.IsKneeling()
 16,,,How's the bratty girl doing?,,
 16,,Can you please help me?,"Struggle some more, I'm having fun.",,!MistressWillRelease()
 16,,(Whimper and beg for mercy.),"Struggle some more, I'm having fun.",,!MistressWillRelease()
@@ -62,6 +67,7 @@ KneelToTalk,,,"Submissive girl, what are you doing standing up in my presence?  
 30,0,I'm sorry.  Please forgive me Mistress.,(She gives you a stern look.)  Don't do it again.,"DialogChangeReputation(""Dominant"", -2)",
 30,0,I won't do it again.,(She gives you a stern look.)  Fine.,,
 30,11,I'll do what I want.,You dare to defy me?  Now you're in trouble!,"DialogChangeReputation(""Dominant"", 3)",
+30,0,(Nod politely and look down.),(She gives you a stern look.)  Don't do it again.,"DialogChangeReputation(""Dominant"", -2)",
 50,,Why the ears and tail?,"She's a neko, a girl with cat features.  Don't judge her, she's a good kitty.",,
 50,,You keep her restrained all day?,"Yes, she's not allowed to stray or talk while I work.",,
 50,,She's enjoying herself?,"Absolutely, she's my submissive and she's a bondage slut.",,
@@ -189,6 +195,6 @@ KneelToTalk,,,"Submissive girl, what are you doing standing up in my presence?  
 221,222,I have my private room in the club.,That could certainly work.  I'll take my kitty to her cage and go see your place right after.,,
 221,222,"Yes, we could use my room Miss.",That could certainly work.  I'll take my kitty to her cage and go see your place right after.,,
 221,0,I don't know.,It's fine girl.  Let me know if you can find a good place where we could meet after my shift.,,
-222,223,"Great, I'll see you there.",,SendMistressToPrivateRoom(3),
+222,223,"Great, I'll see you there.",,SendMistressToPrivateRoom(2),
 222,223,Take your time Miss.,,SendMistressToPrivateRoom(1),
 222,223,You're welcome any time.,,SendMistressToPrivateRoom(2),

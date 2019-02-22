@@ -31,8 +31,9 @@ function ManagementCanReleaseFromOwnerFirst() { return ((Player.Money >= 60) && 
 function ManagementCanReleaseFromOwner() { return ((Player.Money >= 200) && LogQuery("ReleasedFromOwner", "Management")) }
 function ManagementCanBeReleased() { return ((Player.Owner != "") && !PrivateOwnerInRoom()) }
 function ManagementCannotBeReleased() { return ((Player.Owner != "") && PrivateOwnerInRoom()) }
-function ManagementWillOwnPlayer() { return ((Player.Owner == "") && (ReputationGet("Dominant") <= -100) && (ManagementMistressAngryCount == 0) && (PrivateCharacter.length <= 3) && !PrivatePlayerIsOwned()) }
-function ManagementWontOwnPlayer() { return ((Player.Owner == "") && (ReputationGet("Dominant") <= -1) && (ReputationGet("Dominant") >= -99) && (PrivateCharacter.length <= 3) && !PrivatePlayerIsOwned()) }
+function ManagementWillOwnPlayer() { return ((Player.Owner == "") && (ReputationGet("Dominant") <= -100) && (ManagementMistressAngryCount == 0) && (PrivateCharacter.length <= 3) && !PrivatePlayerIsOwned() && ManagementNoMistressInPrivateRoom()) }
+function ManagementWontOwnPlayer() { return ((Player.Owner == "") && (ReputationGet("Dominant") <= -1) && (ReputationGet("Dominant") >= -99) && (PrivateCharacter.length <= 3) && !PrivatePlayerIsOwned() && ManagementNoMistressInPrivateRoom()) }
+function ManagementNoMistressInPrivateRoom() { return (((PrivateCharacter.length <= 1) || (PrivateCharacter[1].Title == null) || (PrivateCharacter[1].Title != "Mistress")) && ((PrivateCharacter.length <= 2) || (PrivateCharacter[2].Title == null) || (PrivateCharacter[2].Title != "Mistress"))) }
 
 // Loads the club management room, creates the Mistress and sub character
 function ManagementLoad() {
@@ -70,6 +71,7 @@ function ManagementClick() {
 	if ((MouseX >= 250) && (MouseX < 750) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(Player);
 	if ((MouseX >= 750) && (MouseX < 1250) && (MouseY >= 0) && (MouseY < 1000) && !ManagementEmpty) {
 		if (((ManagementMistress.Stage == "0") || (ManagementMistress.Stage == "5")) && (ReputationGet("Dominant") < 0) && !Player.IsKneeling()) {
+			ReputationProgress("Dominant", 1);
 			ManagementMistress.CurrentDialog = DialogFind(ManagementMistress, "KneelToTalk");
 			ManagementMistress.Stage = "5";
 		}
@@ -171,5 +173,9 @@ function ManagementReleaseFromOwner(RepChange) {
 function ManagementSendMistressToPrivateRoom(RepChange) {
 	ReputationProgress("Dominant", RepChange);
 	ManagementEmpty = true;
+	CurrentScreen = "Private";
+	ManagementMistress.Name = ManagementMistress.Name.replace(TextGet("Mistress") + " ", "");
+	PrivateAddCharacter(ManagementMistress, "Mistress");
+	CurrentScreen = "Management";
 	DialogLeave();
 }

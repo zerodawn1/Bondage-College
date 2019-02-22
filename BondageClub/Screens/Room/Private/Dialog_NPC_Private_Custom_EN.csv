@@ -251,9 +251,10 @@ PlayerMustKneel,,,"(She licks her lips.)  Hey sexy sub, you know what would turn
 12,0,"No, you can stay.",You got me scared Miss.  What would you like to do?,NPCInteraction(-5),,CancelKickOut,Submissive|Peaceful
 12,0,"No, you can stay.","Make up your mind girl.  So, what's up?",NPCInteraction(-5),,CancelKickOut,Dominant|Rude
 12,0,"No, you can stay.","Sorry, I'm kind of confused now.  What would you like to do?",NPCInteraction(-5),,CancelKickOut,Dumb|Polite
-20,,Do you have a D/s family in the club?,I don't have a D/s family.  And I'm not sure I'm interested in having one.,,,FamilyNotOwner,
-20,,Do you have a D/s family in the club?,"Sadly, I don't have any owner.  I hope I'll find the perfect Mistress someday.",,,FamilyNotOwner,Submissive
-20,,Do you have a D/s family in the club?,I don't have any submissive.  Finding the perfect BDSM match is quite a quest.,,,FamilyNotOwner,Dominant
+20,,Do you have a D/s family in the club?,I don't have a D/s family.  And I'm not sure I'm interested in having one.,,!IsMistress(),FamilyNotOwner,
+20,,Do you have a D/s family in the club?,"Sadly, I don't have any owner.  I hope I'll find the perfect Mistress someday.",,!IsMistress(),FamilyNotOwner,Submissive
+20,,Do you have a D/s family in the club?,I don't have any submissive.  Finding the perfect BDSM match is quite a quest.,,!IsMistress(),FamilyNotOwner,Dominant
+20,,Do you have a D/s family in the club?,I do.  I have two wonderful slaves.,,IsMistress(),,
 20,21,Are you looking for a submissive?,(She smiles.)  It could be fun to own a subbie girl.,,WouldTakePlayerAsSub(),WouldTakePlayerAsSub,
 20,21,Are you looking for a submissive?,"(She giggles.)  I'm a sub myself, so I would need someone that's really submissive.",,WouldTakePlayerAsSub(),WouldTakePlayerAsSub,Submissive
 20,21,Are you looking for a submissive?,"(She smirks.)  Girl, I'm always hunting for slaves.",,WouldTakePlayerAsSub(),WouldTakePlayerAsSub,Dominant
@@ -402,11 +403,12 @@ PlayerMustKneel,,,"(She licks her lips.)  Hey sexy sub, you know what would turn
 1010,,Are you happy to have me as your sub?,"(She caresses your hair.)  I'll be honest with you, I'm not that happy about our relationship.  I hope it gets better with time.",,!IsHappy(),DomNotHappy,Peaceful|Polite
 1010,,Are you happy to have me as your sub?,No slut!  If you can't get me wet you're not worth much.,,!IsHappy(),DomNotHappy,Horny|Rude
 1010,,Are you happy to have me as your sub?,"Not really dear submissive.  Strangely enough, our platonic relationship isn't working for me.",,!IsHappy(),DomNotHappy,Frigid|Wise
-1010,,Do you have a D/s family in the club?,I only have one submissive and it's you girl.,,,DomFamilyOwner,
-1010,,Do you have a D/s family in the club?,I have one subbie and it's best.  (She winks at you.),,,DomFamilyOwner,Playful
-1010,,Do you have a D/s family in the club?,Don't ask questions when you already know the answer.  I have you and that's enough.,,,DomFamilyOwner,Serious
-1010,,Do you have a D/s family in the club?,"I only have one ass to whip red, and it's yours.",,,DomFamilyOwner,Violent
-1010,,Do you have a D/s family in the club?,I only take care of you my precious DialogPlayerName.,,,DomFamilyOwner,Peaceful
+1010,,Do you have a D/s family in the club?,I only have one submissive and it's you girl.,,!IsMistress(),DomFamilyOwner,
+1010,,Do you have a D/s family in the club?,I have one subbie and it's best.  (She winks at you.),,!IsMistress(),DomFamilyOwner,Playful
+1010,,Do you have a D/s family in the club?,Don't ask questions when you already know the answer.  I have you and that's enough.,,!IsMistress(),DomFamilyOwner,Serious
+1010,,Do you have a D/s family in the club?,"I only have one ass to whip red, and it's yours.",,!IsMistress(),DomFamilyOwner,Violent
+1010,,Do you have a D/s family in the club?,I only take care of you my precious DialogPlayerName.,,!IsMistress(),DomFamilyOwner,Peaceful
+1010,,Do you have a D/s family in the club?,"I have three slaves in the club, including you.  (She pinches your cheek.)",,IsMistress(),,
 1010,,When is our D/s trial period done?,(She thinks for a little while.)  In DialogHours hours my sub.  Be patient.,ShowTrialHours(),TrialInProgress(),DomTrialNotDone,
 1010,,When is our D/s trial period done?,In DialogHours hours little one.  Patience is the key for your collar.,ShowTrialHours(),TrialInProgress(),DomTrialNotDone,Wise
 1010,,When is our D/s trial period done?,Uuuuuh.  (She thinks for a long time.)  I think it's in DialogHours hours slave.,ShowTrialHours(),TrialInProgress(),DomTrialNotDone,Dumb
@@ -717,3 +719,8 @@ PunishConfiscateWhipIntro,,,"Slave, you're getting punished for taking too many 
 PunishConfiscateWhip,1001,Yes Mistress. (Give your whip.),"(She grabs the item and whips your butt a few times.)  Good girl, always remember who's in charge.",RunPunishment(1),,,
 PunishConfiscateWhip,1001,You're stealing my whip?,"(She grabs the item and whips your butt a few times.)  I'm not stealing, this item simply doesn't belong to you.",RunPunishment(-2),,,
 PunishConfiscateWhip,1001,"Fine, you can have it.",(She grabs the item and whips your butt a few times.)  This item might come handy later anyway.,RunPunishment(0),,,
+PunishSleepCageIntro,,,"As punishment, you will sleep in your own cage everyday for a week.",,,,
+PunishSleepCage,1001,Mistress!  This is torture!,"Nonsense.  You will wake up everyday in your cage, remembering who's your owner.",RunPunishment(-2),,,
+PunishSleepCage,1001,It might be hard to sleep in there.,"You'll get used to it.  You will wake up everyday in your cage, remembering who's your owner.",RunPunishment(0),,,
+PunishSleepCage,1001,I'm not sure I understand.,"It's easy, you will wake up everyday in your cage, remembering who's your owner.",RunPunishment(0),,,
+PunishSleepCage,1001,Very well Mistress.,"Good, you will wake up everyday in your cage, remembering who's your owner.",RunPunishment(1),,,

@@ -150,7 +150,14 @@ function LoginResponse(CharacterData) {
 		// Starts the game in the main hall while loading characters in the private room
 		PrivateCharacter = [];
 		CommonSetScreen("Room", "Private");
-		CommonSetScreen("Room", "MainHall");
+		
+		// If the player must start in her room, in her cage
+		if (LogQuery("SleepCage", "Rule")) {
+			InventoryRemove(Player, "ItemFeet");
+			InventoryRemove(Player, "ItemLegs");
+			Player.Cage = true;
+			CharacterSetActivePose(Player, "Kneel");
+		} else CommonSetScreen("Room", "MainHall");
 		
 	} else LoginMessage = TextGet("ErrorLoadingCharacterData");
 }
