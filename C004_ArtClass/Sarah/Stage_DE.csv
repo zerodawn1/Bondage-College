@@ -2,7 +2,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,,Malen ist nicht|meine Stärke.,Oh! Das kriegst du bestimmt hin.|Ist Kunst nicht so dein Ding?,10,0,-1,
 0,0,0,,Ich komme|schon klar.,Ganz bestimmt.|Gefällt dir die Kunststunde mit Julia?,10,0,0,
 0,0,0,,Ich würde lieber|dich malen.,(Sie wird rot.) Sehr nett von dir.|Dir gefällt unsere Lehrerin also nicht?,10,1,0,
-0,0,0,BondageDone,"Wenn du brav bist, fessele|ich dich heute nochmal","(Sie neigt ihren Kopf.) Ja, Miss.|Wie gefällt dir der Kunstunterricht mit Julia?",10,0,1,
+0,0,0,BondageDone,"Wenn du brav bist, fessele|ich dich heute nochmal","(Sie senkt den Kopf.) Ja, Miss.|Wie gefällt dir der Kunstunterricht mit Julia?",10,0,1,
 10,0,0,,Julia ist ein recht|großes Bildmodell.,"Sei nicht so gemein zu ihr. Sie ist vielleicht|etwas kräftig, aber sie ist 'ne gute Lehrerin.",20,-1,0,
 10,0,0,,Ihr Kleid hat|zu viele Details.,Darum geht es ja! Sie ist|kein einfaches Bildmodell.,20,0,0,
 10,0,0,,"Kunst ist okay,|aber Julia nicht.","Sei nicht so gemein zu ihr. Sie wird langsam|alt, aber sie ist 'ne gute Lehrerin.",20,-1,0,
@@ -21,7 +21,7 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 130,0,0,CanBeBallGagged,"Schau in meine Tasche,|da ist ein Ballknebel.","Oh gut! Weit aufmachen, hübsches Modell.|(Sie befestigt den Ballknebel in deinem Mund.)",130,0,0,BallGagPlayer()
 130,0,0,Common_PlayerRestrained,"Sarah, kannst|du mir helfen?",,130,0,0,BegForRelease()
 130,0,0,Common_PlayerGagged,"@Nanghn, uuumng!",(Sie kichert) Du bist geknebelt so süß.,130,0,0,
-130,0,0,Common_PlayerGagged,(Deinen Kopf neigen.),"Du wärst eine nette Sklavin, weißt du?",130,0,0,BowHead()
+130,0,0,Common_PlayerGagged,(Den Kopf senken.),"Du wärst eine nette Sklavin, weißt du?",130,0,0,BowHead()
 130,0,0,GetTapeAvail,Hast du noch andere|Ideen?ADD_MINUTES:1,"Ja! Ich hab hier was, das du benutzen kannst.|(Sie geht weg und kommt mit Klebeband zurück.)",130,0,0,GetTape()
 130,0,0,IsModel,Solltest du dich nicht aus-|ziehen wie Julia?ADD_MINUTES:1,(Sie kichert.) Hast recht.|(Sie zieht ihre Uniform aus.),140,0,0,"SetCloth(1, 0, 0)"
 130,0,0,IsModel,"Zeig mehr Haut,|Blondchen.ADD_MINUTES:1",Blondchen? Mmmh. Okay.|(Sie zieht ihre Uniform aus.),140,0,0,"SetCloth(1, -1, 1)"
@@ -38,18 +38,18 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 160,0,0,EggInside,Sarah. Gefällt|dir das Ei?,Und wie! Vielen Dank.|Das Surren erinnert mich an dich.,160,0,0,
 160,2,0,Common_PlayerNotGagged,(Küssen.)ADD_MINUTES:1,"(Sie wird rot.) Du bist so nett,|du erinnerst mich an Amanda.",160,0,0,Kiss()
 160,0,0,,(Seile enger ziehen.)ADD_MINUTES:1,Diese Seile lassen sich|nicht noch enger ziehen.,160,0,0,Tighten()
-160,0,0,Common_PlayerNotRestrained,(Befreien.)ADD_MINUTES:1,"Oooooch, warum hast du mich losgebunden?|(Sie steckt die Zunge raus und nimmt ihre Pose ein.)",150,0,0,Untie()
-160,0,0,Common_PlayerNotRestrained,(Kitzeln.)ADD_MINUTES:1,"Du bist witzig. Aber war das schon alles?|(Sie kichert, bleibt aber unbeeindruckt.)",160,0,0,
+160,0,0,Common_PlayerNotRestrained,(Sie befreien.)ADD_MINUTES:1,"Oooooch, warum hast du mich losgebunden?|(Sie steckt die Zunge raus und nimmt ihre Pose ein.)",150,0,0,Untie()
+160,0,0,Common_PlayerNotRestrained,(Sie kitzeln.)ADD_MINUTES:1,"Du bist witzig. Aber war das schon alles?|(Sie kichert, bleibt aber unbeeindruckt.)",160,0,0,
 160,0,0,PaintAvail,(Sarah malen.)|(30 Minuten),(Du malst sie sorgfältig ab und zeigst ihr das Ergebnis.)|Wow! So ein perverses Bild. Ich liebe es!,160,0,0,Paint()
 170,0,0,CrotchRopeReady,(Mit ihrem Schrittseil|spielen.)ADD_MINUTES:1,"(Du spielst mit dem Schrittseil und sie fällt bebend|auf die Kniee, bereit für einen großen Orgasmus.)",200,0,0,OrgasmStart()
 170,0,0,,(Seile enger ziehen.)ADD_MINUTES:1,Diese Seile lassen sich|nicht noch enger ziehen.,170,0,0,Tighten()
-170,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)ADD_MINUTES:1,(Sie streckt ihren Kiefer und lächelt.)|Hast du noch etwas Größeres auf Lager?,160,0,0,Ungag()
-170,0,0,Common_PlayerNotRestrained,(Kitzeln.)ADD_MINUTES:1,"(Sie kichert, bleibt aber unbeeindruckt.)",170,0,0,
+170,0,0,Common_PlayerNotRestrained,(Sie entknebeln.)ADD_MINUTES:1,(Sie streckt ihren Kiefer und lächelt.)|Hast du noch etwas Größeres auf Lager?,160,0,0,Ungag()
+170,0,0,Common_PlayerNotRestrained,(Sie kitzeln.)ADD_MINUTES:1,"(Sie kichert, bleibt aber unbeeindruckt.)",170,0,0,
 170,0,0,PaintAvail,(Sarah malen.)|(30 Minuten),(Du malst sie sorgfältig ab und zeigst ihr das Ergebnis.)|(Sie betrachtet dein Werk und nickt zufrieden.),170,0,0,Paint()
 180,0,0,CrotchRopeReady,(Mit ihrem Schrittseil|spielen.)ADD_MINUTES:1,"(Du spielst mit dem Schrittseil und sie fällt bebend|auf die Kniee, bereit für einen großen Orgasmus.)",250,0,0,OrgasmStart()
 180,0,0,,(Seile enger ziehen.)ADD_MINUTES:1,Diese Seile lassen sich|nicht noch enger ziehen.,180,0,0,Tighten()
-180,0,0,Common_PlayerNotRestrained,(Knebel entfernen.)ADD_MINUTES:1,(Sie lächelt dich an.) Das Klebeband|war eine meiner besten Ideen.,160,0,0,Ungag()
-180,0,0,Common_PlayerNotRestrained,(Kitzeln.)ADD_MINUTES:1,"(Sie kichert, bleibt aber unbeeindruckt.)",180,0,0,
+180,0,0,Common_PlayerNotRestrained,(Sie entknebeln.)ADD_MINUTES:1,(Sie lächelt dich an.) Das Klebeband|war eine meiner besten Ideen.,160,0,0,Ungag()
+180,0,0,Common_PlayerNotRestrained,(Sie kitzeln.)ADD_MINUTES:1,"(Sie kichert, bleibt aber unbeeindruckt.)",180,0,0,
 180,0,0,PaintAvail,(Sarah malen.)|(30 Minuten),(Du malst sie sorgfältig ab und zeigst ihr das Ergebnis.)|(Sie betrachtet dein Werk und nickt zufrieden.),180,0,0,Paint()
 200,0,0,,"Willst du zum Höhepunkt,|meine Kleine?",(Sie nickt sanft und|versucht sich zusammenzureißen.),210,0,1,
 200,0,0,,Die Nutte will|also kommen?,"(Sie schüttelt den Kopf, dann nickt sie|und versucht sich zusammenzureißen.)",210,-1,0,

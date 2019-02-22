@@ -16,7 +16,7 @@ TightenFail,"(Du versuchst Jennifer enger zu fesseln, aber es|misslingt dir und 
 Tickle,(Du kitzelst sie vor der ganzen Klasse.|Sie kauert beschämt und versucht dich zu treten.)
 TickleFail,(Du kitzelst sie mit etwas Mühe.|Sie kauert beschämt und versucht dich zu treten.)
 EarnTrust,Dann vertraue ich dir mal.|Das alles macht mich so nervös.
-EggComment,A-a-aber... I-ich... Okay.|(Sie neigt ihren Kopf.)
+EggComment,A-a-aber... I-ich... Okay.|(Sie senkt den Kopf.)
 PlayerUntie,"(Sie wird rot und geht dich losbinden.)|Bitteschön, meine Beste, das war sicher erniedrigend."
 PlayerStayTied,"(Sie ist zu nervös, um dir zu Hilfe zu kommen.)|(Du brauchst mind. 3 Liebe, damit sie dir hilft.)"
 NoTimeToPaint,"(Die Zeit reicht nicht mehr,|um ein Kunstwerk zu schaffen.)"

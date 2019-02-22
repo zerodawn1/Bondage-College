@@ -57,8 +57,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 220,0,0,!SidneyGone,"Sidney hat Sie betäubt,|ausgezogen und gefesselt.",Du lügst! Sie trägt Handschellen! Du warst es!|Nimm mir sofort diese Handschellen ab!,230,-1,0,AllowLeave()
 220,0,0,SidneyGone,"Sidney hat Sie betäubt,|ausgezogen und gefesselt.",Danke! SIDNEY! (Sie springt auf und rennt in|Handschellen und ohne Kleidung aus dem Raum.),270,1,0,NoCrime()
 230,0,0,,Sie sehen so|echt süß aus.,"Du machst es nicht besser, Fräulein.|Nimm mir sofort diese Handschellen ab.",230,0,0,
-230,0,0,,(Kitzeln.)ADD_MINUTES:1,Hey!!! HeheHEHEhehe! Aufhören! Aufhören!|(Sie lacht ziemlich laut und wird rot.),230,0,0,Tickle()
-230,0,0,,(Auf den Hintern hauen.)ADD_MINUTES:1,Au! Fass mich ja nicht an!,230,0,0,
+230,0,0,,(Sie kitzeln.)ADD_MINUTES:1,Hey!!! HeheHEHEhehe! Aufhören! Aufhören!|(Sie lacht ziemlich laut und wird rot.),230,0,0,Tickle()
+230,0,0,,(Ihr auf den|Hintern hauen.)ADD_MINUTES:1,Au! Fass mich ja nicht an!,230,0,0,
 230,0,0,,(Aus dem Raum fliehen.),,230,0,0,Escape()
 250,0,0,SidneyGone,"Wenn Sie Sidney suchen,|sie ist den Gang runter.",Danke! Du bleibst hier und ich hole sie.|(Sie springt auf und verlässt den Raum.),270,1,0,
 250,0,0,Common_PlayerRestrained,(Ihr deine|Handschellen zeigen.),Behalte die erstmal an.|Ich lasse dich nachher frei.,250,0,0,
