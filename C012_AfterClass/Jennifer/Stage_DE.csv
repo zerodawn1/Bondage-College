@@ -102,8 +102,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 245,0,0,,(Schweigen und auf|ihre Kleidung deuten.),(Sie zieht sich aus.) Ich ziehe mich für kaum|jemanden aus. Du hast eine seltsame Kraft über mich.,250,0,0,"ForceChangeActor(""Naked"")"
 250,0,0,,"Gib's zu, du magst es,|meine Befehle zu befolgen.","Ich weiß nicht warum, aber da ist was dran.|Ich fühle mich dir gegenüber sehr unterwürfig.",260,0,0,
 250,0,0,,Das ist einfach erklärt.|Du bist Unterwürfig.,Ich fühle mich dir gegenüber|schon irgendwie unterwürfig.,260,0,0,
-250,0,0,,Die Kraft der Dominanz.|Widerstand ist zwecklos.,Sie ist wirklich mächtig. Irgendwie unheimlich.|Ich fühle mich dir gegenüber schon sehr unterwürfig.,260,0,0,RefuseSubmit()
-250,0,0,,"Du sehnst dich danach,|mir zu dienen, Fotze.",(Sie schaut stirnrunzelnd zu Boden.)|Ich fühle mich dir gegenüber schon unterwürfig.,260,0,0,
+250,0,0,,Die Kraft der Dominanz.|Widerstand ist zwecklos.,Sie ist wirklich mächtig. Irgendwie unheimlich.|Ich fühle mich dir gegenüber schon sehr unterwürfig.,260,0,0,
+250,0,0,,"Du sehnst dich danach,|mir zu dienen, Fotze.",(Sie schaut stirnrunzelnd zu Boden.)|Ich fühle mich dir gegenüber schon unterwürfig.,260,0,0,RefuseSubmit()
 260,0,0,,Als eine Bitch wirst|du ein Halsband tragen.,Ein Halsband? Ich habe andere Mädchen mit solchen|gesehen. Sie scheinen Beschützer zu haben.,270,0,0,RefuseSubmit()
 260,0,0,,Ich werde dir fürs Training|ein Halsband anlegen.,Ein Halsband? Ich habe andere Mädchen mit solchen|gesehen. Sie scheinen Beschützer zu haben.,270,0,0,
 260,0,0,,Als meine Sub schließe|ich dir ein Halsband um.,Ein Halsband? Ich habe andere Mädchen mit solchen|gesehen. Sie scheinen Beschützer zu haben.,270,0,0,

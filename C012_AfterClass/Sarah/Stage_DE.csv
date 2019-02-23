@@ -161,8 +161,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 380,0,0,,Das wird so|ein Spaß.,"Super! Das ist eine gute Einstellung.|Sag Bescheid, wenn du bereit bist.",0,0,0,"BondageClubInvite(""Love"")"
 380,0,0,,"Ich hoffe, ich finde|einen Besitzer.","Super! Das ist eine gute Einstellung.|Sag Bescheid, wenn du bereit bist.",0,0,0,"BondageClubInvite(""Sub"")"
 380,0,0,,"Ich glaube, ich|bleibe heute hier.","Kein Problem, wir können etwas|anderes machen, bevor ich gehe.",0,0,0,
-400,0,0,BondageClubInvitationBySarah,(Langsam nicken.)|(Zum Club gehen.),(Der Bondage-Club wird in einer zukünftigen|Version des Spiels verfügbar sein.),400,0,0,
-400,0,0,BondageClubInvitationBySarah,Ja! Gehen wir!|(Zum Club gehen.),(Der Bondage-Club wird in einer zukünftigen|Version des Spiels verfügbar sein.),400,0,0,
+400,0,0,BondageClubInvitationBySarah,(Langsam nicken.)|(Zum Club gehen.),,400,0,0,EnterBondageClub()
+400,0,0,BondageClubInvitationBySarah,Ja! Gehen wir!|(Zum Club gehen.),,400,0,0,EnterBondageClub()
 400,0,0,Common_PlayerGagged,@UNGN MH NUUOGH!,(Sie kichert und verlässt dein Zimmer.),410,0,0,
 400,0,0,Common_PlayerRestrained,"Kannst du mir helfen,|bevor du gehst?","Du findest bestimmt jemanden, der dir hilft.|(Sie verlässt dein Zimmer.)",410,0,0,
 400,0,0,!Common_ActorIsOwned,"Viel Spaß, Sarah!",Werd ich haben. (Sie verlässt dein Zimmer.),410,0,0,
