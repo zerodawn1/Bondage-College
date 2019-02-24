@@ -104,7 +104,7 @@ function PrivateRun() {
 	
 	// Standard buttons
 	if (Player.CanWalk() && (Player.Cage == null)) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
-	if (Player.CanKneel()) DrawButton(1885, 145, 90, 90, "", "White", "Icons/Kneel.png");
+	if (LogQuery("RentRoom", "PrivateRoom") && Player.CanKneel()) DrawButton(1885, 145, 90, 90, "", "White", "Icons/Kneel.png");
 	
 	// If we must save a character status after a dialog
 	if (PrivateCharacterToSave > 0) {
@@ -292,6 +292,7 @@ function PrivateOwnerInRoom() {
 // When a custom NPC restrains the player, there's a minute timer before release
 function PrivateRestrainPlayer() {
 	CharacterFullRandomRestrain(Player);
+	NPCLoveChange(CurrentCharacter, 2);
 	PrivateReleaseTimer = CommonTime() + (Math.random() * 60000) + 60000;
 }
 
@@ -544,6 +545,7 @@ function PrivatePlayerCollaring() {
 	NPCEventDelete(CurrentCharacter, "EndSubTrial");
 	NPCEventAdd(CurrentCharacter, "PlayerCollaring", CurrentTime);
 	InventoryRemove(Player, "ItemNeck");
+	CharacterRelease(Player);
 	CharacterSetActivePose(Player, null);
 	ReputationProgress("Dominant", -20);
 	Player.Owner = "NPC-" + CurrentCharacter.Name;

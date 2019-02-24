@@ -255,12 +255,12 @@ PlayerMustKneel,,,"(She licks her lips.)  Hey sexy sub, you know what would turn
 20,,Do you have a D/s family in the club?,"Sadly, I don't have any owner.  I hope I'll find the perfect Mistress someday.",,!IsMistress(),FamilyNotOwner,Submissive
 20,,Do you have a D/s family in the club?,I don't have any submissive.  Finding the perfect BDSM match is quite a quest.,,!IsMistress(),FamilyNotOwner,Dominant
 20,,Do you have a D/s family in the club?,I do.  I have two wonderful slaves.,,IsMistress(),,
-20,21,Are you looking for a submissive?,(She smiles.)  It could be fun to own a subbie girl.,,WouldTakePlayerAsSub(),WouldTakePlayerAsSub,
-20,21,Are you looking for a submissive?,"(She giggles.)  I'm a sub myself, so I would need someone that's really submissive.",,WouldTakePlayerAsSub(),WouldTakePlayerAsSub,Submissive
-20,21,Are you looking for a submissive?,"(She smirks.)  Girl, I'm always hunting for slaves.",,WouldTakePlayerAsSub(),WouldTakePlayerAsSub,Dominant
-20,,Are you looking for a submissive?,Not right now.  It sounds like too much work.,,WontTakePlayerAsSub(),WontTakePlayerAsSub,
-20,,Are you looking for a submissive?,"(She giggles.)  Maybe as a sister, but not someone to own of course.",,WontTakePlayerAsSub(),WontTakePlayerAsSub,Submissive
-20,,Are you looking for a submissive?,Nope.  I don't have enough free time to care of new slaves.,,WontTakePlayerAsSub(),WontTakePlayerAsSub,Dominant
+20,21,Are you looking for a submissive?,(She looks at you and smiles.)  It could be fun to own a subbie girl.,,WouldTakePlayerAsSub(),WouldTakePlayerAsSub,
+20,21,Are you looking for a submissive?,"(She looks at you and giggles.)  I'm a sub myself, so I would need someone that's really submissive.",,WouldTakePlayerAsSub(),WouldTakePlayerAsSub,Submissive
+20,21,Are you looking for a submissive?,"(She looks at you and smirks.)  Girl, I'm always hunting for slaves.",,WouldTakePlayerAsSub(),WouldTakePlayerAsSub,Dominant
+20,,Are you looking for a submissive?,"It would be nice, but I could only take a submissive that I like and that I've known for a while.",,WontTakePlayerAsSub(),WontTakePlayerAsSub,
+20,,Are you looking for a submissive?,(She giggles.)  I'm not sure I would be a great Domme.  I would need someone that I love and that's very submissive.,,WontTakePlayerAsSub(),WontTakePlayerAsSub,Submissive
+20,,Are you looking for a submissive?,Someone like you?  (She smirks.)  I need to get better aquinted and make sure you're submissive enough first.,,WontTakePlayerAsSub(),WontTakePlayerAsSub,Dominant
 20,,Are you looking for a submissive?,You mean yourself?  I need more time to get to know you.,,NeedTimeToTakePlayerAsSub(),NeedTimeToTakePlayerAsSub,
 20,,Are you looking for a submissive?,(She giggles.)  Me?  Looking for a subbie?  Like you?  I don't know.  I need more time first to get to know you.,,NeedTimeToTakePlayerAsSub(),NeedTimeToTakePlayerAsSub,Submissive
 20,,Are you looking for a submissive?,"Girl, we barely know each other.  I need more time to get to know you.",,NeedTimeToTakePlayerAsSub(),NeedTimeToTakePlayerAsSub,Dominant
