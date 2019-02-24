@@ -8,6 +8,12 @@ var ManagementPlayerAppearance = null;
 var ManagementMistressAllowPlay = false;
 var ManagementCanReleaseChastity = true;
 var ManagementEmpty = false;
+var ManagementRandomGirl = null;
+var ManagementRandomGirlArchetype = "";
+var ManagementRandomActivityCount = 0;
+var ManagementRandomActivity = "";
+var ManagementRandomActivityList = ["AddArms", "RemoveArms", "AddGag", "RemoveGag", "AddTorso", "RemoveTorso", "AddFeet", "RemoveFeet", "AddLegs", "RemoveLegs", "Tickle", "Spank", "Kiss", "Fondle", "Masturbate"];
+var ManagementVisitRoom = false;
 
 // Returns TRUE if the dialog situation is allowed
 function ManagementNoTitle() { return (!LogQuery("JoinedSorority", "Maid") && (ReputationGet("Kidnap") < 50)) }
@@ -35,9 +41,12 @@ function ManagementWillOwnPlayer() { return ((Player.Owner == "") && (Reputation
 function ManagementWontOwnPlayer() { return ((Player.Owner == "") && (ReputationGet("Dominant") <= -1) && (ReputationGet("Dominant") >= -99) && (PrivateCharacter.length <= 3) && !PrivatePlayerIsOwned() && ManagementNoMistressInPrivateRoom()) }
 function ManagementNoMistressInPrivateRoom() { return (((PrivateCharacter.length <= 1) || (PrivateCharacter[1].Title == null) || (PrivateCharacter[1].Title != "Mistress")) && ((PrivateCharacter.length <= 2) || (PrivateCharacter[2].Title == null) || (PrivateCharacter[2].Title != "Mistress"))) }
 function ManagementIsClubSlave() { return ((InventoryGet(Player, "ItemNeck") != null) && (InventoryGet(Player, "ItemNeck").Asset.Name == "ClubSlaveCollar")) }
+function ManagementCanTransferToRoom() { return (LogQuery("RentRoom", "PrivateRoom") && (JSON.parse(localStorage.getItem("BondageClubPrivateRoomCharacter" + Player.AccountName + "3")) == null)) }
+function ManagementWontVisitRoom() { return (!ManagementVisitRoom && ManagementCanTransferToRoom()) }
 
 // Loads the club management room, creates the Mistress and sub character
 function ManagementLoad() {
+	ManagementBackground = "Management";
 	if ((ManagementMistress == null) && (TextGet("Mistress") != "")) {
 		ManagementMistress = CharacterLoadNPC("NPC_Management_Mistress");
 		ManagementMistress.Name = TextGet("Mistress") + " " + ManagementMistress.Name;
@@ -199,4 +208,95 @@ function ManagementFinishClubSlave(RepChange) {
 	if (Player.IsOwned()) InventoryWear(Player, "SlaveCollar", "ItemNeck");
 	else InventoryRemove(Player, "ItemNeck");
 	if (Player.IsNaked()) CharacterDress(Player, ManagementPlayerAppearance);
+}
+
+// When the player as club slave gets stopped by a random girl
+function ManagementClubSlaveRandomIntro() {
+	
+	// Sets the girl that greets the club slave player
+	CommonSetScreen("Room", "Management");
+	ManagementBackground = "MainHall";
+	ManagementRandomGirl = null;
+	CharacterDelete("NPC_Management_RandomGirl");	
+	ManagementRandomGirl = CharacterLoadNPC("NPC_Management_RandomGirl");	
+	CharacterSetCurrent(ManagementRandomGirl);
+	ManagementRandomGirl.Stage = "0";
+	ManagementRandomGirl.AllowItem = false;
+	ManagementRandomActivityCount = 0;
+	
+	// 1 out of 7 girls will be a maid
+	var Intro = (Math.floor(Math.random() * 7)).toString();
+	if (Intro == "0") {
+		CharacterArchetypeClothes(ManagementRandomGirl, "Maid");
+		ManagementRandomGirlArchetype = "Maid";
+	} else ManagementRandomGirlArchetype = "";
+
+	// If the player is already tied up, there's a different intro
+	if (Player.CanInteract()) ManagementRandomGirl.CurrentDialog = DialogFind(ManagementRandomGirl, "Intro" + Intro);
+	else ManagementRandomGirl.CurrentDialog = DialogFind(ManagementRandomGirl, "IntroRestrained" + Intro);
+
+}
+
+// When a random activity starts
+function ManagementRandomActivityStart(A) {
+	ManagementRandomActivity = A;
+	ManagementRandomGirl.CurrentDialog = DialogFind(ManagementRandomGirl, "Activity" + A + "Intro");
+	ManagementRandomGirl.Stage = "Activity" + A;
+}
+
+// Club slave random activity
+function ManagementClubSlaveRandomActivityLaunch() {
+	
+	// After 4 activities, there's more and more chances that it will stop
+	ManagementRandomActivityCount++;
+	if (Math.random() * ManagementRandomActivityCount >= 4) {
+		if ((Math.random() >= 0.5) && (!Player.CanInteract() || !Player.CanTalk())) {
+			CharacterRelease(Player);
+			ManagementRandomGirl.CurrentDialog = DialogFind(ManagementRandomGirl, "ActivityEndReleaseIntro");
+		} else ManagementRandomGirl.CurrentDialog = DialogFind(ManagementRandomGirl, "ActivityEndIntro");
+		ManagementRandomGirl.Stage = "ActivityEnd";
+		ManagementVisitRoom = ((Math.random() >= 0.5) && ManagementCanTransferToRoom());
+		return;
+	}
+
+	// Finds an activity to do on the player
+	while (true) {
+
+		// Picks an activity at random
+		var A = CommonRandomItemFromList(ManagementRandomActivity, ManagementRandomActivityList);
+
+		// Add or remove an item
+		if ((A == "AddArms") && (InventoryGet(Player, "ItemArms") == null)) { InventoryWearRandom(Player, "ItemArms", 3); ManagementRandomActivityStart(A); return; }
+		if ((A == "RemoveArms") && (InventoryGet(Player, "ItemArms") != null)) { InventoryRemove(Player, "ItemArms"); ManagementRandomActivityStart(A); return; }
+		if ((A == "AddGag") && (InventoryGet(Player, "ItemMouth") == null)) { InventoryWearRandom(Player, "ItemMouth", 3); ManagementRandomActivityStart(A); return; }
+		if ((A == "RemoveGag") && (InventoryGet(Player, "ItemMouth") != null)) { InventoryRemove(Player, "ItemMouth"); ManagementRandomActivityStart(A); return; }
+		if ((A == "AddTorso") && (InventoryGet(Player, "ItemTorso") == null)) { InventoryWearRandom(Player, "ItemTorso", 3); ManagementRandomActivityStart(A); return; }
+		if ((A == "RemoveTorso") && (InventoryGet(Player, "ItemTorso") != null)) { InventoryRemove(Player, "ItemTorso"); ManagementRandomActivityStart(A); return; }
+		if ((A == "AddFeet") && (InventoryGet(Player, "ItemFeet") == null)) { InventoryWearRandom(Player, "ItemFeet", 3); ManagementRandomActivityStart(A); return; }
+		if ((A == "RemoveFeet") && (InventoryGet(Player, "ItemFeet") != null)) { InventoryRemove(Player, "ItemFeet"); ManagementRandomActivityStart(A); return; }
+		if ((A == "AddLegs") && (InventoryGet(Player, "ItemLegs") == null)) { InventoryWearRandom(Player, "ItemLegs", 3); ManagementRandomActivityStart(A); return; }
+		if ((A == "RemoveLegs") && (InventoryGet(Player, "ItemLegs") != null)) { InventoryRemove(Player, "ItemLegs"); ManagementRandomActivityStart(A); return; }
+
+		// Physical activities
+		if ((A == "Kiss") && (InventoryGet(Player, "ItemMouth") == null)) { ManagementRandomActivityStart(A); return; }
+		if ((A == "Spank") || (A == "Tickle")) { ManagementRandomActivityStart(A); return; }
+		if ((A == "Fondle") && !Player.IsBreastChaste()) { ManagementRandomActivityStart(A); return; }
+		if ((A == "Masturbate") && !Player.IsVulvaChaste()) { ManagementRandomActivityStart(A); return; }
+		
+	}
+}
+
+// When the random activities stops
+function ManagementClubSlaveRandomActivityEnd(RepChange) {
+	ReputationProgress("Dominant", RepChange);
+	DialogLeave();
+	CommonSetScreen("Room", "MainHall");
+}
+
+// When the player transfers the random girl to her room
+function ManagementClubSlaveTransferToRoom() {
+	ManagementClubSlaveRandomActivityEnd(2);
+	InventoryRemove(Player, "ItemFeet");
+	CommonSetScreen("Room", "Private");
+	PrivateAddCharacter(ManagementRandomGirl, ManagementRandomGirlArchetype);
 }
