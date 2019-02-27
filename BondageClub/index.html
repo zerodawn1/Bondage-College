@@ -43,6 +43,8 @@
 <script src="Scripts/Asset.js"></script>
 <script src="Scripts/MiniGame.js"></script>
 <script src="Scripts/NPC.js"></script>
+<script src="Scripts/Server.js"></script>
+<script src="Scripts/socket.io/socket.io.js"></script>
 <script src="Assets/Female3DCG/Female3DCG.js"></script>
 <script src="Screens/Character/Login/Login.js"></script>
 <script src="Screens/Character/Appearance/Appearance.js"></script>
@@ -78,7 +80,7 @@
 	
 	TO DO:
 	
-	Show new Patreon users
+	Bring a gagged girl to your room after a kidnapping
 	
 }*/
 
@@ -89,6 +91,7 @@ window.onload = function() {
 	DrawLoad();
 	AssetLoadAll();
 	CommonSetScreen("Character", "Login");
+	ServerInit();
 	MainRun();
 };
 

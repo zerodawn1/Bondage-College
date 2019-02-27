@@ -568,13 +568,18 @@ function CharacterAppearanceSave(C) {
 	
 	// Creates a big parameter string of every appearance items 
 	if ((C.ID == 0) && (C.AccountName != "") && (C.AccountPassword != "")) {
-		var P = "&family=" + C.AssetFamily;
+		var D = {};
+		D.AssetFamily = C.AssetFamily;
+		D.Appearance = [];
 		for (var A = 0; A < C.Appearance.length; A++) {
-			P = P + "&group" + A.toString() + "=" + C.Appearance[A].Asset.Group.Name + "&name" + A.toString() + "=" + C.Appearance[A].Asset.Name;
-			if ((C.Appearance[A].Color != null) && (C.Appearance[A].Color != "Default")) P = P + "&color" + A.toString() + "=" + C.Appearance[A].Color;
-			if ((C.Appearance[A].Difficulty != null) && (C.Appearance[A].Difficulty != 0)) P = P + "&difficulty" + A.toString() + "=" + C.Appearance[A].Difficulty.toString();
+			var N = {};
+			N.Group = C.Appearance[A].Asset.Group.Name;
+			N.Name = C.Appearance[A].Asset.Name;
+			if ((C.Appearance[A].Color != null) && (C.Appearance[A].Color != "Default")) N.Color = C.Appearance[A].Color;
+			if ((C.Appearance[A].Difficulty != null) && (C.Appearance[A].Difficulty != 0)) N.Difficulty = C.Appearance[A].Difficulty;
+			D.Appearance.push(N);
 		}
-		AccountRequest("appearance_update", P);
+		ServerSend("AccountUpdate", D);
 	}	
 
 }

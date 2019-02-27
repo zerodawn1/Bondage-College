@@ -99,13 +99,13 @@ function CreationRun() {
 
 // When the ajax response returns, we analyze it's data
 function CreationResponse(CharacterData) {
-	if ((CharacterData != null) && (CharacterData.indexOf("account_created") >= 0)) {
+	if ((CharacterData != null) && (CharacterData.indexOf("AccountCreated") >= 0)) {
 		
 		// Keep the character data and pushes it's appearance to the server
 		Player.Name = document.getElementById("InputCharacter").value.trim();
 		Player.AccountName = document.getElementById("InputName").value.trim();
 		Player.AccountPassword = document.getElementById("InputPassword1").value.trim();
-		CurrentTime = parseInt(CharacterData.replace("account_created", ""));
+		CurrentTime = parseInt(CharacterData.replace("AccountCreated", ""));
 		if (isNaN(CurrentTime)) CurrentTime = CommonTime();
 
 		// Imports logs, inventory and Sarah status from the Bondage College
@@ -159,20 +159,10 @@ function CreationClick() {
 			var LN = /^[a-zA-Z0-9 ]+$/;
 			var LS = /^[a-zA-Z ]+$/;
 			var E = /^[a-zA-Z0-9@.]+$/;
-			if (CharacterName.match(LS) && Name.match(LN) && Password1.match(LN) && (Email.match(E) || Email == "") && (CharacterName.length > 0) && (CharacterName.length <= 20) && (Name.length > 0) && (Name.length <= 20) && (Password1.length > 0) && (Password1.length <= 20) && (Email.length <= 100)) {
-
-				// Calls the PHP page to create the accounts
-				var xmlhttp = new XMLHttpRequest();
-				xmlhttp.onreadystatechange = function() {
-					if (xmlhttp.readyState == XMLHttpRequest.DONE) {
-						if (xmlhttp.status == 200) CreationResponse(xmlhttp.responseText.trim().toString());
-						else CreationMessage = TextGet("Error") + " " + xmlhttp.status.toString();
-					}
-				};
-				xmlhttp.open("GET", AccountAddress + "?command=account_create&character=" + CharacterName + "&account=" + Name + "&password=" + Password1 + "&email=" + Email, true);
-				xmlhttp.send();
-
-			} else CreationMessage = TextGet("InvalidData");
+			if (CharacterName.match(LS) && Name.match(LN) && Password1.match(LN) && (Email.match(E) || Email == "") && (CharacterName.length > 0) && (CharacterName.length <= 20) && (Name.length > 0) && (Name.length <= 20) && (Password1.length > 0) && (Password1.length <= 20) && (Email.length <= 100))
+				ServerSend("AccountCreate", { Name: CharacterName, AccountName: Name, Password: Password1, Email: Email } );
+			else 
+				CreationMessage = TextGet("InvalidData");
 
 		} else CreationMessage = TextGet("BothPasswordDoNotMatch");
 	}
