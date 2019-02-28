@@ -123,7 +123,11 @@ function LoginResponse(C) {
 	// If the return package contains a name and a account name
 	if (typeof C == "object") {
 		if ((C.Name != null) && (C.AccountName != null)) {
-			
+
+			// Make sure we have values
+			if (C.Appearance == null) C.Appearance = [];
+			if (C.AssetFamily == null) C.AssetFamily = "Female3DCG";			
+
 			// Sets the player character info
 			Player.Name = C.Name;
 			Player.AccountName = C.AccountName;

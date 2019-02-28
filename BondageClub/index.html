@@ -33,7 +33,6 @@
 <script src="Scripts/GameLog.js"></script>
 <script src="Scripts/Reputation.js"></script>
 <script src="Scripts/Skill.js"></script>
-<script src="Scripts/Account.js"></script>
 <script src="Scripts/Character.js"></script>
 <script src="Scripts/CharacterName.js"></script>
 <script src="Scripts/Dialog.js"></script>
@@ -95,10 +94,9 @@ window.onload = function() {
 	MainRun();
 };
 
-// Main game running state, runs the drawing and account functions
+// Main game running state, runs the drawing
 function MainRun() {
 	DrawProcess();
-	AccountProcess();
 	CurrentTime = CurrentTime + CommonRunInterval;
 	setTimeout(MainRun, CommonRunInterval);
 }

@@ -52,6 +52,7 @@ function PrivateLoad() {
 	// Loads the vendor and NPC from storage
 	PrivateVendor = CharacterLoadNPC("NPC_Private_Vendor");
 	PrivateVendor.AllowItem = false;
+	NPCTraitDialog(PrivateVendor);
 	if (PrivateCharacter.length == 0) {
 		PrivateCharacter.push(Player);
 		PrivateLoadCharacter(1);
@@ -549,7 +550,7 @@ function PrivatePlayerCollaring() {
 	CharacterSetActivePose(Player, null);
 	ReputationProgress("Dominant", -20);
 	Player.Owner = "NPC-" + CurrentCharacter.Name;
-	AccountSync();
+	ServerPlayerSync();
 	PlayerCollaringMistress = CurrentCharacter;
 	CommonSetScreen("Cutscene", "PlayerCollaring");
 	DialogLeave();

@@ -73,7 +73,7 @@ function IntroductionClick() {
 
 // The maid opinion will affect the global player Domme/sub reputation at the end of the first training
 function IntroductionChangeMaidOpinion(Bonus) {
-	IntroductionMaidOpinion = IntroductionMaidOpinion + Bonus;
+	IntroductionMaidOpinion = IntroductionMaidOpinion + parseInt(Bonus);
 }
 
 // Gives focus on certain body parts with rectangles
@@ -105,7 +105,7 @@ function IntroductionGetBasicItems() {
 function IntroductionSaveMaidOpinion() {
 	if (!LogQuery("MaidOpinion", "Introduction")) {
 		LogAdd("MaidOpinion", "Introduction");
-		ReputationChange("Dominant", IntroductionMaidOpinion);
+		ReputationProgress("Dominant", IntroductionMaidOpinion);
 	}
 }
 

@@ -175,7 +175,7 @@ function ManagementContactOwner() {
 // When the Mistress releases the player from her owner
 function ManagementReleaseFromOwner(RepChange) {
 	Player.Owner = "";
-	AccountSync();
+	ServerPlayerSync();
 	InventoryRemove(Player, "ItemNeck");
 	ReputationProgress("Dominant", RepChange);
 	LogAdd("ReleasedFromOwner", "Management");

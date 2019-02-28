@@ -305,7 +305,7 @@ function CharacterSetCurrent(C) {
 // Changes the character money and sync with the account server
 function CharacterChangeMoney(C, Value) {
 	C.Money = parseInt(C.Money) + parseInt(Value) * ((Value > 0) ? CheatFactor("DoubleMoney", 2) : 1);
-	AccountSync();
+	ServerPlayerSync();
 }
 
 // Refreshes the character parameters

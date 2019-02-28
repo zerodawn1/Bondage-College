@@ -28,7 +28,7 @@ function LogAdd(NewLogName, NewLogGroup, NewLogValue, Push) {
 
 	// Sends the log to the server
 	if ((Push == null) || Push)
-		AccountRequest("log_add", "&name=" + NewLogName + "&group=" + NewLogGroup + ((NewLogValue != null) ? "&value=" + NewLogValue : ""));
+		ServerPlayerLogSync();
 
 }
 

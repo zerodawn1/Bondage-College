@@ -29,7 +29,7 @@ function InventoryAdd(C, NewItemName, NewItemGroup, Push) {
 
 		// Sends the new item to the server if it's for the current player
 		if ((C.ID == 0) && ((Push == null) || Push))
-			AccountRequest("inventory_add", "&name=" + NewItemName + "&group=" + NewItemGroup);
+			ServerPlayerInventorySync();
 
 	}
 
@@ -45,7 +45,7 @@ function InventoryDelete(C, DelItemName, DelItemGroup, Push) {
 
 	// Next, we call the player account service to remove the item
 	if ((C.ID == 0) && ((Push == null) || Push))
-		AccountRequest("inventory_delete", "&name=" + DelItemName + "&group=" + DelItemGroup);
+		ServerPlayerInventorySync();
 
 }
 

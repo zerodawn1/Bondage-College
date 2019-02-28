@@ -6,6 +6,7 @@ Login,Login
 CreateNewCharacter,Or create a new character
 NewCharacter,New Character
 ErrorLoadingCharacterData,Error loading character data
+ErrorDisconnectedFromServer,Error: Disconnected from server
 ValidatingNamePassword,Validating name and password...
 ValidatingNamePassword,Incorrect name or password
 Error,Error:
