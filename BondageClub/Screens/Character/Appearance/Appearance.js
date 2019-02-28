@@ -534,7 +534,7 @@ function CharacterAppearanceReady(C) {
 
 	// If there's no error, we continue to the login or main hall if already logged
 	if ((C.ID == 0) && (C.AccountName != "") && (C.AccountPassword != "")) {
-		CharacterAppearanceSave(C);
+		ServerPlayerAppearanceSync();
 		CommonSetScreen("Room", CharacterAppearanceReturnRoom);
 		CharacterAppearanceReturnRoom = "MainHall";
 	} else CommonSetScreen("Character", "Creation");
@@ -559,28 +559,7 @@ function CharacterAppearanceCopy(FromC, ToC) {
 	// Refreshes the second character and saves it if it's the player
 	AssetReload(ToC);
 	CharacterRefresh(ToC);
-	if (ToC.ID == 0) CharacterAppearanceSave(ToC);
-
-}
-
-// Pushes the character appearance to the account service
-function CharacterAppearanceSave(C) {
-	
-	// Creates a big parameter string of every appearance items 
-	if ((C.ID == 0) && (C.AccountName != "") && (C.AccountPassword != "")) {
-		var D = {};
-		D.AssetFamily = C.AssetFamily;
-		D.Appearance = [];
-		for (var A = 0; A < C.Appearance.length; A++) {
-			var N = {};
-			N.Group = C.Appearance[A].Asset.Group.Name;
-			N.Name = C.Appearance[A].Asset.Name;
-			if ((C.Appearance[A].Color != null) && (C.Appearance[A].Color != "Default")) N.Color = C.Appearance[A].Color;
-			if ((C.Appearance[A].Difficulty != null) && (C.Appearance[A].Difficulty != 0)) N.Difficulty = C.Appearance[A].Difficulty;
-			D.Appearance.push(N);
-		}
-		ServerSend("AccountUpdate", D);
-	}	
+	if (ToC.ID == 0) ServerPlayerAppearanceSync();
 
 }
 

@@ -64,11 +64,11 @@ function MainHallRun() {
 		MainHallNextEventTimer = null;
 	}
 	
-	// If we must show a progress bar for the rescue maid
+	// If we must show a progress bar for the rescue maid.  If not, we show the number of online players
 	if ((!Player.CanInteract() || !Player.CanWalk() || !Player.CanTalk()) && (MainHallStartEventTimer != null) && (MainHallNextEventTimer != null)) {
 		DrawText(TextGet("RescueIsComing"), 1750, 925, "White", "Black");
 		DrawProgressBar(1525, 955, 450, 35, (1 - ((MainHallNextEventTimer - CommonTime()) / (MainHallNextEventTimer - MainHallStartEventTimer))) * 100);
-	}
+	} else DrawText(TextGet("OnlinePlayers") + " " + CurrentOnlinePlayers.toString(), 1750, 950, "White", "Black");
 
 }
 

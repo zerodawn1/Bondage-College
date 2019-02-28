@@ -32,15 +32,24 @@ DatabaseClient.connect(DatabaseURL, { useNewUrlParser: true }, function(err, db)
 			socket.on("AccountUpdate", function (data) { AccountUpdate(data, socket) });
 			socket.on("AccountDisconnect", function () { AccountRemove(socket.id) });
 			socket.on('disconnect', function() { AccountRemove(socket.id) });
+			AccountSendServerInfo(socket);
 		});
+		
+		// Refreshes the server information to clients each 30 seconds
+		setInterval(AccountSendServerInfo(null), 30000);
 		
 	});
 	
 });
 
-// Return the current time
-function CommonTime() {
-	return new Date().getTime();
+// Sends the server info to all players or one specific player (socket)
+function AccountSendServerInfo(socket) {
+	var SI = {
+		Time = new Date().getTime(),
+		OnlinePlayers = Account.length
+	}
+	if (socket != null) sockets.emit("ServerInfo", SI);
+	else IO.sockets.emit("ServerInfo", SI);
 }
 
 // Creates a new account by creating its file
@@ -65,7 +74,7 @@ function AccountCreate(data, socket) {
 					socket.emit("CreationResponse", "Account already exists");			
 				} else {
 				
-					// Since the file doesn't exist, we create it with the hashed password
+					// Creates a hashed password and saves it with the account info
 					BCrypt.hash(data.Password.toUpperCase(), 10, function( err, hash ) {
 						if (err) throw err;
 						console.log("Creating new account: " + data.AccountName + "  ID: " + socket.id.toString());
@@ -76,7 +85,7 @@ function AccountCreate(data, socket) {
 							if (err) throw err;
 							console.log("Account created");
 						});
-						socket.emit("CreationResponse", "AccountCreated" + CommonTime().toString());
+						socket.emit("CreationResponse", "AccountCreated");
 					});
 					
 				}
@@ -107,11 +116,25 @@ function AccountLogin(data, socket) {
 				// Compare the password to its hashed version
 				BCrypt.compare(data.Password.toUpperCase(), result.Password, function( err, res ) {
 					if (res) {
+						
+						// Logs the account
 						console.log("Login account: " + result.AccountName + "  ID: " + socket.id.toString());
-						result.CurrentTime = CommonTime().toString();
 						socket.emit("LoginResponse", result);
 						result.ID = socket.id;						
 						Account.push(result);
+						
+						// Disconnect duplicated logged accounts
+						for(var A = 0; A < Account.length; A++)
+							if ((Account[A].AccountName == result.AccountName) && (Account[A].ID != socket.id)) {
+								for(var S = 0; S < IO.sockets.length; S++)
+									if (IO.sockets[S].id == Account[A].ID) {
+										AccountRemove(Account[A].ID);
+										IO.sockets[S].disconnect();
+										break;
+									}
+								break;
+							}
+
 					} else socket.emit("LoginResponse", "InvalidNamePassword");
 				});
 				

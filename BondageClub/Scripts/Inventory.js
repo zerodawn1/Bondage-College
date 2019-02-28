@@ -104,7 +104,7 @@ function InventorySetDifficulty(C, AssetGroup, Difficulty) {
 		for (var A = 0; A < C.Appearance.length; A++)
 			if ((C.Appearance[A].Asset != null) && (C.Appearance[A].Asset.Group.Name == AssetGroup))
 				C.Appearance[A].Difficulty = Difficulty;
-	if (CurrentModule != "Character") CharacterAppearanceSave(C);
+	if ((CurrentModule != "Character") && (C.ID == 0)) ServerPlayerAppearanceSync();
 }
 
 // Returns TRUE if there's already a locked item at a given position

@@ -136,11 +136,7 @@ function LoginResponse(C) {
 			if (CommonIsNumeric(C.Money)) Player.Money = C.Money;
 			Player.Owner = ((C.Owner == null) || (C.Owner == "undefined")) ? "" : C.Owner;
 			Player.Lover = ((C.Lover == null) || (C.Lover == "undefined")) ? "" : C.Lover;
-
-			// Sets the current time based on the server
-			if (C.CurrentTime == null) C.CurrentTime = CommonTime();
-			CurrentTime = parseInt(C.CurrentTime);
-			if (isNaN(CurrentTime)) CurrentTime = CommonTime();
+			CurrentOnlinePlayers++;
 
 			// Loads the player character model and data
 			CharacterAppearanceLoadFromAccount(Player, C.Appearance);

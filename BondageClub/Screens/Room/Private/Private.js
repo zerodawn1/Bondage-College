@@ -474,7 +474,7 @@ function PrivateActivityRun(LoveFactor) {
 // Set the no change rule for the player
 function PrivateBlockChange(Minutes) {
 	LogAdd("BlockChange", "Rule", CurrentTime + (Minutes * 60000));
-	CharacterAppearanceSave(Player);
+	ServerPlayerAppearanceSync();
 }
 
 // Starts a random punishment for the player as submissive

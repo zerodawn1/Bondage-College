@@ -313,7 +313,7 @@ function CharacterRefresh(C) {
 	CharacterLoadEffect(C);
 	CharacterLoadPose(C);	
 	CharacterLoadCanvas(C);
-	if (CurrentModule != "Character") CharacterAppearanceSave(C);
+	if ((CurrentModule != "Character") && (C.ID == 0)) ServerPlayerAppearanceSync();
 }
 
 // Returns TRUE if a character is naked
