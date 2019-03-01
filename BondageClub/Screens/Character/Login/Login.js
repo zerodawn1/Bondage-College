@@ -136,7 +136,8 @@ function LoginResponse(C) {
 			if (CommonIsNumeric(C.Money)) Player.Money = C.Money;
 			Player.Owner = ((C.Owner == null) || (C.Owner == "undefined")) ? "" : C.Owner;
 			Player.Lover = ((C.Lover == null) || (C.Lover == "undefined")) ? "" : C.Lover;
-			CurrentOnlinePlayers++;
+			Player.Creation = C.Creation;
+			Player.Wardrobe = C.Wardrobe;
 
 			// Loads the player character model and data
 			CharacterAppearanceLoadFromAccount(Player, C.Appearance);
@@ -149,11 +150,14 @@ function LoginResponse(C) {
 			CharacterAppearanceValidate(Player);
 			document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 			document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
-			
+
 			// Starts the game in the main hall while loading characters in the private room
 			PrivateCharacter = [];
-			CommonSetScreen("Room", "Private");
-			
+			PrivateCharacter.push(Player);
+			if (C.PrivateCharacter != null)
+				for(var P = 0; P < PrivateCharacter.length; P++)
+					PrivateCharacter.push(C.PrivateCharacter[P]);
+
 			// If the player must start in her room, in her cage
 			if (LogQuery("SleepCage", "Rule")) {
 				InventoryRemove(Player, "ItemFeet");

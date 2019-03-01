@@ -9,6 +9,7 @@ function ServerInit() {
 	ServerSocket.on("CreationResponse", function (data) { CreationResponse(data) });
 	ServerSocket.on("LoginResponse", function (data) { LoginResponse(data) });
 	ServerSocket.on("disconnect", function (data) { ServerDisconnect() } );
+	ServerSocket.on("ForceDisconnect", function (data) { ServerDisconnect(data) } );
 }
 
 // When the server sends some information to the client, we keep it in variables
@@ -18,12 +19,12 @@ function ServerInfo(data) {
 }
 
 // When the server disconnects, we go back to the login screen
-function ServerDisconnect() {
+function ServerDisconnect(data) {
 	if (Player.Name != "" ) {
 		if (CurrentCharacter != null) 
 			DialogLeave(); 
 		CommonSetScreen("Character", "Login"); 
-		LoginMessage = TextGet("ErrorDisconnectedFromServer");
+		LoginMessage = TextGet((data != null) ? data : "ErrorDisconnectedFromServer");
 	}
 }
 
@@ -88,3 +89,37 @@ function ServerPlayerAppearanceSync() {
 	}	
 
 }
+
+// Syncs the player wardrobe with the server (12 wardrobe positions)
+function ServerPlayerWardrobeSync() {
+	var D = {};
+	D.Wardrobe = [];
+	for(var W = 0; W < WardrobeCharacter.length; W++) {
+		D.Wardrobe[W] = [];
+		for(var A = 0; A < WardrobeCharacter[W].Appearance.length; A++)
+			if (WardrobeCharacter[W].Appearance[A].Asset.Group.Category == "Appearance")
+				D.Wardrobe[W].push({ Name: WardrobeCharacter[W].Appearance[A].Asset.Name, Group: WardrobeCharacter[W].Appearance[A].Asset.Group.Name, Color: WardrobeCharacter[W].Appearance[A].Color });
+	}
+	ServerSend("AccountUpdate", D);
+}
+
+// Syncs the private character with the server
+function ServerPrivateCharacterSync() {
+	var D = {};
+	D.PrivateCharacter = [];
+	for(var ID = 1; ID < PrivateCharacter.length; ID++) {
+		var C = {
+			Name: PrivateCharacter[ID].Name,
+			Love: PrivateCharacter[ID].Love,
+			Title: PrivateCharacter[ID].Title,
+			Trait: PrivateCharacter[ID].Trait,
+			Cage: PrivateCharacter[ID].Cage,
+			AccountName: PrivateCharacter[ID].AccountName,
+			Appearance: PrivateCharacter[ID].Appearance.slice(),
+			AppearanceFull: PrivateCharacter[ID].AppearanceFull.slice(),
+			Event: PrivateCharacter[ID].Event
+		};
+		D.PrivateCharacter.push(C);
+	}
+	ServerSend("AccountUpdate", D);
+};

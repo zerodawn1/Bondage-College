@@ -41,7 +41,7 @@ function ManagementWillOwnPlayer() { return ((Player.Owner == "") && (Reputation
 function ManagementWontOwnPlayer() { return ((Player.Owner == "") && (ReputationGet("Dominant") <= -1) && (ReputationGet("Dominant") >= -99) && (PrivateCharacter.length <= 3) && !PrivatePlayerIsOwned() && ManagementNoMistressInPrivateRoom()) }
 function ManagementNoMistressInPrivateRoom() { return (((PrivateCharacter.length <= 1) || (PrivateCharacter[1].Title == null) || (PrivateCharacter[1].Title != "Mistress")) && ((PrivateCharacter.length <= 2) || (PrivateCharacter[2].Title == null) || (PrivateCharacter[2].Title != "Mistress"))) }
 function ManagementIsClubSlave() { return ((InventoryGet(Player, "ItemNeck") != null) && (InventoryGet(Player, "ItemNeck").Asset.Name == "ClubSlaveCollar")) }
-function ManagementCanTransferToRoom() { return (LogQuery("RentRoom", "PrivateRoom") && (JSON.parse(localStorage.getItem("BondageClubPrivateRoomCharacter" + Player.AccountName + "3")) == null)) }
+function ManagementCanTransferToRoom() { return (LogQuery("RentRoom", "PrivateRoom") && (PrivateCharacter.length < PrivateCharacterMax)) }
 function ManagementWontVisitRoom() { return (!ManagementVisitRoom && ManagementCanTransferToRoom()) }
 
 // Loads the club management room, creates the Mistress and sub character
@@ -153,7 +153,7 @@ function ManagementReleasePrivateRoom() {
 	for (var P = 1; P < PrivateCharacter.length; P++) {
 		if (PrivateCharacter[P].IsVulvaChaste()) InventoryRemove(PrivateCharacter[P], "ItemPelvis");
 		if (PrivateCharacter[P].IsBreastChaste()) InventoryRemove(PrivateCharacter[P], "ItemBreast");
-		PrivateSaveCharacter(P);
+		ServerPrivateCharacterSync();
 	}
 	CharacterChangeMoney(Player, -50);
 }

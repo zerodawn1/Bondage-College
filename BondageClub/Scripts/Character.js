@@ -123,35 +123,6 @@ function CharacterLoadCSVDialog(C) {
 	
 }
 
-// Loads a wardrobe character from storage
-function CharacterLoadFromStorage(StorageName) {
-
-	// Checks if the NPC already exists and returns it if it's the case
-	for (var C = 0; C < Character.length; C++)
-		if (Character[C].AccountName == "Template-" + StorageName)
-			return Character[C];
-		
-	// Gets the character from storage
-	CharacterReset(Character.length, "Female3DCG");
-	C = Character[Character.length - 1];
-	C.AccountName = "Template-" + StorageName;
-	CharacterAppearanceBuildAssets(C);
-	
-	// If there's a saved version, we take it, if not we randomize the slot
-	var App = JSON.parse(localStorage.getItem(StorageName));
-	if (App != null) {
-		C.Appearance = [];
-		for(var A = 0; A < App.length; A++)
-			if ((App[A].Asset != null) && (App[A].Asset.Group.Category == "Appearance"))
-				if ((App[A].Asset.Value == 0) || InventoryAvailable(Player, App[A].Asset.Name, App[A].Asset.Group.Name))
-					C.Appearance.push(App[A]);
-	}
-	else
-		CharacterAppearanceFullRandom(C);
-	return C;
-
-}
-
 // Sets the clothes based on a character archetype
 function CharacterArchetypeClothes(C, Archetype) {
 	

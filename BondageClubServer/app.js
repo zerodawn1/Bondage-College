@@ -36,7 +36,7 @@ DatabaseClient.connect(DatabaseURL, { useNewUrlParser: true }, function(err, db)
 		});
 		
 		// Refreshes the server information to clients each 30 seconds
-		setInterval(AccountSendServerInfo(null), 30000);
+		setInterval(AccountSendServerInfo, 30000);
 		
 	});
 	
@@ -45,11 +45,16 @@ DatabaseClient.connect(DatabaseURL, { useNewUrlParser: true }, function(err, db)
 // Sends the server info to all players or one specific player (socket)
 function AccountSendServerInfo(socket) {
 	var SI = {
-		Time = new Date().getTime(),
-		OnlinePlayers = Account.length
+		Time: CommonTime(),
+		OnlinePlayers: Account.length
 	}
-	if (socket != null) sockets.emit("ServerInfo", SI);
+	if (socket != null) socket.emit("ServerInfo", SI);
 	else IO.sockets.emit("ServerInfo", SI);
+}
+
+// Return the current time
+function CommonTime() {
+	return new Date().getTime();
 }
 
 // Creates a new account by creating its file
@@ -79,13 +84,16 @@ function AccountCreate(data, socket) {
 						if (err) throw err;
 						console.log("Creating new account: " + data.AccountName + "  ID: " + socket.id.toString());
 						data.Password = hash;
-						data.ID = socket.id;
-						Account.push(data);
+						data.Creation = CommonTime();
 						Database.collection("Accounts").insertOne(data, function(err, res) {
 							if (err) throw err;
 							console.log("Account created");
 						});
+						data.ID = socket.id;
+						data.Socket = socket;
+						Account.push(data);
 						socket.emit("CreationResponse", "AccountCreated");
+						AccountSendServerInfo(socket);
 					});
 					
 				}
@@ -117,23 +125,21 @@ function AccountLogin(data, socket) {
 				BCrypt.compare(data.Password.toUpperCase(), result.Password, function( err, res ) {
 					if (res) {
 						
-						// Logs the account
-						console.log("Login account: " + result.AccountName + "  ID: " + socket.id.toString());
-						socket.emit("LoginResponse", result);
-						result.ID = socket.id;						
-						Account.push(result);
-						
 						// Disconnect duplicated logged accounts
 						for(var A = 0; A < Account.length; A++)
 							if ((Account[A].AccountName == result.AccountName) && (Account[A].ID != socket.id)) {
-								for(var S = 0; S < IO.sockets.length; S++)
-									if (IO.sockets[S].id == Account[A].ID) {
-										AccountRemove(Account[A].ID);
-										IO.sockets[S].disconnect();
-										break;
-									}
+								Account[A].Socket.emit("ForceDisconnect", "ErrorDuplicatedLogin");
+								AccountRemove(Account[A].ID);
 								break;
 							}
+
+						// Logs the account
+						console.log("Login account: " + result.AccountName + "  ID: " + socket.id.toString());
+						socket.emit("LoginResponse", result);
+						result.ID = socket.id;
+						result.Socket = socket;
+						Account.push(result);
+						AccountSendServerInfo(socket);
 
 					} else socket.emit("LoginResponse", "InvalidNamePassword");
 				});
