@@ -10,7 +10,6 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		Name: "",
 		AssetFamily: CharacterAssetFamily,
 		AccountName: "",
-		AccountPassword: "",
 		Owner: "",
 		Lover: "",
 		Money: 0,
@@ -280,11 +279,11 @@ function CharacterChangeMoney(C, Value) {
 }
 
 // Refreshes the character parameters
-function CharacterRefresh(C) {	
+function CharacterRefresh(C, Push) {
 	CharacterLoadEffect(C);
 	CharacterLoadPose(C);	
 	CharacterLoadCanvas(C);
-	if ((CurrentModule != "Character") && (C.ID == 0)) ServerPlayerAppearanceSync();
+	if ((CurrentModule != "Character") && (C.ID == 0) && ((Push == null) || (Push == true))) ServerPlayerAppearanceSync();
 }
 
 // Returns TRUE if a character is naked
@@ -411,5 +410,5 @@ function CharacterFullRandomRestrain(C, Ratio) {
 // Sets a new pose for the character
 function CharacterSetActivePose(C, NewPose) {
 	C.ActivePose = NewPose;
-	CharacterRefresh(C);
+	CharacterRefresh(C, false);
 }

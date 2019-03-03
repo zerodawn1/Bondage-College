@@ -119,7 +119,7 @@ function LoginRun() {
 
 // When the character logs, we analyze the data
 function LoginResponse(C) {
-	
+
 	// If the return package contains a name and a account name
 	if (typeof C == "object") {
 		if ((C.Name != null) && (C.AccountName != null)) {
@@ -131,7 +131,6 @@ function LoginResponse(C) {
 			// Sets the player character info
 			Player.Name = C.Name;
 			Player.AccountName = C.AccountName;
-			Player.AccountPassword = document.getElementById("InputPassword").value.trim();
 			Player.AssetFamily = C.AssetFamily;		
 			if (CommonIsNumeric(C.Money)) Player.Money = C.Money;
 			Player.Owner = ((C.Owner == null) || (C.Owner == "undefined")) ? "" : C.Owner;
@@ -140,7 +139,7 @@ function LoginResponse(C) {
 			Player.Wardrobe = C.Wardrobe;
 
 			// Loads the player character model and data
-			CharacterAppearanceLoadFromAccount(Player, C.Appearance);
+			Player.Appearance = ServerAppearanceLoadFromBundle(C.AssetFamily, C.Appearance);
 			InventoryRemove(Player, "ItemMisc");
 			InventoryLoad(Player, C.Inventory, false);
 			LogLoad(C.Log);
@@ -148,6 +147,7 @@ function LoginResponse(C) {
 			SkillLoad(C.Skill);
 			CharacterLoadCSVDialog(Player);
 			CharacterAppearanceValidate(Player);
+			CharacterRefresh(Player, false);
 			document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 			document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
 
@@ -155,7 +155,7 @@ function LoginResponse(C) {
 			PrivateCharacter = [];
 			PrivateCharacter.push(Player);
 			if (C.PrivateCharacter != null)
-				for(var P = 0; P < PrivateCharacter.length; P++)
+				for(var P = 0; P < C.PrivateCharacter.length; P++)
 					PrivateCharacter.push(C.PrivateCharacter[P]);
 
 			// If the player must start in her room, in her cage

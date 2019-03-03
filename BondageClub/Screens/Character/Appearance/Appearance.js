@@ -505,7 +505,7 @@ function AppearanceClick() {
 function CharacterAppearanceExit(C) {
 	C.Appearance = CharacterAppearanceBackup;
 	CharacterLoadCanvas(C);
-	if ((C.AccountName != "") && (C.AccountPassword != "")) CommonSetScreen("Room", CharacterAppearanceReturnRoom);
+	if (C.AccountName != "") CommonSetScreen("Room", CharacterAppearanceReturnRoom);
 	else CommonSetScreen("Character", "Login");
 	CharacterAppearanceReturnRoom = "MainHall";
 }
@@ -533,7 +533,7 @@ function CharacterAppearanceReady(C) {
 			}
 
 	// If there's no error, we continue to the login or main hall if already logged
-	if ((C.ID == 0) && (C.AccountName != "") && (C.AccountPassword != "")) {
+	if ((C.ID == 0) && (C.AccountName != "")) {
 		ServerPlayerAppearanceSync();
 		CommonSetScreen("Room", CharacterAppearanceReturnRoom);
 		CharacterAppearanceReturnRoom = "MainHall";
@@ -560,37 +560,5 @@ function CharacterAppearanceCopy(FromC, ToC) {
 	AssetReload(ToC);
 	CharacterRefresh(ToC);
 	if (ToC.ID == 0) ServerPlayerAppearanceSync();
-
-}
-
-// Loads the character appearance from the JSON file
-function CharacterAppearanceLoadFromAccount(C, Appearance) {
-
-	// Make sure we have something to load
-	if (Appearance != null) {
-
-		// For each appearance item to load
-		C.Appearance = [];
-		for (var A = 0; A < Appearance.length; A++) {
-
-			// Cycles in all the assets to find the correct item to add and colorize it
-			var I;
-			for (I = 0; I < Asset.length; I++)
-				if ((Asset[I].Name == Appearance[A].Name) && (Asset[I].Group.Name == Appearance[A].Group) && (Asset[I].Group.Family == C.AssetFamily)) {
-					var NA = {
-						Asset: Asset[I],
-						Difficulty: parseInt((Appearance[A].Difficulty == null) ? 0 : Appearance[A].Difficulty),
-						Color: (Appearance[A].Color == null) ? "Default" : Appearance[A].Color
-					}
-					C.Appearance.push(NA);
-					break;
-				}
-
-		}
-
-		// Draw the character canvas
-		CharacterRefresh(C);
-
-	}
 
 }

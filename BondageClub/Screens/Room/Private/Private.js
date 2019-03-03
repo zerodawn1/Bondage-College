@@ -19,7 +19,7 @@ function PrivateVendorCanPlay() { return (LogQuery("RentRoom", "PrivateRoom") &&
 function PrivateAllowChange() { return (!CurrentCharacter.IsRestrained() && (ReputationGet("Dominant") + 25 >= NPCTraitGet(CurrentCharacter, "Dominant"))) }
 function PrivateWontChange() { return (!CurrentCharacter.IsRestrained() && (ReputationGet("Dominant") + 25 < NPCTraitGet(CurrentCharacter, "Dominant"))) }
 function PrivateIsRestrained() { return (CurrentCharacter.IsRestrained()) }
-function PrivateAllowRestain() { return (CurrentCharacter.IsRestrained() || (ReputationGet("Dominant") + 25 >= NPCTraitGet(CurrentCharacter, "Dominant"))) }
+function PrivateAllowRestain() { return (CurrentCharacter.AllowItem) }
 function PrivateNobodyGagged() { return (Player.CanTalk() && CurrentCharacter.CanTalk()) }
 function PrivateCanMasturbate() { return (CharacterIsNaked(CurrentCharacter) && !CurrentCharacter.IsVulvaChaste() && !Player.IsRestrained()) }
 function PrivateCanFondle() { return (!CurrentCharacter.IsBreastChaste() && !Player.IsRestrained()) }
@@ -55,7 +55,7 @@ function PrivateLoad() {
 	PrivateVendor.AllowItem = false;
 	NPCTraitDialog(PrivateVendor);
 	for(var C = 1; C < PrivateCharacter.length; C++)
-		PrivateLoadCharacter(PrivateCharacter[C]);
+		PrivateLoadCharacter(C);
 	PrivateRelationDecay();
 
 }
@@ -191,28 +191,28 @@ function PrivateGetCage() {
 // Loads the private room character
 function PrivateLoadCharacter(C) {
 
-	// If there's no account, we build the character from the server template
-	if ((C.AccountName == null) && (C.Name != null)) {
+	// If there's no account, we build the full character from the server template
+	if ((PrivateCharacter[C].AccountName == null) && (PrivateCharacter[C].Name != null)) {
 		var N = CharacterLoadNPC("NPC_Private_Custom");
-		N.Name = C.Name;
-		N.AccountName = "NPC_Private_Custom" + ID.toString();
-		if (C.Title != null) N.Title = C.Title;
-		if (C.Appearance != null) N.Appearance = C.Appearance.slice();
-		if (C.AppearanceFull != null) N.AppearanceFull = C.AppearanceFull.slice();
-		if (C.Trait != null) N.Trait = C.Trait.slice();
-		if (C.Cage != null) N.Cage = C.Cage;
-		if (C.Event != null) N.Event = C.Event;
-		N.Love = (C.Love == null) ? 0 : parseInt(C.Love);
+		N.Name = PrivateCharacter[C].Name;
+		N.AccountName = "NPC_Private_Custom" + N.ID.toString();
+		if (PrivateCharacter[C].Title != null) N.Title = PrivateCharacter[C].Title;
+		if (PrivateCharacter[C].AssetFamily != null) N.AssetFamily = PrivateCharacter[C].AssetFamily;
+		if (PrivateCharacter[C].Appearance != null) N.Appearance = ServerAppearanceLoadFromBundle(PrivateCharacter[C].AssetFamily, PrivateCharacter[C].Appearance);
+		if (PrivateCharacter[C].AppearanceFull != null) N.AppearanceFull = ServerAppearanceLoadFromBundle(PrivateCharacter[C].AssetFamily, PrivateCharacter[C].AppearanceFull);
+		if (PrivateCharacter[C].Trait != null) N.Trait = PrivateCharacter[C].Trait.slice();
+		if (PrivateCharacter[C].Cage != null) N.Cage = PrivateCharacter[C].Cage;
+		if (PrivateCharacter[C].Event != null) N.Event = PrivateCharacter[C].Event;
+		N.Love = (PrivateCharacter[C].Love == null) ? 0 : parseInt(PrivateCharacter[C].Love);
 		AssetReload(N);
 		NPCTraitDialog(N);
 		CharacterRefresh(N);
-		PrivateCharacter.push(N);
 		if (NPCEventGet(N, "PrivateRoomEntry") == 0) NPCEventAdd(N, "PrivateRoomEntry", CurrentTime);
-		C = N;
+		PrivateCharacter[C] = N;
 	}
 
 	// We allow items on NPC if 25+ dominant reputation, not owner or restrained
-	C.AllowItem = (((ReputationGet("Dominant") + 25 >= NPCTraitGet(C, "Dominant")) && !C.IsOwner()) || C.IsRestrained() || !C.CanTalk());
+	PrivateCharacter[C].AllowItem = (((ReputationGet("Dominant") + 25 >= NPCTraitGet(PrivateCharacter[C], "Dominant")) && !PrivateCharacter[C].IsOwner()) || PrivateCharacter[C].IsRestrained() || !PrivateCharacter[C].CanTalk());
 
 }
 
@@ -232,14 +232,14 @@ function PrivateAddCharacter(Template, Archetype) {
 	PrivateCharacter.push(C);
 	NPCEventAdd(C, "PrivateRoomEntry", CurrentTime);
 	ServerPrivateCharacterSync();
-	C.AllowItem = ((ReputationGet("Dominant") + 25 >= NPCTraitGet(C, "Dominant")) || C.IsRestrained() || !C.CanTalk());
+	C.AllowItem = (((ReputationGet("Dominant") + 25 >= NPCTraitGet(C, "Dominant")) && !C.IsOwner()) || C.IsRestrained() || !C.CanTalk());
 }
 
 // Returns the ID of the private room current character
 function PrivateGetCurrentID() {
-	if ((PrivateCharacter[3] != null) && (CurrentCharacter.Name == PrivateCharacter[3].Name)) return 3;
-	if ((PrivateCharacter[2] != null) && (CurrentCharacter.Name == PrivateCharacter[2].Name)) return 2;
-	return 1;
+	for(var P = 1; P < PrivateCharacter.length; P++)
+		if (CurrentCharacter.Name == PrivateCharacter[P].Name)
+			return P;
 }
 
 // When the player kicks out a character

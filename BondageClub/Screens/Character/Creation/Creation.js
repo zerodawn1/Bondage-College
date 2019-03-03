@@ -104,8 +104,8 @@ function CreationResponse(CharacterData) {
 		// Keep the character data and pushes it's appearance to the server
 		Player.Name = document.getElementById("InputCharacter").value.trim();
 		Player.AccountName = document.getElementById("InputName").value.trim();
-		Player.AccountPassword = document.getElementById("InputPassword1").value.trim();
 		Player.Creation = CurrentTime;
+		Player.Money = 100;
 
 		// Imports logs, inventory and Sarah status from the Bondage College
 		PrivateCharacter = [];

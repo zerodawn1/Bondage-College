@@ -1,9 +1,10 @@
 "use strict";
 var ServerSocket = null;
+var ServerURL = "http://localhost:4288";
 
 // Loads the server events
 function ServerInit() {
-	ServerSocket = io('http://localhost:4288');
+	ServerSocket = io(ServerURL);
 	ServerSocket.on("ServerMessage", function (data) { console.log(data) });
 	ServerSocket.on("ServerInfo", function (data) { ServerInfo(data) });
 	ServerSocket.on("CreationResponse", function (data) { CreationResponse(data) });
@@ -69,22 +70,53 @@ function ServerPlayerSkillSync() {
 	ServerSend("AccountUpdate", D);
 }
 
+// Prepares an appearance bundle that we can push to the server (removes the assets, only keep the main information)
+function ServerAppearanceBundle(Appearance) {
+	var Bundle = [];
+	for (var A = 0; A < Appearance.length; A++) {
+		var N = {};
+		N.Group = Appearance[A].Asset.Group.Name;
+		N.Name = Appearance[A].Asset.Name;
+		if ((Appearance[A].Color != null) && (Appearance[A].Color != "Default")) N.Color = Appearance[A].Color;
+		if ((Appearance[A].Difficulty != null) && (Appearance[A].Difficulty != 0)) N.Difficulty = Appearance[A].Difficulty;
+		Bundle.push(N);
+	}
+	return Bundle;
+}
+
+// Loads the appearance assets from a server bundle that only contains the main info (no assets)
+function ServerAppearanceLoadFromBundle(AssetFamily, Bundle) {
+
+	// For each appearance item to load
+	var Appearance = [];
+	for (var A = 0; A < Bundle.length; A++) {
+
+		// Cycles in all the assets to find the correct item to add and colorize it
+		var I;
+		for (I = 0; I < Asset.length; I++)
+			if ((Asset[I].Name == Bundle[A].Name) && (Asset[I].Group.Name == Bundle[A].Group) && (Asset[I].Group.Family == AssetFamily)) {
+				var NA = {
+					Asset: Asset[I],
+					Difficulty: parseInt((Bundle[A].Difficulty == null) ? 0 : Bundle[A].Difficulty),
+					Color: (Bundle[A].Color == null) ? "Default" : Bundle[A].Color
+				}
+				Appearance.push(NA);
+				break;
+			}
+
+	}	
+	return Appearance;
+
+}
+
 // Syncs the player appearance with the server
 function ServerPlayerAppearanceSync() {
 	
 	// Creates a big parameter string of every appearance items and sends it to the server
-	if ((Player.AccountName != "") && (Player.AccountPassword != "")) {
+	if (Player.AccountName != "") {
 		var D = {};
 		D.AssetFamily = Player.AssetFamily;
-		D.Appearance = [];
-		for (var A = 0; A < Player.Appearance.length; A++) {
-			var N = {};
-			N.Group = Player.Appearance[A].Asset.Group.Name;
-			N.Name = Player.Appearance[A].Asset.Name;
-			if ((Player.Appearance[A].Color != null) && (Player.Appearance[A].Color != "Default")) N.Color = Player.Appearance[A].Color;
-			if ((Player.Appearance[A].Difficulty != null) && (Player.Appearance[A].Difficulty != 0)) N.Difficulty = Player.Appearance[A].Difficulty;
-			D.Appearance.push(N);
-		}
+		D.Appearance = ServerAppearanceBundle(Player.Appearance);
 		ServerSend("AccountUpdate", D);
 	}	
 
@@ -114,9 +146,9 @@ function ServerPrivateCharacterSync() {
 			Title: PrivateCharacter[ID].Title,
 			Trait: PrivateCharacter[ID].Trait,
 			Cage: PrivateCharacter[ID].Cage,
-			AccountName: PrivateCharacter[ID].AccountName,
-			Appearance: PrivateCharacter[ID].Appearance.slice(),
-			AppearanceFull: PrivateCharacter[ID].AppearanceFull.slice(),
+			AssetFamily: PrivateCharacter[ID].AssetFamily,
+			Appearance: ServerAppearanceBundle(PrivateCharacter[ID].Appearance),
+			AppearanceFull: ServerAppearanceBundle(PrivateCharacter[ID].AppearanceFull),
 			Event: PrivateCharacter[ID].Event
 		};
 		D.PrivateCharacter.push(C);

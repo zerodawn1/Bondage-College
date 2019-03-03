@@ -105,7 +105,7 @@ ItemPelvisLeatherCrop,,,(She grumbles as you strike her butt with the crop.)  Ow
 300,310,"I'm ready, you can tie me up.",(She wraps a white nylon rope around your feet and does two knots.),"DialogWearItem(""NylonRope"", ""ItemFeet"")",AllowRestrainPlayer()
 300,,Not yet.  Give me some time.  (Leave her.),,DialogLeave(),
 310,320,I won't be running away now.,That's for sure.  (She wraps a second rope around your legs.),"DialogWearItem(""NylonRope"", ""ItemLegs"")",
-310,320,That's all?,Hah, of course not. Much left to do.  (She wraps a second rope around your legs.),"DialogWearItem(""NylonRope"", ""ItemLegs"")"
+310,320,That's all?,"Hah, of course not.  Much left to do.  (She wraps a second rope around your legs.)","DialogWearItem(""NylonRope"", ""ItemLegs"")",
 320,330,It feels good.,"(She nods and wraps a third rope around your body and arms, forcing them to stick into your back.)","DialogWearItem(""NylonRope"", ""ItemArms"")",
 320,330,You sure know the ropes.,"(She smiles and wraps a third rope around your body and arms, forcing them to stick into your back.)","DialogWearItem(""NylonRope"", ""ItemArms"")",
 330,340,It's too tight!,You'll get used to it.  Now do you think you can escape?,ChangeMaidOpinion(-1),
