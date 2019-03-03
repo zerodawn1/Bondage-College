@@ -95,7 +95,6 @@ function InventoryWear(C, AssetName, AssetGroup, ItemColor, Difficulty) {
 	for (var A = 0; A < Asset.length; A++)
 		if ((Asset[A].Name == AssetName) && (Asset[A].Group.Name == AssetGroup))
 			CharacterAppearanceSetItem(C, AssetGroup, Asset[A], ItemColor, Difficulty);
-	CharacterRefresh(C);
 }
 
 // Sets the difficulty to remove an item

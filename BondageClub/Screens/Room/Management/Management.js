@@ -43,6 +43,10 @@ function ManagementNoMistressInPrivateRoom() { return (((PrivateCharacter.length
 function ManagementIsClubSlave() { return ((InventoryGet(Player, "ItemNeck") != null) && (InventoryGet(Player, "ItemNeck").Asset.Name == "ClubSlaveCollar")) }
 function ManagementCanTransferToRoom() { return (LogQuery("RentRoom", "PrivateRoom") && (PrivateCharacter.length < PrivateCharacterMax)) }
 function ManagementWontVisitRoom() { return (!ManagementVisitRoom && ManagementCanTransferToRoom()) }
+function ManagementCanBeClubMistress() { return ((ReputationGet("Dominant") >= 100) && ((Math.floor((CurrentTime - Player.Creation) / 86400000)) >= 14) && !LogQuery("ClubMistress", "Management") && !Player.IsRestrained() && !Player.IsKneeling()) }
+function ManagementCannotBeClubMistress() { return ((ReputationGet("Dominant") < 100) && (ReputationGet("Dominant") >= 50) && ((Math.floor((CurrentTime - Player.Creation) / 86400000)) >= 14) && !LogQuery("ClubMistress", "Management") && !Player.IsRestrained() && !Player.IsKneeling()) }
+function ManagementCannotBeClubMistressLaugh() { return ((ReputationGet("Dominant") < 50) && ((Math.floor((CurrentTime - Player.Creation) / 86400000)) >= 14) && !LogQuery("ClubMistress", "Management") && !Player.IsRestrained() && !Player.IsKneeling()) }
+function ManagementCannotBeClubMistressTime() { return (((Math.floor((CurrentTime - Player.Creation) / 86400000)) < 14) && !LogQuery("ClubMistress", "Management") && !Player.IsRestrained() && !Player.IsKneeling()) }
 
 // Loads the club management room, creates the Mistress and sub character
 function ManagementLoad() {
@@ -299,4 +303,18 @@ function ManagementClubSlaveTransferToRoom() {
 	InventoryRemove(Player, "ItemFeet");
 	CommonSetScreen("Room", "Private");
 	PrivateAddCharacter(ManagementRandomGirl, ManagementRandomGirlArchetype);
+}
+
+// When the player gets the Mistress clothes
+function ManagementGetMistressOutfit(Color) {
+	CharacterRelease(Player);
+	CharacterArchetypeClothes(Player, "Mistress", Color);
+}
+
+// When the player starts the Mistress introduction party
+function ManagementPlayerMistressCutscene() {
+	LogAdd("ClubMistress", "Management");
+	DialogLeave();
+	ManagementMistress.Stage = "0";
+	CommonSetScreen("Cutscene", "PlayerMistress");
 }

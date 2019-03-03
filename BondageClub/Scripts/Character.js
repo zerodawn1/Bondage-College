@@ -123,7 +123,7 @@ function CharacterLoadCSVDialog(C) {
 }
 
 // Sets the clothes based on a character archetype
-function CharacterArchetypeClothes(C, Archetype) {
+function CharacterArchetypeClothes(C, Archetype, ForceColor) {
 	
 	// Maid archetype
 	if (Archetype == "Maid") {
@@ -139,20 +139,16 @@ function CharacterArchetypeClothes(C, Archetype) {
 	// Mistress archetype
 	if (Archetype == "Mistress") {
 		var ColorList = ["#333333", "#AA4444", "#AAAAAA"];
-		var Color = CommonRandomItemFromList("", ColorList);
+		var Color = (ForceColor == null) ? CommonRandomItemFromList("", ColorList) : ForceColor;
 		CharacterAppearanceSetItem(C, "Hat", null);
 		InventoryAdd(C, "MistressGloves", "Gloves");
-		CharacterAppearanceSetItem(C, "Gloves", C.Inventory[C.Inventory.length - 1].Asset);
-		CharacterAppearanceSetColorForGroup(C, Color, "Gloves");
+		InventoryWear(C, "MistressGloves", "Gloves", Color);
 		InventoryAdd(C, "MistressBoots", "Shoes");
-		CharacterAppearanceSetItem(C, "Shoes", C.Inventory[C.Inventory.length - 1].Asset);
-		CharacterAppearanceSetColorForGroup(C, Color, "Shoes");
+		InventoryWear(C, "MistressBoots", "Shoes", Color);
 		InventoryAdd(C, "MistressTop", "Cloth");
-		CharacterAppearanceSetItem(C, "Cloth", C.Inventory[C.Inventory.length - 1].Asset);
-		CharacterAppearanceSetColorForGroup(C, Color, "Cloth");
+		InventoryWear(C, "MistressTop", "Cloth", Color);
 		InventoryAdd(C, "MistressBottom", "ClothLower");
-		CharacterAppearanceSetItem(C, "ClothLower", C.Inventory[C.Inventory.length - 1].Asset);
-		CharacterAppearanceSetColorForGroup(C, Color, "ClothLower");
+		InventoryWear(C, "MistressBottom", "ClothLower", Color);
 	}
 
 }
