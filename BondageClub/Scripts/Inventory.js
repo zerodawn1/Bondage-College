@@ -40,8 +40,10 @@ function InventoryDelete(C, DelItemName, DelItemGroup, Push) {
 
 	// First, we remove the item from the player inventory
 	for (var I = 0; I < C.Inventory.length; I++)
-		if ((C.Inventory[I].Name == DelItemName) && (C.Inventory[I].Group == DelItemGroup))
+		if ((C.Inventory[I].Name == DelItemName) && (C.Inventory[I].Group == DelItemGroup)) {
 			C.Inventory.splice(I, 1);
+			break;
+		}
 
 	// Next, we call the player account service to remove the item
 	if ((C.ID == 0) && ((Push == null) || Push))

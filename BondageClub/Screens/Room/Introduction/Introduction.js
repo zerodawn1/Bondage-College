@@ -14,6 +14,7 @@ var IntroductionRescueScenarioList = ["LatexWoman", "Newcomer", "MaidFight", "Sa
 function IntroductionIsRescueScenario(ScenarioName) { return (IntroductionRescueScenario == ScenarioName) }
 function IntroductionIsBothFree() { return (!IntroductionMaid.IsRestrained() && IntroductionMaid.CanTalk() && !IntroductionSub.IsRestrained() && IntroductionMaid.CanTalk()) }
 function IntroductionIsMaidRestrained() { return (IntroductionMaid.IsRestrained() || !IntroductionMaid.CanTalk()) }
+function IntroductionNoTitle() { return (!LogQuery("JoinedSorority", "Maid") && !LogQuery("ClubMistress", "Management")) }
 
 // Loads the introduction room
 function IntroductionLoad() {

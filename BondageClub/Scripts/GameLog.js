@@ -32,6 +32,22 @@ function LogAdd(NewLogName, NewLogGroup, NewLogValue, Push) {
 
 }
 
+// Deletes a log entry
+function LogDelete(DelLogName, DelLogGroup, Push) {
+
+	// Finds the log entry and deletes it
+	for (var L = 0; L < Log.length; L++)
+		if ((Log[L].Name == DelLogName) && (Log[L].Group == DelLogGroup)) {
+			Log.splice(L, 1);
+			break;
+		}
+
+	// Sends the new log to the server
+	if ((Push == null) || Push)
+		ServerPlayerLogSync();
+
+}
+
 // Checks if the log exists, return true if it does (if there's a value, it counts as an expiry time)
 function LogQuery(QueryLogName, QueryLogGroup) {
 	for (var L = 0; L < Log.length; L++)

@@ -127,10 +127,10 @@ function CharacterArchetypeClothes(C, Archetype, ForceColor) {
 	
 	// Maid archetype
 	if (Archetype == "Maid") {
-		InventoryAdd(C, "MaidOutfit1", "Cloth");
+		InventoryAdd(C, "MaidOutfit1", "Cloth", false);
 		CharacterAppearanceSetItem(C, "Cloth", C.Inventory[C.Inventory.length - 1].Asset);
 		CharacterAppearanceSetColorForGroup(C, "Default", "Cloth");
-		InventoryAdd(C, "MaidHairband1", "Hat");
+		InventoryAdd(C, "MaidHairband1", "Hat", false);
 		CharacterAppearanceSetItem(C, "Hat", C.Inventory[C.Inventory.length - 1].Asset);
 		CharacterAppearanceSetColorForGroup(C, "Default", "Hat");
 		C.AllowItem = (LogQuery("LeadSorority", "Maid"));
@@ -141,14 +141,16 @@ function CharacterArchetypeClothes(C, Archetype, ForceColor) {
 		var ColorList = ["#333333", "#AA4444", "#AAAAAA"];
 		var Color = (ForceColor == null) ? CommonRandomItemFromList("", ColorList) : ForceColor;
 		CharacterAppearanceSetItem(C, "Hat", null);
-		InventoryAdd(C, "MistressGloves", "Gloves");
+		InventoryAdd(C, "MistressGloves", "Gloves", false);
 		InventoryWear(C, "MistressGloves", "Gloves", Color);
-		InventoryAdd(C, "MistressBoots", "Shoes");
+		InventoryAdd(C, "MistressBoots", "Shoes", false);
 		InventoryWear(C, "MistressBoots", "Shoes", Color);
-		InventoryAdd(C, "MistressTop", "Cloth");
+		InventoryAdd(C, "MistressTop", "Cloth", false);
 		InventoryWear(C, "MistressTop", "Cloth", Color);
-		InventoryAdd(C, "MistressBottom", "ClothLower");
+		InventoryAdd(C, "MistressBottom", "ClothLower", false);
 		InventoryWear(C, "MistressBottom", "ClothLower", Color);
+		InventoryAdd(C, "MetalChastityBeltKey", "ItemPelvis", false);
+		InventoryAdd(C, "MetalChastityBraKey", "ItemBreast", false);
 	}
 
 }

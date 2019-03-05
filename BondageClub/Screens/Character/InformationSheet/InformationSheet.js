@@ -6,18 +6,19 @@ var InformationSheetPreviousScreen = "";
 
 // Gets the best title for the player and returns it
 function InformationSheetGetTitle() {
-	if (SkillGetLevel(Player, "Dressage") > 9) return TextGet("TitlePonyPegasus")
-	else if (SkillGetLevel(Player, "Dressage") >= 8) return TextGet("TitlePonyUnicorn")
-	else if (SkillGetLevel(Player, "Dressage") >= 6) return TextGet("TitlePonyWild")
-	else if (SkillGetLevel(Player, "Dressage") >= 5) return TextGet("TitlePonyHot")
-	else if (SkillGetLevel(Player, "Dressage") >= 4) return TextGet("TitlePonyWarm")
-	else if (SkillGetLevel(Player, "Dressage") >= 3) return TextGet("TitlePonyCold")
-	else if (SkillGetLevel(Player, "Dressage") >= 2) return TextGet("TitlePonyFarm")
-	else if (SkillGetLevel(Player, "Dressage") >= 1) return TextGet("TitlePonyFoal");
+	if (LogQuery("ClubMistress", "Management")) return TextGet("TitleMistress");
+	if (SkillGetLevel(Player, "Dressage") >= 10) return TextGet("TitlePonyPegasus");
 	if (LogQuery("LeadSorority", "Maid")) return TextGet("TitleHeadMaid");
 	if (ReputationGet("Kidnap") >= 100) return TextGet("TitleMasterKidnapper");
+	if (SkillGetLevel(Player, "Dressage") >= 8) return TextGet("TitlePonyUnicorn");
+	if (SkillGetLevel(Player, "Dressage") >= 6) return TextGet("TitlePonyWild");
+	if (SkillGetLevel(Player, "Dressage") >= 5) return TextGet("TitlePonyHot");
 	if (LogQuery("JoinedSorority", "Maid")) return TextGet("TitleMaid");
 	if (ReputationGet("Kidnap") >= 50) return TextGet("TitleKidnapper");
+	if (SkillGetLevel(Player, "Dressage") >= 4) return TextGet("TitlePonyWarm");
+	if (SkillGetLevel(Player, "Dressage") >= 3) return TextGet("TitlePonyCold");
+	if (SkillGetLevel(Player, "Dressage") >= 2) return TextGet("TitlePonyFarm");
+	if (SkillGetLevel(Player, "Dressage") >= 1) return TextGet("TitlePonyFoal");
 	return TextGet("TitleNone");
 }
 

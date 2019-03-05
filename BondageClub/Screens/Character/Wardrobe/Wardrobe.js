@@ -23,7 +23,8 @@ function WardrobeLoadCharacter(P) {
 					for (var S = 0; S < Asset.length; S++)
 						if ((Asset[S].Name == Player.Wardrobe[P][A].Name) && (Asset[S].Group.Name == Player.Wardrobe[P][A].Group))
 							if (Asset[S].Group.Category == "Appearance")
-								CharacterAppearanceSetItem(C, Player.Wardrobe[P][A].Group, Asset[S], Player.Wardrobe[P][A].Color);
+								if ((Asset[S].Value == 0) || InventoryAvailable(Player, Asset[S].Name, Asset[S].Group.Name))
+									CharacterAppearanceSetItem(C, Player.Wardrobe[P][A].Group, Asset[S], Player.Wardrobe[P][A].Color);
 			CharacterLoadCanvas(C);
 		}
 		else
