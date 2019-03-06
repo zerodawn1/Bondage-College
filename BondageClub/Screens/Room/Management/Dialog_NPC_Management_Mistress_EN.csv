@@ -163,7 +163,7 @@ MistressExpulsion,,,We Mistresses have been speaking.  It seems you're not fit t
 200,220,Will you be my Mistress?,"I've heard about you girl, they say you're one of the best slaves around.  You would offer yourself to me?",,WillOwnPlayer()
 200,,Will you be my Mistress?,"Girl, my standards are high.  If I get a new slave, she would have to be the perfect submissive.",,WontOwnPlayer()
 200,,Can I collar and own anyone?,"BDSM is consensual.  As long as the person isn't already owned and consent to be your slave, you can collar her.",,
-200,,I want to collar a submissive.,Perfect!  You'll have to wait though.  The club is restructuring.  Please come back later.,,
+200,,I want to collar a submissive.,Perfect!  Go get your consenting pet and bring her here.  You will need to pay 100$ for the slave collar and the ceremony.,,
 200,,A Dominant wants to collar me.,"You must be thrilled sub girl, but your Dominant will arrange the collaring ceremony, not you.  Ask her politely to contact us.",,!Player.IsOwned()
 200,210,I want to be released from my owner.,"I'm sorry to hear that.  Breaking a BDSM bond is serious.  Tell me your story, why do you want to leave?",,CanBeReleased()
 200,,I want to be released from my owner.,"Girl, I know your owner.  Speak with her about it first.",,CannotBeReleased()

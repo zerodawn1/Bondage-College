@@ -152,7 +152,9 @@ function CharacterAppearanceFullRandom(C, ClothOnly) {
 				var SelectedAsset = R[Math.round(Math.random() * (R.length - 1))];			
 				var SelectedColor = SelectedAsset.Group.ColorSchema[Math.round(Math.random() * (SelectedAsset.Group.ColorSchema.length - 1))];
 				if ((SelectedAsset.Group.ColorSchema[0] == "Default") && (Math.random() < 0.5)) SelectedColor = "Default";
-				if (SelectedAsset.Group.ParentColor != "") SelectedColor = CharacterAppearanceGetCurrentValue(C, SelectedAsset.Group.ParentColor, "Color");
+				if (SelectedAsset.Group.ParentColor != "")
+					if (CharacterAppearanceGetCurrentValue(C, SelectedAsset.Group.ParentColor, "Color") != "None")
+						SelectedColor = CharacterAppearanceGetCurrentValue(C, SelectedAsset.Group.ParentColor, "Color");
 				var NA = {
 					Asset: SelectedAsset,
 					Color: SelectedColor

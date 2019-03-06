@@ -146,6 +146,8 @@ function ServerPrivateCharacterSync() {
 			Title: PrivateCharacter[ID].Title,
 			Trait: PrivateCharacter[ID].Trait,
 			Cage: PrivateCharacter[ID].Cage,
+			Owner: PrivateCharacter[ID].Owner,
+			Lover: PrivateCharacter[ID].Lover,
 			AssetFamily: PrivateCharacter[ID].AssetFamily,
 			Appearance: ServerAppearanceBundle(PrivateCharacter[ID].Appearance),
 			AppearanceFull: ServerAppearanceBundle(PrivateCharacter[ID].AppearanceFull),

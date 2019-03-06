@@ -146,7 +146,7 @@ function LoginResponse(C) {
 			ReputationLoad(C.Reputation);
 			SkillLoad(C.Skill);
 			CharacterLoadCSVDialog(Player);
-			CharacterAppearanceValidate(Player);
+			if (!LogQuery("SleepCage", "Rule")) CharacterAppearanceValidate(Player);
 			CharacterRefresh(Player, false);
 			document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 			document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
@@ -164,6 +164,7 @@ function LoginResponse(C) {
 				InventoryRemove(Player, "ItemLegs");
 				Player.Cage = true;
 				CharacterSetActivePose(Player, "Kneel");
+				CommonSetScreen("Room", "Private");
 			} else CommonSetScreen("Room", "MainHall");
 			
 		} else LoginMessage = TextGet("ErrorLoadingCharacterData");
