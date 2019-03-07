@@ -146,7 +146,7 @@ function LoginResponse(C) {
 			ReputationLoad(C.Reputation);
 			SkillLoad(C.Skill);
 			CharacterLoadCSVDialog(Player);
-			if (!LogQuery("SleepCage", "Rule")) CharacterAppearanceValidate(Player);
+			if (!LogQuery("SleepCage", "Rule") || (Player.Owner == "")) CharacterAppearanceValidate(Player);
 			CharacterRefresh(Player, false);
 			document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
 			document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
@@ -159,7 +159,7 @@ function LoginResponse(C) {
 					PrivateCharacter.push(C.PrivateCharacter[P]);
 
 			// If the player must start in her room, in her cage
-			if (LogQuery("SleepCage", "Rule")) {
+			if (LogQuery("SleepCage", "Rule") && (Player.Owner != "")) {
 				InventoryRemove(Player, "ItemFeet");
 				InventoryRemove(Player, "ItemLegs");
 				Player.Cage = true;
