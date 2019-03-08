@@ -52,7 +52,7 @@ function ActorSpecificGetValue(SpecificActorName, ValueType) {
 
 // Return the current actor's localized name
 function ActorGetDisplayName() {
-	if (ActorNamesText == null) ReadCSV("ActorNamesText", "C999_Common", "ActorNames", "Text", GetWorkingLanguage());
+	if (ActorNamesText == null) ReadCSV("ActorNamesText", "C999_Common", "ActorNames", "Text", GetWorkingLanguageForChapter("C999_Common"));
 	if (ActorGetValue(ActorHideName)) return GetCSVText(ActorNamesText, "Unknown");
 	return GetCSVText(ActorNamesText, CurrentActor);
 }

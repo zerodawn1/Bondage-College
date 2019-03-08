@@ -6,8 +6,8 @@ Stage,LoveReq,SubReq,VarReq,Interaction,Result,NextStage,LoveMod,SubMod,Function
 0,0,0,,Благодарности,Огромное СПАСИБО всем|кто поддерживал игру.,0,0,0,RollCredits()
 10,0,0,,Глава 1|Перед уроком,,10,0,0,"LoadChapter(""C001_BeforeClass"")"
 10,0,0,,Глава 2|Первый урок,,10,0,0,"LoadChapter(""C002_FirstClass"")"
-10,0,0,,Глава 3|Утренний арест,10,0,0,"LoadChapter(""C003_MorningDetention"")"
-10,0,0,,Глава 4|Художественный класс,,10,0,0,"LoadChapter(""""C004_ArtClass"")"
+10,0,0,,Глава 3|Утренний арест,,10,0,0,"LoadChapter(""C003_MorningDetention"")"
+10,0,0,,Глава 4|Художественный класс,,10,0,0,"LoadChapter(""C004_ArtClass"")"
 10,0,0,,Глава 5|Спортивный зал,,10,0,0,"LoadChapter(""C005_GymClass"")"
 10,0,0,,Глава 6|Изоляция,,10,0,0,"LoadChapter(""C006_Isolation"")"
 10,0,0,,Глава 7|Обеденный перерыв,,10,0,0,"LoadChapter(""C007_LunchBreak"")"
