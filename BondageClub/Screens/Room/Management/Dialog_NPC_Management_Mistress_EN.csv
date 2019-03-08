@@ -232,14 +232,14 @@ MistressExpulsion,,,We Mistresses have been speaking.  It seems you're not fit t
 360,0,Maybe I'm not fit to be a public slave.,(She swaps your collars and nods.)  Going public isn't for everyone.  Here's your money girl.  (She gives you 80$.),FinishClubSlave(2),Player.IsOwned()
 360,0,Maybe I'm not fit to be a public slave.,(She removes your collar and nods.)  Going public isn't for everyone.  Here's your money girl.  (She gives you 80$.),FinishClubSlave(2),!Player.IsOwned()
 400,,What are club Mistresses?,We Mistresses are the final arbiters in the club.  We make the rules and enforce them.  It's hard work but it's rewarding.,,
-400,,What are the requirements?,"To apply to be a club Mistress, someone must be a club member for at least two weeks and be known to be really dominant.",,
+400,,What are the requirements?,"To apply to be a club Mistress, someone must be a club member for at least one week and be known to be really dominant.",,
 400,,Do they get paid?,Absolutely.  The salary is 100$ per week and they will receive the official Mistress outfit that I'm wearing right now.,,
 400,,Do they have privileges?,They have a special privilege that comes with responsibilities.  Every Mistress get special keys for chastity devices.,,
 400,,What if a Mistress turns submissive?,She will be kicked out of the group and her Mistress clothes will be confiscated.,,
 400,410,Can I become a club Mistress?,You've made quite a reputation for yourself in the club.  Are you serious about becoming a Mistress?,,CanBeClubMistress()
 400,,Can I become a club Mistress?,We've noticed your good reputation but it's not enough.  Work harder to become an elite Dominant.,,CannotBeClubMistress()
 400,,Can I become a club Mistress?,You?  Don't make me laugh.  Being a Mistress is for real Dominants only.,,CannotBeClubMistressLaugh()
-400,,Can I become a club Mistress?,"Girl, you're a new member.  You must be a club member for at least two weeks before you can apply.",,CannotBeClubMistressTime()
+400,,Can I become a club Mistress?,"Girl, you're a new member.  You must be a club member for at least one week before you can apply.",,CannotBeClubMistressTime()
 400,0,I'm here to collect my salary.,(She checks her book and gives you 100$.)  Here you go Mistress DialogPlayerName.  Come again in seven days for your next pay.,MistressPay(),MistressCanBePaid()
 400,0,I'm here to collect my salary.,(She checks her book and frowns.)  You're too early Mistress DialogPlayerName.  It takes a full week between each payment.,,MistressCannotBePaid()
 400,0,That's all I wanted to know.,"Good.  Now, get to the point or get going.",,
@@ -258,8 +258,8 @@ MistressExpulsion,,,We Mistresses have been speaking.  It seems you're not fit t
 500,510,You're kicking me out?,"Correct, you're not Dominant enough, so you're getting kicked out of the Mistresses circle.",,
 500,510,(Stay silent.),"Girl, you've really lost your Dominant touch and you're getting kicked out of the Mistresses circle.","DialogChangeReputation(""Dominant"", -3)",
 510,520,That's unfair!,"Don't make it harder than it should be, you've brought this on yourself.  Now get naked for your shaming.",,
-510,520,I understand.,"Very good, you did brought this on yourself.  Now get naked for your shaming.","DialogChangeReputation(""Dominant"", -2)",
-520,,My shaming?,"Yes, your shaming period will last for an hour.  You will have to wander the club naked so everyone knows you're not a Mistress anymore.",DialogRemove(),
+510,520,I understand.,"Very good, you did bring this on yourself.  Now get naked for your shaming.","DialogChangeReputation(""Dominant"", -2)",
+520,,My shaming?,"Yes, your shaming period will last for an hour.  You will have to wander the club naked, so everyone knows you're not a Mistress anymore.",DialogRemove(),
 520,530,(Grumble and get naked.),You're not allowed to wear clothes for the next hour.  Now surrender your Mistress outfit and chastity keys.,PlayerStrip(),
 520,530,(Stay silent and get naked.),You're not allowed to wear clothes for the next hour.  Now surrender your Mistress outfit and chastity keys.,PlayerStrip(),
 530,0,"Fine, take it.  (Give your Mistress items.)","(She takes your Mistress items and sighs.)  Such a pity, you had so much potential.  Carry on girl.",MistressKicked(),

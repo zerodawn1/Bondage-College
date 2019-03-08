@@ -333,7 +333,8 @@ function AppearanceRun() {
 	} else {
 
 		// Draws the color picker
-		DrawText(CharacterAppearanceGetCurrentValue(Player, CharacterAppearanceColorPicker, "Color"), 1450, 75, "white", "black");
+		ElementPosition("InputColor", 1450, 65, 300);
+		DrawButton(1610, 37, 65, 65, "", "White", "Icons/Color.png");
 		DrawImage("Backgrounds/ColorPicker.png", 1300, 145);
 
 	}
@@ -474,9 +475,14 @@ function AppearanceClick() {
 		if ((MouseX >= 1910) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 975))
 			for (var A = CharacterAppearanceOffset; A < AssetGroup.length && A < CharacterAppearanceOffset + CharacterAppearanceNumPerPage; A++)
 				if ((AssetGroup[A].Family == Player.AssetFamily) && (AssetGroup[A].Category == "Appearance") && AssetGroup[A].AllowColorize)
-					if ((MouseY >= 145 + (A - CharacterAppearanceOffset) * 95) && (MouseY <= 210 + (A - CharacterAppearanceOffset) * 95)) {
+					if ((MouseY >= 145 + (A - CharacterAppearanceOffset) * 95) && (MouseY <= 210 + (A - CharacterAppearanceOffset) * 95))						
+					{
+						
+						// Keeps the previous color in backup and creates a text box to enter the color
 						CharacterAppearanceColorPicker = AssetGroup[A].Name;
 						CharacterAppearanceColorPickerBackup = CharacterAppearanceGetCurrentValue(Player, CharacterAppearanceColorPicker, "Color");
+						ElementCreateInput("InputColor", "text", ((CharacterAppearanceColorPickerBackup == "Default") || (CharacterAppearanceColorPickerBackup == "None")) ? "#" : CharacterAppearanceColorPickerBackup, "7");
+						
 					}
 
 		// If we must set back the default outfit or set a random outfit
@@ -489,15 +495,27 @@ function AppearanceClick() {
 
 	} else {
 		
-		// In color picker mode, we can pick a color, cancel or accept the new color
-		if ((MouseX >= 1300) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 975))
-			CharacterAppearanceSetColorForGroup(Player, DrawRGBToHex(MainCanvas.getImageData(MouseX, MouseY, 1, 1).data), CharacterAppearanceColorPicker);
+		// Can set a color manually from the text field
+		if ((MouseX >= 1610) && (MouseX < 1675) && (MouseY >= 37) && (MouseY < 102))
+			if (/^#[0-9A-F]{6}$/i.test(ElementValue("InputColor")))
+				CharacterAppearanceSetColorForGroup(Player, ElementValue("InputColor").toLowerCase(), CharacterAppearanceColorPicker);
+
+		// In color picker mode, we can pick a color from the color image
+		if ((MouseX >= 1300) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 975)) {
+			var Color = DrawRGBToHex(MainCanvas.getImageData(MouseX, MouseY, 1, 1).data);
+			CharacterAppearanceSetColorForGroup(Player, Color, CharacterAppearanceColorPicker);
+			ElementValue("InputColor", Color);
+		}
+		
+		// Accepts the new color
 		if ((MouseX >= 1768) && (MouseX < 1858) && (MouseY >= 25) && (MouseY < 115)) {
 			CharacterAppearanceSetColorForGroup(Player, CharacterAppearanceColorPickerBackup, CharacterAppearanceColorPicker);
-			CharacterAppearanceColorPicker = "";			
-		}
-		if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) 
 			CharacterAppearanceColorPicker = "";
+		}
+
+		// Cancel out of color picking
+		if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceColorPicker = "";
+		if (CharacterAppearanceColorPicker == "") ElementRemove("InputColor");
 		
 	}
 

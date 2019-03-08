@@ -67,26 +67,8 @@ function LoginLoad() {
 	CharacterLoadCSVDialog(Player);
 	LoginMessage = "";
 	if (LoginCredits == null) CommonReadCSV("LoginCredits", CurrentModule, CurrentScreen, "GameCredits");
-
-	// Creates a text box to enter the player name
-	var InputName = document.createElement('input');
-	InputName.setAttribute("ID", "InputName");
-	InputName.setAttribute("name", "InputName");
-	InputName.setAttribute("type", "text");
-	InputName.setAttribute("value", "");
-	InputName.setAttribute("maxlength", "20");
-	InputName.addEventListener("keypress", KeyDown);
-	document.body.appendChild(InputName);
-
-	// Creates a text box to enter the player name
-	var InputPassword = document.createElement('input');
-	InputPassword.setAttribute("ID", "InputPassword");
-	InputPassword.setAttribute("name", "InputPassword");
-	InputPassword.setAttribute("type", "password");
-	InputPassword.setAttribute("value", "");
-	InputPassword.setAttribute("maxlength", "20");
-	InputPassword.addEventListener("keypress", KeyDown);
-	document.body.appendChild(InputPassword);
+	ElementCreateInput("InputName", "text", "", "20");
+	ElementCreateInput("InputPassword", "password", "", "20");
 
 }
 
@@ -101,9 +83,9 @@ function LoginRun() {
 	DrawText(TextGet("Welcome"), 1000, 50, "White", "Black");
 	DrawText(LoginMessage, 1000, 100, "White", "Black");
 	DrawText(TextGet("AccountName"), 1000, 200, "White", "Black");
-	DrawElementPosition("InputName", 1000, 260, 500);
+	ElementPosition("InputName", 1000, 260, 500);
 	DrawText(TextGet("Password"), 1000, 350, "White", "Black");
-	DrawElementPosition("InputPassword", 1000, 410, 500);
+	ElementPosition("InputPassword", 1000, 410, 500);
 	DrawButton(925, 500, 150, 60, TextGet("Login"), "White", "");
 	DrawText(TextGet("CreateNewCharacter"), 1000, 670, "White", "Black");
 	DrawButton(850, 740, 300, 60, TextGet("NewCharacter"), "White", "");
@@ -148,8 +130,8 @@ function LoginResponse(C) {
 			CharacterLoadCSVDialog(Player);
 			if (!LogQuery("SleepCage", "Rule") || (Player.Owner == "")) CharacterAppearanceValidate(Player);
 			CharacterRefresh(Player, false);
-			document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
-			document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
+			ElementRemove("InputName");
+			ElementRemove("InputPassword");
 
 			// Starts the game in the main hall while loading characters in the private room
 			PrivateCharacter = [];
@@ -177,15 +159,15 @@ function LoginClick() {
 	
 	// Opens the cheat panel
 	if (CheatAllow && ((MouseX >= 850) && (MouseX <= 1150) && (MouseY >= 870) && (MouseY <= 930))) {
-		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
-		document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
+		ElementRemove("InputName");
+		ElementRemove("InputPassword");
 		CommonSetScreen("Character", "Cheat");
 	}
 	
 	// If we must create a new character
 	if ((MouseX >= 850) && (MouseX <= 1150) && (MouseY >= 740) && (MouseY <= 800)) {
-		document.getElementById("InputName").parentNode.removeChild(document.getElementById("InputName"));
-		document.getElementById("InputPassword").parentNode.removeChild(document.getElementById("InputPassword"));
+		ElementRemove("InputName");
+		ElementRemove("InputPassword");
 		CharacterAppearanceSetDefault(Player);
 		InventoryRemove(Player, "ItemFeet");
 		InventoryRemove(Player, "ItemLegs");
@@ -195,8 +177,8 @@ function LoginClick() {
 	
 	// If we must try to login
 	if ((MouseX >= 925) && (MouseX <= 1075) && (MouseY >= 500) && (MouseY <= 560)) {
-		var Name = document.getElementById("InputName").value.trim();
-		var Password = document.getElementById("InputPassword").value.trim();
+		var Name = ElementValue("InputName");
+		var Password = ElementValue("InputPassword");
 		var letters = /^[a-zA-Z0-9]+$/;
 		if (Name.match(letters) && Password.match(letters) && (Name.length > 0) && (Name.length <= 20) && (Password.length > 0) && (Password.length <= 20))
 			ServerSend("AccountLogin", { AccountName: Name, Password: Password } );

@@ -282,7 +282,7 @@ function PrivateOwnerInRoom() {
 // When a custom NPC restrains the player, there's a minute timer before release
 function PrivateRestrainPlayer() {
 	CharacterFullRandomRestrain(Player);
-	PrivateNPCInteraction(2);
+	PrivateNPCInteraction(5);
 	PrivateReleaseTimer = CommonTime() + (Math.random() * 60000) + 60000;
 }
 
