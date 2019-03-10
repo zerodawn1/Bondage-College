@@ -28,10 +28,12 @@ function PrivateWontRestainPlayer() { return (!Player.IsRestrained() && !Current
 function PrivateAllowReleasePlayer() { return (Player.IsRestrained() && CurrentCharacter.CanTalk() && CurrentCharacter.CanInteract() && ((CommonTime() > PrivateReleaseTimer) || CurrentCharacter.IsOwnedByPlayer()) && !PrivateOwnerInRoom()) }
 function PrivateWontReleasePlayer() { return (Player.IsRestrained() && CurrentCharacter.CanTalk() && CurrentCharacter.CanInteract() && !((CommonTime() > PrivateReleaseTimer) || CurrentCharacter.IsOwnedByPlayer()) && !PrivateOwnerInRoom()) }
 function PrivateWontReleasePlayerOwner() { return (Player.IsRestrained() && CurrentCharacter.CanTalk() && CurrentCharacter.CanInteract() && PrivateOwnerInRoom()) }
-function PrivateWillKneel() { return (CurrentCharacter.CanKneel() && !CurrentCharacter.IsKneeling() && (ReputationGet("Dominant") > NPCTraitGet(CurrentCharacter, "Dominant"))) }
-function PrivateWontKneel() { return (CurrentCharacter.CanKneel() && !CurrentCharacter.IsKneeling() && (ReputationGet("Dominant") <= NPCTraitGet(CurrentCharacter, "Dominant"))) }
+function PrivateWillKneel() { return (CurrentCharacter.CanKneel() && CurrentCharacter.CanTalk() && !CurrentCharacter.IsKneeling() && ((ReputationGet("Dominant") > NPCTraitGet(CurrentCharacter, "Dominant")) || CurrentCharacter.IsOwnedByPlayer())) }
+function PrivateWillKneelGagged() { return (CurrentCharacter.CanKneel() && !CurrentCharacter.CanTalk() && !CurrentCharacter.IsKneeling() && ((ReputationGet("Dominant") > NPCTraitGet(CurrentCharacter, "Dominant")) || CurrentCharacter.IsOwnedByPlayer())) }
+function PrivateWontKneel() { return (CurrentCharacter.CanKneel() && !CurrentCharacter.IsKneeling() && (ReputationGet("Dominant") <= NPCTraitGet(CurrentCharacter, "Dominant")) && !CurrentCharacter.IsOwnedByPlayer()) }
 function PrivateCannotKneel() { return (!CurrentCharacter.CanKneel() && !CurrentCharacter.IsKneeling()) }
-function PrivateCanStandUp() { return (CurrentCharacter.CanKneel() && CurrentCharacter.IsKneeling()) }
+function PrivateCanStandUp() { return (CurrentCharacter.CanKneel() && CurrentCharacter.CanTalk() && CurrentCharacter.IsKneeling()) }
+function PrivateCanStandUpGagged() { return (CurrentCharacter.CanKneel() && !CurrentCharacter.CanTalk() && CurrentCharacter.IsKneeling()) }
 function PrivateCannotStandUp() { return (!CurrentCharacter.CanKneel() && CurrentCharacter.IsKneeling()) }
 function PrivateWouldTakePlayerAsSub() { return (!PrivatePlayerIsOwned() && !PrivateIsCaged() && !CurrentCharacter.IsKneeling() && !CurrentCharacter.IsRestrained() && (CurrentCharacter.Love >= 50) && (ReputationGet("Dominant") + 50 <= NPCTraitGet(CurrentCharacter, "Dominant")) && (CurrentTime >= CheatFactor("SkipTrialPeriod", 0) * NPCEventGet(CurrentCharacter, "PrivateRoomEntry") + NPCLongEventDelay(CurrentCharacter))) }
 function PrivateWontTakePlayerAsSub() { return (!PrivatePlayerIsOwned() && !PrivateIsCaged() && !CurrentCharacter.IsKneeling() && !CurrentCharacter.IsRestrained() && ((ReputationGet("Dominant") + 50 > NPCTraitGet(CurrentCharacter, "Dominant")) || (CurrentCharacter.Love < 50))) }
@@ -219,6 +221,7 @@ function PrivateLoadCharacter(C) {
 		CharacterRefresh(N);
 		if (NPCEventGet(N, "PrivateRoomEntry") == 0) NPCEventAdd(N, "PrivateRoomEntry", CurrentTime);
 		PrivateCharacter[C] = N;
+		if (PrivateCharacter[C].CanKneel() && PrivateCharacter[C].IsOwnedByPlayer()) CharacterSetActivePose(PrivateCharacter[C], "Kneel");
 	}
 
 	// We allow items on NPC if 25+ dominant reputation, not owner or restrained

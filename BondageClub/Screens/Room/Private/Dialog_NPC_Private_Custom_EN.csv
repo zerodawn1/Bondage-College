@@ -222,6 +222,7 @@ PlayerMustKneel,,,"(She licks her lips.)  Hey sexy sub, you know what would turn
 10,,Get on your knees.,Absolutely Miss.  I will find a comfy kneeling position for your pleasure.  (She comfortably sits on knees.),"DialogSetPose(CurrentCharacter, ""Kneel"")",WillKneel(),WillKneel,Submissive|Peaceful
 10,,Get on your knees.,"Consider yourself lucky, I don't kneel for many girls.  (She reluctantly kneels for you.)","DialogSetPose(CurrentCharacter, ""Kneel"")",WillKneel(),WillKneel,Dominant|Serious
 10,,Get on your knees.,Kneeling is boring.  I'm punished or what?  (She pouts and kneels for you.),"DialogSetPose(CurrentCharacter, ""Kneel"")",WillKneel(),WillKneel,Playful|Dumb
+10,,(Point at the floor.),(She nods and kneels for you.),"DialogSetPose(CurrentCharacter, ""Kneel"")",WillKneelGagged(),,
 10,,Get on your knees.,"No, I'm not in the mood for that.",,WontKneel(),WontKneel,
 10,,Get on your knees.,"Sorry yo.  I already spent too much time on my knees, I'm not doin' it for you.",,WontKneel(),WontKneel,Submissive|Rude
 10,,Get on your knees.,"(She laughs at you.)  Kneeling isn't fun, it's the last thing I'll do for you girl.",,WontKneel(),WontKneel,Dominant|Playful
@@ -231,6 +232,7 @@ PlayerMustKneel,,,"(She licks her lips.)  Hey sexy sub, you know what would turn
 10,,Stand up.,(She happily jumps back up.)  Thanks Miss!,"DialogSetPose(CurrentCharacter, """")",CanStandUp(),StandUp,Submissive|Playful
 10,,Stand up.,It's about time!  Kneeling is for wimpy subs anyway.,"DialogSetPose(CurrentCharacter, """")",CanStandUp(),StandUp,Dominant|Violent
 10,,Stand up.,"Tremendous!  (She stands up slowly.)  I must confess, my legs were starting to hurt.","DialogSetPose(CurrentCharacter, """")",CanStandUp(),StandUp,Peaceful|Polite
+10,,(Point at the floor then upward.),(She nods and stands up.),"DialogSetPose(CurrentCharacter, """")",CanStandUpGagged(),,
 10,,Stand up.,(She wiggles her restrained legs and shrugs.),,CannotStandUp(),,
 10,12,You should go.,You want me to leave now?,,,KickOut,
 10,12,You should go.,Oh!  You want some privacy?  (She winks.),,,KickOut,Dominant|Horny
@@ -803,6 +805,18 @@ PunishSleepCage,1001,Very well Mistress.,"Good, you will wake up everyday in you
 2000,,(Struggle and plead for help.),"I'm sorry Mistress, but your own Mistress is watching, and I don't want to get us both in trouble.",,WontReleasePlayerOwner(),SubStruggleWontReleasePlayerOwner,
 2000,,(Struggle and plead for help.),Sure thing!  (She starts to release you but stops when she sees your Mistress staring at her.)  Oops!,,WontReleasePlayerOwner(),SubStruggleWontReleasePlayerOwner,Playful|Dumb
 2000,,(Struggle and plead for help.),It wouldn't be wise Mistress.  Your owner is the final arbiter on your of freedom.,,WontReleasePlayerOwner(),SubStruggleWontReleasePlayerOwner,Serious|Wise
+2000,,Get on your knees.,(She nods and gets on her knees.),"DialogSetPose(CurrentCharacter, ""Kneel"")",WillKneel(),SubWillKneel,
+2000,,Get on your knees.,Absolutely Miss.  I will find a comfy kneeling position for your pleasure.  (She comfortably sits on knees.),"DialogSetPose(CurrentCharacter, ""Kneel"")",WillKneel(),SubWillKneel,Submissive|Peaceful
+2000,,Get on your knees.,"Consider yourself Mistress, I don't kneel for many girls.  (She reluctantly kneels for you.)","DialogSetPose(CurrentCharacter, ""Kneel"")",WillKneel(),SubWillKneel,Dominant|Serious
+2000,,Get on your knees.,Kneeling is boring.  I'm punished or what?  (She pouts and kneels for you.),"DialogSetPose(CurrentCharacter, ""Kneel"")",WillKneel(),SubWillKneel,Playful|Dumb
+2000,,(Point at the floor.),(She nods and kneels for you.),"DialogSetPose(CurrentCharacter, ""Kneel"")",WillKneelGagged(),,
+2000,,Get on your knees.,(She wiggles her restrained legs and shrugs.),,CannotKneel(),,
+2000,,Stand up.,Alright!  Time to move.  (She stands up.),"DialogSetPose(CurrentCharacter, """")",CanStandUp(),SubStandUp,
+2000,,Stand up.,(She happily jumps back up.)  Thanks Mistress!,"DialogSetPose(CurrentCharacter, """")",CanStandUp(),SubStandUp,Submissive|Playful
+2000,,Stand up.,It's about time!  Kneeling is for wimpy subs anyway.,"DialogSetPose(CurrentCharacter, """")",CanStandUp(),SubStandUp,Dominant|Violent
+2000,,Stand up.,"Tremendous!  (She stands up slowly.)  I must confess, my legs were starting to hurt.","DialogSetPose(CurrentCharacter, """")",CanStandUp(),SubStandUp,Peaceful|Polite
+2000,,(Point at the floor then upward.),(She nods and stands up.),"DialogSetPose(CurrentCharacter, """")",CanStandUpGagged(),,
+2000,,Stand up.,(She wiggles her restrained legs and shrugs.),,CannotStandUp(),,
 2000,2100,(Play with her.),"(You move closer, ready to play with her.)",,AllowRestain(),,
 2000,,(Leave her.),,DialogLeave(),,,
 2010,,,Is there anything else you want to talk about Mistress?,,,SubIntroTalk,
