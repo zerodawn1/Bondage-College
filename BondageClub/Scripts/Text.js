@@ -35,7 +35,7 @@ function TextLoad(TextGroup) {
     // Finds the full path of the CSV file to use cache
 	Text = null;
 	if ((TextGroup == null) || (TextGroup = "")) TextGroup = CurrentScreen;
-    var FullPath = "Screens/" + CurrentModule + "/" + TextGroup + "/Text_" + TextGroup + "_" + CommonGetWorkingLanguage() + ".csv";    
+    var FullPath = "Screens/" + CurrentModule + "/" + TextGroup + "/Text_" + TextGroup + "_EN.csv";    
     if (CommonCSVCache[FullPath]) {
 		TextBuild(CommonCSVCache[FullPath]);
         return;

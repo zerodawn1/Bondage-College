@@ -86,7 +86,7 @@ function CommonReadCSV(Array, Path, Screen, File, Language) {
 	
     // Changed from a single path to various arguments and internally concatenate them
     // This ternary operator is used to keep backward compatibility
-    var FullPath = "Screens/" + Path + "/" + Screen + "/" + File + (((Language == null) || (Language == false)) ? "" : "_" + CommonGetWorkingLanguage()) + ".csv";    
+    var FullPath = "Screens/" + Path + "/" + Screen + "/" + File + (((Language == null) || (Language == false)) ? "" : "_EN") + ".csv";    
     if (CommonCSVCache[FullPath]) {
 		window[Array] = CommonCSVCache[FullPath];
         return;
@@ -101,12 +101,7 @@ function CommonReadCSV(Array, Path, Screen, File, Language) {
     });
 }
 
-// Returns a working language if translation isn't fully ready
-function CommonGetWorkingLanguage() {
-	return "EN";
-}
-
-// AJAX utility
+// AJAX utility to get a file and return it's content
 function CommonGet(Path, Callback) {
 	var xhr = new XMLHttpRequest();
     xhr.open("GET", Path);
