@@ -4,7 +4,7 @@ var CheatAllow = false;
 var CheatList = ["DoubleReputation", "DoubleSkill", "DoubleMoney", "DoubleItemSpeed", "BlockRandomKidnap", "SkipTrialPeriod"];
 var CheatBonusList = ["DoubleMoney", "DoubleSkill"];
 var CheatBonusFactor = 2;
-var CheatBonusTime = 1551928838188;
+var CheatBonusTime = 1552967946711;
 var CheatActivated = [];
 
 // Returns TRUE if the cheat is currently active
