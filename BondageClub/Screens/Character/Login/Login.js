@@ -120,6 +120,7 @@ function LoginResponse(C) {
 			Player.Lover = ((C.Lover == null) || (C.Lover == "undefined")) ? "" : C.Lover;
 			Player.Creation = C.Creation;
 			Player.Wardrobe = C.Wardrobe;
+			WardrobeCharacter = [];
 
 			// Loads the player character model and data
 			Player.Appearance = ServerAppearanceLoadFromBundle(C.AssetFamily, C.Appearance);
