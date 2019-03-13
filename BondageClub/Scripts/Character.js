@@ -117,7 +117,7 @@ function CharacterBuildDialog(C, CSV) {
 function CharacterLoadCSVDialog(C) {
 
     // Finds the full path of the CSV file to use cache
-    var FullPath = ((C.ID == 0) ? "Screens/Character/Player/Dialog_Player" : "Screens/" + CurrentModule + "/" + CurrentScreen + "/Dialog_" + C.AccountName) + "_EN.csv";    
+    var FullPath = ((C.ID == 0) ? "Screens/Character/Player/Dialog_Player" : "Screens/" + CurrentModule + "/" + CurrentScreen + "/Dialog_" + C.AccountName) + ".csv";    
     if (CommonCSVCache[FullPath]) {
 		CharacterBuildDialog(C, CommonCSVCache[FullPath]);
         return;

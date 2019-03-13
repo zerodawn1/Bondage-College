@@ -82,11 +82,11 @@ function CommonParseCSV(str) {
 }
 
 // Read a CSV file from the web site
-function CommonReadCSV(Array, Path, Screen, File, Language) {
+function CommonReadCSV(Array, Path, Screen, File) {
 	
     // Changed from a single path to various arguments and internally concatenate them
     // This ternary operator is used to keep backward compatibility
-    var FullPath = "Screens/" + Path + "/" + Screen + "/" + File + (((Language == null) || (Language == false)) ? "" : "_EN") + ".csv";    
+    var FullPath = "Screens/" + Path + "/" + Screen + "/" + File + ".csv";    
     if (CommonCSVCache[FullPath]) {
 		window[Array] = CommonCSVCache[FullPath];
         return;

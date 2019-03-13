@@ -14,9 +14,9 @@ function MainHallLoad() {
 	MainHallMaid = CharacterLoadNPC("NPC_MainHall_Maid");
 	MainHallIsMaid = LogQuery("JoinedSorority", "Maid");
 	MainHallIsHeadMaid = LogQuery("LeadSorority", "Maid");
-	CommonReadCSV("NoArravVar", "Room", "Management", "Dialog_NPC_Management_RandomGirl_EN");
-	CommonReadCSV("NoArravVar", "Room", "KidnapLeague", "Dialog_NPC_KidnapLeague_RandomKidnapper_EN");
-	CommonReadCSV("NoArravVar", "Room", "Private", "Dialog_NPC_Private_Custom_EN");
+	CommonReadCSV("NoArravVar", "Room", "Management", "Dialog_NPC_Management_RandomGirl");
+	CommonReadCSV("NoArravVar", "Room", "KidnapLeague", "Dialog_NPC_KidnapLeague_RandomKidnapper");
+	CommonReadCSV("NoArravVar", "Room", "Private", "Dialog_NPC_Private_Custom");
 }
 
 // Run the main hall screen

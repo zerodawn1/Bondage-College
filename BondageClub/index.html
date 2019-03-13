@@ -78,7 +78,6 @@
 
 /*	
 	TO DO
-	BUG : Wardrobe doesn't load color, it keeps the previous one
 	Sarah / Chapter 14
 */
 
@@ -87,6 +86,7 @@ window.onload = function() {
 	//CheatImport();
 	ServerURL = "https://bondage-club-server.herokuapp.com/";
 	CommonIsMobile = CommonDetectMobile();
+	TranslationLoad();
 	DrawLoad();
 	AssetLoadAll();
 	CommonSetScreen("Character", "Login");
