@@ -337,8 +337,9 @@ function PrivateShowTrialHours() {
 function PrivatePlayerIsOwned() {
 	if (Player.Owner != "") return true;
 	for(var C = 0; C < PrivateCharacter.length; C++)
-		if (PrivateCharacter[C].IsOwner())
-			return true;
+		if (typeof PrivateCharacter[C].IsOwner === 'function') 
+			if (PrivateCharacter[C].IsOwner())
+				return true;
 	return false;
 }
 
