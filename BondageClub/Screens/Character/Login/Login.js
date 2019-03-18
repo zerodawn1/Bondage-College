@@ -63,6 +63,7 @@ function LoginLoad() {
 	// Resets the player and other characters
 	Character = [];
 	CharacterReset(0, "Female3DCG");
+	SarahReset();
 	LoginDoNextThankYou();
 	CharacterLoadCSVDialog(Player);
 	LoginMessage = "";
@@ -132,6 +133,7 @@ function LoginResponse(C) {
 			SkillLoad(C.Skill);
 			CharacterLoadCSVDialog(Player);
 			if (!LogQuery("SleepCage", "Rule") || (Player.Owner == "")) CharacterAppearanceValidate(Player);
+			SarahSetStatus();
 			CharacterRefresh(Player, false);
 			ElementRemove("InputName");
 			ElementRemove("InputPassword");
