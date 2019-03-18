@@ -32,9 +32,10 @@ RemoveSuspensionHempRope,,,(She breathes.) Finally.  What should that be?,,
 0,,"Hello, I'm DialogPlayerName.  Pleased to meet you.","Pleased to meet you too.  I'm DialogCharacterName, I'm a Trainer for our Horse Club.",DialogRemove(),
 0,40,Can you answer some questions?,"Yes sure, but hurry up the ponies are waiting.",,
 0,,Can I get a pony training? ,,CanBecomePony(),PlayerIsNewby
-0,,I want a trial training.,"Ok, let us start.",TrialTraining(),PlayerIsNewby
-0,,I'm her for a Training Routine.,,PlayerStartTrainingLesson(),PlayerIsPony
 0,,I want to become a Trainer.,,CanBecomeTrainer(),!PlayerIsTrainer
+0,,I want a trial pony training.,"Ok, let us start.",TrialPonyTraining(),PlayerIsNewby
+0,,I want a trial trainer training.,"Ok, let us start.",TrialTrainerTraining(),PlayerIsNewby
+0,,I'm her for a Training Routine.,,PlayerStartTrainingLesson(),PlayerIsPony
 0,210,I want to train a pony.,I get 10 $ cleaning fee for your riding gear.,,PlayerIsTrainer
 0,,(Dress Back),(She begins to stow the bridle.),DressBackPlayer(),StablePlayerIsDressOff()
 0,,I can't stay to chat.  (Leave her.),,DialogLeave(),
@@ -59,7 +60,7 @@ RemoveSuspensionHempRope,,,(She breathes.) Finally.  What should that be?,,
 21,22,(Open your Mouth.),Arms behind your back,"DialogWearItem(""HarnessBallGag"", ""ItemMouth"")",
 22,,(Wait and do Nothing),(The Whip hit your Butt.) Faster.,DialogRemove(),
 22,23,(Move the arms backwards),Bend Over,"DialogWearItem(""LeatherArmbinder"", ""ItemArms"")",
-23,24,(Bend Over),"(She feels the Butt) Ok, here is the Horse Tail Plug. Now we finished dress off. Stand straight.","DialogWearItem(""BlackButtPlug"", ""ItemButt"")",
+23,24,(Bend Over),(She feels the Butt) O.K. here is the Horse Tail Plug. Now we finished dress off. Stand straight.,"DialogWearItem(""BlackButtPlug"", ""ItemButt"")",
 24,25,(Stand straight.),Take a step forward. ,BecomePonyFin(),
 25,100,(Take a Step),"Elegant like a fence post, you have a long way to go.",,
 40,,What's going on in here?,We train Submissive to be Ponygirls. This allows them to move very elegantly.,,
@@ -77,7 +78,7 @@ RemoveSuspensionHempRope,,,(She breathes.) Finally.  What should that be?,,
 46,40,(listen),For every training routine you have to appear with a collar.,,
 100,0,(Waiting for instructions),,PlayerGetTrainingLesson(),
 200,0,(Do it quickly.),(She grins.)  You are not really dominant.,"DialogChangeReputation(""Dominant"", -3)",
-200,0,"I want to become a trainer, not a stableboy!",she winks. that is the dominant nature. give your money. Welcome to the guild her ist your Dress.,BecomeTrainer(),
+200,0,"I want to become a trainer, not a stableboy!",she winks. that is the dominant nature. give your money. Welcome to the guild her is your Dress.,BecomeTrainer(),
 210,0,Here is the money.  Hurry up.,(She will give you the clean clothes.) have a lot of fun.,TrainerStart(),
 210,0,I forgot my wallet.,"Then it will not work, you loser.","DialogChangeReputation(""Dominant"", -1)",
 StableTrainerToyHorseFin,,,"That was great, right?",,
@@ -92,7 +93,7 @@ StableBecomePonyTrue,11,When can I start?,once you have paid the fee and the hea
 StableBecomePonyTrue,0,I do not want it.,Contact me if you change your mind.,,
 StableBecomeTrainerDressageIntro,,,"Before you become a trainer, you must first learn the subtleties of dressage.",,
 StableBecomeTrainerDomIntro,,,Only dominant people can become trainer,,
-StableBecomeTrainerEquipmentIntro,,,"you lack the necessary equipment. you have to buy the following: Crops, Whips aud Lether Belt for Feet and Legs",,
+StableBecomeTrainerEquipmentIntro,,,"you lack the necessary equipment. you have to buy the following: Crops, Whips and Leather Belt for Feet and Legs",,
 StableBecomeTrainerMoneyIntro,,,You are too poor and can not afford the training of ponies.,,
 StableBecomeTrainerTrueIntro,,,"Yes, you can join the trainer guild. the entrance fee is 500 $.",,
 StableBecomeTrainerTrue,200,Take my money. when can I start?,First exercise: Take the broom and return the stable.,,
