@@ -2,9 +2,15 @@
 var SarahBackground = "SarahBedroom";
 var SarahStatus = "";
 var Sarah = null;
+var SarahActivityCount = 0;
+var SarahUnlockQuest = false;
 
 // Returns TRUE if a dialog condition matches
 function SarahStatusIs(QueryStatus) { return (QueryStatus == SarahStatus) }
+function CanKissLover() { return (Player.CanTalk() && Sarah.CanTalk() && (Player.Lover == "NPC-Sarah")) }
+function CanKissNotLover() { return (Player.CanTalk() && Sarah.CanTalk() && (Player.Lover != "NPC-Sarah")) }
+function CanSpankOwner() { return (Player.CanInteract() && (Sarah.Owner == Player.Name)) }
+function CanSpankNotOwner() { return (Player.CanInteract() && (Sarah.Owner != Player.Name)) }
 
 // Sets Sarah status
 function SarahSetStatus() {
@@ -73,4 +79,15 @@ function SarahClick() {
 	if ((MouseX >= 1000) && (MouseX < 1500) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(Sarah);
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) CommonSetScreen("Room", "MainHall");
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 235)) InformationSheetLoadCharacter(Player);
+}
+
+// Increments the number of activities done with Sarah (after 10, Amanda comes in)
+function SarahActivityRun() {
+	SarahActivityCount++;
+}
+
+// Starts the Sarah unlock quest
+function SarahStartUnlockQuest() {
+	SarahUnlockQuest = false;
+	DialogLeave();
 }
