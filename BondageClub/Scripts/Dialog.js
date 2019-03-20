@@ -302,8 +302,11 @@ function DialogClick() {
 										if (DialogInventory[I].Asset.SelfBondage || (C.ID != 0)) DialogProgressStart(C, Item, DialogInventory[I]);
 										else DialogSetText("CannotUseOnSelf");
 									} else {
-										C.CurrentDialog = DialogFind(C, DialogInventory[I].Asset.Group.Name + DialogInventory[I].Asset.Name);
-										DialogLeaveItemMenu();
+										var D = DialogFind(C, DialogInventory[I].Asset.Group.Name + DialogInventory[I].Asset.Name, null, false);
+										if (D != "") {
+											C.CurrentDialog = D;
+											DialogLeaveItemMenu();
+										}
 									}
 					} else {
 
@@ -313,8 +316,11 @@ function DialogClick() {
 								DialogProgressStart(C, Item, null);
 							else
 								if (!DialogInventory[I].Asset.Wear) {
-									C.CurrentDialog = DialogFind(C, DialogInventory[I].Asset.Group.Name + DialogInventory[I].Asset.Name);
-									DialogLeaveItemMenu();
+									var D = DialogFind(C, DialogInventory[I].Asset.Group.Name + DialogInventory[I].Asset.Name, null, false);
+									if (D != "") {
+										C.CurrentDialog = D;
+										DialogLeaveItemMenu();
+									}
 								}
 
 					}
@@ -581,7 +587,7 @@ function DialogGarble(C, CD) {
 }
 
 // Searches in the dialog for a specific stage keyword and returns that dialog option if we find it
-function DialogFind(C, KeyWord1, KeyWord2) {
+function DialogFind(C, KeyWord1, KeyWord2, ReturnPrevious) {
 	for(var D = 0; D < C.Dialog.length; D++)
 		if (C.Dialog[D].Stage == KeyWord1)
 			return C.Dialog[D].Result;
@@ -589,7 +595,7 @@ function DialogFind(C, KeyWord1, KeyWord2) {
 		for(var D = 0; D < C.Dialog.length; D++)
 			if (C.Dialog[D].Stage == KeyWord2)
 				return C.Dialog[D].Result;
-	return CurrentCharacter.CurrentDialog;
+	return ((ReturnPrevious == null) || ReturnPrevious) ? C.CurrentDialog : "";
 }
 
 // Draw all the possible interactions 
