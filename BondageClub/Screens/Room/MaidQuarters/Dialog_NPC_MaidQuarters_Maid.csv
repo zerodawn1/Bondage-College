@@ -45,7 +45,13 @@ ItemPelvisLeatherCrop,,,(She grumbles as you strike her butt with the crop.)  A 
 0,90,Who are the leaders in the sorority?,"The leaders are the head maids, they are dominant and experienced maids like you Miss.",,CanBecomeHeadMaid
 0,90,Who are the leaders in the sorority?,"The leaders are the head maids, they are dominant and experienced maids.  Maybe someday you could be head maid if you work hard enough.",,CannotBecomeHeadMaidYet
 0,,Tell me about the club.,The Bondage Club has a long history.  It was a secret club back then when BDSM was taboo and forbidden.,DialogRemove(),
+0,5,"As head maid, I have a task for you.",Of course Miss.  What can I do for you?,,CanFreeSarah()
 0,,I can't stay to chat.  (Leave her.),,DialogLeave(),
+5,6,There's a blond girl stuck in a reserved bedroom.,Is that true?  I can send a maid to rescue her right away.  Who reserved the room?,,
+5,0,Forget it.,Very well.  Is there anything else I can do head maid DialogPlayerName?,,
+6,0,It's reserved by Mistress Sophie.,(Her eyes widen.)  The sorority cannot interfere then.  Please check with the club management.,,
+6,0,I've reserved it.  Send a maid now.,Yes Miss!  (She sends a maid to unlock Sarah.)  It shouldn't take long.  Is there anything else I can do?,,FreeSarah()
+6,0,"Forget it, I'll do it myself.",Very well.  Is there anything else I can do head maid DialogPlayerName?,,
 10,20,I love the uniform!,"Wonderful.  I'm sure we'll find your size.  After lots of work for us, you can earn a permanent uniform that you can keep.",,
 10,20,I'll need to dress like you?,"Only when you're doing a chore.  After lots of work for us, you can earn a permanent uniform that you can keep.",,
 10,20,I'm not afraid of work.,"That's the spirit!  And after lots of work for us, you can earn a permanent uniform that you can keep.",,

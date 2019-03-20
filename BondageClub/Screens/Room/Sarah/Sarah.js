@@ -4,6 +4,7 @@ var SarahStatus = "";
 var Sarah = null;
 var SarahActivityCount = 0;
 var SarahUnlockQuest = false;
+var SarahLeft = false;
 
 // Returns TRUE if a dialog condition matches
 function SarahStatusIs(QueryStatus) { return (QueryStatus == SarahStatus) }
@@ -11,6 +12,8 @@ function SarahCanKissLover() { return (Player.CanTalk() && Sarah.CanTalk() && (P
 function SarahCanKissNotLover() { return (Player.CanTalk() && Sarah.CanTalk() && (Player.Lover != "NPC-Sarah")) }
 function SarahCanSpankOwner() { return (Player.CanInteract() && (Sarah.Owner == Player.Name)) }
 function SarahCanSpankNotOwner() { return (Player.CanInteract() && (Sarah.Owner != Player.Name)) }
+function SarahCanInviteToRoomFriend() { return (Player.CanWalk() && Sarah.CanWalk() && (Sarah.Owner != Player.Name) && (PrivateCharacter.length < PrivateCharacterMax)) }
+function SarahCanInviteToRoomSlave() { return (Player.CanWalk() && Sarah.CanWalk() && (Sarah.Owner == Player.Name) && (PrivateCharacter.length < PrivateCharacterMax)) }
 
 // Sets Sarah status
 function SarahSetStatus() {
@@ -60,7 +63,7 @@ function SarahLoad() {
 // Run the main introduction room, draw all 3 characters
 function SarahRun() {
 	DrawCharacter(Player, 500, 0, 1);
-	DrawCharacter(Sarah, 1000, -270, 1);
+	if (!SarahLeft) DrawCharacter(Sarah, 1000, -270, 1);
 	if (Player.CanWalk()) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
 	DrawButton(1885, 145, 90, 90, "", "White", "Icons/Character.png");
 }
@@ -68,7 +71,7 @@ function SarahRun() {
 // When the user clicks in the introduction room
 function SarahClick() {
 	if ((MouseX >= 500) && (MouseX < 1000) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(Player);
-	if ((MouseX >= 1000) && (MouseX < 1500) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(Sarah);
+	if ((MouseX >= 1000) && (MouseX < 1500) && (MouseY >= 0) && (MouseY < 1000) && !SarahLeft) CharacterSetCurrent(Sarah);
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) CommonSetScreen("Room", "MainHall");
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 235)) InformationSheetLoadCharacter(Player);
 }
@@ -91,4 +94,24 @@ function SarahCheckShackles() {
 function SarahStartUnlockQuest() {
 	SarahUnlockQuest = true;
 	DialogLeave();
+}
+
+// Unlocks Sarah from her predicament
+function SarahUnlock() {
+	SarahUnlockQuest = false;
+	InventoryRemove(Sarah, "ItemArms");
+	SarahBackground = "SarahBedroomZoom";
+	Sarah.Stage = "200";
+	CharacterSetActivePose(Sarah, null);
+}
+
+// When Sarah leaves the room
+function SarahLeaveRoom() {
+	SarahLeft = true;
+}
+
+// When Sarah transfers to the player room
+function SarahTransferToRoom() {
+	CommonSetScreen("Room", "Private");
+	PrivateAddCharacter(Sarah);
 }

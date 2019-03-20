@@ -13,6 +13,7 @@ MistressExpulsion,,,We Mistresses have been speaking.  It seems you're not fit t
 0,,,Welcome kidnapper.  How can I help you?,,"DialogReputationGreater(""Kidnap"", 50)"
 0,,,Be direct and don't waste my time girl.,,NoTitle()
 0,,Greetings Miss.  My name is DialogPlayerName.,"You seem to have some manners.  I'm DialogCharacterName, I'm in charge of the club today.",DialogRemove(),NoTitle()
+0,60,How come Sarah is locked down?,"Sarah you say?  Oh yes, the blond college student.  Mistress Sophie reserved a room for her punishment.",,SarahUnlockQuest()
 0,10,I have a few questions.,"Don't be shy, but don't waste my time.",,
 0,50,Who's that bound girl?,She's my kitty.  She stays with me while I work.,,
 0,100,Can we talk about chastity devices?,"Absolutely, what would you like to know?",,
@@ -97,6 +98,10 @@ MistressExpulsion,,,We Mistresses have been speaking.  It seems you're not fit t
 56,0,Can you please help me?,"Very well, I will help you.  (She releases you.)  I hope you had fun with my pet.",PlayerRelease(),MistressWillRelease()
 56,0,(Whimper and beg for mercy.),"Very well, I will help you.  (She releases you.)  I hope you had fun with my pet.",PlayerRelease(),MistressWillRelease()
 56,,(Leave her.),,DialogLeave(),
+60,0,Can you please release her?,"No, Mistress Sophie already made plans.  Do not interfere.",,!IsSarahOwner()
+60,61,"She's my property, let her go.","Of course, I will send a maid to warn Mistress Sophie and free your slave.",FreeSarah(),IsSarahOwner()
+60,0,"Very well, punish her properly then.","Don't worry, Mistress Sophie will discipline her well.",,
+61,0,Thank you.,It's my duty.  Is there something else you need?,,
 100,,What are the rules for chastity items?,Only the club Mistresses can unlock chastity devices.  Make sure you use your keys wisely.  (She winks at you.),,"DialogLogQuery(""ClubMistress"", ""Management"")"
 100,,What are the rules for chastity items?,"Only the club Mistresses can unlock chastity devices.  If you have an owner, you need your owner permission to be unlocked.",,"!DialogLogQuery(""ClubMistress"", ""Management"")"
 100,,Can I buy a key?,"No, the keys are not for sales.  They are for Mistresses only.",DialogRemove(),"!DialogLogQuery(""ClubMistress"", ""Management"")"
