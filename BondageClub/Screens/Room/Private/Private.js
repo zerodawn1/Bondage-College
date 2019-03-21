@@ -232,7 +232,7 @@ function PrivateLoadCharacter(C) {
 }
 
 // When a new character is added to the room
-function PrivateAddCharacter(Template, Archetype) {
+function PrivateAddCharacter(Template, Archetype, CustomData) {
 	var C = CharacterLoadNPC("NPC_Private_Custom");
 	C.Name = Template.Name;
 	C.AccountName = "NPC_Private_Custom" + PrivateCharacter.length.toString();
@@ -242,11 +242,11 @@ function PrivateAddCharacter(Template, Archetype) {
 	if ((Archetype != null) && (Archetype != "")) C.Title = Archetype;
 	NPCTraitGenerate(C);
 	if ((Archetype != null) && (Archetype == "Mistress")) NPCTraitSet(C, "Dominant", 60 + Math.floor(Math.random() * 41));
-	NPCTraitDialog(C);
+	if ((CustomData == null) || (CustomData == false)) NPCTraitDialog(C);
 	CharacterRefresh(C);
 	PrivateCharacter.push(C);
 	NPCEventAdd(C, "PrivateRoomEntry", CurrentTime);
-	ServerPrivateCharacterSync();
+	if ((CustomData == null) || (CustomData == false)) ServerPrivateCharacterSync();
 	C.AllowItem = (((ReputationGet("Dominant") + 25 >= NPCTraitGet(C, "Dominant")) && !C.IsOwner()) || C.IsRestrained() || !C.CanTalk());
 }
 

@@ -63,7 +63,7 @@ function SarahLoad() {
 // Run the main introduction room, draw all 3 characters
 function SarahRun() {
 	DrawCharacter(Player, 500, 0, 1);
-	if (!SarahLeft) DrawCharacter(Sarah, 1000, -270, 1);
+	if (!SarahLeft) DrawCharacter(Sarah, 1000, (Sarah.IsKneeling()) ? -270 : 0, 1);
 	if (Player.CanWalk()) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
 	DrawButton(1885, 145, 90, 90, "", "White", "Icons/Character.png");
 }
@@ -98,9 +98,9 @@ function SarahStartUnlockQuest() {
 
 // Unlocks Sarah from her predicament
 function SarahUnlock() {
+	CharacterRelease(Sarah);
 	SarahUnlockQuest = false;
-	InventoryRemove(Sarah, "ItemArms");
-	SarahBackground = "SarahBedroomZoom";
+	SarahBackground = "SarahBedroomLeft";
 	Sarah.Stage = "200";
 	CharacterSetActivePose(Sarah, null);
 }
@@ -108,10 +108,31 @@ function SarahUnlock() {
 // When Sarah leaves the room
 function SarahLeaveRoom() {
 	SarahLeft = true;
+	DialogLeave();
 }
 
 // When Sarah transfers to the player room
 function SarahTransferToRoom() {
+	SarahLeaveRoom();
+	CharacterRelease(Sarah);
+	InventoryWear(Sarah, "CollegeOutfit1", "Cloth");
+	InventoryWear(Sarah, "Socks4", "Socks");
+	InventoryWear(Sarah, "Shoes2", "Shoes");	
 	CommonSetScreen("Room", "Private");
-	PrivateAddCharacter(Sarah);
+	PrivateAddCharacter(Sarah, null, true);
+	var C = PrivateCharacter[PrivateCharacter.length - 1];
+	C.Trait = [];
+	NPCTraitSet(C, "Submissive", 70);
+	NPCTraitSet(C, "Violent", 50);
+	NPCTraitSet(C, "Horny", 40);
+	NPCTraitSet(C, "Dumb", 20);
+	NPCTraitSet(C, "Playful", 90);
+	if (Sarah.Owner == Player.Name) {
+		InventoryWear(Sarah, "SlaveCollar", "ItemNeck");
+		C.Owner = Player.Name;
+		C.Love = 100;
+	} else C.Love = 20;
+	NPCTraitDialog(C);
+	NPCEventAdd(C, "NPCCollaring", CurrentTime);
+	ServerPrivateCharacterSync();
 }
