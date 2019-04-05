@@ -93,7 +93,7 @@ ItemMetalChastityBra,,,"(She seems to disagree as you lock her breast away.)  Mi
 ItemMetalChastityBra,,,(You lock the chastity bra as she struggles like an animal to remove it.)  Damn it!  I won't come off.,,,ItemMetalChastityBra,Violent|Dumb
 ItemMetalChastityBra,,,"(She nods as you lock the chastity bra on her.)  Support and protection at the same time, this is a great article for submissives.",,,ItemMetalChastityBra,Frigid|Wise
 RemoveMetalChastityBra,,,(She wiggles her breast slowly as you unlock the chastity bra.)  Thanks!  That was kind of cruel.,,,RemoveMetalChastityBra,
-RemoveMetalChastityBra,,,(She stay silent as you use unlock the chastity bra.)  Be thoughtful and don't unlock anything until I'm disciplined.,,,RemoveMetalChastityBra,Violent|Serious
+RemoveMetalChastityBra,,,(She stays silent as you use unlock the chastity bra.)  Be thoughtful and don't unlock anything until I'm disciplined.,,,RemoveMetalChastityBra,Violent|Serious
 RemoveMetalChastityBra,,,"(She wiggles her breast happily as you unlock the chastity bra.)  Oh, hell yeah!  The metal was fucking hurting.",,,RemoveMetalChastityBra,Peaceful|Rude
 ItemBreastLeatherWhip,,,(She jumps and does small whimpers each time you hit her.)  It stings!,,,ItemBreastLeatherWhip,
 ItemBreastLeatherWhip,,,(She moans of pleasure with each lash on her breast and torso.)  Oh yeah!  Hit me harder!,,,ItemBreastLeatherWhip,Violent
@@ -539,7 +539,7 @@ ActivityUngag,1000,(Grumble in the gag.),(She removes the item and allows you to
 ActivityUngag,1000,(Help her to remove your gag.),(She removes the item and allows you to talk.)  Good girl.,ActivityRun(1),,,
 ActivityRestrainIntro,,,"We are in the Bondage Club my sub, you know you should be tied up.",,,DomActivityRestrainIntro,
 ActivityRestrainIntro,,,"My girl, it would be really sexy to get you in restraints.",,,DomActivityRestrainIntro,Horny
-ActivityRestrainIntro,,,You've playing with these hands way too much.  Its time to stop and restrain them.,,,DomActivityRestrainIntro,Frigid
+ActivityRestrainIntro,,,You've been playing with these hands way too much.  Its time to stop and restrain them.,,,DomActivityRestrainIntro,Frigid
 ActivityRestrainIntro,,,"Girl, being a slave isn't always easy.  You need to suffer from the restraints, give me your hands.",,,DomActivityRestrainIntro,Violent
 ActivityRestrainIntro,,,"(She gently grabs your hands.)  My subbie, its time to test your limits and restrain these pretty hands.",,,DomActivityRestrainIntro,Peaceful
 ActivityRestrain,1000,Yes Mistress.  (Give your hands.),(She restrains your arms and smiles.)  A happy sub is a restrained sub.,ActivityRun(1),Player.CanTalk(),,
@@ -550,7 +550,7 @@ ActivityRestrain,1000,(Nod and bow your head.),(She restrains your arms and pets
 ActivityRestrain,1000,(Grumble and try to stop her.),(She frowns and restrains you tightly.)  You're not in control girl.,ActivityRun(-7),,,
 ActivityFullRestrainIntro,,,"We are in the Bondage Club my sub, you should be fully restrained.",,,DomActivityFullRestrainIntro,
 ActivityFullRestrainIntro,,,"My girl, it would be really sexy to get you fully restrained.",,,DomActivityFullRestrainIntro,Horny
-ActivityFullRestrainIntro,,,You've playing with these hands way too much.  Its time to fully restrain you.,,,DomActivityFullRestrainIntro,Frigid
+ActivityFullRestrainIntro,,,You've been playing with these hands way too much.  Its time to fully restrain you.,,,DomActivityFullRestrainIntro,Frigid
 ActivityFullRestrainIntro,,,"Girl, being a slave isn't always easy.  You need to feel the pain from lots of the restraints.",,,DomActivityFullRestrainIntro,Violent
 ActivityFullRestrainIntro,,,"(She gently grabs your hands.)  My subbie, its time to test your limits and restrain you fully.",,,DomActivityFullRestrainIntro,Peaceful
 ActivityFullRestrain,1000,Yes Mistress.  (Politely give your hands.),(She restrains you with many items and smiles.)  A happy sub is a restrained sub.,ActivityRun(1),Player.CanTalk(),,
