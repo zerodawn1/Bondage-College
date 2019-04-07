@@ -18,10 +18,10 @@ function SarahCanKissLover() { return (Player.CanTalk() && Sarah.CanTalk() && (P
 function SarahCanKissNotLover() { return (Player.CanTalk() && Sarah.CanTalk() && (Player.Lover != "NPC-Sarah")) }
 function SarahCanSpankOwner() { return (Player.CanInteract() && (Sarah.Owner == Player.Name)) }
 function SarahCanSpankNotOwner() { return (Player.CanInteract() && (Sarah.Owner != Player.Name)) }
-function SarahCanInviteToRoomFriend() { return (Player.CanWalk() && Sarah.CanWalk() && (Sarah.Owner != Player.Name) && (PrivateCharacter.length < PrivateCharacterMax)) }
-function SarahCanInviteToRoomSlave() { return (Player.CanWalk() && Sarah.CanWalk() && (Sarah.Owner == Player.Name) && (PrivateCharacter.length < PrivateCharacterMax)) }
-function SarahCanInviteAmandaToRoom() { return (Player.CanWalk() && Amanda.CanWalk() && (PrivateCharacter.length < PrivateCharacterMax) && (!SarahInside || (Amanda.Owner == Player.Name))) }
-function SarahCanInviteAmandaToRoomRefuse() { return (Player.CanWalk() && Amanda.CanWalk() && (PrivateCharacter.length < PrivateCharacterMax) && SarahInside && (Amanda.Owner != Player.Name)) }
+function SarahCanInviteToRoomFriend() { return (Player.CanWalk() && Sarah.CanWalk() && (Sarah.Owner != Player.Name) && (PrivateCharacter.length < PrivateCharacterMax) && LogQuery("RentRoom", "PrivateRoom")) }
+function SarahCanInviteToRoomSlave() { return (Player.CanWalk() && Sarah.CanWalk() && (Sarah.Owner == Player.Name) && (PrivateCharacter.length < PrivateCharacterMax) && LogQuery("RentRoom", "PrivateRoom")) }
+function SarahCanInviteAmandaToRoom() { return (Player.CanWalk() && Amanda.CanWalk() && (PrivateCharacter.length < PrivateCharacterMax) && (!SarahInside || (Amanda.Owner == Player.Name)) && LogQuery("RentRoom", "PrivateRoom")) }
+function SarahCanInviteAmandaToRoomRefuse() { return (Player.CanWalk() && Amanda.CanWalk() && (PrivateCharacter.length < PrivateCharacterMax) && SarahInside && (Amanda.Owner != Player.Name) && LogQuery("RentRoom", "PrivateRoom")) }
 function SarahCanKickAmandaOut() { return (Amanda.CanWalk() && (Player.Owner != "NPC-Amanda") && (!SarahInside || (Amanda.Owner == Player.Name))) }
 function SarahCanKickAmandaOutRefuse() { return (Amanda.CanWalk() && (Player.Owner != "NPC-Amanda") && SarahInside && (Amanda.Owner != Player.Name)) }
 function SarahShackled() { return (SarahInside && (Sarah != null) && (InventoryGet(Sarah, "ItemArms") != null) && (InventoryGet(Sarah, "ItemArms").Asset.Name == "FourLimbsShackles")) }
@@ -33,7 +33,8 @@ function SarahAmandaCanKiss() { return (AmandaInside && (Amanda != null) && Play
 // Returns the correct label for Sarah's room
 function SarahRoomLabel() {
 	if (!SarahInside) return "ExploreClub";
-	if ((SarahStatus != "") && (!SarahIntroDone)) return "SearchSarah";
+	if ((SarahStatus != "") && (!SarahIntroDone) && (LogQuery("SarahWillBePunished", "NPC-SarahIntro") || LogQuery("SarahWillBePunished", "NPC-SarahIntro"))) return "SearchSarah";
+	if ((SarahStatus != "") && (!SarahIntroDone) && !LogQuery("SarahWillBePunished", "NPC-SarahIntro") && !LogQuery("SarahWillBePunished", "NPC-SarahIntro")) return "ExploreClub";
 	if (SarahIntroDone) return "SarahBedroom";
 	return "ExploreClub";
 }
@@ -47,8 +48,8 @@ function SarahSetStatus() {
 	if (LogQuery("SarahLover", "NPC-Sarah") && (Player.Lover != "NPC-Sarah")) SarahStatus = "ExLover";
 	if (LogQuery("SarahCollared", "NPC-Sarah")) SarahStatus = "Owned";
 	if (LogQuery("SarahCollaredWithCurfew", "NPC-Sarah")) SarahStatus = "Curfew";
-	if (LogQuery("SarahWillBePunished", "NPC-Sarah")) SarahStatus = "WillBePunished";
-	if (LogQuery("SarahCameWithPlayer", "NPC-Sarah")) SarahStatus = "CameWithPlayer";
+	if (LogQuery("SarahWillBePunished", "NPC-SarahIntro")) SarahStatus = "WillBePunished";
+	if (LogQuery("SarahCameWithPlayer", "NPC-SarahIntro")) SarahStatus = "CameWithPlayer";
 	
 	// Amanda status depends on Bondage College imported data
 	if (LogQuery("BondageCollege", "Import")) AmandaStatus = "SchoolMate";
@@ -106,7 +107,7 @@ function SarahLoad() {
 				Sarah.Owner = Player.Name;
 			}
 			CharacterSetActivePose(Sarah, "Kneel");
-			AmandaIntroTime = CurrentTime + 600000;
+			AmandaIntroTime = CurrentTime + 400000;
 			SarahCharacter.push(Sarah);
 			
 		}
@@ -224,6 +225,11 @@ function SarahUnlock() {
 	CharacterSetActivePose(Sarah, null);
 }
 
+function SarahEvasion() {
+	SarahUnlock();
+	DialogLeave();
+}
+
 // When Sarah leaves the room
 function SarahLeaveRoom() {
 	for(var C = 1; C < SarahCharacter.length; C++)
@@ -252,7 +258,8 @@ function SarahTransferToRoom() {
 	NPCTraitSet(C, "Playful", 90);
 	C.Love = 20;
 	if (Sarah.Owner == Player.Name) {
-		InventoryWear(Sarah, "SlaveCollar", "ItemNeck");
+		NPCEventAdd(C, "NPCCollaring", CurrentTime);
+		InventoryWear(C, "SlaveCollar", "ItemNeck");
 		C.Owner = Player.Name;
 		C.Love = 100;
 	}
@@ -260,8 +267,8 @@ function SarahTransferToRoom() {
 		C.Lover = Player.Name;
 		C.Love = 100;
 	}
+	if (LogQuery("AmandaSarahLovers", "NPC-AmandaSarah")) C.Lover = "NPC-Amanda";
 	NPCTraitDialog(C);
-	NPCEventAdd(C, "NPCCollaring", CurrentTime);
 	ServerPrivateCharacterSync();
 }
 
@@ -295,7 +302,8 @@ function SarahTransferAmandaToRoom() {
 	NPCTraitSet(C, "Polite", 50);
 	C.Love = 20;
 	if (Amanda.Owner == Player.Name) {
-		InventoryWear(Amanda, "SlaveCollar", "ItemNeck");
+		NPCEventAdd(C, "NPCCollaring", CurrentTime);
+		InventoryWear(C, "SlaveCollar", "ItemNeck");
 		C.Owner = Player.Name;
 		C.Love = 100;
 	}
@@ -303,8 +311,12 @@ function SarahTransferAmandaToRoom() {
 		C.Lover = Player.Name;
 		C.Love = 100;
 	}
-	if (Player.Owner == "NPC-Amanda") C.Love = 100;
+	if (Player.Owner == "NPC-Amanda") {
+		NPCEventAdd(C, "PlayerCollaring", CurrentTime);
+		NPCEventAdd(C, "LastGift", CurrentTime);
+		C.Love = 100;
+	}
+	if (LogQuery("AmandaSarahLovers", "NPC-AmandaSarah")) C.Lover = "NPC-Sarah";
 	NPCTraitDialog(C);
-	NPCEventAdd(C, "NPCCollaring", CurrentTime);
 	ServerPrivateCharacterSync();
 }

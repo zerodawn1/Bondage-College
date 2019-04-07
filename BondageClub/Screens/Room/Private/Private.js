@@ -81,14 +81,14 @@ function PrivateDrawCharacter() {
 
 	// For each character to draw (maximum 4 at a time)
 	for(var C = PrivateCharacterOffset; (C < PrivateCharacter.length && C < PrivateCharacterOffset + 4); C++) {
-		if (PrivateCharacter[C].Cage != null) DrawImage("Screens/Room/Private/CageBack.png", X + C * 470, 0);
-		DrawCharacter(PrivateCharacter[C], X + C * 470, 0, 1);
-		if (PrivateCharacter[C].Cage != null) DrawImage("Screens/Room/Private/CageFront.png", X + C * 470, 0);
-		DrawButton(X + 145 + C * 470, 900, 90, 90, "", "White", "Icons/Character.png");
+		if (PrivateCharacter[C].Cage != null) DrawImage("Screens/Room/Private/CageBack.png", X + (C - PrivateCharacterOffset) * 470, 0);
+		DrawCharacter(PrivateCharacter[C], X + (C - PrivateCharacterOffset) * 470, 0, 1);
+		if (PrivateCharacter[C].Cage != null) DrawImage("Screens/Room/Private/CageFront.png", X + (C - PrivateCharacterOffset) * 470, 0);
+		DrawButton(X + 145 + (C - PrivateCharacterOffset) * 470, 900, 90, 90, "", "White", "Icons/Character.png");
 		if (LogQuery("Cage", "PrivateRoom") && !LogQuery("BlockCage", "Rule"))
 			if ((Player.Cage == null) || (C == 0))
 				if (!PrivateCharacter[C].IsOwner())
-					DrawButton(X + 265 + C * 470, 900, 90, 90, "", "White", "Icons/Cage.png");
+					DrawButton(X + 265 + (C - PrivateCharacterOffset) * 470, 900, 90, 90, "", "White", "Icons/Cage.png");
 	}
 	
 }
@@ -131,7 +131,7 @@ function PrivateClickCharacterButton() {
 	for(var C = PrivateCharacterOffset; (C < PrivateCharacter.length && C < PrivateCharacterOffset + 4); C++) {
 		
 		// The cage is only available on certain conditions
-		if ((MouseX >= X + 265 + C * 470) && (MouseX <= X + 355 + C * 470))
+		if ((MouseX >= X + 265 + (C - PrivateCharacterOffset) * 470) && (MouseX <= X + 355 + (C - PrivateCharacterOffset) * 470))
 			if (LogQuery("Cage", "PrivateRoom") && !LogQuery("BlockCage", "Rule"))
 				if ((Player.Cage == null) || (C == 0))
 					if (!PrivateCharacter[C].IsOwner()) {
@@ -140,7 +140,7 @@ function PrivateClickCharacterButton() {
 					}
 
 		// The information sheet button is always available
-		if ((MouseX >= X + 145 + C * 470) && (MouseX <= X + 235 + C * 470))
+		if ((MouseX >= X + 145 + (C - PrivateCharacterOffset) * 470) && (MouseX <= X + 235 + (C - PrivateCharacterOffset) * 470))
 			InformationSheetLoadCharacter(PrivateCharacter[C]);
 
 	}
@@ -156,7 +156,7 @@ function PrivateClickCharacter() {
 
 	// For each character, we find the one that was clicked and open it's dialog
 	for(var C = PrivateCharacterOffset; (C < PrivateCharacter.length && C < PrivateCharacterOffset + 4); C++)
-		if ((MouseX >= X + C * 470) && (MouseX <= X + 470 + C * 470)) {
+		if ((MouseX >= X + (C - PrivateCharacterOffset) * 470) && (MouseX <= X + 470 + (C - PrivateCharacterOffset) * 470)) {
 			
 			// Sets the new character (1000 if she's owner, 2000 if she's owned)
 			PrivateCharacterToSave = C;
@@ -209,7 +209,7 @@ function PrivateGetCage() {
 }
 
 // When the player gets the room expansion
-function PrivateGetCage() {
+function PrivateGetExpansion() {
 	CharacterChangeMoney(Player, -200);
 	LogAdd("Expansion", "PrivateRoom");
 	PrivateCharacterMax = 8;

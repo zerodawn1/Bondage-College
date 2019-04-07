@@ -90,7 +90,17 @@ RemoveSuspensionHempRope,,,(You untie the hemp rope from the ceiling and slowly 
 120,,(Masturbate her.),(You masturbate her slowly as she trembles and moans from the pleasure.) Ooooooh yes.,ActivityRun(),Player.CanInteract()
 120,,(Leave her.),,DialogLeave(),
 121,120,I'll go find help.  (Leave her.),,StartUnlockQuest(),
+121,,Have you tried to struggle out?,"(She nods.)  Yes, but the shackles are too tight, I cannot get loose.",DialogRemove(),
+121,130,Maybe I can help you escape.,Oh!  You're an escape artist?  (She giggles.),,"DialogSkillGreater(""Evasion"", 7)"
 121,120,Let's wait for Mistress Sophie.,Sure!  (She giggles and struggles in her cuffs.),ActivityRun(),
+130,131,"Yes, I could show you some tricks.",That's great!  Let's try your tricks then.,,
+130,131,"Maybe, let me see these shackles.",Wonderful!  I hope you will succeed.,,
+131,132,(Inspect the shackles carefully.),"(Using your evasion knowledge, you check her shackles and find a way for her to get out by using a lubricant and struggling in a certain way.)",,
+132,133,I'll need some kind of lubricant to help you.,(She giggles.)  Well that's easy!  Just check in my panties.  Being restrained makes me all wet.,,
+133,134,(Rub the shackles on her panties.),(You rub the shackles on her wet panties as she sings a song.)  This is so kinky!  I wonder if it will work.,,
+133,134,(Gather her pussy fluid for the shackles.),(You grab her pussy and gather some fluid to lubricate her shackles.)  This is so kinky!  I wonder if it will work.,,
+134,121,"Ok girl, try to struggle out.","(She struggles clumsily but cannot get free.)  This is funny, but I don't think this is working.",,
+134,200,(Show her some evasion tricks to help her out.),,Evasion(),
 200,,,Thanks for getting me out Mistress.  You're the best!,,DialogIsProperty()
 200,,,Thanks for getting me out DialogPlayerName.  That was sweet.,,!DialogIsProperty()
 200,,What will you do?,"I don't know, get in trouble I guess.  (She giggles.)  Do you have any fun plans?",DialogRemove(),

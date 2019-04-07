@@ -22,6 +22,7 @@ function ImportBondageCollege(C) {
 				if ((localStorage.getItem("BondageCollegeExportSidney") != null) && (localStorage.getItem("BondageCollegeExportSidney") != "")) LogAdd(localStorage.getItem("BondageCollegeExportSidney"), "NPC-Sidney");
 				if ((localStorage.getItem("BondageCollegeExportJennifer") != null) && (localStorage.getItem("BondageCollegeExportJennifer") != "")) LogAdd(localStorage.getItem("BondageCollegeExportJennifer"), "NPC-Jennifer");
 				if ((localStorage.getItem("BondageCollegeExportAmandaSarah") != null) && (localStorage.getItem("BondageCollegeExportAmandaSarah") != "")) LogAdd(localStorage.getItem("BondageCollegeExportAmandaSarah"), "NPC-AmandaSarah");
+				if ((localStorage.getItem("BondageCollegeExportSarahIntro") != null) && (localStorage.getItem("BondageCollegeExportSarahIntro") != "")) LogAdd(localStorage.getItem("BondageCollegeExportSarahIntro"), "NPC-SarahIntro");
 			}
 
 			// Imports every inventory items
@@ -50,6 +51,7 @@ function ImportBondageCollege(C) {
 			// Sync with the server
 			ServerPlayerSync();
 			ServerPlayerInventorySync();
+			SarahSetStatus();
 
 		}
 

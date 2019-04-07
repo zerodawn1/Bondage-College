@@ -53,7 +53,7 @@ function C013_BondageClub_Entrance_EnterClub() {
 	var AmandaSarah = "";
 	var Amanda = "";
 	CurrentActor = "Amanda";
-	if ((ActorGetValue(ActorLover) == "Sarah") AmandaSarah = "AmandaSarahLovers";
+	if (GameLogQuery("C012_AfterClass", CurrentActor, "DatingSarah")) AmandaSarah = "AmandaSarahLovers";
 	if (Common_PlayerLover == "Amanda") Amanda = "AmandaLover";
 	if ((ActorGetValue(ActorOwner) == "Player") && !GameLogQuery("", "Amanda", "CurfewStay")) Amanda = "AmandaCollared";
 	if ((ActorGetValue(ActorOwner) == "Player") && GameLogQuery("", "Amanda", "CurfewStay")) Amanda = "AmandaCollaredWithCurfew";
@@ -65,8 +65,11 @@ function C013_BondageClub_Entrance_EnterClub() {
 	if (Common_PlayerLover == "Sarah") Sarah = "SarahLover";
 	if ((ActorGetValue(ActorOwner) == "Player") && !GameLogQuery("", "Sarah", "CurfewStay")) Sarah = "SarahCollared";
 	if ((ActorGetValue(ActorOwner) == "Player") && GameLogQuery("", "Sarah", "CurfewStay")) Sarah = "SarahCollaredWithCurfew";
-	if (C013_BondageClub_Entrance_WithSarah && GameLogQuery(CurrentChapter, "", "SarahWillBePunished")) Sarah = "SarahWillBePunished";
-	if (C013_BondageClub_Entrance_WithSarah && !GameLogQuery(CurrentChapter, "", "SarahWillBePunished")) Sarah = "SarahCameWithPlayer";
+	
+	// Save Sarah intro status
+	var SarahIntro = "";
+	if (C013_BondageClub_Entrance_WithSarah && GameLogQuery(CurrentChapter, "", "SarahWillBePunished")) SarahIntro = "SarahWillBePunished";
+	if (C013_BondageClub_Entrance_WithSarah && !GameLogQuery(CurrentChapter, "", "SarahWillBePunished")) SarahIntro = "SarahCameWithPlayer";
 
 	// Save Sidney status
 	var Sidney = "";
@@ -92,6 +95,8 @@ function C013_BondageClub_Entrance_EnterClub() {
 	localStorage.setItem("BondageCollegeExportLockedCollar", (PlayerHasLockedInventory("Collar")) ? "true" : "false");
 	localStorage.setItem("BondageCollegeExportLockedChastityBelt", (PlayerHasLockedInventory("ChastityBelt")) ? "true" : "false");
 	localStorage.setItem("BondageCollegeExportLockedVibratingEgg", (PlayerHasLockedInventory("VibratingEgg")) ? "true" : "false");
+	localStorage.setItem("BondageCollegeExportAmandaSarah", AmandaSarah);
+	localStorage.setItem("BondageCollegeExportSarahIntro", SarahIntro);
 	localStorage.setItem("BondageCollegeExportAmanda", Amanda);
 	localStorage.setItem("BondageCollegeExportSarah", Sarah);
 	localStorage.setItem("BondageCollegeExportSidney", Sidney);
