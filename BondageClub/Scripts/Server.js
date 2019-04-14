@@ -13,6 +13,9 @@ function ServerInit() {
 	ServerSocket.on("ForceDisconnect", function (data) { ServerDisconnect(data) } );
 	ServerSocket.on("ChatRoomSearchResult", function (data) { ChatSearchResult = data; } );
 	ServerSocket.on("ChatRoomSearchResponse", function (data) { ChatSearchResponse(data); } );
+	ServerSocket.on("ChatRoomCreateResponse", function (data) { ChatCreateResponse(data); } );
+	ServerSocket.on("ChatRoomSync", function (data) { ChatRoomSync(data); } );
+	ServerSocket.on("ChatRoomMessage", function (data) { ChatRoomMessage(data); } );
 }
 
 // When the server sends some information to the client, we keep it in variables

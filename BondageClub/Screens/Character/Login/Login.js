@@ -121,6 +121,7 @@ function LoginResponse(C) {
 			Player.Lover = ((C.Lover == null) || (C.Lover == "undefined")) ? "" : C.Lover;
 			Player.Creation = C.Creation;
 			Player.Wardrobe = C.Wardrobe;
+			Player.OnlineID = C.ID.toString();
 			WardrobeCharacter = [];
 
 			// Loads the player character model and data

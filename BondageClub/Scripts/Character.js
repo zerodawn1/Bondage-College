@@ -192,6 +192,26 @@ function CharacterLoadNPC(NPCType) {
 	
 }
 
+// Loads an online character
+function CharacterLoadOnline(Name, AccountID, Appearance) {
+	
+	// Checks if the NPC already exists and returns it if it's the case
+	for (var C = 0; C < Character.length; C++)
+		if (Character[C].AccountName == AccountID)
+			return Character[C];
+
+	// Creates the new character
+	CharacterReset(Character.length, "Female3DCG");
+	C = Character[Character.length - 1];
+	C.Name = Name;
+	C.AccountName = AccountID;
+	C.Appearance = ServerAppearanceLoadFromBundle("Female3DCG", Appearance);
+	AssetReload(C);
+	CharacterRefresh(C);
+	return C;
+		
+}
+
 // Deletes an NPC from the buffer
 function CharacterDelete(NPCType) {
 	for (var C = 0; C < Character.length; C++)

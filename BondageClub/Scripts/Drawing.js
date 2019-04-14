@@ -132,9 +132,9 @@ function DrawCharacter(C, X, Y, Zoom) {
 						DrawEmptyRect(C.FocusGroup.Zone[Z][0] + X, C.FocusGroup.Zone[Z][1] + Y - C.HeightModifier, C.FocusGroup.Zone[Z][2], C.FocusGroup.Zone[Z][3], "cyan");
 			
 			// Draw the character name below herself
-			if ((C.Name != "") && (CurrentModule == "Room") && (CurrentScreen != "Private")) 
+			if ((C.Name != "") && ((CurrentModule == "Room") || (CurrentModule == "Online")) && (CurrentScreen != "Private")) 
 				if (!Player.IsBlind())
-					DrawText(C.Name, X + 255, Y + 980, "White", "Black");
+					DrawText(C.Name, X + 255 * Zoom, Y + 980 * Zoom, "White", "Black");
 
 		}
 
@@ -400,7 +400,7 @@ function DrawProcess() {
 	// Gets the current screen background and draw it, a darker version in character dialog mode
 	var B = window[CurrentScreen + "Background"];
 	if ((B != null) && (B != ""))
-		if (((Player.Effect.indexOf("BlindNormal") >= 0) || (Player.Effect.indexOf("BlindHeavy") >= 0)) && (CurrentModule != "Character"))
+		if (((Player.Effect.indexOf("BlindNormal") >= 0) || (Player.Effect.indexOf("BlindHeavy") >= 0) || (CurrentScreen == "ChatRoom")) && (CurrentModule != "Character"))
 			DrawRect(0, 0, 2000, 1000, "Black");
 		else
 			DrawImage("Backgrounds/" + B + ((((CurrentCharacter != null) || ShopStarted || (Player.Effect.indexOf("BlindLight") >= 0)) && (CurrentModule != "Character")) ? "Dark" : "") + ".jpg", 0, 0);
