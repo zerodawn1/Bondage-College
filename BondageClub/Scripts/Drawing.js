@@ -400,7 +400,7 @@ function DrawProcess() {
 	// Gets the current screen background and draw it, a darker version in character dialog mode
 	var B = window[CurrentScreen + "Background"];
 	if ((B != null) && (B != ""))
-		if (((Player.Effect.indexOf("BlindNormal") >= 0) || (Player.Effect.indexOf("BlindHeavy") >= 0) || (CurrentScreen == "ChatRoom")) && (CurrentModule != "Character"))
+		if (((Player.Effect.indexOf("BlindNormal") >= 0) || (Player.Effect.indexOf("BlindHeavy") >= 0)) && (CurrentModule != "Character"))
 			DrawRect(0, 0, 2000, 1000, "Black");
 		else
 			DrawImage("Backgrounds/" + B + ((((CurrentCharacter != null) || ShopStarted || (Player.Effect.indexOf("BlindLight") >= 0)) && (CurrentModule != "Character")) ? "Dark" : "") + ".jpg", 0, 0);

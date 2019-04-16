@@ -114,10 +114,10 @@ function CharacterBuildDialog(C, CSV) {
 }
 
 // Loads a CSV file to build the character dialog
-function CharacterLoadCSVDialog(C) {
+function CharacterLoadCSVDialog(C, Override) {
 
     // Finds the full path of the CSV file to use cache
-    var FullPath = ((C.ID == 0) ? "Screens/Character/Player/Dialog_Player" : "Screens/" + CurrentModule + "/" + CurrentScreen + "/Dialog_" + C.AccountName) + ".csv";    
+    var FullPath = ((C.ID == 0) ? "Screens/Character/Player/Dialog_Player" : "Screens/" + CurrentModule + "/" + CurrentScreen + "/Dialog_" + ((Override == null) ? C.AccountName : Override)) + ".csv";    
     if (CommonCSVCache[FullPath]) {
 		CharacterBuildDialog(C, CommonCSVCache[FullPath]);
         return;
@@ -206,6 +206,7 @@ function CharacterLoadOnline(Name, AccountID, Appearance) {
 	C.Name = Name;
 	C.AccountName = AccountID;
 	C.Appearance = ServerAppearanceLoadFromBundle("Female3DCG", Appearance);
+	CharacterLoadCSVDialog(C, "Online");
 	AssetReload(C);
 	CharacterRefresh(C);
 	return C;
