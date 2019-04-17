@@ -20,7 +20,6 @@ function ChatRoomLoad() {
 	ElementRemove("InputSearch");
 	ElementRemove("InputName");
 	ElementRemove("InputDescription");
-	ChatRoomLog = "";
 	ChatRoomCreateElement();
 }
 
@@ -78,10 +77,12 @@ function ChatRoomRun() {
 	ChatRoomBackground = "";
 	DrawRect(0, 0, 2000, 1000, "Black");
 	ChatRoomDrawCharacter(false);
-	ElementPosition("InputChat", 1403, 945, 796);
-	ElementPositionFix("TextAreaChatLog", 36, 1005, 5, 970, 878);
-	DrawButton(1805, 905, 90, 90, "", "White", "Icons/Chat.png");
-	if (Player.CanWalk()) DrawButton(1905, 905, 90, 90, "", "White", "Icons/Exit.png");
+	ElementPosition("InputChat", 1365, 959, 720);
+	ElementPositionFix("TextAreaChatLog", 36, 1005, 5, 990, 925);
+	DrawButton(1725, 935, 60, 60, "", "White", "Icons/Small/Chat.png");
+	if (Player.CanKneel()) DrawButton(1795, 935, 60, 60, "", "White", "Icons/Small/Kneel.png");
+	if (Player.CanInteract() && !LogQuery("BlockChange", "Rule")) DrawButton(1865, 935, 60, 60, "", "White", "Icons/Small/Dress.png");
+	if (Player.CanWalk()) DrawButton(1935, 935, 60, 60, "", "White", "Icons/Small/Exit.png");
 }
 
 // When the player clicks in the chat room
@@ -89,10 +90,26 @@ function ChatRoomClick() {
 	
 	// When the user chats
 	if ((MouseX >= 0) && (MouseX < 1000) && (MouseY >= 0) && (MouseY < 1000)) ChatRoomDrawCharacter(true);
-	if ((MouseX >= 1805) && (MouseX < 1895) && (MouseY >= 905) && (MouseY < 995)) ChatRoomSendChat();
+	if ((MouseX >= 1725) && (MouseX < 1785) && (MouseY >= 935) && (MouseY < 995)) ChatRoomSendChat();
+	
+	// When the player kneels
+	if ((MouseX >= 1795) && (MouseX < 1855) && (MouseY >= 935) && (MouseY < 995) && Player.CanKneel()) { 
+		ServerSend("ChatRoomChat", { Content: Player.Name + " " + TextGet((Player.ActivePose == null) ? "kneeldown": "standup"), Type: "Action" } );
+		CharacterSetActivePose(Player, (Player.ActivePose == null) ? "Kneel" : null);
+		ChatRoomCharacterUpdate(Player); 
+	}
+	
+	// When the user wants to change clothes
+	if ((MouseX >= 1865) && (MouseX < 1925) && (MouseY >= 935) && (MouseY < 995) && Player.CanInteract() && !LogQuery("BlockChange", "Rule")) { 
+		ElementRemove("InputChat");
+		ElementRemove("TextAreaChatLog");
+		CharacterAppearanceReturnRoom = "ChatRoom"; 
+		CharacterAppearanceReturnModule = "Online";
+		CommonSetScreen("Character", "Appearance");
+	}
 
 	// When the user leaves
-	if ((MouseX >= 1905) && (MouseX < 1995) && (MouseY >= 905) && (MouseY < 995) && (Player.CanWalk())) {
+	if ((MouseX >= 1935) && (MouseX < 1995) && (MouseY >= 935) && (MouseY < 995) && (Player.CanWalk())) {
 		ElementRemove("InputChat");
 		ElementRemove("TextAreaChatLog");
 		ServerSend("ChatRoomLeave", "");
@@ -109,18 +126,25 @@ function ChatRoomKeyDown() {
 // Sends the chat to everyone in the room
 function ChatRoomSendChat() {
 	var msg = DialogGarble(Player, ElementValue("InputChat").trim());
-	if (msg != "") ServerSend("ChatRoomChat", { Message: msg } );
+	if (msg != "") ServerSend("ChatRoomChat", { Content: msg, Type: "Chat" } );
 	ElementValue("InputChat", "");
 }
 
 // Publishes the player action to the chat
 function ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem) {
-	var msg = "(" + Player.Name;
-	var dest = (C.ID == 0) ? "herself" : C.Name;
-	if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null)) msg = msg + " swaps " + DialogProgressPrevItem.Asset.Name + " for " + DialogProgressNextItem.Asset.Name + " on " + dest + ".)";
-	else if (DialogProgressNextItem != null) msg = msg + " uses " + DialogProgressNextItem.Asset.Name + " on " + dest + ".)";
-	else msg = msg + " removes " + DialogProgressPrevItem.Asset.Name + " from " + dest + ".)";
-	ServerSend("ChatRoomChat", { Message: msg } );
+	var msg = Player.Name;
+	var dest = (C.ID == 0) ? TextGet("herself") : C.Name;
+	if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null)) msg = msg + " " + TextGet("swaps") + " " + DialogProgressPrevItem.Asset.Description + " " + TextGet("for") + " " + DialogProgressNextItem.Asset.Description + " "  + TextGet("on") + " " + dest + ".";
+	else if (DialogProgressNextItem != null) msg = msg + " " + TextGet("uses") + " " + DialogProgressNextItem.Asset.Description + " " + TextGet("on") + " " + dest + ".";
+	else msg = msg + " " + TextGet("removes") + " " + DialogProgressPrevItem.Asset.Description + " " + TextGet("from") + " " + dest + ".";
+	ServerSend("ChatRoomChat", { Content: msg, Type: "Action" } );
+	ChatRoomCharacterUpdate(C);
+}
+
+// Pushes the new character data/appearance to the server
+function ChatRoomCharacterUpdate(C) {
+	var data = {};
+	ServerSend("ChatRoomCharacterUpdate", data);
 }
 
 // When the server sends a response

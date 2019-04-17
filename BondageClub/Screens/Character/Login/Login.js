@@ -199,6 +199,7 @@ function LoginClick() {
 	if ((MouseX >= 1025) && (MouseX <= 1225) && (MouseY >= 500) && (MouseY <= 560)) {
 		TranslationNextLanguage();
 		TextLoad();
+		AssetLoadDescription("Female3DCG");
 		LoginMessage = "";
 	}
 	

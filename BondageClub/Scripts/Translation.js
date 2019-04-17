@@ -199,6 +199,42 @@ function TranslationText(Text) {
 
 }
 
+// Translates the asset group and asset description
+function TranslationAssetProcess(T) {
+	for (var A = 0; A < AssetGroup.length; A++)
+		AssetGroup[A].Description = TranslationString(AssetGroup[A].Description, T, "");
+	for (var A = 0; A < Asset.length; A++)
+		Asset[A].Description = TranslationString(Asset[A].Description, T, "");
+}
+
+// Translates the description of the assets and groups
+function TranslationAsset(Family) {
+	
+	// If we play in a foreign language
+	if ((TranslationLanguage != null) && (TranslationLanguage.trim() != "") && (TranslationLanguage.trim().toUpperCase() != "EN")) {
+
+		// Finds the full path of the translation file to use
+		var FullPath = "Assets/" + Family + "/" + Family + "_" + TranslationLanguage + ".txt";
+
+		// If the translation file is already loaded, we translate from it
+		if (TranslationCache[FullPath]) {
+			TranslationAssetProcess(TranslationCache[FullPath]);
+			return;
+		}
+
+		// If the translation is available, we open the txt file, parse it and returns the result to build the dialog
+		if (TranslationAvailable(FullPath))
+			CommonGet(FullPath, function() {
+				if (this.status == 200) {
+					TranslationCache[FullPath] = TranslationParseTXT(this.responseText);
+					TranslationAssetProcess(TranslationCache[FullPath]);
+				}
+			});
+	
+	}
+	
+}
+
 // Changes the current language
 function TranslationNextLanguage() {
 	for (var L = 0; L < TranslationDictionary.length; L++)

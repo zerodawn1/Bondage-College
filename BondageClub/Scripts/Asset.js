@@ -92,6 +92,9 @@ function AssetBuildDescription(Family, CSV) {
 			}
 
 		}
+		
+	// Translates the descriptions to a foreign language
+	TranslationAsset(Family);
 
 }
 

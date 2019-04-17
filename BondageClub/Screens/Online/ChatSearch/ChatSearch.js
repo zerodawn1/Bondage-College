@@ -8,6 +8,7 @@ function ChatSearchLoad() {
 	ElementCreateInput("InputSearch", "text", "", "20");
 	ChatSearchQuery();
 	ChatSearchMessage = "";
+	ChatRoomLog = "";
 }
 
 // When the chat screens load
