@@ -193,24 +193,59 @@ function CharacterLoadNPC(NPCType) {
 }
 
 // Loads an online character
-function CharacterLoadOnline(Name, AccountID, Appearance) {
-	
-	// Checks if the NPC already exists and returns it if it's the case
-	for (var C = 0; C < Character.length; C++)
-		if (Character[C].AccountName == AccountID)
-			return Character[C];
+function CharacterLoadOnline(data) {
 
-	// Creates the new character
-	CharacterReset(Character.length, "Female3DCG");
-	C = Character[Character.length - 1];
-	C.Name = Name;
-	C.AccountName = AccountID;
-	C.Appearance = ServerAppearanceLoadFromBundle("Female3DCG", Appearance);
-	CharacterLoadCSVDialog(C, "Online");
-	AssetReload(C);
-	CharacterRefresh(C);
-	return C;
+	// Checks if the NPC already exists and returns it if it's the case
+	var Char = null;	
+	if (data.ID.toString() == Player.OnlineID)
+		Char = Player;
+	else
+		for (var C = 0; C < Character.length; C++)
+			if (Character[C].AccountName == "Online-" + data.ID.toString())
+				Char = Character[C];
+
+	// If the character isn't found
+	if (Char == null) {
 		
+		// Creates the new character from the online template
+		CharacterReset(Character.length, "Female3DCG");
+		Char = Character[Character.length - 1];
+		Char.Name = data.Name;
+		Char.AccountName = "Online-" + data.ID.toString();
+		Char.Appearance = ServerAppearanceLoadFromBundle("Female3DCG", data.Appearance);
+		Char.ActivePose = data.ActivePose;
+		CharacterLoadCSVDialog(Char, "Online");
+		AssetReload(Char);
+		CharacterRefresh(Char);
+	
+	} else {
+		
+		// Flags "refresh" if we need to redraw the character 
+		var Refresh = false;
+		if ((Char.ActivePose != data.ActivePose) || (ChatRoomData == null) || (ChatRoomData.Character == null))
+			Refresh = true;
+		else
+			for (var C = 0; C < ChatRoomData.Character.length; C++)
+				if (ChatRoomData.Character[C].ID == data.ID)
+					if (ChatRoomData.Character[C].Appearance.length != data.Appearance.length)
+						Refresh = true;
+					else 
+						for (var A = 0; A < data.Appearance.length; A++)
+							if ((data.Appearance[A].Name != ChatRoomData.Character[C].Appearance[A].Name) || (data.Appearance[A].Group != ChatRoomData.Character[C].Appearance[A].Group))
+								Refresh = true;
+
+		// If we must refresh
+		if (Refresh) {
+			Char.ActivePose = data.ActivePose;
+			Char.Appearance = ServerAppearanceLoadFromBundle("Female3DCG", data.Appearance);
+			CharacterRefresh(Char);
+		}
+
+	}
+
+	// Returns the character
+	return Char;
+
 }
 
 // Deletes an NPC from the buffer

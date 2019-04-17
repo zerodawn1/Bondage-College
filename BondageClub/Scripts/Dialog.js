@@ -455,7 +455,6 @@ function DialogDrawItemMenu(C) {
 				// Add / swap / remove the item
 				if (DialogProgressNextItem == null) InventoryRemove(C, C.FocusGroup.Name);
 				else InventoryWear(C, DialogProgressNextItem.Asset.Name, DialogProgressNextItem.Asset.Group.Name);
-				if (CurrentScreen == "ChatRoom") ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem);
 
 				// The player can use another item right away, for another character we jump back to her reaction
 				if (C.ID == 0) {
@@ -468,6 +467,9 @@ function DialogDrawItemMenu(C) {
 					DialogLeaveItemMenu();
 				}
 
+				// In a chat room, we publish the result for everyone
+				if (CurrentScreen == "ChatRoom") ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem);
+				
 			}		
 
 		} else {

@@ -139,11 +139,16 @@ function ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem
 	else msg = msg + " " + TextGet("removes") + " " + DialogProgressPrevItem.Asset.Description + " " + TextGet("from") + " " + dest + ".";
 	ServerSend("ChatRoomChat", { Content: msg, Type: "Action" } );
 	ChatRoomCharacterUpdate(C);
+	if (CurrentCharacter != null) DialogLeave();
 }
 
 // Pushes the new character data/appearance to the server
 function ChatRoomCharacterUpdate(C) {
-	var data = {};
+	var data = {
+		ID: (C.ID == 0) ? Player.OnlineID : C.AccountName.replace("Online-", ""),
+		ActivePose: C.ActivePose,
+		Appearance: ServerAppearanceBundle(C.Appearance)
+	};
 	ServerSend("ChatRoomCharacterUpdate", data);
 }
 
@@ -174,16 +179,16 @@ function ChatRoomSync(data) {
 	if ((data != null) && (typeof data === "object") && (data.Name != null)) {
 
 		// Load the room
+		console.log(data);
 		if (CurrentScreen != "ChatRoom") CommonSetScreen("Online", "ChatRoom");
-		ChatRoomData = data;
 
 		// Load the characters
 		ChatRoomCharacter = [];		
 		for (var C = 0; C < data.Character.length; C++)
-			if (data.Character[C].ID.toString() == Player.OnlineID)
-				ChatRoomCharacter.push(Player);
-			else
-				ChatRoomCharacter.push(CharacterLoadOnline(data.Character[C].Name, "Online-" + data.Character[C].ID.toString(), data.Character[C].Appearance));
+			ChatRoomCharacter.push(CharacterLoadOnline(data.Character[C]));
+
+		// Keeps a copy of the previous version
+		ChatRoomData = data;
 
 	}
 }
