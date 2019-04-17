@@ -1,3 +1,5 @@
+"use strict";
+
 // Returns the current value of an element
 function ElementValue(ID, Value) {
 	if (document.getElementById(ID) != null)

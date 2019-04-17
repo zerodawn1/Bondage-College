@@ -214,6 +214,7 @@ function CharacterLoadOnline(data) {
 		Char.AccountName = "Online-" + data.ID.toString();
 		Char.Appearance = ServerAppearanceLoadFromBundle("Female3DCG", data.Appearance);
 		Char.ActivePose = data.ActivePose;
+		Char.Reputation = data.Reputation;
 		CharacterLoadCSVDialog(Char, "Online");
 		AssetReload(Char);
 		CharacterRefresh(Char);
@@ -237,7 +238,9 @@ function CharacterLoadOnline(data) {
 		// If we must refresh
 		if (Refresh) {
 			Char.ActivePose = data.ActivePose;
+			Char.Reputation = data.Reputation;
 			Char.Appearance = ServerAppearanceLoadFromBundle("Female3DCG", data.Appearance);
+			Char.AllowItem = ((Char.ID == 0) || Char.IsRestrained() || !Char.CanTalk() || (ReputationGet("Dominant") + 25 >= ReputationCharacterGet(Char, "Dominant")));
 			CharacterRefresh(Char);
 		}
 

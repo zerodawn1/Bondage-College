@@ -131,7 +131,7 @@ function ChatRoomSendChat() {
 }
 
 // Publishes the player action to the chat
-function ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem) {
+function ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem, LeaveDialog) {
 	var msg = Player.Name;
 	var dest = (C.ID == 0) ? TextGet("herself") : C.Name;
 	if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null)) msg = msg + " " + TextGet("swaps") + " " + DialogProgressPrevItem.Asset.Description + " " + TextGet("for") + " " + DialogProgressNextItem.Asset.Description + " "  + TextGet("on") + " " + dest + ".";
@@ -139,7 +139,7 @@ function ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem
 	else msg = msg + " " + TextGet("removes") + " " + DialogProgressPrevItem.Asset.Description + " " + TextGet("from") + " " + dest + ".";
 	ServerSend("ChatRoomChat", { Content: msg, Type: "Action" } );
 	ChatRoomCharacterUpdate(C);
-	if (CurrentCharacter != null) DialogLeave();
+	if (LeaveDialog && (CurrentCharacter != null)) DialogLeave();
 }
 
 // Pushes the new character data/appearance to the server
@@ -191,4 +191,10 @@ function ChatRoomSync(data) {
 		ChatRoomData = data;
 
 	}
+}
+
+// If we must show the character profile (information sheet)
+function ChatRoomViewProfile() {
+	if (CurrentCharacter != null) 
+		InformationSheetLoadCharacter(CurrentCharacter);
 }
