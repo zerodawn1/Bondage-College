@@ -28,6 +28,7 @@ function DialogNaked(C) { CharacterNaked((C.toUpperCase().trim() == "PLAYER") ? 
 function DialogFullRandomRestrain(C) { CharacterFullRandomRestrain((C.toUpperCase().trim() == "PLAYER") ? Player : CurrentCharacter); } // Strips a character naked and removes the restrains
 function DialogLogQuery(LogType, LogGroup) { return LogQuery(LogType, LogGroup); } // Returns TRUE if a specific log is registered
 function DialogAllowItem(Allow) { return CurrentCharacter.AllowItem = (Allow.toUpperCase().trim() == "TRUE"); } // Sets the AllowItem flag on the current character
+function DialogDoAllowItem(C) { return (C.toUpperCase().trim() == "PLAYER") ? Player.AllowItem : CurrentCharacter.AllowItem } // Sets the AllowItem flag on the current character
 function DialogIsKneeling(C) { return (C.toUpperCase().trim() == "PLAYER") ? Player.IsKneeling() : CurrentCharacter.IsKneeling() }
 function DialogIsOwner() { return (CurrentCharacter.Name == Player.Owner.replace("NPC-", "")) }
 function DialogIsProperty() { return (CurrentCharacter.Owner == Player.Name) }
@@ -405,6 +406,7 @@ function DialogSetText(NewText) {
 
 // Extends a specific item (loads its settings and shows its own menu)
 function DialogExtendItem(I) {
+	DialogProgress = -1;
 	DialogFocusItem = I;
 	CommonDynamicFunction("Inventory" + I.Asset.Group.Name + I.Asset.Name + "Load()");
 }
@@ -473,7 +475,7 @@ function DialogDrawItemMenu(C) {
 
 				// Add / swap / remove the item
 				if (DialogProgressNextItem == null) InventoryRemove(C, C.FocusGroup.Name);
-				else InventoryWear(C, DialogProgressNextItem.Asset.Name, DialogProgressNextItem.Asset.Group.Name);
+				else InventoryWear(C, DialogProgressNextItem.Asset.Name, DialogProgressNextItem.Asset.Group.Name, "Default", SkillGetLevel(Player, "Bondage"));
 
 				// The player can use another item right away, for another character we jump back to her reaction
 				if (C.ID == 0) {
@@ -491,7 +493,7 @@ function DialogDrawItemMenu(C) {
 				}
 
 				// Check to open the extended menu of the item.  In a chat room, we publish the result for everyone
-				if ((DialogProgressNextItem != null) && DialogProgressNextItem.Extended) {
+				if ((DialogProgressNextItem != null) && DialogProgressNextItem.Asset.Extended) {
 					if (CurrentScreen == "ChatRoom") ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem, false);
 					DialogExtendItem(DialogProgressNextItem);
 				} else {

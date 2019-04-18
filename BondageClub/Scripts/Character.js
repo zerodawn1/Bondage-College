@@ -192,6 +192,17 @@ function CharacterLoadNPC(NPCType) {
 	
 }
 
+// Sets up the online character
+function CharacterOnlineRefresh(Char, data) {
+	Char.ActivePose = data.ActivePose;
+	Char.Reputation = data.Reputation;
+	Char.Appearance = ServerAppearanceLoadFromBundle("Female3DCG", data.Appearance);
+	AssetReload(Char);
+	CharacterLoadEffect(Char);
+	Char.AllowItem = ((Char.ID == 0) || Char.IsRestrained() || !Char.CanTalk() || (ReputationGet("Dominant") + 25 >= ReputationCharacterGet(Char, "Dominant")));
+	CharacterRefresh(Char);
+}
+
 // Loads an online character
 function CharacterLoadOnline(data) {
 
@@ -212,13 +223,9 @@ function CharacterLoadOnline(data) {
 		Char = Character[Character.length - 1];
 		Char.Name = data.Name;
 		Char.AccountName = "Online-" + data.ID.toString();
-		Char.Appearance = ServerAppearanceLoadFromBundle("Female3DCG", data.Appearance);
-		Char.ActivePose = data.ActivePose;
-		Char.Reputation = data.Reputation;
 		CharacterLoadCSVDialog(Char, "Online");
-		AssetReload(Char);
-		CharacterRefresh(Char);
-	
+		CharacterOnlineRefresh(Char, data);
+
 	} else {
 		
 		// Flags "refresh" if we need to redraw the character 
@@ -236,13 +243,7 @@ function CharacterLoadOnline(data) {
 								Refresh = true;
 
 		// If we must refresh
-		if (Refresh) {
-			Char.ActivePose = data.ActivePose;
-			Char.Reputation = data.Reputation;
-			Char.Appearance = ServerAppearanceLoadFromBundle("Female3DCG", data.Appearance);
-			Char.AllowItem = ((Char.ID == 0) || Char.IsRestrained() || !Char.CanTalk() || (ReputationGet("Dominant") + 25 >= ReputationCharacterGet(Char, "Dominant")));
-			CharacterRefresh(Char);
-		}
+		if (Refresh) CharacterOnlineRefresh(Char, data);
 
 	}
 
@@ -288,7 +289,7 @@ function CharacterAddEffect(C, NewEffect) {
 }
 
 // Resets the current effect list on a character
-function CharacterLoadEffect(C) {	
+function CharacterLoadEffect(C) {
 	C.Effect = [];
 	for (var A = 0; A < C.Appearance.length; A++) {
 		if (C.Appearance[A].Asset.Effect != null)

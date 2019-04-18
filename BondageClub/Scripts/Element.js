@@ -77,6 +77,7 @@ function ElementPositionFix(ElementID, Font, X, Y, W, H) {
 	var Left;
 	var Width;
 	var Top;
+	var Height;
 	if (DrawScreenWidth <= DrawScreenHeight * 2) {
 		Font = Font * DrawScreenWidth / 2000;
 		Left = X * DrawScreenWidth / 2000;

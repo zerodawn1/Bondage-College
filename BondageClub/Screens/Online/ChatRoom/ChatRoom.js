@@ -195,6 +195,9 @@ function ChatRoomSync(data) {
 
 // If we must show the character profile (information sheet)
 function ChatRoomViewProfile() {
-	if (CurrentCharacter != null) 
-		InformationSheetLoadCharacter(CurrentCharacter);
+	if (CurrentCharacter != null) {
+		var C = CurrentCharacter;
+		DialogLeave();
+		InformationSheetLoadCharacter(C);
+	}
 }
