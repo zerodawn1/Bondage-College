@@ -494,11 +494,9 @@ function DialogDrawItemMenu(C) {
 
 				// Check to open the extended menu of the item.  In a chat room, we publish the result for everyone
 				if ((DialogProgressNextItem != null) && DialogProgressNextItem.Asset.Extended) {
-					if (CurrentScreen == "ChatRoom") ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem, false);
+					ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem, false);
 					DialogExtendItem(DialogProgressNextItem);
-				} else {
-					if (CurrentScreen == "ChatRoom") ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem, true);	
-				}
+				} else ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem, true);
 				
 			}		
 
@@ -555,11 +553,12 @@ function DialogGarble(C, CD) {
 		
 	// Total gags always returns "..."
 	if (C.Effect.indexOf("GagTotal") >= 0) {
-		NS = "... ";
 		for (var L = 0; L < CD.length; L++) {			
 			var H = CD.charAt(L).toLowerCase();
 			if (H == "(") Par = true;
 			if (Par) NS = NS + CD.charAt(L);
+			if (!Par && (H != " ")) NS = NS + "m";
+			if (!Par && (H == " ")) NS = NS + " ";
 			if (H == ")") Par = false;
 		}
 		return NS;
@@ -632,11 +631,11 @@ function DialogGarble(C, CD) {
 function DialogFind(C, KeyWord1, KeyWord2, ReturnPrevious) {
 	for(var D = 0; D < C.Dialog.length; D++)
 		if (C.Dialog[D].Stage == KeyWord1)
-			return C.Dialog[D].Result;
+			return C.Dialog[D].Result.trim();
 	if (KeyWord2 != null)
 		for(var D = 0; D < C.Dialog.length; D++)
 			if (C.Dialog[D].Stage == KeyWord2)
-				return C.Dialog[D].Result;
+				return C.Dialog[D].Result.trim();
 	return ((ReturnPrevious == null) || ReturnPrevious) ? C.CurrentDialog : "";
 }
 

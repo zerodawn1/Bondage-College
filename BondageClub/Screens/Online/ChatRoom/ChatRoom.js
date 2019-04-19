@@ -130,16 +130,27 @@ function ChatRoomSendChat() {
 	ElementValue("InputChat", "");
 }
 
-// Publishes the player action to the chat
+// Publishes the player action (add, remove, swap) to the chat
 function ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem, LeaveDialog) {
-	var msg = Player.Name;
-	var dest = (C.ID == 0) ? TextGet("herself") : C.Name;
-	if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null)) msg = msg + " " + TextGet("swaps") + " " + DialogProgressPrevItem.Asset.Description + " " + TextGet("for") + " " + DialogProgressNextItem.Asset.Description + " "  + TextGet("on") + " " + dest + ".";
-	else if (DialogProgressNextItem != null) msg = msg + " " + TextGet("uses") + " " + DialogProgressNextItem.Asset.Description + " " + TextGet("on") + " " + dest + ".";
-	else msg = msg + " " + TextGet("removes") + " " + DialogProgressPrevItem.Asset.Description + " " + TextGet("from") + " " + dest + ".";
-	ServerSend("ChatRoomChat", { Content: msg, Type: "Action" } );
-	ChatRoomCharacterUpdate(C);
-	if (LeaveDialog && (CurrentCharacter != null)) DialogLeave();
+	if (CurrentScreen == "ChatRoom") {
+		var msg = Player.Name;
+		var dest = (C.ID == 0) ? TextGet("herself") : C.Name;
+		if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null)) msg = msg + " " + TextGet("swaps") + " " + DialogProgressPrevItem.Asset.Description + " " + TextGet("for") + " " + DialogProgressNextItem.Asset.Description + " "  + TextGet("on") + " " + dest + ".";
+		else if (DialogProgressNextItem != null) msg = msg + " " + TextGet("uses") + " " + DialogProgressNextItem.Asset.Description + " " + TextGet("on") + " " + dest + ".";
+		else msg = msg + " " + TextGet("removes") + " " + DialogProgressPrevItem.Asset.Description + " " + TextGet("from") + " " + dest + ".";
+		ServerSend("ChatRoomChat", { Content: msg, Type: "Action" } );
+		ChatRoomCharacterUpdate(C);
+		if (LeaveDialog && (CurrentCharacter != null)) DialogLeave();
+	}
+}
+
+// Publishes a custom action to the chat
+function ChatRoomPublishCustomAction(msg, LeaveDialog) {
+	if (CurrentScreen == "ChatRoom") {
+		ServerSend("ChatRoomChat", { Content: msg, Type: "Action" } );
+		ChatRoomCharacterUpdate(CurrentCharacter);
+		if (LeaveDialog && (CurrentCharacter != null)) DialogLeave();
+	}
 }
 
 // Pushes the new character data/appearance to the server

@@ -195,7 +195,7 @@ function CharacterLoadNPC(NPCType) {
 // Sets up the online character
 function CharacterOnlineRefresh(Char, data) {
 	Char.ActivePose = data.ActivePose;
-	Char.Reputation = data.Reputation;
+	Char.Reputation = (data.Reputation != null) ? data.Reputation : [];
 	Char.Appearance = ServerAppearanceLoadFromBundle("Female3DCG", data.Appearance);
 	AssetReload(Char);
 	CharacterLoadEffect(Char);
@@ -222,6 +222,8 @@ function CharacterLoadOnline(data) {
 		CharacterReset(Character.length, "Female3DCG");
 		Char = Character[Character.length - 1];
 		Char.Name = data.Name;
+		Char.Lover = (data.Lover != null) ? data.Lover : "";
+		Char.Owner = (data.Owner != null) ? data.Owner : "";
 		Char.AccountName = "Online-" + data.ID.toString();
 		CharacterLoadCSVDialog(Char, "Online");
 		CharacterOnlineRefresh(Char, data);
@@ -241,6 +243,9 @@ function CharacterLoadOnline(data) {
 						for (var A = 0; A < data.Appearance.length; A++)
 							if ((data.Appearance[A].Name != ChatRoomData.Character[C].Appearance[A].Name) || (data.Appearance[A].Group != ChatRoomData.Character[C].Appearance[A].Group))
 								Refresh = true;
+							else
+								if ((data.Appearance[A].Property != null) && (ChatRoomData.Character[C].Appearance[A].Property != null) && (JSON.stringify(data.Appearance[A].Property) != JSON.stringify(ChatRoomData.Character[C].Appearance[A].Property)))
+									Refresh = true;
 
 		// If we must refresh
 		if (Refresh) CharacterOnlineRefresh(Char, data);
@@ -292,11 +297,14 @@ function CharacterAddEffect(C, NewEffect) {
 function CharacterLoadEffect(C) {
 	C.Effect = [];
 	for (var A = 0; A < C.Appearance.length; A++) {
-		if (C.Appearance[A].Asset.Effect != null)
-			CharacterAddEffect(C, C.Appearance[A].Asset.Effect);
+		if ((C.Appearance[A].Property != null) && (C.Appearance[A].Property.Effect != null))
+			CharacterAddEffect(C, C.Appearance[A].Property.Effect);
 		else
-			if (C.Appearance[A].Asset.Group.Effect != null)
-				CharacterAddEffect(C, C.Appearance[A].Asset.Group.Effect);
+			if (C.Appearance[A].Asset.Effect != null)
+				CharacterAddEffect(C, C.Appearance[A].Asset.Effect);
+			else
+				if (C.Appearance[A].Asset.Group.Effect != null)
+					CharacterAddEffect(C, C.Appearance[A].Asset.Group.Effect);
 	}	
 }
 
