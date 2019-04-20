@@ -27,13 +27,14 @@ function ChatRoomLoad() {
 function ChatRoomDrawCharacter(DoClick) {
 
 	// If there's 2 characters, it's zoomed in
-	if (!DoClick) {
-		if (ChatRoomCharacter.length <= 2) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + ".jpg", MainCanvas, 500, 0, 1000, 1000, 0, 0, 1000, 1000);
-		if (ChatRoomCharacter.length == 3) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + ".jpg", MainCanvas, 400, 0, 1200, 1000, 0, 50, 1000, 900);
-		if (ChatRoomCharacter.length == 4) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + ".jpg", MainCanvas, 200, 0, 1600, 1000, 0, 150, 1000, 700);
-		if (ChatRoomCharacter.length == 5) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + ".jpg", MainCanvas, 0, 0, 2000, 1000, 0, 250, 1000, 500);
-		if (ChatRoomCharacter.length >= 6) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + ".jpg", MainCanvas, 0, 0, 2000, 1000, 0, 0, 1000, 500);
-		if (ChatRoomCharacter.length >= 6) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + ".jpg", MainCanvas, 0, 0, 2000, 1000, 0, 500, 1000, 500);
+	if (!DoClick && (Player.Effect.indexOf("BlindHeavy") < 0) && (Player.Effect.indexOf("BlindNormal") < 0)) {
+		var Dark = (Player.Effect.indexOf("BlindLight") < 0) ? "" : "Dark";
+		if (ChatRoomCharacter.length <= 2) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + Dark + ".jpg", MainCanvas, 500, 0, 1000, 1000, 0, 0, 1000, 1000);
+		if (ChatRoomCharacter.length == 3) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + Dark + ".jpg", MainCanvas, 400, 0, 1200, 1000, 0, 50, 1000, 900);
+		if (ChatRoomCharacter.length == 4) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + Dark + ".jpg", MainCanvas, 200, 0, 1600, 1000, 0, 150, 1000, 700);
+		if (ChatRoomCharacter.length == 5) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + Dark + ".jpg", MainCanvas, 0, 0, 2000, 1000, 0, 250, 1000, 500);
+		if (ChatRoomCharacter.length >= 6) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + Dark + ".jpg", MainCanvas, 0, 0, 2000, 1000, 0, 0, 1000, 500);
+		if (ChatRoomCharacter.length >= 6) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + Dark + ".jpg", MainCanvas, 0, 0, 2000, 1000, 0, 500, 1000, 500);
 	}
 
 	// Sets the X position
@@ -59,11 +60,12 @@ function ChatRoomDrawCharacter(DoClick) {
 	// Draw the characters
 	for (var C = 0; C < ChatRoomCharacter.length; C++)
 		if (DoClick) {
-			if ((MouseX >= (C % 5) * Space + X) && (MouseX <= (C % 5) * Space + X + 500 * Zoom) && (MouseY >= Y + Math.floor(C / 5) * 500) && (MouseX <= Y + Math.floor(C / 5) * 500 + 1000 * Zoom)) {
+			if ((MouseX >= (C % 5) * Space + X) && (MouseX <= (C % 5) * Space + X + 450 * Zoom) && (MouseY >= Y + Math.floor(C / 5) * 500) && (MouseY <= Y + Math.floor(C / 5) * 500 + 1000 * Zoom)) {
 				ElementRemove("InputChat");
 				ElementRemove("TextAreaChatLog");
 				ChatRoomBackground = ChatRoomData.Background;
 				CharacterSetCurrent(ChatRoomCharacter[C]);
+				break;
 			}
 		}
 		else
@@ -190,7 +192,6 @@ function ChatRoomSync(data) {
 	if ((data != null) && (typeof data === "object") && (data.Name != null)) {
 
 		// Load the room
-		console.log(data);
 		if (CurrentScreen != "ChatRoom") CommonSetScreen("Online", "ChatRoom");
 
 		// Load the characters

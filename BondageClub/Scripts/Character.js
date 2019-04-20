@@ -246,6 +246,9 @@ function CharacterLoadOnline(data) {
 							else
 								if ((data.Appearance[A].Property != null) && (ChatRoomData.Character[C].Appearance[A].Property != null) && (JSON.stringify(data.Appearance[A].Property) != JSON.stringify(ChatRoomData.Character[C].Appearance[A].Property)))
 									Refresh = true;
+								else 
+									if (((data.Appearance[A].Property != null) && (ChatRoomData.Character[C].Appearance[A].Property == null)) || ((data.Appearance[A].Property == null) && (ChatRoomData.Character[C].Appearance[A].Property != null)))
+										Refresh = true;
 
 		// If we must refresh
 		if (Refresh) CharacterOnlineRefresh(Char, data);
