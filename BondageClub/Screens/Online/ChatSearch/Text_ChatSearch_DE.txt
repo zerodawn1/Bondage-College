@@ -3,9 +3,9 @@ Kein Chatraum gefunden, du kannst einen neuen erstellen.
 Search for a room by name:
 Raum per Name suchen:
 Search for a room
-Nach einem Raum suchen
+Raum suchen
 Create your room
-Deinen Raum erstellen
+Raum erstellen
 This room is already full
 Dieser Raum ist bereits voll
 Room doesn't exist anymore

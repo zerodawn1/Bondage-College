@@ -5,7 +5,7 @@ Raumname (Buchstaben & Ziffern)
 A short description or what's going on.
 Eine kurze Beschreibung oder was hier los ist.
 Private (Need exact name to find it)
-Privat (Genauer Name zum Finden erforderlich)
+Privat (Zutritt nur mit genauem Namen)
 Select the background
 Hintergrund wählen
 Create
