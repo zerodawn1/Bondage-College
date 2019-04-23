@@ -96,7 +96,7 @@ function ChatRoomClick() {
 	
 	// When the player kneels
 	if ((MouseX >= 1795) && (MouseX < 1855) && (MouseY >= 935) && (MouseY < 995) && Player.CanKneel()) { 
-		ServerSend("ChatRoomChat", { Content: Player.Name + " " + TextGet((Player.ActivePose == null) ? "kneeldown": "standup"), Type: "Action" } );
+		ServerSend("ChatRoomChat", { Content: Player.Name + " " + TextGet((Player.ActivePose == null) ? "KneelDown": "StandUp"), Type: "Action" } );
 		CharacterSetActivePose(Player, (Player.ActivePose == null) ? "Kneel" : null);
 		ChatRoomCharacterUpdate(Player); 
 	}
@@ -135,14 +135,27 @@ function ChatRoomSendChat() {
 // Publishes the player action (add, remove, swap) to the chat
 function ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem, LeaveDialog) {
 	if (CurrentScreen == "ChatRoom") {
-		var msg = Player.Name;
-		var dest = (C.ID == 0) ? TextGet("herself") : C.Name;
-		if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null)) msg = msg + " " + TextGet("swaps") + " " + DialogProgressPrevItem.Asset.Description + " " + TextGet("for") + " " + DialogProgressNextItem.Asset.Description + " "  + TextGet("on") + " " + dest + ".";
-		else if (DialogProgressNextItem != null) msg = msg + " " + TextGet("uses") + " " + DialogProgressNextItem.Asset.Description + " " + TextGet("on") + " " + dest + ".";
-		else msg = msg + " " + TextGet("removes") + " " + DialogProgressPrevItem.Asset.Description + " " + TextGet("from") + " " + dest + ".";
+
+		// Prepares the message
+		var msg = "";
+		if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null)) msg = TextGet("ActionSwap");
+		else if ((DialogProgressNextItem != null) && (DialogProgressNextItem.Asset.Effect != null) && (DialogProgressNextItem.Asset.Effect.indexOf("Lock") >= 0)) msg = TextGet("ActionLock");
+		else if (DialogProgressNextItem != null) msg = TextGet("ActionUse");
+		else if ((DialogProgressPrevItem != null) && (DialogProgressPrevItem.Asset.Effect != null) && (DialogProgressPrevItem.Asset.Effect.indexOf("Lock") >= 0)) msg = TextGet("ActionUnlock");
+		else msg = TextGet("ActionRemove");
+		
+		// Replaces the action tags to build the phrase
+		msg = msg.replace("SourceCharacter", Player.Name);
+		msg = msg.replace("DestinationCharacter", (C.ID == 0) ? TextGet("Her") : C.Name + TextGet("'s"));
+		if (DialogProgressPrevItem != null) msg = msg.replace("PrevAsset", DialogProgressPrevItem.Asset.Description.toLowerCase());
+		if (DialogProgressNextItem != null) msg = msg.replace("NextAsset", DialogProgressNextItem.Asset.Description.toLowerCase());
+		if (C.FocusGroup != null) msg = msg.replace("FocusAssetGroup", C.FocusGroup.Description.toLowerCase());
+ 
+		// Sends the result to the server and leaves the dialog if we need to
 		ServerSend("ChatRoomChat", { Content: msg, Type: "Action" } );
 		ChatRoomCharacterUpdate(C);
 		if (LeaveDialog && (CurrentCharacter != null)) DialogLeave();
+
 	}
 }
 
