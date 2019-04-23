@@ -127,9 +127,47 @@ function ChatRoomKeyDown() {
 
 // Sends the chat to everyone in the room
 function ChatRoomSendChat() {
-	var msg = DialogGarble(Player, ElementValue("InputChat").trim());
-	if (msg != "") ServerSend("ChatRoomChat", { Content: msg, Type: "Chat" } );
+	
+	// Some custom functions like /dice or /coin are implemented for randomness
+	var msg = ElementValue("InputChat").trim()
+	if (msg.toLowerCase().indexOf("/dice") == 0) {
+		
+		// The player can roll a dice, if no size is specified, a 6 sided dice is assumed
+		msg = TextGet("ActionDice");
+		var Dice = (isNaN(msg.substring(5, 50))) ? 6 : parseInt(msg.substring(5, 50));
+		if ((Dice < 4) || (Dice > 100)) Dice = 6;
+		msg = msg.replace("SourceCharacter", Player.Name);
+		msg = msg.replace("DiceType", Dice.toString());
+		msg = msg.replace("DiceResult", (Math.floor(Math.random() * Dice) + 1).toString());
+		if (msg != "") ServerSend("ChatRoomChat", { Content: msg, Type: "Action" } );
+
+	else if (msg.toLowerCase().indexOf("/coin") == 0) {
+
+		// The player can flip a coin, heads or tails are 50/50
+		msg = TextGet("ActionCoin");
+		var Heads = (Math.random() >= 0.5);
+		msg = msg.replace("SourceCharacter", Player.Name);
+		msg = msg.replace("CoinResult", Heads ? TextGet("Heads") : TextGet("Tails"));
+		if (msg != "") ServerSend("ChatRoomChat", { Content: msg, Type: "Action" } );
+
+	else if (msg.toLowerCase().indexOf("*") == 0) {
+
+		// The player can emote an action using *, it doesn't garble
+		msg = msg.replace(/\*/g, "");
+		if (msg != "") msg = Player.Name + " " + msg;
+		if (msg != "") ServerSend("ChatRoomChat", { Content: msg, Type: "Emote" } );
+
+	} else {
+		
+		// Regular chat can be garbled with a gag
+		msg = DialogGarble(Player, msg);
+		if (msg != "") ServerSend("ChatRoomChat", { Content: msg, Type: "Chat" } );
+		
+	}
+
+	// Clears the chat text message
 	ElementValue("InputChat", "");
+
 }
 
 // Publishes the player action (add, remove, swap) to the chat
