@@ -3,15 +3,17 @@ var ChatRoomBackground = "";
 var ChatRoomData = {};
 var ChatRoomCharacter = [];
 var ChatRoomLog = "";
+var ChatRoomLastMessage = "";
 
 // Creates the chat room input elements
 function ChatRoomCreateElement() {
 	if (document.getElementById("InputChat") == null) {
 		ElementCreateInput("InputChat", "text", "", "250");
+		document.getElementById("InputChat").setAttribute("autocomplete", "off");
 		ElementCreateTextArea("TextAreaChatLog");
 		ElementValue("TextAreaChatLog", ChatRoomLog);
-		document.getElementById("InputChat").focus();
-		document.getElementById("InputChat").setAttribute("autocomplete", "off");
+		ElementScrollToEnd("TextAreaChatLog");
+		ElementFocus("InputChat");
 	}
 }
 
@@ -20,6 +22,7 @@ function ChatRoomLoad() {
 	ElementRemove("InputSearch");
 	ElementRemove("InputName");
 	ElementRemove("InputDescription");
+	ElementRemove("InputSize");
 	ChatRoomCreateElement();
 }
 
@@ -98,7 +101,7 @@ function ChatRoomClick() {
 	if ((MouseX >= 1795) && (MouseX < 1855) && (MouseY >= 935) && (MouseY < 995) && Player.CanKneel()) { 
 		ServerSend("ChatRoomChat", { Content: Player.Name + " " + TextGet((Player.ActivePose == null) ? "KneelDown": "StandUp"), Type: "Action" } );
 		CharacterSetActivePose(Player, (Player.ActivePose == null) ? "Kneel" : null);
-		ChatRoomCharacterUpdate(Player); 
+		ChatRoomCharacterUpdate(Player);
 	}
 	
 	// When the user wants to change clothes
@@ -123,6 +126,8 @@ function ChatRoomClick() {
 // The ENTER key sends the chat
 function ChatRoomKeyDown() {
 	if (KeyPress == 13) ChatRoomSendChat();
+	if (KeyPress == 33) ElementValue("InputChat", ChatRoomLastMessage);
+	if (KeyPress == 34) ElementValue("InputChat", "");
 }
 
 // Sends the chat to everyone in the room
@@ -130,18 +135,19 @@ function ChatRoomSendChat() {
 	
 	// Some custom functions like /dice or /coin are implemented for randomness
 	var msg = ElementValue("InputChat").trim()
+	ChatRoomLastMessage = msg;
 	if (msg.toLowerCase().indexOf("/dice") == 0) {
 		
 		// The player can roll a dice, if no size is specified, a 6 sided dice is assumed
-		msg = TextGet("ActionDice");
-		var Dice = (isNaN(msg.substring(5, 50))) ? 6 : parseInt(msg.substring(5, 50));
+		var Dice = (isNaN(parseInt(msg.substring(5, 50).trim()))) ? 6 : parseInt(msg.substring(5, 50).trim());
 		if ((Dice < 4) || (Dice > 100)) Dice = 6;
+		msg = TextGet("ActionDice");
 		msg = msg.replace("SourceCharacter", Player.Name);
 		msg = msg.replace("DiceType", Dice.toString());
 		msg = msg.replace("DiceResult", (Math.floor(Math.random() * Dice) + 1).toString());
 		if (msg != "") ServerSend("ChatRoomChat", { Content: msg, Type: "Action" } );
 
-	else if (msg.toLowerCase().indexOf("/coin") == 0) {
+	} else if (msg.toLowerCase().indexOf("/coin") == 0) {
 
 		// The player can flip a coin, heads or tails are 50/50
 		msg = TextGet("ActionCoin");
@@ -150,7 +156,7 @@ function ChatRoomSendChat() {
 		msg = msg.replace("CoinResult", Heads ? TextGet("Heads") : TextGet("Tails"));
 		if (msg != "") ServerSend("ChatRoomChat", { Content: msg, Type: "Action" } );
 
-	else if (msg.toLowerCase().indexOf("*") == 0) {
+	} else if (msg.indexOf("*") == 0) {
 
 		// The player can emote an action using *, it doesn't garble
 		msg = msg.replace(/\*/g, "");
@@ -228,12 +234,8 @@ function ChatRoomMessage(data) {
 		ChatRoomLog = ChatRoomLog + data + '\r\n';
 		if (document.getElementById("TextAreaChatLog") != null) {
 			ElementValue("TextAreaChatLog", ChatRoomLog);
-			setTimeout(function(){ 
-				var element = document.getElementById("TextAreaChatLog");
-				element.focus();
-				element.selectionStart = element.selectionEnd = element.value.length;
-				document.getElementById("InputChat").focus();
-			}, 0);
+			ElementScrollToEnd("TextAreaChatLog");
+			ElementFocus("InputChat");
 		}
 	}
 }
