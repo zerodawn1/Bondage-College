@@ -54,7 +54,11 @@ var AssetFemale3DCG = [
 			{ Name: "TShirt1", Require: ["ClothLower"] },
 			{ Name: "TennisShirt1", Require: ["ClothLower"] },
 			{ Name: "Sweater1", Require: ["ClothLower"] },
-			{ Name: "MistressTop", Require: ["ClothLower"], Hide: ["Bra"], Value: -1 }
+			{ Name: "MistressTop", Require: ["ClothLower"], Hide: ["Bra"], Value: -1 },
+			{ Name: "AdultBabyDress1", Hide: ["ClothLower"], Value: 300 },
+			{ Name: "AdultBabyDress2", Hide: ["ClothLower"], Value: 300 },
+			{ Name: "AdultBabyDress3", Hide: ["ClothLower"], Value: 300 },
+			{ Name: "NurseUniform", Hide: ["ClothLower"], Value: -1 }
 		]
 	},
 	
@@ -110,6 +114,7 @@ var AssetFemale3DCG = [
 		Asset: [
 			"Band1", "Beret1", "Ears1", "Ears2",
 			{ Name: "MaidHairband1", Value: -1 },
+			{ Name: "NurseCap", Value: -1 },
 			{ Name: "Santa1", Value: 30 },
 			{ Name: "BunnyEars1", Value: 20 }
 		]
@@ -164,10 +169,13 @@ var AssetFemale3DCG = [
 		Priority: 13,
 		ParentGroup: "BodyUpper",
 		Underwear: true,
-		Color: ["#cccccc", "#aaaaaa", "#888888", "#666666", "#444444", "#222222", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
+		Color: ["Default", "#cccccc", "#aaaaaa", "#888888", "#666666", "#444444", "#222222", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 150,
 		Top: 200,
-		Asset: ["Bra1", "Bra2", "Bra7"]
+		Asset: [
+			"Bra1", "Bra2", "Bra7",
+			{ Name: "Bustier1", Value: 30 }
+		]
 	},
 	
 	{
@@ -204,7 +212,13 @@ var AssetFemale3DCG = [
 		Color: ["#cccccc", "#aaaaaa", "#888888", "#666666", "#444444", "#222222", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Left: 150,
 		Top: 425,
-		Asset: ["Panties1", "Panties7", "Panties8", "Panties11"]
+		Asset: [
+			{ Name: "Panties1" },
+			{ Name: "Panties7" },
+			{ Name: "Panties8" },
+			{ Name: "Panties11" },
+			{ Name: "Diapers1", Value: -1 }
+		]
 	},
 
 	{
@@ -345,6 +359,7 @@ var AssetFemale3DCG = [
 		Zone: [[150, 340, 200, 80]],
 		Asset: [ 
 			{ Name: "NylonRopeHarness", Value: 25, Prerequisite: "AccessTorso", Time: 25 },
+			{ Name: "AdultBabyHarness", Value: -1, Time: 15, RemoveTime: 10 }, // Priority: 24, 
 			{ Name: "HempRopeHarness", Value: 50, Prerequisite: "AccessTorso", Time: 25, RemoveTime: 35, Difficulty: 3 },
 			{ Name: "LeatherHarness", Value: 100, Prerequisite: "AccessTorso", Time: 15, RemoveTime: 10 }
 		]
@@ -387,6 +402,10 @@ var AssetFemale3DCG = [
 			{ Name: "MetalCuffs", Priority: 22, Value: 50, SetPose: ["BackCuffs"], Effect: ["Block", "Prone", "Lock"], Time: 5 },
 			{ Name: "MetalCuffsKey", Wear: false, Value: 25, Effect: ["Unlock-MetalCuffs"], Time: 5 },
 			{ Name: "LeatherArmbinder", SelfBondage: false, Priority: 2, Value: 80, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone", "Struggle"], Time: 25, RemoveTime: 10, Difficulty: 10 },
+			{ Name: "PaddedMittens", SelfBondage: false, Value: -1, Effect: ["Block", "Prone", "Struggle"], Time: 25, RemoveTime: 10, Difficulty: 4 },
+			{ Name: "PaddedMittensLocked", Random: false, SelfBondage: false, Value: -1, Effect: ["Block", "Prone", "Lock"], Time: 12 },
+			{ Name: "PaddedMittensHarness", Random: false, SelfBondage: false, Value: -1, Effect: ["Block", "Prone", "Struggle"], Time: 25, RemoveTime: 10, Difficulty: 4 },
+			{ Name: "PaddedMittensHarnessLocked", Random: false, SelfBondage: false, Value: -1, Effect: ["Block", "Prone", "Lock"], Time: 12 },
 			{ Name: "FourLimbsShackles", Enable: false, Value: -1, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Lock"], Time: 30 }
 		]
 	},
@@ -426,6 +445,8 @@ var AssetFemale3DCG = [
 			{ Name: "HarnessPanelGag", Effect: ["GagHeavy"], Value: 80, Time: 20 },
 			{ Name: "RingGag", Value: 35, Time: 5 },
 			{ Name: "DuctTapeGag", Value: 20, Time: 5, RemoveTime: 2 },
+			{ Name: "PacifierGag", Random: false, Effect: ["GagLight"], Value: -1, Time: 2 },
+			{ Name: "HarnessPacifierGag", Random: false, Effect: ["GagLight"], Value: -1, Time: 20 },
 			{ Name: "DusterGag", Random: false, RemoveAtLogin: true, Value: -1, Time: 20 },
 			{ Name: "HarnessPonyBits", Random: false, Effect: ["GagHeavy"], Value: -1, Time: 20 },
 			{ Name: "PumpGag", Effect: [], Random: false, Extended: true, Value: 100, Time: 20 },
@@ -463,7 +484,9 @@ var AssetFemale3DCG = [
 			{ Name: "WoodenMaidTray", Enable: false, Value: -1 },
 			{ Name: "WoodenMaidTrayFull", Enable: false, Value: -1 },
 			{ Name: "WoodenPaddle", Enable: false, Value: -1 },
-			{ Name: "WoodenBox", RemoveAtLogin: true, Effect: ["BlindNormal", "Prone", "Enclose", "GagLight", "Struggle", "Freeze"], Enable: false, Value: -1 , Time: 15, RemoveTime: 5, Difficulty: 6 },
+			{ Name: "WoodenBox", RemoveAtLogin: true, Effect: ["BlindNormal", "Prone", "Enclose", "GagLight", "Struggle", "Freeze"], Enable: false, Value: -1 , Time: 15, RemoveTime: 10, Difficulty: 4 },
+			{ Name: "MilkCan", RemoveAtLogin: true, Effect: ["BlindHeavy", "Prone", "Enclose", "GagHeavy", "Struggle", "Freeze"], SetPose: ["Kneel"], Enable: false, Value: -1 , Time: 15, RemoveTime: 10, Difficulty: 5 },
+			{ Name: "WaterCell", RemoveAtLogin: true, Effect: ["Prone", "Enclose", "GagHeavy", "Struggle", "Freeze"], SetPose: ["Suspension", "LegsClosed"], Block: ["ItemFeet"], Enable: false, Value: -1, Time: 15, RemoveTime: 15, Difficulty: 5 }, 
 		]
 	}
 
