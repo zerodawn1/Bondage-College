@@ -2,6 +2,7 @@
 var SarahBackground = "";
 var SarahStatus = "";
 var AmandaStatus = "";
+var SophieStatus = "";
 var Sarah = null;
 var Amanda = null;
 var Sophie = null;
@@ -139,8 +140,31 @@ function SarahLoad() {
 			InventoryWear(Amanda, "SlaveCollar", "ItemNeck");
 			Amanda.Owner = Player.Name;
 		}
-		SophieIntroTime = CurrentTime + 600000;
+		SophieIntroTime = CurrentTime + 400000;
 		SarahCharacter.splice(1, 0, Amanda);
+
+	}
+
+	// Loads Mistress Sophie if we need
+	if (SophieInside && (Sophie == null) && (SophieStatus != "InPrivateRoom")) {
+
+		// Creates Sarah and equips her like in the Bondage Club original story
+		Sophie = CharacterLoadNPC("NPC_Sophie");
+		Sophie.Name = "Sophie";
+		Sophie.AllowItem = false;
+		CharacterNaked(Amanda);
+		InventoryRemove(Amanda, "Nipples");
+		InventoryWear(Amanda, "PussyLight1", "Pussy", "#555555");
+		InventoryWear(Amanda, "Eyes7", "Eyes", "#3f289f");
+		InventoryWear(Amanda, "Eyes7", "Eyes", "#3f289f");
+		InventoryWear(Amanda, "Mouth1", "Mouth", "Default");
+		InventoryWear(Amanda, "Large", "BodyUpper", "White");
+		InventoryWear(Amanda, "Large", "BodyLower", "White");
+		InventoryWear(Amanda, "Default", "Hands", "White");
+		InventoryWear(Amanda, "HairBack15", "HairBack", "#CCCCCC");
+		InventoryWear(Amanda, "HairFront4", "HairFront", "#CCCCCC");
+		CharacterArchetypeClothes(Sophie, "Mistress", "#bbbbbb");
+		SarahCharacter.splice(2, 0, Sophie);
 
 	}
 
@@ -160,12 +184,30 @@ function AmandaLoad() {
 
 }
 
+// Loads the Sophie character
+function AmandaLoad() {
+	
+	// If we must show the intro scene
+	if (!SophieIntroDone) {
+		if (CurrentCharacter != null) DialogLeave();
+		SarahIntroType = "Sophie";
+		CommonSetScreen("Cutscene", "SarahIntro");
+		SophieInside = true;
+		SophieIntroDone = true;
+	}
+
+}
+
 // Check to load new characters
 function SarahLoadNewCharacter() {
 	
-	// Amanda can be loaded if Sarah isn't there or after 10 minutes with Sarah.  She must not be in the player room.
+	// Amanda can be loaded if Sarah isn't there or after a while with Sarah.  She must not be in the player room.
 	if (!AmandaInside && (AmandaStatus != "InPrivateRoom") && ((AmandaIntroTime <= CurrentTime) && (AmandaIntroTime > 0))) AmandaLoad();
 	if (!AmandaInside && (AmandaStatus != "InPrivateRoom") && !AmandaIntroDone && !SarahInside) AmandaLoad();
+
+	// Sophie can be loaded if Sarah & Amanda aren't there or after a while with Amanda.  She must not be in the player room.
+	if (!SophieInside && (SophieStatus != "InPrivateRoom") && ((SophieIntroTime <= CurrentTime) && (SophieIntroTime > 0))) SophieLoad();
+	if (!SophieInside && (SophieStatus != "InPrivateRoom") && !SophieIntroDone && !AmandaInside && !SarahInside) SophieLoad();
 	
 }
 
@@ -195,7 +237,7 @@ function SarahClick() {
 			CharacterSetCurrent(SarahCharacter[C]);
 }
 
-// Increments the number of activities done with Sarah (after 10, Amanda comes in)
+// Increments the number of activities done with Sarah & Amanda for Amanda & Sophie to come in
 function SarahActivityRun() {
 	if (AmandaIntroTime > 0) AmandaIntroTime = AmandaIntroTime - 60000;
 	if (SophieIntroTime > 0) SophieIntroTime = SophieIntroTime - 60000;

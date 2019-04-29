@@ -1,0 +1,12 @@
+PlayerGagged,,,The sound of a gagged slave is a delicieuse musique to my ears.,,
+0,,,It's a plaisir to see you Mistress DialogPlayerName.  What brings you here?,,"DialogLogQuery(""ClubMistress"", ""Management"")"
+0,,,What are you doing here maid DialogPlayerName?,,"DialogLogQuery(""JoinedSorority"", ""Maid"")"
+0,,,Who are you girl?  What are you doing here?,,
+0,10,"Mistress Sophie, it's always a pleasure.","Absolutely Mistress DialogPlayerName, but I've reserved this room for the day.  Why are you here?",,"DialogLogQuery(""ClubMistress"", ""Management"")"
+0,10,This room is mine.,"You must be confused Mistress DialogPlayerName, I've reserved this room for the day.",,"DialogLogQuery(""ClubMistress"", ""Management"")"
+0,10,I was sent by the maid sorority.,,,"DialogLogQuery(""JoinedSorority"", ""Maid"")"
+0,10,I'm here to clean the room Miss.,,,"DialogLogQuery(""JoinedSorority"", ""Maid"")"
+0,10,What are you doing here?,What am I doing here?  (She looks angry.)  I've reserved this room for the day.,,
+0,10,"I'm sorry, I'm lost.","Girl, this is a private room.  I've reserved it for the day.",,
+0,,(Leave her.),,DialogLeave(),
+10,,TO DO,TO DO,,
