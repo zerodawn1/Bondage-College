@@ -125,7 +125,6 @@ function SarahLoad() {
 		InventoryRemove(Amanda, "Nipples");
 		InventoryWear(Amanda, "PussyLight3", "Pussy", "#623123");
 		InventoryWear(Amanda, "Eyes7", "Eyes", "#3f289f");
-		InventoryWear(Amanda, "Eyes7", "Eyes", "#3f289f");
 		InventoryWear(Amanda, "Mouth1", "Mouth", "Default");
 		InventoryWear(Amanda, "Normal", "BodyUpper", "White");
 		InventoryWear(Amanda, "Normal", "BodyLower", "White");
@@ -150,21 +149,21 @@ function SarahLoad() {
 
 		// Creates Sarah and equips her like in the Bondage Club original story
 		Sophie = CharacterLoadNPC("NPC_Sophie");
-		Sophie.Name = "Sophie";
+		Sophie.Name = "Mistress Sophie";
 		Sophie.AllowItem = false;
-		CharacterNaked(Amanda);
-		InventoryRemove(Amanda, "Nipples");
-		InventoryWear(Amanda, "PussyLight1", "Pussy", "#555555");
-		InventoryWear(Amanda, "Eyes7", "Eyes", "#3f289f");
-		InventoryWear(Amanda, "Eyes7", "Eyes", "#3f289f");
-		InventoryWear(Amanda, "Mouth1", "Mouth", "Default");
-		InventoryWear(Amanda, "Large", "BodyUpper", "White");
-		InventoryWear(Amanda, "Large", "BodyLower", "White");
-		InventoryWear(Amanda, "Default", "Hands", "White");
-		InventoryWear(Amanda, "HairBack15", "HairBack", "#CCCCCC");
-		InventoryWear(Amanda, "HairFront4", "HairFront", "#CCCCCC");
-		CharacterArchetypeClothes(Sophie, "Mistress", "#bbbbbb");
-		SarahCharacter.splice(2, 0, Sophie);
+		CharacterNaked(Sophie);
+		InventoryRemove(Sophie, "Nipples");
+		InventoryWear(Sophie, "PussyLight1", "Pussy", "#555555");
+		InventoryWear(Sophie, "Eyes1", "Eyes", "#b08061");
+		InventoryWear(Sophie, "Glasses5", "Glasses", "#333333");
+		InventoryWear(Sophie, "Mouth1", "Mouth", "Default");
+		InventoryWear(Sophie, "Large", "BodyUpper", "White");
+		InventoryWear(Sophie, "Large", "BodyLower", "White");
+		InventoryWear(Sophie, "Default", "Hands", "White");
+		InventoryWear(Sophie, "HairBack16", "HairBack", "#CCCCCC");
+		InventoryWear(Sophie, "HairFront1", "HairFront", "#CCCCCC");
+		CharacterArchetypeClothes(Sophie, "Mistress", "#333333");
+		SarahCharacter.splice(1, 0, Sophie);
 
 	}
 
@@ -185,7 +184,7 @@ function AmandaLoad() {
 }
 
 // Loads the Sophie character
-function AmandaLoad() {
+function SophieLoad() {
 	
 	// If we must show the intro scene
 	if (!SophieIntroDone) {
@@ -206,6 +205,7 @@ function SarahLoadNewCharacter() {
 	if (!AmandaInside && (AmandaStatus != "InPrivateRoom") && !AmandaIntroDone && !SarahInside) AmandaLoad();
 
 	// Sophie can be loaded if Sarah & Amanda aren't there or after a while with Amanda.  She must not be in the player room.
+	if (!SophieInside && (SophieStatus != "InPrivateRoom") && (SophieIntroTime <= 0) && ((AmandaIntroTime <= CurrentTime) && (AmandaIntroTime > 0)) && (AmandaStatus == "InPrivateRoom")) SophieLoad();
 	if (!SophieInside && (SophieStatus != "InPrivateRoom") && ((SophieIntroTime <= CurrentTime) && (SophieIntroTime > 0))) SophieLoad();
 	if (!SophieInside && (SophieStatus != "InPrivateRoom") && !SophieIntroDone && !AmandaInside && !SarahInside) SophieLoad();
 	
