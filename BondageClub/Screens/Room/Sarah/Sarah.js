@@ -1,4 +1,5 @@
 "use strict";
+var SarahRoomAvailable = true;
 var SarahBackground = "";
 var SarahStatus = "";
 var AmandaStatus = "";
@@ -11,6 +12,7 @@ var AmandaInside = false;
 var SophieInside = false;
 var SarahUnlockQuest = false;
 var SarahCharacter = [];
+var SophieUpsetCount = 0;
 
 // Returns TRUE if a dialog condition matches
 function SarahStatusIs(QueryStatus) { return (QueryStatus == SarahStatus) }
@@ -30,6 +32,15 @@ function SarahAmandaHasStrapon() { return (Player.CanInteract() && AmandaInside 
 function SarahAmandaHasNoStrapon() { return (Player.CanInteract() && AmandaInside && (Amanda != null) && !Amanda.IsVulvaChaste()) }
 function SarahKnowAmandaInRoom() { return (SarahInside && AmandaInside && (Sarah != null) && (Amanda != null) && !Sarah.CanInteract() && (!Sarah.IsBlind() || Amanda.CanTalk())) }
 function SarahAmandaCanKiss() { return (AmandaInside && (Amanda != null) && Player.CanTalk() && Amanda.CanTalk() && (Player.Lover == "NPC-Amanda")) }
+function SarahIsClubSlave() { return ((InventoryGet(Player, "ItemNeck") != null) && (InventoryGet(Player, "ItemNeck").Asset.Name == "ClubSlaveCollar")) }
+
+// Returns TRUE to know if the girls are inside the room
+function SarahSarahIsInside() { return (SarahInside && (Sarah != null)) }
+function SarahAmandaIsInside() { return (AmandaInside && (Amanda != null)) }
+function SarahSarahAndAmandaAreInside() { return (SarahSarahIsInside() && SarahAmandaIsInside()) }
+function SarahSarahOrAmandaAreInside() { return (SarahSarahIsInside() || SarahAmandaIsInside()) }
+function SarahSarahIsPlayerSlave() { return ((Sarah != null) && (Sarah.Owner == Player.Name)) }
+function SarahAmandaIsPlayerSlave() { return ((Amanda != null) && (Amanda.Owner == Player.Name)) }
 
 // Returns the correct label for Sarah's room
 function SarahRoomLabel() {
@@ -323,6 +334,15 @@ function SarahAmandaLeaveRoom() {
 	DialogLeave();
 }
 
+// When Sophie leaves the room
+function SarahSophieLeaveRoom() {
+	for(var C = 1; C < SarahCharacter.length; C++)
+		if (SarahCharacter[C].Name == "Sophie")
+			SarahCharacter.splice(C, 1);
+	SophieInside = false;
+	DialogLeave();
+}
+
 // When Amanda transfers to the room
 function SarahTransferAmandaToRoom() {
 	SarahAmandaLeaveRoom();
@@ -361,4 +381,66 @@ function SarahTransferAmandaToRoom() {
 	if (LogQuery("AmandaSarahLovers", "NPC-AmandaSarah")) C.Lover = "NPC-Sarah";
 	NPCTraitDialog(C);
 	ServerPrivateCharacterSync();
+}
+
+// When Sophie gets too upset, she might kick the player out
+function SarahUpsetSophie(Offset) {
+	SophieUpsetCount = SophieUpsetCount + Offset;
+	if (SophieUpsetCount > 3) {
+		Sophie.CurrentDialog = DialogFind(Sophie, "ExpelPlayer");
+		Sophie.Stage = "80";
+	}
+}
+
+// When a the player gets restrained by Sophie on different phases
+function SarahRestrainedBySophie(Phase, DomRep) {
+	Phase = parseInt(Phase);
+	DomRep = parseInt(DomRep);
+	if (DomRep != 0) ReputationChange("Dominant", DomRep);
+	if (DomRep > 0) SarahUpsetSophie(DomRep);
+	if (SophieUpsetCount <= 3) {
+		if (Phase == 0) InventoryWear(Player, "LeatherCuffs", "ItemArms"); // lock
+		if (Phase == 1) InventoryWear(Player, "LeatherCuffs", "ItemLegs"); // lock
+		if (Phase == 2) Phase = Phase;// attach
+	}
+}
+
+// When a fight starts between the player and Sophie
+function SarahFightSophie() {
+	
+}
+
+// Gets the next punishment that the player must inflict to the girls
+function SarahPlayerPunishGirls() {
+	
+}
+
+// Gets the next punishment that Sophie will inflict to the girls
+function SarahSophiePunishGirls() {
+	
+}
+
+// When Sophie frees Sarah because she's already owned
+function SophieFreeSarahAndLeave() {
+	DialogLeave();
+	SarahUnlock();
+	SophieInside = false;
+}
+
+// When Sophie frees Amanda and kicks both her and the player out
+function SophieFreePlayerAndAmandaTheyLeave() {
+	DialogLeave();
+	if (LogQuery("RentRoom", "PrivateRoom") && (PrivateCharacter.length < PrivateCharacterMax)) {
+		SarahTransferAmandaToRoom()
+		CommonSetScreen("Room", "Private");
+	}
+	else CommonSetScreen("Room", "MainHall");
+	SarahRoomAvailable = false;
+}
+
+// When the player gets kicked out and locked out of the room
+function SarahKickPlayerOut() {
+	DialogLeave();
+	SarahRoomAvailable = false;
+	CommonSetScreen("Room", "MainHall");
 }
