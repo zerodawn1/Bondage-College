@@ -35,11 +35,11 @@ function SarahAmandaCanKiss() { return (AmandaInside && (Amanda != null) && Play
 function SarahIsClubSlave() { return ((InventoryGet(Player, "ItemNeck") != null) && (InventoryGet(Player, "ItemNeck").Asset.Name == "ClubSlaveCollar")) }
 
 // Returns TRUE to know if the girls are inside the room
-function SarahSarahIsInside() { return (SarahInside && (Sarah != null)) }
+function SarahIsInside() { return (SarahInside && (Sarah != null)) }
 function SarahAmandaIsInside() { return (AmandaInside && (Amanda != null)) }
-function SarahSarahAndAmandaAreInside() { return (SarahSarahIsInside() && SarahAmandaIsInside()) }
-function SarahSarahOrAmandaAreInside() { return (SarahSarahIsInside() || SarahAmandaIsInside()) }
-function SarahSarahIsPlayerSlave() { return ((Sarah != null) && (Sarah.Owner == Player.Name)) }
+function SarahAndAmandaAreInside() { return (SarahIsInside() && SarahAmandaIsInside()) }
+function SarahOrAmandaAreInside() { return (SarahIsInside() || SarahAmandaIsInside()) }
+function SarahIsPlayerSlave() { return ((Sarah != null) && (Sarah.Owner == Player.Name)) }
 function SarahAmandaIsPlayerSlave() { return ((Amanda != null) && (Amanda.Owner == Player.Name)) }
 
 // Returns the correct label for Sarah's room

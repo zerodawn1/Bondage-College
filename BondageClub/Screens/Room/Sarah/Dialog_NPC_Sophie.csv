@@ -6,14 +6,15 @@ ExpelPlayer,,,"Enough!  (She seems furious.)  I'm tired of you, I don't want to 
 0,,,Who are you girl?  What are you doing here?,,
 0,10,"Mistress Sophie, it's always a pleasure.","Absolutely *Maitresse* DialogPlayerName, but I've reserved this room for the day.  What's the purpose of your visit?",,"DialogLogQuery(""ClubMistress"", ""Management"")"
 0,10,This room is mine.,(She stares at you.)  You must be confused *Maitresse* DialogPlayerName.  I've reserved this room for the day.,UpsetSophie(1),"DialogLogQuery(""ClubMistress"", ""Management"")"
-0,10,I was sent by the maid sorority.,The sorority sent you?  For what purpose?,,"DialogLogQuery(""JoinedSorority"", ""Maid"")"
+0,10,I was sent by the maid sorority.,The *sororite* sent you?  Impossible!  You're probably wrong girl.,,"DialogLogQuery(""JoinedSorority"", ""Maid"")"
 0,10,I'm here to clean the room Miss.,It's too early for room cleaning girl.  You're probably at the wrong place.,UpsetSophie(1),"DialogLogQuery(""JoinedSorority"", ""Maid"")"
 0,10,What are you doing here?,What am I doing here?  (She looks angry.)  I've reserved this room for the day!,UpsetSophie(2),
 0,10,"I'm sorry, I'm lost.","Girl, this is a private room.  I've reserved it for the day.",UpsetSophie(1),
 0,10,Are you Mistress Sophie?  (Kneel fo her.),"*Oui*, why are you here slave girl?","DialogSetPose(Player, ""Kneel"")",IsClubSlave()
 0,,(Leave her.),,DialogLeave(),
-10,11,I wanted to meet you Mistress Sophie.,(She looks annoyed.)  Your timing is horrible.  What do you want from me?,UpsetSophie(1),
-10,11,I came to learn from you.,(She looks intrigued.)  What do you want to learn?,,
+10,14,"So sorry, this maid is confused.",(She grins.)  And do you know what happens to *confuse* maids?,,"DialogLogQuery(""JoinedSorority"", ""Maid"")"
+10,11,"Actually, I've wanted to meet you.",(She looks annoyed.)  Your timing is horrible.  What do you want from me?,UpsetSophie(1),
+10,11,Can you teach me Mistress Sophie?,(She looks intrigued.)  What do you want to learn?,,
 10,20,I've came to rescue Sarah.,"(She frowns.)  She doesn't need any rescue, she's getting *punie* for her deeds.",UpsetSophie(1),SarahShackled()
 10,20,I've came to see Sarah.,"She's getting punished, you'll have to come back later.",,SarahIsInside()
 10,30,I've came to see Amanda.,The brown hair girl?  A maid got her pretty good.  (She smirks.)  What is she doing in my room?,,AmandaIsInside()
@@ -31,6 +32,9 @@ ExpelPlayer,,,"Enough!  (She seems furious.)  I'm tired of you, I don't want to 
 12,15,I don't think so Miss.,"Face it girl, you're a *soumise*.  So either you also get *punie*, or you get out.",UpsetSophie(2),"DialogReputationLess(""Dominant"", -30)"
 13,100,I'm listening.,,PlayerPunishGirls(),
 13,100,Let's do it!,,PlayerPunishGirls(),
+14,16,What Miss?,The get *punie*.  Get naked little maid.,,
+14,16,They get a raise?  (Giggle.),"Don't try to be funny.  Get naked little maid, you're getting *punie*.",UpsetSophie(2),
+14,16,(Stay silent.),The get *punie*.  Get naked little maid.,,
 15,16,What the hell is *punie* ?,"Don't mock me girl, I don't like your attitude.  Get naked now.",UpsetSophie(2),
 15,16,"Yes Miss, I deserve to be punished.",(She grins.)  Excellent.  Get naked girl.,"DialogChangeReputation(""Dominant"", -3)",
 15,16,Don't be too harsh.,,UpsetSophie(1),
