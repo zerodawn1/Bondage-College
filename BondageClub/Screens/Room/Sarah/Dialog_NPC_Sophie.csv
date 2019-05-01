@@ -1,5 +1,7 @@
 PlayerGagged,,,The sound of a gagged slave is a *delicieuse musique* to my ears.,,
 ExpelPlayer,,,"Enough!  (She seems furious.)  I'm tired of you, I don't want to see you anymore.  Get out!",,
+FightVictory,,,(She bows her head.)  Unbelivable!  I was *defaite* in battle.  You truly are a great kidnapper.,,
+FightDefeat,,,"(She makes a wicked smile.)  Girl, you really thought you could defeat me?",,
 0,,,(She swings her crop toward you.)  *Esclave*!  What are you doing here?,,IsClubSlave()
 0,,,It's a *plaisir* to see you Mistress DialogPlayerName.  What brings you here?,,"DialogLogQuery(""ClubMistress"", ""Management"")"
 0,,,What are you doing here maid DialogPlayerName?,,"DialogLogQuery(""JoinedSorority"", ""Maid"")"
@@ -82,15 +84,30 @@ ExpelPlayer,,,"Enough!  (She seems furious.)  I'm tired of you, I don't want to 
 50,51,Yes Mistress Sophie.  (Give your hands.),"(She stays silent and grabs your arms, locking leather cuffs on them.)","RestrainedBySophie(0, -2)",
 50,51,"Fine, make it quick.  (Give your hands.)","(She frowns and grabs your arms forcefully, locking leather cuffs on them.)","RestrainedBySophie(0, 2)",
 50,51,Is it really necessary?,"(She doesn't listen and grabs your arms forcefully, locking leather cuffs on them.)","RestrainedBySophie(0, 0)",
-51,52,What are these cuffs?,(She doesn't answer and locks more cuffs around your legs.),"RestrainedBySophie(1, 0)",
-51,52,It's really tight Miss.,(She nods and locks more cuffs around your legs.),"RestrainedBySophie(1, -1)",
-51,52,What the fuck?,(She frowns and locks more cuffs around your legs.),"RestrainedBySophie(1, 1)",
-51,52,(Stay silent.),(She gets more cuffs and locks them around your legs.),"RestrainedBySophie(1, 0)",
-52,53,You're so kinky!,(She stares at you.)  You need to learn discipline girl.  And I will teach you.  (She attaches the leather cuffs.),"RestrainedBySophie(2, 1)",
-52,53,(Bow your head.),This punishment will help you learn and grow.  (She attaches the leather cuffs.),"RestrainedBySophie(2, -1)",
-52,53,(Stay silent.),This punishment will help you learn and grow.  (She attaches the leather cuffs.),"RestrainedBySophie(2, 0)",
+51,,What are these cuffs?,These leather cuffs are very handy to keep *soumises* under control.  They can be locked first and chained together later in many fashion.,,
+51,52,It's really tight Miss.,(She grins and restrain your legs.),"RestrainedBySophie(1, -1)",
+51,52,What the fuck?,(She frowns and restrain your legs.),"RestrainedBySophie(1, 1)",
+51,52,(Stay silent.),(She prompty restrain your legs.),"RestrainedBySophie(1, 0)",
+52,53,You're so kinky!,(She stares at you.)  You need to learn discipline girl.  And I will teach you.  (She attaches the wrist cuffs with a chain.),"RestrainedBySophie(2, 1)",
+52,53,(Bow your head.),This punishment will help you learn and grow.  (She attaches the wrist cuffs with a chain.),"RestrainedBySophie(2, -1)",
+52,53,(Stay silent.),This punishment will help you learn and grow.  (She attaches the wrist cuffs with a chain.),"RestrainedBySophie(2, 0)",
 53,200,I'm ready to be punished Miss.,,SophiePunishGirls(),
 53,200,I understand Mistress Sophie.,,SophiePunishGirls(),
+60,61,That was quite a fight.,*Absolument*.  And you've won DialogPlayerName.  You've also won my respect.,"DialogChangeReputation(""Dominant"", 6)",
+60,61,Who's the queen now?,Do not be *arrogante* DialogPlayerName.  Treasure the respect that you've won.,"DialogChangeReputation(""Dominant"", 8)",
+60,61,I was lucky.,It was more than *chance* DialogPlayerName.  You're a formidable opponent and you've won my respect.,"DialogChangeReputation(""Dominant"", 4)",
+61,,,I still can't believe you won.  You're a formidable *kidnappeuse*.,,
+61,,Can you release Sarah?,"Of course, I'll have her released.  (She calls for a maid to rescue Sarah.)",SarahUnlock(),SarahShackled()
+61,,You're my prisonner and the room is mine?,"*Oui*, enjoy your spoils of war for now DialogPlayerName.  I'll have my revenge someday.",,
+61,,(Tickle her.),(You tickle her on the tummy but she barely reacts.)  That's the best you can do?  Are you a child?,,Player.CanInteract()
+61,,(Kiss her.),(She turns away as you try to kiss her.)  These lips are not for you DialogPlayerName.,,CanKissSophie()
+61,,(Spank her.),"(You spank her butt a few times as she moans very lighty, hiding the enjoyment.)",,Player.CanInteract()
+61,,(Fondle her.),(You cup her breast and massage them lovingly as she struggles to get away from you.),,Player.CanInteract()
+61,,(Bring her to your room.),,"TransferSophieToRoom(""-50"")",CanInviteSophieToRoom()
+61,,(Leave her.),,,
+70,16,It was a good fight.,"(She nods and catches her breath.)  Enough talks, get naked loser.","DialogChangeReputation(""Dominant"", -2)",
+70,16,I'll get you next time.,"(She frowns and catches her breath.)  Enough talks, get naked loser.","DialogChangeReputation(""Dominant"", -1)",
+70,16,You're too strong for me Miss.,"(She smirks and catches her breath.)  Enough talks, get naked loser.","DialogChangeReputation(""Dominant"", -3)",
 80,,"I'm sorry, I didn't meant to annoy you.",It's too *tard* to apologize.  Now get out before I kick you out.,DialogRemove(),
 80,98,I'll stay if I want.,(She swings her crop and gives you a menacing look.)  Are you sure you want to face me girl?,,
 80,99,(Walk out of the room.),"(She stares at you as you get out, and locks the door behind you.)",,

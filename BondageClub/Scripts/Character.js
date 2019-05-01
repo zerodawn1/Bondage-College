@@ -289,11 +289,14 @@ function CharacterLoadPose(C) {
 	C.Pose = [];
 	if (C.ActivePose != null) C.Pose.push(C.ActivePose);
 	for (var A = 0; A < C.Appearance.length; A++) {
-		if (C.Appearance[A].Asset.SetPose != null)
-			CharacterAddPose(C, C.Appearance[A].Asset.SetPose);
+		if ((C.Appearance[A].Property != null) && (C.Appearance[A].Property.SetPose != null))
+			CharacterAddPose(C, C.Appearance[A].Property.SetPose);
 		else
-			if (C.Appearance[A].Asset.Group.SetPose != null)
-				CharacterAddPose(C, C.Appearance[A].Asset.Group.SetPose);
+			if (C.Appearance[A].Asset.SetPose != null)
+				CharacterAddPose(C, C.Appearance[A].Asset.SetPose);
+			else
+				if (C.Appearance[A].Asset.Group.SetPose != null)
+					CharacterAddPose(C, C.Appearance[A].Asset.Group.SetPose);
 	}	
 }
 

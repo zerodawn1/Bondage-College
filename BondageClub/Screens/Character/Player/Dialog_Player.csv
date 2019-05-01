@@ -26,6 +26,10 @@ PumpIt,,,Pump it
 pumps,,,pumps
 deflates,,,deflates
 gag,,,gag
+LeatherCuffsRestrainNone,,,SourceCharacter detaches the chain from DestinationCharacter leather cuffs.
+LeatherCuffsRestrainWrist,,,SourceCharacter attaches the leather cuffs wrist chain behind DestinationCharacter back.
+LeatherCuffsRestrainElbow,,,SourceCharacter attaches the leather cuffs elbow chain behind DestinationCharacter back.
+LeatherCuffsRestrainBoth,,,SourceCharacter attaches the leather cuffs wrist and elbow chains behind DestinationCharacter back.
 PlayerGagged,,,(You can use or remove items by selecting specific body regions on yourself.)
 0,,,(You can use or remove items by selecting specific body regions on yourself.)
 ItemBreastLeatherWhip,,,(You clumsily whip your own breast and tummy.  It would be more painful if someone else did it.)
