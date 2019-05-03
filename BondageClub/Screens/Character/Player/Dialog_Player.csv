@@ -15,7 +15,7 @@ Impossible,,,Impossible to escape!
 CanStruggle,,,Struggle to free yourself
 CannotStruggle,,,You'll need help to get out
 CanUnlock,,,You can unlock yourself
-CannotUnlock,,,You don't have the proper key
+CannotUnlock,,,You cannot unlock yourself
 ZoneBlocked,,,This zone is out of reach from another item
 AccessBlocked,,,You cannot access your items
 ProgressClick,,,Click here to speed up the progress
@@ -31,15 +31,15 @@ pumps,,,pumps
 deflates,,,deflates
 gag,,,gag
 SelectBondagePosition,,,Select the bondage position
-CannotUnlockIfElbowBound,,,The victim cannot unlock herself if her elbows are bound
+CannotUnlockIfElbowBound,,,A victim cannot unlock herself if her elbows are bound
 LeatherCuffsPoseNone,,,Detached
 LeatherCuffsPoseWrist,,,Bind wrists
 LeatherCuffsPoseElbow,,,Bind elbows
 LeatherCuffsPoseBoth,,,Bind both
-LeatherCuffsRestrainNone,,,SourceCharacter detaches the chain from DestinationCharacter leather cuffs.
-LeatherCuffsRestrainWrist,,,SourceCharacter attaches the leather cuffs wrist chain behind DestinationCharacter back.
-LeatherCuffsRestrainElbow,,,SourceCharacter attaches the leather cuffs elbow chain behind DestinationCharacter back.
-LeatherCuffsRestrainBoth,,,SourceCharacter attaches the leather cuffs wrist and elbow chains behind DestinationCharacter back.
+LeatherCuffsRestrainNone,,,SourceCharacter detaches the chain from DestinationCharacter's leather cuffs.
+LeatherCuffsRestrainWrist,,,SourceCharacter attaches the leather cuffs wrist chain behind DestinationCharacter's back.
+LeatherCuffsRestrainElbow,,,SourceCharacter attaches the leather cuffs elbow chain behind DestinationCharacter's back.
+LeatherCuffsRestrainBoth,,,SourceCharacter attaches the leather cuffs wrist and elbow chains behind DestinationCharacter's back.
 PlayerGagged,,,(You can use or remove items by selecting specific body regions on yourself.)
 0,,,(You can use or remove items by selecting specific body regions on yourself.)
 ItemBreastLeatherWhip,,,(You clumsily whip your own breast and tummy.  It would be more painful if someone else did it.)

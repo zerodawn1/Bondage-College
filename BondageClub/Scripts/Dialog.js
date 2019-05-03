@@ -60,7 +60,7 @@ function DialogPrerequisite(D) {
 
 // Searches for an item in the player inventory to unlock a specific item
 function DialogCanUnlock(C, Item) {
-	if ((Item != null) && (Item.Property != null) && (Item.Property.SelfUnlock != null) && (Item.Property.SelfUnlock != false)) return false;
+	if ((Item != null) && (Item.Property != null) && (Item.Property.SelfUnlock != null) && (Item.Property.SelfUnlock == false)) return false;
 	var UnlockName = "Unlock-" + CharacterAppearanceGetCurrentValue(C, C.FocusGroup.Name, "Name");
 	for (var I = 0; I < Player.Inventory.length; I++)
 		if ((Player.Inventory[I].Asset.Effect != null) && (Player.Inventory[I].Asset.Effect.indexOf(UnlockName) >= 0))
@@ -289,7 +289,7 @@ function DialogClick() {
 					
 					// If the player can struggle out or unlock herself
 					if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Struggle") >= 0) && (DialogProgress == -1)) DialogProgressStart(C, Item, null);
-					if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Lock") >= 0) && DialogCanUnlock(C, Item)) DialogProgressStart(C, Item, null);
+					if ((C.ID == 0) && (((Item.Property != null) && (Item.Property.Effect != null) && (Item.Property.Effect.indexOf("Block") >= 0) && (Item.Property.Effect.indexOf("Lock") >= 0)) || ((Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Lock") >= 0))) && DialogCanUnlock(C, Item)) DialogProgressStart(C, Item, null);
 
 				}
 
@@ -313,7 +313,7 @@ function DialogClick() {
 
 						// Cannot change item if the previous one is locked or blocked by another group
 						var Item = InventoryGet(C, C.FocusGroup.Name);
-						if ((Item == null) || (Item.Asset.Effect == null) || (Item.Asset.Effect.indexOf("Lock") < 0)) {
+						if ((Item == null) || (((Item.Property == null) || (Item.Property.Effect == null) || (Item.Property.Effect.indexOf("Lock") < 0)) && ((Item.Asset.Effect == null) || (Item.Asset.Effect.indexOf("Lock") < 0)))) {
 							if (!InventoryGroupIsBlocked(C))
 								if (InventoryAllow(C, DialogInventory[I].Asset.Prerequisite))
 									if ((Item == null) || (Item.Asset.Name != DialogInventory[I].Asset.Name)) {
@@ -529,7 +529,7 @@ function DialogDrawItemMenu(C) {
 				}
 
 				// Draw the unlock option
-				if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Lock") >= 0)) {
+				if ((C.ID == 0) && (((Item.Property != null) && (Item.Property.Effect != null) && (Item.Property.Effect.indexOf("Block") >= 0) && (Item.Property.Effect.indexOf("Lock") >= 0)) || ((Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Lock") >= 0)))) {
 					if (DialogCanUnlock(C, Item)) {
 						DrawText(DialogFind(Player, "CanUnlock"), 1250, 62, "White", "Black");
 						DrawButton(1500, 25, 225, 75, DialogFind(Player, "Unlock"), "White");
