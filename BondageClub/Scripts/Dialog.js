@@ -59,8 +59,9 @@ function DialogPrerequisite(D) {
 }
 
 // Searches for an item in the player inventory to unlock a specific item
-function DialogCanUnlock(C) {
-	var UnlockName = "Unlock-" + CharacterAppearanceGetCurrentValue(C, C.FocusGroup.Name, "Name");	
+function DialogCanUnlock(C, Item) {
+	if ((Item != null) && (Item.Property != null) && (Item.Property.SelfUnlock != null) && (Item.Property.SelfUnlock != false)) return false;
+	var UnlockName = "Unlock-" + CharacterAppearanceGetCurrentValue(C, C.FocusGroup.Name, "Name");
 	for (var I = 0; I < Player.Inventory.length; I++)
 		if ((Player.Inventory[I].Asset.Effect != null) && (Player.Inventory[I].Asset.Effect.indexOf(UnlockName) >= 0))
 			return true;
@@ -288,7 +289,7 @@ function DialogClick() {
 					
 					// If the player can struggle out or unlock herself
 					if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Struggle") >= 0) && (DialogProgress == -1)) DialogProgressStart(C, Item, null);
-					if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Lock") >= 0) && DialogCanUnlock(C)) DialogProgressStart(C, Item, null);
+					if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Lock") >= 0) && DialogCanUnlock(C, Item)) DialogProgressStart(C, Item, null);
 
 				}
 
@@ -341,17 +342,20 @@ function DialogClick() {
 								if ((DialogInventory[I].Asset.Effect != null) && (DialogInventory[I].Asset.Effect.indexOf("Unlock-" + Item.Asset.Name) >= 0))
 									DialogProgressStart(C, Item, null);
 								else
-									if (!DialogInventory[I].Asset.Wear) {
-										if (CurrentScreen == "ChatRoom")
-											ChatRoomPublishAction(CurrentCharacter, null, DialogInventory[I], true);
-										else {
-											var D = DialogFind(C, DialogInventory[I].Asset.Group.Name + DialogInventory[I].Asset.Name, null, false);
-											if (D != "") {
-												C.CurrentDialog = D;
-												DialogLeaveItemMenu();
+									if ((Item.Asset.Name == DialogInventory[I].Asset.Name) && Item.Asset.Extended)
+										DialogExtendItem(Item);
+									else
+										if (!DialogInventory[I].Asset.Wear) {
+											if (CurrentScreen == "ChatRoom")
+												ChatRoomPublishAction(CurrentCharacter, null, DialogInventory[I], true);
+											else {
+												var D = DialogFind(C, DialogInventory[I].Asset.Group.Name + DialogInventory[I].Asset.Name, null, false);
+												if (D != "") {
+													C.CurrentDialog = D;
+													DialogLeaveItemMenu();
+												}
 											}
 										}
-									}
 
 						}
 						break;
@@ -436,9 +440,9 @@ function DialogDrawItemMenu(C) {
 		// Draws the top menu
 		if ((C.FocusGroup != null) && (InventoryGet(C, C.FocusGroup.Name) != null)) {
 			DrawTextWrap(DialogText, 1000, 0, 500, 125, "White");
-			DrawButton(1500, 25, 225, 75, "Remove", "White");
+			DrawButton(1500, 25, 225, 75, DialogFind(Player, "Remove"), "White");
 		} else DrawTextWrap(DialogText, 1000, 0, 750, 125, "White");
-		DrawButton(1750, 25, 225, 75, "Cancel", "White");
+		DrawButton(1750, 25, 225, 75, DialogFind(Player, "Cancel"), "White");
 
 		// For each items in the player inventory
 		var X = 1000;
@@ -459,7 +463,7 @@ function DialogDrawItemMenu(C) {
 
 		// Can always cancel out
 		var C = (Player.FocusGroup != null) ? Player : CurrentCharacter;
-		DrawButton(1750, 25, 225, 75, "Cancel", "White");
+		DrawButton(1750, 25, 225, 75, DialogFind(Player, "Cancel"), "White");
 	
 		// If the player is progressing
 		if (DialogProgress >= 0) {
@@ -521,14 +525,14 @@ function DialogDrawItemMenu(C) {
 				// Draw the struggle option
 				if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Struggle") >= 0)) {
 					DrawText(DialogFind(Player, "CanStruggle"), 1250, 62, "White", "Black");
-					DrawButton(1500, 25, 225, 75, "Struggle", "White");
+					DrawButton(1500, 25, 225, 75, DialogFind(Player, "Struggle"), "White");
 				}
 
 				// Draw the unlock option
 				if ((C.ID == 0) && (Item.Asset.Effect != null) && (Item.Asset.Effect.indexOf("Block") >= 0) && (Item.Asset.Effect.indexOf("Lock") >= 0)) {
-					if (DialogCanUnlock(C)) {
+					if (DialogCanUnlock(C, Item)) {
 						DrawText(DialogFind(Player, "CanUnlock"), 1250, 62, "White", "Black");
-						DrawButton(1500, 25, 225, 75, "Unlock", "White");
+						DrawButton(1500, 25, 225, 75, DialogFind(Player, "Unlock"), "White");
 					} else DrawText(DialogFind(Player, "CannotUnlock"), 1350, 62, "White", "Black");
 				}
 

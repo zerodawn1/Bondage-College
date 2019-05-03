@@ -407,10 +407,11 @@ function SarahRestrainedBySophie(Phase, DomRep) {
 		if (Phase == 1) InventoryWearRandom(Player, "ItemFeet");
 		if (Phase == 2) {
 			var Cuffs = InventoryGet(Player, "ItemArms")
+			Cuffs.Property = {};
 			Cuffs.Property.Restrain = "Wrist";
 			Cuffs.Property.SetPose = ["BackBoxTie"];
 			Cuffs.Property.Effect = ["Block", "Prone", "Lock"];
-			CharacterRefresh(C);
+			CharacterRefresh(Player);
 		}
 	}
 }

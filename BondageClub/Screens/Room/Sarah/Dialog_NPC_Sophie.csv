@@ -84,7 +84,7 @@ FightDefeat,,,"(She makes a wicked smile.)  Girl, you really thought you could d
 50,51,Yes Mistress Sophie.  (Give your hands.),"(She stays silent and grabs your arms, locking leather cuffs on them.)","RestrainedBySophie(0, -2)",
 50,51,"Fine, make it quick.  (Give your hands.)","(She frowns and grabs your arms forcefully, locking leather cuffs on them.)","RestrainedBySophie(0, 2)",
 50,51,Is it really necessary?,"(She doesn't listen and grabs your arms forcefully, locking leather cuffs on them.)","RestrainedBySophie(0, 0)",
-51,,What are these cuffs?,These leather cuffs are very handy to keep *soumises* under control.  They can be locked first and chained together later in many fashion.,,
+51,,What are these cuffs?,These leather cuffs are very handy to keep *soumises* under control.  They can be locked first and chained together later in many fashion.,DialogRemove(),
 51,52,It's really tight Miss.,(She grins and restrain your legs.),"RestrainedBySophie(1, -1)",
 51,52,What the fuck?,(She frowns and restrain your legs.),"RestrainedBySophie(1, 1)",
 51,52,(Stay silent.),(She prompty restrain your legs.),"RestrainedBySophie(1, 0)",

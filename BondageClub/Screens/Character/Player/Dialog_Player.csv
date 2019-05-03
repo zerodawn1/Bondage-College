@@ -1,6 +1,10 @@
 SelectItem,,,Select an item to use
 CannotUseOnSelf,,,Cannot use on yourself
 RemoveClothesForItem,,,Remove some clothes first
+Cancel,,,Cancel
+Remove,,,Remove
+Struggle,,,Struggle
+Unlock,,,Unlock
 Swapping,,,Swapping...
 Struggling,,,Struggling...
 Unlocking,,,Unlocking...
@@ -26,6 +30,12 @@ PumpIt,,,Pump it
 pumps,,,pumps
 deflates,,,deflates
 gag,,,gag
+SelectBondagePosition,,,Select the bondage position
+CannotUnlockIfElbowBound,,,The victim cannot unlock herself if her elbows are bound
+LeatherCuffsPoseNone,,,Detached
+LeatherCuffsPoseWrist,,,Bind wrists
+LeatherCuffsPoseElbow,,,Bind elbows
+LeatherCuffsPoseBoth,,,Bind both
 LeatherCuffsRestrainNone,,,SourceCharacter detaches the chain from DestinationCharacter leather cuffs.
 LeatherCuffsRestrainWrist,,,SourceCharacter attaches the leather cuffs wrist chain behind DestinationCharacter back.
 LeatherCuffsRestrainElbow,,,SourceCharacter attaches the leather cuffs elbow chain behind DestinationCharacter back.
