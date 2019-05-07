@@ -43,6 +43,10 @@ function InventoryItemArmsLeatherCuffsClick() {
 // Sets the cuffs pose (wrist, elbow, both or none)
 function InventoryItemArmsLeatherCuffsSetPose(NewPose) {
 	var C = (Player.FocusGroup != null) ? Player : CurrentCharacter;
+	if (CurrentScreen == "ChatRoom") {
+		DialogFocusItem = InventoryGet(C, C.FocusGroup.Name);
+		InventoryItemArmsLeatherCuffsLoad();
+	}
 	DialogFocusItem.Property.Restrain = NewPose;
 	if (NewPose == null) {
 		delete DialogFocusItem.Property.SetPose;

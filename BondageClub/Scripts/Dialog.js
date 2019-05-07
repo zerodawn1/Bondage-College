@@ -296,9 +296,8 @@ function DialogClick() {
 			}
 			
 			// If the user wants to use the remote through the "Use Remote" button
-			if ((MouseX >= 1500) && (MouseX <= 1725) && (MouseY >= 25) && (MouseY <= 100) && (InventoryGet(C, C.FocusGroup.Name).Asset.Effect != null) && (InventoryGet(C, C.FocusGroup.Name).Asset.Effect.indexOf("Egged") >= 0) && (Player.Effect.indexOf("Block") < 0) && InventoryGroupIsBlocked(C) && InventoryAvailable(Player,"VibratorRemote","ItemVulva")) {
+			if ((MouseX >= 1500) && (MouseX <= 1725) && (MouseY >= 25) && (MouseY <= 100) && (InventoryGet(C, C.FocusGroup.Name).Asset.Effect != null) && (InventoryGet(C, C.FocusGroup.Name).Asset.Effect.indexOf("Egged") >= 0) && (Player.Effect.indexOf("Block") < 0) && InventoryGroupIsBlocked(C) && InventoryAvailable(Player,"VibratorRemote","ItemVulva"))
 				DialogExtendItem(InventoryGet(C, C.FocusGroup.Name));
-			}
 		
 			// If the user cancels the menu
 			if ((MouseX >= 1750) && (MouseX <= 1975) && (MouseY >= 25) && (MouseY <= 100))
@@ -326,12 +325,12 @@ function DialogClick() {
 											if (DialogInventory[I].Asset.SelfBondage || (C.ID != 0)) DialogProgressStart(C, Item, DialogInventory[I]);
 											else DialogSetText("CannotUseOnSelf");
 										} else {
-											
-											//The vibrating egg remote can open the vibrating egg's extended dialog
-											if (DialogInventory[I].Asset.Name == "VibratorRemote" && C.IsEgged()) {
+
+											// The vibrating egg remote can open the vibrating egg's extended dialog
+											if (DialogInventory[I].Asset.Name == "VibratorRemote" && C.IsEgged())
 												DialogExtendItem(C.Appearance.find(function(item){ return item.Asset.Name == "VibratingEgg"; }));
-											}
-											
+
+											// Publishes the item result
 											if (CurrentScreen == "ChatRoom" && DialogInventory[I].Asset.Effect == null)
 												ChatRoomPublishAction(CurrentCharacter, null, DialogInventory[I], true);
 											else {
@@ -341,6 +340,7 @@ function DialogClick() {
 													DialogLeaveItemMenu();
 												}
 											}
+
 										}										
 									} else {
 										if ((Item.Asset.Name == DialogInventory[I].Asset.Name) && Item.Asset.Extended)
@@ -522,8 +522,9 @@ function DialogDrawItemMenu(C) {
 
 				// Check to open the extended menu of the item.  In a chat room, we publish the result for everyone
 				if ((DialogProgressNextItem != null) && DialogProgressNextItem.Asset.Extended) {
+					DialogInventoryBuild(C);
 					ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem, false);
-					DialogExtendItem(DialogProgressNextItem);
+					DialogExtendItem(InventoryGet(C, DialogProgressNextItem.Asset.Group.Name));
 				} else ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem, true);
 				
 			}		
