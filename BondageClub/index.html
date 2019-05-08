@@ -114,6 +114,7 @@ function MainRun() {
 
 // When the user presses a key, we send the KeyDown event to the current screen if it can accept it
 function KeyDown(event) {
+	if (event.repeat) return;
 	KeyPress = event.keyCode || event.which;
 	CommonKeyDown();
 }
