@@ -14,7 +14,7 @@ RemoveItemNeck,,,(You remove the collar around her neck.)  Collars are such a tu
 ItemPelvis,,,(You snap the belt around her waist as she pouts.)  This is unfair!,,
 RemoveItemPelvis,,,(You unlock the belt from her waist and crotch.)  I can't wait to see what you'll use on me next...,,
 ItemTorso,,,(You prepare a full body harness on her torso as she twirls.)  This is very hot!,,
-RemoveItemTorso,,,"(You remove the body harness from her torso.)  It was kinky and comfy Miss, I hope you try another one.",,
+RemoveItemTorso,,,(You remove the body harness from her torso.)  It was kinky and comfy Miss.  I hope to try another one.,,
 ItemButt,,,(She does a light moan as you slide the device inside.)  Oh my!  It certainly fills me.,,
 RemoveItemButt,,,(She nods slowly as you remove the butt plug.)  It was fun!  Maybe another one?,,
 ItemBreast,,,(She holds her breath as you use the item.)  You certainly are in control Miss.,,
@@ -26,7 +26,7 @@ RemoveItemHead,,,(You remove the device and she looks at you.)  That was pretty 
 ItemBreastLeatherWhip,,,(She trembles of pain and pleasure as you whip her breast.)  Ohhhh yeah!  This is great.,,
 ItemBreastLeatherCrop,,,(You swing the crop on her torso as she moans.)  Ow!  You have lots of talents.,,
 ItemPelvisLeatherWhip,,,(You whip her butt as she jumps from the pain.)  It hurts soooooo good.,,
-ItemPelvisLeatherCrop,,,(She moans and shakes her butt each time the crop lands on it.) God I love pain.,,
+ItemPelvisLeatherCrop,,,"(She moans and shakes her butt each time the crop lands on it.) God, I love pain.",,
 ItemVulvaVibratingWand,,,"(She moans softly as you massage her pussy with the wand.)  Mmmmh, this is lovely Miss!",,
 VibratingEgg,,,(She moans as you slide the egg inside.)  Is it getting hot in here?,,
 RemoveVibratingEgg,,,(She does one last moan as you remove the egg.)  Ooooh!  That was quite a stimulation.,,
@@ -59,7 +59,7 @@ RemoveSuspensionHempRope,,,(You untie the hemp rope from the ceiling and slowly 
 40,,A kiss to remember our love?,"Sure!  (You kiss each other quickly.)  I remember these lips.  (She giggles.)  So, how did you find me?",DialogRemove(),
 40,41,I've searched all over town for you.,You're the best!  And they've accepted you as a club member?,,
 40,41,I've asked your friends about you.,That's clever!  Amanda knows about the Bondage Club.  You're a member now?,,
-40,41,It's pure luck.  I wasn't looking for you.,It's a small world I guess.  (She smiles.)  You're a club member now?,,
+40,41,It's pure luck.  I wasn't looking for you.,We live in a small and kinky world.  (She smiles.)  You're a club member now?,,
 41,100,"Yes, I've joined this great club!",Awesome!  I hope you're having fun like me.  (She struggles playfully.)  Have you met Mistress Sophie?,,
 41,100,I had to join to enter the building.,"Of course, and I hope you're having fun like me.  (She struggles playfully.)  Have you met Mistress Sophie?",,
 50,,I'm glad to see you slave.  (Spank her butt.),"Ow!  I'm so happy to see you Mistress!  Well... hear you.  (She giggles.)  So, you've joined the club?",DialogRemove(),
@@ -73,14 +73,14 @@ RemoveSuspensionHempRope,,,(You untie the hemp rope from the ceiling and slowly 
 61,100,"Yes, I'm a new club member.",Great!  I hope you're having fun like me Mistress.  (She struggles playfully.)  Have you met Mistress Sophie?,,
 61,100,I've been a member for a while now.,That's wonderful Mistress!  (She struggles playfully.)  You probably know Mistress Sophie?,,
 70,100,What's your punishment?,I'm not sure actually.  I'm waiting here for Mistress Sophie to receive it.  Have you met her?,,
-70,100,All of this for bringing a friend?,"Yes and no, I've actually angered Mistress Sophie, one of the club owners.  Have you met her?",,
+70,100,All of this for bringing a friend?,"Yes and no, I've angered Mistress Sophie, one of the club owners.  Have you met her?",,
 80,,Why are you restrained?,"I'm getting punished.  (She struggles and giggles.)  Don't worry, I've seen worse.  So, are you enjoying your visit?",DialogRemove(),
 80,100,"Yes, thanks for introducing me.",Sure!  And I can introduce you to lots of great people around here.  Have you met Mistress Sophie?,,
 80,100,"Yes and no, I still need to explore.","Absolutely, and exploring is part of the fun.  Have you met Mistress Sophie?",,
 80,100,I'm not sure this place is for me.,"I understand, but before you go, there's someone you should meet.  Have you met Mistress Sophie?",,
 100,110,I work with Sophie.  I'm a Mistress here.,Oh!  Are you here to punish me?  I thought she wanted to do it personally.,,"DialogLogQuery(""ClubMistress"", ""Management"")"
 100,110,Who's Mistress Sophie?,She's one of the club owners and she's going to punish me here a little later.,,
-100,110,Why do you ask?,"She should be here soon, she reserved that room.  She's going to punish me.",,
+100,110,Why do you ask?,She should be here soon.  She reserved that room to punish me.,,
 110,,,Mistress Sophie?  DialogPlayerName?  Marco?  (She laughs.),,
 110,,I shouldn't be here?,I don't know if you'll get in trouble for being here.  Don't make Mistress Sophie angry.,DialogRemove(),
 110,,Do you want to be left alone?,"I guess you can stay, it's boring to be left alone.  Unless it's part of my punishment and you could get in trouble with Mistress Sophie.",DialogRemove(),
@@ -125,7 +125,7 @@ RemoveSuspensionHempRope,,,(You untie the hemp rope from the ceiling and slowly 
 220,,Great!  (Bring her to your room.),,TransferToRoom(),
 1000,,,Punished by my baby?  This is hot!,,"StatusIs(""Lover"")"
 1000,,,You're doing the punishment Miss DialogPlayerName?,,
-1000,,Get naked girl.,(She nods and strips down quickly.)  Of course Miss!,DialogNaked(CurrentCharacter),CanStrip()
+1000,,Get naked girl.,"(She nods and strips down quickly.)  Of course, Miss!",DialogNaked(CurrentCharacter),CanStrip()
 1000,,Are you scared?,"(She giggles.)  A little, it's very thrilling.",DialogRemove(),
 1000,,You're my bitch now.,"(She nods happily.)  Yes Miss, I'm your bitch.",DialogRemove(),
 1000,,I won't be too harsh my love.,(She sighs.)  You can play rough with me baby.,DialogRemove(),"StatusIs(""Lover"")"
