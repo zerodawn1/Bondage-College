@@ -511,7 +511,7 @@ function AppearanceClick() {
 		
 		// Can set a color manually from the text field
 		if ((MouseX >= 1610) && (MouseX < 1675) && (MouseY >= 37) && (MouseY < 102))
-			if (/^#[0-9A-F]{6}$/i.test(ElementValue("InputColor")))
+			if (CommonIsColor(ElementValue("InputColor")))
 				CharacterAppearanceSetColorForGroup(Player, ElementValue("InputColor").toLowerCase(), CharacterAppearanceColorPicker);
 
 		// In color picker mode, we can pick a color from the color image
