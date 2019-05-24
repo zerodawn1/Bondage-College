@@ -6,6 +6,14 @@ var ChatRoomLog = "";
 var ChatRoomLastMessage = [""];
 var ChatRoomLastMessageIndex = 0;
 
+// Returns TRUE if the dialog option is available
+function ChatRoomCanAddWhiteList() { return ((CurrentCharacter != null) && (CurrentCharacter.MemberNumber != null) && (Player.WhiteList.indexOf(CurrentCharacter.MemberNumber) < 0) && (Player.BlackList.indexOf(CurrentCharacter.MemberNumber) < 0)) }
+function ChatRoomCanAddBlackList() { return ((CurrentCharacter != null) && (CurrentCharacter.MemberNumber != null) && (Player.WhiteList.indexOf(CurrentCharacter.MemberNumber) < 0) && (Player.BlackList.indexOf(CurrentCharacter.MemberNumber) < 0)) }
+function ChatRoomCanRemoveWhiteList() { return ((CurrentCharacter != null) && (CurrentCharacter.MemberNumber != null) && (Player.WhiteList.indexOf(CurrentCharacter.MemberNumber) >= 0)) }
+function ChatRoomCanRemoveBlackList() { return ((CurrentCharacter != null) && (CurrentCharacter.MemberNumber != null) && (Player.BlackList.indexOf(CurrentCharacter.MemberNumber) >= 0)) }
+function ChatRoomCanAddFriend() { return ((CurrentCharacter != null) && (CurrentCharacter.MemberNumber != null) && (Player.FriendList.indexOf(CurrentCharacter.MemberNumber) < 0)) }
+function ChatRoomCanRemoveFriend() { return ((CurrentCharacter != null) && (CurrentCharacter.MemberNumber != null) && (Player.FriendList.indexOf(CurrentCharacter.MemberNumber) >= 0)) }
+
 // Creates the chat room input elements
 function ChatRoomCreateElement() {
 	if (document.getElementById("InputChat") == null) {
@@ -68,12 +76,20 @@ function ChatRoomDrawCharacter(DoClick) {
 				ElementRemove("InputChat");
 				ElementRemove("TextAreaChatLog");
 				ChatRoomBackground = ChatRoomData.Background;
+				ChatRoomCharacter[C].AllowItem = (ChatRoomCharacter[C].ID == 0);
+				ServerSend("ChatRoomAllowItem", { MemberNumber: ChatRoomCharacter[C].MemberNumber });
 				CharacterSetCurrent(ChatRoomCharacter[C]);
 				break;
 			}
 		}
-		else
+		else {
 			DrawCharacter(ChatRoomCharacter[C], (C % 5) * Space + X, Y + Math.floor(C / 5) * 500, Zoom);
+			if (ChatRoomCharacter[C].MemberNumber != null) {
+				if (Player.WhiteList.indexOf(ChatRoomCharacter[C].MemberNumber) >= 0) DrawImage("Icons/Small/WhiteList.png", (C % 5) * Space + X + 44 * Zoom, Y + Math.floor(C / 5) * 500);
+				else if (Player.BlackList.indexOf(ChatRoomCharacter[C].MemberNumber) >= 0) DrawImage("Icons/Small/BlackList.png", (C % 5) * Space + X + 44 * Zoom, Y + Math.floor(C / 5) * 500);
+				if (Player.FriendList.indexOf(ChatRoomCharacter[C].MemberNumber) >= 0) DrawImage("Icons/Small/FriendList.png", (C % 5) * Space + X + 400 * Zoom, Y + Math.floor(C / 5) * 500);
+			}
+		}
 
 }
 
@@ -326,4 +342,23 @@ function ChatRoomBanFromRoom() {
 		ServerSend("ChatRoomBan", CurrentCharacter.AccountName.replace("Online-", ""));
 		DialogLeave();
 	}
+}
+
+// Adds or remove an online member to/from a specific list
+function ChatRoomListManage(Operation, ListType) {
+	if (((Operation == "Add" || Operation == "Remove")) && (CurrentCharacter != null) && (CurrentCharacter.MemberNumber != null) && (Player[ListType] != null) && Array.isArray(Player[ListType])) {
+		if ((Operation == "Add") && (Player[ListType].indexOf(CurrentCharacter.MemberNumber) < 0)) Player[ListType].push(CurrentCharacter.MemberNumber);
+		if ((Operation == "Remove") && (Player[ListType].indexOf(CurrentCharacter.MemberNumber) >= 0)) Player[ListType].splice(Player[ListType].indexOf(CurrentCharacter.MemberNumber), 1);
+		var data = {};
+		data[ListType] = Player[ListType];
+		ServerSend("AccountUpdate", data);
+	}
+
+}
+
+// When the server returns if applying an item is allowed
+function ChatRoomAllowItem(data) {
+	if ((data != null) && (typeof data === "object") && (data.MemberNumber != null) && (typeof data.MemberNumber === "number") && (data.AllowItem != null) && (typeof data.AllowItem === "boolean"))
+		if ((CurrentCharacter != null) && (CurrentCharacter.MemberNumber == data.MemberNumber))
+			CurrentCharacter.AllowItem = data.AllowItem;
 }
