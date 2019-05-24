@@ -19,8 +19,8 @@ function ChatRoomCreateElement() {
 	if (document.getElementById("InputChat") == null) {
 		ElementCreateInput("InputChat", "text", "", "250");
 		document.getElementById("InputChat").setAttribute("autocomplete", "off");
-		ElementCreateTextArea("TextAreaChatLog");
-		ElementValue("TextAreaChatLog", ChatRoomLog);
+		ElementCreateDiv("TextAreaChatLog");
+		ElementContent("TextAreaChatLog", ChatRoomLog);
 		ElementScrollToEnd("TextAreaChatLog");
 		ElementFocus("InputChat");
 	}
@@ -261,12 +261,6 @@ function ChatRoomCharacterUpdate(C) {
 	ServerSend("ChatRoomCharacterUpdate", data);
 }
 
-// When the server sends a response
-function ChatRoomResponse(data) {
-	if ((data != null) && (typeof data === "string") && (data != ""))
-		ChatRoomLog = data + '\r\n';
-}
-
 // When the server sends a chat message
 function ChatRoomMessage(data) {
 	
@@ -284,17 +278,23 @@ function ChatRoomMessage(data) {
 		// If we found the sender
 		if (SenderCharacter != null) {
 	
-			// Builds the message to add depending on the type
 			var msg = data.Content;
-			if ((data.Type != null) && (data.Type == "Chat")) msg = SenderCharacter.Name + ": " + msg;
+
+			// Replace < and > characters to prevent HTML injections
+			while (msg.indexOf("<") > -1) msg = msg.replace("<", "&lt;");
+			while (msg.indexOf(">") > -1) msg = msg.replace(">", "&gt;");
+
+			// Builds the message to add depending on the type
+			if ((data.Type != null) && (data.Type == "Chat")) msg = '<span class="ChatMessageName" style="color:' + (SenderCharacter.LabelColor || 'gray') + ';">' + SenderCharacter.Name + ':</span> ' + msg;
 			if ((data.Type != null) && (data.Type == "Emote")) msg = "*" + msg + "*";
 			if ((data.Type != null) && (data.Type == "Action")) msg = "(" + msg + ")";
 		
-			// Adds the message and scrolls down
-			ChatRoomLog = ChatRoomLog + msg + '\r\n';
+			// Adds the message and scrolls down unless the user has scrolled up
+			var ShouldScrollDown = ElementIsScrolledToEnd("TextAreaChatLog");
+			ChatRoomLog = ChatRoomLog + '<div class="ChatMessage ChatMessage' + data.Type + '" data-time="' + ChatRoomCurrentTime() + '">' + msg + '</div>';
 			if (document.getElementById("TextAreaChatLog") != null) {
-				ElementValue("TextAreaChatLog", ChatRoomLog);
-				ElementScrollToEnd("TextAreaChatLog");
+				ElementContent("TextAreaChatLog", ChatRoomLog);
+				if (ShouldScrollDown) ElementScrollToEnd("TextAreaChatLog");
 				ElementFocus("InputChat");
 			}
 			
@@ -342,6 +342,12 @@ function ChatRoomBanFromRoom() {
 		ServerSend("ChatRoomBan", CurrentCharacter.AccountName.replace("Online-", ""));
 		DialogLeave();
 	}
+}
+
+// Returns the User's current local time as a displayable string
+function ChatRoomCurrentTime() {
+	var D = new Date();
+	return ("0" + D.getHours()).substr(-2) + ":" + ("0" + D.getMinutes()).substr(-2);
 }
 
 // Adds or remove an online member to/from a specific list
