@@ -198,7 +198,6 @@ function ChatRoomSendChat() {
 
 			// The player can emote an action using *, it doesn't garble
 			msg = msg.replace(/\*/g, "");
-			if (msg != "") msg = Player.Name + " " + msg;
 			if (msg != "") ServerSend("ChatRoomChat", { Content: msg, Type: "Emote" } );
 
 		} else {
@@ -287,12 +286,14 @@ function ChatRoomMessage(data) {
 
 			// Builds the message to add depending on the type
 			if ((data.Type != null) && (data.Type == "Chat")) msg = '<span class="ChatMessageName" style="color:' + (SenderCharacter.LabelColor || 'gray') + ';">' + SenderCharacter.Name + ':</span> ' + msg;
-			if ((data.Type != null) && (data.Type == "Emote")) msg = "*" + msg + "*";
+			if ((data.Type != null) && (data.Type == "Emote")) msg = "*" + SenderCharacter.Name + " " + msg + "*";
 			if ((data.Type != null) && (data.Type == "Action")) msg = "(" + msg + ")";
 		
 			// Adds the message and scrolls down unless the user has scrolled up
 			var ShouldScrollDown = ElementIsScrolledToEnd("TextAreaChatLog");
-			ChatRoomLog = ChatRoomLog + '<div class="ChatMessage ChatMessage' + data.Type + '" data-time="' + ChatRoomCurrentTime() + '">' + msg + '</div>';
+			var DataAttributes = 'data-time="' + ChatRoomCurrentTime() + '" data-sender="' + data.Sender + '"';
+			var BackgroundColor = ((data.Type == "Emote" || data.Type == "Action") ? 'style="background-color:' + ChatRoomGetLighterColor(SenderCharacter.LabelColor) + ';"' : "");
+			ChatRoomLog = ChatRoomLog + '<div class="ChatMessage ChatMessage' + data.Type + '" ' + DataAttributes + ' ' + BackgroundColor + '>' + msg + '</div>';
 			if (document.getElementById("TextAreaChatLog") != null) {
 				ElementContent("TextAreaChatLog", ChatRoomLog);
 				if (ShouldScrollDown) ElementScrollToEnd("TextAreaChatLog");
@@ -349,6 +350,12 @@ function ChatRoomBanFromRoom() {
 function ChatRoomCurrentTime() {
 	var D = new Date();
 	return ("0" + D.getHours()).substr(-2) + ":" + ("0" + D.getMinutes()).substr(-2);
+}
+
+function ChatRoomGetLighterColor(Color) {
+	if (!Color) return "#f0f0f0";
+	var R = Color.substring(1, 3), G = Color.substring(3, 5), B = Color.substring(5, 7);
+	return "#" + (255 - Math.floor((255 - parseInt(R, 16)) * 0.1)).toString(16) + (255 - Math.floor((255 - parseInt(G, 16)) * 0.1)).toString(16) + (255 - Math.floor((255 - parseInt(B, 16)) * 0.1)).toString(16);
 }
 
 // Adds or remove an online member to/from a specific list
