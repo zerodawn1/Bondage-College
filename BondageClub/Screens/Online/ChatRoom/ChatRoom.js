@@ -78,7 +78,7 @@ function ChatRoomDrawCharacter(DoClick) {
 				ElementRemove("TextAreaChatLog");
 				ChatRoomBackground = ChatRoomData.Background;
 				ChatRoomCharacter[C].AllowItem = (ChatRoomCharacter[C].ID == 0);
-				ServerSend("ChatRoomAllowItem", { MemberNumber: ChatRoomCharacter[C].MemberNumber });
+				if (ChatRoomCharacter[C].ID != 0) ServerSend("ChatRoomAllowItem", { MemberNumber: ChatRoomCharacter[C].MemberNumber });
 				CharacterSetCurrent(ChatRoomCharacter[C]);
 				break;
 			}
@@ -373,6 +373,8 @@ function ChatRoomListManage(Operation, ListType) {
 // When the server returns if applying an item is allowed
 function ChatRoomAllowItem(data) {
 	if ((data != null) && (typeof data === "object") && (data.MemberNumber != null) && (typeof data.MemberNumber === "number") && (data.AllowItem != null) && (typeof data.AllowItem === "boolean"))
-		if ((CurrentCharacter != null) && (CurrentCharacter.MemberNumber == data.MemberNumber))
+		if ((CurrentCharacter != null) && (CurrentCharacter.MemberNumber == data.MemberNumber)) {
 			CurrentCharacter.AllowItem = data.AllowItem;
+			CharacterSetCurrent(CurrentCharacter);
+		}
 }
