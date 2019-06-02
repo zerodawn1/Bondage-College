@@ -50,7 +50,12 @@ function InventoryItemArmsDuctTapeSetPose(NewPose) {
 			InventoryItemArmsDuctTapeLoad();
 		}
 		if (NewPose == null) delete DialogFocusItem.Property;
-		else DialogFocusItem.Property = {SetPose: ["BackElbowTouch"], Type: NewPose, Hide: ["Cloth", "ClothLower"]};
+		else {
+			DialogFocusItem.Property = {SetPose: ["BackElbowTouch"], Type: NewPose, Hide: ["Cloth", "ClothLower"]};
+			if (NewPose == "Bottom") DialogFocusItem.Property.Block = ["ItemVulva", "ItemButt", "ItemPelvis"];
+			if (NewPose == "Top") DialogFocusItem.Property.Block = ["ItemTorso", "ItemBreast", "ItemNipples"];
+			if (NewPose == "Full") DialogFocusItem.Property.Block = ["ItemVulva", "ItemButt", "ItemPelvis", "ItemTorso", "ItemBreast", "ItemNipples"];
+		}
 		CharacterRefresh(C);
 		var msg = DialogFind(Player, "DuctTapeRestrain" + ((NewPose == null) ? "Hands" : NewPose));
 		msg = msg.replace("SourceCharacter", Player.Name);
