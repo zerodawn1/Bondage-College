@@ -530,7 +530,7 @@ function CharacterSetFacialExpression(C, AssetGroup, Expression) {
 			if ((Expression == null) || (C.Appearance[A].Asset.Group.AllowExpression.indexOf(Expression) >= 0)) {
 				if (!C.Appearance[A].Property) C.Appearance[A].Property = {};
 				C.Appearance[A].Property.Expression = Expression;
-				CharacterLoadCanvas(C);
+				CharacterRefresh(C);
 				ChatRoomCharacterUpdate(C);
 			}
 		}

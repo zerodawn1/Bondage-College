@@ -16,12 +16,14 @@
 
 <script src="Scripts/Common.js"></script>
 <script src="Scripts/Drawing.js"></script>
+<script src="Scripts/Timer.js"></script>
 <script src="Scripts/GameLog.js"></script>
 <script src="Scripts/Reputation.js"></script>
 <script src="Scripts/Skill.js"></script>
 <script src="Scripts/Character.js"></script>
 <script src="Scripts/CharacterName.js"></script>
 <script src="Scripts/Dialog.js"></script>
+<script src="Scripts/Speech.js"></script>
 <script src="Scripts/Text.js"></script>
 <script src="Scripts/Inventory.js"></script>
 <script src="Scripts/Import.js"></script>
@@ -85,6 +87,8 @@
 /*
 
 	TO DO
+	TEST: Chat room character update
+	TEST: Facial expression when clicking on other player
 	Padlocks for most items:
 		- I was thinking of using the new item property object to assign a lock to another item.
 		- Items that can have a lock (gags, leather belts, leather harness, mittens, etc.) could have a flag for it, something like “AllowLock”.
@@ -114,8 +118,9 @@ window.onload = function() {
 // Main game running state, runs the drawing
 function MainRun() {
 	DrawProcess();
-	CurrentTime = CurrentTime + CommonRunInterval;
-	setTimeout(MainRun, CommonRunInterval);
+	TimerProcess();
+	CurrentTime = CurrentTime + TimerRunInterval;
+	setTimeout(MainRun, TimerRunInterval);
 }
 
 // When the user presses a key, we send the KeyDown event to the current screen if it can accept it

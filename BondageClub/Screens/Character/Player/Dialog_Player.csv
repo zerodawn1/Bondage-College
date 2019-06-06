@@ -2,10 +2,16 @@ SelectItem,,,Select an item to use
 CannotUseOnSelf,,,Cannot use on yourself
 RemoveClothesForItem,,,Remove some clothes first
 Cancel,,,Cancel
-Remove,,,Remove
-Struggle,,,Struggle
-Unlock,,,Unlock
-Color,,,Color
+Exit,,,Back to character
+Remove,,,Remove the item
+Struggle,,,Try to struggle out
+Lock,,,Use a lock
+Unlock,,,Unlock the item
+Remote,,,Use your remote
+ColorPick,,,Color of next item
+ColorSelect,,,Use this color
+ColorCancel,,,Default color
+Challenge,,,Challenge:
 Swapping,,,Swapping...
 Struggling,,,Struggling...
 Unlocking,,,Unlocking...

@@ -203,7 +203,7 @@ function ChatRoomSendChat() {
 		} else {
 			
 			// Regular chat can be garbled with a gag
-			msg = DialogGarble(Player, msg);
+			msg = SpeechGarble(Player, msg);
 			if (msg != "") ServerSend("ChatRoomChat", { Content: msg, Type: "Chat" } );
 			
 		}
