@@ -420,6 +420,7 @@ function DialogItemClick(ClickItem) {
 			DialogItemToLock = null;
 			DialogInventoryBuild(C);
 			CharacterRefresh(C);
+			ChatRoomPublishAction(C, CurrentItem, ClickItem, true);
 		}
 		return;
 	}
@@ -439,11 +440,14 @@ function DialogItemClick(ClickItem) {
 							DialogExtendItem(InventoryGet(C, C.FocusGroup.Name));
 						
 						// Publishes the item result
-						if (CurrentScreen == "ChatRoom" && !InventoryItemHasEffect(ClickItem))
+						if (CurrentScreen == "ChatRoom" && !InventoryItemHasEffect(ClickItem)) {
+							InventoryExpressionTrigger(C, ClickItem);
 							ChatRoomPublishAction(CurrentCharacter, null, ClickItem, true);
+						}
 						else {
 							var D = DialogFind(C, ClickItem.Asset.Group.Name + ClickItem.Asset.Name, null, false);
 							if (D != "") {
+								InventoryExpressionTrigger(C, ClickItem);
 								C.CurrentDialog = D;
 								DialogLeaveItemMenu();
 							}
@@ -455,12 +459,14 @@ function DialogItemClick(ClickItem) {
 							if (InventoryItemHasEffect(ClickItem, "TriggerShock") && InventoryItemHasEffect(TargetItem, "ReceiveShock")) {
 								if (CurrentScreen == "ChatRoom") {
 									var intensity = TargetItem.Property ? TargetItem.Property.Intensity : 0;
+									InventoryExpressionTrigger(C, ClickItem);
 									ChatRoomPublishCustomAction((DialogFind(Player, TargetItem.Asset.Name + "Trigger" + intensity)).replace("DestinationCharacter",C.Name), true);
 								}
 								else {
 									var intensity = TargetItem.Property ? TargetItem.Property.Intensity : 0;
 									var D = (DialogFind(Player, TargetItem.Asset.Name + "Trigger" + intensity)).replace("DestinationCharacter", C.Name);
 									if (D != "") {
+										InventoryExpressionTrigger(C, ClickItem);
 										C.CurrentDialog = "(" + D + ")";
 										DialogLeaveItemMenu();
 									}
@@ -485,11 +491,14 @@ function DialogItemClick(ClickItem) {
 				DialogExtendItem(CurrentItem);
 			else
 				if (!ClickItem.Asset.Wear) {
-					if (CurrentScreen == "ChatRoom")
+					if (CurrentScreen == "ChatRoom") {
+						InventoryExpressionTrigger(C, ClickItem);
 						ChatRoomPublishAction(CurrentCharacter, null, ClickItem, true);
+					}
 					else {
 						var D = DialogFind(C, ClickItem.Asset.Group.Name + ClickItem.Asset.Name, null, false);
 						if (D != "") {
+							InventoryExpressionTrigger(C, ClickItem);
 							C.CurrentDialog = D;
 							DialogLeaveItemMenu();
 						}

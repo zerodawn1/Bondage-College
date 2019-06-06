@@ -69,7 +69,8 @@ function AssetAdd(NewAsset) {
 		Prerequisite: NewAsset.Prerequisite,
 		Extended: (NewAsset.Extended == null) ? false : NewAsset.Extended,
 		AllowLock: (NewAsset.AllowLock == null) ? false : NewAsset.AllowLock,
-		IsLock: (NewAsset.IsLock == null) ? false : NewAsset.IsLock
+		IsLock: (NewAsset.IsLock == null) ? false : NewAsset.IsLock,
+		ExpressionTrigger : NewAsset.ExpressionTrigger
 	}
 	Asset.push(A);
 }

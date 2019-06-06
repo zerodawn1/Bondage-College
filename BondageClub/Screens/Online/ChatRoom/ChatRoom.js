@@ -221,7 +221,8 @@ function ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem
 
 		// Prepares the message
 		var msg = "";
-		if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null)) msg = TextGet("ActionSwap");
+		if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null) && !DialogProgressNextItem.Asset.IsLock) msg = TextGet("ActionSwap");
+		else if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null) && DialogProgressNextItem.Asset.IsLock) msg = TextGet("ActionAddLock");
 		else if (InventoryItemHasEffect(DialogProgressNextItem, "Lock")) msg = TextGet("ActionLock");
 		else if (DialogProgressNextItem != null) msg = TextGet("ActionUse");
 		else if (InventoryItemHasEffect(DialogProgressPrevItem, "Lock")) msg = TextGet("ActionUnlock");

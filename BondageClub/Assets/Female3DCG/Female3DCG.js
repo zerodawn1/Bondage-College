@@ -325,7 +325,7 @@ var AssetFemale3DCG = [
 			{ Name: "NylonRope", Value: 15, Time: 15 },
 			{ Name: "HempRope", Value: 30, Time: 15, Difficulty: 3 },
 			{ Name: "LeatherBelt", Value: 25, Time: 10, RemoveTime: 5, AllowLock: true },
-			{ Name: "SuspensionHempRope", SelfBondage: false, Random: false, RemoveAtLogin: true, SetPose: ["Suspension", "LegsClosed"], Effect: ["Freeze", "Prone"], Value: -1, Height: 150, Time: 30, Difficulty: 3, Alpha: [[125, 850, 250, 150]] },
+			{ Name: "SuspensionHempRope", SelfBondage: false, Random: false, RemoveAtLogin: true, SetPose: ["Suspension", "LegsClosed"], Effect: ["Freeze", "Prone"], Value: -1, Height: 150, Time: 30, Difficulty: 3, Alpha: [[125, 850, 250, 150]], ExpressionTrigger: [{Group: "Blush", Name: "High", Timer: 30}, {Group: "Eyebrows", Name: "Raised", Timer: 10}] },
 			{ Name: "DuctTape", Value: 50, Time: 15, RemoveTime: 10, BuyGroup: "DuctTape" }
 		]
 	},
@@ -361,8 +361,8 @@ var AssetFemale3DCG = [
 		Top: 400,
 		Zone: [[100, 500, 150, 80]],
 		Asset: [
-			{ Name: "VibratingEgg", Effect: ["Egged"], Value: 25, Prerequisite: "AccessVulva", Time: 5 },
-			{ Name: "VibratingWand", Wear: false, Value: 60, Prerequisite: "AccessVulva", Bonus: [{Type: "KidnapManipulation", Factor: 3}] },
+			{ Name: "VibratingEgg", Effect: ["Egged"], Value: 25, Prerequisite: "AccessVulva", Time: 5, ExpressionTrigger: [{Group: "Blush", Name: "Low", Timer: 10}] },
+			{ Name: "VibratingWand", Wear: false, Value: 60, Prerequisite: "AccessVulva", Bonus: [{Type: "KidnapManipulation", Factor: 3}], ExpressionTrigger: [{Group: "Blush", Name: "Medium", Timer: 10}, {Group: "Eyes", Name: "Closed", Timer: 5}] },
 			{ Name: "VibratorRemote", Effect: ["Remote"], Wear: false, Value: 80, BuyGroup: "VibratorRemote" }
 		]
 	},
@@ -377,9 +377,9 @@ var AssetFemale3DCG = [
 		Top: 150,
 		Zone: [[250, 500, 150, 80]],
 		Asset: [
-			{ Name: "BlackButtPlug", Value: 20, Prerequisite: "AccessVulva", Time: 10 },
-			{ Name: "TailButtPlug", Value: 50, Prerequisite: "AccessVulva", Time: 10 },
-			{ Name: "HorsetailPlug", Value: 50, Prerequisite: "AccessVulva", Time: 10 }
+			{ Name: "BlackButtPlug", Value: 20, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{Group: "Blush", Name: "Low", Timer: 10}] },
+			{ Name: "TailButtPlug", Value: 50, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{Group: "Blush", Name: "Low", Timer: 10}] },
+			{ Name: "HorsetailPlug", Value: 50, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{Group: "Blush", Name: "Low", Timer: 10}] }
 		]
 	},
 
@@ -394,10 +394,10 @@ var AssetFemale3DCG = [
 		Top: 375,
 		Zone: [[150, 420, 200, 80]],
 		Asset: [
-			{ Name: "MetalChastityBelt", Effect: ["Chaste", "Lock"], Block: ["ItemVulva", "ItemButt"], Value: 100, Prerequisite: "AccessVulva", Time: 20, RemoveTime: 10 },
+			{ Name: "MetalChastityBelt", Effect: ["Chaste", "Lock"], Block: ["ItemVulva", "ItemButt"], Value: 100, Prerequisite: "AccessVulva", Time: 20, RemoveTime: 10, ExpressionTrigger: [{Group: "Eyebrows", Name: "Soft", Timer: 10}] },
 			{ Name: "MetalChastityBeltKey", Wear: false, Value: -1, Effect: ["Unlock-MetalChastityBelt"], Prerequisite: "AccessVulva", Time: 5 },
-			{ Name: "LeatherCrop", Value: 40, Wear: false, BuyGroup: "LeatherCrop", Bonus: [{Type: "KidnapDomination", Factor: 3}] },
-			{ Name: "LeatherWhip", Value: 60, Wear: false, BuyGroup: "LeatherWhip", Bonus: [{Type: "KidnapBruteForce", Factor: 3}] },
+			{ Name: "LeatherCrop", Value: 40, Wear: false, BuyGroup: "LeatherCrop", Bonus: [{Type: "KidnapDomination", Factor: 3}], ExpressionTrigger: [{Group: "Blush", Name: "Low", Timer: 10}, {Group: "Eyebrows", Name: "Soft", Timer: 10}] },
+			{ Name: "LeatherWhip", Value: 60, Wear: false, BuyGroup: "LeatherWhip", Bonus: [{Type: "KidnapBruteForce", Factor: 3}], ExpressionTrigger: [{Group: "Blush", Name: "Medium", Timer: 10}, {Group: "Eyebrows", Name: "Soft", Timer: 10}] },
 			{ Name: "StraponPanties", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], Value: 50, Prerequisite: "AccessVulva", Time: 15 }
 		]
 	},
@@ -417,7 +417,7 @@ var AssetFemale3DCG = [
 			{ Name: "NylonRopeHarness", Value: 25, Prerequisite: "AccessTorso", Time: 25 }, 
 			{ Name: "HempRopeHarness", Value: 50, Prerequisite: "AccessTorso", Time: 25, RemoveTime: 35, Difficulty: 3 },
 			{ Name: "LeatherHarness", Value: 100, Prerequisite: "AccessTorso", Time: 15, RemoveTime: 10, AllowLock: true },
-			{ Name: "AdultBabyHarness", Value: 80, Priority: 24, Time: 15, RemoveTime: 10 }
+			{ Name: "AdultBabyHarness", Value: 80, Priority: 24, Time: 15, RemoveTime: 10, ExpressionTrigger: [{Group: "Blush", Name: "Low", Timer: 10}] }
 		]
 	},
 
@@ -432,10 +432,10 @@ var AssetFemale3DCG = [
 		Top: 200,
 		Zone: [[150, 260, 100, 80]],
 		Asset: [
-			{ Name: "StraightPiercing", Value: 10, Prerequisite: "AccessBreast", Time: 15 },
-			{ Name: "RoundPiercing", Value: 20, Prerequisite: "AccessBreast", Time: 15 },
-			{ Name: "NippleClamp", Value: 35, Prerequisite: "AccessBreast", Time: 10 },
-			{ Name: "VibeNippleClamp", Value: 50, Effect: ["Egged"], Prerequisite: "AccessBreast", Time: 10 },
+			{ Name: "StraightPiercing", Value: 10, Prerequisite: "AccessBreast", Time: 15, ExpressionTrigger: [{Group: "Eyes", Name: "Closed", Timer: 5}, {Group: "Eyebrows", Name: "Angry", Timer: 5}] },
+			{ Name: "RoundPiercing", Value: 20, Prerequisite: "AccessBreast", Time: 15, ExpressionTrigger: [{Group: "Eyes", Name: "Closed", Timer: 5}, {Group: "Eyebrows", Name: "Angry", Timer: 5}] },
+			{ Name: "NippleClamp", Value: 35, Prerequisite: "AccessBreast", Time: 10, ExpressionTrigger: [{Group: "Eyes", Name: "Closed", Timer: 5}, {Group: "Eyebrows", Name: "Angry", Timer: 5}] },
+			{ Name: "VibeNippleClamp", Value: 50, Effect: ["Egged"], Prerequisite: "AccessBreast", Time: 10, ExpressionTrigger: [{Group: "Eyes", Name: "Closed", Timer: 5}, {Group: "Eyebrows", Name: "Angry", Timer: 5}] },
 			{ Name: "VibratorRemote", Value: 80, Effect: ["Remote"], Wear: false, BuyGroup: "VibratorRemote" }
 		]
 	},
@@ -451,10 +451,10 @@ var AssetFemale3DCG = [
 		Top: 200,
 		Zone: [[250, 260, 100, 80]],
 		Asset: [
-			{ Name: "MetalChastityBra", Value: 75, Effect: ["Lock", "BreastChaste"], Block: ["ItemNipples"], Hide: ["ItemNipples"], Prerequisite: "AccessBreast", Time: 15 },
+			{ Name: "MetalChastityBra", Value: 75, Effect: ["Lock", "BreastChaste"], Block: ["ItemNipples"], Hide: ["ItemNipples"], Prerequisite: "AccessBreast", Time: 15, ExpressionTrigger: [{Group: "Eyebrows", Name: "Soft", Timer: 10}] },
 			{ Name: "MetalChastityBraKey", Wear: false, Value: -1, Effect: ["Unlock-MetalChastityBra"], Prerequisite: "AccessBreast", Time: 5 },
-			{ Name: "LeatherCrop", Value: 40, Wear: false, BuyGroup: "LeatherCrop", Bonus: [{Type: "KidnapDomination", Factor: 3}] },
-			{ Name: "LeatherWhip", Value: 60, Wear: false, BuyGroup: "LeatherWhip", Bonus: [{Type: "KidnapBruteForce", Factor: 3}] }
+			{ Name: "LeatherCrop", Value: 40, Wear: false, BuyGroup: "LeatherCrop", Bonus: [{Type: "KidnapDomination", Factor: 3}], ExpressionTrigger: [{Group: "Blush", Name: "Low", Timer: 10}, {Group: "Eyebrows", Name: "Soft", Timer: 10}] },
+			{ Name: "LeatherWhip", Value: 60, Wear: false, BuyGroup: "LeatherWhip", Bonus: [{Type: "KidnapBruteForce", Factor: 3}], ExpressionTrigger: [{Group: "Blush", Name: "Medium", Timer: 10}, {Group: "Eyebrows", Name: "Soft", Timer: 10}] }
 		]
 	},
 	
@@ -494,9 +494,9 @@ var AssetFemale3DCG = [
 		Asset: [ 
 			{ Name: "LeatherCollar", Value: 40, Time: 5, Difficulty: 10, AllowLock: true },
 			{ Name: "SlaveCollar", Random: false, Effect: ["Lock"], Enable: false, Value: -1, Time: 5, Difficulty: 50 },
-			{ Name: "ClubSlaveCollar", Random: false, Effect: ["Lock"], Enable: false, Value: -1, Time: 5, Difficulty: 50 },
-			{ Name: "ShockCollar", Random: false, Extended: true, Effect:["ReceiveShock"], BuyGroup: "ShockCollar", Value: 250, Time: 15, Difficulty: 10, AllowLock: true },
-			{ Name: "ShockCollarRemote", Random: false, Wear: false, Effect:["TriggerShock"], BuyGroup: "ShockCollar", Value: -1}
+			{ Name: "ClubSlaveCollar", Random: false, Effect: ["Lock"], Enable: false, Value: -1, Time: 5, Difficulty: 50, ExpressionTrigger: [{Group: "Blush", Name: "Medium", Timer: 15}] },
+			{ Name: "ShockCollar", Random: false, Extended: true, Effect:["ReceiveShock"], BuyGroup: "ShockCollar", Value: 250, Time: 15, Difficulty: 10, AllowLock: true, ExpressionTrigger: [{Group: "Eyebrows", Name: "Soft", Timer: 10}] },
+			{ Name: "ShockCollarRemote", Random: false, Wear: false, Effect:["TriggerShock"], BuyGroup: "ShockCollar", Value: -1, ExpressionTrigger: [{Group: "Eyebrows", Name: "Soft", Timer: 10}, {Group: "Blush", Name: "Soft", Timer: 15}, {Group: "Eyes", Name: "Closed", Timer: 5}] }
 		]
 	},
 	
@@ -516,12 +516,12 @@ var AssetFemale3DCG = [
 			{ Name: "HarnessPanelGag", Effect: ["GagHeavy"], Difficulty: 6, Value: 80, Time: 20, AllowLock: true },
 			{ Name: "RingGag", Value: 35, Time: 5, AllowLock: true },
 			{ Name: "DuctTape", Extended: true, Difficulty: -2, Value: 50, Time: 10, RemoveTime: 5, BuyGroup: "DuctTape" },
-			{ Name: "PacifierGag", Random: false, Difficulty: -50, Effect: ["GagLight"], Value: 15, Time: 2 },
-			{ Name: "HarnessPacifierGag", Random: false, Difficulty: 2, Effect: ["GagLight"], Value: 70, Time: 20, AllowLock: true },
+			{ Name: "PacifierGag", Random: false, Difficulty: -50, Effect: ["GagLight"], Value: 15, Time: 2, ExpressionTrigger: [{Group: "Blush", Name: "Light", Timer: 5}, {Group: "Eyes", Name: "Closed", Timer: 5}] },
+			{ Name: "HarnessPacifierGag", Random: false, Difficulty: 2, Effect: ["GagLight"], Value: 70, Time: 20, AllowLock: true, ExpressionTrigger: [{Group: "Blush", Name: "Light", Timer: 5}, {Group: "Eyes", Name: "Closed", Timer: 5}] },
 			{ Name: "DusterGag", Random: false, Difficulty: 4, RemoveAtLogin: true, Value: -1, Time: 20, AllowLock: true },
 			{ Name: "HarnessPonyBits", Random: false, Difficulty: 4, Effect: ["GagHeavy"], Value: -1, Time: 20, AllowLock: true },
-			{ Name: "PumpGag", Effect: [], Random: false, Extended: true, Value: 100, Time: 20, AllowLock: true },
-			{ Name: "KittyGag", Effect: ["GagLight"], Difficulty: -4, Value: 20, Time: 10 },
+			{ Name: "PumpGag", Effect: [], Random: false, Extended: true, Value: 100, Time: 20, AllowLock: true, ExpressionTrigger: [{Group: "Eyebrows", Name: "Soft", Timer: 10}] },
+			{ Name: "KittyGag", Effect: ["GagLight"], Difficulty: -4, Value: 20, Time: 10, ExpressionTrigger: [{Group: "Blush", Name: "Light", Timer: 5}, {Group: "Eyes", Name: "Closed", Timer: 5}] },
 			{ Name: "CarrotGag", Effect: ["GagHeavy"], Random: false, Value: 50, Time: 15 },
 			{ Name: "RegularSleepingPill", Enable: false, Wear: false, Value: -1, Bonus: [{Type: "KidnapSneakiness", Factor: 3}] }
 		]
