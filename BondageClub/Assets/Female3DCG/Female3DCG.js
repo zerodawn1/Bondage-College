@@ -492,10 +492,10 @@ var AssetFemale3DCG = [
 		Top: 190,
 		Zone: [[150, 210, 200, 50]],
 		Asset: [ 
-			{ Name: "LeatherCollar", Value: 40, Time: 5, Difficulty: 10, AllowLock: true },
+			{ Name: "LeatherCollar", Value: 40, Time: 5, Difficulty: 50, AllowLock: true },
 			{ Name: "SlaveCollar", Random: false, Effect: ["Lock"], Enable: false, Value: -1, Time: 5, Difficulty: 50 },
 			{ Name: "ClubSlaveCollar", Random: false, Effect: ["Lock"], Enable: false, Value: -1, Time: 5, Difficulty: 50, ExpressionTrigger: [{Group: "Blush", Name: "Medium", Timer: 15}] },
-			{ Name: "ShockCollar", Random: false, Extended: true, Effect:["ReceiveShock"], BuyGroup: "ShockCollar", Value: 250, Time: 15, Difficulty: 10, AllowLock: true, ExpressionTrigger: [{Group: "Eyebrows", Name: "Soft", Timer: 10}] },
+			{ Name: "ShockCollar", Random: false, Extended: true, Effect:["ReceiveShock"], BuyGroup: "ShockCollar", Value: 250, Time: 15, Difficulty: 50, AllowLock: true, ExpressionTrigger: [{Group: "Eyebrows", Name: "Soft", Timer: 10}] },
 			{ Name: "ShockCollarRemote", Random: false, Wear: false, Effect:["TriggerShock"], BuyGroup: "ShockCollar", Value: -1, ExpressionTrigger: [{Group: "Eyebrows", Name: "Soft", Timer: 10}, {Group: "Blush", Name: "Soft", Timer: 15}, {Group: "Eyes", Name: "Closed", Timer: 5}] }
 		]
 	},
@@ -556,10 +556,10 @@ var AssetFemale3DCG = [
 		Top: -250,
 		Zone: [[25, 580, 75, 410], [400, 580, 75, 410]],
 		Asset: [
-			{ Name: "MetalPadlock", Wear: false, Value: 20, Time: 10, RemoveTime: 10, IsLock: true },
-			{ Name: "IntricatePadlock", Wear: false, Value: 60, Time: 15, RemoveTime: 25, IsLock: true },
-			{ Name: "TimerPadlock", Wear: false, Value: 100, Time: 15, RemoveTimer: 10, IsLock: true },
-			{ Name: "MetalPadlockKey", Wear: false, Value: 20, Effect: ["Unlock-MetalPadlock"] },
+			{ Name: "MetalPadlock", Wear: false, Value: 15, Time: 10, IsLock: true },
+			{ Name: "IntricatePadlock", Wear: false, Value: 60, Time: 30, IsLock: true },
+			{ Name: "TimerPadlock", Wear: false, Value: 100, RemoveTimer: 300, IsLock: true },
+			{ Name: "MetalPadlockKey", Wear: false, Value: 15, Effect: ["Unlock-MetalPadlock"] },
 			{ Name: "IntricatePadlockKey", Wear: false, Value: 60, Effect: ["Unlock-IntricatePadlock"] },
 			{ Name: "MetalCuffsKey", Wear: false, Value: 25, Effect: ["Unlock-MetalCuffs"], Time: 5 },
 			{ Name: "WoodenMaidTray", Enable: false, Value: -1 },

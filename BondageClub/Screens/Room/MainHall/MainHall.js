@@ -62,7 +62,7 @@ function MainHallRun() {
 		DrawButton(25, 145, 90, 90, "", "White", "Icons/Horse.png", TextGet("Stable"));
 
 		// Nursery & Slave market
-		DrawButton(145, 265, 90, 90, "", "White", "Icons/Gavel.png", TextGet("SlaveMarket"));
+		//DrawButton(145, 265, 90, 90, "", "White", "Icons/Gavel.png", TextGet("SlaveMarket"));
 		DrawButton(25, 265, 90, 90, "", "White", "Icons/Diaper.png", TextGet("Nursery"));
 
 	}
@@ -142,7 +142,7 @@ function MainHallClick() {
 
 		// Nursery & Slave market
 		if ((MouseX >=   25) && (MouseX <  115) && (MouseY >= 265) && (MouseY < 355)) MainHallWalk("Nursery");
-		if ((MouseX >=  145) && (MouseX <  235) && (MouseY >= 265) && (MouseY < 355)) MainHallWalk("SlaveMarket");
+		//if ((MouseX >=  145) && (MouseX <  235) && (MouseY >= 265) && (MouseY < 355)) MainHallWalk("SlaveMarket");
 
 	}
 

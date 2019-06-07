@@ -3,6 +3,14 @@ var CurrentTime = 0;
 var TimerRunInterval = 20;
 var TimerCycle = 0;
 
+// Returns a string of the current remaining timer
+function TimerToString(T) {
+	var M = Math.floor(T / 60000).toString();
+	var S = Math.floor((T % 60000) / 1000).toString();
+	if (S.length == 1) S = "0" + S;
+	return M + ":" + S;
+}
+
 // Check if we must remove items from a player or an NPC
 function TimerInventoryRemove() {
 	

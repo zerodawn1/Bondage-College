@@ -185,6 +185,7 @@ function DialogMenuButtonBuild(C) {
 		if (DialogInventory >= 12) DialogMenuButton.push("Next");
 		if (InventoryItemHasEffect(Item, "Lock", true) && DialogCanUnlock(Item)) DialogMenuButton.push("Unlock");
 		if (InventoryItemHasEffect(Item, "Lock", true) && !DialogCanUnlock(Item) && (C.ID == 0)) DialogMenuButton.push("Struggle");
+		if (InventoryItemHasEffect(Item, "Lock", true) && (Item.Property != null) && (Item.Property.LockedBy != null) && (Item.Property.LockedBy != "")) DialogMenuButton.push("CheckLock");
 		if ((Item != null) && Item.Asset.AllowLock && !InventoryItemHasEffect(Item, "Lock", true) && Player.CanInteract()) DialogMenuButton.push("Lock");
 		if ((Item != null) && !InventoryItemHasEffect(Item, "Lock", true) && Player.CanInteract() && !InventoryGroupIsBlocked(C) && InventoryAllow(C, Item.Asset.Prerequisite)) DialogMenuButton.push("Remove");
 		if ((Item != null) && !InventoryItemHasEffect(Item, "Lock", true) && !Player.CanInteract() && (C.ID == 0)) DialogMenuButton.push("Struggle");
@@ -287,6 +288,12 @@ function DialogProgressStart(C, PrevItem, NextItem) {
 	if ((C.ID == 0) && !C.CanInteract() && !InventoryItemHasEffect(PrevItem, "Block", true)) S = S - 10; // Very hard to struggle from another item than the blocking one
 	if (InventoryItemHasEffect(PrevItem, "Lock", true) && !DialogCanUnlock(PrevItem)) S = S - 5; // Harder to struggle from a locked item
 	
+	// If there's a locking item, we add the time of that lock
+	if ((PrevItem != null) && (NextItem == null) && InventoryItemHasEffect(PrevItem, "Lock", true) && DialogCanUnlock(PrevItem)) {
+		var Lock = InventoryGetLock(PrevItem);
+		if ((Lock != null) && (Lock.Asset != null) && (Lock.Asset.RemoveTime != null)) Timer = Timer + Lock.Asset.RemoveTime;
+	}
+	
 	// Prepares the progress bar and timer
 	DialogProgress = 0;
 	DialogProgressAuto = TimerRunInterval * (0.11 + (S * 0.11)) / (Timer * CheatFactor("DoubleItemSpeed", 0.5));
@@ -371,6 +378,13 @@ function DialogMenuButtonClick() {
 				DialogProgressStart(C, Item, null);
 				return;
 			}
+			
+			// When the player inspects a lock
+			if (DialogMenuButton[I] == "CheckLock") {
+				var Lock = InventoryGetLock(Item);
+				if (Lock != null) DialogExtendItem(Lock);
+				return;				
+			}			
 
 			// Color picker Icon - Starts the color picking
 			if (DialogMenuButton[I] == "ColorPick") { 

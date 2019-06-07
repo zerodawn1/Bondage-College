@@ -174,3 +174,11 @@ function InventoryExpressionTrigger(C, Item) {
 				TimerInventoryRemoveSet(C, Item.Asset.ExpressionTrigger[E].Group, Item.Asset.ExpressionTrigger[E].Timer);
 			}
 }
+
+// Returns the item that locks another item
+function InventoryGetLock(Item) {
+	if ((Item == null) || (Item.Property == null) || (Item.Property.LockedBy == null)) return null;
+	for (var A = 0; A < Asset.length; A++)
+		if (Asset[A].IsLock && (Asset[A].Name == Item.Property.LockedBy))
+			return { Asset: Asset[A] };
+}
