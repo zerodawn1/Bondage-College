@@ -268,7 +268,7 @@ function ServerAccountBeep(data) {
 
 // Draws the beep sent by the server
 function ServerDrawBeep() {
-	if ((ServerBeep.Timer != null) && (ServerBeep.Timer > CurrentTime)) DrawButton(0, 0, 1000, 50, ServerBeep.Message, "Pink", "");
+	if ((ServerBeep.Timer != null) && (ServerBeep.Timer > CurrentTime)) DrawButton((CurrentScreen == "ChatRoom") ? 0 : 500, 0, 1000, 50, ServerBeep.Message, "Pink", "");
 }
 
 // Gets the account ownership result from the query sent to the server
@@ -285,5 +285,12 @@ function ServerAccountOwnership(data) {
 		Player.Ownership = data.Ownership;
 		LoginValidCollar();
 	}
-	
+
+	// If we must clear the character ownership data
+	if ((data != null) && (typeof data === "object") && !Array.isArray(data) && (data.ClearOwnership != null) && (typeof data.ClearOwnership === "boolean") && (data.ClearOwnership == true)) {
+		Player.Owner = "";
+		Player.Ownership = null;
+		LoginValidCollar();
+	}
+
 }
