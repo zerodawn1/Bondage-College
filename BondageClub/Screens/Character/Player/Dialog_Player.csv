@@ -58,6 +58,7 @@ CannotUnlockIfElbowBound,,,A victim cannot unlock herself if her elbows are boun
 ItemMiscMetalPadlock,,,"""From your friendly hardware store"""
 ItemMiscIntricatePadlock,,,"""To keep your loved one secure"""
 ItemMiscTimerPadlock,,,You can restart the timer but cannot unlock
+ItemMiscOwnerPadlock,,,"""Never forget who you belong too"""
 LeatherCuffsPoseNone,,,Detached
 LeatherCuffsPoseWrist,,,Bind wrists
 LeatherCuffsPoseElbow,,,Bind elbows
