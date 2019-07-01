@@ -245,8 +245,8 @@ function PrivateLoadCharacter(C) {
 		N.AccountName = "NPC_Private_Custom" + N.ID.toString();
 		if (PrivateCharacter[C].Title != null) N.Title = PrivateCharacter[C].Title;
 		if (PrivateCharacter[C].AssetFamily != null) N.AssetFamily = PrivateCharacter[C].AssetFamily;
-		if (PrivateCharacter[C].Appearance != null) N.Appearance = ServerAppearanceLoadFromBundle(PrivateCharacter[C].AssetFamily, PrivateCharacter[C].Appearance);
-		if (PrivateCharacter[C].AppearanceFull != null) N.AppearanceFull = ServerAppearanceLoadFromBundle(PrivateCharacter[C].AssetFamily, PrivateCharacter[C].AppearanceFull);
+		if (PrivateCharacter[C].Appearance != null) N.Appearance = ServerAppearanceLoadFromBundle(PrivateCharacter[C], PrivateCharacter[C].AssetFamily, PrivateCharacter[C].Appearance);
+		if (PrivateCharacter[C].AppearanceFull != null) N.AppearanceFull = ServerAppearanceLoadFromBundle(PrivateCharacter[C], PrivateCharacter[C].AssetFamily, PrivateCharacter[C].AppearanceFull);
 		if (PrivateCharacter[C].Trait != null) N.Trait = PrivateCharacter[C].Trait.slice();
 		if (PrivateCharacter[C].Cage != null) N.Cage = PrivateCharacter[C].Cage;
 		if (PrivateCharacter[C].Event != null) N.Event = PrivateCharacter[C].Event;

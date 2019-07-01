@@ -93,7 +93,7 @@ function ServerAppearanceBundle(Appearance) {
 }
 
 // Make sure the properties are valid for the item (to prevent griefing in multi-player)
-function ServerValidateProperties(Item) {
+function ServerValidateProperties(C, Item) {
 
 	// For each effect on the item
 	if ((Item.Property != null) && (Item.Property.Effect != null))
@@ -108,16 +108,26 @@ function ServerValidateProperties(Item) {
 				Item.Property.Effect.splice(E, 1);
 				E--;
 			}
-
-			// Make sure the remove timer on the lock is valid
-			if (Effect == "Lock") {
-				if (InventoryGetLock(Item) != null) {
-					var StandardTimer = InventoryGetLock(Item).Asset.RemoveTimer;
-					if (StandardTimer != null) {
-						if ((typeof Item.Property.RemoveTimer !== "number") || (Item.Property.RemoveTimer > CurrentTime + StandardTimer * 1000))
-							Item.Property.RemoveTimer = CurrentTime + StandardTimer * 1000;
-					} else delete Item.Property.RemoveTimer;
+			
+			// If the item is locked by a lock
+			if ((Effect == "Lock") && (InventoryGetLock(Item) != null)) {
+				
+				// Make sure the remove timer on the lock is valid
+				var Lock = InventoryGetLock(Item);
+				if ((Lock.Asset.RemoveTimer != null) && (Lock.Asset.RemoveTimer != 0)) {
+					if ((typeof Item.Property.RemoveTimer !== "number") || (Item.Property.RemoveTimer > CurrentTime + Lock.Asset.RemoveTimer * 1000))
+						Item.Property.RemoveTimer = CurrentTime + Lock.Asset.RemoveTimer * 1000;
+				} else delete Item.Property.RemoveTimer;
+					
+				// Make sure the remove timer on the lock is valid
+				if (Lock.Asset.OwnerOnly && ((C.Ownership == null) || (C.Ownership.MemberNumber == null) || (Item.Property.LockMemberNumber == null) || (C.Ownership.MemberNumber != Item.Property.LockMemberNumber))) {
+					delete Item.Property.LockedBy;
+					delete Item.Property.LockMemberNumber;
+					delete Item.Property.RemoveTimer;
+					Item.Property.Effect.splice(E, 1);
+					E--;
 				}
+
 			}
 
 			// Other effects can be removed
@@ -162,7 +172,7 @@ function ServerValidateProperties(Item) {
 }
 
 // Loads the appearance assets from a server bundle that only contains the main info (no assets)
-function ServerAppearanceLoadFromBundle(AssetFamily, Bundle) {
+function ServerAppearanceLoadFromBundle(C, AssetFamily, Bundle) {
 
 	// For each appearance item to load
 	var Appearance = [];
@@ -178,7 +188,7 @@ function ServerAppearanceLoadFromBundle(AssetFamily, Bundle) {
 				}
 				if (Bundle[A].Property != null) {
 					NA.Property = Bundle[A].Property;
-					ServerValidateProperties(NA);
+					ServerValidateProperties(C, NA);
 				}				
 				Appearance.push(NA);
 				break;

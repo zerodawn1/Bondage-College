@@ -204,7 +204,7 @@ function CharacterOnlineRefresh(Char, data) {
 	Char.ItemPermission = data.ItemPermission;
 	Char.Ownership = data.Ownership;	
 	Char.Reputation = (data.Reputation != null) ? data.Reputation : [];
-	Char.Appearance = ServerAppearanceLoadFromBundle("Female3DCG", data.Appearance);
+	Char.Appearance = ServerAppearanceLoadFromBundle(Char, "Female3DCG", data.Appearance);
 	AssetReload(Char);
 	CharacterLoadEffect(Char);
 	CharacterRefresh(Char);
