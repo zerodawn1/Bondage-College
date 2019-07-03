@@ -264,13 +264,16 @@ function KidnapLeagueRandomActivityLaunch() {
 	// After 4 activities, there's more and more chances that the player will be released
 	KidnapLeagueRandomActivityCount++;
 	if (Math.random() * KidnapLeagueRandomActivityCount >= 4) {
+		KidnapLeagueRandomActivityCount = 0;
 		if ((InventoryGet(Player, "Cloth") == null) && (KidnapPlayerCloth != null)) {
 			InventoryWear(Player, KidnapPlayerCloth.Asset.Name, "Cloth", KidnapPlayerCloth.Color);		
 			if (KidnapPlayerClothLower != null) InventoryWear(Player, KidnapPlayerClothLower.Asset.Name, "ClothLower", KidnapPlayerClothLower.Color);
 		}
-		CharacterRelease(Player);
-		KidnapLeagueRandomActivityStart("End");
-		KidnapLeagueVisitRoom = ((Math.random() >= 0.5) && KidnapLeagueCanTransferToRoom());
+		if (!InventoryCharacterHasOwnerOnlyItem(Player)) {
+			CharacterRelease(Player);		
+			KidnapLeagueRandomActivityStart("End");
+			KidnapLeagueVisitRoom = ((Math.random() >= 0.5) && KidnapLeagueCanTransferToRoom());
+		} else KidnapLeagueRandomActivityStart("EndNoRelease");
 		return;
 	}
 
