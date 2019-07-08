@@ -188,6 +188,7 @@ function MainHallFreeSarah() {
 function MainHallMaidShamePlayer() {
 	CharacterRelease(Player);
 	CharacterNaked(Player);
+	MainHallHasOwnerLock = false;
 	LogAdd("BlockChange", "Rule", CurrentTime + 3600000);
 	if (ReputationGet("Dominant") > 10) ReputationProgress("Dominant", -10);
 	if (ReputationGet("Dominant") < -10) ReputationProgress("Dominant", 10);
