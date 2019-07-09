@@ -314,6 +314,7 @@ function PrivateChange(NewCloth) {
 		PrivateNPCInteraction(10);
 		CharacterChangeMoney(Player, -100);
 		PrivateCharacterNewClothes = CurrentCharacter;
+		CurrentCharacter.Stage = 2000;
 		DialogLeave();
 		CharacterAppearanceLoadCharacter(PrivateCharacterNewClothes);
 	}
