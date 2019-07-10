@@ -802,6 +802,17 @@ ActivityPetGirl,1000,A pet?  Alright.  (Give your hands.),(She nods and dresses 
 ActivityPetGirl,1000,(Sigh and give your hands.),(She nods and dresses you as a puppy before gagging and strapping you up.)  Nice pet!,ActivityRun(0),,,
 ActivityPetGirl,1000,(Grumble and try to stop her.),(She frowns and forces you to dress as a puppy before gagging and strapping you up.),ActivityRun(-7),,,
 ActivityPetGirl,1000,(Bark and promptly give your hands.),(She smiles and dresses you as a puppy before gagging and strapping you up.)  Good pet!,ActivityRun(1),,,
+ActivityLocksIntro,,,"(She checks your restraints.)  My girl, what if we added some locks to make it more secure?",,,DomActivityLocksIntro,
+ActivityLocksIntro,,,"(She checks your restraints and frowns.)  Slave, this isn't secure enough, lets add some locks.",,,DomActivityLocksIntro,Serious
+ActivityLocksIntro,,,It's easier for a submissive to reach her safe space while in inescapable bondage.  Lets add some locks on your devices.,,,DomActivityLocksIntro,Wise
+ActivityLocksIntro,,,Protecting you from yourself and the outside world is my responsibility.  Let me add some padlocks on your restraints.,,,DomActivityLocksIntro,Polite
+ActivityLocksIntro,,,"Slave, you belong to me and only me.  Let's make it clear and add some locks on your devices.",,,DomActivityLocksIntro,Dominant
+ActivityLocks,1000,Isn't that too much?,(She shakes her head no and locks your restraints.)  Do not contest my decisions.,ActivityRun(-7),Player.CanTalk(),,
+ActivityLocks,1000,The more secure the better.,(She smirks and locks your restraints.)  Very true.  Now you're safe and secure my girl.,ActivityRun(1),Player.CanTalk(),,
+ActivityLocks,1000,Very well Mistress.,(She locks your restraints.)  You won't be struggling out easily.,ActivityRun(0),Player.CanTalk(),,
+ActivityLocks,1000,(Stay silent.),(She locks your restraints.)  You won't be struggling out easily.,ActivityRun(0),,,
+ActivityLocks,1000,(Present your restraints promptly.),(She smirks and locks your restraints.)  Now you're safe and secure my girl.,ActivityRun(1),,,
+ActivityLocks,1000,(Grumble and try to stop her.),(She shakes her head no and locks your restraints.)  Do not contest my decisions.,ActivityRun(-7),,,
 PunishIntro,,,(She seems furious.)  That's enough!  You must be punished.,,,DomPunishIntro,
 PunishIntro,,,(She slaps your face.)  Slave!  You must be punished.,,,DomPunishIntro,Violent
 PunishIntro,,,"(She speaks with a calm and menacing voice.)  I'm sorry my precious submissive, but you must be punished.",,,DomPunishIntro,Peaceful

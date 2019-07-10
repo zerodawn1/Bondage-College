@@ -469,15 +469,9 @@ function DialogItemClick(ClickItem) {
 	// If we must apply a lock to an item
 	if (DialogItemToLock != null) {
 		if ((CurrentItem != null) && CurrentItem.Asset.AllowLock) {
-			if (CurrentItem.Property == null) CurrentItem.Property = {};
-			if (CurrentItem.Property.Effect == null) CurrentItem.Property.Effect = [];
-			CurrentItem.Property.Effect.push("Lock");
-			CurrentItem.Property.LockedBy = ClickItem.Asset.Name;
-			CurrentItem.Property.LockMemberNumber = Player.MemberNumber;
-			if (ClickItem.Asset.RemoveTimer > 0) TimerInventoryRemoveSet(C, CurrentItem.Asset.Group.Name, ClickItem.Asset.RemoveTimer);
+			InventoryLock(CurrentItem, ClickItem, C, Player.MemberNumber);
 			DialogItemToLock = null;
 			DialogInventoryBuild(C);
-			CharacterRefresh(C);
 			ChatRoomPublishAction(C, CurrentItem, ClickItem, true);
 		}
 		return;
