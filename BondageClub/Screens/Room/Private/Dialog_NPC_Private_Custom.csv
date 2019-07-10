@@ -150,6 +150,10 @@ OwnerBeepFail,,,"(She looks angry.)  Little submissive, when I call you, you nee
 OwnerBeepFail,,,"(She slaps your face.)  Slave!  When I beep you, you need to come here quicker.",,,OwnerBeepFail,Serious|Violent
 OwnerBeepFail,,,"Slut!  When I'm wet and I fucking beep your cunt, you better come faster.",,,OwnerBeepFail,Rude|Horny
 OwnerBeepFail,,,"(She shakes her head from left to right.)  My girl, it's very disapointing when I summon you and you don't come in a timely manner.",,,OwnerBeepFail,Wise|Peaceful
+0,,,(She pets your head and smiles.)  You're a cute pet.,,CanPet(),IntroPet,
+0,,,"(She looks at your suit in envy.)  Yo!  Your bitch suit looks great, can I have one?",,CanPet(),IntroPet,Submissive|Rude
+0,,,(She slowly and carefully pets you.)  A good pet needs lots of care.,,CanPet(),IntroPet,Serious|Peaceful
+0,,,(She grabs you by the back of the neck.)  Does this puppy need a spanking?,,CanPet(),IntroPet,Dominant|Violent
 0,,,Will you let me out of the cage?,,IsCaged(),IntroCage,
 0,,,I love this cage you've found for me.  Too bad there's not enough room for two.,,IsCaged(),IntroCage,Submissive|Horny
 0,,,Enough!  Get me out of that fucking cage!,,IsCaged(),IntroCage,Dominant|Rude
@@ -395,6 +399,10 @@ OwnerBeepFail,,,"(She shakes her head from left to right.)  My girl, it's very d
 100,,(Masturbate her.),"(You masturbate her with passion as she moans and blushes.)  Miss, it would be an honor to become your love slave one day.",,CanMasturbate(),PlayMasturbate,Submissive|Polite
 100,0,(Stop playing.),(You take a step back.),,,,
 100,,(Leave her.),,DialogLeave(),,,
+1000,,,(She pets your head and smiles.)  You're a cute pet my girl.,,CanPet(),DomIntroPet,
+1000,,,(She pets your head playfully.)  You're the cutest little bitch that I've ever had.  Bark puppy!,,CanPet(),DomIntroPet,Playful|Dumb
+1000,,,(She slowly and carefully pets you.)  A good pet needs lots of care.  I love you my submissive.,,CanPet(),DomIntroPet,Serious|Peaceful
+1000,,,(She grabs you by the back of the neck.)  Does this slave puppy need a spanking?,,CanPet(),DomIntroPet,Dominant|Violent
 1000,,,(She smiles seeing you on your knees.)  What's on your mind my subbie?,,DialogIsKneeling(Player),DomIntroPlayerKneeling,
 1000,,,(She gives you a stern look and nods.)  Your posture shows respect and docility.  What do you need little one?,,DialogIsKneeling(Player),DomIntroPlayerKneeling,Dominant|Polite
 1000,,,(She stays far from you but smiles seeing your position.)  Is there anything you desire my protege?,,DialogIsKneeling(Player),DomIntroPlayerKneeling,Frigid|Wise
@@ -749,6 +757,17 @@ ActivityGift,1000,You're the best Mistress ever!,And you're the best sub.  Spend
 ActivityGift,1000,I cannot take it.,"Slave, take it and spend it on something I can use on you.  (She gives you 50$.)",ActivityRun(-1),Player.CanTalk(),,
 ActivityGift,1000,(Nod politely and take the money.),Spend it on something I can use on you.  (She winks and gives you 50$.),ActivityRun(0),,,
 ActivityGift,1000,(Refuse the money.),"Slave, take it and spend it on something I can use on you.  (She gives you 50$.)",ActivityRun(-1),,,
+ActivityPetGirlIntro,,,"I've seen a few puppy girls in the club, and now I want one.  I think I'll make a pet out of you.",,,DomActivityPetGirlIntro,
+ActivityPetGirlIntro,,,"My girl, it would be really hot to see you in a puppy suit and cuddle with you.  I'll make a pet out of you.",,,DomActivityPetGirlIntro,Horny
+ActivityPetGirlIntro,,,"My parents never let me have a puppy back then, and now I want one.  I'll make a pet out of you.",,,DomActivityPetGirlIntro,Dumb
+ActivityPetGirlIntro,,,"My little protege, it's time for you to experiment another facet of BDSM, the lifestyle of a pet girl.",,,DomActivityPetGirlIntro,Polite
+ActivityPetGirlIntro,,,"(She gently caresses your cheek.)  My delicate subbie, you need to be more helpless.  I'll make a pet out of you.",,,DomActivityPetGirlIntro,Peaceful
+ActivityPetGirl,1000,I'll be your pet Mistress.  (Politely give your hands.),(She smiles and dresses you as a puppy before gagging and strapping you up.)  Good pet!,ActivityRun(1),Player.CanTalk(),,
+ActivityPetGirl,1000,That's not a good idea.,(She frowns and forces you to dress as a puppy before gagging and strapping you up.),ActivityRun(-7),Player.CanTalk(),,
+ActivityPetGirl,1000,A pet?  Alright.  (Give your hands.),(She nods and dresses you as a puppy before gagging and strapping you up.)  Nice pet!,ActivityRun(0),Player.CanTalk(),,
+ActivityPetGirl,1000,(Sigh and give your hands.),(She nods and dresses you as a puppy before gagging and strapping you up.)  Nice pet!,ActivityRun(0),,,
+ActivityPetGirl,1000,(Grumble and try to stop her.),(She frowns and forces you to dress as a puppy before gagging and strapping you up.),ActivityRun(-7),,,
+ActivityPetGirl,1000,(Bark and promptly give your hands.),(She smiles and dresses you as a puppy before gagging and strapping you up.)  Good pet!,ActivityRun(1),,,
 PunishIntro,,,(She seems furious.)  That's enough!  You must be punished.,,,DomPunishIntro,
 PunishIntro,,,(She slaps your face.)  Slave!  You must be punished.,,,DomPunishIntro,Violent
 PunishIntro,,,"(She speaks with a calm and menacing voice.)  I'm sorry my precious submissive, but you must be punished.",,,DomPunishIntro,Peaceful

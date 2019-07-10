@@ -10,7 +10,7 @@ var PrivateReleaseTimer = 0;
 var PrivateActivity = "";
 var PrivateActivityCount = 0;
 var PrivateActivityAffectLove = true;
-var PrivateActivityList = ["Gag", "Ungag", "Restrain", "FullRestrain", "Release", "Tickle", "Spank", "Pet", "Slap", "Kiss", "Fondle", "Naked", "Underwear", "RandomClothes", "Shibari", "Gift"];
+var PrivateActivityList = ["Gag", "Ungag", "Restrain", "FullRestrain", "Release", "Tickle", "Spank", "Pet", "Slap", "Kiss", "Fondle", "Naked", "Underwear", "RandomClothes", "Shibari", "Gift", "PetGirl"];
 var PrivatePunishment = "";
 var PrivatePunishmentList = ["Cage", "Bound", "BoundPet", "ChastityBelt", "ChastityBra", "ForceNaked", "ConfiscateKey", "ConfiscateCrop", "ConfiscateWhip", "SleepCage", "LockOut"];
 var PrivateCharacterNewClothes = null;
@@ -60,6 +60,7 @@ function PrivateIsNeutral() { return ((CurrentCharacter.Love >= -30) && (Current
 function PrivateSubTrialInProgress() { return ((NPCEventGet(CurrentCharacter, "EndDomTrial") > 0) && (CurrentTime < CheatFactor("SkipTrialPeriod", 0) * NPCEventGet(CurrentCharacter, "EndDomTrial"))) }
 function PrivateSubTrialOverWilling() { return ((NPCEventGet(CurrentCharacter, "EndDomTrial") > 0) && (CurrentTime >= CheatFactor("SkipTrialPeriod", 0) * NPCEventGet(CurrentCharacter, "EndDomTrial")) && (CurrentCharacter.Love >= 90)) }
 function PrivateSubTrialOverUnwilling() { return ((NPCEventGet(CurrentCharacter, "EndDomTrial") > 0) && (CurrentTime >= CheatFactor("SkipTrialPeriod", 0) * NPCEventGet(CurrentCharacter, "EndDomTrial")) && (CurrentCharacter.Love < 90)) }
+function PrivateCanPet() { return ((CurrentCharacter.Love >= 0) && !CurrentCharacter.IsRestrained() && (InventoryGet(Player, "ItemArms") != null) && (InventoryGet(Player, "ItemArms").Asset.Name == "BitchSuit")) }
 
 // Loads the private room vendor NPC
 function PrivateLoad() {
@@ -434,7 +435,8 @@ function PrivateStartActivity() {
 		if ((Act == "RandomClothes") && Player.CanChange()) break;
 		if ((Act == "Shibari") && Player.CanChange() && (NPCTraitGet(CurrentCharacter, "Wise") >= 0)) break;
 		if ((Act == "Gift") && (Player.Owner != "") && (CurrentCharacter.Love >= 90) && (CurrentTime >= NPCEventGet(CurrentCharacter, "LastGift") + 86400000)) break;
-		
+		if ((Act == "PetGirl") && (InventoryGet(Player, "ItemArms") == null) && (NPCTraitGet(CurrentCharacter, "Peaceful") >= 0)) break;
+
 		// After 100 tries, we give up on picking an activity and the owner ignore the player
 		Count++;
 		if (Count >= 100) {
@@ -519,6 +521,18 @@ function PrivateActivityRun(LoveFactor) {
 		InventoryWear(Player, "HempRopeHarness", "ItemTorso", "Default", Math.floor(Math.random() * 10) + 1);
 		InventoryWearRandom(Player, "ItemMouth");
 		PrivateReleaseTimer = CommonTime() + (Math.random() * 60000) + 60000;
+	}
+
+	// In PetGirl, the player gets gagged, bound & dressed as a puppy
+	if (PrivateActivity == "PetGirl") {
+		InventoryRemove(Player, "ItemLegs");
+		InventoryRemove(Player, "ItemFeet");
+		InventoryRemove(Player, "Hat");
+		InventoryWearRandom(Player, "ItemMouth");
+		InventoryWear(Player, "BitchSuit", "ItemArms", "Default", Math.floor(Math.random() * 10) + 1);
+		InventoryWear(Player, "PuppyEars1", "HairAccessory");
+		InventoryWear(Player, "PuppyTailPlug", "ItemButt");
+		PrivateReleaseTimer = CommonTime() + (Math.random() * 120000) + 120000;
 	}
 
 	// After running the activity a few times, we stop
