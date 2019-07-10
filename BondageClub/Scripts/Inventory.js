@@ -198,3 +198,13 @@ function InventoryCharacterHasOwnerOnlyItem(C) {
 				return true;
 	return false;
 }
+
+// Returns TRUE if at least one item on the character can be locked
+function InventoryHasLockableItems(C) {
+	
+}
+
+// Applies random locks on each character items that can be locked
+function InventoryFullLockRandom(C) {
+	
+}

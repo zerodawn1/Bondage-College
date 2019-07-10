@@ -10,7 +10,7 @@ var PrivateReleaseTimer = 0;
 var PrivateActivity = "";
 var PrivateActivityCount = 0;
 var PrivateActivityAffectLove = true;
-var PrivateActivityList = ["Gag", "Ungag", "Restrain", "RestrainOther", "FullRestrain", "FullRestrainOther", "Release", "Tickle", "Spank", "Pet", "Slap", "Kiss", "Fondle", "Naked", "Underwear", "RandomClothes", "Shibari", "Gift", "PetGirl"];
+var PrivateActivityList = ["Gag", "Ungag", "Restrain", "RestrainOther", "FullRestrain", "FullRestrainOther", "Release", "Tickle", "Spank", "Pet", "Slap", "Kiss", "Fondle", "Naked", "Underwear", "RandomClothes", "Shibari", "Gift", "PetGirl", "Locks"];
 var PrivateActivityTarget = null;
 var PrivatePunishment = "";
 var PrivatePunishmentList = ["Cage", "Bound", "BoundPet", "ChastityBelt", "ChastityBra", "ForceNaked", "ConfiscateKey", "ConfiscateCrop", "ConfiscateWhip", "SleepCage", "LockOut"];
@@ -451,6 +451,7 @@ function PrivateStartActivity() {
 		if ((Act == "Shibari") && Player.CanChange() && (NPCTraitGet(CurrentCharacter, "Wise") >= 0)) break;
 		if ((Act == "Gift") && (Player.Owner != "") && (CurrentCharacter.Love >= 90) && (CurrentTime >= NPCEventGet(CurrentCharacter, "LastGift") + 86400000)) break;
 		if ((Act == "PetGirl") && (InventoryGet(Player, "ItemArms") == null) && (NPCTraitGet(CurrentCharacter, "Peaceful") >= 0)) break;
+		if ((Act == "Locks") && InventoryHasLockableItems(Player)) break;
 
 		// After 100 tries, we give up on picking an activity and the owner ignore the player
 		Count++;
@@ -522,13 +523,14 @@ function PrivateActivityRun(LoveFactor) {
 	if (PrivateActivity == "Naked") CharacterNaked(Player);
 	if (PrivateActivity == "Underwear") CharacterRandomUnderwear(Player);
 	if (PrivateActivity == "RandomClothes") CharacterAppearanceFullRandom(Player, true);
+	if (PrivateActivity == "Locks") InventoryFullLockRandom(Player);
 
 	// The gift can only happen once a day if the player is fully collared
 	if (PrivateActivity == "Gift") {
 		CharacterChangeMoney(Player, 50);
 		NPCEventAdd(CurrentCharacter, "LastGift", CurrentTime);
 	}
-	
+
 	// In Shibari, the player gets naked and fully roped in hemp
 	if (PrivateActivity == "Shibari") {
 		CharacterNaked(Player);
