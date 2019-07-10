@@ -228,6 +228,12 @@ OwnerBeepFail,,,"(She shakes her head from left to right.)  My girl, it's very d
 0,,(Struggle and whimper for help.),"(She checks your locks.)  Your owner locked your fucking ass, you stay that way girl.",,WontReleasePlayerOwnerOnly(),StruggleWontReleasePlayerOwnerOnly,Dominant|Rude
 0,,(Struggle and whimper for help.),Of course Miss.  (She tries to pick your owner lock but fail miserably.)  I don't understand why it doesn't unlock.,,WontReleasePlayerOwnerOnly(),StruggleWontReleasePlayerOwnerOnly,Submissive|Dumb
 0,,(Struggle and whimper for help.),"(She checks your locks and giggles.)  Oh no, you look way too sexy with these locks on.",,WontReleasePlayerOwnerOnly(),StruggleWontReleasePlayerOwnerOnly,Horny|Playful
+0,,(Cuddle against her legs.),(You slowly cuddle against her legs as she pets you.)  You could make a good pet you know?,,CanPet(),Pet,
+0,,(Cuddle against her legs.),(You start to cuddle and she gets at your level to cuddle as a pet with you.)  Pet cuddles are so much fun!,,CanPet(),Pet,Submissive|Playful
+0,,(Cuddle against her legs.),(You cuddle against her legs as she pets you roughly.)  This bitch need a bone?,,CanPet(),Pet,Dumb|Rude
+0,,(Cuddle against her legs.),(You cuddle against her legs as she pets you tenderly and carefully.)  A good pet deserves to be nourished and cherished.,,CanPet(),Pet,Peaceful|Polite
+0,,(Cuddle against her legs.),"(You cuddle against her legs as she pets you.)  If you're serious about being a pet, you should find a proper trainer.",,CanPet(),Pet,Wise|Serious
+0,,(Cuddle against her legs.),"(You start to cuddle but she swiftly spanks you on the butt.)  Girl, you'll need to do better than that.",,CanPet(),Pet,Violent|Frigid
 0,100,(Play with her.),"(You move closer, ready to play with her.)",,AllowRestain(),,
 0,,(Play with her.),(She stops you from doing anything.)  What do you think you're doing?,,!AllowRestain(),WontPlay,
 0,,(Play with her.),(She pushes you back.)  Hold on girl.  I'm not in the mood for that.,,!AllowRestain(),WontPlay,Dominant|Frigid
@@ -439,6 +445,12 @@ OwnerBeepFail,,,"(She shakes her head from left to right.)  My girl, it's very d
 1000,,(Struggle and whimper for help.),"Girl, put some more efforts in your struggling and maybe I'll help you.",,WontReleasePlayer(),DomStruggleWontReleasePlayer,Dominant|Serious
 1000,,(Struggle and whimper for help.),I decline.  Your predicament is a submissive lesson that you must learn from.,,WontReleasePlayer(),DomStruggleWontReleasePlayer,Submissive|Wise
 1000,,(Struggle and whimper for help.),Fuck no!  Seeing my slut struggle like that is huge turn on for me.,,WontReleasePlayer(),DomStruggleWontReleasePlayer,Horny|Rude
+1000,,(Cuddle against her legs.),(You slowly cuddle against her legs as she pets you.)  I'm glad I've found you my pet.,,CanPet(),DomPet,
+1000,,(Cuddle against her legs.),(You start to cuddle and she gets at your level to cuddle as a pet with you.)  Pet cuddles are so much fun my girl!,,CanPet(),DomPet,Submissive|Playful
+1000,,(Cuddle against her legs.),(You cuddle against her legs as she pets you roughly.)  This bitch needs a bone?,,CanPet(),DomPet,Dumb|Rude
+1000,,(Cuddle against her legs.),(You cuddle against her legs as she pets you tenderly and carefully.)  A good pet deserves to be nourished and cherished.,,CanPet(),DomPet,Peaceful|Polite
+1000,,(Cuddle against her legs.),"(You cuddle against her legs as she pets you.)  My girl, someday I might find you a proper pet trainer.",,CanPet(),DomPet,Wise|Serious
+1000,,(Cuddle against her legs.),"(You start to cuddle but she swiftly spanks you on the butt.)  Slave, you'll need to do better than that.",,CanPet(),DomPet,Violent|Frigid
 1000,,"Mistress, can I wear something else now?","No, your time isn't over yet.  You cannot change now.",,"DialogLogQuery(""BlockChange"", ""Rule"")",DomCanChange,
 1000,,"Mistress, can I wear something else now?","No, my sexy sub, I like you the way you are.  Wait until the time is up.",,"DialogLogQuery(""BlockChange"", ""Rule"")",DomCanChange,Horny
 1000,,"Mistress, can I wear something else now?",Stop thinking about your body and your clothes and focus on serving me.  Wait until the time is up.,,"DialogLogQuery(""BlockChange"", ""Rule"")",DomCanChange,Frigid
@@ -590,6 +602,17 @@ ActivityRestrain,1000,"Mistress, please don't restrain me.",(She frowns and rest
 ActivityRestrain,1000,(Sigh and give your hands.),(She stays silent and restrains your arms.),ActivityRun(0),,,
 ActivityRestrain,1000,(Nod and bow your head.),(She restrains your arms and pets your head.)  Good girl.,ActivityRun(1),,,
 ActivityRestrain,1000,(Grumble and try to stop her.),(She frowns and restrains you tightly.)  You're not in control girl.,ActivityRun(-7),,,
+ActivityRestrainOtherIntro,,,(She looks at ActivityTarget.)  I think it's time to restrain ActivityTarget.  I'll strap her up.,,,DomActivityRestrainOtherIntro,
+ActivityRestrainOtherIntro,,,"ActivityTarget is pretty hot, but she would be even sexier restrained.  I'll strap her up.",,,DomActivityRestrainOtherIntro,Horny
+ActivityRestrainOtherIntro,,,(She looks around the room and sees ActivityTarget.)  Why isn't she restrained?  She needs to join the fun.,,,DomActivityRestrainOtherIntro,Playful
+ActivityRestrainOtherIntro,,,Was ActivityTarget playing with herself earlier?  I'll make sure she stops that and strap her up.,,,DomActivityRestrainOtherIntro,Frigid
+ActivityRestrainOtherIntro,,,"My sub, we also need to take care of your friends.  Its time to strap up ActivityTarget.",,,DomActivityRestrainOtherIntro,Wise
+ActivityRestrainOther,1000,As long as she consents to it.,(She nods and restrains her arms.)  We are in the Bondage Club after all.,ActivityRun(0),Player.CanTalk(),,
+ActivityRestrainOther,1000,"Mistress, please don't touch her.",(She frowns and restrains her tightly.)  You're not in control girl.,ActivityRun(-7),Player.CanTalk(),,
+ActivityRestrainOther,1000,Great idea Mistress!,(She restrains her arms and smiles.)  I'm the queen of the room.,ActivityRun(1),Player.CanTalk(),,
+ActivityRestrainOther,1000,(Grumble and try to stop her.),(She frowns and restrains her tightly.)  You're not in control girl.,ActivityRun(-7),,,
+ActivityRestrainOther,1000,(Stay silent.),(She nods and restrains her arms.)  We are in the Bondage Club after all.,ActivityRun(0),,,
+ActivityRestrainOther,1000,(Nod happily.),(She restrains her arms and smiles.)  I'm the queen of the room.,ActivityRun(1),,,
 ActivityFullRestrainIntro,,,"We are in the Bondage Club my sub, you should be fully restrained.",,,DomActivityFullRestrainIntro,
 ActivityFullRestrainIntro,,,"My girl, it would be really sexy to get you fully restrained.",,,DomActivityFullRestrainIntro,Horny
 ActivityFullRestrainIntro,,,You've been playing with these hands way too much.  Its time to fully restrain you.,,,DomActivityFullRestrainIntro,Frigid
@@ -601,6 +624,17 @@ ActivityFullRestrain,1000,"Mistress, please don't restrain me.",(She frowns and 
 ActivityFullRestrain,1000,(Sigh and give your hands.),(She stays silent and restrains you with many items.),ActivityRun(0),,,
 ActivityFullRestrain,1000,(Nod and promptly give your hands.),(She restrains you with many items and pets your head.)  Good girl.,ActivityRun(1),,,
 ActivityFullRestrain,1000,(Grumble and try to stop her.),(She frowns and restrains you with many items.)  You're not in control girl.,ActivityRun(-7),,,
+ActivityFullRestrainOtherIntro,,,(She looks at ActivityTarget and grins.)  I think it's time to fully restrain ActivityTarget.,,,DomActivityFullRestrainOtherIntro,
+ActivityFullRestrainOtherIntro,,,"ActivityTarget is pretty hot, but she would be even sexier fully restrained.  It's time to get her in trouble.",,,DomActivityFullRestrainOtherIntro,Horny
+ActivityFullRestrainOtherIntro,,,(She notices ActivityTarget.)  Why isn't she fully restrained?  She needs to join the fun.,,,DomActivityFullRestrainOtherIntro,Playful
+ActivityFullRestrainOtherIntro,,,Was ActivityTarget playing with herself earlier?  I'll make sure she stops that and fully restrain her.,,,DomActivityFullRestrainOtherIntro,Frigid
+ActivityFullRestrainOtherIntro,,,"My sub, we also need to take care of your friends.  Its time to fully restrain ActivityTarget.",,,DomActivityFullRestrainOtherIntro,Wise
+ActivityFullRestrainOther,1000,As long as she consents to it.,(She nods and fully restrains her.)  We are in the Bondage Club after all.,ActivityRun(0),Player.CanTalk(),,
+ActivityFullRestrainOther,1000,"Mistress, please don't touch her.",(She frowns and fully restrains her.)  You're not in control girl.,ActivityRun(-7),Player.CanTalk(),,
+ActivityFullRestrainOther,1000,Great idea Mistress!,(She fully restrains her and smiles.)  I'm the queen of the room.,ActivityRun(1),Player.CanTalk(),,
+ActivityFullRestrainOther,1000,(Grumble and try to stop her.),(She frowns and fully restrains her.)  You're not in control girl.,ActivityRun(-7),,,
+ActivityFullRestrainOther,1000,(Stay silent.),(She nods and fully restrains her.)  We are in the Bondage Club after all.,ActivityRun(0),,,
+ActivityFullRestrainOther,1000,(Nod happily.),(She fully restrains her and smiles.)  I'm the queen of the room.,ActivityRun(1),,,
 ActivityReleaseIntro,,,You're cute when you're restrained but you deserve a break.  Let me help you.,,,DomActivityReleaseIntro,
 ActivityReleaseIntro,,,I don't have enough time to watch you and protect you from yourself girl.  I'll let you go.,,,DomActivityReleaseIntro,Serious
 ActivityReleaseIntro,,,"It's so much fun to see you struggle, but I guess all good things must end.",,,DomActivityReleaseIntro,Playful

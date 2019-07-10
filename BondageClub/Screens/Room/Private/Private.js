@@ -10,7 +10,8 @@ var PrivateReleaseTimer = 0;
 var PrivateActivity = "";
 var PrivateActivityCount = 0;
 var PrivateActivityAffectLove = true;
-var PrivateActivityList = ["Gag", "Ungag", "Restrain", "FullRestrain", "Release", "Tickle", "Spank", "Pet", "Slap", "Kiss", "Fondle", "Naked", "Underwear", "RandomClothes", "Shibari", "Gift", "PetGirl"];
+var PrivateActivityList = ["Gag", "Ungag", "Restrain", "RestrainOther", "FullRestrain", "FullRestrainOther", "Release", "Tickle", "Spank", "Pet", "Slap", "Kiss", "Fondle", "Naked", "Underwear", "RandomClothes", "Shibari", "Gift", "PetGirl"];
+var PrivateActivityTarget = null;
 var PrivatePunishment = "";
 var PrivatePunishmentList = ["Cage", "Bound", "BoundPet", "ChastityBelt", "ChastityBra", "ForceNaked", "ConfiscateKey", "ConfiscateCrop", "ConfiscateWhip", "SleepCage", "LockOut"];
 var PrivateCharacterNewClothes = null;
@@ -407,6 +408,18 @@ function PrivatePlayerIsOwned() {
 	return false;
 }
 
+// Returns TRUE if someone else in the room can be restrained by the player owner, keep that target in a variable to be used later
+function PrivateCanRestrainOther() {
+	PrivateActivityTarget = null;
+	var List = [];
+	for(var C = 0; C < PrivateCharacter.length; C++)
+		if ((PrivateCharacter[C].ID != 0) && (PrivateCharacter[C].ID != CurrentCharacter.ID) && (NPCTraitGet(CurrentCharacter, "Dominant") > NPCTraitGet(PrivateCharacter[C], "Dominant")) && (InventoryGet(PrivateCharacter[C], "ItemArms") == null))
+			List.push(PrivateCharacter[C]);
+	if (List.length > 0)
+		PrivateActivityTarget = List[Math.floor(Math.random() * List.length)];
+	return (PrivateActivityTarget != null);
+}
+
 // Starts a random activity for the player as submissive
 function PrivateStartActivity() {
 
@@ -422,7 +435,9 @@ function PrivateStartActivity() {
 		if ((Act == "Gag") && Player.CanTalk()) break;
 		if ((Act == "Ungag") && !Player.CanTalk() && (CommonTime() > PrivateReleaseTimer)) break;
 		if ((Act == "Restrain") && (InventoryGet(Player, "ItemArms") == null)) break;
+		if ((Act == "RestrainOther") && PrivateCanRestrainOther()) break;
 		if ((Act == "FullRestrain") && (InventoryGet(Player, "ItemArms") == null)) break;
+		if ((Act == "FullRestrainOther") && PrivateCanRestrainOther()) break;
 		if ((Act == "Release") && Player.IsRestrained() && (CommonTime() > PrivateReleaseTimer)) break;
 		if ((Act == "Tickle") && (NPCTraitGet(CurrentCharacter, "Playful") >= 0)) break;
 		if ((Act == "Spank") && (NPCTraitGet(CurrentCharacter, "Violent") >= 0)) break;
@@ -453,6 +468,7 @@ function PrivateStartActivity() {
 	PrivateActivityCount = 0;
 	CurrentCharacter.Stage = "Activity" + PrivateActivity;
 	CurrentCharacter.CurrentDialog = DialogFind(CurrentCharacter, "Activity" + PrivateActivity + "Intro");
+	if (PrivateActivityTarget != null) CurrentCharacter.CurrentDialog = CurrentCharacter.CurrentDialog.replace("ActivityTarget", PrivateActivityTarget.Name);
 
 }
 
@@ -495,9 +511,11 @@ function PrivateActivityRun(LoveFactor) {
 	// The restraining activities are harsher for serious NPCs
 	if (PrivateActivity == "Gag") InventoryWearRandom(Player, "ItemMouth");
 	if (PrivateActivity == "Restrain") InventoryWearRandom(Player, "ItemArms");
+	if (PrivateActivity == "RestrainOther") InventoryWearRandom(PrivateActivityTarget, "ItemArms");
 	if ((PrivateActivity == "FullRestrain") && (NPCTraitGet(CurrentCharacter, "Playful") > 0)) CharacterFullRandomRestrain(Player, "Few");
 	if ((PrivateActivity == "FullRestrain") && (NPCTraitGet(CurrentCharacter, "Playful") == 0)) CharacterFullRandomRestrain(Player);
 	if ((PrivateActivity == "FullRestrain") && (NPCTraitGet(CurrentCharacter, "Serious") > 0)) CharacterFullRandomRestrain(Player, "Lot");
+	if (PrivateActivity == "FullRestrainOther") CharacterFullRandomRestrain(PrivateActivityTarget);
 	if (PrivateActivity == "Release") CharacterRelease(Player);
 	if (PrivateActivity == "Ungag") { InventoryRemove(Player, "ItemMouth"); InventoryRemove(Player, "ItemHead"); }
 	if ((PrivateActivity == "Gag") || (PrivateActivity == "Restrain") || (PrivateActivity == "FullRestrain")) PrivateReleaseTimer = CommonTime() + (Math.random() * 60000) + 60000;
