@@ -449,7 +449,7 @@ OwnerBeepFail,,,"(She shakes her head from left to right.)  My girl, it's very d
 1000,,(Cuddle against her legs.),(You start to cuddle and she gets at your level to cuddle as a pet with you.)  Pet cuddles are so much fun my girl!,,CanPet(),DomPet,Submissive|Playful
 1000,,(Cuddle against her legs.),(You cuddle against her legs as she pets you roughly.)  This bitch needs a bone?,,CanPet(),DomPet,Dumb|Rude
 1000,,(Cuddle against her legs.),(You cuddle against her legs as she pets you tenderly and carefully.)  A good pet deserves to be nourished and cherished.,,CanPet(),DomPet,Peaceful|Polite
-1000,,(Cuddle against her legs.),"(You cuddle against her legs as she pets you.)  My girl, someday I might find you a proper pet trainer.",,CanPet(),DomPet,Wise|Serious
+1000,,(Cuddle against her legs.),"(You cuddle against her legs as she pets you.)  My girl, someday I'll find a proper pet trainer for you.",,CanPet(),DomPet,Wise|Serious
 1000,,(Cuddle against her legs.),"(You start to cuddle but she swiftly spanks you on the butt.)  Slave, you'll need to do better than that.",,CanPet(),DomPet,Violent|Frigid
 1000,,"Mistress, can I wear something else now?","No, your time isn't over yet.  You cannot change now.",,"DialogLogQuery(""BlockChange"", ""Rule"")",DomCanChange,
 1000,,"Mistress, can I wear something else now?","No, my sexy sub, I like you the way you are.  Wait until the time is up.",,"DialogLogQuery(""BlockChange"", ""Rule"")",DomCanChange,Horny
@@ -558,10 +558,12 @@ OwnerBeepFail,,,"(She shakes her head from left to right.)  My girl, it's very d
 1020,1021,Greetings.  Do you need anything Mistress?,"Yes, I wanted to see you and spend some time with you.","DialogChangeReputation(""Dominant"", -1)",,,
 1020,1021,I was about to come inside anyway.,"Very well, I wanted to see you and spend some time with you.","DialogChangeReputation(""Dominant"", 1)",,,
 1020,1021,What's going on Mistress?,I wanted to see you and spend some time with you.,,,,
-1020,1021,Of course Mistress.  There's nothing more important than you.,"Good girl, I wanted to see you and spend some time with you.","DialogChangeReputation(""Dominant"", -3)",,,
+1020,1021,There's nothing more important than you.,"Good girl, I wanted to see you and spend some time with you.","DialogChangeReputation(""Dominant"", -3)",,,
 1020,1021,(Nod happily.),I wanted to see you and spend some time with you.,,,,
 1021,,What would you like to do?,,StartActivity(),Player.CanTalk(),,
-1021,,(Nod slowly.),,StartActivity(),!Player.CanTalk(),,
+1021,,This is great!,,StartActivity(),Player.CanTalk(),,
+1021,,(Nod happily.),,StartActivity(),!Player.CanTalk(),,
+1021,,(Give a curious look.),,StartActivity(),!Player.CanTalk(),,
 1030,Punish,"Sorry Mistress, I was kind of tied up.","Sorry or not, you're late and you must be punished.",,,,
 1030,Punish,I had something more important to do.,Nothing should be more important than your Mistress.  You must be punished.,"DialogChangeReputation(""Dominant"", 3)",,,
 1030,Punish,Oh my.  What's going on Mistress?,"Never mind what's going on, you must be punished.","DialogChangeReputation(""Dominant"", 1)",,,
