@@ -576,7 +576,7 @@ var AssetFemale3DCG = [
 			{ Name: "DuctTape", Extended: true, Difficulty: -2, Value: 50, Time: 10, RemoveTime: 5, BuyGroup: "DuctTape", AllowEffect: ["GagLight", "GagNormal"] },
 			{ Name: "PacifierGag", Random: false, Difficulty: -50, Effect: ["GagLight"], Value: 15, Time: 2, ExpressionTrigger: [{Group: "Blush", Name: "Light", Timer: 5}, {Group: "Eyes", Name: "Closed", Timer: 5}] },
 			{ Name: "HarnessPacifierGag", Random: false, Difficulty: 2, Effect: ["GagLight"], Value: 70, Time: 20, AllowLock: true, ExpressionTrigger: [{Group: "Blush", Name: "Light", Timer: 5}, {Group: "Eyes", Name: "Closed", Timer: 5}] },
-			{ Name: "DusterGag", Random: false, Difficulty: 4, RemoveAtLogin: true, Value: -1, Time: 20, AllowLock: true },
+			{ Name: "DusterGag", Random: false, Difficulty: 4, Value: -1, Time: 20, AllowLock: true },
 			{ Name: "HarnessPonyBits", Random: false, Difficulty: 4, Effect: ["GagHeavy"], Value: -1, Time: 20, AllowLock: true },
 			{ Name: "PumpGag", Effect: [], Random: false, Extended: true, Value: 100, Time: 20, AllowLock: true, ExpressionTrigger: [{Group: "Eyebrows", Name: "Soft", Timer: 10}], AllowEffect: ["GagLight", "GagNormal", "GagHeavy", "GagTotal"] },
 			{ Name: "KittyGag", Effect: ["GagLight"], Difficulty: -4, Value: 20, Time: 10, ExpressionTrigger: [{Group: "Blush", Name: "Light", Timer: 5}, {Group: "Eyes", Name: "Closed", Timer: 5}] },
