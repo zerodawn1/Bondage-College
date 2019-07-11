@@ -330,9 +330,8 @@ function PrivateChange(NewCloth) {
 	if (NewCloth == "Naked") CharacterNaked(CurrentCharacter);
 	if (NewCloth == "Custom") {
 		PrivateNPCInteraction(10);
-		CharacterChangeMoney(Player, -100);
+		CharacterChangeMoney(Player, -50);
 		PrivateCharacterNewClothes = CurrentCharacter;
-		CurrentCharacter.Stage = "2000";
 		DialogLeave();
 		CharacterAppearanceLoadCharacter(PrivateCharacterNewClothes);
 	}
