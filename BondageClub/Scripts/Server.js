@@ -96,7 +96,7 @@ function ServerAppearanceBundle(Appearance) {
 function ServerValidateProperties(C, Item) {
 
 	// No validations for NPCs
-	if ((C.AccountName.substring(0, 3) == "NPC_") || (C.AccountName.substring(0, 3) == "NPC-")) return;
+	if ((C.AccountName.substring(0, 4) == "NPC_") || (C.AccountName.substring(0, 4) == "NPC-")) return;
 
 	// For each effect on the item
 	if ((Item.Property != null) && (Item.Property.Effect != null))

@@ -261,6 +261,7 @@ function PrivateLoadCharacter(C) {
 	if ((PrivateCharacter[C].AccountName == null) && (PrivateCharacter[C].Name != null)) {
 		var N = CharacterLoadNPC("NPC_Private_Custom");
 		N.Name = PrivateCharacter[C].Name;
+		PrivateCharacter[C].AccountName = "NPC_Private_Custom" + N.ID.toString();
 		N.AccountName = "NPC_Private_Custom" + N.ID.toString();
 		if (PrivateCharacter[C].Title != null) N.Title = PrivateCharacter[C].Title;
 		if (PrivateCharacter[C].AssetFamily != null) N.AssetFamily = PrivateCharacter[C].AssetFamily;
