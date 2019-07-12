@@ -214,12 +214,10 @@ var AssetFemale3DCG = [
 	{
 		Group: "Wings",
 		Priority: 1,
-		ParentGroup: "BodyUpper",
 		ParentColor: "Bra",
+		Default: false,
 		Clothing: true,
 		Underwear: true,
-		Default: false,
-		AllowPose: ["BackBoxTie", "BackCuffs", "BackElbowTouch", "TapedHands"],
 		Color: ["Default"],
 		Asset: [
 			{ Name: "SuccubusFeather", Value: 100 },
