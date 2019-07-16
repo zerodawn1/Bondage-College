@@ -5,6 +5,7 @@ var CellOpenTimer = 0;
 
 // Loads the cell screen
 function CellLoad() {
+	CharacterSetActivePose(Player, null);
 	CellOpenTimer = LogValue("Locked", "Cell")
 	if (CellOpenTimer == null) CellOpenTimer = 0;
 	if (CellOpenTimer > CurrentTime + 3600000) {
@@ -17,6 +18,8 @@ function CellLoad() {
 function CellRun() {
 	DrawCharacter(Player, 750, 0, 1);
 	if (CellOpenTimer < CurrentTime) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png", TextGet("Leave"));
+	if (Player.CanKneel() && (CellOpenTimer > CurrentTime)) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Kneel.png", TextGet("Kneel"));
+	DrawButton(1885, 145, 90, 90, "", "White", "Icons/Character.png", TextGet("Profile"));
 	DrawButton(1885, 145, 90, 90, "", "White", "Icons/Character.png", TextGet("Profile"));
 	if (CellOpenTimer < CurrentTime) DrawButton(1885, 265, 90, 90, "", "White", "Icons/Cell.png", TextGet("Lock"));
 	if (CellOpenTimer < CurrentTime) DrawButton(1885, 385, 90, 90, "", "White", "Icons/Plus.png", TextGet("AddTime"));
@@ -27,6 +30,7 @@ function CellRun() {
 
 // When the user clicks in the cell screen
 function CellClick() {
+	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115) && Player.CanKneel() && (CellOpenTimer > CurrentTime)) CharacterSetActivePose(Player, (Player.ActivePose == null) ? "Kneel" : null);
 	if ((MouseX >= 750) && (MouseX < 1250) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(Player);
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 235)) InformationSheetLoadCharacter(Player);
 	if (CellOpenTimer < CurrentTime) {
