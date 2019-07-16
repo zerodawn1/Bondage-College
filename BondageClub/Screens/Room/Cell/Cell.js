@@ -18,7 +18,7 @@ function CellRun() {
 	DrawCharacter(Player, 750, 0, 1);
 	if (CellOpenTimer < CurrentTime) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png", TextGet("Leave"));
 	DrawButton(1885, 145, 90, 90, "", "White", "Icons/Character.png", TextGet("Profile"));
-	if (CellOpenTimer < CurrentTime) DrawButton(1885, 265, 90, 90, "", "White", "Icons/Start.png", TextGet("Lock"));
+	if (CellOpenTimer < CurrentTime) DrawButton(1885, 265, 90, 90, "", "White", "Icons/Cell.png", TextGet("Lock"));
 	if (CellOpenTimer < CurrentTime) DrawButton(1885, 385, 90, 90, "", "White", "Icons/Plus.png", TextGet("AddTime"));
 	if (CellOpenTimer < CurrentTime) DrawButton(1885, 505, 90, 90, "", "White", "Icons/Minus.png", TextGet("RemoveTime"));
 	if (CellOpenTimer < CurrentTime) DrawText(TextGet("Timer") + " " + CellMinutes.toString() + " " + TextGet("Minutes"), 1620, 920, "White", "Black");
