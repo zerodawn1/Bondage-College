@@ -402,9 +402,9 @@ function ManagementActivityStruggleStart() {
 	CommonSetScreen("Room", "Empty");
 }
 
-// Starts the quiz game
+// Starts the quiz game (picks a question at random)
 function ManagementStartQuiz() {
-	var Q = (0).toString();
+	var Q = (Math.floor(Math.random() * 15)).toString();
 	CurrentCharacter.Stage = "QuizAnswer" + Q;
 	CurrentCharacter.CurrentDialog = DialogFind(CurrentCharacter, "QuizQuestion" + Q);
 }
