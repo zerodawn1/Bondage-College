@@ -404,7 +404,7 @@ function ManagementActivityStruggleStart() {
 
 // Starts the quiz game (picks a question at random)
 function ManagementStartQuiz() {
-	var Q = (Math.floor(Math.random() * 15)).toString();
+	var Q = (Math.floor(Math.random() * 20)).toString();
 	CurrentCharacter.Stage = "QuizAnswer" + Q;
 	CurrentCharacter.CurrentDialog = DialogFind(CurrentCharacter, "QuizQuestion" + Q);
 }
