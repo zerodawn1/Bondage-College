@@ -2,6 +2,8 @@
 
 // Loads the item extension properties
 function InventoryItemMiscTimerPadlockLoad() {
+	if ((DialogFocusItem != null) && (DialogFocusItem.Property == null)) DialogFocusItem.Property = {};
+	if ((DialogFocusItem != null) && (DialogFocusItem.Property != null) && (DialogFocusItem.Property.RemoveItem == null)) DialogFocusItem.Property.RemoveItem = false;
 }
 
 // Draw the extension screen
@@ -13,13 +15,21 @@ function InventoryItemMiscTimerPadlockDraw() {
 	DrawImageResize("Assets/" + DialogFocusItem.Asset.Group.Family + "/" + DialogFocusItem.Asset.Group.Name + "/Preview/" + DialogFocusItem.Asset.Name + ".png", 1389, 227, 221, 221);
 	DrawTextFit(DialogFocusItem.Asset.Description, 1500, 475, 221, "black");
 	DrawText(DialogFind(Player, DialogFocusItem.Asset.Group.Name + DialogFocusItem.Asset.Name + "Intro"), 1500, 600, "white", "gray");
-	if (Player.CanInteract()) DrawButton(1350, 700, 300, 65, "Restart Timer", "White");
+	if ((Player.MemberNumber == DialogFocusItem.Property.LockMemberNumber) && Player.CanInteract()) {
+		DrawButton(600, 668, 64, 64, "", "White", (DialogFocusItem.Property.RemoveItem) ? "Icons/Checked.png" : "");	
+		DrawText(DialogFind(Player, "RemoveItemWithTimer"), 1050, 700, "white", "gray");
+	} else DrawText(DialogFind(Player, (DialogFocusItem.Property.RemoveItem) ? "WillRemoveItemWithTimer" : "WontRemoveItemWithTimer"), 1050, 700, "white", "gray");
+	if (Player.CanInteract()) DrawButton(1350, 800, 300, 65, DialogFind(Player, "RestartTimer"), "White");
 }
 
 // Catches the item extension clicks
 function InventoryItemMiscTimerPadlockClick() {
 	if ((MouseX >= 1885) && (MouseX <= 1975) && (MouseY >= 25) && (MouseY <= 110)) InventoryItemMiscTimerPadlockExit();
-	if ((MouseX >= 1350) && (MouseX <= 1650) && (MouseY >= 700) && (MouseY <= 765) && Player.CanInteract()) InventoryItemMiscTimerPadlockReset();
+	if ((MouseX >= 1350) && (MouseX <= 1650) && (MouseY >= 800) && (MouseY <= 865) && Player.CanInteract()) InventoryItemMiscTimerPadlockReset();
+	if ((MouseX >= 600) && (MouseX <= 664) && (MouseY >= 668) && (MouseY <= 732) && (Player.MemberNumber == DialogFocusItem.Property.LockMemberNumber) && Player.CanInteract()) {
+		DialogFocusItem.Property.RemoveItem = !(DialogFocusItem.Property.RemoveItem);
+		if (CurrentScreen == "ChatRoom") ChatRoomCharacterUpdate(CurrentCharacter);
+	}
 }
 
 // When the timer resets

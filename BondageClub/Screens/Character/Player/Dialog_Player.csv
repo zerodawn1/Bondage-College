@@ -55,6 +55,10 @@ ServerMessageEndTrial,,,The Bondage Club is proud to announce that SourceCharact
 LockMemberNumber,,,Member number on lock:
 TimerLeft,,,Time left:
 TimerRestart,,,SourceCharacter restarts the five minute timer padlock on DestinationCharacter BodyPart.
+RestartTimer,,,Restart Timer
+RemoveItemWithTimer,,,Remove item when the lock timer runs out
+WillRemoveItemWithTimer,,,The item will be removed when the lock timer runs out
+WontRemoveItemWithTimer,,,The item will stay when the lock timer runs out
 SelectBondagePosition,,,Select the bondage position
 SelectTapeWrapping,,,Select the tape wrapping
 CannotUnlockIfElbowBound,,,A victim cannot unlock herself if her elbows are bound
