@@ -31,13 +31,14 @@ function TimerInventoryRemove() {
 								if (Character[C].Appearance[A].Property.Effect[E] == "Lock")
 									Character[C].Appearance[A].Property.Effect.splice(E, 1);
 
-						// If we must remove the linked item from the character
+						// If we must remove the linked item from the character or the facial expression
 						if ((Character[C].Appearance[A].Property.RemoveItem != null) && Character[C].Appearance[A].Property.RemoveItem && (Character[C].Appearance[A].Asset.Group.Category != null) && (Character[C].Appearance[A].Asset.Group.Category == "Item"))
 							InventoryRemove(Character[C], Character[C].Appearance[A].Asset.Group.Name);
-
-						// Remove an expression (ex: blush)
-						if (Character[C].Appearance[A].Asset.Group.AllowExpression != null)
-							CharacterSetFacialExpression(Character[C], Character[C].Appearance[A].Asset.Group.Name, null);
+						else
+							if (Character[C].Appearance[A].Asset.Group.AllowExpression != null)
+								CharacterSetFacialExpression(Character[C], Character[C].Appearance[A].Asset.Group.Name, null);
+							else
+								CharacterRefresh(Character[C]);
 
 						// Sync with the server and exit
 						if (Character[C].ID == 0) ChatRoomCharacterUpdate(Character[C]);
