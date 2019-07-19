@@ -3,11 +3,11 @@ ItemHead0,,,"Hello, I want to get a device like the one you're wearing, for my s
 ItemHead0,ItemHead1,"Hello, welcome to the store.","Thanks, do you have it in multiple colors?",,
 ItemHead0,ItemHead1,(Nod happily.),Do you have it in multiple colors?,,
 ItemHead0,ItemHead1,(Nod politely.),Do you have it in multiple colors?,"DialogChangeReputation(""Dominant"", -1)",
-ItemHead1,ItemHead2,In every possible colors.,"Very good, and do you have a larger size?  My girl has a big head.",,
+ItemHead1,ItemHead2,In every possible color.,"Very good, and do you have a larger size?  My girl has a big head.",,
 ItemHead1,ItemHead2,(Nod slowly.),"Very good, and do you have a larger size?  My girl has a big head.",,
 ItemHead1,WontBuy,(Shake your head no.),That's disappointing.  I might be back later then.  Take care.,,
 ItemHead2,WontBuy,(Shrug with your shoulders.),You don't know?  I'll go check with the manager then.  Take care.,,
-ItemHead2,ItemHead3,(Nod affirmatively.),Perfect!  And what about the fabric?  Is it good quality?,,
+ItemHead2,ItemHead3,(Nod affirmatively.),Perfect!  And what about the fabric?  It's good quality?,,
 ItemHead2,WontBuy,I don't know.,You don't know?  I'll go check with the manager then.  Take care.,,
 ItemHead3,WillBuy,It's very well made.,Sold!  I'll go pay the manager.  Thanks girl.,,
 ItemHead3,WontBuy,It's kind of cheap to be honest.,Really?  I'll buy it from somewhere else then.  Take care.,,
@@ -51,8 +51,8 @@ ItemLegs1,WontBuy,No marks at all,(She ponders.)  It's not what I'm look for the
 ItemLegs1,ItemLegs2,"Yes, little sexy marks.",Nice.  And what about the price?  The quality is good for the price?,,
 ItemLegs1,ItemLegs2,"Yes, pretty good marks.",Nice.  And what about the price?  The quality is good for the price?,,
 ItemLegs1,WontBuy,"Yes, huge marks.",(She ponders.)  It's not what I'm look for then.  Thanks anyway pretty lady.,,
-ItemLegs2,ItemLegs3,"At this price, there's no better.",(She nods.)  You're an angel.  Can I kiss you sexy angel?,,
-ItemLegs2,ItemLegs3,The price is fair for this quality.,(She nods.)  You're an angel.  Can I kiss you sexy angel?,,
+ItemLegs2,ItemLegs3,"At this price, there's no better.","(She nods.)  You're an angel.  Can I kiss you, sexy angel?",,
+ItemLegs2,ItemLegs3,The price is fair for this quality.,"(She nods.)  You're an angel.  Can I kiss you, sexy angel?",,
 ItemLegs2,WontBuy,It could be a little cheaper.,(She ponders.)  It's not what I'm look for then.  Thanks anyway pretty lady.,,
 ItemLegs3,WontBuy,You're not my type.,(She snobs you.)  Fine!  I'll go shop elsewhere.,,
 ItemLegs3,WontBuy,"Sorry, I can't flirt with customers.",(She snobs you.)  Fine!  I'll go shop elsewhere.,,
@@ -71,7 +71,7 @@ ItemFeet2,ItemFeet3,It can be tight.,That's awesome.  Struggle and hop around fo
 ItemFeet2,ItemFeet3,"Very, very tight.",That's awesome.  Struggle and hop around for me girl.,,
 ItemFeet3,WillBuy,(Struggle for her.),Great.  You've did a good demonstration.  I'll buy it.  Thanks girl.,,
 ItemFeet3,WillBuy,(Wiggle your feet.),Alright.  You've did a fair demonstration.  I'll buy it.  Thanks girl.,,
-ItemFeet3,WontBuy,(Don't move.),(She yawns.)  That's the best you can do?  You've lost your sales girl.  Have a good day.,,
+ItemFeet3,WontBuy,(Don't move.),(She yawns.)  Is that the best you can do?  You've lost your sale girl.  Have a good day.,,
 WillBuy,WillBuyEnd,Great!  Can you help me before you pay?,"Fine, I will help you.  (She releases you from the item.)  Take care!",Release(),CurrentCharacter.WillRelease()
 WillBuy,WillBuyEnd,Great!  Can you help me before you pay?,"Stay like that, you're a poor saleswoman anyway.","DialogChangeReputation(""Dominant"", -1)",!CurrentCharacter.WillRelease()
 WillBuy,WillBuyEnd,(Struggle in the device.),"Fine, I will help you.  (She releases you from the item.)  Take care!",Release(),CurrentCharacter.WillRelease()
