@@ -396,6 +396,7 @@ function ManagementActivityStruggleRestrain() {
 function ManagementActivityStruggleStart() {
 	ManagementTimer = CurrentTime + 60000;
 	DialogLeave();
+	EmptyBackground = "MainHall";
 	EmptyCharacter = [];
 	EmptyCharacter.push(Player);
 	EmptyCharacter.push(ManagementRandomGirl);

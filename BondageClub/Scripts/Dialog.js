@@ -54,17 +54,23 @@ function DialogPrerequisite(D) {
 	else
 		if (CurrentCharacter.Dialog[D].Prerequisite.indexOf("Player.") == 0)
 			return Player[CurrentCharacter.Dialog[D].Prerequisite.substring(7, 250).replace("()", "").trim()]();
-		else 
+		else
 			if (CurrentCharacter.Dialog[D].Prerequisite.indexOf("!Player.") == 0)
 				return !Player[CurrentCharacter.Dialog[D].Prerequisite.substring(8, 250).replace("()", "").trim()]();
 			else
-				if (CurrentCharacter.Dialog[D].Prerequisite.indexOf("(") >= 0)
-					return CommonDynamicFunctionParams(CurrentCharacter.Dialog[D].Prerequisite);
+				if (CurrentCharacter.Dialog[D].Prerequisite.indexOf("CurrentCharacter.") == 0)
+					return CurrentCharacter[CurrentCharacter.Dialog[D].Prerequisite.substring(17, 250).replace("()", "").trim()]();
 				else
-					if (CurrentCharacter.Dialog[D].Prerequisite.substring(0, 1) != "!")
-						return window[CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite.trim()];
+					if (CurrentCharacter.Dialog[D].Prerequisite.indexOf("!CurrentCharacter.") == 0)
+						return !CurrentCharacter[CurrentCharacter.Dialog[D].Prerequisite.substring(18, 250).replace("()", "").trim()]();
 					else
-						return !window[CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite.substr(1, 250).trim()];
+						if (CurrentCharacter.Dialog[D].Prerequisite.indexOf("(") >= 0)
+							return CommonDynamicFunctionParams(CurrentCharacter.Dialog[D].Prerequisite);
+						else
+							if (CurrentCharacter.Dialog[D].Prerequisite.substring(0, 1) != "!")
+								return window[CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite.trim()];
+							else
+								return !window[CurrentScreen + CurrentCharacter.Dialog[D].Prerequisite.substr(1, 250).trim()];
 }
 
 // Searches for an item in the player inventory to unlock a specific item

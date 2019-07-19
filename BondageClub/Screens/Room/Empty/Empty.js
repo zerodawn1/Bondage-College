@@ -36,3 +36,19 @@ function EmptyManagementCell() {
 	CharacterFullRandomRestrain(Player, "ALL");
 	CellLock(5);
 }
+
+// Release the player from the item applied by the shop vendor
+function EmptyShopRelease() {
+	InventoryRemove(Player, ShopDemoItemGroup);
+	DialogChangeReputation("Dominant", -1);
+}
+
+// Release the player from the item applied by the shop vendor
+function EmptyShopEnd(Sold) {
+	ShopVendor.Stage = (Sold) ? "33" : "34";
+	ShopVendor.CurrentDialog = DialogFind(CurrentCharacter, (Sold) ? "ItemSold" : "ItemNotSold").replace("MoneyAmount", ShopDemoItemPayment.toString());
+	if (Sold) CharacterChangeMoney(Player, ShopDemoItemPayment);
+	DialogLeave();
+	CommonSetScreen("Room", "Empty");
+	CharacterSetCurrent(ShopVendor);
+}
