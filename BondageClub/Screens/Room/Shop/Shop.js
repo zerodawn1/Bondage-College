@@ -228,6 +228,7 @@ function ShopJobRestrain() {
 function ShopJobStart() {
 	DialogLeave();
 	EmptyBackground = "Shop";
+	EmptyCharacterOffset = -500;
 	EmptyCharacter = [];
 	EmptyCharacter.push(Player);
 	EmptyCharacter.push(ShopCustomer);

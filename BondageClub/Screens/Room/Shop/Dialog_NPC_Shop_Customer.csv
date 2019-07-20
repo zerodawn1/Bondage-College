@@ -72,12 +72,12 @@ ItemFeet2,ItemFeet3,"Very, very tight.",That's awesome.  Struggle and hop around
 ItemFeet3,WillBuy,(Struggle for her.),Great.  You've did a good demonstration.  I'll buy it.  Thanks girl.,,
 ItemFeet3,WillBuy,(Wiggle your feet.),Alright.  You've did a fair demonstration.  I'll buy it.  Thanks girl.,,
 ItemFeet3,WontBuy,(Don't move.),(She yawns.)  Is that the best you can do?  You've lost your sale girl.  Have a good day.,,
-WillBuy,WillBuyEnd,Great!  Can you help me before you pay?,"Fine, I will help you.  (She releases you from the item.)  Take care!",Release(),CurrentCharacter.WillRelease()
-WillBuy,WillBuyEnd,Great!  Can you help me before you pay?,"Stay like that, you're a poor saleswoman anyway.","DialogChangeReputation(""Dominant"", -1)",!CurrentCharacter.WillRelease()
-WillBuy,WillBuyEnd,(Struggle in the device.),"Fine, I will help you.  (She releases you from the item.)  Take care!",Release(),CurrentCharacter.WillRelease()
-WillBuy,WillBuyEnd,(Struggle in the device.),"Stay like that, you're a poor saleswoman anyway.","DialogChangeReputation(""Dominant"", -1)",!CurrentCharacter.WillRelease()
+WillBuy,WillBuyEnd,Great!  Can you help me before you pay?,"Fine, I will help you.  (She releases you from the item.)  I'll go pay now.",Release(),CurrentCharacter.WillRelease()
+WillBuy,WillBuyEnd,Great!  Can you help me before you pay?,"Stay like that, you can sell it again to another customer.","DialogChangeReputation(""Dominant"", -1)",!CurrentCharacter.WillRelease()
+WillBuy,WillBuyEnd,(Struggle in the device.),"Fine, I will help you.  (She releases you from the item.)  I'll go pay now.",Release(),CurrentCharacter.WillRelease()
+WillBuy,WillBuyEnd,(Struggle in the device.),"Stay like that, you can sell it again to another customer.","DialogChangeReputation(""Dominant"", -1)",!CurrentCharacter.WillRelease()
 WillBuy,,(Go back to the store vendor.),,End(true),
-WillBuy,,(Go back to the store vendor.),,End(true),
+WillBuyEnd,,(Go back to the store vendor.),,End(true),
 WontBuy,WontBuyEnd,Can you help me before you go?,"Fine, I will help you.  (She releases you from the item.)  Take care!",Release(),CurrentCharacter.WillRelease()
 WontBuy,WontBuyEnd,Can you help me before you go?,"Stay like that, you're a poor saleswoman anyway.","DialogChangeReputation(""Dominant"", -1)",!CurrentCharacter.WillRelease()
 WontBuy,WontBuyEnd,(Struggle in the device.),"Fine, I will help you.  (She releases you from the item.)  Take care!",Release(),CurrentCharacter.WillRelease()
