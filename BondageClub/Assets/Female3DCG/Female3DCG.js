@@ -184,7 +184,8 @@ var AssetFemale3DCG = [
 			{ Name: "Horns2", Value: 20 },
 			{ Name: "Horns3", Value: 20 },
 			{ Name: "FoxEars1", Value: 20 },
-			{ Name: "BatWings", Value: 20 }
+			{ Name: "BatWings", Value: 20 },
+			{ Name: "KittyMask1", Hide: ["HairFront", "Glasses"], Value: 20 }
 		]
 	},		
 
