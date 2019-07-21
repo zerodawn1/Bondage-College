@@ -99,7 +99,6 @@ function DialogLeave() {
 	Player.FocusGroup = null;
 	CurrentCharacter.FocusGroup = null;
 	DialogInventory = null;
-	DialogInventoryOffset = 0;
 	CurrentCharacter = null;
 }
 
@@ -145,7 +144,6 @@ function DialogLeaveItemMenu() {
 	Player.FocusGroup = null;
 	CurrentCharacter.FocusGroup = null;
 	DialogInventory = null;
-	DialogInventoryOffset = 0;
 	DialogProgress = -1;
 	DialogColor = null;
 	ElementRemove("InputColor");
@@ -206,6 +204,7 @@ function DialogMenuButtonBuild(C) {
 function DialogInventoryBuild(C) {
 
 	// Make sure there's a focused group
+	DialogInventoryOffset = 0;
 	DialogInventory = [];
 	if (C.FocusGroup != null) {
 
@@ -367,6 +366,7 @@ function DialogMenuButtonClick() {
 			if (DialogMenuButton[I] == "Lock") {
 				if (DialogItemToLock == null) {
 					if ((Item != null) && (Item.Asset.AllowLock != null)) {
+						DialogInventoryOffset = 0;
 						DialogInventory = [];
 						DialogItemToLock = Item;
 						for (var A = 0; A < Player.Inventory.length; A++)
@@ -540,7 +540,6 @@ function DialogClick() {
 						DialogFocusItem = null;
 						DialogInventoryBuild(C);
 						DialogText = DialogTextDefault;
-						DialogInventoryOffset = 0;
 						break;
 					}
 	}
