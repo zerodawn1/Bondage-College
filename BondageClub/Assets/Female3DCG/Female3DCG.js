@@ -116,7 +116,7 @@ var AssetFemale3DCG = [
 			"Socks1", "Socks2", "Socks3", "Socks4", "Socks5", "Stockings1", "Stockings2",
 			{ Name: "Stockings3", Value: 10 },
 			{ Name: "Stockings4", Value: 10 },
-			{ Name: "Pantyhose1", Value: 10, Priority: 13 , Block: ["ItemVulva", "ItemButt"]}
+			{ Name: "Pantyhose1", Value: 10, Priority: 13, Block: ["ItemVulva", "ItemButt"]}
 		]
 	},
 	
@@ -369,6 +369,7 @@ var AssetFemale3DCG = [
 		Priority: 24,
 		ParentGroup: "BodyLower",
 		Default: false,
+		IsRestraint: true,
 		Effect: ["Freeze", "Prone"],
 		Color: ["Default"],
 		SetPose: ["LegsClosed"],
@@ -391,6 +392,7 @@ var AssetFemale3DCG = [
 		Priority: 23,
 		ParentGroup: "BodyLower",
 		Default: false,
+		IsRestraint: true,
 		Effect: ["Prone", "KneelFreeze"],
 		Color: ["Default"],
 		SetPose: ["LegsClosed"],
@@ -529,6 +531,7 @@ var AssetFemale3DCG = [
 		Category: "Item",
 		Priority: 27,
 		Default: false,
+		IsRestraint: true,
 		Color: ["Default"],
 		Left: 125,		
 		Top: 200,
@@ -573,6 +576,7 @@ var AssetFemale3DCG = [
 		Category: "Item",
 		Priority: 30,
 		Default: false,
+		IsRestraint: true,
 		Effect: ["GagNormal"],
 		Color: ["Default"],
 		Left: 150,
@@ -617,6 +621,7 @@ var AssetFemale3DCG = [
 		Category: "Item",
 		Priority: 31,
 		Default: false,
+		IsRestraint: true,
 		Color: ["Default"],
 		Left: 150,
 		Top: 50,
