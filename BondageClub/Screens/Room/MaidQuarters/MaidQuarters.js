@@ -61,7 +61,10 @@ function MaidQuartersRun() {
 // When the user clicks in the maid quarters
 function MaidQuartersClick() {
 	if ((MouseX >= 500) && (MouseX < 1000) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(Player);
-	if ((MouseX >= 1000) && (MouseX < 1500) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(MaidQuartersMaid);
+	if ((MouseX >= 1000) && (MouseX < 1500) && (MouseY >= 0) && (MouseY < 1000)) {
+		CharacterSetCurrent(MaidQuartersMaid);
+		if (MaidQuartersMaid.Stage == "285") MaidQuartersMaid.CurrentDialog = DialogFind(MaidQuartersMaid, (MaidQuartersOnlineDrinkCompleted()) ? "MaidDrinkOnlineComplete" : "MaidDrinkOnlineIncomplete");
+	}
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) CommonSetScreen("Room", "MainHall");
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 235)) InformationSheetLoadCharacter(Player);
 }
@@ -228,6 +231,7 @@ function MaidQuartersGetDusterGag() {
 
 // When the online drink mini game starts
 function MaidQuartersOnlineDrinkStart() {
+	InventoryWear(Player, "WoodenMaidTrayFull", "ItemMisc");
 	MaidQuartersOnlineDrinkCount = 0;
 	MaidQuartersOnlineDrinkValue = 0;
 	MaidQuartersOnlineDrinkCustomer = [];
@@ -242,6 +246,7 @@ function MaidQuartersOnlineDrinkPick(MemberNumber, DrinkValue) {
 		if (MaidQuartersOnlineDrinkCount >= 5) {
 			InventoryWear(Player, "WoodenMaidTray", "ItemMisc");
 			CharacterRefresh(Player);
+			ChatRoomCharacterUpdate(Player);
 		}
 	}
 }
@@ -251,4 +256,5 @@ function MaidQuartersOnlineDrinkPay() {
 	var M = 10 + Math.floor(MaidQuartersOnlineDrinkValue * 0.4);
 	MaidQuartersMaid.CurrentDialog = MaidQuartersMaid.CurrentDialog.replace("REPLACEMONEY", M.toString());
 	CharacterChangeMoney(Player, M);
+	ReputationProgress("Maid", 4);
 }

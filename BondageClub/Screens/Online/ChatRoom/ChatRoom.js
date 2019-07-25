@@ -471,7 +471,7 @@ function ChatRoomSendOwnershipRequest(RequestType) {
 // When the player picks a drink from a maid platter
 function ChatRoomDrinkPick(DrinkType, Money) {
 	if (ChatRoomCanTakeDrink()) {
-		ServerSend("ChatRoomChat", { Content: Player.Name + " " + TextGet("PickDrink" + DrinkType), Type: "Action" } );
+		ServerSend("ChatRoomChat", { Content: Player.Name + " " + DialogFind(CurrentCharacter, "MaidDrinkPick" + DrinkType), Type: "Action" } );
 		ServerSend("ChatRoomChat", { Content: "MaidDrinkPick" + Money.toString(), Type: "Hidden", Target: CurrentCharacter.MemberNumber } );
 		CharacterChangeMoney(Player, Money * -1);
 		DialogLeave();
