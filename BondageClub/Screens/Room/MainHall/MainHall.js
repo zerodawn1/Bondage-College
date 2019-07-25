@@ -238,3 +238,18 @@ function MainHallMistressExpulsion() {
 	ManagementMistress.CurrentDialog = DialogFind(MainHallMaid, "MistressExpulsion");
 	CharacterSetCurrent(ManagementMistress);
 }
+
+// The maid can introduce the game to the player
+function MainHallMaidIntroduction() {
+	if (!LogQuery("IntroductionDone", "MainHall") && Player.CanTalk()) {
+		MainHallMaid.Stage = "1000";
+		MainHallMaid.CurrentDialog = DialogFind(Player, "IntroductionMaidGreetings");
+		CharacterSetCurrent(MainHallMaid);
+		MainHallMaid.AllowItem = false;
+	}
+}
+
+// Flag the introduction as done
+function MainHallMaidIntroductionDone() {
+	LogAdd("IntroductionDone", "MainHall");
+}
