@@ -361,7 +361,7 @@ function DialogMenuButtonClick() {
 					DialogExtendItem(Item);
 				return;
 			}
-
+		
 			// Lock Icon - Rebuilds the inventory list with locking items
 			if (DialogMenuButton[I] == "Lock") {
 				if (DialogItemToLock == null) {
