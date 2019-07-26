@@ -56,4 +56,5 @@ function InventoryItemMouthPumpGagSetPump(Modifier) {
 	CharacterLoadEffect(C);
 	if (C.ID == 0) ServerPlayerAppearanceSync();
 	ChatRoomPublishCustomAction(Player.Name + " " + DialogFind(Player, ((Modifier > 0) ? "pumps" : "deflates")) + " " + C.Name + DialogFind(Player, "'s") + " " + DialogFind(Player, "gag") + ".", true);
+
 }
