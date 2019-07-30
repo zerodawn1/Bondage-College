@@ -243,7 +243,7 @@ function DialogFacialExpressionsBuild() {
 		if (!ExpressionList || !ExpressionList.length) continue;
 		var Item = {};
 		Item.Appearance = PA;
-		Item.CurrentExpression = PA.Property.Expression;
+		Item.CurrentExpression = (PA.Property == null) ? null : PA.Property.Expression;
 		var Index = ExpressionList.indexOf(Item.CurrentExpression);
 		Item.MenuExpression1 = (Index < 0) ? ExpressionList[ExpressionList.length - 1] : (Index == 0) ? null : ExpressionList[Index - 1];
 		Item.MenuExpression2 = Item.CurrentExpression;
