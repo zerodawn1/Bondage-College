@@ -323,5 +323,26 @@ ClubSlaveIntro6,ClubSlave,(Try to get her attention.),(She struggles in vain and
 ClubSlaveIntro6,ClubSlave,(Tap on her shoulder.),(She struggles a little but fails to make any progress.  She turns to you.),,Player.CanInteract()
 ClubSlaveIntro6,ClubSlave,(Mumble in your gag.),(She giggles hearing your mumbles and nods politely.),"DialogChangeReputation(""Dominant"", -1)",!Player.CanTalk()
 ClubSlaveIntro6,,(Ignore her.),,MainHall(),
-ClubSlave,,TO DO ,TO DO,,
+ClubSlave,ClubSlaveTalk,Let's talk.,Of course Miss.  What would you like to talk about?,,!IsClubSave()
+ClubSlave,,(Hug her.),(You hug each other and warm yourself.  Your slave sister seems to appreciate.),,IsClubSave()
+ClubSlave,,(Struggle and beg for help.),"(She shakes her head no.)  I'm sorry Miss, I'm not allowed to do that.  Please ask a maid.",,!Player.CanInteract()
+ClubSlave,ClubSlavePlay,(Play with her.),(You start to play with her.),,
+ClubSlave,,Will you visit my room after your contract?,"I'm sorry Miss, I'm too busy today.  Maybe another time.",ClubSlaveVisitRoom(),
 ClubSlave,,(Leave her.),,MainHall(),
+ClubSlaveTalk,,Who are you?,I'm slave DialogCharacterName Miss.  It's a pleasure to meet you.,"ClubSlaveActiviy(""Talk"", 0)",
+ClubSlaveTalk,,Why are you naked?,"It's the rule Miss, all club slaves under contract must be naked.","ClubSlaveActiviy(""Talk"", 0)",
+ClubSlaveTalk,,What's a club slave?,We take a one hour contract with management and get paid to please club members.,"ClubSlaveActiviy(""Talk"", 0)",
+ClubSlaveTalk,,Can I become a club slave?,"It's only for true submissives, go to the club management and ask if you're eligible.","ClubSlaveActiviy(""Talk"", -3)",
+ClubSlaveTalk,,What's the limit with you?,The usual limits Miss.  No blood or any permanent harm.  You can restrain me or have sex with me.,"ClubSlaveActiviy(""Talk"", 1)",
+ClubSlaveTalk,,Who's slut are you?,(She blushes and bows her head in shame.)  I'm your slut Miss.,"ClubSlaveActiviy(""Talk"", 3)",
+ClubSlaveTalk,ClubSlave,Enough chit-chat.,Very well.  Is there anything else I can do for you Miss?,,
+ClubSlavePlay,,,(You start to play with her.),,
+ClubSlavePlay,,(Tickle her.),(You tickle her on the ribs and tummy.  She laughs and squirms a little.),"ClubSlaveActiviy(""Activity"", 0)",Player.CanInteract()
+ClubSlavePlay,,(Kiss her.),(You share a slow and loving kiss.)  You have wonderful lips.  (She giggles.),"ClubSlaveActiviy(""Activity"", -1)",CanKiss()
+ClubSlavePlay,,(Fondle her.),(You playfully fondle her breasts and butt as she moans softly and blushes.),"ClubSlaveActiviy(""Activity"", 0)",Player.CanTalk()
+ClubSlavePlay,,(Slap her.),(You harshly slap her in the face and she bows her head in shame.),"ClubSlaveActiviy(""Activity"", 2)",Player.CanInteract()
+ClubSlavePlay,,(Spank her.),(You spank her hard on the butt and she sharply inhales from the pain.),"ClubSlaveActiviy(""Activity"", 1)",Player.CanInteract()
+ClubSlavePlay,,(Masturbate her.),(You grab her pussy and slowly masturbate her as she focuses on resisting the pleasure.),"ClubSlaveActiviy(""Activity"", 0)",CanMasturbate()
+ClubSlavePlay,ClubSlave,(Stop playing with her.),(You take a step back.),,
+ClubSlaveWillVisit,,,(She ponders.)  Alright!  My slave contract ends pretty soon.  I'll go visit you Miss.,,
+ClubSlaveVisit,,See you later!  (Leave her.),,MainHall(),
