@@ -16,19 +16,19 @@ function InventoryItemMouthPlugGagDraw() {
 
 	// Draw the possible gag types
 	DrawText(DialogFind(Player, "SelectGagType"), 1500, 500, "white", "gray");
-	DrawButton(1000, 550, 225, 225, "", (DialogFocusItem.Property.Type == null || DialogFocusItem.Property.Type == "Plug") ? "#888888" : "White");
-	DrawImage("Screens/Inventory/" + DialogFocusItem.Asset.Group.Name + "/" + DialogFocusItem.Asset.Name + "/Plug.png", 1000, 550);
-	DrawText(DialogFind(Player, "PlugGagMouthTypePlug"), 1115, 800, "white", "gray");
-	DrawButton(1250, 550, 225, 225, "", ((DialogFocusItem.Property.Type != null) && (DialogFocusItem.Property.Type == "Open")) ? "#888888" : "White");
-	DrawImage("Screens/Inventory/" + DialogFocusItem.Asset.Group.Name + "/" + DialogFocusItem.Asset.Name + "/Open.png", 1250, 550);
-	DrawText(DialogFind(Player, "PlugGagMouthTypeOpen"), 1365, 800, "white", "gray");
+	DrawButton(1175, 550, 225, 225, "", (DialogFocusItem.Property.Type == null || DialogFocusItem.Property.Type == "Plug") ? "#888888" : "White");
+	DrawImage("Screens/Inventory/" + DialogFocusItem.Asset.Group.Name + "/" + DialogFocusItem.Asset.Name + "/Plug.png", 1175, 549);
+	DrawText(DialogFind(Player, "PlugGagMouthTypePlug"), 1288, 800, "white", "gray");
+	DrawButton(1600, 550, 225, 225, "", ((DialogFocusItem.Property.Type != null) && (DialogFocusItem.Property.Type == "Open")) ? "#888888" : "White");
+	DrawImage("Screens/Inventory/" + DialogFocusItem.Asset.Group.Name + "/" + DialogFocusItem.Asset.Name + "/Open.png", 1600, 549);
+	DrawText(DialogFind(Player, "PlugGagMouthTypeOpen"), 1713, 800, "white", "gray");
 }
 
 // Catches the item extension clicks
 function InventoryItemMouthPlugGagClick() {
 	if ((MouseX >= 1885) && (MouseX <= 1975) && (MouseY >= 25) && (MouseY <= 110)) DialogFocusItem = null;
-	if ((MouseX >= 1000) && (MouseX <= 1225) && (MouseY >= 550) && (MouseY <= 775) && (DialogFocusItem.Property.Type != null)) InventoryItemMouthPlugGagSetType(null);
-	if ((MouseX >= 1250) && (MouseX <= 1475) && (MouseY >= 550) && (MouseY <= 775) && ((DialogFocusItem.Property.Type == null) || (DialogFocusItem.Property.Type != "Open"))) InventoryItemMouthPlugGagSetType("Open");
+	if ((MouseX >= 1175) && (MouseX <= 1400) && (MouseY >= 550) && (MouseY <= 775) && (DialogFocusItem.Property.Type != null)) InventoryItemMouthPlugGagSetType(null);
+	if ((MouseX >= 1600) && (MouseX <= 1825) && (MouseY >= 550) && (MouseY <= 775) && ((DialogFocusItem.Property.Type == null) || (DialogFocusItem.Property.Type != "Open"))) InventoryItemMouthPlugGagSetType("Open");
 }
 
 // Sets the gag type (Plug, Open)
