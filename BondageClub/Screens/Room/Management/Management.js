@@ -312,6 +312,7 @@ function ManagementFindClubSlaveRandomIntro() {
 	}
 	InventoryWear(ManagementRandomGirl, "ClubSlaveCollar", "ItemNeck");
 	CharacterSetCurrent(ManagementRandomGirl);
+	ManagementRandomGirl.CurrentDialog = DialogFind(ManagementRandomGirl, "ClubSlaveIntroText" + Intro);
 
 }
 
@@ -479,7 +480,10 @@ function ManagementClubSlaveActiviy(ActivityType, RepChange) {
 // If the player talked and played with the club slave, there's a 50% chance she will go to the player's room
 function ManagementClubSlaveVisitRoom() {
 	if ((ManagementRandomTalkCount >= 2) && (ManagementRandomActivityCount >= 2) && ManagementVisitRoom && ManagementRandomGirl.CanTalk()) {
+		CommonSetScreen("Room", "Private");
 		PrivateAddCharacter(ManagementRandomGirl, "Submissive");
+		CommonSetScreen("Room", "Management");
+		ManagementBackground = "MainHall";
 		ManagementRandomGirl.Stage = "ClubSlaveVisit";
 		ManagementRandomGirl.CurrentDialog = DialogFind(ManagementRandomGirl, "ClubSlaveWillVisit");
 	}
