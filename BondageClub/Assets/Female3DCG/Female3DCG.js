@@ -402,7 +402,7 @@ var AssetFemale3DCG = [
 			{ Name: "NylonRope", Value: 15, Time: 15 },
 			{ Name: "HempRope", Value: 30, Time: 15, Difficulty: 3 },
 			{ Name: "LeatherBelt", Value: 25, Time: 10, RemoveTime: 5, AllowLock: true },
-			{ Name: "Irish8", Value: 25, Time: 10, RemoveTime: 5, AllowLock: true },
+			{ Name: "Irish8Cuffs", Value: 25, Time: 10, RemoveTime: 5, AllowLock: true },
 			{ Name: "SuspensionHempRope", SelfBondage: false, Random: false, RemoveAtLogin: true, SetPose: ["Suspension", "LegsClosed"], Effect: ["Freeze", "Prone"], Value: -1, Height: 150, Time: 30, Difficulty: 3, Alpha: [[125, 850, 250, 150]], ExpressionTrigger: [{Group: "Blush", Name: "High", Timer: 30}, {Group: "Eyebrows", Name: "Raised", Timer: 10}], Prerequisite: "NotChained" },
 			{ Name: "DuctTape", Value: 50, Time: 15, RemoveTime: 10, BuyGroup: "DuctTape" },
 			{ Name: "MermaidRopeTie", Value: 30, Time: 15, Difficulty: 3 }
@@ -677,7 +677,7 @@ var AssetFemale3DCG = [
 		Color: ["Default"],
 		Left: 150,
 		Top: 50,
-		Zone: [[150, 35, 200, 125]],
+		Zone: [[175, 25, 150, 125]],
 		Asset: [
 			{ Name: "ClothBlindfold", Effect: ["BlindLight", "Prone"], Hide: ["Glasses"], Value: 20, Time: 5 },
 			{ Name: "LeatherBlindfold", Effect: ["BlindNormal", "Prone"], Hide: ["Glasses"], Value: 40, Time: 5, AllowLock: true },
@@ -690,7 +690,7 @@ var AssetFemale3DCG = [
 		]
 	},
 	
-		{
+	{
 		Group: "ItemEars",
 		Category: "Item",
 		Priority: 1,
@@ -699,7 +699,7 @@ var AssetFemale3DCG = [
 		Color: ["Default"],
 		Left: 150,
 		Top: 50,
-       Zone: [[125, 25, 45, 150], [320, 25, 45, 150]],
+		Zone: [[125, 25, 50, 125], [325, 25, 50, 125]],
 		Asset: [
 		    { Name: "LightDutyEarPlugs", Visible: false, Effect: ["Prone", "DeafLight"], Difficulty: 50, Value: 30, Time: 5 },
 		    { Name: "HeavyDutyEarPlugs", Visible: false, Effect: ["DeafHeavy", "Prone"], Difficulty: 50, Value: 40, Time: 5 }
