@@ -753,9 +753,9 @@ var AssetFemale3DCG = [
 		Top: -250,
 		Zone: [[25, 580, 75, 410], [400, 580, 75, 410]],
 		Asset: [
-			{ Name: "WoodenBox", RemoveAtLogin: true, Effect: ["BlindNormal", "Prone", "Enclose", "GagLight", "Freeze"], Enable: true, Value: -1, Time: 15, RemoveTime: 10, Difficulty: 4 },
-			{ Name: "MilkCan", RemoveAtLogin: true, Effect: ["BlindHeavy", "Prone", "Enclose", "GagHeavy", "Freeze"], SetPose: ["Kneel"], Enable: true, Value: -1, Time: 15, RemoveTime: 10, Difficulty: 5 },
-			{ Name: "WaterCell", RemoveAtLogin: true, Effect: ["Prone", "Enclose", "GagHeavy", "Freeze"], SetPose: ["Suspension", "LegsClosed"], Block: ["ItemFeet"], Enable: true, Value: -1, Time: 15, RemoveTime: 15, Difficulty: 5 }
+			{ Name: "WoodenBox", RemoveAtLogin: true, Effect: ["BlindNormal", "Prone", "Enclose", "GagLight", "Freeze"], Value: -1, Time: 15, RemoveTime: 10, Difficulty: 4 },
+			{ Name: "MilkCan", RemoveAtLogin: true, Effect: ["BlindHeavy", "Prone", "Enclose", "GagHeavy", "Freeze"], SetPose: ["Kneel"], Value: -1, Time: 15, RemoveTime: 10, Difficulty: 5 },
+			{ Name: "WaterCell", RemoveAtLogin: true, Effect: ["Prone", "Enclose", "GagHeavy", "Freeze"], SetPose: ["Suspension", "LegsClosed"], Block: ["ItemFeet"], Value: -1, Time: 15, RemoveTime: 15, Difficulty: 5 }
 		]
 	}
 
