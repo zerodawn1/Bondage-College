@@ -181,7 +181,7 @@ function ServerAppearanceLoadFromBundle(C, AssetFamily, Bundle, SourceMemberNumb
 	var Appearance = [];
 
 	// Reapply any item that was equipped and isn't enable, same for owner locked items if the source member isn't the owner
-	if (SourceMemberNumber != null)
+	if ((SourceMemberNumber != null) && (C.ID == 0))
 		for (var A = 0; A < C.Appearance.length; A++)
 			if (!C.Appearance[A].Asset.Enable)
 				Appearance.push(C.Appearance[A]);
@@ -206,7 +206,7 @@ function ServerAppearanceLoadFromBundle(C, AssetFamily, Bundle, SourceMemberNumb
 				// Sets the item properties and make sure a non-owner cannot add an owner lock
 				if (Bundle[A].Property != null) {
 					NA.Property = Bundle[A].Property;
-					if ((SourceMemberNumber != null) && (C.Ownership != null) && (C.Ownership.MemberNumber != null) && (C.Ownership.MemberNumber != SourceMemberNumber) && InventoryOwnerOnlyItem(NA)) {
+					if ((SourceMemberNumber != null) && (C.ID == 0) && (C.Ownership != null) && (C.Ownership.MemberNumber != null) && (C.Ownership.MemberNumber != SourceMemberNumber) && InventoryOwnerOnlyItem(NA)) {
 						var Lock = InventoryGetLock(NA);
 						if ((Lock != null) && (Lock.Property != null)) delete Item.Property.LockMemberNumber;
 					}
@@ -228,7 +228,7 @@ function ServerAppearanceLoadFromBundle(C, AssetFamily, Bundle, SourceMemberNumb
 					}
 
 				// Make sure we don't push an item that's disabled, coming from another player	
-				if (CanPush && !NA.Asset.Enable && (SourceMemberNumber != null)) CanPush = false;
+				if (CanPush && !NA.Asset.Enable && (SourceMemberNumber != null) && (C.ID == 0)) CanPush = false;
 				if (CanPush) Appearance.push(NA);
 				break;
 

@@ -77,7 +77,7 @@ function EmptySlaveMarketTrainingLevelIs(TestLevel) {
 function EmptySlaveMarketTrainingProgress(Intensity) {
 	
 	// Intensity of activity gets added minus from 0 to 3 of random decay
-	CurrentCharacter.TrainingIntensity = CurrentCharacter.TrainingIntensity + parseInt(Intensity) - Math.floor(Math.Random() * 4);
+	CurrentCharacter.TrainingIntensity = CurrentCharacter.TrainingIntensity + parseInt(Intensity) - Math.floor(Math.random() * 4);
 	if (CurrentCharacter.TrainingIntensity < 0) CurrentCharacter.TrainingIntensity = 0;
 	if (CurrentCharacter.TrainingIntensity > 10) CurrentCharacter.TrainingIntensity = 10;
 	CurrentCharacter.TrainingCount++;
@@ -100,10 +100,14 @@ function EmptySlaveMarketTrainingProgress(Intensity) {
 
 // When the slave market training ends
 function EmptySlaveMarketTrainingEnd(Status) {
+	var Money = CurrentCharacter.TrainingCountPerfect * 3;
+	DialogLeave();
 	if (Status != "Success") DialogChangeReputation("Dominant", -3);
-	else CharacterChangeMoney(Player, 10);
+	else CharacterChangeMoney(Player, Money);
 	CommonSetScreen("Room", "SlaveMarket");
-	SlaveMarketMistress.CurrentDialog = DialogFind("Training" + Status);
+	SlaveMarketMistress.CurrentDialog = DialogFind(SlaveMarketMistress, "Training" + Status).replace("MoneyAmount", Money.toString());
 	SlaveMarketMistress.Stage = (Status == "Success") ? "42" : "43";
+	CharacterDelete("NPC_SlaveMarket_SlaveToTrain");
+	delete CommonCSVCache["Screens/Room/SlaveMarket/Dialog_NPC_SlaveMarket_SlaveToTrain.csv"];
 	CharacterSetCurrent(SlaveMarketMistress);
 }
