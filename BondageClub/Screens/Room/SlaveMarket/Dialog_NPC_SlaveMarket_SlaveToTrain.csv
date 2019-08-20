@@ -78,7 +78,7 @@ TrainingEnd,,,"(A maid comes to inform you that the training session is over, an
 1300,,(Kiss her.),(You kiss her lovingly to keep her in the mood.),SlaveMarketTrainingProgress(1),CurrentCharacter.CanTalk()
 1300,,(Massage her breast.),(You massage her breast slowly as she moans from the pleasure.),SlaveMarketTrainingProgress(3),!CurrentCharacter.IsBreastChaste()
 1300,,(Masturbate her.),(You masturbate her skillfully as she moans loudly from the pleasure.),SlaveMarketTrainingProgress(5),!CurrentCharacter.IsVulvaChaste()
-1300,,(Eat her.),(She screams from the incontrollable pleasure as you eat her pussy with delight.),SlaveMarketTrainingProgress(7),!CurrentCharacter.IsVulvaChaste()
+1300,,(Eat her.),(She screams from the uncontrollable pleasure as you eat her pussy with delight.),SlaveMarketTrainingProgress(7),!CurrentCharacter.IsVulvaChaste()
 1300,,(Give up and go back.),,"SlaveMarketTrainingEnd(""Fail"")",
 1900,1901,Your training is done.,(She nods happily and seems to have learned from you.  Your training had positive effects.),,CurrentCharacter.CanTalk()
 1900,1901,Next time it will be harsher.,(She gulps but seems to have learned from you.  Your training had positive effects.),"DialogChangeReputation(""Dominant"", 3)",CurrentCharacter.CanTalk()

@@ -352,7 +352,7 @@ function AppearanceLoad() {
 	CharacterAppearanceBackup = JSON.parse(JSON.stringify(C.Appearance));
 }
 
-// Run the characther appearance selection screen 
+// Run the character appearance selection screen 
 function AppearanceRun() {
 	var C = CharacterAppearanceSelection;
 	
