@@ -75,7 +75,7 @@ function AssetAdd(NewAsset) {
 		IsLock: (NewAsset.IsLock == null) ? false : NewAsset.IsLock,
 		OwnerOnly: (NewAsset.OwnerOnly == null) ? false : NewAsset.OwnerOnly,
 		ExpressionTrigger : NewAsset.ExpressionTrigger,
-		Layer: BuildLayer(NewAsset.Layer),
+		Layer: AssetBuildLayer(NewAsset.Layer),
 		AllowEffect: NewAsset.AllowEffect,
 		AllowBlock: NewAsset.AllowBlock,
 		AllowType: NewAsset.AllowType
@@ -86,7 +86,7 @@ function AssetAdd(NewAsset) {
 }
 
 // Builds layers for an asset
-function BuildLayer(NewLayers) {
+function AssetBuildLayer(NewLayers) {
 	if (NewLayers == null || !Array.isArray(NewLayers)) return null;
 	var Layers = [];
 	for (var L = 0; L < NewLayers.length; L++) {
