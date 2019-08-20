@@ -64,6 +64,16 @@ ServerMessageOfferStartTrial,,,"SourceCharacter is offering you to start a trial
 ServerMessageStartTrial,,,The Bondage Club is pleased to announce that SourceCharacter is starting a 3 days minimum trial period as a submissive.
 ServerMessageOfferEndTrial,,,"SourceCharacter has prepared a great collaring ceremony.  A maid brings a slave collar, which her submissive must consent to wear."
 ServerMessageEndTrial,,,The Bondage Club is proud to announce that SourceCharacter is now fully collared.  Her fate is in her Mistress hands.
+ServerMessageOwnerRuleChangeAllow,,,Your owner is now allowing you to access your wardrobe and change clothes.
+ServerMessageOwnerRuleChangeBlock1Hour,,,Your owner has blocked your wardrobe access for an hour.  You won't be able to change clothes.
+ServerMessageOwnerRuleChangeBlock1Day,,,Your owner has blocked your wardrobe access for a day.  You won't be able to change clothes.
+ServerMessageOwnerRuleChangeBlock1Week,,,Your owner has blocked your wardrobe access for a week.  You won't be able to change clothes.
+ServerMessageOwnerRuleChangeBlock,,,Your owner has blocked your wardrobe access.  You won't be able to change clothes until that rule is revoked.
+ServerMessageOwnerRuleWhisperAllow,,,Your owner is now allowing you to whisper to other members when she's there.
+ServerMessageOwnerRuleWhisperBlock,,,Your owner is now preventing you from whispering to other members when she's there.
+ServerMessageOwnerRuleKeyAllow,,,Your owner is now allowing you to have keys.  You can buy keys from the club shop.
+ServerMessageOwnerRuleKeyConfiscate,,,Your owner has confiscated your keys.  All your regular keys are lost.
+ServerMessageOwnerRuleKeyBlock,,,Your owner is now preventing you from getting new keys.  The club shop will not sell keys to you anymore.
 LockMemberNumber,,,Member number on lock:
 TimerLeft,,,Time left:
 TimerRestart,,,SourceCharacter restarts the five minute timer padlock on DestinationCharacter BodyPart.
