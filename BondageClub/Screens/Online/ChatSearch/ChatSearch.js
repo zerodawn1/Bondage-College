@@ -22,11 +22,9 @@ function ChatSearchRun() {
 		var Y = 25;
 		for (var C = 0; C < ChatSearchResult.length && C < 24; C++) {
 
-			var HasFriends = (ChatSearchResult[C].Friends != null) && (ChatSearchResult[C].Friends.length > 0);
-
 			// Draw the room rectangle
-			DrawButton(X, Y, 630, 85, "", HasFriends ? "#ffe5e5" : "White");
-			DrawTextFit((HasFriends ? (ChatSearchResult[C].Friends.length.toString() + ": ") : "") + ChatSearchResult[C].Name + " - " + ChatSearchResult[C].Creator + " " + ChatSearchResult[C].MemberCount + "/" + ChatSearchResult[C].MemberLimit + "", X + 315, Y + 25, 620, "black");
+			DrawButton(X, Y, 630, 85, "", ((ChatSearchResult[C].Friends != null) && (ChatSearchResult[C].Friends.length > 0)) ? "#CFFFCF" : "White");
+			DrawTextFit(ChatSearchResult[C].Name + " - " + ChatSearchResult[C].Creator + " " + ChatSearchResult[C].MemberCount + "/" + ChatSearchResult[C].MemberLimit + "", X + 315, Y + 25, 620, "black");
 			DrawTextFit(ChatSearchResult[C].Description, X + 315, Y + 62, 620, "black");
 
 			// Moves the next window position
@@ -36,28 +34,33 @@ function ChatSearchRun() {
 				Y = Y + 109;
 			}
 		}
-	} else DrawText(TextGet("NoChatRoomFound"), 1000, 450, "White", "Gray");
 
-	if (!CommonIsMobile && (MouseX >= 25) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 875)) {
-		var X = 25;
-		var Y = 25;
-		for (var C = 0; C < ChatSearchResult.length && C < 24; C++) {
-			if ((MouseX >= X) && (MouseX <= X + 630) && (MouseY >= Y) && (MouseY <= Y + 85) && (ChatSearchResult[C].Friends != null) && (ChatSearchResult[C].Friends.length > 0)) {
-				var Friends = ChatSearchResult[C].Friends[0].Name + " (" + ChatSearchResult[C].Friends[0].MemberNumber.toString() + ")";
-				for (var F = 1; F < ChatSearchResult[C].Friends.length; F++) {
-					Friends += ", " + ChatSearchResult[C].Friends[F].Name + " (" + ChatSearchResult[C].Friends[F].MemberNumber.toString() + ")";
+		// Draws the hovering text of friends in the current room
+		if (!CommonIsMobile && (MouseX >= 25) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 875)) {
+			
+			// Finds the room where the mouse is hovering
+			X = 25;
+			Y = 25;
+			for (var C = 0; C < ChatSearchResult.length && C < 24; C++) {
+
+				// Builds the friend list and shows it
+				if ((MouseX >= X) && (MouseX <= X + 630) && (MouseY >= Y) && (MouseY <= Y + 85) && (ChatSearchResult[C].Friends != null) && (ChatSearchResult[C].Friends.length > 0)) {
+					DrawTextWrap(TextGet("FriendsInRoom") + " " + ChatSearchResult[C].Name, (X > 1000) ? 685 : X + 660, (Y > 352) ? 352 : Y, 630, 60, "black", "#FFFF88", 1);
+					for (var F = 0; F < ChatSearchResult[C].Friends.length; F++)
+						DrawTextWrap(ChatSearchResult[C].Friends[F].MemberName + " (" + ChatSearchResult[C].Friends[F].MemberNumber + ")", (X > 1000) ? 685 : X + 660, ((Y > 352) ? 352 : Y) + 60 + F * 60, 630, 60, "black", "#FFFF88", 1);
 				}
-				DrawButtonHover(X, Y, 630, 85, Friends);
+
+				// Moves the next window position
+				X = X + 660;
+				if (X > 1500) {
+					X = 25;
+					Y = Y + 109;
+				}
 			}
 
-			// Moves the next window position
-			X = X + 660;
-			if (X > 1500) {
-				X = 25;
-				Y = Y + 109;
-			}
 		}
-	}
+		
+	} else DrawText(TextGet("NoChatRoomFound"), 1000, 450, "White", "Gray");
 
 	// Draw the bottom controls
 	if (ChatSearchMessage == "") ChatSearchMessage = "EnterName";

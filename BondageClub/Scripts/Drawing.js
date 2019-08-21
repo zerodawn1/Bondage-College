@@ -472,15 +472,14 @@ function DrawBackNextButton(Left, Top, Width, Height, Label, Color, Image, BackT
 	MainCanvas.lineTo(Left + Width - 5, Top + Height / 2);
 	MainCanvas.lineTo(Left + Width - 15, Top + Height - Height / 5);
 	MainCanvas.stroke();
-	MainCanvas.closePath();	
-
-	if (BackText == null) BackText = () => "MISSING VALUE FOR: BACK TEXT";
-	if (NextText == null) NextText = () => "MISSING VALUE FOR: NEXT TEXT";
+	MainCanvas.closePath();
 
 	// Draw the hovering text
-	if ((MouseX >= Left) && (MouseX <= Left + Width) && (MouseY >= Top) && (MouseY <= Top + Height)) {
+	if (BackText == null) BackText = () => "MISSING VALUE FOR: BACK TEXT";
+	if (NextText == null) NextText = () => "MISSING VALUE FOR: NEXT TEXT";
+	if ((MouseX >= Left) && (MouseX <= Left + Width) && (MouseY >= Top) && (MouseY <= Top + Height))
 		DrawButtonHover(Left, Top, Width, Height, (MouseX > Split) ? NextText(): BackText());
-	}
+
 }
 
 // Draw the hovering text
