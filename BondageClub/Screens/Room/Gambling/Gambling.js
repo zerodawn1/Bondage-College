@@ -17,6 +17,7 @@ var GamblingAppearanceFirst = null;
 var GamblingAppearanceSecond = null;
 var GamblingAppearancePlayer = null;
 var GamblingIllegalChange = false; //Sub Player lost Cloth although forbidden by Mistress
+var ToothpickCount = 0; //aviable Toothpicks
 
 // Returns TRUE if a dialog is permitted
 function GamblingIsSubsRestrained() { return (GamblingFirstSub.IsRestrained() || !GamblingFirstSub.CanTalk() || GamblingSecondSub.IsRestrained() || !GamblingSecondSub.CanTalk());}
@@ -26,9 +27,15 @@ function GamblingSecondSubRestrained() {return (GamblingSecondSub.IsRestrained()
 function GamblingSecondCanPlay() {return (!Player.IsRestrained() && Player.CanTalk() && !GamblingSecondSub.IsRestrained() && GamblingSecondSub.CanTalk());}
 function GamblingCanPlaySimpleDice() {return GamblingFirstCanPlay()}
 function GamblingCanPlayTwentyOne() {return (GamblingFirstCanPlay() && ReputationGet("Gambling") >= 10);}
+function GamblingCanPlayToothpick() {return (GamblingFirstCanPlay() && ReputationGet("Gambling") >= 20);}
 function GamblingCanPlayFox() {return (GamblingSecondCanPlay() && (ReputationGet("Gambling") >= 30) && (Player.Money >= 10));}
 function GamblingCanPlayStreetRoissy() {return (GamblingSecondCanPlay() && (ReputationGet("Gambling") >= 40) && (Player.Money >= 30));}
 function GamblingCanPlayDaredSix() {return (GamblingSecondCanPlay() && (ReputationGet("Gambling") >= 50) && (Player.Money >= 50));}
+
+function GamblingToothpickCanPickOne() {return ToothpickCount >= 1}
+function GamblingToothpickCanPickTwo() {return ToothpickCount >= 2}
+function GamblingToothpickCanPickThree() {return ToothpickCount >= 3}
+
 
 // Loads the Gambling Hall
 function GamblingLoad() {
@@ -163,6 +170,76 @@ function GamblingSimpleDiceController(SimpleDiceState) {
 			GamblingFirstSub.Stage = 0;
 	}
 }
+
+
+// Draws the Toothpicks
+function GamblingShowToothpickStack () {
+	for (var i = 0; i < ToothpickCount; i++) {
+		DrawImageResize("Screens/Room/Gambling/toothpick.png", 410, 45 + 26 * i, 160, 7);
+	}
+	DrawText(ToothpickCount, 490, 25, "white", "black")
+	return true;
+}
+
+//Controller for Toothpick
+function GamblingToothpickController (ToothpickState) {
+	if (ToothpickState == "new") {
+		ToothpickCount = 15;
+		GamblingFirstSub.Stage = 200
+	}
+
+	else if (ToothpickState == "give_up") {
+		GamblingFirstSub.Stage = 203;
+	}
+	
+	else if (ToothpickState == "win") {
+		ReputationProgress("Gambling", 1);
+		GamblingFirstSub.AllowItem = true;
+	}
+	
+	else if (ToothpickState == "lost") {
+		var difficulty = Math.floor(Math.random() * 5) + 2
+		InventoryWearRandom(Player, "ItemArms", difficulty);
+		InventoryWearRandom(Player, "ItemMouth", difficulty); 
+		InventoryWearRandom(Player, "ItemLegs", difficulty); 
+		InventoryWearRandom(Player, "ItemFeet", difficulty); 
+	}
+
+	else {
+		ToothpickCount -= ToothpickState
+
+		// has player lost?
+		if (ToothpickCount <= 0) {
+			GamblingFirstSub.Stage = 202;
+			GamblingFirstSub.CurrentDialog = DialogFind(GamblingFirstSub, "ToothpickLost");
+		}
+
+		// NPC
+		if (ToothpickCount > 0) {
+			var npc_choice = GamblingToothpickNPCChoice()
+			GamblingFirstSub.Stage = 201
+			GamblingFirstSub.CurrentDialog = DialogFind(GamblingFirstSub, "Toothpick" + npc_choice.toString());
+			ToothpickCount -= npc_choice
+			GamblingFirstSub.Stage = 200
+		
+			// has NPC lost?
+			if (ToothpickCount <= 0) {
+				GamblingFirstSub.Stage = 201;
+			}
+		}
+	}
+}
+
+function GamblingToothpickNPCChoice() {
+	var max_pick = (ToothpickCount >= 3) ? 3 : ToothpickCount
+	var choice = Math.floor(Math.random() * max_pick) + 1;
+	if (ToothpickCount == 6) {choice = 1}
+	else if (ToothpickCount == 4) {choice = 3}
+	else if (ToothpickCount == 3) {choice = 2}
+	else if (ToothpickCount == 2) {choice = 1}
+	return choice
+}
+
 
 //Controller for fifteen and six
 function GamblingTwentyOneController(TwentyOneState) {
@@ -496,6 +573,11 @@ function GamblingDaredSixController (DaredSixState){
 		}
 	}		
 }	
+
+
+
+
+
 
 //get dressinglevel for Caracters
 function GamblingDressingLevel(C) {

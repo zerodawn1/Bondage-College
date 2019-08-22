@@ -722,3 +722,8 @@ function CharacterAppearanceWardrobeLoad(C) {
 	CharacterAppearanceWardrobeMode = true;
 	CharacterAppearanceWardrobeText = TextGet("WardrobeNameInfo");
 }
+
+// generated random colorcode
+function getRandomColor() {
+	return '#' + (0x1000000 + Math.random() * 0xFFFFFF).toString(16).substr(1,6)
+}
