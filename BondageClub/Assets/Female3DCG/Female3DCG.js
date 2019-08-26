@@ -739,8 +739,8 @@ var AssetFemale3DCG = [
 		Top: 50,
 		Zone: [[125, 25, 50, 125], [325, 25, 50, 125]],
 		Asset: [
-			{ Name: "LightDutyEarPlugs", Visible: false, Effect: ["Prone", "DeafLight"], Difficulty: 50, Value: 30, Time: 5 },
-			{ Name: "HeavyDutyEarPlugs", Visible: false, Effect: ["DeafHeavy", "Prone"], Difficulty: 50, Value: 40, Time: 5 }
+			{ Name: "LightDutyEarPlugs", Visible: false, Effect: ["DeafLight"], Difficulty: 50, Value: 30, Time: 5 },
+			{ Name: "HeavyDutyEarPlugs", Visible: false, Effect: ["DeafHeavy"], Difficulty: 50, Value: 40, Time: 5 }
 		]
 	},
 
