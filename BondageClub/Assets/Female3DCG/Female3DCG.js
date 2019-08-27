@@ -48,6 +48,7 @@ var AssetFemale3DCG = [
 			{ Name: "TennisSkirt1", ParentItem: "TennisShirt1", Expose: ["ItemVulva", "ItemButt"] },
 			{ Name: "Jeans1" },
 			{ Name: "Shorts1" },
+			{ Name: "Pajama1", Random: false, Priority: 24 },
 			{ Name: "MistressBottom", Hide: ["Panties"], Value: -1 }
 		]
 	},
