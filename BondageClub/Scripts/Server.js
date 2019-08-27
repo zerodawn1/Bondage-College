@@ -322,7 +322,13 @@ function ServerAccountBeep(data) {
 		ServerBeep.ChatRoomName = data.ChatRoomName;
 		ServerBeep.Timer = CurrentTime + 10000;
 		ServerBeep.Message = DialogFind(Player, "BeepFrom") + " " + ServerBeep.MemberName + " (" + ServerBeep.MemberNumber.toString() + ")";
-		if (ServerBeep.ChatRoomName != null) ServerBeep.Message = ServerBeep.Message + " " + DialogFind(Player, "InRoom") + " \"" + ServerBeep.ChatRoomName + "\"";
+		if (ServerBeep.ChatRoomName != null) {
+			ServerBeep.Message = ServerBeep.Message + " " + DialogFind(Player, "InRoom") + " \"" + ServerBeep.ChatRoomName + "\"";
+		} 
+		FriendListLastBeeps.set(ServerBeep.MemberNumber, { Time: ChatRoomCurrentTime(), Message: ServerBeep.Message });
+		if (CurrentScreen == "FriendList") {
+			ServerSend("AccountQuery", { Query: "OnlineFriends" });
+		}
 	}
 }
 
