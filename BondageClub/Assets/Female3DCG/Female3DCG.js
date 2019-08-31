@@ -542,7 +542,7 @@ var AssetFemale3DCG = [
 		Zone: [[150, 340, 200, 80]],
 		Asset: [
 			{ Name: "NylonRopeHarness", Value: 25, Prerequisite: "AccessTorso", Time: 25 },
-			{ Name: "HempRopeHarness", Value: 50, Prerequisite: "AccessTorso", Time: 25, RemoveTime: 35, Difficulty: 3 },
+			{ Name: "HempRopeHarness", Value: 50, Extended: true, Prerequisite: "AccessTorso", Time: 25, RemoveTime: 35, Difficulty: 3, AllowType: ["Diamond"]},
 			{ Name: "LeatherHarness", Value: 100, Prerequisite: "AccessTorso", Time: 15, RemoveTime: 10, Difficulty: 50, AllowLock: true },
 			{ Name: "AdultBabyHarness", Value: 80, Priority: 29, Time: 15, RemoveTime: 10, Difficulty: 3, AllowLock: true, ExpressionTrigger: [{Group: "Blush", Name: "Low", Timer: 10}] },
 			{ 
@@ -551,8 +551,7 @@ var AssetFemale3DCG = [
 				 DynamicPreviewIcon: () => {return (SpankingCurrentType)? SpankingCurrentType : InventoryGet(Player, "ItemHands").Property.Type}, 
 				 DynamicAllowInventoryAdd: () => {return InventoryIsWorn(Player, "ItemHands", "SpankingToys")},
 				 DynamicExpressionTrigger: () => {return SpankingInventory.filter(x=> x.Name == ((SpankingCurrentType)? SpankingCurrentType : InventoryGet(Player, "ItemHands").Property.Type))[0].ExpressionTrigger}
-			},
-			{ Name: "DiamondTie", Value: 50, Prerequisite: "AccessTorso", Time: 25, RemoveTime: 35, Difficulty: 3 }
+			}
 		]
 	},
 

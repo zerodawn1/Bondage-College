@@ -148,6 +148,11 @@ DuctTapeHeadSetDouble,,,SourceCharacter takes a piece of duct tape for Destinati
 DuctTapeHeadSetWrap,,,SourceCharacter wraps some duct tape onto DestinationCharacter's face.
 DuctTapeHeadTypeMummy,,,Mummy
 DuctTapeHeadSetMummy,,,SourceCharacter wraps DestinationCharacter's head in tape with multiple layers. 
+SelectHarnessType,,,Select the type of Harness
+HempRopeHarnessTypeBasic,,,Basic Tie
+HempRopeHarnessTypeDiamond,,,Diamond Tie
+HempRopeHarnessSetBasic,,,SourceCharacter uses the rope on DestinationCharacter's to do a basic harness.
+HempRopeHarnessSetDiamond,,,SourceCharacter uses the rope on DestinationCharacter's to do a Diamond style harness.
 Intensity-1,,,Item intensity: Disabled
 Intensity0,,,Item intensity: Low
 Intensity1,,,Item intensity: Medium
