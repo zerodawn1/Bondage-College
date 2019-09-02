@@ -106,7 +106,7 @@ StraitJacketPoseLoose,,,Loose
 StraitJacketPoseNormal,,,Normal
 StraitJacketPoseSnug,,,Snug
 StraitJacketPoseTight,,,Tight
-StraitJacketRestrainLoose,,,SourceCharacter loosens the straps on DestinationCharacter's straitjacket.
+StraitJacketRestrainNone,,,SourceCharacter loosens the straps on DestinationCharacter's straitjacket.
 StraitJacketRestrainNormal,,,SourceCharacter adjusts the straps normally on DestinationCharacter's straitjacket.
 StraitJacketRestrainSnug,,,SourceCharacter snugs the straps on DestinationCharacter's straitjacket.
 StraitJacketRestrainTight,,,SourceCharacter tightens the straps on DestinationCharacter's straitjacket.
