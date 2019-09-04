@@ -48,7 +48,7 @@ var AssetFemale3DCG = [
 			{ Name: "TennisSkirt1", ParentItem: "TennisShirt1", Expose: ["ItemVulva", "ItemButt"] },
 			{ Name: "Jeans1" },
 			{ Name: "Shorts1" },
-			{ Name: "Pajama1", Random: false, Priority: 24 },
+			{ Name: "Pajama1", Random: false, Priority: 23 },
 			{ Name: "MistressBottom", Hide: ["Panties"], Value: -1 }
 		]
 	},
@@ -124,7 +124,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Shoes",
-		Priority: 23,
+		Priority: 22,
 		ParentGroup: "BodyLower",
 		Clothing: true,
 		AllowPose: ["LegsClosed", "Kneel"],
@@ -284,7 +284,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Hands",
-		Priority: 22,
+		Priority: 24,
 		AllowNone: false,
 		AllowColorize: false,
 		ParentColor: "BodyUpper",
@@ -421,7 +421,7 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemLegs",
 		Category: "Item",
-		Priority: 24,
+		Priority: 23,
 		ParentGroup: "BodyLower",
 		Default: false,
 		IsRestraint: true,
