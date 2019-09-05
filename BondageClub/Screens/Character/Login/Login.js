@@ -107,6 +107,27 @@ function LoginValidCollar() {
 	if ((InventoryGet(Player, "ItemNeck") == null) && (Player.Owner != "")) InventoryWear(Player, "SlaveCollar", "ItemNeck");
 }
 
+// Only players that are club Mistresses can have the Mistress Padlock & Key
+function LoginMistressItems() {
+	if (LogQuery("ClubMistress", "Management")) {
+		InventoryAdd(Player, "MistressGloves", "Gloves", false);
+		InventoryAdd(Player, "MistressBoots", "Shoes", false);
+		InventoryAdd(Player, "MistressTop", "Cloth", false);
+		InventoryAdd(Player, "MistressBottom", "ClothLower", false);
+		InventoryAdd(Player, "MistressPadlock", "ItemMisc", false);
+		InventoryAdd(Player, "MistressPadlockKey", "ItemMisc", false);
+		ServerPlayerInventorySync();
+	} else {
+		InventoryDelete(Player, "MistressPadlock", "ItemMisc", false);
+		InventoryDelete(Player, "MistressPadlockKey", "ItemMisc", false);
+		InventoryDelete(Player, "MistressGloves", "Gloves", false);
+		InventoryDelete(Player, "MistressBoots", "Shoes", false);
+		InventoryDelete(Player, "MistressTop", "Cloth", false);
+		InventoryDelete(Player, "MistressBottom", "ClothLower", false);
+		ServerPlayerInventorySync();
+	}
+}
+
 // When the character logs, we analyze the data
 function LoginResponse(C) {
 
@@ -171,9 +192,7 @@ function LoginResponse(C) {
 			if (LogQuery("JoinedSorority", "Maid") && !InventoryAvailable(Player, "MaidOutfit2", "Cloth")) InventoryAdd(Player, "MaidOutfit2", "Cloth");
 			if ((InventoryGet(Player, "ItemArms") != null) && (InventoryGet(Player, "ItemArms").Asset.Name == "FourLimbsShackles")) InventoryRemove(Player, "ItemArms");
 			LoginValidCollar();
-			
-			// If player is a Club Mistress make sure they have their key and take it away if they are not one
-			if (LogQuery("ClubMistress", "Management")) { InventoryAdd(Player, "ClubMistressKey", "ItemMisc"); } else { InventoryDelete(Player, "ClubMistressKey", "ItemMisc"); }
+			LoginMistressItems();
 
 			// If the player must log back in the cell
 			if (LogQuery("Locked", "Cell")) {

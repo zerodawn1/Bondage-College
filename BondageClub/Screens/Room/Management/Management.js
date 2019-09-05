@@ -61,7 +61,6 @@ function ManagementCannotBeClubSlaveDominant() { return (!InventoryCharacterHasO
 function ManagementCannotBeClubSlaveOwnerLock() { return InventoryCharacterHasOwnerOnlyRestraint(Player) }
 function ManagementCanKiss() { return (Player.CanTalk() && CurrentCharacter.CanTalk()) }
 function ManagementCanMasturbate() { return (Player.CanInteract() && !CurrentCharacter.IsVulvaChaste()) }
-function LockItem(C, AssetGroup, AssetLock, MemberNumber) {InventoryLock(C, InventoryGet(C, AssetGroup), { Asset: AssetGet(C.AssetFamily, "ItemMisc", AssetLock)}, MemberNumber);}
 
 // Returns TRUE if there's no other Mistress in the player private room
 function ManagementNoMistressInPrivateRoom() {
@@ -154,9 +153,9 @@ function ManagementPlayerArmbinder(ChangeRep) {
 function ManagementPlayerRandomRestrain() {
 	CharacterFullRandomRestrain(Player, "Lot");
 	InventoryWear(Player, "MetalChastityBelt", "ItemPelvis");
+	InventoryLock(Player, InventoryGet(Player, "ItemPelvis"), { Asset: AssetGet(C.AssetFamily, "ItemMisc", "MistressPadlock")}, -1);
 	InventoryWear(Player, "MetalChastityBra", "ItemBreast");
-	LockItem(Player, "ItemBreast", "ClubPadlock");
-	LockItem(Player, "ItemPlevis", "ClubPadlock");
+	InventoryLock(Player, InventoryGet(Player, "ItemBreast"), { Asset: AssetGet(C.AssetFamily, "ItemMisc", "MistressPadlock")}, -1);
 	ManagementCanReleaseChastity = false;
 }
 
@@ -409,12 +408,8 @@ function ManagementMistressPay() {
 function ManagementMistressKicked() {
 	LogAdd("BlockChange", "Rule", CurrentTime + 3600000);
 	LogDelete("ClubMistress", "Management");
+	LoginMistressItems();
 	ReputationProgress("Dominant", -6);
-	InventoryDelete(Player, "MistressGloves", "Gloves", false);
-	InventoryDelete(Player, "MistressBoots", "Shoes", false);
-	InventoryDelete(Player, "MistressTop", "Cloth", false);
-	InventoryDelete(Player, "MistressBottom", "ClothLower", false);
-	InventoryDelete(Player, "ClubMistressKey", "ItemMisc", false);
 	ServerPlayerInventorySync();
 }
 

@@ -514,21 +514,12 @@ var AssetFemale3DCG = [
 		Top: 375,
 		Zone: [[150, 420, 200, 80]],
 		Asset: [
-			{ Name: "MetalChastityBelt", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], Value: 250, Prerequisite: "AccessVulva", AllowLock: true, Difficulty: 50, Time: 20, RemoveTime: 10, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
-			{ Name: "StuddedChastityBelt", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], Value: 100, Prerequisite: "AccessVulva", AllowLock: true, Difficulty: 20, Time: 20, RemoveTime: 10, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
+			{ Name: "StraponPanties", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], Value: -1, Prerequisite: "AccessVulva", Time: 15 },
 			{ Name: "LeatherChastityBelt", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], Value: 50, Prerequisite: "AccessVulva", AllowLock: true, Difficulty: 10, Time: 20, RemoveTime: 10, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
-			{ Name: "LeatherCrop", Value: 40, Wear: false, BuyGroup: "LeatherCrop", Bonus: [{ Type: "KidnapDomination", Factor: 3 }], ExpressionTrigger: [{ Group: "Blush", Name: "Low", Timer: 10 }, { Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
-			{ Name: "LeatherWhip", Value: 60, Wear: false, BuyGroup: "LeatherWhip", Bonus: [{ Type: "KidnapBruteForce", Factor: 3 }], ExpressionTrigger: [{ Group: "Blush", Name: "Medium", Timer: 10 }, { Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
-			{ Name: "StraponPanties", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], Value: 50, Prerequisite: "AccessVulva", Time: 15 },
+			{ Name: "StuddedChastityBelt", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], Value: 100, Prerequisite: "AccessVulva", AllowLock: true, Difficulty: 20, Time: 20, RemoveTime: 10, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
+			{ Name: "MetalChastityBelt", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], Value: 200, Prerequisite: "AccessVulva", AllowLock: true, Difficulty: 50, Time: 20, RemoveTime: 10, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
 			{
-				Name: "SpankingToys", Wear: false, Random: false, BuyGroup: "SpankingToys", IgnoreParentGroup: true,
-				DynamicDescription: () => { return (SpankingCurrentType) ? SpankingCurrentType : InventoryGet(Player, "ItemHands").Property.Type },
-				DynamicPreviewIcon: () => { return (SpankingCurrentType) ? SpankingCurrentType : InventoryGet(Player, "ItemHands").Property.Type },
-				DynamicAllowInventoryAdd: () => { return InventoryIsWorn(Player, "ItemHands", "SpankingToys") },
-				DynamicExpressionTrigger: () => { return SpankingInventory.filter(x => x.Name == ((SpankingCurrentType) ? SpankingCurrentType : InventoryGet(Player, "ItemHands").Property.Type))[0].ExpressionTrigger }
-			},
-			{
-				Name: "LoveChastityBelt", Value: 500, Prerequisite: "AccessVulva", Difficulty: 100, Time: 20, RemoveTime: 10, Extended: true,
+				Name: "LoveChastityBelt", Value: 400, Prerequisite: "AccessVulva", Difficulty: 50, Time: 20, RemoveTime: 10, Extended: true,
 				Effect: ["Lock"], OwnerOnly: true,
 				AllowEffect: ["Chaste", "Egged", "Vibrating"],
 				AllowBlock: ["ItemVulva", "ItemButt"],
@@ -566,6 +557,15 @@ var AssetFemale3DCG = [
 					{ Name: "Lock", AllowColorize: false, AllowTypes: ["", "Open", "Closed", "Vibe", "Shock"], HasType: false, NewParentGroupName: "" },
 					{ Name: "ShieldLock", AllowColorize: false, AllowTypes: ["Closed", "Vibe", "Shock"], HasType: false, NewParentGroupName: "" },
 				]
+			},
+			{ Name: "LeatherCrop", Value: 40, Wear: false, BuyGroup: "LeatherCrop", Bonus: [{ Type: "KidnapDomination", Factor: 3 }], ExpressionTrigger: [{ Group: "Blush", Name: "Low", Timer: 10 }, { Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
+			{ Name: "LeatherWhip", Value: 60, Wear: false, BuyGroup: "LeatherWhip", Bonus: [{ Type: "KidnapBruteForce", Factor: 3 }], ExpressionTrigger: [{ Group: "Blush", Name: "Medium", Timer: 10 }, { Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
+			{
+				Name: "SpankingToys", Wear: false, Random: false, BuyGroup: "SpankingToys", IgnoreParentGroup: true,
+				DynamicDescription: () => { return (SpankingCurrentType) ? SpankingCurrentType : InventoryGet(Player, "ItemHands").Property.Type },
+				DynamicPreviewIcon: () => { return (SpankingCurrentType) ? SpankingCurrentType : InventoryGet(Player, "ItemHands").Property.Type },
+				DynamicAllowInventoryAdd: () => { return InventoryIsWorn(Player, "ItemHands", "SpankingToys") },
+				DynamicExpressionTrigger: () => { return SpankingInventory.filter(x => x.Name == ((SpankingCurrentType) ? SpankingCurrentType : InventoryGet(Player, "ItemHands").Property.Type))[0].ExpressionTrigger }
 			}
 		]
 	},
@@ -885,11 +885,11 @@ var AssetFemale3DCG = [
 			{ Name: "IntricatePadlock", Wear: false, Value: 60, Time: 30, IsLock: true, Effect: [] },
 			{ Name: "TimerPadlock", Wear: false, Value: 100, RemoveTimer: 300, IsLock: true, Effect: [] },
 			{ Name: "OwnerPadlock", Wear: false, Value: 100, Time: 10, IsLock: true, OwnerOnly: true, Effect: [] },
-			{ Name: "ClubPadlock", Wear: false, Value: 10, Time: 10, IsLock: true, Effect: [] },
+			{ Name: "MistressPadlock", Wear: false, Value: -1, Time: 10, IsLock: true, Effect: [] },
 			{ Name: "MetalPadlockKey", Wear: false, Value: 15, Effect: ["Unlock-MetalPadlock"] },
 			{ Name: "IntricatePadlockKey", Wear: false, Value: 60, Effect: ["Unlock-IntricatePadlock"] },
 			{ Name: "OwnerPadlockKey", Wear: false, Value: 100, OwnerOnly: true, Effect: ["Unlock-OwnerPadlock"] },
-			{ Name: "ClubMistressKey", Wear: false, Value: -1, Effect: ["Unlock-ClubPadlock"] },
+			{ Name: "MistressPadlockKey", Wear: false, Value: -1, Effect: ["Unlock-MistressPadlock"] },
 			{ Name: "MetalCuffsKey", Wear: false, Value: 25, Effect: ["Unlock-MetalCuffs"], Time: 5 },
 			{ Name: "WoodenMaidTray", Enable: false, Value: -1 },
 			{ Name: "WoodenMaidTrayFull", Enable: false, Value: -1 },

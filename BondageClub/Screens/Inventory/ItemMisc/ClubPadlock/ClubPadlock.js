@@ -1,11 +1,11 @@
 "use strict";
 
 // Loads the item extension properties
-function InventoryItemMiscClubPadlockLoad() {
+function InventoryItemMiscMistressPadlockLoad() {
 }
 
 // Draw the extension screen
-function InventoryItemMiscClubPadlockDraw() {
+function InventoryItemMiscMistressPadlockDraw() {
 	DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
 	DrawRect(1387, 225, 225, 275, "white");
 	DrawImageResize("Assets/" + DialogFocusItem.Asset.Group.Family + "/" + DialogFocusItem.Asset.Group.Name + "/Preview/" + DialogFocusItem.Asset.Name + ".png", 1389, 227, 221, 221);
@@ -16,6 +16,6 @@ function InventoryItemMiscClubPadlockDraw() {
 }
 
 // Catches the item extension clicks
-function InventoryItemMiscClubPadlockClick() {
+function InventoryItemMiscMistressPadlockClick() {
 	if ((MouseX >= 1885) && (MouseX <= 1975) && (MouseY >= 25) && (MouseY <= 110)) DialogFocusItem = null;
 }
