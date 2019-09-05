@@ -30,7 +30,7 @@ function ManagementCanPlayWithoutPermission() { return (!ManagementMistressAllow
 function ManagementOwnerFromBondageCollege() { return ((Player.Owner == "NPC-Sidney") || (Player.Owner == "NPC-Amanda") || (Player.Owner == "NPC-Jennifer")) }
 function ManagementOwnerInPrivateRoom() { return PrivateOwnerInRoom() }
 function ManagementOwnerAway() { return !((Player.Owner == "NPC-Sidney") || (Player.Owner == "NPC-Amanda") || (Player.Owner == "NPC-Jennifer")) }
-function ManagementAllowReleaseChastity() { return (Player.IsChaste() && ManagementCanReleaseChastity) }
+function ManagementAllowReleaseChastity() { return (Player.IsChaste() && ManagementCanReleaseChastity && !InventoryOwnerOnlyItem(InventoryGet(Player, "ItemBreast"))&& !InventoryOwnerOnlyItem(InventoryGet(Player, "ItemPelvis"))) }
 function ManagementRefuseReleaseChastity() { return (Player.IsChaste() && !ManagementCanReleaseChastity) }
 function ManagementOwnerPending() { return (CommonTime() < ManagementMistressReleaseTimer) }
 function ManagementOwnerAccepted() { return ((CommonTime() >= ManagementMistressReleaseTimer) && ManagementCanReleaseChastity) }
@@ -61,6 +61,7 @@ function ManagementCannotBeClubSlaveDominant() { return (!InventoryCharacterHasO
 function ManagementCannotBeClubSlaveOwnerLock() { return InventoryCharacterHasOwnerOnlyRestraint(Player) }
 function ManagementCanKiss() { return (Player.CanTalk() && CurrentCharacter.CanTalk()) }
 function ManagementCanMasturbate() { return (Player.CanInteract() && !CurrentCharacter.IsVulvaChaste()) }
+function LockItem(C, AssetGroup, AssetLock, MemberNumber) {InventoryLock(C, InventoryGet(C, AssetGroup), { Asset: AssetGet(C.AssetFamily, "ItemMisc", AssetLock)}, MemberNumber);}
 
 // Returns TRUE if there's no other Mistress in the player private room
 function ManagementNoMistressInPrivateRoom() {
@@ -154,6 +155,8 @@ function ManagementPlayerRandomRestrain() {
 	CharacterFullRandomRestrain(Player, "Lot");
 	InventoryWear(Player, "MetalChastityBelt", "ItemPelvis");
 	InventoryWear(Player, "MetalChastityBra", "ItemBreast");
+	LockItem(Player, "ItemBreast", "ClubPadlock");
+	LockItem(Player, "ItemPlevis", "ClubPadlock");
 	ManagementCanReleaseChastity = false;
 }
 
@@ -411,8 +414,7 @@ function ManagementMistressKicked() {
 	InventoryDelete(Player, "MistressBoots", "Shoes", false);
 	InventoryDelete(Player, "MistressTop", "Cloth", false);
 	InventoryDelete(Player, "MistressBottom", "ClothLower", false);
-	InventoryDelete(Player, "MetalChastityBeltKey", "ItemPelvis", false);
-	InventoryDelete(Player, "MetalChastityBraKey", "ItemBreast", false);
+	InventoryDelete(Player, "ClubMistressKey", "ItemMisc", false);
 	ServerPlayerInventorySync();
 }
 
