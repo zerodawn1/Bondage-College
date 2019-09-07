@@ -29,7 +29,10 @@ function AsylumEntranceRun() {
 // When the user clicks in the room
 function AsylumEntranceClick() {
 	if ((MouseX >= 500) && (MouseX < 1000) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(Player);
-	if ((MouseX >= 1000) && (MouseX < 1500) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(AsylumEntranceNurse);
+	if ((MouseX >= 1000) && (MouseX < 1500) && (MouseY >= 0) && (MouseY < 1000)) {
+		if (LogValue("Committed", "Asylum") >= CurrentTime) AsylumEntranceNurse.Stage = "100";
+		CharacterSetCurrent(AsylumEntranceNurse);
+	}
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk() && (LogValue("Committed", "Asylum") < CurrentTime)) CommonSetScreen("Room", "MainHall");
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 235)) InformationSheetLoadCharacter(Player);
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 265) && (MouseY < 355) && AsylumEntranceCanWander()) AsylumEntranceStartChat();
@@ -101,4 +104,24 @@ function AsylumEntranceCommitPatient(Duration, ReputationChange) {
 function AsylumEntranceStartNurse() {
 	AsylumEntranceWearNurseClothes(Player);
 	if (ReputationGet("Asylum") <= 0) DialogSetReputation("Asylum", 1);
+}
+
+// When a patient player fights for her freedom against the nurse
+function AsylumEntranceFightNurse() {
+	KidnapStart(AsylumEntranceNurse, "AsylumEntranceDark", 8, "AsylumEntranceFightNurseEnd()");
+}
+
+// When the fight against the nurse ends
+function AsylumEntranceFightNurseEnd() {
+	SkillProgress("Willpower", ((Player.KidnapMaxWillpower - Player.KidnapWillpower) + (AsylumEntranceNurse.KidnapMaxWillpower - AsylumEntranceNurse.KidnapWillpower)) * 2);
+	AsylumEntranceNurse.Stage = (KidnapVictory) ? "120" : "130";
+	if (!KidnapVictory) CharacterRelease(AsylumEntranceNurse);
+	else CharacterRelease(Player);
+	InventoryRemove(AsylumEntranceNurse, "ItemHead");
+	InventoryRemove(AsylumEntranceNurse, "ItemMouth");
+	InventoryRemove(Player, "ItemHead");
+	InventoryRemove(Player, "ItemMouth");
+	CommonSetScreen("Room", "AsylumEntrance");
+	CharacterSetCurrent(AsylumEntranceNurse);
+	AsylumEntranceNurse.CurrentDialog = DialogFind(AsylumEntranceNurse, (KidnapVictory) ? "FightVictory" : "FightDefeat");
 }

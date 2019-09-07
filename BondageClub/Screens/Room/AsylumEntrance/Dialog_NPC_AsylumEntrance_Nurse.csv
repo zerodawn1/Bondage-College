@@ -1,4 +1,6 @@
 PlayerGagged,,,"Lovely gag, but you'll need to get it off if you want to talk with me.",,
+FightVictory,,,"Ow!  Well done, you're quite a tough patient.  I'm not letting you out anyway.",,
+FightDefeat,,,"You really thought you could beat me?  You trully are mad, little patient.",,
 0,,,Greetings doctor DialogPlayerName.  It's always a pleasure to see you.  Are you working today?,,"DialogReputationGreater(""Asylum"", 100)"
 0,,,Welcome to the asylum nurse DialogPlayerName.  Our patients are expecting you.  Are you here to work?,,"DialogReputationGreater(""Asylum"", 50)"
 0,,,Hello assistant DialogPlayerName.  It's time to get to work for the asylum!,,"DialogReputationGreater(""Asylum"", 1)"
@@ -41,3 +43,19 @@ PlayerGagged,,,"Lovely gag, but you'll need to get it off if you want to talk wi
 32,33,I'm already dressed up.,"Wonderful!  Come inside then, there are lots of patients to take care of.",StartNurse(),IsWearingNurseClothes()
 32,33,Can you help me to change?,"(She gives you the nurse clothes.)  Come inside, there are lots of patients to take care of.",StartNurse(),!IsWearingNurseClothes()
 33,0,Thanks!  (Leave her.),,DialogLeave(),
+100,,,"If it isn't the famous patient DialogPlayerName.  As usual, I hope your stay in the asylum is going well.",,"DialogReputationLess(""Asylum"", -100)"
+100,,,Hello again patient DialogPlayerName.  I hope your stay in the asylum is going well.,,"DialogReputationLess(""Asylum"", -50)"
+100,,,Hello there.  I hope your stay in the asylum is going well.,,
+100,,Can you release me?,"I'm sorry, but if someone restrained you, there must be good reasons.",,!Player.CanInteract()
+100,,Release me or I'll scream.,(She quickly gags you and giggles.)  Scream all you want.,"DialogWearRandomItem(""ItemMouth"")",!Player.CanInteract()
+100,,When do I get out of the asylum?,"Check the clock girl, it's on the wall behind you.",,
+100,,Can I go out temporarly?,"No, the rules are strict, you cannot get out until your time is up.",,
+100,110,You need to let me out now.,(She frowns and stares at you.)  No!  The rules are the rules!  Do your time.,,Player.CanInteract()
+100,,I must go.  (Leave her.),,DialogLeave(),
+110,0,"Fine, I'll do my time.",Alright.  Try to get some rest or make some friends.,,
+110,0,(Sigh and cross your arms.),Try to get some rest or make some friends.,,
+110,111,Do I have to force my way out?,(She clinches her fists.)  What does it mean?,,
+111,,It means war!  (Fight her.),,FightNurse(),
+111,0,"Nothing, forget it.",(She grumbles.)  Fine.  Try to get some rest or make some friends.,,
+120,,TO DO WIN,TO DO WIN,,
+130,,TO DO LOSE,TO DO LOSE,,
