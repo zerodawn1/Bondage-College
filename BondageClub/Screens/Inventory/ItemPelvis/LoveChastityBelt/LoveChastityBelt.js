@@ -24,7 +24,6 @@ function InventoryItemPelvisLoveChastityBeltDraw() {
 
 
   DrawTextFit(DialogFocusItem.Asset.Description, 1500, 475, 221, "black");
-  DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png");
 
   if (CharacterGetCurrent().IsOwnedByPlayer()) {
 
