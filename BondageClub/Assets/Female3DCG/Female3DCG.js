@@ -7,7 +7,7 @@ var AssetFemale3DCG = [
 		Priority: 27,
 		ParentGroup: "BodyUpper",
 		Clothing: true,
-		AllowPose: ["TapedHands", "BackBoxTie", "BackCuffs", "BackElbowTouch"],
+		AllowPose: ["TapedHands", "BackBoxTie", "BackCuffs", "BackElbowTouch", "Bolero"],
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Asset: [
 			{ Name: "CollegeOutfit1", Hide: ["ClothLower", "ItemNeck"], Value: -1 },
@@ -541,7 +541,7 @@ var AssetFemale3DCG = [
 				DynamicExpressionTrigger: () => {
 					if (InventoryItemPelvisLoveChastityBeltLastAction == "Open") {
 						return [{ Group: "Blush", Name: "Low", Timer: 10 }];
-					} else if (InventoryItemPelvisLoveChastityBeltLastAction == "Close") {
+					} else if (InventoryItemPelvisLoveChastityBeltLastAction == "Closed") {
 						return [{ Group: "Blush", Name: "Medium", Timer: 10 }];
 					} else if (InventoryItemPelvisLoveChastityBeltLastAction == "Vibe") {
 						return [{ Group: "Blush", Name: "Medium", Timer: 10 }];
@@ -566,10 +566,10 @@ var AssetFemale3DCG = [
 				Layer: [
 					{ Name: "Open", AllowColorize: true, AllowTypes: ["", "Open"], HasType: false },
 					{ Name: "Closed", AllowColorize: true, AllowTypes: ["Closed", "Vibe", "Shock"], HasType: false },
-					{ Name: "Vibe", AllowColorize: false, AllowTypes: ["Vibe"], HasType: false, NewParentGroupName: "" },
-					{ Name: "Shock", AllowColorize: false, AllowTypes: ["Shock"], HasType: false, NewParentGroupName: "" },
-					{ Name: "Lock", AllowColorize: false, AllowTypes: ["", "Open", "Closed", "Vibe", "Shock"], HasType: false, NewParentGroupName: "" },
-					{ Name: "ShieldLock", AllowColorize: false, AllowTypes: ["Closed", "Vibe", "Shock"], HasType: false, NewParentGroupName: "" },
+					{ Name: "Vibe", AllowColorize: false, AllowTypes: ["Vibe"], HasType: false, OverrideAllowPose: [] },
+					{ Name: "Shock", AllowColorize: false, AllowTypes: ["Shock"], HasType: false, OverrideAllowPose: [] },
+					{ Name: "Lock", AllowColorize: false, AllowTypes: ["", "Open", "Closed", "Vibe", "Shock"], HasType: false, OverrideAllowPose: [] },
+					{ Name: "ShieldLock", AllowColorize: false, AllowTypes: ["Closed", "Vibe", "Shock"], HasType: false, OverrideAllowPose: [] },
 				]
 			},
 			{ Name: "LeatherCrop", Value: 40, Wear: false, BuyGroup: "LeatherCrop", Bonus: [{ Type: "KidnapDomination", Factor: 3 }], ExpressionTrigger: [{ Group: "Blush", Name: "Low", Timer: 10 }, { Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
@@ -683,6 +683,13 @@ var AssetFemale3DCG = [
 			{ Name: "FourLimbsShackles", Enable: false, Value: -1, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Lock"], Time: 30 },
 			{ Name: "StraitLeotard", SelfBondage: false, Value: 150, SetPose: ["BackElbowTouch"], Hide: ["Cloth"], HideItem: ["ClothLowerSkirt1", "ClothLowerTennisSkirt1"], Block: ["ItemNipples", "ItemVulva", "ItemButt", "ItemPelvis", "ItemTorso", "ItemBreast", "ItemHands"], Effect: ["Block", "Prone"], Time: 35, RemoveTime: 20, Difficulty: 13, AllowLock: true },
 			{ Name: "StraitJacket", SelfBondage: false, Extended: true, Value: 200, SetPose: ["BackElbowTouch"], Hide: ["Cloth"], HideItem: ["ClothLowerSkirt1", "ClothLowerTennisSkirt1"], Block: ["ItemNipples", "ItemVulva", "ItemButt", "ItemPelvis", "ItemTorso", "ItemBreast", "ItemHands"], Effect: ["Block", "Prone"], Time: 35, RemoveTime: 20, Difficulty: 6, AllowLock: true },
+			{ 
+				Name: "Bolero", SelfBondage: false, Value: 120, SetPose: ["BackElbowTouch", "Bolero"], Block: ["ItemHands"], Effect: ["Block", "Prone"], Time: 35, RemoveTime: 20, Difficulty: 11, AllowLock: true,
+				Layer: [
+					{ Name: "Leather", AllowColorize: true },
+					{ Name: "Belts", AllowColorize: false }
+				]
+			},
 			{ Name: "DuctTape", SelfBondage: false, Extended: true, Value: 50, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone"], Time: 20, RemoveTime: 10, Difficulty: 5, BuyGroup: "DuctTape", AllowBlock: ["ItemVulva", "ItemButt", "ItemPelvis", "ItemTorso", "ItemBreast", "ItemNipples"], AllowType: ["Bottom", "Top", "Full"] },
 			{ Name: "BitchSuit", Random: false, SelfBondage: false, Value: 250, SetPose: ["BackElbowTouch", "Kneel"], Hide: ["Cloth", "ClothLower", "BodyLower", "Shoes", "Socks"], Block: ["ItemPelvis", "ItemTorso", "ItemBreast", "ItemHands"], Effect: ["Block", "Prone", "ForceKneel"], Time: 40, RemoveTime: 30, Difficulty: 15, AllowLock: true, Prerequisite: "NotSuspended" },
 			{ Name: "CollarLeashHolding", Random: false, SelfBondage: false, Priority: 34, Value: -1, Time: 3, RemoveTime: 3, Difficulty: 1, Prerequisite: "NotSuspended" },
