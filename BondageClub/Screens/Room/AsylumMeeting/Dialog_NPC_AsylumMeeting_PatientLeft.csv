@@ -14,7 +14,7 @@ PlayerGagged,,,"Get that gag off or stop talking, you're driving me nuts.",,
 0,30,It's time for your treatment.,It is?  (She thinks.)  Look!  A patient is trying to escape!  (She points behind you.),,"DialogReputationGreater(""Asylum"", 1)"
 0,,I must go.  (Leave her.),,DialogLeave(),
 10,,What can you provide?,"What do you need?  A smoke?  A vibrator?  Some help with a jacket?  I'm here for you, and your money.",,
-10,11,I want some cigarettes.,"Sure, the price is 1$ per smoke, do you want one?",,
+10,11,I want a cigarette.,"Sure, the price is 1$ per smoke, do you want one?",,
 10,12,I want a vibrator.,"I have a vibrating wand I can sell you.  It's used and it's not cheap, it goes for 80$.  Do you want it?",,"!DialogInventoryAvailable(""VibratingWand"", ""ItemVulva"")"
 10,,I want to get out of here.,"I can't help you there.  You can always try to fight your way out, but you'll get in trouble later.",,
 10,0,I have everything I need.,Alright.  You know where to find me if you need something else.,,
