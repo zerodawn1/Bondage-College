@@ -6,6 +6,8 @@ var AsylumMeetingPatientRight = null;
 // Returns TRUE if specific dialog conditions are met
 function AsylumMeetingCanReleasePlayer() { return (Player.IsRestrained() && !AsylumMeetingPatientLeft.IsRestrained() && (LogValue("Committed", "Asylum") >= CurrentTime)) }
 function AsylumMeetingCannotReleasePlayer() { return (Player.IsRestrained() && (AsylumMeetingPatientLeft.IsRestrained() || (LogValue("Committed", "Asylum") < CurrentTime))) }
+function AsylumMeetingCanRestrainPlayer() { return (!Player.IsRestrained() && !AsylumMeetingPatientLeft.IsRestrained() && (LogValue("Committed", "Asylum") >= CurrentTime)) }
+function AsylumMeetingCanKiss() { return (Player.CanTalk() && CurrentCharacter.CanTalk()) }
 
 // Loads the room and it's patients
 function AsylumMeetingLoad() {
@@ -79,4 +81,10 @@ function AsylumMeetingRunAway(RepChange) {
 	DialogChangeReputation("Asylum", RepChange);
 	DialogLeave();
 	AsylumMeetingPatientLeft.RunAway = true;
+}
+
+// When the player gets restrained
+function AsylumMeetingRestrainPlayer(RestraintsType) {
+	CharacterFullRandomRestrain(Player, RestraintsType);
+	DialogChangeReputation("Dominant", -1);
 }

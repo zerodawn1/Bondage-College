@@ -24,5 +24,13 @@ ItemPelvisLeatherCrop,,,(She tries to avoid the crop as you swing it on her butt
 0,,Why are you restrained?,"Mistress sent me here for a bondage therapy.  So long story short, I'm in therapy.",,CurrentCharacter.IsRestrained()
 0,,Can I tie you up?,"(She shakes her head yes.)  Of course nurse DialogPlayerName, it's part of my treatment.",,"DialogReputationGreater(""Asylum"", 1)"
 0,,Can I tie you up?,"(She shakes her head yes.)  Yes Madam, it's part of my treatment.",,"DialogReputationLess(""Asylum"", 0)"
-0,,Can I play with you?,(She shakes her head yes.)  Absolutely.  Mistress said that I belong to the asylum until she gets me back.,,
+0,10,Can I play with you?,(She shakes her head yes.)  Absolutely.  Mistress said that I belong to the asylum until she gets me back.,,Player.CanInteract()
+0,,Will you tie me up?,(She shakes her head no.)  I'm sorry Madam.  I'm not allowed to use items on other persons.,,!Player.IsRestrained()
+0,,(Struggle in your restraints.),(She shakes her head no.)  I'm sorry Madam.  I'm not allowed to help you.,,Player.IsRestrained()
 0,,I need to run.  (Leave her.),,DialogLeave(),
+10,,(Pet her.),(She purrs a little as you pet her head gently.),,
+10,,(Tickle her.),(She trashes around and laughs from your skillful tickling hands.),,
+10,,(Kiss her.),(You exchange a sweet and loving kiss.),,CanKiss()
+10,,(Fondle her.),(She closes her eyes and seems to enjoy your touch as you fondle her breast and butt through her clothes.),,
+10,,(Masturbate her.),(You slide a hand in her pants and masturbate her slowly as she moans from the pleasure.),,
+10,0,That's enough.,(She nods as you stop playing with her.),,
