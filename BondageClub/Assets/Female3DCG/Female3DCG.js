@@ -83,6 +83,7 @@ var AssetFemale3DCG = [
 			{ Name: "Corset2", Value: 30, Hide: ["ItemNipples"] },
 			{ Name: "Corset3", Value: 30, Hide: ["ItemNipples"] },
 			{ Name: "Corset4", Value: 30, Expose: ["ItemNipples", "ItemBreast"] },
+			{ Name: "Bikini1", Value: 25, Hide: ["ItemNipples"] },
 			{ Name: "Swimsuit1", Value: 20, Hide: ["Panties", "ItemNipples"] },
 			{ Name: "Swimsuit2", Value: 25, Hide: ["Panties", "ItemNipples"] },
 			{ Name: "BunnySuit", Value: 30, Hide: ["Panties", "ItemNipples"] }
@@ -108,6 +109,7 @@ var AssetFemale3DCG = [
 			{ Name: "Panties13", Value: 10 },
 			{ Name: "Panties14", Value: 10 },
 			{ Name: "Panties15", Value: 10 },
+			{ Name: "Bikini1", Value: 25 },
 			{ Name: "Diapers1", Value: 50 }
 		]
 	},
