@@ -260,6 +260,7 @@ function ChatRoomSendChat() {
 		else if (m.indexOf("/blacklistadd ") == 0) ChatRoomListManipulation(Player.BlackList, Player.WhiteList, msg);
 		else if (m.indexOf("/blacklistremove ") == 0) ChatRoomListManipulation(null, Player.BlackList, msg);
 		else if (m.indexOf("/ban ") == 0) ChatRoomAdminChatAction("Ban", msg);
+		else if (m.indexOf("/unban ") == 0) ChatRoomAdminChatAction("Unban", msg);
 		else if (m.indexOf("/kick ") == 0) ChatRoomAdminChatAction("Kick", msg);
 		else if (m.indexOf("/promote ") == 0) ChatRoomAdminChatAction("Promote", msg);
 		else if (m.indexOf("/demote ") == 0) ChatRoomAdminChatAction("Demote", msg);
