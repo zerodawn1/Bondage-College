@@ -221,20 +221,20 @@ function DialogInventoryBuild(C) {
 		// First, we add anything that's currently equipped
 		var Item = null;
 		for(var A = 0; A < C.Appearance.length; A++)
-			if ((C.Appearance[A].Asset.Group.Name == C.FocusGroup.Name) && (C.Appearance[A].Asset.DynamicAllowInventoryAdd())) {
+			if ((C.Appearance[A].Asset.Group.Name == C.FocusGroup.Name) && ((typeof C.Appearance[A].Asset.DynamicAllowInventoryAdd !== "function") || C.Appearance[A].Asset.DynamicAllowInventoryAdd())) {
 				DialogInventoryAdd(C, C.Appearance[A], true, true);
 				break;
 			}
 
 		// Second, we add everything from the victim inventory
 		for(var A = 0; A < C.Inventory.length; A++)
-			if ((C.Inventory[A].Asset != null) && (C.Inventory[A].Asset.Group.Name == C.FocusGroup.Name) && (C.Inventory[A].Asset.DynamicAllowInventoryAdd()))
+			if ((C.Inventory[A].Asset != null) && (C.Inventory[A].Asset.Group.Name == C.FocusGroup.Name) && ((typeof C.Inventory[A].Asset.DynamicAllowInventoryAdd !== "function") || C.Inventory[A].Asset.DynamicAllowInventoryAdd()))
 				DialogInventoryAdd(C, C.Inventory[A], false);
 			
 		// Third, we add everything from the player inventory if the player isn't the victim
 		if (C.ID != 0)
 			for(var A = 0; A < Player.Inventory.length; A++)
-				if ((Player.Inventory[A].Asset != null) && (Player.Inventory[A].Asset.Group.Name == C.FocusGroup.Name && Player.Inventory[A].Asset.DynamicAllowInventoryAdd()))
+				if ((Player.Inventory[A].Asset != null) && (Player.Inventory[A].Asset.Group.Name == C.FocusGroup.Name) && ((typeof Player.Inventory[A].Asset.DynamicAllowInventoryAdd !== "function") || Player.Inventory[A].Asset.DynamicAllowInventoryAdd()))
 					DialogInventoryAdd(C, Player.Inventory[A], false);
 		DialogMenuButtonBuild(C);
 
