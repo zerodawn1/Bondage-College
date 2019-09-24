@@ -234,7 +234,7 @@ function InventoryHasLockableItems(C) {
 // Applies a lock to an inventory item
 function InventoryLock(C, Item, Lock, MemberNumber) {
 	if (typeof Item === 'string') Item = InventoryGet(C, Item);
-	if (typeof Lock === 'string') Lock = AssetGet(C.AssetFamily, "ItemMisc", Lock)
+	if (typeof Lock === 'string') Lock = { Asset: AssetGet(C.AssetFamily, "ItemMisc", Lock) };
 	if (Item && Lock && Item.Asset.AllowLock) {
 		if (Item.Property == null) Item.Property = {};
 		if (Item.Property.Effect == null) Item.Property.Effect = [];
