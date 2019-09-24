@@ -218,7 +218,7 @@ function InventoryCharacterHasOwnerOnlyRestraint(C) {
 	if ((C.Ownership == null) || (C.Ownership.MemberNumber == null) || (C.Ownership.MemberNumber == "")) return false;
 	if (C.Appearance != null)
 		for (var A = 0; A < C.Appearance.length; A++)
-			if (C.Appearance[A].Asset.Group.IsRestraint && InventoryOwnerOnlyItem(C.Appearance[A]))
+			if (C.Appearance[A].Asset.IsRestraint && InventoryOwnerOnlyItem(C.Appearance[A]))
 				return true;
 	return false;
 }
@@ -233,10 +233,12 @@ function InventoryHasLockableItems(C) {
 
 // Applies a lock to an inventory item
 function InventoryLock(C, Item, Lock, MemberNumber) {
-	if (Item.Asset.AllowLock) {
+	if (typeof Item === 'string') Item = InventoryGet(C, Item);
+	if (typeof Lock === 'string') Lock = AssetGet(C.AssetFamily, "ItemMisc", Lock)
+	if (Item && Lock && Item.Asset.AllowLock) {
 		if (Item.Property == null) Item.Property = {};
 		if (Item.Property.Effect == null) Item.Property.Effect = [];
-		Item.Property.Effect.push("Lock");
+		if (Item.Property.Effect.indexOf("Lock") < 0) Item.Property.Effect.push("Lock");
 		Item.Property.LockedBy = Lock.Asset.Name;
 		if (MemberNumber != null) Item.Property.LockMemberNumber = MemberNumber;
 		if (Lock.Asset.RemoveTimer > 0) TimerInventoryRemoveSet(C, Item.Asset.Group.Name, Lock.Asset.RemoveTimer);
@@ -272,11 +274,7 @@ function InventoryConfiscateKey() {
 	InventoryDelete(Player, "IntricatePadlockKey", "ItemMisc");
 }
 
-function InventoryIsWorn(C, AssetGroup, name){
-	if((C == null) || (C.Appearance == null)) return null;
-	var item = C.Appearance.filter(i => i.Asset.Group.Name == AssetGroup)[0];
-	if((item != null) && (item.Asset.Name == name))
-		return true;
-	else
-		return false;
-}
+// returns TRUE if the item is worn
+function InventoryIsWorn(C, AssetGroup, AssetName){
+	return C && C.Appearance && C.Appearance.some(Item => Item.Asset.Group.Name == AssetGroup && Item.Asset.Name == AssetName);
+} 
