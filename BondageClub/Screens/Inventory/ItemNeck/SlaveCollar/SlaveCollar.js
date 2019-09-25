@@ -54,4 +54,5 @@ function InventoryItemNeckSlaveCollarSetType(NewType) {
     var Type = SlaveCollarTypes.find(Collar => Collar.Name == NewType) || SlaveCollarTypes[0];
     DialogFocusItem.Property = Type.Property;
     ChatRoomPublishCustomAction(DialogFind(Player, "SlaveCollarChangeType").replace("SourceCharacter", Player.Name).replace("DestinationCharacter", C.Name), true);
+	if (CurrentScreen != "ChatRoom") CharacterRefresh(CurrentCharacter);
 }
