@@ -9,6 +9,7 @@ var TitleList = [
 	{ Name: "MasterKidnapper", Requirement: function () { return (ReputationGet("Kidnap") >= 100) } },
 	{ Name: "Patient", Requirement: function () { return ((ReputationGet("Asylum") <= -50) && (ReputationGet("Asylum") > -100)) } },
 	{ Name: "PermanentPatient", Requirement: function () { return (ReputationGet("Asylum") <= -100) } },
+	{ Name: "EscapedPatient", Requirement: function () { return (LogValue("Escaped", "Asylum") >= CurrentTime) }, Force: true },
 	{ Name: "Nurse", Requirement: function () { return ((ReputationGet("Asylum") >= 50) && (ReputationGet("Asylum") < 100)) } },
 	{ Name: "Doctor", Requirement: function () { return (ReputationGet("Asylum") >= 100) } },
 	{ Name: "PonyPegasus", Requirement: function () { return (SkillGetLevel(Player, "Dressage") >= 10) } },
@@ -23,8 +24,10 @@ var TitleList = [
 
 // Sets the title for the player
 function TitleSet(NewTitle) {
-	Player.Title = NewTitle;
-	ServerSend("AccountUpdate", { Title: NewTitle } );
+	if (NewTitle != Player.Title) {
+		Player.Title = NewTitle;
+		ServerSend("AccountUpdate", { Title: NewTitle } );
+	}
 	return NewTitle;
 }
 
@@ -35,6 +38,11 @@ function TitleGet(C) {
 	if ((C.Title == null) || (C.Title == "") || (C.Title == "None")) return "None";
 	if (C.ID != 0) return C.Title;
 
+	// If we find a title that we must force, we set it and return it
+	for (var T = 0; T < TitleList.length; T++)
+		if (TitleList[T].Requirement() && (TitleList[T].Force != null) && TitleList[T].Force)
+			return TitleSet(TitleList[T].Name);
+
 	// If we find a valid title, we return it
 	for (var T = 0; T < TitleList.length; T++)
 		if ((C.Title == TitleList[T].Name) && TitleList[T].Requirement())
@@ -43,6 +51,15 @@ function TitleGet(C) {
 	// If the title is invalid, we set it to none
 	return TitleSet("None");
 
+}
+
+// Returns TRUE if the current player title is forced upon her
+function TitleIsForced() {
+	if ((Player.Title == null) || (Player.Title == "") || (Player.Title == "None")) return false;
+	for (var T = 0; T < TitleList.length; T++)
+		if ((Player.Title == TitleList[T].Name) && (TitleList[T].Force != null) && TitleList[T].Force)
+			return true;
+	return false;
 }
 
 // Run the title selection screen

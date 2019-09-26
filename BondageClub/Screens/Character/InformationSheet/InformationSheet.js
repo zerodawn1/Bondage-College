@@ -22,10 +22,11 @@ function InformationSheetRun() {
 
 	// Draw the character base values
 	var C = InformationSheetSelection;
+	var CurrentTitle = TitleGet(C);
 	DrawCharacter(C, 50, 50, 0.9);
 	MainCanvas.textAlign = "left";
 	DrawText(TextGet("Name") + " " + C.Name, 550, 125, "Black", "Gray");
-	DrawText(TextGet("Title") + " " + TextGet("Title" + TitleGet(C)), 550, 200, "Black", "Gray");
+	DrawText(TextGet("Title") + " " + TextGet("Title" + CurrentTitle), 550, 200, (TitleIsForced(CurrentTitle)) ? "Red" : "Black", "Gray");
 	DrawText(TextGet("MemberNumber") + " " + ((C.MemberNumber == null) ? TextGet("NoMemberNumber") : C.MemberNumber.toString()), 550, 275, "Black", "Gray");
 
 	// Some info are not available for online players
@@ -100,8 +101,8 @@ function InformationSheetRun() {
 	MainCanvas.textAlign = "center";
 	DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png");
 	if (C.ID == 0) {
-		DrawButton(1815, 190, 90, 90, "", "White", "Icons/Title.png");
-		DrawButton(1815, 305, 90, 90, "", "White", "Icons/Preference.png");	
+		if (!TitleIsForced(CurrentTitle)) DrawButton(1815, 190, 90, 90, "", "White", "Icons/Title.png");
+		DrawButton(1815, 305, 90, 90, "", "White", "Icons/Preference.png");
 		DrawButton(1815, 420, 90, 90, "", "White", "Icons/FriendList.png");
 	}
 
@@ -110,7 +111,7 @@ function InformationSheetRun() {
 // When the user clicks on the character info screen
 function InformationSheetClick() {
 	if ((MouseX >= 1815) && (MouseX < 1905) && (MouseY >= 75) && (MouseY < 165)) InformationSheetExit();
-	if ((MouseX >= 1815) && (MouseX < 1905) && (MouseY >= 190) && (MouseY < 280) && (InformationSheetSelection.ID == 0)) CommonSetScreen("Character", "Title");
+	if ((MouseX >= 1815) && (MouseX < 1905) && (MouseY >= 190) && (MouseY < 280) && (InformationSheetSelection.ID == 0) && (!TitleIsForced(InformationSheetSelection.Title))) CommonSetScreen("Character", "Title");
 	if ((MouseX >= 1815) && (MouseX < 1905) && (MouseY >= 305) && (MouseY < 395) && (InformationSheetSelection.ID == 0)) CommonSetScreen("Character", "Preference");
 	if ((MouseX >= 1815) && (MouseX < 1905) && (MouseY >= 420) && (MouseY < 510) && (InformationSheetSelection.ID == 0)) CommonSetScreen("Character", "FriendList");
 }
