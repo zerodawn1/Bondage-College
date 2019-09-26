@@ -44,6 +44,7 @@
 <script src="Screens/Character/Cheat/Cheat.js"></script>
 <script src="Screens/Character/PasswordReset/PasswordReset.js"></script>
 <script src="Screens/Character/FriendList/FriendList.js"></script>
+<script src="Screens/Character/Title/Title.js"></script>
 <script src="Screens/Room/MainHall/MainHall.js"></script>
 <script src="Screens/Room/Shop/Shop.js"></script>
 <script src="Screens/Room/Introduction/Introduction.js"></script>
@@ -122,10 +123,11 @@
 	OK - Love Chastity Belt - Adding shield right after adding belt + Code crash (Sekkmer)
 	OK - Move left - Move right (MrsHoudini)
 	OK - New HobbleSkirt and Open crotch StraitDress (FeuertinKira)
-	OK - Collar Tag Refactor
-	OK - SpankingToys
-	OK - InventoryLock
-	OK - IsRestraint based on item, not groups
+	OK - Collar Tag Refactor (Sekkmer)
+	OK - SpankingToys Fixes (Sekkmer)
+	OK - InventoryLock refactor (Sekkmer)
+	OK - IsRestraint based on item, not groups (Sekkmer)
+	OK - Legs, wooden horse (Gatetrek)
 
 	Asylum
 	TO DO - Bedroom - The patient can rest on the bed to relax, or be strapped on it for a set time
@@ -145,7 +147,7 @@
 // When the code is loaded, we start the game engine
 window.onload = function() {
 	//CheatImport();
-	ServerURL = "https://bondage-club-server.herokuapp.com/";
+	//ServerURL = "https://bondage-club-server.herokuapp.com/";
 	CommonIsMobile = CommonDetectMobile();
 	TranslationLoad();
 	DrawLoad();
