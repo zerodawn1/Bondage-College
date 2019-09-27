@@ -202,10 +202,11 @@ function CharacterLoadNPC(NPCType) {
 
 // Sets up the online character
 function CharacterOnlineRefresh(Char, data, SourceMemberNumber) {
+	if (Char.ID != 0) Char.Title = data.Title;
 	Char.ActivePose = data.ActivePose;
 	Char.LabelColor = data.LabelColor;
 	Char.Creation = data.Creation;
-	Char.ItemPermission = data.ItemPermission;
+	if (Char.ID != 0) Char.ItemPermission = data.ItemPermission;
 	Char.Ownership = data.Ownership;
 	Char.Reputation = (data.Reputation != null) ? data.Reputation : [];
 	Char.Appearance = ServerAppearanceLoadFromBundle(Char, "Female3DCG", data.Appearance, SourceMemberNumber);
@@ -236,6 +237,7 @@ function CharacterLoadOnline(data, SourceMemberNumber) {
 		Char.Name = data.Name;
 		Char.Lover = (data.Lover != null) ? data.Lover : "";
 		Char.Owner = (data.Owner != null) ? data.Owner : "";
+		Char.Title = data.Title;
 		Char.AccountName = "Online-" + data.ID.toString();
 		Char.MemberNumber = data.MemberNumber;
 		var BackupCurrentScreen = CurrentScreen;
@@ -257,7 +259,7 @@ function CharacterLoadOnline(data, SourceMemberNumber) {
 
 		// Flags "refresh" if we need to redraw the character
 		if (!Refresh)
-			if ((Char.ActivePose != data.ActivePose) || (Char.LabelColor != data.LabelColor) || (ChatRoomData == null) || (ChatRoomData.Character == null))
+			if ((Char.ActivePose != data.ActivePose) || (Char.Title != data.Title) || (Char.LabelColor != data.LabelColor) || (ChatRoomData == null) || (ChatRoomData.Character == null))
 				Refresh = true;
 			else
 				for (var C = 0; C < ChatRoomData.Character.length; C++)
