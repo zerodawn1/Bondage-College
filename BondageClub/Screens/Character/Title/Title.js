@@ -3,6 +3,7 @@ var TitleBackground = "Sheet";
 var TitleList = [
 	{ Name: "None", Requirement: function () { return true } },
 	{ Name: "Mistress", Requirement: function () { return LogQuery("ClubMistress", "Management") } },
+	{ Name: "ClubSlave", Requirement: function () { return ManagementIsClubSlave() }, Force: true },
 	{ Name: "Maid", Requirement: function () { return (LogQuery("JoinedSorority", "Maid") && !LogQuery("LeadSorority", "Maid")) } },
 	{ Name: "HeadMaid", Requirement: function () { return LogQuery("LeadSorority", "Maid") } },
 	{ Name: "Kidnapper", Requirement: function () { return ((ReputationGet("Kidnap") >= 50) && (ReputationGet("Kidnap") < 100)) } },
@@ -12,6 +13,7 @@ var TitleList = [
 	{ Name: "EscapedPatient", Requirement: function () { return (LogValue("Escaped", "Asylum") >= CurrentTime) }, Force: true },
 	{ Name: "Nurse", Requirement: function () { return ((ReputationGet("Asylum") >= 50) && (ReputationGet("Asylum") < 100)) } },
 	{ Name: "Doctor", Requirement: function () { return (ReputationGet("Asylum") >= 100) } },
+	{ Name: "CollegeStudent", Requirement: function () { return InventoryAvailable(Player, "CollegeOutfit1", "Cloth") } },
 	{ Name: "PonyPegasus", Requirement: function () { return (SkillGetLevel(Player, "Dressage") >= 10) } },
 	{ Name: "PonyUnicorn", Requirement: function () { return ((SkillGetLevel(Player, "Dressage") >= 8) && (SkillGetLevel(Player, "Dressage") <= 9)) } },
 	{ Name: "PonyWild", Requirement: function () { return ((SkillGetLevel(Player, "Dressage") >= 6) && (SkillGetLevel(Player, "Dressage") <= 7)) } },
@@ -34,14 +36,15 @@ function TitleSet(NewTitle) {
 // Returns the current title and validates the title for the player
 function TitleGet(C) {
 
+	// If we find a title that we must force, we set it and return it
+	if (C.ID == 0)
+		for (var T = 0; T < TitleList.length; T++)
+			if (TitleList[T].Requirement() && (TitleList[T].Force != null) && TitleList[T].Force)
+				return TitleSet(TitleList[T].Name);
+
 	// No title or other character titles aren't validated
 	if ((C.Title == null) || (C.Title == "") || (C.Title == "None")) return "None";
 	if (C.ID != 0) return C.Title;
-
-	// If we find a title that we must force, we set it and return it
-	for (var T = 0; T < TitleList.length; T++)
-		if (TitleList[T].Requirement() && (TitleList[T].Force != null) && TitleList[T].Force)
-			return TitleSet(TitleList[T].Name);
 
 	// If we find a valid title, we return it
 	for (var T = 0; T < TitleList.length; T++)
@@ -54,10 +57,10 @@ function TitleGet(C) {
 }
 
 // Returns TRUE if the current player title is forced upon her
-function TitleIsForced() {
-	if ((Player.Title == null) || (Player.Title == "") || (Player.Title == "None")) return false;
+function TitleIsForced(Title) {
+	if ((Title == null) || (Title == "") || (Title == "None")) return false;
 	for (var T = 0; T < TitleList.length; T++)
-		if ((Player.Title == TitleList[T].Name) && (TitleList[T].Force != null) && TitleList[T].Force)
+		if ((Title == TitleList[T].Name) && (TitleList[T].Force != null) && TitleList[T].Force)
 			return true;
 	return false;
 }
