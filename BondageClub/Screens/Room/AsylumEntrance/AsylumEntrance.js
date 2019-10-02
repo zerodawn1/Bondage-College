@@ -262,7 +262,7 @@ function AsylumEntranceBackAsPatient() {
 }
 
 // When the player meets an escaped patient as a nurse
-function AsylumEntranceNurseCatchEscapedPlayer() {
+function AsylumEntranceEscapedPatientMeet() {
 	CommonSetScreen("Room", "AsylumEntrance");
 	AsylumEntranceBackground = "MainHall";
 	AsylumEntranceEscapedPatient = null;
@@ -287,6 +287,7 @@ function AsylumEntranceEscapedPatientFight() {
 // When the player fight ends against the escaped patient
 function AsylumEntranceEscapedPatientFightOutro(Surrender) {
 	CommonSetScreen("Room", "AsylumEntrance");
+	AsylumEntranceBackground = "MainHall";
 	SkillProgress("Willpower", ((Player.KidnapMaxWillpower - Player.KidnapWillpower) + (AsylumEntranceEscapedPatient.KidnapMaxWillpower - AsylumEntranceEscapedPatient.KidnapWillpower)) * 2);
 	if ((Surrender != null) && Surrender) DialogChangeReputation("Dominant", -3);
 	AsylumEntranceEscapedPatient.Stage = (KidnapVictory) ? "100" : "200";
@@ -305,7 +306,7 @@ function AsylumEntranceEscapedPatientBribe() {
 
 // When the player transfers a patient to her room
 function AsylumEntranceEscapedPatientTransferToRoom() {
-	AsylumEntranceWearPatientClothesClothes(AsylumEntranceEscapedPatient);
+	AsylumEntranceWearPatientClothes(AsylumEntranceEscapedPatient);
 	CharacterRelease(Player);
 	CommonSetScreen("Room", "Private");
 	PrivateAddCharacter(AsylumEntranceEscapedPatient, "Patient");
@@ -317,9 +318,15 @@ function AsylumEntranceEscapedPatientTransferToAsylum() {
 	AsylumEntranceBackground = "AsylumEntrance";
 	CharacterChangeMoney(Player, 15);
 	DialogChangeReputation("Asylum", 4);
-	CharacterRelease(AsylumEntranceNurse);
-	AsylumEntranceWearPatientClothesClothes(AsylumEntranceEscapedPatient);
-	InventoryWear(AsylumEntranceNurse, "StraitJacket", "ItemArms");
-	InventoryWear(AsylumEntranceNurse, "SmallBlindfold", "ItemHead");
-	InventoryWear(AsylumEntranceNurse, "MuzzleGag", "ItemMouth");
+	CharacterRelease(AsylumEntranceEscapedPatient);
+	AsylumEntranceWearPatientClothes(AsylumEntranceEscapedPatient);
+	InventoryWear(AsylumEntranceEscapedPatient, "StraitJacket", "ItemArms");
+	InventoryWear(AsylumEntranceEscapedPatient, "SmallBlindfold", "ItemHead");
+	InventoryWear(AsylumEntranceEscapedPatient, "MuzzleGag", "ItemMouth");
+}
+
+// When the player leaves the escaped patient
+function AsylumEntranceEscapedPatientLeave() {
+	CommonSetScreen("Room", "MainHall");
+	DialogLeave();
 }
