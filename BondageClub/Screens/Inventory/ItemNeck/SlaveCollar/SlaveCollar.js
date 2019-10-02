@@ -32,12 +32,12 @@ function InventoryItemNeckSlaveCollarDraw() {
         var Color = DialogFocusItem.Color;
         var I = 1;
         if (InventoryItemNeckSlaveColorMode) {
-            DrawButton(1775, 25, 90, 90, "", "White", "Icons/ColorCancel.png", DialogFind(Player, "ColorPick"));
-            DrawButton(1665, 25, 90, 90, "", "White", "Icons/ColorSelect.png", DialogFind(Player, "ColorPick"));
+            DrawButton(1775, 25, 90, 90, "", "White", "Icons/ColorCancel.png");
+            DrawButton(1665, 25, 90, 90, "", "White", "Icons/ColorSelect.png");
             ElementPosition("InputColor", 1450, 65, 300);
             DrawImage("Backgrounds/ColorPicker.png", 1300, 145);
         } else {
-            DrawButton(1775, 25, 90, 90, "", (Color != null && Color != "Default" && Color != "None") ? Color : "White", "Icons/ColorPick.png", DialogFind(Player, "ColorPick"));
+            DrawButton(1775, 25, 90, 90, "", (Color != null && Color != "Default" && Color != "None") ? Color : "White", "Icons/ColorPick.png");
         }
     }
     if (!InventoryItemNeckSlaveColorMode) {
