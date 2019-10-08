@@ -38,7 +38,7 @@ var AssetFemale3DCG = [
 			{ Name: "NurseUniform", Hide: ["ClothLower"], Value: -1 },
 			{ Name: "BunnyCollarCuffs", Value: 10, Expose: ["ItemNipples", "ItemBreast", "ItemTorso"] },
 			{ Name: "Robe1", Value: 50 },
-			{ Name: "SuspenderTop1", Priority: 16, Value: 100, Expose: ["ItemNipples", "ItemBreast"], Hide: ["Panties"] },
+			{ Name: "SuspenderTop1", Priority: 16, Value: 100, Expose: ["ItemNipples", "ItemBreast"], Hide: ["Panties"], HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
 			{ Name: "LeatherCorsetTop1", Priority: 20, Value: 80 },
 			{
 			    Name: "FlowerDress", Value: 100, Hide: ["ClothLower"],
@@ -74,16 +74,16 @@ var AssetFemale3DCG = [
 		Asset: [
 			{ Name: "Skirt1", Expose: ["ItemVulva", "ItemButt"] },
 			{ Name: "TennisSkirt1", ParentItem: "TennisShirt1", Expose: ["ItemVulva", "ItemButt"] },
-			{ Name: "Jeans1", HideItem: ["ItemVulvaVibratingDildo"] },
-			{ Name: "Shorts1", HideItem: ["ItemVulvaVibratingDildo"] },
+			{ Name: "Jeans1", HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
+			{ Name: "Shorts1", HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
 			{ Name: "Pajama1", Random: false, Priority: 23 },
-			{ Name: "MistressBottom", Hide: ["Panties"], HideItem: ["ItemVulvaVibratingDildo"], Value: -1 },
+			{ Name: "MistressBottom", Hide: ["Panties"], HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"], Value: -1 },
 			{ Name: "Waspie1", Priority: 24, Value: 80, Expose: ["ItemVulva", "ItemButt"] },
 			{ Name: "Waspie2", Priority: 24, Value: 100, Expose: ["ItemVulva", "ItemButt"] },
 			{ Name: "Waspie3", Priority: 24, Value: 60, Expose: ["ItemVulva", "ItemButt"] },
 			{ Name: "LatexPants1", Value: 80, HideItem: ["ItemVulvaVibratingDildo"] },
 			{ Name: "LatexSkirt1", Value: 60, Expose: ["ItemVulva", "ItemButt"] },
-			{ Name: "Jeans2", HideItem: ["ItemVulvaVibratingDildo"], Value: 45 }
+			{ Name: "Jeans2", HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"], Value: 45 }
 		]
 	},
 
@@ -136,24 +136,23 @@ var AssetFemale3DCG = [
 		Left: 150,
 		Top: 395,
 		Asset: [
-			{ Name: "Panties1", HideItem: ["ItemVulvaVibratingDildo"] },
-			{ Name: "Panties7", HideItem: ["ItemVulvaVibratingDildo"] },
-			{ Name: "Panties8", HideItem: ["ItemVulvaVibratingDildo"] },
-			{ Name: "Panties11", HideItem: ["ItemVulvaVibratingDildo"] },
-			{ Name: "Panties12", Value: 10, HideItem: ["ItemVulvaVibratingDildo"] },
-			{ Name: "Panties13", Value: 10, HideItem: ["ItemVulvaVibratingDildo"] },
-			{ Name: "Panties14", Value: 10, HideItem: ["ItemVulvaVibratingDildo"] },
-			{ Name: "Panties15", Value: 10, HideItem: ["ItemVulvaVibratingDildo"] },
-			{ Name: "Bikini1", Value: 25, HideItem: ["ItemVulvaVibratingDildo"] },
-			{ Name: "Diapers1", Value: 50, HideItem: ["ItemVulvaVibratingDildo"] },
-			{ Name: "Panties16", Value: 15, HideItem: ["ItemVulvaVibratingDildo"] }
-			{ Name: "MaidPanties1", Value: 50, HideItem: ["ItemVulvaVibratingDildo"] },
+			{ Name: "Panties1", HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
+			{ Name: "Panties7", HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
+			{ Name: "Panties8", HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
+			{ Name: "Panties11", HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
+			{ Name: "Panties12", Value: 10, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
+			{ Name: "Panties13", Value: 10, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
+			{ Name: "Panties14", Value: 10, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
+			{ Name: "Panties15", Value: 10, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
+			{ Name: "Bikini1", Value: 25, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
+			{ Name: "Diapers1", Value: 50, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
+			{ Name: "MaidPanties1", Value: 50, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
 			{ Name: "LatexPanties1", Value: 40, Expose: ["ItemVulva"] },
 			{ Name: "WrapPanties1", Value: 30, Expose: ["ItemVulva"] },
 			{ Name: "CrotchPanties1", Value: 30, Expose: ["ItemVulva", "ItemButt"] },
-			{ Name: "StringPanties1", Value: 20, HideItem: ["ItemVulvaVibratingDildo"] },
-			{ Name: "StringPasty1", Value: 20, HideItem: ["ItemVulvaVibratingDildo"] },
-			{ Name: "ZipPanties1", Value: 25, HideItem: ["ItemVulvaVibratingDildo"] },
+			{ Name: "StringPanties1", Value: 20, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
+			{ Name: "StringPasty1", Value: 20, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
+			{ Name: "ZipPanties1", Value: 25, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
 			{ Name: "HarnessPanties1", Value: 50, Expose: ["ItemVulva", "ItemButt"], AllowPose: ["LegsClosed", "Kneel"] }
 		]
 	},
@@ -173,7 +172,7 @@ var AssetFemale3DCG = [
 			"Socks0", "Socks1", "Socks2", "Socks3", "Socks4", "Socks5", "Stockings1", "Stockings2",
 			{ Name: "Stockings3", Value: 10 },
 			{ Name: "Stockings4", Value: 10 },
-			{ Name: "Pantyhose1", Value: 10, Priority: 16, Block: ["ItemVulva", "ItemButt"], HideItem: ["ItemVulvaVibratingDildo"] },
+			{ Name: "Pantyhose1", Value: 10, Priority: 16, Block: ["ItemVulva", "ItemButt"], HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
 			{
 			    Name: "Socks6", Value: 25, HideItem: ["ItemVulvaVibratingDildo"],
 				Layer: [
@@ -569,6 +568,7 @@ var AssetFemale3DCG = [
 					{ Name: "Pussy", AllowColorize: false }
 				]
 			},
+			{ Name: "ClitSuctionCup", Effect: [], Value: 50, Extended: true, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{ Group: "Eyes", Name: "Closed", Timer: 5 }, { Group: "Eyebrows", Name: "Angry", Timer: 5 }] },
 			AssetSpankingToys
 		]
 	},
@@ -610,12 +610,12 @@ var AssetFemale3DCG = [
 		Top: 375,
 		Zone: [[150, 420, 200, 80]],
 		Asset: [
-			{ Name: "StraponPanties", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], HideItem: ["ItemVulvaVibratingDildo"], Value: -1, Prerequisite: "AccessVulva", Time: 15 },
-			{ Name: "LeatherChastityBelt", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], HideItem: ["ItemVulvaVibratingDildo"], Value: 50, Prerequisite: "AccessVulva", AllowLock: true, Difficulty: 10, Time: 20, RemoveTime: 10, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
-			{ Name: "StuddedChastityBelt", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], HideItem: ["ItemVulvaVibratingDildo"], Value: 100, Prerequisite: "AccessVulva", AllowLock: true, Difficulty: 20, Time: 20, RemoveTime: 10, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
-			{ Name: "MetalChastityBelt", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], HideItem: ["ItemVulvaVibratingDildo"], Value: 200, Prerequisite: "AccessVulva", AllowLock: true, Difficulty: 50, Time: 20, RemoveTime: 10, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
+			{ Name: "StraponPanties", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"], Value: -1, Prerequisite: "AccessVulva", Time: 15 },
+			{ Name: "LeatherChastityBelt", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"], Value: 50, Prerequisite: "AccessVulva", AllowLock: true, Difficulty: 10, Time: 20, RemoveTime: 10, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
+			{ Name: "StuddedChastityBelt", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"], Value: 100, Prerequisite: "AccessVulva", AllowLock: true, Difficulty: 20, Time: 20, RemoveTime: 10, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
+			{ Name: "MetalChastityBelt", Effect: ["Chaste"], Block: ["ItemVulva", "ItemButt"], HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"], Value: 200, Prerequisite: "AccessVulva", AllowLock: true, Difficulty: 50, Time: 20, RemoveTime: 10, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 10 }] },
 			{
-				Name: "LoveChastityBelt",  HideItem: ["ItemVulvaVibratingDildo"], Value: 400, Prerequisite: "AccessVulva", Difficulty: 50, Time: 20, RemoveTime: 10, Extended: true,
+				Name: "LoveChastityBelt",  HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"], Value: 400, Prerequisite: "AccessVulva", Difficulty: 50, Time: 20, RemoveTime: 10, Extended: true,
 				Effect: ["Lock"], OwnerOnly: true,
 				AllowEffect: ["Chaste", "Egged", "Vibrating"],
 				AllowBlock: ["ItemVulva", "ItemButt"],
@@ -703,6 +703,7 @@ var AssetFemale3DCG = [
 			{ Name: "HeartPasties", DefaultColor: "#800000" ,Value: 20, Prerequisite: "AccessBreast", Time: 10, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 5 }] },
 			{ Name: "NippleAccessory1", Value: 15, Prerequisite: "AccessBreast", Time: 5, },
 			{ Name: "TapedVibeEggs", Value: 30, Effect: ["Egged"], Prerequisite: "AccessBreast", Time: 5, AllowEffect: ["Egged", "Vibrating"] },
+			{ Name: "NippleSuctionCups", Effect: [], Value: 50, Extended: true, Prerequisite: "AccessBreast", Time: 10, ExpressionTrigger: [{ Group: "Eyes", Name: "Closed", Timer: 5 }, { Group: "Eyebrows", Name: "Angry", Timer: 5 }] },
 			AssetSpankingToys
 		]
 	},
@@ -744,8 +745,8 @@ var AssetFemale3DCG = [
 			{ Name: "LeatherCuffs", DefaultColor: "#404040", Priority: 26, Random: false, Value: 100, AllowPose: ["BackBoxTie", "BackElbowTouch"], Time: 20, Difficulty: 3, Extended: true, AllowLock: true, AllowEffect: ["Block", "Prone"], AllowType: ["Wrist", "Elbow", "Both"] },
 			{ Name: "MittenChain1", Random: false, SelfBondage: false, Value: -1, Block: ["ItemHands", "ItemTorso"], Time: 15, Difficulty: 5, AllowLock: true },
 			{ Name: "FourLimbsShackles", Enable: false, Value: -1, SetPose: ["BackBoxTie"], Effect: ["Block", "Prone", "Lock"], Time: 30 },
-			{ Name: "StraitLeotard", DefaultColor: "#70C0C0", SelfBondage: false, SelfUnlock: false, Value: 150, SetPose: ["BackElbowTouch"], Hide: ["Cloth"], HideItem: ["ClothLowerSkirt1", "ClothLowerTennisSkirt1", "ItemVulvaVibratingDildo"], Block: ["ItemNipples", "ItemVulva", "ItemButt", "ItemPelvis", "ItemTorso", "ItemBreast", "ItemHands"], Effect: ["Block", "Prone"], Time: 35, RemoveTime: 20, Difficulty: 13, AllowLock: true },
-			{ Name: "StraitJacket", DefaultColor: "#A0A0A0", SelfBondage: false, SelfUnlock: false, Extended: true, Value: 200, SetPose: ["BackElbowTouch"], Hide: ["Cloth"], HideItem: ["ClothLowerSkirt1", "ClothLowerTennisSkirt1", "ItemVulvaVibratingDildo"], Block: ["ItemNipples", "ItemVulva", "ItemButt", "ItemPelvis", "ItemTorso", "ItemBreast", "ItemHands"], Effect: ["Block", "Prone"], Time: 35, RemoveTime: 20, Difficulty: 6, AllowLock: true },
+			{ Name: "StraitLeotard", DefaultColor: "#70C0C0", SelfBondage: false, SelfUnlock: false, Value: 150, SetPose: ["BackElbowTouch"], Hide: ["Cloth"], HideItem: ["ClothLowerSkirt1", "ClothLowerTennisSkirt1", "ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"], Block: ["ItemNipples", "ItemVulva", "ItemButt", "ItemPelvis", "ItemTorso", "ItemBreast", "ItemHands"], Effect: ["Block", "Prone"], Time: 35, RemoveTime: 20, Difficulty: 13, AllowLock: true },
+			{ Name: "StraitJacket", DefaultColor: "#A0A0A0", SelfBondage: false, SelfUnlock: false, Extended: true, Value: 200, SetPose: ["BackElbowTouch"], Hide: ["Cloth"], HideItem: ["ClothLowerSkirt1", "ClothLowerTennisSkirt1", "ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"], Block: ["ItemNipples", "ItemVulva", "ItemButt", "ItemPelvis", "ItemTorso", "ItemBreast", "ItemHands"], Effect: ["Block", "Prone"], Time: 35, RemoveTime: 20, Difficulty: 6, AllowLock: true },
 			{ 
 				Name: "Bolero", DefaultColor: "#E080A0", SelfBondage: false, SelfUnlock: false, Value: 120, SetPose: ["BackElbowTouch", "Bolero"], Block: ["ItemHands"], Effect: ["Block", "Prone"], Time: 35, RemoveTime: 20, Difficulty: 11, AllowLock: true,
 				Layer: [
