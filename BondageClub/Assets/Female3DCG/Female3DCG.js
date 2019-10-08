@@ -146,6 +146,7 @@ var AssetFemale3DCG = [
 			{ Name: "Panties15", Value: 10, HideItem: ["ItemVulvaVibratingDildo"] },
 			{ Name: "Bikini1", Value: 25, HideItem: ["ItemVulvaVibratingDildo"] },
 			{ Name: "Diapers1", Value: 50, HideItem: ["ItemVulvaVibratingDildo"] },
+			{ Name: "Panties16", Value: 15, HideItem: ["ItemVulvaVibratingDildo"] }
 			{ Name: "MaidPanties1", Value: 50, HideItem: ["ItemVulvaVibratingDildo"] },
 			{ Name: "LatexPanties1", Value: 40, Expose: ["ItemVulva"] },
 			{ Name: "WrapPanties1", Value: 30, Expose: ["ItemVulva"] },
@@ -173,6 +174,11 @@ var AssetFemale3DCG = [
 			{ Name: "Stockings3", Value: 10 },
 			{ Name: "Stockings4", Value: 10 },
 			{ Name: "Pantyhose1", Value: 10, Priority: 16, Block: ["ItemVulva", "ItemButt"], HideItem: ["ItemVulvaVibratingDildo"] },
+			{
+			    Name: "Socks6", Value: 25, HideItem: ["ItemVulvaVibratingDildo"],
+				Layer: [
+					{ Name: "Sock", AllowColorize: true },
+					{ Name: "Frill", AllowColorize: false }
 			{ 
 				Name: "SocksFur", Value: 45,
 				Layer: [
@@ -378,7 +384,7 @@ var AssetFemale3DCG = [
 		AllowPose: ["Suspension"],
 		Left: 50,
 		Top: 0,
-		Asset: ["HairNone", "HairBack1", "HairBack2", "HairBack4", "HairBack10", "HairBack14", "HairBack15", "HairBack16", "HairBack17", "HairBack18", "HairBack19"]
+		Asset: ["HairNone", "HairBack1", "HairBack2", "HairBack4", "HairBack10", "HairBack14", "HairBack15", "HairBack16", "HairBack17", "HairBack18", "HairBack19", "HairBack20", "HairBack5", "HairBack8", "HairBack11"]
 	},
 
 	{
@@ -389,7 +395,7 @@ var AssetFemale3DCG = [
 		Color: ["#6a3628", "#202020", "#dcc787", "#6c2132", "#999999", "#dddddd", "#e781b1", "#81e7b1", "#81b1e7", "#eeee99", "#ee9999", "#ee99ee"],
 		Left: 150,
 		Top: 50,
-		Asset: ["HairFront1", "HairFront2", "HairFront3", "HairFront4", "HairFront5", "HairFront6", "HairFront7", "HairFront8", "HairFront9", "HairFront10", "HairFront11", "HairFront12"]
+		Asset: ["HairFront1", "HairFront2", "HairFront3", "HairFront4", "HairFront5", "HairFront6", "HairFront7", "HairFront8", "HairFront9", "HairFront10", "HairFront11", "HairFront12", "HairFront13"]
 	},
 
 	{

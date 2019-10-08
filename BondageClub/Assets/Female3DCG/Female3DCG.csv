@@ -75,6 +75,7 @@ Panties,Panties14,High Cut
 Panties,Panties15,Thong
 Panties,Bikini1,Frilled Bikini
 Panties,Diapers1,Diapers
+Panties,Panties16,Frill Panties
 Panties,MaidPanties1,Maid Panties
 Panties,LatexPanties1,Latex Panties
 Panties,WrapPanties1,Wrap Panties
@@ -95,6 +96,7 @@ Socks,Stockings2,Stockings Light
 Socks,Stockings3,Silky Stockings
 Socks,Stockings4,Fishnet Stockings
 Socks,Pantyhose1,Pantyhose
+Socks,Socks6,Frill Socks
 Socks,SocksFur,Socks with Fur
 Shoes,,Shoes
 Shoes,Shoes1,Style 1
@@ -197,6 +199,10 @@ HairBack,HairBack16,Style 7
 HairBack,HairBack17,Style 8
 HairBack,HairBack18,Style 9
 HairBack,HairBack19,Style 10
+HairBack,HairBack20,Style 11
+HairBack,HairBack5,Style 12
+HairBack,HairBack8,Style 13
+HairBack,HairBack11,Style 14
 HairFront,,Front Hair
 HairFront,HairFront1,Style 1
 HairFront,HairFront2,Style 2
@@ -210,6 +216,7 @@ HairFront,HairFront9,Style 9
 HairFront,HairFront10,Style 10
 HairFront,HairFront11,Style 11
 HairFront,HairFront12,Style 12
+HairFront,HairFront13,Style 13
 Eyes,,Eyes
 Eyes,Eyes1,Style 1
 Eyes,Eyes2,Style 2
