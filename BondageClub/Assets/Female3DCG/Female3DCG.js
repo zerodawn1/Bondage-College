@@ -146,6 +146,7 @@ var AssetFemale3DCG = [
 			{ Name: "Panties15", Value: 10, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
 			{ Name: "Bikini1", Value: 25, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
 			{ Name: "Diapers1", Value: 50, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
+			{ Name: "Panties16", Value: 25, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
 			{ Name: "MaidPanties1", Value: 50, HideItem: ["ItemVulvaVibratingDildo", "ItemVulvaClitSuctionCup"] },
 			{ Name: "LatexPanties1", Value: 40, Expose: ["ItemVulva"] },
 			{ Name: "WrapPanties1", Value: 30, Expose: ["ItemVulva"] },
@@ -178,7 +179,9 @@ var AssetFemale3DCG = [
 				Layer: [
 					{ Name: "Sock", AllowColorize: true },
 					{ Name: "Frill", AllowColorize: false }
-			{ 
+				]
+			},
+			{
 				Name: "SocksFur", Value: 45,
 				Layer: [
 					{ Name: "Fabric", AllowColorize: true },
