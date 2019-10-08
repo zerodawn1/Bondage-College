@@ -18,6 +18,8 @@ Cloth,AdultBabyDress3,Flower Baby dress
 Cloth,NurseUniform,Nurse Uniform
 Cloth,BunnyCollarCuffs,Bunny Girl Accessories
 Cloth,Robe1,Robe
+Cloth,SuspenderTop1,Suspender Top
+Cloth,LeatherCorsetTop1,Leather Corset Top
 Cloth,FlowerDress,Flower Dress
 Cloth,Dress2,Nomadic Dress
 Cloth,LaceBabydoll,Lace Babydoll
@@ -30,6 +32,11 @@ ClothLower,Jeans1,Jeans
 ClothLower,Shorts1,Shorts
 ClothLower,Pajama1,Pajama
 ClothLower,MistressBottom,Mistress Bottom
+ClothLower,Waspie1,Bondage Waspie
+ClothLower,Waspie2,Royal Waspie
+ClothLower,Waspie3,Straps Waspie
+ClothLower,LatexPants1,Latex Pants
+ClothLower,LatexSkirt1,Latex Skirt
 ClothLower,Jeans2,Ripped Jeans
 Bra,,Bra
 Bra,Bra1,Style 1
@@ -43,10 +50,20 @@ Bra,Corset1,Corset + Garters
 Bra,Corset2,Corset
 Bra,Corset3,Half Cup Corset
 Bra,Corset4,Under Bust Corset
+Bra,Corset5,Floral Corset
 Bra,Bikini1,Frilled Bikini
 Bra,Swimsuit1,Swimsuit style 1
 Bra,Swimsuit2,Swimsuit style 2
 Bra,BunnySuit,Bunny Girl Bodysuit
+Bra,FrameBra1,Frame Bra Style 1
+Bra,FrameBra2,Frame Bra Style 2
+Bra,BondageBra1,Bondage Bra
+Bra,LatexBra1,Latex Bra
+Bra,HarnessBra1,Bondage Harness
+Bra,CuteBikini1,Cute Bikini
+Bra,CorsetBikini1,Corset Bikini
+Bra,OuvertPerl1,Ouvert Perl
+Bra,Sarashi1,Sarashi
 Panties,,Panties
 Panties,Panties1,Style 1
 Panties,Panties7,Style 2
@@ -58,6 +75,14 @@ Panties,Panties14,High Cut
 Panties,Panties15,Thong
 Panties,Bikini1,Frilled Bikini
 Panties,Diapers1,Diapers
+Panties,MaidPanties1,Maid Panties
+Panties,LatexPanties1,Latex Panties
+Panties,WrapPanties1,Wrap Panties
+Panties,CrotchPanties1,Crotchless Briefs
+Panties,StringPanties1,G-String Panties
+Panties,StringPasty1,G-String Pasty
+Panties,ZipPanties1,Zip-String Panties
+Panties,HarnessPanties1,Bondage Harness
 Socks,,Socks
 Socks,Socks0,Ankle
 Socks,Socks1,Short
@@ -97,6 +122,7 @@ Hat,CaptainHat1,Captain's Hat
 Hat,BunnySuccubus2,Bunny Succubus 
 Hat,HairFlower1, Flower
 Hat,WitchHat1, Witch Hat
+Hat,PirateBandana1,Pirate Bandana
 HairAccessory,,Hair Accessory
 HairAccessory,Ears1,Ears Small
 HairAccessory,Ears2,Ears Large
@@ -129,6 +155,7 @@ Glasses,SunGlasses2,Sunglasses 2
 Glasses,Mask1,Venetian Mask
 Glasses,Mask2,Domino Mask
 Glasses,ButterflyMask1,Butterfly Mask
+Glasses,EyePatch1,Eye Patch
 TailStraps,,Tail Strap
 TailStraps,TailStrap,Kitty Tail Strap
 TailStraps,HorseTailStrap,Horse Tail Strap
@@ -277,6 +304,11 @@ ItemNipples,VibeNippleClamp,Vibrating Nipple Clamps
 ItemNipples,VibratorRemote,Vibrating Clamps Remote
 ItemNipples,WeightedPiercing,Weighted Piercing
 ItemNipples,ChainClamp,Chain Clamp
+ItemNipples,ScrewClamps,Screw Clamps
+ItemNipples,ChainTassles,Chain Tassles
+ItemNipples,HeartPasties,Heart Pasties
+ItemNipples,NippleAccessory1,Nipple Jewels
+ItemNipples,TapeVibeEggs,Taped Vibrating Eggs
 ItemBreast,,Breast
 ItemBreast,MetalChastityBra,Metal Chastity Bra
 ItemBreast,LeatherCrop,Leather Crop
@@ -319,6 +351,8 @@ ItemNeck,ShockCollarRemote,Shock Collar Remote
 ItemNeck,BatCollar,Bat Collar
 ItemNeck,PostureCollar,Posture Collar
 ItemNeck,SteelPostureCollar,Steel Collar
+ItemNeck,SpikeCollar,Spike Collar
+ItemNeck,HighCollar,High Collar
 ItemNeck,LeatherChoker,Leather Choker
 ItemNeck,PetCollar,Pet Collar
 ItemNeckAccessories,,Collar
@@ -347,6 +381,7 @@ ItemMouth,KittyGag,Kitty Mask Gag
 ItemMouth,KittenHarnessPanelGag,Kitty Harness Gag
 ItemMouth,CarrotGag,Rubber Carrot Gag
 ItemMouth,MuzzleGag,Muzzle Gag
+ItemMouth,NeckCorsetGag,Neck Corset Gag
 ItemMouth,RegularSleepingPill,Sleeping Pill
 ItemMouth,PantiesMask,Panties Mask
 ItemMouth,PlugGag,Plug Gag
@@ -362,6 +397,7 @@ ItemHead,KittyBlindfold,Kitty Blindfold
 ItemHead,DuctTape,Duct Tape
 ItemHead,SmallBlindfold,Small Blindfold
 ItemHead,LeatherHoodOpenMouth,Leather Hood Mouth
+ItemHead,FullBlindfold,Full Blindfold
 ItemEars,,Ears
 ItemEars,LightDutyEarPlugs,Light Duty Ear Plugs
 ItemEars,HeavyDutyEarPlugs,Heavy Duty Ear Plugs
@@ -387,3 +423,6 @@ ItemDevices,WaterCell,Water torture Cell
 ItemDevices,Cage,Stand up cage
 ItemDevices,LowCage,Kennel
 ItemDevices,SaddleStand,Saddle Stand
+ItemBoots,PonyBoots,Pony Boots
+ItemBoots,BalletHeels,Ballet Heels
+ItemBoots,BalletWedges,Ballet Wedges
