@@ -209,12 +209,12 @@ function DialogMenuButtonBuild(C) {
 		if (InventoryItemHasEffect(Item, "Egged") && InventoryAvailable(Player, "VibratorRemote", "ItemVulva") && Player.CanInteract()) DialogMenuButton.push("Remote");
 		if ((Item != null) && Item.Asset.Extended && Player.CanInteract() && (!Item.Asset.OwnerOnly || (C.IsOwnedByPlayer()))) DialogMenuButton.push("Use");
 		if (Player.CanInteract()) DialogMenuButton.push("ColorPick");
+		if (C.ID == 0) {
+			if (DialogItemPermissionMode) DialogMenuButton.push("DialogNormalMode");
+			else DialogMenuButton.push("DialogPermissionMode");
+		}
 	}
 
-	if (C.ID == 0) {
-		if (DialogItemPermissionMode) DialogMenuButton.push("DialogNormalMode");
-		else DialogMenuButton.push("DialogPermissionMode");
-	}
 }
 
 // Build the inventory listing for the dialog which is what's equipped, the player inventory and the character inventory for that group
@@ -541,7 +541,7 @@ function DialogItemClick(ClickItem) {
 
 	// permission mode allow/block items
 	if (C.ID == 0 && DialogItemPermissionMode) {
-		if (CurrentItem && (CurrentItem.Asset.Name = ClickItem.Asset.Name)) return;
+		if (CurrentItem && (CurrentItem.Asset.Name == ClickItem.Asset.Name)) return;
 		if (Player.BlockItems.some(B => B.Name == ClickItem.Asset.Name && B.Group == ClickItem.Asset.Group.Name)) {
 			Player.BlockItems = Player.BlockItems.filter(B => B.Name != ClickItem.Asset.Name || B.Group != ClickItem.Asset.Group.Name);
 		} else {
@@ -766,7 +766,7 @@ function DialogDrawItemMenu(C) {
 
 	// Draws the top menu text & icons
 	if (DialogMenuButton == null) DialogMenuButtonBuild((Player.FocusGroup != null) ? Player : CurrentCharacter);
-	if ((DialogColor == null) && Player.CanInteract() && (DialogProgress < 0) && !InventoryGroupIsBlocked(C)) DrawTextWrap(DialogText, 1000, 0, 975 - DialogMenuButton.length * 110, 125, "White");
+	if ((DialogColor == null) && Player.CanInteract() && (DialogProgress < 0) && !InventoryGroupIsBlocked(C)) DrawTextWrap((!DialogItemPermissionMode) ? DialogText : DialogFind(Player, "DialogPermissionMode"), 1000, 0, 975 - DialogMenuButton.length * 110, 125, "White");
 	for (var I = DialogMenuButton.length - 1; I >= 0; I--)
 		DrawButton(1885 - I * 110, 15, 90, 90, "", ((DialogMenuButton[I] == "ColorPick") && (DialogColorSelect != null)) ? DialogColorSelect : "White", "Icons/" + DialogMenuButton[I] + ".png", (DialogColor == null) ? DialogFind(Player, DialogMenuButton[I]) : null);
 
@@ -778,10 +778,10 @@ function DialogDrawItemMenu(C) {
 		return;
 	}
 
-	// Inventory is only accessible if the player can interact and there's no progress bar
+	// In item permission mode, the player can choose which item he allows other users to mess with.  Allowed items have a green background.  Disallowed have a red background.
 	if ((DialogItemPermissionMode && (C.ID == 0) && (DialogProgress < 0)) || (Player.CanInteract() && (DialogProgress < 0) && !InventoryGroupIsBlocked(C))) {
 
-		// Draw each items in the player inventory (up to 12 per screen)
+		// Draw all possible items in that category (12 per screen)
 		if (DialogInventory == null) DialogInventoryBuild(C);
 		var X = 1000;
 		var Y = 125;
@@ -790,7 +790,7 @@ function DialogDrawItemMenu(C) {
 			var Hover = (MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && !CommonIsMobile;
 			var Block = C.BlockItems && C.BlockItems.some(B => B.Name == Item.Asset.Name && B.Group == Item.Asset.Group.Name)
 			DrawRect(X, Y, 225, 275, (DialogItemPermissionMode && C.ID == 0) ? 
-				(DialogInventory[I].Worn ? "yellow" : Block ? Hover ? "red" : "pink" : Hover ? "green" : "lime") : 
+				(DialogInventory[I].Worn ? "gray" : Block ? Hover ? "red" : "pink" : Hover ? "green" : "lime") : 
 				((Hover && !Block) ? "cyan" : DialogInventory[I].Worn ? "pink" : Block ? "gray" : "white"));
 			if (Item.Worn && InventoryItemHasEffect(InventoryGet(C, Item.Asset.Group.Name), "Vibrating", true)) DrawImageResize("Assets/" + Item.Asset.Group.Family + "/" + Item.Asset.Group.Name + "/Preview/" + Item.Asset.Name + ".png", X + Math.floor(Math.random() * 3) + 1, Y + Math.floor(Math.random() * 3) + 1, 221, 221);
 			else DrawImageResize("Assets/" + Item.Asset.Group.Family + "/" + Item.Asset.Group.Name + "/Preview/" + Item.Asset.Name + Item.Asset.DynamicPreviewIcon() + ".png", X + 2, Y + 2, 221, 221);
