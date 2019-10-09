@@ -407,6 +407,9 @@ ItemHead,DuctTape,Duct Tape
 ItemHead,SmallBlindfold,Small Blindfold
 ItemHead,LeatherHoodOpenMouth,Leather Hood Mouth
 ItemHead,FullBlindfold,Full Blindfold
+ItemHead,LeatherHoodSensDep,Sensory Deprivation Leather Hood
+ItemHead,LatexHoodOpenHair,Open Latex Hood with hair
+ItemHead,LeatherHoodSealed,Sealed Leather Hood
 ItemEars,,Ears
 ItemEars,LightDutyEarPlugs,Light Duty Ear Plugs
 ItemEars,HeavyDutyEarPlugs,Heavy Duty Ear Plugs
