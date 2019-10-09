@@ -59,7 +59,7 @@ function AsylumEntranceStartChat() {
 	ChatRoomSpace = "Asylum";
 	ChatSearchBackground = "AsylumEntranceDark";
 	ChatSearchLeaveRoom = "AsylumEntrance";
-	ChatCreateBackgroundList = ["AsylumEntrance", "AsylumBedroom", "AsylumMeeting", "AsylumTherapy", "PaddedCell"];
+	ChatCreateBackgroundList = ["AsylumEntrance", "AsylumBedroom", "AsylumMeeting", "AsylumTherapy", "PaddedCell", "PaddedCell2"];
 	CommonSetScreen("Online", "ChatSearch");
 }
 
