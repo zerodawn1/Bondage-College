@@ -74,7 +74,7 @@ function AsylumTherapyTherapyEnd() {
 
 // When the patient therapy fails, loses reputation
 function AsylumTherapyTherapyFail() {
-	DialogChangeReputation("Asylum", 3);
+	DialogChangeReputation("Asylum", 2);
 	if (ReputationGet("Asylum") >= 0) DialogSetReputation("Asylum", -1);
 	AsylumTherapyTherapyEnd();
 }
