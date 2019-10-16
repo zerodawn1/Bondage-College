@@ -93,7 +93,7 @@ function AsylumTherapyPainTherapyRestrain() {
 	CharacterSetActivePose(Player, "Kneel");
 	InventoryWear(AsylumTherapyNurse, "SpankingToys", "ItemHands");
 	if ((ReputationGet("Asylum") <= -50) && (ReputationGet("Asylum") >= -99)) InventoryGet(AsylumTherapyNurse, "ItemHands").Property = { Type: "Paddle" };
-	if (ReputationGet("Asylum") <= -100) InventoryGet(AsylumTherapyNurse, "ItemHands").Property = { Type: "Flogger" };
+	if (ReputationGet("Asylum") <= -100) InventoryGet(AsylumTherapyNurse, "ItemHands").Property = { Type: "Whip" };
 	CharacterRefresh(AsylumTherapyNurse);
 }
 
@@ -106,7 +106,7 @@ function AsylumTherapyTickleTherapyRestrain() {
 function AsylumTherapyTickleTherapyBlindfold() {
 	if ((ReputationGet("Asylum") <= -1) && (ReputationGet("Asylum") >= -49)) InventoryWear(Player, "ClothBlindfold", "ItemHead");
 	if ((ReputationGet("Asylum") <= -50) && (ReputationGet("Asylum") >= -99)) InventoryWear(Player, "LeatherBlindfold", "ItemHead");
-	if ((ReputationGet("Asylum") <= -100) && (ReputationGet("Asylum") >= -100)) InventoryWear(Player, "StuddedBlindfold", "ItemHead");
+	if ((ReputationGet("Asylum") <= -100) && (ReputationGet("Asylum") >= -100)) InventoryWear(Player, "LeatherHoodOpenMouth", "ItemHead");
 }
 
 // For the orgasm therapy, a vibrating toy can be applied on the player's breast
@@ -116,15 +116,41 @@ function AsylumTherapyOrgasmTherapyRestrain() {
 	if ((ReputationGet("Asylum") <= -100) && (ReputationGet("Asylum") >= -100)) InventoryWear(Player, "NippleClamp", "ItemNipples");
 }
 
+// Initiates the bondage therapy as a nurse
+function AsylumTherapyPatientBondageIntro(RepChange, RestraintsLevel) {
+	DialogChangeReputation("Dominant", RepChange);
+	CharacterFullRandomRestrain(AsylumTherapyPatient, RestraintsLevel);
+}
+
 // Initiates the pain therapy as a nurse
 function AsylumTherapyPatientPainIntro(RepChange) {
 	DialogChangeReputation("Dominant", RepChange);
 	InventoryWear(AsylumTherapyPatient, "FourLimbsShackles", "ItemArms");
 	CharacterSetActivePose(AsylumTherapyPatient, "Kneel");
 	InventoryWear(Player, "SpankingToys", "ItemHands");
-	if ((ReputationGet("Asylum") <= -50) && (ReputationGet("Asylum") >= -99)) InventoryGet(Player, "ItemHands").Property = { Type: "Paddle" };
-	if (ReputationGet("Asylum") <= -100) InventoryGet(Player, "ItemHands").Property = { Type: "Flogger" };
+	if ((ReputationGet("Asylum") >= 50) && (ReputationGet("Asylum") <= 99)) InventoryGet(Player, "ItemHands").Property = { Type: "Paddle" };
+	if (ReputationGet("Asylum") >= 100) InventoryGet(Player, "ItemHands").Property = { Type: "Whip" };
 	CharacterRefresh(Player);
+}
+
+// Initiates the tickle therapy as a nurse
+function AsylumTherapyPatientTickleIntro(RepChange) {
+	DialogChangeReputation("Dominant", RepChange);
+	InventoryWear(AsylumTherapyPatient, "FourLimbsShackles", "ItemArms");
+	if ((ReputationGet("Asylum") >= 1) && (ReputationGet("Asylum") <= 49)) InventoryWear(AsylumTherapyPatient, "ClothBlindfold", "ItemHead");
+	if ((ReputationGet("Asylum") >= 50) && (ReputationGet("Asylum") <= 99)) InventoryWear(AsylumTherapyPatient, "LeatherBlindfold", "ItemHead");
+	if (ReputationGet("Asylum") >= 100) InventoryWear(AsylumTherapyPatient, "LeatherHoodOpenMouth", "ItemHead");
+	CharacterRefresh(AsylumTherapyPatient);
+}
+
+// Initiates the orgasm therapy as a nurse
+function AsylumTherapyPatientOrgasmIntro(RepChange) {
+	DialogChangeReputation("Dominant", RepChange);
+	InventoryWear(AsylumTherapyPatient, "FourLimbsShackles", "ItemArms");
+	if ((ReputationGet("Asylum") >= 1) && (ReputationGet("Asylum") <= 49)) InventoryWear(AsylumTherapyPatient, "TapedVibeEggs", "ItemNipples");
+	if ((ReputationGet("Asylum") >= 50) && (ReputationGet("Asylum") <= 99)) InventoryWear(AsylumTherapyPatient, "NippleSuctionCups", "ItemNipples");
+	if (ReputationGet("Asylum") >= 100) InventoryWear(AsylumTherapyPatient, "NippleClamp", "ItemNipples");
+	CharacterRefresh(AsylumTherapyPatient);
 }
 
 // Starts the therapy mini-game as a nurse
@@ -137,6 +163,9 @@ function AsylumTherapyTherapyStart(Difficulty) {
 // Ends the therapy mini-game as a nurse, plays with reputation and money
 function AsylumTherapyTherapyEnd() {
 	CommonSetScreen("Room", "AsylumTherapy");
+	CharacterSetActivePose(AsylumTherapyPatient, null);
+	InventoryRemove(AsylumTherapyPatient, "ItemHead");
+	InventoryRemove(AsylumTherapyPatient, "ItemMouth");
 	CharacterSetCurrent(AsylumTherapyPatient);
 	AsylumTherapyPatient.Stage = MiniGameVictory ? "1100" : "1200";
 	AsylumTherapyPatient.CurrentDialog = DialogFind(AsylumTherapyPatient, MiniGameVictory ? "TherapyVictory" : "TherapyDefeat");
@@ -156,4 +185,17 @@ function AsylumTherapyTherapyEnd() {
 		DialogChangeReputation("Asylum", 6);
 		CharacterChangeMoney(Player, 20);
 	}
+}
+
+// When a new patient comes in
+function AsylumTherapyPatientNew() {
+	CharacterRelease(AsylumTherapyPatient);
+	InventoryRemove(AsylumTherapyPatient, "ItemNeck");
+	InventoryRemove(Player, "ItemHands");
+	AsylumTherapyPatient = CharacterLoadNPC("NPC_AsylumTherapy_Patient");
+	CharacterAppearanceFullRandom(AsylumTherapyPatient);
+	AsylumEntranceWearPatientClothes(AsylumTherapyPatient);
+	AsylumTherapyPatient.AllowItem = false;
+	CharacterRandomName(AsylumTherapyPatient);
+	if (CurrentCharacter != null) DialogLeave();
 }
