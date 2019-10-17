@@ -37,7 +37,7 @@ function AsylumTherapyClick() {
 	if ((MouseX >= 1000) && (MouseX < 1500) && (MouseY >= 0) && (MouseY < 1000) && (ReputationGet("Asylum") <= -1)) CharacterSetCurrent(AsylumTherapyNurse);
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) {
 		if (Player.CanChange() && (LogValue("Committed", "Asylum") >= CurrentTime)) AsylumEntranceWearPatientClothes(Player);
-		if ((ReputationGet("Asylum") <= -50) && (LogValue("Committed", "Asylum") >= CurrentTime)) InventoryWear(Player, "StraitJacket", "ItemArms", "Default", 3);
+		if ((ReputationGet("Asylum") <= -50) && (LogValue("Committed", "Asylum") >= CurrentTime) && Player.CanInteract()) InventoryWear(Player, "StraitJacket", "ItemArms", "Default", 3);
 		CommonSetScreen("Room", "AsylumEntrance");
 	}
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 235)) InformationSheetLoadCharacter(Player);
@@ -157,11 +157,11 @@ function AsylumTherapyPatientOrgasmIntro(RepChange) {
 function AsylumTherapyTherapyStart(Difficulty) {
 	TherapyCharacterLeft = Player;
 	TherapyCharacterRight = AsylumTherapyPatient;
-	MiniGameStart("Therapy", Difficulty, "AsylumTherapyTherapyEnd");
+	MiniGameStart("Therapy", Difficulty, "AsylumTherapyTherapyMiniGameEnd");
 }
 
 // Ends the therapy mini-game as a nurse, plays with reputation and money
-function AsylumTherapyTherapyEnd() {
+function AsylumTherapyTherapyMiniGameEnd() {
 	CommonSetScreen("Room", "AsylumTherapy");
 	CharacterSetActivePose(AsylumTherapyPatient, null);
 	InventoryRemove(AsylumTherapyPatient, "ItemHead");
