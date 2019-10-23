@@ -1,15 +1,30 @@
 "use strict";
 var CollegeTennisBackground = "CollegeTennis";
 var CollegeTennisJennifer = null;
+var CollegeTennisJenniferStatus = "";
+var CollegeTennisJenniferWillJoinRoom = false;
+
+// Returns TRUE if the dialog option should be shown
+function CollegeTennisJenniferStatusIs(QueryStatus) { return (QueryStatus == CollegeTennisJenniferStatus) }
 
 // Generates Jennifer
 function CollegeTennisLoad() {
+
+	// Sets Jennifer current relationship with the player
+	if (LogQuery("BondageCollege", "Import")) CollegeTennisJenniferStatus = "SchoolMate";
+	if (LogQuery("JenniferLover", "NPC-Jennifer") && (Player.Lover == "NPC-Jennifer")) CollegeTennisJenniferStatus = "Lover";
+	if (LogQuery("JenniferLover", "NPC-Jennifer") && (Player.Lover != "NPC-Jennifer")) CollegeTennisJenniferStatus = "ExLover";
+	if (LogQuery("JenniferCollared", "NPC-Jennifer")) CollegeTennisJenniferStatus = "Owned";
+	if (LogQuery("JenniferMistress", "NPC-Jennifer") && (Player.Owner == "NPC-Jennifer")) CollegeTennisJenniferStatus = "Owner";
+	if (LogQuery("JenniferMistress", "NPC-Jennifer") && (Player.Owner != "NPC-Jennifer")) CollegeTennisJenniferStatus = "ExOwner";
+
+	// Generates a full Jennifer model based on the Bondage College template
 	if (CollegeTennisJennifer == null) {
 		CollegeTennisJennifer = CharacterLoadNPC("NPC_CollegeTennis_Jennifer");
 		CollegeTennisJennifer.Name = "Jennifer";
 		CollegeTennisJennifer.AllowItem = false;
 		CharacterNaked(CollegeTennisJennifer);		
-		if (LogQuery("JenniferCollared", "NPC-Jennifer")) {
+		if (CollegeTennisJenniferStatus == "Owned") {
 			InventoryWear(CollegeTennisJennifer, "SlaveCollar", "ItemNeck");
 			CollegeTennisJennifer.Owner = Player.Name;
 		}
@@ -32,6 +47,7 @@ function CollegeTennisLoad() {
 		InventoryGet(CollegeTennisJennifer, "ItemHands").Property = { Type: "TennisRacket" };
 		CharacterRefresh(CollegeTennisJennifer);
 	}
+
 }
 
 // Runs the room (shows the player and Jennifer)
@@ -48,4 +64,61 @@ function CollegeTennisClick() {
 	if ((MouseX >= 1000) && (MouseX < 1500) && (MouseY >= 0) && (MouseY < 1000)) CharacterSetCurrent(CollegeTennisJennifer);
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115) && Player.CanWalk()) CommonSetScreen("Room", "CollegeEntrance");
 	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 145) && (MouseY < 235)) InformationSheetLoadCharacter(Player);
+}
+
+// When the tennis game starts
+function CollegeTennisGameStart(Difficulty) {
+
+	// Gives a racket to the player
+	InventoryWear(Player, "SpankingToys", "ItemHands");
+	InventoryGet(Player, "ItemHands").Property = { Type: "TennisRacket" };
+	CharacterRefresh(Player);
+
+	// Starts the match
+	TennisCharacterLeft = Player;
+	TennisCharacterRight = CollegeTennisJennifer;
+	MiniGameStart("Tennis", Difficulty, "CollegeTennisGameEnd");
+
+}
+
+// When the tennis game ends (an extra dialog can open to invite Jennifer after winning)
+function CollegeTennisGameEnd() {
+	CommonSetScreen("Room", "CollegeTennis");
+	CharacterSetCurrent(CollegeTennisJennifer);
+	CollegeTennisJennifer.Stage = MiniGameVictory ? "100" : "200";
+	CollegeTennisJennifer.CurrentDialog = DialogFind(CollegeTennisJennifer, MiniGameVictory ? "TennisVictory" : "TennisDefeat");
+	CollegeTennisJenniferWillJoinRoom = (MiniGameVictory && (MiniGameDifficulty != "Easy") && (CollegeTennisJenniferStatus != "Lover") && (CollegeTennisJenniferStatus != "Owned") && (CollegeTennisJenniferStatus != "Owner") && LogQuery("RentRoom", "PrivateRoom") && (PrivateCharacter.length < PrivateCharacterMax));
+}
+
+// When the plater invites Jennifer to her room, she also gets a tennis racket
+function CollegeTennisInviteToPrivateRoom() {
+	InventoryAdd(Player, "SpankingToysTennisRacket", "ItemHands");
+	CommonSetScreen("Room", "Private");
+	PrivateAddCharacter(CollegeTennisJennifer, null, true);
+	var C = PrivateCharacter[PrivateCharacter.length - 1];
+	C.Trait = [];
+	NPCTraitSet(C, "Submissive", 20);
+	NPCTraitSet(C, "Peaceful", 50);
+	NPCTraitSet(C, "Frigid", 80);
+	NPCTraitSet(C, "Wise", 40);
+	NPCTraitSet(C, "Serious", 30);
+	NPCTraitSet(C, "Polite", 60);
+	C.Love = 20;
+	if (CollegeTennisJennifer.Owner == Player.Name) {
+		NPCEventAdd(C, "NPCCollaring", CurrentTime);
+		InventoryWear(C, "SlaveCollar", "ItemNeck");
+		C.Owner = Player.Name;
+		C.Love = 100;
+	}
+	if (Player.Lover == "NPC-Jennifer") {
+		C.Lover = Player.Name;
+		C.Love = 100;
+	}
+	if (Player.Owner == "NPC-Jennifer") {
+		NPCEventAdd(C, "PlayerCollaring", CurrentTime);
+		NPCEventAdd(C, "LastGift", CurrentTime);
+		C.Love = 100;
+	}
+	NPCTraitDialog(C);
+	ServerPrivateCharacterSync();
 }
