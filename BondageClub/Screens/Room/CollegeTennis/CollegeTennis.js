@@ -6,6 +6,7 @@ var CollegeTennisJenniferWillJoinRoom = false;
 
 // Returns TRUE if the dialog option should be shown
 function CollegeTennisJenniferStatusIs(QueryStatus) { return (QueryStatus == CollegeTennisJenniferStatus) }
+function CollegeTennisCanInviteToPrivateRoom() { return (LogQuery("RentRoom", "PrivateRoom") && (PrivateCharacter.length < PrivateCharacterMax)) }
 
 // Generates Jennifer
 function CollegeTennisLoad() {
@@ -17,35 +18,44 @@ function CollegeTennisLoad() {
 	if (LogQuery("JenniferCollared", "NPC-Jennifer")) CollegeTennisJenniferStatus = "Owned";
 	if (LogQuery("JenniferMistress", "NPC-Jennifer") && (Player.Owner == "NPC-Jennifer")) CollegeTennisJenniferStatus = "Owner";
 	if (LogQuery("JenniferMistress", "NPC-Jennifer") && (Player.Owner != "NPC-Jennifer")) CollegeTennisJenniferStatus = "ExOwner";
+	if (PrivateCharacter.length > 1)
+		for (var P = 1; P < PrivateCharacter.length; P++)
+			if (PrivateCharacter[P].Name == "Jennifer")
+				CollegeTennisJenniferStatus = "Away";
 
 	// Generates a full Jennifer model based on the Bondage College template
 	if (CollegeTennisJennifer == null) {
+		
+		// If Jennifer is away, we generate a random girl
 		CollegeTennisJennifer = CharacterLoadNPC("NPC_CollegeTennis_Jennifer");
-		CollegeTennisJennifer.Name = "Jennifer";
 		CollegeTennisJennifer.AllowItem = false;
-		CharacterNaked(CollegeTennisJennifer);		
-		if (CollegeTennisJenniferStatus == "Owned") {
-			InventoryWear(CollegeTennisJennifer, "SlaveCollar", "ItemNeck");
-			CollegeTennisJennifer.Owner = Player.Name;
-		}
-		InventoryWear(CollegeTennisJennifer, "PussyLight1", "Pussy", "#edd6b0");
-		InventoryWear(CollegeTennisJennifer, "Eyes5", "Eyes", "#ffa239");
-		InventoryWear(CollegeTennisJennifer, "Mouth1", "Mouth", "Default");
-		InventoryWear(CollegeTennisJennifer, "Small", "BodyUpper", "White");
-		InventoryWear(CollegeTennisJennifer, "Small", "BodyLower", "White");
-		InventoryWear(CollegeTennisJennifer, "Default", "Hands", "White");
-		InventoryWear(CollegeTennisJennifer, "HairBack6", "HairBack", "#8dccce");
-		InventoryWear(CollegeTennisJennifer, "HairFront5", "HairFront", "#8dccce");
-		InventoryWear(CollegeTennisJennifer, "Bra1", "Bra", "#CCCCCC");
-		InventoryWear(CollegeTennisJennifer, "Panties1", "Panties", "#CCCCCC");
+		CharacterNaked(CollegeTennisJennifer);			
+		if (CollegeTennisJenniferStatus != "Away") {
+			CollegeTennisJennifer.Name = "Jennifer";
+			InventoryWear(CollegeTennisJennifer, "PussyLight1", "Pussy", "#edd6b0");
+			InventoryWear(CollegeTennisJennifer, "Eyes5", "Eyes", "#ffa239");
+			InventoryWear(CollegeTennisJennifer, "Mouth1", "Mouth", "Default");
+			InventoryWear(CollegeTennisJennifer, "Small", "BodyUpper", "White");
+			InventoryWear(CollegeTennisJennifer, "Small", "BodyLower", "White");
+			InventoryWear(CollegeTennisJennifer, "Default", "Hands", "White");
+			InventoryWear(CollegeTennisJennifer, "HairBack6", "HairBack", "#8dccce");
+			InventoryWear(CollegeTennisJennifer, "HairFront5", "HairFront", "#8dccce");
+			InventoryWear(CollegeTennisJennifer, "Bra1", "Bra", "#CCCCCC");
+			InventoryWear(CollegeTennisJennifer, "Panties1", "Panties", "#CCCCCC");
+			InventoryWear(CollegeTennisJennifer, "Glasses1", "Glasses", "Default");
+			if (CollegeTennisJenniferStatus == "Owned") {
+				InventoryWear(CollegeTennisJennifer, "SlaveCollar", "ItemNeck");
+				CollegeTennisJennifer.Owner = Player.Name;
+			}
+		} else CollegeTennisJennifer.Stage = 1000;
 		InventoryWear(CollegeTennisJennifer, "TennisShirt1", "Cloth", "Default");
 		InventoryWear(CollegeTennisJennifer, "TennisSkirt1", "ClothLower", "Default");
 		InventoryWear(CollegeTennisJennifer, "Socks1", "Socks", "#CCCCCC");
 		InventoryWear(CollegeTennisJennifer, "Sneakers1", "Shoes", "Default");
-		InventoryWear(CollegeTennisJennifer, "Glasses1", "Glasses", "Default");
 		InventoryWear(CollegeTennisJennifer, "SpankingToys", "ItemHands");
 		InventoryGet(CollegeTennisJennifer, "ItemHands").Property = { Type: "TennisRacket" };
 		CharacterRefresh(CollegeTennisJennifer);
+
 	}
 
 }
@@ -93,6 +103,7 @@ function CollegeTennisGameEnd() {
 // When the plater invites Jennifer to her room, she also gets a tennis racket
 function CollegeTennisInviteToPrivateRoom() {
 	InventoryAdd(Player, "SpankingToysTennisRacket", "ItemHands");
+	InventoryRemove(CollegeTennisJennifer, "ItemHands");
 	CommonSetScreen("Room", "Private");
 	PrivateAddCharacter(CollegeTennisJennifer, null, true);
 	var C = PrivateCharacter[PrivateCharacter.length - 1];
@@ -121,4 +132,8 @@ function CollegeTennisInviteToPrivateRoom() {
 	}
 	NPCTraitDialog(C);
 	ServerPrivateCharacterSync();
+	DialogLeave();
+	CharacterAppearanceFullRandom(CollegeTennisJennifer);
+	CharacterRandomName(CollegeTennisJennifer);
+	CollegeTennisJennifer = null;
 }

@@ -25,7 +25,7 @@ TennisDefeat,,,(She looks happy.)  Good game!  But you need some practice.  We c
 21,22,You should come there with me.,"(She looks intrigued.)  Sure, I'm curious to see your club.  Should we go there now?",,CanInviteToPrivateRoom()
 21,0,One day I will show you.,"Thanks, I'm curious now.  I'm not sure this is a place for me though.  Invite me over if you have room for me.",,
 22,,Let's go now!  (Bring her to your room.),,InviteToPrivateRoom(),
-22,0,Now now.,Very well.  Would you like to play tennis with me?,,
+22,0,Not now.,Very well.  Would you like to play tennis with me?,,
 100,10,Another match?  Sure!,That's the spirit!  I'm glad you still have some energy left.,,
 100,110,That was a great game.,(She smiles.)  Yes!  I love a good challenge.  Winning or losing ins't very important.,,JenniferWillJoinRoom
 110,120,I love your attitude.,Thanks a lot!  I'm glad you came to the court today.,,
@@ -42,3 +42,5 @@ TennisDefeat,,,(She looks happy.)  Good game!  But you need some practice.  We c
 150,0,It's a torture dungeon.,(She looks shocked.)  Oh my!  Anyway.  Would you like to play another game?,,
 200,10,"Yes, I want my revenge.",That's the spirit!  I'm glad you still have some energy left.,,
 200,0,"No, that's enough.",Very well.  We can play later if you want.,,
+1000,,,TO DO,,
+1000,,TO DO,TO DO,,
