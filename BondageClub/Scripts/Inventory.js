@@ -112,16 +112,24 @@ function InventoryAllow(C, Prerequisite) {
 		|| (InventoryGet(C, "Socks") != null && (InventoryGet(C, "Socks").Asset.Block != null) && InventoryGet(C, "Socks").Asset.Block.includes("ItemVulva")))) { DialogSetText("RemoveClothesForItem"); return false; }
 	
 	
+	//Shackles and Manacles
+	if (Prerequisite == "Shackles" && InventoryGet(C, "ItemFeet") != null) { DialogSetText("MustFreeFeetFirst"); return false; }
+	if (Prerequisite == "Shackles" && (InventoryGet(C, "ItemDevices") != null) && (InventoryGet(C, "ItemDevices").Asset.Name == "SaddleStand")) { DialogSetText("CannotBeUsedWithSaddleStand"); return false; }
+	if (Prerequisite == "Shackles" &&  C.Pose.indexOf("Suspension") >= 0)  { DialogSetText("TheyMustBeStandingFirst"); return false; }
+	if (Prerequisite == "Shackles" &&  C.Pose.indexOf("Horse") >= 0)  { DialogSetText("TheyMustBeStandingFirst"); return false; }
+	
 	// Saddle stand
-	if (Prerequisite == "LegsOpen1" && C.Pose.indexOf("LegsClosed") >= 0)  { DialogSetText("LegsCannotOpen"); return false; }
-	if (Prerequisite == "LegsOpen1" && C.Pose.indexOf("Suspension") >= 0)  { DialogSetText("TheyMustBeStandingFirst"); return false; }
-	if (Prerequisite == "LegsOpen1" && C.Pose.indexOf("Horse") >= 0)  { DialogSetText("TheyMustBeStandingFirst"); return false; }
-	if (Prerequisite == "LegsOpen1" && C.Pose.indexOf("Kneel") >= 0)  { DialogSetText("TheyMustBeStandingFirst"); return false; }
-
+	if (Prerequisite == "LegsOpen1" &&  C.Pose.indexOf("LegsClosed") >= 0)  { DialogSetText("LegsCannotOpen"); return false; }
+	if (Prerequisite == "LegsOpen1" &&  C.Pose.indexOf("Suspension") >= 0)  { DialogSetText("TheyMustBeStandingFirst"); return false; }
+	if (Prerequisite == "LegsOpen1" &&  C.Pose.indexOf("Horse") >= 0)  { DialogSetText("TheyMustBeStandingFirst"); return false; }
+	if (Prerequisite == "LegsOpen1" &&  C.Pose.indexOf("Kneel") >= 0)  { DialogSetText("TheyMustBeStandingFirst"); return false; }
+	if (Prerequisite == "LegsOpen1" &&  C.Effect.indexOf("Shackled") >= 0) { DialogSetText("RemoveShacklesFirst"); return false; }
+	
 	// Wooden horse blocks
-	if (Prerequisite == "Horse" && C.Pose.indexOf("Kneel") >= 0)  { DialogSetText("TheyMustBeStandingFirst"); return false; }
-	if (Prerequisite == "Horse" && C.Pose.indexOf("LegsClosed") >= 0)  { DialogSetText("LegsCannotOpen"); return false; }
-	if (Prerequisite == "Horse" && C.Pose.indexOf("Suspension") >= 0)  { DialogSetText("TheyMustBeStandingFirst"); return false; }
+	if (Prerequisite == "Horse" &&  C.Pose.indexOf("Kneel") >= 0)  { DialogSetText("TheyMustBeStandingFirst"); return false; }
+	if (Prerequisite == "Horse" &&  C.Pose.indexOf("LegsClosed") >= 0)  { DialogSetText("LegsCannotOpen"); return false; }
+	if (Prerequisite == "Horse" &&  C.Pose.indexOf("Suspension") >= 0)  { DialogSetText("TheyMustBeStandingFirst"); return false; }
+	if (Prerequisite == "Horse" &&  C.Effect.indexOf("Shackled") >= 0) { DialogSetText("RemoveShacklesFirst"); return false; }
 	if (Prerequisite == "CollaredNotSuspended1" && (InventoryGet(C, "ItemNeck") == null || C.Pose.indexOf("Suspension") >= 0)) { DialogSetText("MustCollaredFirstAndRemoveSuspension1"); return false; }
 	if (Prerequisite == "CollaredNotSuspended1" && (InventoryGet(C, "ItemNeck") == null || C.Pose.indexOf("Horse") >= 0)) { DialogSetText("MustCollaredFirstAndRemoveSuspension1"); return false; }
 	if (Prerequisite == "NotSuspendedOrHorsed" && C.Pose.indexOf("Suspension") >= 0) { DialogSetText("TheyMustBeStandingFirst"); return false; }
