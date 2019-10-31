@@ -31,7 +31,7 @@ function ChatRoomCurrentCharacterIsAdmin() { return ((CurrentCharacter != null) 
 // Creates the chat room input elements
 function ChatRoomCreateElement() {
 	if (document.getElementById("InputChat") == null) {
-		ElementCreateTextArea("InputChat"); //switched to textarea for larger input field
+		ElementCreateTextArea("InputChat");
 		document.getElementById("InputChat").setAttribute("maxLength", 250);
 		document.getElementById("InputChat").setAttribute("autocomplete", "off");
 		ElementCreateDiv("TextAreaChatLog");
@@ -148,40 +148,42 @@ function ChatRoomRun() {
 	ChatRoomDrawCharacter(false);
 	ElementPositionFix("TextAreaChatLog", 36, 1005, 5, 988, 859);
 	ElementPosition("InputChat", 1405, 929, 798, 117);
-	DrawButton(1935, 870, 60, 60, "", "White", "Icons/Small/Preference.png");
 	DrawButton(1805, 870, 60, 60, "", "White", "Icons/Small/Chat.png");
+	DrawButton(1870, 870, 60, 60, "", "White", "Icons/Small/Character.png");
+	DrawButton(1935, 870, 60, 60, "", "White", "Icons/Small/Preference.png");
 	if (Player.CanKneel()) DrawButton(1805, 935, 60, 60, "", "White", "Icons/Small/Kneel.png");
 	if (Player.CanChange()) DrawButton(1870, 935, 60, 60, "", "White", "Icons/Small/Dress.png");
-	DrawButton(1870, 870, 60, 60, "", "White", "Icons/Small/Character.png");
-	if ((Player.CanWalk() && !ChatRoomData.Locked) || ChatRoomPlayerIsAdmin()) DrawButton(1935, 935, 60, 60, "", "White", "Icons/Small/Exit.png");
+	if (ChatRoomCanLeave()) DrawButton(1935, 935, 60, 60, "", "White", "Icons/Small/Exit.png");
 }
 
 // When the player clicks in the chat room
 function ChatRoomClick() {
-	
-	// When the user chats
+
+	// When the user chats or clicks on a character
 	if ((MouseX >= 0) && (MouseX < 1000) && (MouseY >= 0) && (MouseY < 1000)) ChatRoomDrawCharacter(true);
 	if ((MouseX >= 1805) && (MouseX < 1865) && (MouseY >= 875) && (MouseY < 935)) ChatRoomSendChat();
 
-	// Room Admin controls
-	//if ((MouseX >= 1805) && (MouseX < 1865) && (MouseY >= 870) && (MouseY < 935) &&  ChatRoomPlayerIsAdmin())  ServerSend("ChatRoomAdmin", { MemberNumber: Player.ID, Action: "Private" });
-	//if ((MouseX >= 1870) && (MouseX < 1930) && (MouseY >= 870) && (MouseY < 935) &&  ChatRoomPlayerIsAdmin() && Player.CanChange())  ServerSend("ChatRoomAdmin", { MemberNumber: Player.ID, Action: "Lock" });
-	if ((MouseX >= 1935) && (MouseX < 1995) && (MouseY >= 875) && (MouseY < 935)) {// for RoomAdmin Screen
-		//console.log('roomadmin')
+	// When the user checks her profile
+	if ((MouseX >= 1870) && (MouseX < 1930) && (MouseY >= 875) && (MouseY < 935)) {
 		ElementRemove("InputChat");
 		ElementRemove("TextAreaChatLog");
-		CharacterAppearanceReturnRoom = "ChatRoom"; 
-		CharacterAppearanceReturnModule = "Online";
+		InformationSheetLoadCharacter(Player);
+	}
+
+	// When the user enters the room administration screen
+	if ((MouseX >= 1935) && (MouseX < 1995) && (MouseY >= 875) && (MouseY < 935)) {
+		ElementRemove("InputChat");
+		ElementRemove("TextAreaChatLog");
 		CommonSetScreen("Online", "ChatAdmin");
 	}
-	
-	// When the player kneels
-	if ((MouseX >= 1805) && (MouseX < 1865) && (MouseY >= 935) && (MouseY < 995) && Player.CanKneel()) { 
+
+	// When the user character kneels
+	if ((MouseX >= 1805) && (MouseX < 1865) && (MouseY >= 935) && (MouseY < 995) && Player.CanKneel()) {
 		ServerSend("ChatRoomChat", { Content: Player.Name + " " + TextGet((Player.ActivePose == null) ? "KneelDown": "StandUp"), Type: "Action" } );
 		CharacterSetActivePose(Player, (Player.ActivePose == null) ? "Kneel" : null);
 		ChatRoomCharacterUpdate(Player);
 	}
-	
+
 	// When the user wants to change clothes
 	if ((MouseX >= 1870) && (MouseX < 1930) && (MouseY >= 935) && (MouseY < 995) && Player.CanChange()) { 
 		ElementRemove("InputChat");
@@ -191,15 +193,8 @@ function ChatRoomClick() {
 		CharacterAppearanceLoadCharacter(Player);
 	}
 
-	// When the user checks her profile
-	if ((MouseX >= 1870) && (MouseX < 1930) && (MouseY >= 875) && (MouseY < 935)) {
-		ElementRemove("InputChat");
-		ElementRemove("TextAreaChatLog");
-		InformationSheetLoadCharacter(Player);
-	}
-
 	// When the user leaves
-	if ((MouseX >= 1935) && (MouseX < 1995) && (MouseY >= 935) && (MouseY < 995) && (((Player.CanWalk()) && !ChatRoomData.Locked) || ChatRoomPlayerIsAdmin())) {
+	if ((MouseX >= 1935) && (MouseX < 1995) && (MouseY >= 935) && (MouseY < 995) && ChatRoomCanLeave()) {
 		ElementRemove("InputChat");
 		ElementRemove("TextAreaChatLog");
 		ServerSend("ChatRoomLeave", "");
@@ -208,14 +203,24 @@ function ChatRoomClick() {
 
 }
 
+// Returns TRUE if the player can leave the current chat room
+function ChatRoomCanLeave() {
+	if (!Player.CanWalk()) return false; // Cannot leave if cannot walk
+	if (!ChatRoomData.Locked || ChatRoomPlayerIsAdmin()) return true; // Can leave if the room isn't locked or is an administrator
+	for (var C = 0; C < ChatRoomCharacter.length; C++)
+		if (ChatRoomData.Admin.indexOf(ChatRoomCharacter[C].MemberNumber) >= 0)
+			return false; // Cannot leave if the room is locked and there's an administrator inside
+	return true; // Can leave if the room is locked and there's no administrator inside
+}
+
 // Chat room keyboard shortcuts
 function ChatRoomKeyDown() {
 
-	// The ENTER key sends the chat
-	if (KeyPress == 13) {	
-		event.preventDefault(); //needed for <textarea> otherwise it always adds a new line after clearing the field
-		ChatRoomSendChat()
-	};
+	// The ENTER key sends the chat.  The "preventDefault" is needed for <textarea>, otherwise it adds a new line after clearing the field
+	if (KeyPress == 13) {
+		event.preventDefault();
+		ChatRoomSendChat();
+	}
 
 	// On page up, we show the previous chat typed
 	if (KeyPress == 33) {
