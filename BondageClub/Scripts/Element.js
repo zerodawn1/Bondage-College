@@ -78,7 +78,7 @@ function ElementPosition(ElementID, X, Y, W, H) {
 		Top = (Y * DrawScreenWidth / 2000) + ((DrawScreenHeight * 2 - DrawScreenWidth) / 4) - (Height / 2);
 	} else {
 		Font = (DrawScreenHeight / 25);
-		Height = H ? (H * DrawScreenWidth / 1000) : (Font * 1.15);;
+		Height = H ? (H * DrawScreenHeight / 1000) : (Font * 1.15);
 		Left = ((X - (W / 2)) * DrawScreenHeight / 1000) + (DrawScreenWidth - DrawScreenHeight * 2) / 2;
 		Width = (W * DrawScreenHeight / 1000) - 18;
 		Top = (Y * DrawScreenHeight / 1000) - (Height / 2);
@@ -127,9 +127,7 @@ function ElementSetDataAttribute(ID, Name, Value) {
 // Scrolls to the end of a specified element
 function ElementScrollToEnd(ID) {
 	var element = document.getElementById(ID);
-	if (element != null) {
-		element.scrollTop = element.scrollHeight;
-	}
+	if (element != null) element.scrollTop = element.scrollHeight;
 }
 
 // Returns TRUE if the specified element is currently scrolled to the very bottom

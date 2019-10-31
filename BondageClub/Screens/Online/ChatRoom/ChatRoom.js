@@ -35,14 +35,12 @@ function ChatRoomCreateElement() {
 		document.getElementById("InputChat").setAttribute("maxLength", 250);
 		document.getElementById("InputChat").setAttribute("autocomplete", "off");
 		ElementCreateDiv("TextAreaChatLog");
-		ElementPositionFix("TextAreaChatLog", 36, 1005, 5, 988, 923);
+		ElementPositionFix("TextAreaChatLog", 36, 1005, 5, 988, 859);
 		ElementContent("TextAreaChatLog", ChatRoomLog);
 		ElementScrollToEnd("TextAreaChatLog");
-		if (Player.ChatSettings) {
-			for (var property in Player.ChatSettings) {
+		if (Player.ChatSettings)
+			for (var property in Player.ChatSettings)
 				ElementSetDataAttribute("TextAreaChatLog", property, Player.ChatSettings[property]);
-			}
-		}
 		ElementFocus("InputChat");
 	}
 }
@@ -149,10 +147,8 @@ function ChatRoomRun() {
 	DrawRect(0, 0, 2000, 1000, "Black");
 	ChatRoomDrawCharacter(false);
 	ElementPositionFix("TextAreaChatLog", 36, 1005, 5, 988, 859);
-	ElementPosition("InputChat",  1405, 930, 795 , 125);
-	
-		DrawButton(1935, 870, 60, 60, "", "White", "Icons/Small/Room.png");
-	
+	ElementPosition("InputChat", 1405, 929, 798, 117);
+	DrawButton(1935, 870, 60, 60, "", "White", "Icons/Small/Preference.png");
 	DrawButton(1805, 870, 60, 60, "", "White", "Icons/Small/Chat.png");
 	if (Player.CanKneel()) DrawButton(1805, 935, 60, 60, "", "White", "Icons/Small/Kneel.png");
 	if (Player.CanChange()) DrawButton(1870, 935, 60, 60, "", "White", "Icons/Small/Dress.png");
