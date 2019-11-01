@@ -239,9 +239,9 @@ function CommonConvertStringToArray(s) {
 // Converts an array of numbers to a string, separated with ","
 function CommonConvertArrayToString(Arr) {
 	var S = "";
-	for (var P = 0; P < Arr.Length; P++) {
+	for (var P = 0; P < Arr.length; P++) {
 		if (P != 0) S = S + ",";
-		S = S + Arr[P].toString;
+		S = S + Arr[P].toString();
 	}
 	return S;
 }
