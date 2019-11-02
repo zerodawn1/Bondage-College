@@ -129,7 +129,12 @@
 <script src="Screens/Inventory/ItemVulva/InflatableVibeDildo/InflatableVibeDildo.js"></script>
 <script src="Screens/Inventory/ItemButt/InflVibeButtPlug/InflVibeButtPlug.js"></script>
 <script src="Screens/Inventory/ItemDevices/TeddyBear/TeddyBear.js"></script>
+<script src="Screens/Inventory/ItemArms/LeatherStraitJacket/LeatherStraitJacket.js"></script>
+<script src="Screens/Inventory/ItemDevices/InflatableBodyBag/InflatableBodyBag.js"></script>
 <script src="Screens/Inventory/ItemArms/WristShackles/WristShackles.js"></script>
+<script src="Screens/Inventory/ItemArms/SturdyLeatherBelts/SturdyLeatherBelts.js"></script>
+<script src="Screens/Inventory/ItemLegs/SturdyLeatherBelts/SturdyLeatherBelts.js"></script>
+<script src="Screens/Inventory/ItemFeet/SturdyLeatherBelts/SturdyLeatherBelts.js"></script>
 <script>
 
 /*
@@ -149,12 +154,15 @@
 	OK - Wrist/Ankles/Shackles/Manacles (Nythaleath)
 	OK - Chat Room Admin Screen (MrsHoudini)
 	OK - Rope Merge (Nythaleath)
+	OK - German translation fixes (Dallun511)
+	TEST - Tons of new items (FeuertinKira)
 
 	Bugs to fix
 	OK - Upside down teddy bear when suspended
 	OK - Dressing room buttons have wrong label (random/reset)
 	OK - If collared by NPC, the collar gets removed in online rooms
 	OK - When importing Bondage College char with Chastity Belt, add a Mistress Lock
+	TEST - Sophie cannot do a player punishment if the player is already chaste
 	
 	Assets / Core
 	OK - New hair style (For Jennifer) + Tennis racket
@@ -162,6 +170,8 @@
 	OK - Get free school uniform from collared Sarah/Amanda/Jennifer/Sidney
 	OK - Get changed into school uniform + get free uniform from Mistress Sarah/Amanda/Jennifer/Sidney
 	OK - Price review for all items
+	TEST - "Mounted" effect, should not be able to be removed without struggling.
+	TO DO - "Enclose" effect, prevents you from using items on other, and others can only interact with the "Enclose" item
 
 	Bondage College - Integrated from the Club main hall (Go to College option)
 	OK - Entrance - A student can introduce the college, main hub to reach the other areas
@@ -183,7 +193,7 @@
 // When the code is loaded, we start the game engine
 window.onload = function() {
 	//CheatImport();
-	//ServerURL = "https://bondage-club-server.herokuapp.com/";
+	ServerURL = "https://bondage-club-server.herokuapp.com/";
 	CommonIsMobile = CommonDetectMobile();
 	TranslationLoad();
 	DrawLoad();
