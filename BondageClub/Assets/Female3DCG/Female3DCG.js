@@ -492,7 +492,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Pussy",
-		Priority: 13,
+		Priority: 12,
 		AllowNone: false,
 		Color: ["Default", "#6a3628", "#443330", "#222222"],
 		Left: 225,
@@ -622,19 +622,19 @@ var AssetFemale3DCG = [
 					{ Name: "Wand", AllowColorize: false }
 				]
 			},
-			{ Name: "VibratingDildo", Priority: 12, Effect: ["Egged"], Value: 60, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{ Group: "Blush", Name: "Medium", Timer: 10 }], AllowEffect: ["Egged", "Vibrating"],
+			{ Name: "VibratingDildo", Priority: 11, Effect: ["Egged"], Value: 60, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{ Group: "Blush", Name: "Medium", Timer: 10 }], AllowEffect: ["Egged", "Vibrating"],
 			Layer: [
 					{ Name: "Dildo", AllowColorize: true },
 					{ Name: "Pussy", AllowColorize: false }
 				]
 			},
-			{ Name: "InflatableVibeDildo", Priority: 12, Effect: ["Egged"], Value: 100, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{ Group: "Blush", Name: "Medium", Timer: 10 }], AllowEffect: ["Egged", "Vibrating"],
+			{ Name: "InflatableVibeDildo", Priority: 11, Effect: ["Egged"], Value: 100, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{ Group: "Blush", Name: "Medium", Timer: 10 }], AllowEffect: ["Egged", "Vibrating"],
 			Layer: [
 					{ Name: "Dildo", AllowColorize: true },
 					{ Name: "Pussy", AllowColorize: false }
 				]
 			},
-			{ Name: "ClitSuctionCup", Priority: 12, Effect: [], Value: 25, Extended: true, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{ Group: "Eyes", Name: "Closed", Timer: 5 }, { Group: "Eyebrows", Name: "Angry", Timer: 5 }] },
+			{ Name: "ClitSuctionCup", Priority: 11, Effect: [], Value: 25, Extended: true, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{ Group: "Eyes", Name: "Closed", Timer: 5 }, { Group: "Eyebrows", Name: "Angry", Timer: 5 }] },
 			{ Name: "TapeStrips", Value: 10, Prerequisite: "AccessVulva", Time: 5, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 5 }] },
 			{ Name: "BenWaBalls", Value: 30, Prerequisite: "AccessVulva", Time: 5, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 5 }] },
 			AssetSpankingToys
@@ -1234,9 +1234,9 @@ var AssetFemale3DCG = [
 			{ Name: "PonyBoots", Height: 35, Value: -1, Time: 10, RemoveTime: 15, Difficulty: 6, AllowLock: true, Alpha: [[75, 800, 140, 200],[290, 800, 140, 200]], Hide: ["Shoes"] },
 			{ Name: "BalletHeels", Height: 35, Value: 75, Time: 10, RemoveTime: 15, Difficulty: 6, AllowLock: true, Alpha: [[75, 770, 140, 200],[290, 770, 140, 200]], Hide: ["Shoes"] },
 			{ Name: "BalletWedges", Height: 35, Value: 50, Time: 10, RemoveTime: 15, Difficulty: 6, AllowLock: true, Alpha: [[75, 810, 140, 200],[290, 810, 140, 200]], Hide: ["Shoes"] },
-			{ Name: "ToeCuffs", Value: 35, Time: 10, RemoveTime: 5, Difficulty: 4, Effect: ["Freeze", "Prone"], SetPose: ["LegsClosed"], AllowLock: true, Hide: ["Shoes"] },
-			{ Name: "LeatherToeCuffs", Value: 50, Time: 10, RemoveTime: 5, Difficulty: 3, Effect: ["Freeze", "Prone"], SetPose: ["LegsClosed"], AllowLock: true, Hide: ["Shoes"] },
-			{ Name: "ToeTie", DefaultColor: "#605020", Value: 15, Time: 10, RemoveTime: 5, Difficulty: 2, Effect: ["Freeze", "Prone"], SetPose: ["LegsClosed"], Hide: ["Shoes"] }
+			{ Name: "ToeCuffs", Value: 35, Time: 10, RemoveTime: 5, Difficulty: 4, Effect: ["Freeze", "Prone"], SetPose: ["LegsClosed"], AllowLock: true, Hide: ["Shoes"], Prerequisite: "ToeTied" },
+			{ Name: "LeatherToeCuffs", Value: 50, Time: 10, RemoveTime: 5, Difficulty: 3, Effect: ["Freeze", "Prone"], SetPose: ["LegsClosed"], AllowLock: true, Hide: ["Shoes"], Prerequisite: "ToeTied" },
+			{ Name: "ToeTie", DefaultColor: "#605020", Value: 15, Time: 10, RemoveTime: 5, Difficulty: 2, Effect: ["Freeze", "Prone"], SetPose: ["LegsClosed"], Hide: ["Shoes"], Prerequisite: "ToeTied" }
 		]
 	}
 	
