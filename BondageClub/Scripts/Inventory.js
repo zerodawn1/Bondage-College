@@ -207,7 +207,7 @@ function InventoryWearRandom(C, AssetGroup, Difficulty) {
 	if (!InventoryLocked(C, AssetGroup)) {
 		var List = [];
 		for (var A = 0; A < Asset.length; A++)
-			if ((Asset[A].Group.Name == AssetGroup) && Asset[A].Wear && Asset[A].Enable && Asset[A].Random)
+			if ((Asset[A].Group.Name == AssetGroup) && Asset[A].Wear && Asset[A].Enable && Asset[A].Random && InventoryAllow(C, Asset[A].Prerequisite))
 				List.push(Asset[A]);
 		if (List.length == 0) return;
 		var RandomAsset = List[Math.floor(Math.random() * List.length)];
