@@ -164,8 +164,8 @@ function LoginResponse(C) {
 			// Gets the online preferences
 			Player.LabelColor = C.LabelColor;
 			Player.ItemPermission = C.ItemPermission;
-			Player.PreferencesSettings = C.PreferencesSettings;
 			Player.ChatSettings = C.ChatSettings;
+			Player.AudioSettings = C.AudioSettings;
 			Player.WhiteList = C.WhiteList;
 			Player.BlackList = C.BlackList;
 			Player.FriendList = C.FriendList;

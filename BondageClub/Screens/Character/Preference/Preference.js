@@ -15,10 +15,12 @@ var PreferenceChatMemberNumbersIndex = 0;
 
 // When the preference screens loads
 function PreferenceLoad() {
+
+	// Sets up the player label color
 	if (!CommonIsColor(Player.LabelColor)) Player.LabelColor = "#ffffff";
 	ElementCreateInput("InputCharacterLabelColor", "text", Player.LabelColor);
 
-	// If the user never used chat settings before, construct them to replicate the default behavior
+	// If the user never set the chat settings before, construct them to replicate the default behavior
 	if (!Player.ChatSettings) Player.ChatSettings = {
 		DisplayTimestamps: true,
 		ColorNames: true,
@@ -26,10 +28,12 @@ function PreferenceLoad() {
 		ColorEmotes: true
 	};
 
-	if (!Player.PreferencesSettings) Player.PreferencesSettings = {
-		EnableSounds: false
+	// If the user never set the audio settings before, construct them to replicate the default behavior
+	if (!Player.AudioSettings) Player.AudioSettings = {
+		PlayBeeps: false
 	};
 
+	// Sets the chat themes
 	PreferenceChatColorThemeList = ["Light", "Dark"];
 	PreferenceChatEnterLeaveList = ["Normal", "Smaller", "Hidden"];
 	PreferenceChatMemberNumbersList = ["Always", "Never", "OnMouseover"];
@@ -39,6 +43,7 @@ function PreferenceLoad() {
 	PreferenceChatColorThemeSelected = PreferenceChatColorThemeList[PreferenceChatColorThemeIndex];
 	PreferenceChatEnterLeaveSelected = PreferenceChatEnterLeaveList[PreferenceChatEnterLeaveIndex];
 	PreferenceChatMemberNumbersSelected = PreferenceChatMemberNumbersList[PreferenceChatMemberNumbersIndex];
+
 }
 
 // Run the preference screen
@@ -61,8 +66,8 @@ function PreferenceRun() {
 	DrawButton(1140, 187, 65, 65, "", "White", "Icons/Color.png");
 	DrawButton(500, 280, 90, 90, "", "White", "Icons/Next.png");
 	DrawText(TextGet("ItemPermission") + " " + TextGet("PermissionLevel" + Player.ItemPermission.toString()), 615, 325, "Black", "Gray");
-	DrawText(TextGet("EnableSounds"), 600, 425, "Black", "Gray");
-	DrawButton(500, 392, 64, 64, "", "White", (Player.PreferencesSettings && Player.PreferencesSettings.EnableSounds) ? "Icons/Checked.png" : "");
+	DrawText(TextGet("PlayBeeps"), 600, 425, "Black", "Gray");
+	DrawButton(500, 392, 64, 64, "", "White", (Player.AudioSettings && Player.AudioSettings.PlayBeeps) ? "Icons/Checked.png" : "");
 	if (PreferenceMessage != "") DrawText(TextGet(PreferenceMessage), 500, 550, "Red", "Black");
 	MainCanvas.textAlign = "center";
 
@@ -102,19 +107,19 @@ function PreferenceClick() {
 	// If we must show/hide/use the color picker
 	if ((MouseX >= 1140) && (MouseX < 1205) && (MouseY >= 187) && (MouseY < 252)) PreferenceColorPick = (PreferenceColorPick != "InputCharacterLabelColor") ? "InputCharacterLabelColor" : "";
 	if ((MouseX >= 1250) && (MouseX < 1925) && (MouseY >= 85) && (MouseY < 915) && (PreferenceColorPick != "")) ElementValue(PreferenceColorPick, DrawRGBToHex(MainCanvas.getImageData(MouseX, MouseY, 1, 1).data));
-	if ((MouseX >= 500) && (MouseX < 564) && (MouseY >= 392) && (MouseY < 456)) Player.PreferencesSettings.EnableSounds = !Player.PreferencesSettings.EnableSounds;
+	if ((MouseX >= 500) && (MouseX < 564) && (MouseY >= 392) && (MouseY < 456)) Player.AudioSettings.PlayBeeps = !Player.AudioSettings.PlayBeeps;
+
 }
 
-// when the user exit this screen
+// When the user exit the preference screen, we push the data back to the server
 function PreferenceExit() {
-	// If we must save and exit
 	if (CommonIsColor(ElementValue("InputCharacterLabelColor"))) {
 		Player.LabelColor = ElementValue("InputCharacterLabelColor");
 		var P = {
 			ItemPermission: Player.ItemPermission,
 			LabelColor: Player.LabelColor,
 			ChatSettings: Player.ChatSettings,
-			PreferencesSettings: Player.PreferencesSettings
+			AudioSettings: Player.AudioSettings
 		}
 		ServerSend("AccountUpdate", P);
 		PreferenceMessage = "";
@@ -148,7 +153,6 @@ function PreferenceSubscreenChatRun() {
 	DrawButton(500, 592, 64, 64, "", "White", (Player.ChatSettings && Player.ChatSettings.ColorNames) ? "Icons/Checked.png" : "");
 	DrawButton(500, 692, 64, 64, "", "White", (Player.ChatSettings && Player.ChatSettings.ColorActions) ? "Icons/Checked.png" : "");
 	DrawButton(500, 792, 64, 64, "", "White", (Player.ChatSettings && Player.ChatSettings.ColorEmotes) ? "Icons/Checked.png" : "");
-
 	DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png");
 	DrawCharacter(Player, 50, 50, 0.9);
 }
