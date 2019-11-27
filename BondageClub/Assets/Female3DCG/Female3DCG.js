@@ -989,7 +989,7 @@ var AssetFemale3DCG = [
 			{ Name: "BatCollar", Value: 25, Time: 5, Difficulty: 50, AllowLock: true },
 			{ Name: "PostureCollar", Value: 40, Time: 5, Difficulty: 50, AllowLock: true },
 			{ Name: "SteelPostureCollar", Value: 60, Time: 5, Difficulty: 50, AllowLock: true },
-			{ Name: "DogCollar", Value: 20, Time: 5, Difficulty: 50, AllowLock: true },
+			{ Name: "DogCollar", Random: false, Value: 20, Time: 5, Difficulty: 50, AllowLock: true },
 			{ Name: "SpikeCollar", Value: 40, Time: 5, Difficulty: 50, AllowLock: true },
 			{
 				Name: "HighCollar", Value: 50, Time: 5, Difficulty: 50, AllowLock: true,
@@ -1170,7 +1170,7 @@ var AssetFemale3DCG = [
 			{ Name: "SackHood", Effect: ["Prone", "BlindHeavy"], Block: ["ItemEars", "ItemMouth"], Hide: ["HairFront", "HairBack", "Glasses", "HairAccessory1", "HairAccessory2", "Hat"], Difficulty: 3, Value: 20, Time: 5 },
 			{ Name: "LewdBlindfold", Priority: 31, Random: false, Effect: ["BlindLight", "Prone"], Hide: ["Glasses"], Value: 45, Time: 5, AllowLock: true, ExpressionTrigger: [{ Group: "Blush", Name: "Light", Timer: 5 }, { Group: "Eyes", Name: "Closed", Timer: 5 }] },
 			{ Name: "LatexBlindfold", Effect: ["BlindNormal", "Prone"], Hide: ["Glasses"], Value: 35, Time: 5, AllowLock: true },
-			{ Name: "DogHood", DefaultColor: "#404040", Effect: ["Prone", "GagNormal"], Hide: ["HairFront", "HairBack", "Glasses", "ItemMouth", "HairAccessory1", "HairAccessory2"], Block: ["ItemMouth", "ItemEars"], Difficulty: 50, Value: 60, Time: 15, AllowLock: true }
+			{ Name: "DogHood", DefaultColor: "#404040", Random: false, Effect: ["Prone", "GagNormal"], Hide: ["HairFront", "HairBack", "Glasses", "ItemMouth", "HairAccessory1", "HairAccessory2"], Block: ["ItemMouth", "ItemEars"], Difficulty: 50, Value: 60, Time: 15, AllowLock: true }
 		]
 	},
 
@@ -1245,7 +1245,7 @@ var AssetFemale3DCG = [
 				]
 			},
 			{ Name: "TheDisplayFrame", RemoveAtLogin: true, Value: 100, Time: 10, Difficulty: 50, Priority: 32, AllowLock: true, SetPose: ["LegsClosed", "BackElbowTouch"], Prerequisite: "DisplayFrame", Block: ["ItemArms", "ItemLegs", "ItemFeet", "ItemBoots", "ItemNeckAccessories"], Effect: ["Prone", "Freeze", "Block"] },
-			{ Name: "Sybian", RemoveAtLogin: true, IsRestraint: false, Value: 80, Time: 10, Difficulty: 1, Priority: 22, SetPose: ["KneelingSpread"], Prerequisite: "Sybian", Block: ["ItemLegs", "ItemFeet", "ItemBoots", "ItemPelvis", "ItemButt", "ItemVulva"], Effect: ["Egged"], Hide: ["Shoes", "Socks", "ItemBoots", "ItemVulva"], HideItem: ["ClothLowerPajama1", "ClothLowerShorts1", "ClothLowerJeans1", "ClothLowerJeans2", "ClothLowerWaspie1", "ClothLowerWaspie2", "ClothLowerWaspie3", "ClothLowerLatexPants1", "ItemDevicesTeddyBear"] }
+			{ Name: "Sybian", RemoveAtLogin: true, IsRestraint: false, Value: 80, Time: 10, Difficulty: 1, Priority: 22, SetPose: ["KneelingSpread"], Prerequisite: "Sybian", Block: ["ItemLegs", "ItemFeet", "ItemBoots", "ItemPelvis", "ItemButt", "ItemVulva"], Effect: ["Egged", "Freeze"], Hide: ["Shoes", "Socks", "ItemBoots", "ItemVulva"], HideItem: ["ClothLowerPajama1", "ClothLowerShorts1", "ClothLowerJeans1", "ClothLowerJeans2", "ClothLowerWaspie1", "ClothLowerWaspie2", "ClothLowerWaspie3", "ClothLowerLatexPants1", "ItemDevicesTeddyBear"] }
 		
 		]
 	},
