@@ -404,6 +404,21 @@ var AssetFemale3DCG = [
 	},
 
 	{
+		Group: "Height",
+		AllowNone: false,
+		AllowColorize: false,
+		Asset: [
+			{ Name: "175cm", Zoom: 1.000, Visible: false },
+			{ Name: "170cm", Zoom: 0.975, Visible: false },
+			{ Name: "165cm", Zoom: 0.950, Visible: false },
+			{ Name: "160cm", Zoom: 0.925, Visible: false },
+			{ Name: "155cm", Zoom: 0.900, Visible: false },
+			{ Name: "150cm", Zoom: 0.875, Visible: false },
+			{ Name: "145cm", Zoom: 0.850, Visible: false }
+		]
+	},
+	
+	{
 		Group: "BodyUpper",
 		Priority: 5,
 		AllowNone: false,
@@ -457,19 +472,6 @@ var AssetFemale3DCG = [
 		Left: 150,
 		Top: 50,
 		Asset: ["HairFront1", "HairFront2", "HairFront3", "HairFront4", "HairFront5", "HairFront6", "HairFront7", "HairFront8", "HairFront9", "HairFront10", "HairFront11", "HairFront12", "HairFront13"]
-	},
-
-	{
-		Group: "Height",
-		AllowNone: false,
-		AllowColorize: false,
-		Asset: [
-			{ Name: "1.0", Visible: false },
-			{ Name: "0.975", Visible: false },
-			{ Name: "0.95", Visible: false },
-			{ Name: "0.925", Visible: false },
-			{ Name: "0.9", Visible: false }
-		]
 	},
 
 	{

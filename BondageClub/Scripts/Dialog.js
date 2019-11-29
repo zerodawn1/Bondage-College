@@ -613,14 +613,14 @@ function DialogClick() {
 		DialogLeaveItemMenu();
 		var C = (MouseX < 500) ? Player : CurrentCharacter;
 		var X = (MouseX < 500) ? 0 : 500;
-		var characterHeight = CharacterAppearanceGetCurrentValue(C,"Height","Asset").Name;
-		var Xoffset = 500 * (1 - characterHeight) / 2;
-		var YOffset = 1000 * (1 - characterHeight);
+		var HeightRatio = CharacterAppearanceGetCurrentValue(C, "Height", "Zoom");
+		var Xoffset = 500 * (1 - HeightRatio) / 2;
+		var YOffset = 1000 * (1 - HeightRatio);		
 		for (var A = 0; A < AssetGroup.length; A++)
 			if ((AssetGroup[A].Category == "Item") && (AssetGroup[A].Zone != null))
 				for (var Z = 0; Z < AssetGroup[A].Zone.length; Z++)
-					if (((C.Pose.indexOf("Suspension") < 0) && (MouseX - X >= ((AssetGroup[A].Zone[Z][0] * characterHeight) + Xoffset)) && (MouseY >= (((AssetGroup[A].Zone[Z][1] - C.HeightModifier) * characterHeight) + YOffset)) && (MouseX - X <= (((AssetGroup[A].Zone[Z][0] + AssetGroup[A].Zone[Z][2]) * characterHeight) + Xoffset)) && (MouseY <= (((AssetGroup[A].Zone[Z][1] + AssetGroup[A].Zone[Z][3] - C.HeightModifier) * characterHeight) + YOffset)))
-						|| ((C.Pose.indexOf("Suspension") >= 0) && (MouseX - X >= ((AssetGroup[A].Zone[Z][0] * characterHeight) + Xoffset)) && (MouseY >= (characterHeight * (1000 - (AssetGroup[A].Zone[Z][1] + AssetGroup[A].Zone[Z][3])) - C.HeightModifier)) && (MouseX - X <= (((AssetGroup[A].Zone[Z][0] + AssetGroup[A].Zone[Z][2]) * characterHeight) + Xoffset)) && (MouseY <= (characterHeight * (1000 - (AssetGroup[A].Zone[Z][1])) - C.HeightModifier)))) {
+					if (((C.Pose.indexOf("Suspension") < 0) && (MouseX - X >= ((AssetGroup[A].Zone[Z][0] * HeightRatio) + Xoffset)) && (MouseY >= (((AssetGroup[A].Zone[Z][1] - C.HeightModifier) * HeightRatio) + YOffset)) && (MouseX - X <= (((AssetGroup[A].Zone[Z][0] + AssetGroup[A].Zone[Z][2]) * HeightRatio) + Xoffset)) && (MouseY <= (((AssetGroup[A].Zone[Z][1] + AssetGroup[A].Zone[Z][3] - C.HeightModifier) * HeightRatio) + YOffset)))
+						|| ((C.Pose.indexOf("Suspension") >= 0) && (MouseX - X >= ((AssetGroup[A].Zone[Z][0] * HeightRatio) + Xoffset)) && (MouseY >= HeightRatio * ((1000 - (AssetGroup[A].Zone[Z][1] + AssetGroup[A].Zone[Z][3])) - C.HeightModifier)) && (MouseX - X <= (((AssetGroup[A].Zone[Z][0] + AssetGroup[A].Zone[Z][2]) * HeightRatio) + Xoffset)) && (MouseY <= HeightRatio * (1000 - ((AssetGroup[A].Zone[Z][1])) - C.HeightModifier)))) {
 						C.FocusGroup = AssetGroup[A];
 						DialogItemToLock = null;
 						DialogFocusItem = null;
@@ -914,8 +914,8 @@ function DialogFindAutoReplace(C, KeyWord1, KeyWord2, ReturnPrevious) {
 function DialogDraw() {
 
 	// Draw both the player and the interaction character
-	if (CurrentCharacter.ID != 0) DrawCharacter(Player, 0, 0, 1, true);
-	DrawCharacter(CurrentCharacter, 500, 0, 1, true);
+	if (CurrentCharacter.ID != 0) DrawCharacter(Player, 0, 0, 1);
+	DrawCharacter(CurrentCharacter, 500, 0, 1);
 
 	// Draw the menu for facial expressions if the player clicked on herself
 	if (CurrentCharacter.ID == 0) DialogDrawExpressionMenu();

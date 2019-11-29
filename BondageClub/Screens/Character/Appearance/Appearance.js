@@ -331,6 +331,7 @@ function CharacterAppearanceGetCurrentValue(C, Group, Type) {
 			if (Type == "Effect") return C.Appearance[A].Asset.Effect;
 			if (Type == "Asset") return C.Appearance[A].Asset;
 			if (Type == "Full") return C.Appearance[A];
+			if (Type == "Zoom") return ((C.Appearance[A].Asset.ZoomModifier == null) || (C.Appearance[A].Asset.ZoomModifier > 1) || (C.Appearance[A].Asset.ZoomModifier < 0.85)) ? 1 : C.Appearance[A].Asset.ZoomModifier;
 		}
 	return "None";
 
