@@ -119,7 +119,7 @@ function SarahLoad() {
 			InventoryWear(Sarah, "PussyLight1", "Pussy", "#edd6b0");
 			InventoryWear(Sarah, "Eyes1", "Eyes", "#b98364");
 			InventoryWear(Sarah, "Mouth1", "Mouth", "Default");
-			InventoryWear(Sarah, "155cm", "Height", "Default");
+			InventoryWear(Sarah, "H0930", "Height", "Default");
 			InventoryWear(Sarah, "Small", "BodyUpper", "White");
 			InventoryWear(Sarah, "Small", "BodyLower", "White");
 			InventoryWear(Sarah, "Default", "Hands", "White");
@@ -153,7 +153,7 @@ function SarahLoad() {
 		InventoryWear(Amanda, "PussyLight3", "Pussy", "#623123");
 		InventoryWear(Amanda, "Eyes7", "Eyes", "#3f289f");
 		InventoryWear(Amanda, "Mouth1", "Mouth", "Default");
-		InventoryWear(Amanda, "160cm", "Height", "Default");
+		InventoryWear(Amanda, "H0950", "Height", "Default");
 		InventoryWear(Amanda, "Normal", "BodyUpper", "White");
 		InventoryWear(Amanda, "Normal", "BodyLower", "White");
 		InventoryWear(Amanda, "Default", "Hands", "White");
@@ -188,7 +188,7 @@ function SarahLoad() {
 		InventoryWear(Sophie, "Eyes1", "Eyes", "#b08061");
 		InventoryWear(Sophie, "Glasses5", "Glasses", "#222222");
 		InventoryWear(Sophie, "Mouth1", "Mouth", "Default");
-		InventoryWear(Sophie, "170cm", "Height", "Default");
+		InventoryWear(Sophie, "H0980", "Height", "Default");
 		InventoryWear(Sophie, "Large", "BodyUpper", "White");
 		InventoryWear(Sophie, "Large", "BodyLower", "White");
 		InventoryWear(Sophie, "Default", "Hands", "White");

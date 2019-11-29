@@ -408,13 +408,17 @@ var AssetFemale3DCG = [
 		AllowNone: false,
 		AllowColorize: false,
 		Asset: [
-			{ Name: "175cm", Zoom: 1.000, Visible: false },
-			{ Name: "170cm", Zoom: 0.975, Visible: false },
-			{ Name: "165cm", Zoom: 0.950, Visible: false },
-			{ Name: "160cm", Zoom: 0.925, Visible: false },
-			{ Name: "155cm", Zoom: 0.900, Visible: false },
-			{ Name: "150cm", Zoom: 0.875, Visible: false },
-			{ Name: "145cm", Zoom: 0.850, Visible: false }
+			{ Name: "H0950", Zoom: 0.950, Visible: false },
+			{ Name: "H0960", Zoom: 0.960, Visible: false },
+			{ Name: "H0970", Zoom: 0.970, Visible: false },
+			{ Name: "H0980", Zoom: 0.980, Visible: false },
+			{ Name: "H0990", Zoom: 0.990, Visible: false },
+			{ Name: "H1000", Zoom: 1.000, Visible: false },
+			{ Name: "H0900", Zoom: 0.900, Visible: false },
+			{ Name: "H0910", Zoom: 0.910, Visible: false },
+			{ Name: "H0920", Zoom: 0.920, Visible: false },
+			{ Name: "H0930", Zoom: 0.930, Visible: false },
+			{ Name: "H0940", Zoom: 0.940, Visible: false }
 		]
 	},
 	
