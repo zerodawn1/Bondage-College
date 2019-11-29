@@ -102,8 +102,7 @@ function DrawGetImageOnError(Img, IsAsset) {
 }
 
 // Refreshes the character if not all images are loaded and draw the character canvas on the main game screen
-function DrawCharacter(C, X, Y, Zoom) {
-
+function DrawCharacter(C, X, Y, Zoom, IsHeightResizeAllowed) {
 	// Make sure we have a character
 	if (C != null)
 		if ((C.ID == 0) || (Player.Effect.indexOf("BlindHeavy") < 0) || (CurrentScreen == "InformationSheet")) {
@@ -111,6 +110,11 @@ function DrawCharacter(C, X, Y, Zoom) {
 			// There's 2 different canvas, one blinking and one that doesn't
 			var seconds = new Date().getTime();
 			var Canvas = (Math.round(seconds / 400) % C.BlinkFactor == 0) ? C.CanvasBlink : C.Canvas;
+			var characterHeight = 1.0;
+			// Applies an offset to X and Y based on the characterHeight
+			if ((IsHeightResizeAllowed == undefined) || IsHeightResizeAllowed) { characterHeight = CharacterAppearanceGetCurrentValue(C,"Height","Asset").Name; }
+			X += Zoom * Canvas.width * (1 - characterHeight) / 2;
+			if (C.Pose.indexOf("Suspension") < 0) { Y += Zoom * Canvas.height * (1 - characterHeight); }
 
 			// If we must dark the Canvas characters
 			if ((C.ID != 0) && Player.IsBlind() && (CurrentScreen != "InformationSheet")) {
@@ -140,19 +144,24 @@ function DrawCharacter(C, X, Y, Zoom) {
 				Canvas = CanvasH;
 			}
 
+			Zoom *= characterHeight;
+
 			// Draw the character
 			if ((Zoom == undefined) || (Zoom == 1))
 				DrawCanvas(Canvas, X, Y - C.HeightModifier);
 			else
 				DrawCanvasZoom(Canvas, X, Y - (C.HeightModifier * Zoom), Zoom);
 
+			// Applies now the offset for Y if the character is suspended
+			if (C.Pose.indexOf("Suspension") >= 0) { Y += (Zoom * Canvas.height * (1 - characterHeight) / characterHeight); }
+
 			// Draws the character focus zones if we need too
 			if ((C.FocusGroup != null) && (C.FocusGroup.Zone != null))
 				for (var Z = 0; Z < C.FocusGroup.Zone.length; Z++)
 					if (C.Pose.indexOf("Suspension") >= 0)
-						DrawEmptyRect(C.FocusGroup.Zone[Z][0] + X, 1000 - (C.FocusGroup.Zone[Z][1] + Y + C.FocusGroup.Zone[Z][3]) - C.HeightModifier, C.FocusGroup.Zone[Z][2], C.FocusGroup.Zone[Z][3], "cyan");
+						DrawEmptyRect((characterHeight * C.FocusGroup.Zone[Z][0]) + X, (1000 - (characterHeight * (C.FocusGroup.Zone[Z][1] + Y + C.FocusGroup.Zone[Z][3]))) - C.HeightModifier, (characterHeight * C.FocusGroup.Zone[Z][2]), (characterHeight * C.FocusGroup.Zone[Z][3]), "cyan");
 					else
-						DrawEmptyRect(C.FocusGroup.Zone[Z][0] + X, C.FocusGroup.Zone[Z][1] + Y - C.HeightModifier, C.FocusGroup.Zone[Z][2], C.FocusGroup.Zone[Z][3], "cyan");
+						DrawEmptyRect((characterHeight * C.FocusGroup.Zone[Z][0]) + X, (characterHeight * C.FocusGroup.Zone[Z][1]) + Y - C.HeightModifier - (C.IsKneeling() ? (250 * (1-characterHeight)) : 0), (characterHeight * C.FocusGroup.Zone[Z][2]), (characterHeight * C.FocusGroup.Zone[Z][3]), "cyan");
 
 			// Draw the character name below herself
 			if ((C.Name != "") && ((CurrentModule == "Room") || (CurrentModule == "Online") || ((CurrentScreen == "Wardrobe") && (C.ID != 0))) && (CurrentScreen != "Private"))
