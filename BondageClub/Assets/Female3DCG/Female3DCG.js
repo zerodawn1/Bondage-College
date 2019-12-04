@@ -268,7 +268,8 @@ var AssetFemale3DCG = [
 			{ Name: "WitchHat1", Value: 40 },
 			{ Name: "PirateBandana1", Value: 15 },
 			{ Name: "PoliceWomanHat", Value: 40 },
-			{ Name: "HeadTowel1", Value: 15, Hide: ["HairFront", "HairBack"] }
+			{ Name: "HeadTowel1", Value: 15, Hide: ["HairFront", "HairBack"] },
+			{ Name: "CollegeDunce", Value: -1 }
 		]
 	},
 
