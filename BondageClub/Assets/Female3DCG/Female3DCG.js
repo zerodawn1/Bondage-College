@@ -1291,7 +1291,7 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemDevices",
 		Category: "Item",
-		Priority: 49,
+		Priority: 48,
 		IsRestraint: true,
 		Default: false,
 		Color: ["Default"],
@@ -1325,7 +1325,7 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemAddon",
 		Category: "Item",
-		Priority: 50,
+		Priority: 49,
 		IsRestraint: true,
 		Default: false,
 		Color: ["Default"],
