@@ -22,8 +22,9 @@ function ShopIsRescueScenario(ScenarioName) { return (ShopRescueScenario == Scen
 // Loads the shop room
 function ShopLoad() {
 
-	// Creates the shop vendor
+	// Creates the shop vendor always at full height to be able to click on her zones correctly
 	ShopVendor = CharacterLoadNPC("NPC_Shop_Vendor");
+	InventoryWear(ShopVendor, "H1000", "Height", "Default");
 	ShopVendor.AllowItem = ShopVendorAllowItem;
 	ShopStarted = false;
 	ShopText = TextGet("SelectItemBuy");
