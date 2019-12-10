@@ -1058,8 +1058,8 @@ var AssetFemale3DCG = [
 			{ Name: "StrictPostureCollar", Priority: 35, Value: 60, Time: 30, RemoveTime: 40, Difficulty: 50, AllowLock: true },
 			{ Name: "NobleCorsetCollar", Value: 45, Time: 5, Difficulty: 50, AllowLock: true },
 			{ Name: "HeartCollar", Value: 50, Time: 5, Difficulty: 50, AllowLock: true },
-			{ Name: "LatexPostureCollar", Priority: 35, Random: false, BuyGroup: ["LatexPostureCollar"], Block: ["ItemMouth"], Effect: ["GagNormal"], Value: 80, Time: 20, RemoveTime: 30, Difficulty: 50, AllowLock: true },
-			{ Name: "LeatherCorsetCollar", DefaultColor: "#404040", Random: false, Priority: 35, BuyGroup: ["LeatherCorsetCollar"], Block: ["ItemMouth"], Effect: ["GagNormal"], Value: 75, Time: 20, RemoveTime: 30, Difficulty: 50, AllowLock: true },
+			{ Name: "LatexPostureCollar", IsRestraint: true, Priority: 35, Random: false, BuyGroup: ["LatexPostureCollar"], Block: ["ItemMouth"], Effect: ["GagNormal"], Value: 80, Time: 20, RemoveTime: 30, Difficulty: 50, AllowLock: true },
+			{ Name: "LeatherCorsetCollar", IsRestraint: true, DefaultColor: "#404040", Random: false, Priority: 35, BuyGroup: ["LeatherCorsetCollar"], Block: ["ItemMouth"], Effect: ["GagNormal"], Value: 75, Time: 20, RemoveTime: 30, Difficulty: 50, AllowLock: true },
 			{ Name: "HighSecurityCollar", Value: 70, Time: 5, Difficulty: 50, AllowLock: true },
 			{ Name: "OrnateCollar", Value: 80, Time: 5, Difficulty: 50, AllowLock: true ,
 			Layer: [
