@@ -74,17 +74,19 @@ function CollegeTheaterRandomRope(C) {
 	InventoryWear(C, "HempRope", "ItemFeet", Color);
 }
 
+// Wears the clothes for the play
+function CollegeTheaterPlayClothes(C1, C2) {
+	InventoryWear(C1, "WitchHat1", "Hat", "#555555");
+	InventoryWear(C1, "BondageDress2", "Cloth", "#555555");
+	InventoryWear(C2, "Beret1", "Hat", "#CC8899");
+	InventoryWear(C2, "Dress2", "Cloth", "Default");
+}
+
 // When Julia love towards the player changes, it can also trigger an event
 function CollegeTheaterJuliaLoveChange(LoveChange, Event) {
 	if (LoveChange != null) CollegeTheaterJuliaLove = CollegeTheaterJuliaLove + parseInt(LoveChange);
-	if (Event == "PlayerWitch") {
-		InventoryWear(Player, "WitchHat1", "Hat", "Default");
-		InventoryWear(CollegeTheaterJulia, "Dress2", "Cloth", "Default");
-	}
-	if (Event == "JuliaWitch") {
-		InventoryWear(CollegeTheaterJulia, "WitchHat1", "Hat", "Default");
-		InventoryWear(Player, "Dress2", "Cloth", "Default");
-	}
+	if (Event == "PlayerWitch") CollegeTheaterPlayClothes(Player, CollegeTheaterJulia);
+	if (Event == "JuliaWitch") CollegeTheaterPlayClothes(CollegeTheaterJulia, Player);
 	if (Event == "PlayerNaked") CharacterNaked(Player);
 	if (Event == "JuliaNaked") CharacterNaked(CollegeTheaterJulia);
 	if (Event == "PlayerRope") CollegeTheaterRandomRope(Player);
@@ -97,6 +99,8 @@ function CollegeTheaterDressBack() {
 	CharacterRelease(CollegeTheaterJulia);
 	CollegeEntranceWearStudentClothes(Player);
 	CollegeTheaterJuliaClothes();
+	InventoryRemove(Player, "Hat");
+	InventoryRemove(CollegeTheaterJulia, "Hat");
 }
 
 // When the plater invites Julia to her room
