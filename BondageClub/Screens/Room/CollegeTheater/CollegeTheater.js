@@ -99,12 +99,16 @@ function CollegeTheaterUnderwear(C) {
 	InventoryRemove(C, "Hat");
 }
 
-// When Julia love towards the player changes, it can also trigger an event.  When 0 or less is applied, she gives a quick angry look.
+// When Julia love towards the player changes, it can also trigger an event.  When a good or bad move is done, her expression will change quickly.
 function CollegeTheaterJuliaLoveChange(LoveChange, Event) {
 	if (LoveChange != null) CollegeTheaterJuliaLove = CollegeTheaterJuliaLove + parseInt(LoveChange);
 	if ((LoveChange != null) && (parseInt(LoveChange) <= 0)) {
 		CharacterSetFacialExpression(CollegeTheaterJulia, "Eyebrows", "Angry");
-		TimerInventoryRemoveSet(CollegeTheaterJulia, "Eyebrows", 3);
+		TimerInventoryRemoveSet(CollegeTheaterJulia, "Eyebrows", 2);
+	}
+	if ((LoveChange != null) && (parseInt(LoveChange) >= 2)) {
+		CharacterSetFacialExpression(CollegeTheaterJulia, "Blush", "Low");
+		TimerInventoryRemoveSet(CollegeTheaterJulia, "Blush", 2);
 	}
 	if (Event == "PlayerWitch") CollegeTheaterPlayClothes(Player, CollegeTheaterJulia);
 	if (Event == "JuliaWitch") CollegeTheaterPlayClothes(CollegeTheaterJulia, Player);
