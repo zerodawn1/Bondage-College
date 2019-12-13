@@ -142,13 +142,36 @@ PlayerGagged,,,Pupil!  This is not a silent play.  (She laughs.),,
 590,900,(Lock a teather ankle iron ball on yourself.),"(She sighs and stops the play.)  I'm sorry little pupil, this is not working.  You don't have what it takes to be in the play.",,!JuliaLoveIs(15)
 590,900,Sorcery!  (Act like magic is locking an ankle iron ball.),"(She sighs and stops the play.)  I'm sorry little pupil, this is not working.  You don't have what it takes to be in the play.",,!JuliaLoveIs(15)
 590,900,I'm confused.  What are you doing?,"(She sighs and stops the play.)  I'm sorry little pupil, this is not working.  You don't have what it takes to be in the play.",,
-600,,TO DO,TO DO,,
+600,610,(Struggle a little.),"Do not resist.  I will carry you to my lair in the woods, and drain your precious youth.",JuliaLoveChange(1),
+600,610,(Struggle like a mad woman.),"Do not resist.  I will carry you to my lair in the woods, and drain your precious youth.",JuliaLoveChange(2),
+600,610,(Don't struggle.),"Do not resist.  I will carry you to my lair in the woods, and drain your precious youth.",JuliaLoveChange(0),
+610,620,Good luck with that.,"(She frowns.)  I don't need chance, I need magic to turn you into a fairy.  Magika faeria!  (She chants a spell to turn you into a fairy.)",JuliaLoveChange(0),
+610,620,And how will you transport me?,"That's easy, I'll use magic to turn you into a fairy.  Magika faeria!  (She chants a spell to turn you into a fairy.)",JuliaLoveChange(1),
+610,620,The guards will arrest you.,"If only they could see you, I'll use magic to turn you into a fairy.  Magika faeria!  (She chants a spell to turn you into a fairy.)",JuliaLoveChange(2),
+620,630,Nooooo!  (Act like you're being changed into a fairy.),(She smiles and straps some wings on your back.)  How do you like your new form mini maiden?,"JuliaLoveChange(2, ""PlayerFairy"")",
+620,630,(Pretend that you're being changed into a fairy.),(She straps some wings on your back.)  How do you like your new form mini maiden?,"JuliaLoveChange(1, ""PlayerFairy"")",
+620,630,(Wait for her next line.),(She frowns and straps some wings on your back.)  How do you like your new form mini maiden?,"JuliaLoveChange(0, ""PlayerFairy"")",
+630,900,I don't know.,(She stops the play.)  Nice try little pupil.  But you're not exactly who I'm looking for.  I will release you.,,
+630,700,Oh tragedy!  I'm doomed!,(She jumps on joy.)  Bravo!  Magnifico!  You are a wonderful actress!,,JuliaLoveIs(20)
+630,700,I love that I can fly.  (Pretend to fly away.),(She jumps on joy.)  Bravo!  Magnifico!  You are a wonderful actress!,,JuliaLoveIs(20)
+630,900,Oh tragedy!  I'm doomed!,(She stops the play.)  Nice try little pupil.  But you're not exactly who I'm looking for.  I will release you.,,!JuliaLoveIs(20)
+630,900,I love that I can fly.  (Pretend to fly away.),(She stops the play.)  Nice try little pupil.  But you're not exactly who I'm looking for.  I will release you.,,!JuliaLoveIs(20)
 900,910,You're stopping the audition?,(She nods as you both dress back up.)  You don't have what it takes for the role.  You can try again on the next play.,DressBack(),
 900,910,Can you give me another chance?,"(She shakes her head as you both dress back up.)  I'm sorry, it wouldn't be fair to the other students.  Everyone gets one try.",DressBack(),
+700,710,Thanks a lot.,"You get the role little pupil, you're excellent.  Where did you learn to act like that?",,
+700,710,Do I get the role?,Si!  You were excellent.  Where did you learn to act like that?,,
+710,720,In a club downtown.,A club where I could meet artists?  An acting club?  An impro club?,,
+710,720,I've had great teachers.,"I would love to meet them, are they in a school in town?  Or in a theater group?",,
+710,1000,That's my secret.,"I respect that.  Check the school board, as soon as all the actors are found, we will start repeating.",,
+720,730,I could bring you there.,"I would love to go there with you, but you cannot out like that.",,CanInviteToPrivateRoom()
+720,1000,I could bring you there.,"Maybe another day.  For now, check the school board, as soon as all the actors are found, we will start repeating.",,!CanInviteToPrivateRoom()
+720,1000,I'll tell you more another time.,"Very well.  Check the school board, as soon as all the actors are found, we will start repeating.",,
+730,740,That's not a problem.  I'll explain on the road.,If you say so.  Let's change and let's go young pupil.,,
+740,,(Bring her to your room.),,"InviteToPrivateRoom(""Maiden"")",
 910,,,"Sorry little pupil, I cannot give you the role.  You can try again on the next play.",,
 910,,"Alright, take care.  (Leave her.)",,DialogLeave(),
 910,,"Fine, get lost.  (Leave her.)",,DialogLeave(),
 1000,1010,Great!  See you soon.,"(You both dress back up as she smiles.)  You have lots of potential, see you soon little pupil.",DressBack(),
 1000,1010,I'll do that.,"(You both dress back up as she smiles.)  You have lots of potential, see you soon little pupil.",DressBack(),
-1010,,,"See you soon little pupil.  If you see the next girl, you can tell her to come in.",,
+1010,,,"See you soon little pupil.  If you see the next student, you can tell her to come in.",,
 1010,,See you soon.  (Leave her.),,DialogLeave(),

@@ -115,11 +115,10 @@ function CollegeTheaterJuliaLoveChange(LoveChange, Event) {
 	if (Event == "PlayerHandCuffs") InventoryWear(Player, "MetalCuffs", "ItemArms", CommonRandomItemFromList("", CollegeTheaterRandomColors));
 	if (Event == "PlayerFeetCuffs") InventoryWear(Player, "Irish8Cuffs", "ItemFeet", CommonRandomItemFromList("", CollegeTheaterRandomColors));
 	if (Event == "PlayerFeetIron") InventoryWear(Player, "BallChain", "ItemFeet", CommonRandomItemFromList("", CollegeTheaterRandomColors));
+	if (Event == "PlayerFairy") InventoryWear(Player, "BatWings", "Wings", CommonRandomItemFromList("", CollegeTheaterRandomColors));
 	if (Event == "JuliaRope") CollegeTheaterRandomRope(CollegeTheaterJulia);
 	if (Event == "JuliaBelt") CollegeTheaterRandomBelt(CollegeTheaterJulia);
-	if (Event == "PlayerClothBlindfold") InventoryWear(Player, "ClothBlindfold", "ItemHead", CommonRandomItemFromList("", CollegeTheaterRandomColors));
 	if (Event == "JuliaClothBlindfold") InventoryWear(CollegeTheaterJulia, "ClothBlindfold", "ItemHead", CommonRandomItemFromList("", CollegeTheaterRandomColors));
-	if (Event == "PlayerLeatherBlindfold") InventoryWear(Player, "LeatherBlindfold", "ItemHead", CommonRandomItemFromList("", CollegeTheaterRandomColors));
 	if (Event == "JuliaLeatherBlindfold") InventoryWear(CollegeTheaterJulia, "LeatherBlindfold", "ItemHead", CommonRandomItemFromList("", CollegeTheaterRandomColors));
 }
 
@@ -139,6 +138,7 @@ function CollegeTheaterInviteToPrivateRoom(Role) {
 	if (Role == "Witch") InventoryAdd(Player, "WitchHat1", "Hat");
 	if (Role == "Witch") InventoryAdd(Player, "BondageDress2", "Cloth");
 	if (Role == "Maiden") InventoryAdd(Player, "Dress2", "Cloth");
+	if (Role == "Maiden") InventoryAdd(Player, "BatWings", "Wings");
 	CommonSetScreen("Room", "Private");
 	PrivateAddCharacter(CollegeTheaterJulia, null, true);
 	var C = PrivateCharacter[PrivateCharacter.length - 1];
