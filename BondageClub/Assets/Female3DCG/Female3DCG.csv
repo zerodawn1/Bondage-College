@@ -208,6 +208,7 @@ TailStraps,SuccubusStrap,Succubus Tail Strap
 TailStraps,SuccubusStrap2,Succubus2 Tail Strap
 TailStraps,RaccoonStrap,Raccoon Tail Strap
 TailStraps,RaccoonTailStrap,Raccoon2 Tail Strap
+TailStraps,PuppyTailStrap1,Puppy Fluffy Tail Strap
 Wings,,Wings
 Wings,SuccubusFeather,Succubus Feather 
 Wings,SuccubusWings,Succubus Wings
@@ -356,6 +357,7 @@ ItemButt,BlackButtPlug,Black Butt Plug
 ItemButt,TailButtPlug,Kitty Butt Plug
 ItemButt,HorseButtPlug,Horse Butt Plug
 ItemButt,PuppyTailPlug,Puppy Butt Plug
+ItemButt,PuppyTailPlug1,Puppy Fluffy Butt Plug
 ItemButt,SuccubusButtPlug,Succubus Butt Plug
 ItemButt,SuccubusButtPlug2,Succubus Tail
 ItemButt,FoxTails,Fox Tails
@@ -493,10 +495,6 @@ ItemNeckAccessories,CollarBell,Bell
 ItemNeckAccessories,CollarBow,Bow
 ItemNeckAccessories,CollarShockUnit,Shock Unit
 ItemNeckAccessories,ShockCollarRemote,Shock Collar Remote
-ItemNeckAccessories,CollarChainLong,Long Chain
-ItemNeckAccessories,CollarChainShort,Short Chain
-ItemNeckAccessories,CollarLeash,Leash
-ItemNeckAccessories,CollarLeashTaken,Pulled Leash
 ItemNeckAccessories,CollarNameTag,Name Tag
 ItemNeckAccessories,CollarNameTagOval,Oval Name Tag
 ItemNeckAccessories,CollarNameTagPet,Pet Name Tag
@@ -507,6 +505,10 @@ ItemNeckAccessories,CollarLapis,Lapis Pendant
 ItemNeckAccessories,CollarPentagram,Pentagram Pendant
 ItemNeckAccessories,CollarFlower,Flower
 ItemNeckAccessories,CollarRose,Rose
+ItemNeckRestraints,CollarChainLong,Long Chain
+ItemNeckRestraints,CollarChainShort,Short Chain
+ItemNeckRestraints,CollarLeash,Leash
+ItemNeckRestraints,CollarLeashTaken,Pulled Leash
 ItemMouth,,Mouth
 ItemMouth,ClothGag,Cloth Gag
 ItemMouth,WiffleGag,Wiffle Ball Gag
