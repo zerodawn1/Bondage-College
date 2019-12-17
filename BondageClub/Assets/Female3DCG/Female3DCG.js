@@ -1082,7 +1082,7 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemNeckAccessories",
 		Category: "Item",
-		Priority: 37,
+		Priority: 38,
 		Default: false,
 		Color: ["Default"],
 		Left: 0,
@@ -1109,7 +1109,7 @@ var AssetFemale3DCG = [
 	{
 		Group: "ItemNeckRestraints",
 		Category: "Item",
-		Priority: 38,
+		Priority: 37,
 		Default: false,
 		IsRestraint: true,
 		Color: ["Default"],
