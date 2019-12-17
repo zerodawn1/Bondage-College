@@ -58,7 +58,7 @@ PlayerGagged,,,Pupil!  This is not a silent play.  (She laughs.),,
 170,180,I will steal your beauty.,You cannot steal my beauty!  Return to your cauldron old witch!,JuliaLoveChange(1),
 180,190,"On your knees, girl.","Never!  (She starts to run around you, pretending to run away.)",JuliaLoveChange(0),
 180,190,Bow to my magic.,"Never!  (She starts to run around you, pretending to run away.)",JuliaLoveChange(1),
-180,190,Surrender or feel my wraith.,"Never!  (She starts to run around you, pretending to run away.)",JuliaLoveChange(2),
+180,190,Surrender or feel my wrath.,"Never!  (She starts to run around you, pretending to run away.)",JuliaLoveChange(2),
 190,200,(Whisper to her that you do a rope spell.),"(You pick some random theater ropes and tie her up, pretending it's magic.)  By golly!  Your wickedness knows no end!","JuliaLoveChange(0, ""JuliaRope"")",JuliaLoveIs(15)
 190,200,Magika ropa!  (Pick some ropes and tie her up.),"(You pick some random theater ropes and tie her up, pretending it's magic.)  By golly!  Your wickedness knows no end!","JuliaLoveChange(2, ""JuliaRope"")",JuliaLoveIs(15)
 190,200,(Point at some belts to notice her you're doing magic.),"(You pick some random theater belts and strap her up, pretending it's magic.)  By golly!  Your wickedness knows no end!","JuliaLoveChange(0, ""JuliaBelt"")",JuliaLoveIs(15)
@@ -95,7 +95,7 @@ PlayerGagged,,,Pupil!  This is not a silent play.  (She laughs.),,
 340,,(Bring her to your room.),,"InviteToPrivateRoom(""Witch"")",
 500,510,I'm ready for it!,(She smiles as you both dress up.)  Beware of my magical powers and be creative!,"JuliaLoveChange(2, ""JuliaWitch"")",
 500,510,Alright.  Let's try that.,(She nods as you both dress up.)  Beware of my magical powers and be creative!,"JuliaLoveChange(1, ""JuliaWitch"")",
-500,510,You will be great as the ugly witch.,(She frowns as you both dress up.)  Beware of my magical powers and be creative!,"JuliaLoveChange(-2, ""JuliaWitch"")",
+500,510,You will be great as the fat witch.,(She frowns as you both dress up.)  Beware of my magical powers and be creative!,"JuliaLoveChange(-2, ""JuliaWitch"")",
 500,510,(Stay silent.),(She sighs as you both dress up.)  Beware of my magical powers and be creative!,"JuliaLoveChange(0, ""JuliaWitch"")",
 510,520,What?  We start now?,(She frowns and nods.)  Young maiden!  Are you alone in this cold night?,JuliaLoveChange(0),
 510,520,Hello old witch.,Young maiden!  Are you alone in this cold night?,JuliaLoveChange(1),
