@@ -98,7 +98,6 @@ function CollegeDetentionInviteToPrivateRoom() {
 	var C = PrivateCharacter[PrivateCharacter.length - 1];
 	C.Trait = [];
 	NPCTraitSet(C, "Dominant", 20);
-	NPCTraitSet(C, "Violent", 30);
 	NPCTraitSet(C, "Horny", 80);
 	NPCTraitSet(C, "Rude", 60);
 	NPCTraitSet(C, "Serious", 40);
