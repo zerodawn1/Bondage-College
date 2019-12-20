@@ -79,6 +79,10 @@ function CollegeDetentionYukiLoveChange(LoveChange, Event) {
 	if ((LoveChange != null) && (parseInt(LoveChange) > 0)) {
 		CharacterSetFacialExpression(CollegeDetentionYuki, "Eyebrows", "Raised");
 		TimerInventoryRemoveSet(CollegeDetentionYuki, "Eyebrows", 2);
+		if (CollegeDetentionYukiLove >= 10) {
+			CollegeDetentionYuki.Stage = "2000";
+			CollegeDetentionYuki.CurrentDialog = DialogFind(CollegeDetentionYuki, "YukiPropose");
+		}
 	}
 }
 
