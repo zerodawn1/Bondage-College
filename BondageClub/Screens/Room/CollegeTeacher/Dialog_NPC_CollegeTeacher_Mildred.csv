@@ -1,0 +1,6 @@
+PlayerGagged,,,(She smirks and makes fun of your mumblings.),,
+0,,,(A gray haired woman stares at you as you enter the teacher's lounge.)  What are you doing here?,,
+0,,Who are you?,I'm teacher Mildred.  How did you got here little miss?,DialogRemove(),"!DialogLogQuery(""BondageCollege"", ""Import"")"
+0,,Hello teacher Mildred.,Greetings little miss DialogPlayerName.  How did you got here?,DialogRemove(),"DialogLogQuery(""BondageCollege"", ""Import"")"
+0,,TO DO,TO DO,,
+0,,"Sorry, I will leave.  (Leave her.)",,DialogLeave(),
