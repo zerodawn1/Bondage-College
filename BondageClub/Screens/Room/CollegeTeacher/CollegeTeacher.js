@@ -73,15 +73,12 @@ function CollegeTeacherMildredLoveChange(LoveChange, Event) {
 	if ((LoveChange != null) && (parseInt(LoveChange) < 0)) {
 		CharacterSetFacialExpression(CollegeTeacherMildred, "Eyes", "Dazed");
 		TimerInventoryRemoveSet(CollegeTeacherMildred, "Eyes", 2);
-		if (CollegeTeacherMildredLove <= -5) {
-		}
 	}
 	if ((LoveChange != null) && (parseInt(LoveChange) > 0)) {
 		CharacterSetFacialExpression(CollegeTeacherMildred, "Blush", "Low");
 		TimerInventoryRemoveSet(CollegeTeacherMildred, "Blush", 2);
-		if (CollegeTeacherMildredLove > 10) {
-		}
 	}
+	if (Event == "Pillory") InventoryWear(Player, "Pillory", "ItemArms");
 }
 
 // Dress back the player and Mildred
