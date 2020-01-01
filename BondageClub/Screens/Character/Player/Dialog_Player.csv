@@ -4,6 +4,7 @@ RemoveClothesForItem,,,Remove some clothes first
 RemoveSuspensionForItem,,,Remove the suspension first
 TheyMustBeStandingFirst,,,Must be standing and not suspended first.
 CannotBeUsedWhenMounted,,,Cannot be used when mounted.
+CannotBeUsedWhenYoked,,,Cannot be used while yoked.
 CannotBeUsedWithFeetSpreader,,,Cannot be used with legs spreader.
 RemoveChastityFirst,,,Must remove chastity first.
 RemoveChainForItem,,,Remove the chain to the floor first
@@ -109,7 +110,7 @@ TimerUnknown,,,Unknown time left
 RestartTimer,,,Restart Timer
 TimerAddTime,,,SourceCharacter adds TimerTime TimerUnit to the padlock on DestinationCharacter's BodyPart.
 TimerAddUnknownTime,,,an unknown amount of time
-AllowModifyTimer,,,Allow everyone adding more time
+AllowModifyTimer,,,Allow everyone to add more time
 AddTimerTimeMinutes,,,Add TimerTime minutes to the Timer
 AddTimerTime,,,Add
 RemoveItemWithTimer,,,Remove item when the lock timer runs out
