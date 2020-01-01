@@ -85,7 +85,7 @@ function PreferenceRun() {
 	DrawButton(500, 280, 90, 90, "", "White", "Icons/Next.png");
 	DrawText(TextGet("ItemPermission") + " " + TextGet("PermissionLevel" + Player.ItemPermission.toString()), 615, 325, "Black", "Gray");
     DrawText(TextGet("AudioVolume"), 800, 425, "Black", "Gray");
-    DrawText(TextGet("SensDepGarbleName"), 500, 505, "Black", "Gray");
+    DrawText(TextGet("SensDepGarbleName"), 600, 505, "Black", "Gray");
     DrawButton(500, 472, 64, 64, "", "White", (Player.GameplaySettings && Player.GameplaySettings.SensDepGarbleName) ? "Icons/Checked.png" : "");
     DrawText(TextGet("PlayBeeps"), 600, 585, "Black", "Gray");
     DrawButton(500, 552, 64, 64, "", "White", (Player.AudioSettings && Player.AudioSettings.PlayBeeps) ? "Icons/Checked.png" : "");
