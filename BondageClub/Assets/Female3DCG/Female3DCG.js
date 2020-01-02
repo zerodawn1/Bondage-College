@@ -1017,7 +1017,7 @@ var AssetFemale3DCG = [
 				]
 			},
 			{ Name: "Yoke", Value: 80, SetPose: ["Yoked"], SelfBondage: false, Priority: 37, Effect: ["Block", "Prone"], Time: 20, Difficulty: 10, AllowLock: true },
-			{ Name: "Pillory", Value: -1, SetPose: ["Yoked"], SelfBondage: false, Priority: 44, Effect: ["Block", "Prone"], Time: 20, Difficulty: 12, AllowLock: true },
+			{ Name: "Pillory", Random: false, Value: -1, SetPose: ["Yoked"], SelfBondage: false, Priority: 44, Effect: ["Block", "Prone"], Time: 20, Difficulty: 12, AllowLock: true },
 			AssetSpankingToys
 		]
 	},
