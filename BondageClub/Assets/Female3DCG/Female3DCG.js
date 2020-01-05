@@ -538,12 +538,7 @@ var AssetFemale3DCG = [
 					{ Name: "Lips", AllowColorize: true },
 					{ Name: "Inner", AllowColorize: false }
 				]
-			},
-			{ Name: "Mouth1" },
-			{ Name: "Mouth2" },
-			{ Name: "Mouth3" },
-			{ Name: "Mouth4" },
-			{ Name: "Mouth5" }
+			}
 		]
 	},
 
@@ -608,7 +603,7 @@ var AssetFemale3DCG = [
 	},
 
 	{
-		Group: "XEmoticon",
+		Group: "Emoticon",
 		Priority: 49,
 		AllowNone: false,
 		AllowColorize: false,
