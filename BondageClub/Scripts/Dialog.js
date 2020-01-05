@@ -21,7 +21,7 @@ var DialogMenuButton = [];
 var DialogItemToLock = null;
 var DialogAllowBlush = false;
 var DialogAllowEyebrows = false;
-var DialogAllowDrool = false;
+var DialogAllowFluids = false;
 var DialogFacialExpressions = [];
 var DialogItemPermissionMode = false;
 
@@ -142,13 +142,13 @@ function DialogEndExpression() {
 	if (DialogAllowEyebrows) {
 		TimerInventoryRemoveSet(Player, "Eyebrows", 5);
 		DialogAllowEyebrows = false;
+	}		
+	if (DialogAllowFluids) {
+		TimerInventoryRemoveSet(Player, "Fluids", 5);
+		DialogAllowFluids = false;
 	}
-	}
-	if (DialogAllowDrool) {
-		TimerInventoryRemoveSet(Player, "Drool", 5);
-		DialogAllowDrool = false;
-	}
-
+}
+		
 // Leaves the item menu for both characters
 function DialogLeaveItemMenu() {
 	DialogEndExpression();
@@ -327,9 +327,9 @@ function DialogStruggle(Reverse) {
 		if (DialogProgressStruggleCount == 125) CharacterSetFacialExpression(Player, "Blush", "High");
 	}
 
-	// drool Expression
-	if (DialogAllowDrool && !Reverse) {
-		if (DialogProgressStruggleCount == 15) CharacterSetFacialExpression(Player, "Drool", "Right", "Left");
+	// At 15 hit: Start drooling
+	if (DialogAllowFluids && !Reverse) {
+		if (DialogProgressStruggleCount == 15) CharacterSetFacialExpression(Player, "Fluids", "DroolMessy");
 	}
 
 	// Over 50 progress, the character frowns
@@ -385,7 +385,7 @@ function DialogProgressStart(C, PrevItem, NextItem) {
 	// If there's no current blushing, we update the blushing state while struggling
 	DialogAllowBlush = ((DialogProgressAuto < 0) && (DialogProgressChallenge > 0) && (C.ID == 0) && ((InventoryGet(C, "Blush") == null) || (InventoryGet(C, "Blush").Property == null) || (InventoryGet(C, "Blush").Property.Expression == null)));
 	DialogAllowEyebrows = ((DialogProgressAuto < 0) && (DialogProgressChallenge > 0) && (C.ID == 0) && ((InventoryGet(C, "Eyebrows") == null) || (InventoryGet(C, "Eyebrows").Property == null) || (InventoryGet(C, "Eyebrows").Property.Expression == null)));
-
+	DialogAllowFluids = ((DialogProgressAuto < 0) && (DialogProgressChallenge > 0) && (C.ID == 0) && ((InventoryGet(C, "Fluids") == null) ||(InventoryGet(C, "Fluids").Property == null) || (InventoryGet(C, "Fluids").Property.Expression == null)));
 }
 
 // The player can use the space bar to speed up the dialog progress, just like clicking
