@@ -1,12 +1,12 @@
 ﻿###_NPC
 Select an item to use
-Выберите предмет для использования
+Выбери предмет для использования
 Cannot use on yourself
 Нельзя использовать на себя
 Remove some clothes first
-Сначала удалите какую-нибудь одежду 
+Сначала удали какую-нибудь одежду 
 Remove the suspension first
-Сначала снимите подвеску
+Сначала сними подвеску
 Must be standing and not suspended first.
 Должен стоять и не подвешен первым.
 Cannot be used when mounted.
@@ -32,21 +32,21 @@ Must free feet frist.
 Must remove shackles first.
 Must remove shackles first.
 Cancel
-Cancel
+Отменить
 Back to character
 Вернемся к персонажу
 View next items
-View next items
+Просмотр следующих предметов
 Remove the item
 Удалить предмет
 Use this item
-Используйте этот предмет
+Используй этот предмет
 Try to struggle out
 Попробуй вырваться
 Dismount
 Dismount
 Escape from the item
-Escape from the item
+Сбежать из предмета
 Use a lock
 Заблокируйте
 Unlock the item
@@ -54,7 +54,7 @@ Unlock the item
 Inspect the lock
 Осмотрите замок
 Use your remote
-Используйте свой пульт дистанционного управления
+Используй свой пульт дистанционного управления
 Exit Permission Mode
 Выход Из Режима Разрешений
 Edit Item Permissions
@@ -64,9 +64,9 @@ Use the Butt Plug's pump
 Color of next item
 Цвет следующего предмета
 Use this color
-Use this color
+Используй этот цвет
 Default color
-Default color
+Цвет по умолчанию
 Challenge:
 Задача:
 Swapping...
@@ -80,21 +80,21 @@ Removing...
 Dismounting...
 Dismounting...
 Escaping...
-Escaping...
+Убегаем...
 Locking...
-Locking...
+Запирается...
 Adding...
 Добавление...
 Impossible to escape!
 Сбежать невозможно!
 Struggle to free yourself
-Struggle to free yourself
+Боритесь, чтобы освободиться
 You'll need help to get out
-You'll need help to get out
+Вам понадобится помощь, чтобы выбраться
 You can unlock yourself
-You can unlock yourself
+Вы можете отпереть себя сами
 You cannot unlock yourself
-You cannot unlock yourself
+Вы не можете отпереть себя
 This zone is out of reach from another item
 Эта зона находится вне досягаемости из-за другого предмета
 You cannot access your items
@@ -144,7 +144,7 @@ deflates
 plug
 plug
 gag
-gag
+кляп
 's
 's
 Delete
@@ -204,7 +204,7 @@ Member number on lock:
 Time left:
 Осталось времени:
 SourceCharacter restarts the five minutes timer padlock on DestinationCharacter BodyPart.
-SourceCharacter restarts the five minutes timer padlock on DestinationCharacter BodyPart.
+SourceCharacter перезапускает замок таймера на пять минут DestinationCharacter BodyPart.
 Restart Timer
 Перезапуск таймера
 Remove item when the lock timer runs out
@@ -218,7 +218,7 @@ Select the bondage position
 Select the tape wrapping
 Выбери клейкую ленту 
 A victim cannot unlock herself if her elbows are bound
-A victim cannot unlock herself if her elbows are bound
+Жертва не может освободиться, если ее локти связаны
 "From your friendly hardware store"
 "From your friendly hardware store"
 "To keep your loved one secure"
@@ -234,11 +234,11 @@ Can only be locked or unlocked by a Club Mistress
 Detached
 Отдельный
 Bind wrists
-Bind wrists
+Свяжи запястья
 Bind elbows
-Bind elbows
+Свяжи локти
 Bind both
-Bind both
+Свяжи оба
 SourceCharacter detaches the chain from DestinationCharacter's leather cuffs.
 SourceCharacter detaches the chain from DestinationCharacter's leather cuffs.
 SourceCharacter attaches the leather cuffs wrist chain behind DestinationCharacter's back.
@@ -324,11 +324,11 @@ Hands
 Arms
 Руки
 Skirt
-Skirt
+Юбка
 Torso
 Торс
 Mummy
-Mummy
+Мумия
 SourceCharacter wraps duct tape around DestinationCharacter's hands.
 SourceCharacter wraps duct tape around DestinationCharacter's hands.
 SourceCharacter creates a duct tape skirt on DestinationCharacter and traps her hands in it.
@@ -742,25 +742,25 @@ You must free her arms before attaching mitten chains.
 Facial expression
 Выражение лица
 Select a spanking toy
-Select a spanking toy
+Выбери игрушку для порки
 Crop
-Crop
+Стек
 Flogger
-Flogger
+Флоггер
 Cane
-Cane
+Трость
 Heart Crop
-Heart Crop
+Стек-Сердце
 Paddle
-Paddle
+Падл
 Whip Paddle
-Whip Paddle
+Кнут Падл
 Whip
-Whip
+Кнут
 Cattle Prod
-Cattle Prod
+Электрошокер
 Tennis Racket
-Tennis Racket
+Теннисная ракетка
 SourceCharacter takes out a Item
 SourceCharacter takes out a Item
 SourceCharacter gives DestinationCharacter a Item

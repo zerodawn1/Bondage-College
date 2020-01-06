@@ -14,18 +14,17 @@ function CollegeTeacherMildredClothes() {
 	InventoryWear(CollegeTeacherMildred, "PussyDark3", "Pussy", "#333333");
 	InventoryWear(CollegeTeacherMildred, "Eyes1", "Eyes", "#a57b78");
 	InventoryWear(CollegeTeacherMildred, "Glasses4", "Glasses", "#333333");
-	InventoryWear(CollegeTeacherMildred, "Mouth1", "Mouth", "Default");
+	InventoryWear(CollegeTeacherMildred, "Mouth", "Mouth", "Default");
 	InventoryWear(CollegeTeacherMildred, "H0940", "Height", "Default");
 	InventoryWear(CollegeTeacherMildred, "Normal", "BodyUpper", "White");
 	InventoryWear(CollegeTeacherMildred, "Normal", "BodyLower", "White");
 	InventoryWear(CollegeTeacherMildred, "Default", "Hands", "White");
-	InventoryWear(CollegeTeacherMildred, "HairBack6", "HairBack", "#603022");
-	InventoryWear(CollegeTeacherMildred, "HairFront4", "HairFront", "#603022");
-	InventoryWear(CollegeTeacherMildred, "Ribbons2", "HairAccessory1", "#111111");
+	InventoryWear(CollegeTeacherMildred, "HairBack21", "HairBack", "#626060");
+	InventoryWear(CollegeTeacherMildred, "HairFront3", "HairFront", "#626060");
 	InventoryWear(CollegeTeacherMildred, "Bra1", "Bra", "#2222AA");
 	InventoryWear(CollegeTeacherMildred, "Panties11", "Panties", "#2222AA");
-	InventoryWear(CollegeTeacherMildred, "Socks5", "Socks", "#444458");
-	InventoryWear(CollegeTeacherMildred, "Shoes2", "Shoes", "#111111");
+	InventoryWear(CollegeTeacherMildred, "Socks5", "Socks", "#111111");
+	InventoryWear(CollegeTeacherMildred, "Heels1", "Shoes", "#222222");
 }
 
 // Generates Mildred
@@ -90,19 +89,27 @@ function CollegeTeacherMildredLoveChange(LoveChange, Event) {
 		CharacterSetFacialExpression(Player, "Blush", "Medium");
 		TimerInventoryRemoveSet(Player, "Blush", 3);
 	}		
+	if (Event == "Gag") InventoryWear(Player, "DogMuzzleExposed", "ItemMouth");
 }
 
 // Dress back the player and Mildred
 function CollegeTeacherDressBack() {
 	CharacterRelease(Player);
 	CharacterRelease(CollegeTeacherMildred);
+	InventoryRemove(CollegeTeacherMildred, "ItemHands");
 	CollegeEntranceWearStudentClothes(Player);
 	CollegeTeacherMildredClothes();
+}
+
+// Sets the current background for the scene
+function CollegeTeacherNewBackground(New) {
+	CollegeTeacherBackground = New;
 }
 
 // When the plater invites Mildred to her room
 function CollegeTeacherInviteToPrivateRoom() {
 	CollegeTeacherDressBack();
+	InventoryAdd(Player, "Pillory", "ItemArms");
 	CommonSetScreen("Room", "Private");
 	PrivateAddCharacter(CollegeTeacherMildred, null, true);
 	var C = PrivateCharacter[PrivateCharacter.length - 1];
