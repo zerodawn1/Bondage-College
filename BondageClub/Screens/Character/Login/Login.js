@@ -4,8 +4,8 @@ var LoginMessage = "";
 var LoginCredits = null;
 var LoginCreditsPosition = 0;
 var LoginThankYou = "";
-var LoginThankYouList = ["Alvin", "BlueWinter", "Bryce", "Christian", "Dan", "Desch", "Dini", "DonOlaf", "Escurse", "Fluffythewhat", "Greendragon", "John", "Kitten", "Laioken", "Lennart", "Michal", "Mindtie", "Misa",
-						 "MunchyCat", "Nick", "Overlord", "Rashiash", "Robin", "Ryner", "Samuel", "Setsu", "Shadow", "Shaun", "Simeon", "Sky", "Terry", "Victor", "William", "Winterisbest", "Xepherio"];
+var LoginThankYouList = ["Alvin", "Ayezona", "BlueWinter", "Bryce", "Christian", "Dan", "Desch", "Dini", "DonOlaf", "Escurse", "Fluffythewhat", "Greendragon", "Kitten", "Laioken", "Lennart", "Michal", "Mindtie", "Misa",
+						 "MunchyCat", "Nick", "Overlord", "Rashiash", "Robin", "Ryner", "Samuel", "Setsu", "Shadow", "Shaun", "Simeon", "SirCody", "Sky", "Victor", "William", "Winterisbest", "Xepherio"];
 var LoginThankYouNext = 0;
 
 // Loads the next thank you bubble
@@ -132,10 +132,14 @@ function LoginMistressItems() {
 function LoginStableItems() {
 	if (LogQuery("JoinedStable", "PonyExam") || LogQuery("JoinedStable", "TrainerExam")) {
 		InventoryAdd(Player, "HarnessPonyBits", "ItemMouth", false);
+		InventoryAdd(Player, "HarnessPonyBits", "ItemMouth2", false);
+		InventoryAdd(Player, "HarnessPonyBits", "ItemMouth3", false);
 		InventoryAdd(Player, "PonyBoots", "Shoes", false);
 		InventoryAdd(Player, "PonyBoots", "ItemBoots", false);
 	} else {
 		InventoryDelete(Player, "HarnessPonyBits", "ItemMouth", false);
+		InventoryDelete(Player, "HarnessPonyBits", "ItemMouth2", false);
+		InventoryDelete(Player, "HarnessPonyBits", "ItemMouth3", false);
 		InventoryDelete(Player, "PonyBoots", "Shoes", false);
 		InventoryDelete(Player, "PonyBoots", "ItemBoots", false);
 	}
