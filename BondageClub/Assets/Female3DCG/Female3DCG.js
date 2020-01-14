@@ -313,7 +313,7 @@ var AssetFemale3DCG = [
 			{ Name: "FoxEars2", Value: 20, BuyGroup: "FoxEars2" },
 			{ Name: "FoxEars3", Value: 20, BuyGroup: "FoxEars3" },
 			{ Name: "PuppyEars2", Value: 20, BuyGroup: "PuppyEars2"},
-			{ Name: "RacoonEars", Value: 15, BuyGroup: "RacoonEars2"}
+			{ Name: "RaccoonEars1", Value: 15, BuyGroup: "RaccoonEars1"}
 		]
 	},
 	
@@ -349,7 +349,7 @@ var AssetFemale3DCG = [
 			{ Name: "FoxEars2", Value: 20, BuyGroup: "FoxEars2" },
 			{ Name: "FoxEars3", Value: 20, BuyGroup: "FoxEars3" },
 			{ Name: "PuppyEars2", Value: 20, BuyGroup: "PuppyEars2"},
-			{ Name: "RacoonEars", Value: 15, BuyGroup: "RacoonEars2"}
+			{ Name: "RaccoonEars1", Value: 15, BuyGroup: "RaccoonEars1"}
 		]
 	},
 
@@ -1307,11 +1307,10 @@ var AssetFemale3DCG = [
 			{ Name: "DogMuzzleExposed", Difficulty: 7, Value: 50, Time: 10, Effect: ["GagNormal"], AllowLock: true, Hide: ["Mouth"], Block: ["ItemMouth2", "ItemMouth3"] },
 			{ Name: "FoxyHarnessPanelGag", Difficulty: 6, Value: 40, Time: 20, Effect: ["GagNormal"], AllowLock: true, Hide: ["Mouth"], Block: ["ItemMouth2", "ItemMouth3"] },
 			{ Name: "BallGag", Effect: ["GagMedium"], Difficulty: 2, Value: 40, Time: 10, AllowLock: true,  Hide: ["Mouth"], ExpressionTrigger: [{ Group:"Fluids", Name: "DroolSides", Timer: 30 }], BuyGroup: "BallGag", SetPose:["GagUnique"], Prerequisite: "GagUnique",
-		     Layer: [
-				  { Name: "Strap", AllowColorize: false},
-				  { Name: "Ball", AllowColorize: true}
-				 
-			 ]
+				Layer: [
+					{ Name: "Strap", AllowColorize: false},
+					{ Name: "Ball", AllowColorize: true}
+				]
 			},
 
 		]
@@ -1497,7 +1496,7 @@ var AssetFemale3DCG = [
 			{ Name: "LewdBlindfold", Priority: 31, Random: false, Effect: ["BlindLight", "Prone"], Hide: ["Glasses"], Value: 45, Time: 5, AllowLock: true, ExpressionTrigger: [{ Group: "Blush", Name: "Light", Timer: 5 }, { Group: "Eyes", Name: "Closed", Timer: 5 }] },
 			{ Name: "LatexBlindfold", Effect: ["BlindNormal", "Prone"], Hide: ["Glasses"], Value: 35, Time: 5, AllowLock: true },
 			{ Name: "DogHood", DefaultColor: "#404040", Random: false, Effect: ["Prone", "GagNormal"], Hide: ["HairFront", "HairBack", "Glasses", "ItemMouth", "ItemMouth2", "ItemMouth3", "HairAccessory1", "HairAccessory2"], Block: ["ItemMouth", "ItemMouth2", "ItemMouth3", "ItemEars"], Difficulty: 50, Value: 60, Time: 15, AllowLock: true },
-			{ Name: "FoxyMask", Random: false, Effect: ["Prone", "GagLight"], Hide: ["Glasses", "ItemMouth", "ItemMouth2", "ItemMouth3"], Block: ["ItemMouth", "ItemMouth2", "ItemMouth3"], Difficulty: 2, Value: 50, Time: 15, AllowLock: true }, 
+			{ Name: "FoxyMask", Random: false, Effect: ["Prone", "GagLight"], Hide: ["Glasses", "ItemMouth", "ItemMouth2", "ItemMouth3"], Block: ["ItemMouth", "ItemMouth2", "ItemMouth3"], Difficulty: 2, Value: 50, Time: 15, AllowLock: true },
 			{ Name: "SleepMask", Effect: ["BlindLight", "Prone"], Hide: ["Glasses"], Value: 5, Time: 5 }
 		]
 	},
