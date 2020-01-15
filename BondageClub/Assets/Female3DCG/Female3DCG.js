@@ -883,7 +883,7 @@ var AssetFemale3DCG = [
 		Category: "Item",
 		Priority: 18,
 		Default: false,
-		AllowPose: ["TapedHands", "BackBoxTie", "BackCuffs", "BackElbowTouch", "Yoked"],
+		AllowPose: ["TapedHands", "BackBoxTie", "BackCuffs", "BackElbowTouch", "Yoked", "Hogtied"],
 		Color: ["Default"],
 		Left: 125,
 		Top: 200,
@@ -1641,7 +1641,7 @@ var PoseFemale3DCG = [
 	},
 	{
 		Name: "Hogtied",
-		OverrideHeight: -550,
+		OverrideHeight: -575,
 		Hide: ["BodyLower", "Hands", "ClothLower", "Socks", "Shoes", "Wings", "TailStrap", "HairBack", "Gloves", "Panties", "Pussy", "ItemHands", "ItemPelvis", "ItemVulva", "ItemButt", "ItemLegs", "ItemFeet"]
 	}
 
