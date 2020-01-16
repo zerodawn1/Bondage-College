@@ -741,7 +741,7 @@ var AssetFemale3DCG = [
 			{ Name: "TapeStrips", Value: 10, Prerequisite: "AccessVulva", Time: 5, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 5 }] },
 			{ Name: "BenWaBalls", Value: 30, Prerequisite: "AccessVulva", Time: 5, ExpressionTrigger: [{ Group: "Eyebrows", Name: "Soft", Timer: 5 }] },
 			{ Name: "HeavyWeightClamp", Value: 30, Prerequisite: "AccessVulva", Time: 5, ExpressionTrigger: [{ Group: "Eyes", Name: "Closed", Timer: 5 }, { Group: "Eyebrows", Name: "Soft", Timer: 5 }] },
-			{ Name: "FullLatexSuitWand", Priority: 33, IsRestraint: true, Extended: true, Block: ["ItemArms", "ItemVulvaPiercings"], AllowLock: true, Value: -1, Effect: ["Egged", "Block", "Prone"],  AllowEffect: ["Egged", "Vibrating"], Time: 5, Difficulty: 12 },
+			{ Name: "FullLatexSuitWand", Priority: 33, IsRestraint: true, Extended: true, Block: ["ItemVulvaPiercings"], AllowLock: true, Value: -1, Effect: ["Egged", "Block", "Prone"], AllowEffect: ["Egged", "Vibrating"], Time: 5, Difficulty: 12 },
 			AssetSpankingToys
 		]
 	},
@@ -1043,14 +1043,21 @@ var AssetFemale3DCG = [
 			{ Name: "Pillory", Random: false, Value: -1, SetPose: ["Yoked"], SelfBondage: false, Priority: 44, Effect: ["Block", "Prone"], Time: 20, Difficulty: 12, AllowLock: true },
 			{ Name: "HogtieHempRope", SelfBondage: false, Random: false, SetPose: ["Hogtied"], Effect: ["Block", "Freeze", "Prone"], HideItem: ["ItemDevicesTeddyBear"], Block: ["ItemHands", "ItemLegs", "ItemFeet"], Value: -1, Time: 25, Difficulty: 9, ExpressionTrigger: [{ Group: "Blush", Name: "Normal", Timer: 20 }, { Group: "Eyebrows", Name: "Raised", Timer: 10 }], Prerequisite: ["NoItemFeet", "NoItemLegs", "NoItemHands", "NotKneeling", "NotSuspended", "NotMounted"] },
 			{
-			Name: "FullLatexSuit", DefaultColor: "#006e7b", Random: false, SelfBondage: false, Value: 200, SetPose: ["BackElbowTouch", "StraitDressOpen" ], Hide: ["Socks", "BodyLower", "Cloth", "ClothLower", "Bra", "Shoes", "ItemBoots", "ItemLegs"], Block: ["ItemBoots", "ItemPelvis", "ItemTorso", "ItemHands", "ItemLegs", "ItemFeet"], Effect: ["Block", "Prone"], HideItem: ["ItemFeetNylonRope", "ItemFeetHempRope", "ItemFeetLeatherBelt", "ItemFeetIrish8Cuffs", "ItemFeetDuctTape", "ItemFeetMermaidRopeTie", "ItemFeetLeatherAnkleCuffs"], Time: 40, RemoveTime: 30, Difficulty: 15, AllowLock: true, Prerequisite: ["NotSuspended", "NotKneeling", "NotHogtied", "NotMounted", "NotKneelingSpread", "NoFeetSpreader", "NotKneelingSpread", "NoFeetSpreader", "NotShackled", "CannotBeSuited"],  Extended: true,
+				Name: "FullLatexSuit", DefaultColor: "#006e7b", Random: false, SelfBondage: false, Value: 200, Time: 40, RemoveTime: 30, Difficulty: 15, AllowLock: true, Extended: true,
+				SetPose: ["BackElbowTouch", "StraitDressOpen"],
+				Hide: ["Socks", "BodyLower", "Cloth", "ClothLower", "Bra", "Shoes", "ItemBoots", "ItemLegs"],
+				Block: ["ItemBoots", "ItemPelvis", "ItemTorso", "ItemHands", "ItemLegs", "ItemFeet"],
+				Effect: ["Block", "Prone"],
+				HideItem: ["ItemFeetNylonRope", "ItemFeetHempRope", "ItemFeetLeatherBelt", "ItemFeetIrish8Cuffs", "ItemFeetDuctTape", "ItemFeetMermaidRopeTie", "ItemFeetLeatherAnkleCuffs"],
+				Prerequisite: ["NotSuspended", "NotKneeling", "NotHogtied", "NotMounted", "NotKneelingSpread", "NoFeetSpreader", "NotKneelingSpread", "NoFeetSpreader", "NotShackled", "CannotBeSuited"],
 				AllowEffect: ["Egged", "Vibrating"],
 				AllowBlock: ["ItemBreast", "ItemNipples", "ItemNipplesPiercings", "ItemVulvaPiercings", "ItemButt"],
-				AllowType:["", "Base", "UnZip", "Latex"],
+				AllowType: ["", "Base", "UnZip", "Latex"],
+				RemoveItemOnRemove: [ { Name: "FullLatexSuitWand", Group: "ItemVulva" } ],
 				Layer: [
-				    { Name: "Latex", AllowColorize: true, AllowTypes: ["", "Base"], HasType: false  },
+				    { Name: "Latex", AllowColorize: true, AllowTypes: ["", "Base"], HasType: false },
 					{ Name: "UnZip", AllowColorize: true, AllowTypes: ["UnZip", "Base"], HasType: false },
-					{ Name: "Base", AllowColorize: false, AllowTypes: ["", "Base", "UnZip", "Latex",], HasType: false  }
+					{ Name: "Base", AllowColorize: false, AllowTypes: ["", "Base", "UnZip", "Latex"], HasType: false }
 				]
 			},
 			AssetSpankingToys
