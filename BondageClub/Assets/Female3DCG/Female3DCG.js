@@ -535,12 +535,13 @@ var AssetFemale3DCG = [
 		Left: 235,
 		Top: 180,
 		Asset: [
-			{ Name: "Mouth", 
+			{ Name: "Regular", 
 			Layer: [
 					{ Name: "Lips", AllowColorize: true },
 					{ Name: "Inner", AllowColorize: false }
 				]
-			}
+			},
+			{ Name: "Discreet" }
 		]
 	},
 
