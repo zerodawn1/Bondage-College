@@ -11,6 +11,7 @@ var ChatRoomPlayerCanJoin = false;
 var ChatRoomMoneyForOwner = 0;
 var ChatRoomQuestGiven = [];
 var ChatRoomSpace = "";
+var ChatRoomMoveTarget = null;
 
 // Returns TRUE if the dialog option is available
 function ChatRoomCanAddWhiteList() { return ((CurrentCharacter != null) && (CurrentCharacter.MemberNumber != null) && (Player.WhiteList.indexOf(CurrentCharacter.MemberNumber) < 0) && (Player.BlackList.indexOf(CurrentCharacter.MemberNumber) < 0)) }
@@ -27,6 +28,7 @@ function ChatRoomCanServeDrink() { return ((CurrentCharacter != null) && Current
 function ChatRoomCanGiveMoneyForOwner() { return ((ChatRoomMoneyForOwner > 0) && (CurrentCharacter != null) && (Player.Ownership != null) && (Player.Ownership.Stage == 1) && (Player.Ownership.MemberNumber == CurrentCharacter.MemberNumber)) }
 function ChatRoomPlayerIsAdmin() { return ((ChatRoomData.Admin != null) && (ChatRoomData.Admin.indexOf(Player.MemberNumber) >= 0)) }
 function ChatRoomCurrentCharacterIsAdmin() { return ((CurrentCharacter != null) && (ChatRoomData.Admin != null) && (ChatRoomData.Admin.indexOf(CurrentCharacter.MemberNumber) >= 0)) }
+function ChatRoomHasMoveTarget() { return ChatRoomMoveTarget != null }
 
 // Creates the chat room input elements
 function ChatRoomCreateElement() {
@@ -97,7 +99,12 @@ function ChatRoomDrawCharacter(DoClick) {
 	for (var C = 0; C < ChatRoomCharacter.length; C++)
 		if (DoClick) {
 			if ((MouseX >= (C % 5) * Space + X) && (MouseX <= (C % 5) * Space + X + 450 * Zoom) && (MouseY >= Y + Math.floor(C / 5) * 500) && (MouseY <= Y + Math.floor(C / 5) * 500 + 1000 * Zoom)) {
-				if ((MouseY <= Y + Math.floor(C / 5) * 500 + 900 * Zoom) && (Player.GameplaySettings && Player.GameplaySettings.BlindDisableExamine ? (!(Player.Effect.indexOf("BlindHeavy") >= 0) || ChatRoomCharacter[C].ID == Player.ID): true)) {
+				if ((MouseY <= Y + Math.floor(C / 5) * 500 + 900 * Zoom) && (Player.GameplaySettings && Player.GameplaySettings.BlindDisableExamine ? (!(Player.Effect.indexOf("BlindHeavy") >= 0) || ChatRoomCharacter[C].ID == Player.ID) : true)) {
+					if (ChatRoomHasMoveTarget() && ChatRoomMoveTarget != ChatRoomCharacter[C].MemberNumber) {
+						// Character to move selected, complete move if not clicking the same character again
+						ChatRoomCompleteMove(ChatRoomCharacter[C].MemberNumber);
+						break;
+					}
 					ElementRemove("InputChat");
 					ElementRemove("TextAreaChatLog");
 					ChatRoomBackground = ChatRoomData.Background;
@@ -537,6 +544,18 @@ function ChatRoomViewProfile() {
 // Sends an administrative command to the server for the chat room from the character dialog
 function ChatRoomAdminAction(ActionType, Publish) {
 	if ((CurrentCharacter != null) && (CurrentCharacter.MemberNumber != null) && ChatRoomPlayerIsAdmin()) {
+		if (ActionType == "Move") {
+			ChatRoomMoveTarget = CurrentCharacter.MemberNumber;
+			DialogLeave();
+			return;
+		}
+
+		if (ActionType == "MoveCancel") {
+			ChatRoomMoveTarget = null;
+			DialogLeave();
+			return;
+		}
+
 		ServerSend("ChatRoomAdmin", { MemberNumber: CurrentCharacter.MemberNumber, Action: ActionType, Publish: ((Publish == null) || (Publish != "false")) });
 		if ((ActionType == "MoveLeft") || (ActionType == "MoveRight")) {
 			var Pos = ChatRoomCharacter.indexOf(CurrentCharacter);
@@ -546,6 +565,19 @@ function ChatRoomAdminAction(ActionType, Publish) {
 			CurrentCharacter.CurrentDialog = CurrentCharacter.CurrentDialog.replace("CharacterPosition", Pos.toString());
 		} else DialogLeave();
 	}
+}
+
+function ChatRoomCompleteMove(MemberNumber) {
+	if (ChatRoomMoveTarget == null) return;
+	ServerSend("ChatRoomAdmin",
+	{
+		MemberNumber: Player.ID,
+		TargetMemberNumber: ChatRoomMoveTarget,
+		DestinationMemberNumber: MemberNumber,
+		Action: "Move",
+		Publish: true
+	});
+	ChatRoomMoveTarget = null;
 }
 
 // Sends an administrative command to the server from the chat text field
