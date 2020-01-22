@@ -115,7 +115,7 @@ function DrawCharacter(C, X, Y, Zoom, IsHeightResizeAllowed) {
 		if ((Player != null) && (Player.VisualSettings != null) && (Player.VisualSettings.ForceFullHeight != null) && Player.VisualSettings.ForceFullHeight) HeightRatio = 1.0;
 		if (Zoom == null) Zoom = 1;
 		X += Zoom * Canvas.width * (1 - HeightRatio) / 2;
-		if (C.Pose.indexOf("Suspension") < 0) Y += Zoom * Canvas.height * (1 - HeightRatio);
+		Y += (C.Pose.indexOf("Suspension") < 0) ? Zoom * Canvas.height * (1 - HeightRatio) : -150;
 
 		// If we must dark the Canvas characters
 		if ((C.ID != 0) && Player.IsBlind() && (CurrentScreen != "InformationSheet")) {

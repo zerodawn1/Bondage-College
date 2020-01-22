@@ -639,11 +639,10 @@ var AssetFemale3DCG = [
 		Zone: [[100, 750, 300, 120]],
 		Asset: [
 			{ Name: "NylonRope", DefaultColor: "#909090", Value: 30, BuyGroup: ["NylonRope"], Time: 15, SetPose: ["LegsClosed"] },
-			{ Name: "HempRope", Value: 60, Time: 15, Difficulty: 3, BuyGroup: ["HempRope"], SetPose: ["LegsClosed"], Extended: true, AllowType: ["Mermaid"] },
+			{ Name: "HempRope", Value: 60, Time: 15, Difficulty: 3, BuyGroup: ["HempRope"], SetPose: ["LegsClosed"], Extended: true, AllowType: ["Mermaid", "Suspension"] },
 			{ Name: "LeatherBelt", Value: 25, Time: 10, RemoveTime: 5, AllowLock: true, SetPose: ["LegsClosed"] },
 			{ Name: "SturdyLeatherBelts", Value: 50, Time: 10, RemoveTime: 5, AllowLock: true, SetPose: ["LegsClosed"], BuyGroup: "SturdyLeatherBelts", Extended: true, AllowType: ["One", "Two", "Three", "Four"] },
 			{ Name: "Irish8Cuffs", Value: 25, Time: 10, RemoveTime: 5, AllowLock: true, SetPose: ["LegsClosed"] },
-			{ Name: "SuspensionHempRope", SelfBondage: false, Random: false, RemoveAtLogin: true, SetPose: ["Suspension", "LegsClosed"], Effect: ["Freeze", "Prone"], HideItem: ["ItemDevicesTeddyBear"], Value: -1, Height: 150, Time: 30, Difficulty: 3, Alpha: [[125, 850, 250, 150]], ExpressionTrigger: [{ Group: "Blush", Name: "High", Timer: 30 }, { Group: "Eyebrows", Name: "Raised", Timer: 10 }], Prerequisite: ["NotChained", "NotHogtied"] },
 			{ Name: "DuctTape", Extended: true, Value: 50, Time: 15, RemoveTime: 10, BuyGroup: "DuctTape", SetPose: ["LegsClosed"], AllowType: ["HalfFeet", "MostFeet", "CompleteFeet"] },
 			{ Name: "LeatherAnkleCuffs", Value: 30, Time: 10, Difficulty: 2, Effect: [], Priority: 24, AllowPose: ["LegsClosed"], Extended: true, AllowLock: true, AllowEffect: ["Freeze", "Prone"] },
 			{ Name: "OrnateAnkleCuffs", Value: 90, Time: 10, Difficulty: 3, Effect: [], Priority: 24, AllowPose: ["LegsClosed"], Extended: true, AllowLock: true, AllowEffect: ["Freeze", "Prone"],
@@ -1003,7 +1002,7 @@ var AssetFemale3DCG = [
 		Zone: [[30, 250, 100, 150], [370, 250, 100, 150]],
 		Asset: [
 			{ Name: "NylonRope", DefaultColor: "#909090", SelfBondage: false, Value: 30, BuyGroup: ["NylonRope"], SetPose: ["BackBoxTie"], Effect: ["Block", "Prone"], Time: 15 },
-			{ Name: "HempRope", SelfBondage: false, Value: 60, SetPose: ["BackBoxTie"], BuyGroup: ["HempRope"], Effect: ["Block", "Prone"], Time: 20, Difficulty: 3 },
+			{ Name: "HempRope", Extended: true, SelfBondage: false, Value: 60, SetPose: ["BackBoxTie"], BuyGroup: ["HempRope"], Effect: ["Block", "Prone"], Time: 20, Difficulty: 3 },
 			{ Name: "MetalCuffs", Priority: 30, Value: 40, SetPose: ["BackCuffs"], Effect: ["Block", "Prone", "Lock"], Difficulty: 5, Time: 5 },
 			{ Name: "SturdyLeatherBelts", SelfBondage: false, AllowLock: true, Value: 50, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone"], Time: 20, Difficulty: 5, BuyGroup: "SturdyLeatherBelts", Extended: true, AllowType: ["One", "Two", "Three", "Four"] },
 			{ Name: "LeatherArmbinder", DefaultColor: "#404040", Extended: true, SelfBondage: false, SelfUnlock: false, Priority: 6, Value: 80, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone"], Block: ["ItemHands"], Time: 25, RemoveTime: 10, Difficulty: 10, AllowLock: true, RemoveItemOnRemove: [{ Name: "LeatherArmbinderStrap", Group: "ItemHidden" },{ Name: "LeatherArmbinderWrapStrap", Group: "ItemHidden"}] },
@@ -1049,7 +1048,6 @@ var AssetFemale3DCG = [
 			},
 			{ Name: "Yoke", Value: 80, SetPose: ["Yoked"], SelfBondage: false, Priority: 39, Effect: ["Block", "Prone"], Time: 20, Difficulty: 10, AllowLock: true },
 			{ Name: "Pillory", Random: false, Value: -1, SetPose: ["Yoked"], SelfBondage: false, Priority: 44, Effect: ["Block", "Prone"], Time: 20, Difficulty: 12, AllowLock: true },
-			{ Name: "HogtieHempRope", SelfBondage: false, Random: false, SetPose: ["Hogtied"], Effect: ["Block", "Freeze", "Prone"], HideItem: ["ItemDevicesTeddyBear"], Block: ["ItemHands", "ItemLegs", "ItemFeet"], Value: -1, Time: 25, Difficulty: 9, ExpressionTrigger: [{ Group: "Blush", Name: "Normal", Timer: 20 }, { Group: "Eyebrows", Name: "Raised", Timer: 10 }], Prerequisite: ["NoItemFeet", "NoItemLegs", "NoItemHands", "NotKneeling", "NotSuspended", "NotMounted"] },
 			{
 				Name: "FullLatexSuit", DefaultColor: "#006e7b", Random: false, SelfBondage: false, Value: 200, Time: 40, RemoveTime: 30, Difficulty: 15, AllowLock: true, Extended: true,
 				SetPose: ["BackElbowTouch", "StraitDressOpen"],
