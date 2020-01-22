@@ -86,6 +86,7 @@ function InventoryItemArmsHempRopeSetPose(NewType) {
 		Dictionary.push({Tag: "DestinationCharacter", Text: C.Name, MemberNumber: C.MemberNumber});
 		ChatRoomPublishCustomAction(msg, true, Dictionary);
 	} else {
+		DialogFocusItem = null;
 		if (C.ID == 0) DialogMenuButtonBuild(C);
 		else {
 			C.CurrentDialog = DialogFind(C, "RopeBondage" + ((NewType) ? NewType : "BoxTie"), "ItemArms");
