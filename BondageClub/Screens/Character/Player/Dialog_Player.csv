@@ -336,6 +336,7 @@ RopeBondageBasic,,,Basic Tie
 RopeBondageCrotchRope,,,Crotch Rope Tie
 RopeBondageDiamond,,,Diamond Harness
 RopeBondageMermaid,,,Mermaid Tie
+RopeBondageBoxTie,,,Box Tie
 RopeBondageHogtied,,,Hogtie
 RopeBondageSuspension,,,Suspension Tie
 RopeBondageSuspensionHogtied,,,Suspension Hogtie
@@ -346,6 +347,10 @@ RopeHarnessSetCrotchRope,,,SourceCharacter uses the rope on TargetCharacter to d
 RopeHarnessSetDiamond,,,SourceCharacter uses the rope on TargetCharacter to do a Diamond style harness.
 LegRopeSetBasic,,,SourceCharacter uses the rope on TargetCharacter to do a basic tie.
 LegRopeSetMermaid,,,SourceCharacter uses the rope on TargetCharacter to do a mermaid tie.
+LegRopeSetSuspension,,,SourceCharacter uses the rope on TargetCharacter to do a suspension tie.
+ArmsRopeSetBoxTie,,,SourceCharacter uses the rope on TargetCharacter to do a box tie.
+ArmsRopeSetHogtied,,,SourceCharacter uses the rope on TargetCharacter to do a hogtie.
+ArmsRopeSetSuspensionHogtied,,,SourceCharacter uses the rope on TargetCharacter to do a suspension hogtie.
 Intensity-1,,,Item intensity: Disabled
 Intensity0,,,Item intensity: Low
 Intensity1,,,Item intensity: Medium

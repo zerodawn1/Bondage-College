@@ -1,10 +1,9 @@
 "use strict";
-var InventoryItemFeetHempRopeMessage = "";
 
 // Loads the item extension properties
 function InventoryItemFeetHempRopeLoad() {
-	if (DialogFocusItem.Property == null) DialogFocusItem.Property = { Type: null };
-	InventoryItemFeetHempRopeMessage = DialogFind(Player, "SelectRopeBondage");
+	if (DialogFocusItem.Property == null) DialogFocusItem.Property = { Type: null, Effect: [] };
+	DialogExtendedMessage = DialogFind(Player, "SelectRopeBondage");
 }
 
 // Draw the item extension screen
@@ -16,7 +15,7 @@ function InventoryItemFeetHempRopeDraw() {
 	DrawTextFit(DialogFocusItem.Asset.Description, 1500, 375, 221, "black");
 
 	// Draw the possible positions and their requirements
-	DrawText(InventoryItemFeetHempRopeMessage, 1500, 475, "white", "gray");
+	DrawText(DialogExtendedMessage, 1500, 475, "white", "gray");
 	DrawButton(1050, 550, 225, 225, "", (DialogFocusItem.Property.Type == null || DialogFocusItem.Property.Type == "Basic") ? "#888888" : "White");
 	DrawImage("Screens/Inventory/" + DialogFocusItem.Asset.Group.Name + "/" + DialogFocusItem.Asset.Name + "/Basic.png", 1050, 551);
 	DrawText(DialogFind(Player, "RopeBondageBasic"), 1163, 800, "white", "gray");
@@ -51,14 +50,8 @@ function InventoryItemFeetHempRopeSetType(NewType) {
 	}
 
 	// Validates a few parameters before suspending
-	if ((NewType == "Suspension") && !InventoryAllow(C, ["NotKneeling", "NotMounted", "NotChained", "NotHogtied"], true)) {
-		InventoryItemFeetHempRopeMessage = DialogText;
-		return;
-	}
-	if ((NewType == "Suspension") && (C.ID == 0)) {
-		InventoryItemFeetHempRopeMessage = DialogFind(Player, "CannotUseOnSelf");
-		return;
-	}
+	if ((NewType == "Suspension") && !InventoryAllow(C, ["NotKneeling", "NotMounted", "NotChained", "NotHogtied"], true)) { DialogExtendedMessage = DialogText; return; }
+	if ((NewType == "Suspension") && (C.ID == 0)) { DialogExtendedMessage = DialogFind(Player, "CannotUseOnSelf"); return; }
 
 	// Sets the position, difficulty and blush effect
 	DialogFocusItem.Property.Type = NewType;
@@ -77,22 +70,23 @@ function InventoryItemFeetHempRopeSetType(NewType) {
 		CharacterSetFacialExpression(C, "Blush", "High");
 		TimerInventoryRemoveSet(C, "Blush", 30);
 	}
-
-	// Refreshes the character
 	CharacterRefresh(C);
-	ChatRoomCharacterUpdate(C);
 
-	// Sets the chatroom message
-	var msg = "LegRopeSet" + ((NewType) ? NewType : "Basic");
-	var Dictionary = [];
-	Dictionary.push({Tag: "SourceCharacter", Text: Player.Name, MemberNumber: Player.MemberNumber});
-	Dictionary.push({Tag: "TargetCharacter", Text: C.Name, MemberNumber: C.MemberNumber});
-	ChatRoomPublishCustomAction(msg, true, Dictionary);
-
-	// Rebuilds the inventory menu
-	if (DialogInventory != null) {
+	// Sets the chatroom or NPC message
+	if (CurrentScreen == "ChatRoom") {
+		ChatRoomCharacterUpdate(C);
+		var msg = "LegRopeSet" + ((NewType) ? NewType : "Basic");
+		var Dictionary = [];
+		Dictionary.push({Tag: "SourceCharacter", Text: Player.Name, MemberNumber: Player.MemberNumber});
+		Dictionary.push({Tag: "TargetCharacter", Text: C.Name, MemberNumber: C.MemberNumber});
+		ChatRoomPublishCustomAction(msg, true, Dictionary);
+	} else {
 		DialogFocusItem = null;
-		DialogMenuButtonBuild(C);
+		if (C.ID == 0) DialogMenuButtonBuild(C);
+		else {
+			C.CurrentDialog = DialogFind(C, "RopeBondage" + ((NewType) ? NewType : "Basic"), "ItemFeet");
+			C.FocusGroup = null;
+		}
 	}
 
 }
