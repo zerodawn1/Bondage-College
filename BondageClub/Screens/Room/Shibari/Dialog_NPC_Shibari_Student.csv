@@ -43,6 +43,7 @@ RopeBondageHarness,,,(You use the ropes and create a harness around her body.)  
 RopeBondageDiamond,,,(You use the ropes and create a diamond harness around her body.)  You're a rope artist Miss DialogPlayerName.,,
 0,,,Konichiwa Miss.  I hope you're enjoying the Dojo.,,
 0,,"Hi girl, I'm DialogPlayerName.","It's a pleasure to meet you Miss, I'm DialogCharacterName.",DialogRemove(),
+0,,Can I play with you?,(She nods happily.)  Of course Miss.  I'm here to learn and serve.,DialogRemove(),
 0,,Are you ok up there?,"(She nods.)  Yes, as long as I don't spin too much, I'm fine.",,AllowSpank()
 0,10,What's going on here?,You are in the Shibari Dojo.  Most people come here to practice their rope and escape techniques.,,
 0,,(Spank her on the butt.),(You spank her on the butt as she dangles on the rope.)  Oooooh!  I love the way it stings Miss.,Spank(),AllowSpank()
@@ -51,7 +52,7 @@ RopeBondageDiamond,,,(You use the ropes and create a diamond harness around her 
 10,,What is Shibari?,It's Japanese rope bondage.  Ask our teacher for more details.,,
 10,,Are you training now?,"Yes and no, I'm enjoying my bondage more than trying to escape.",,AllowSpank()
 10,,Can I tie you up?,"Absolutely, I'm ready for any challenge.  I especially love rope bondage and suspension.",,
-10,,Will you tie me up?,"No Miss, I'm sorry, I'm a submissive.",,
+10,,Will you tie me up?,"No Miss.  I'm sorry, I'm a submissive.",,
 10,0,Let's talk about something else.,Yes Miss.,,
 MaidRescue,,,Konichiwa Miss.  It seems that we got in trouble.,,
 MaidRescue,,Do you need help?,"(She shakes her head no.)  I'm fine, things like that happen all the time.  Check with the teacher.",,

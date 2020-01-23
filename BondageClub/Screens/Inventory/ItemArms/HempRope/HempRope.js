@@ -50,7 +50,7 @@ function InventoryItemArmsHempRopeSetPose(NewType) {
 	}
 
 	// Validates a few parameters before hogtied
-	if ((NewType != null) && !InventoryAllow(C, ["NotKneeling", "NotMounted", "NotChained", "NotHogtied"], true)) { DialogExtendedMessage = DialogText; return; }
+	if ((NewType != null) && !InventoryAllow(C, ["NotKneeling", "NotMounted", "NotChained", "NotSuspended"], true)) { DialogExtendedMessage = DialogText; return; }
 
 	// Sets the new pose with it's effects
 	DialogFocusItem.Property.Type = NewType;
@@ -69,7 +69,7 @@ function InventoryItemArmsHempRopeSetPose(NewType) {
 		InventoryRemove(C, "ItemHidden");
 	}
 	if (NewType == "SuspensionHogtied") {
-		DialogFocusItem.Property.SetPose = ["Hogtied", "SuspensionHogtied"]; 
+		DialogFocusItem.Property.SetPose = ["Hogtied", "SuspensionHogtied"];
 		DialogFocusItem.Property.Difficulty = 6; 
 		CharacterSetFacialExpression(C, "Blush", "Medium"); 
 		TimerInventoryRemoveSet(C, "Blush", 20);
