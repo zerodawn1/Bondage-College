@@ -31,6 +31,8 @@ function ChatRoomHasSwapTarget() { return ChatRoomSwapTarget != null }
 
 // Creates the chat room input elements
 function ChatRoomCreateElement() {
+
+	// Creates the chat box
 	if (document.getElementById("InputChat") == null) {
 		ElementCreateTextArea("InputChat");
 		document.getElementById("InputChat").setAttribute("maxLength", 250);
@@ -39,6 +41,8 @@ function ChatRoomCreateElement() {
 	} else if (document.getElementById("InputChat").style.display == "none") {
 		ElementFocus("InputChat");
 	}
+
+	// Creates the chat log
 	if (document.getElementById("TextAreaChatLog") == null) {
 		ElementCreateDiv("TextAreaChatLog");
 		ElementPositionFix("TextAreaChatLog", 36, 1005, 5, 988, 859);
@@ -49,6 +53,7 @@ function ChatRoomCreateElement() {
 		ElementScrollToEnd("TextAreaChatLog");
 		ChatRoomRefreshChatSettings(Player);
 	}
+
 }
 
 // When the chat room loads
@@ -325,7 +330,6 @@ function ChatRoomSendChat() {
 		else {
 
 			// Regular chat can be garbled with a gag
-			//msg = SpeechGarble(Player, msg);
 			if ((msg != "") && (ChatRoomTargetMemberNumber == null)) ServerSend("ChatRoomChat", { Content: msg, Type: "Chat" } );
 
 			// The whispers get sent to the server and shown on the client directly
