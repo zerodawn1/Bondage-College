@@ -30,8 +30,8 @@ function BackgroundSelectionLoad() {
 // When the background selection screens runs
 function BackgroundSelectionRun() {
 	DrawButton(1685, 25, 90, 90, "", "White", "Icons/Next.png", TextGet("Next"));
-	DrawButton(1785, 25, 90, 90, "", "White", "Icons/Remove.png", TextGet("Cancel"));
-	DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png", TextGet("Exit"));
+	DrawButton(1785, 25, 90, 90, "", "White", "Icons/Cancel.png", TextGet("Cancel"));
+	DrawButton(1885, 25, 90, 90, "", "White", "Icons/Accept.png", TextGet("Accept"));
 	var X = 45;
 	var Y = 150;
 	for (var i = BackgroundSelectionOffset; i < BackgroundSelectionList.length && i - BackgroundSelectionOffset < BackgroundSelectionSize; ++i) {
@@ -41,7 +41,8 @@ function BackgroundSelectionRun() {
 			DrawButton(X, Y, 450, 225, BackgroundSelectionList[i], "White");
 		}
 		DrawImageResize("Backgrounds/" + BackgroundSelectionList[i] + ".jpg", X + 2, Y + 2, 446, 221);
-		DrawTextFit(DialogFind(Player, BackgroundSelectionList[i]), X + 225, Y + 250, 450, "Yellow");
+		DrawTextFit(DialogFind(Player, BackgroundSelectionList[i]), X + 227, Y + 252, 450, "Black");
+		DrawTextFit(DialogFind(Player, BackgroundSelectionList[i]), X + 225, Y + 250, 450, "White");
 		X += 450 + 35;
 		if (i % 4 == 3) {
 			X = 45;
