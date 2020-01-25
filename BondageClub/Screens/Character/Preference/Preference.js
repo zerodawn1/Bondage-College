@@ -69,6 +69,7 @@ function PreferenceLoad() {
 
 // Run the preference screen
 function PreferenceRun() {
+	
 	// If a subscreen is active, draw that instead
 	if (PreferenceSubscreen == "Chat") return PreferenceSubscreenChatRun();
 	if (PreferenceSubscreen == "Audio") return PreferenceSubscreenAudioRun();
@@ -85,10 +86,7 @@ function PreferenceRun() {
 	DrawButton(1140, 187, 65, 65, "", "White", "Icons/Color.png");
 	DrawButton(500, 280, 90, 90, "", "White", "Icons/Next.png");
 	DrawText(TextGet("ItemPermission") + " " + TextGet("PermissionLevel" + Player.ItemPermission.toString()), 615, 325, "Black", "Gray");
-    //DrawText(TextGet("AudioVolume"), 800, 425, "Black", "Gray");
 	DrawText(TextGet("SensDepSetting"), 800, 428, "Black", "Gray");
-    //DrawText(TextGet("PlayBeeps"), 600, 585, "Black", "Gray");
-    //DrawButton(500, 552, 64, 64, "", "White", (Player.AudioSettings && Player.AudioSettings.PlayBeeps) ? "Icons/Checked.png" : "");
     DrawText(TextGet("BlindDisableExamine"), 600, 505, "Black", "Gray");
     DrawButton(500, 472, 64, 64, "", "White", (Player.GameplaySettings && Player.GameplaySettings.BlindDisableExamine) ? "Icons/Checked.png" : "");
     DrawText(TextGet("DisableAutoRemoveLogin"), 600, 585, "Black", "Gray");
@@ -96,9 +94,6 @@ function PreferenceRun() {
     DrawText(TextGet("ForceFullHeight"), 600, 665, "Black", "Gray");
     DrawButton(500, 632, 64, 64, "", "White", (Player.VisualSettings && Player.VisualSettings.ForceFullHeight) ? "Icons/Checked.png" : "");
 	MainCanvas.textAlign = "center";
-    //DrawBackNextButton(500, 392, 250, 64, Player.AudioSettings.Volume * 100 + "%", "White", "",
-      //  () => PreferenceSettingsVolumeList[(PreferenceSettingsVolumeIndex + PreferenceSettingsVolumeList.length - 1) % PreferenceSettingsVolumeList.length] * 100 + "%",
-        //() => PreferenceSettingsVolumeList[(PreferenceSettingsVolumeIndex + 1) % PreferenceSettingsVolumeList.length] * 100 + "%");
 	DrawBackNextButton(500, 392, 250, 64, TextGet(Player.GameplaySettings.SensDepChatLog), "White", "",
 		() => TextGet(PreferenceSettingsSensDepList[(PreferenceSettingsSensDepIndex + PreferenceSettingsSensDepList.length - 1) % PreferenceSettingsSensDepList.length]),
 		() => TextGet(PreferenceSettingsSensDepList[(PreferenceSettingsSensDepIndex + 1) % PreferenceSettingsSensDepList.length]));
@@ -121,6 +116,7 @@ function PreferenceClick() {
 	if (PreferenceSubscreen == "Chat") return PreferenceSubscreenChatClick();
 	if (PreferenceSubscreen == "Audio") return PreferenceSubscreenAudioClick();
 
+	// If the user clicks on "Exit"
 	if ((MouseX >= 1815) && (MouseX < 1905) && (MouseY >= 75) && (MouseY < 165) && (PreferenceColorPick == "")) PreferenceExit();
 
 	// If the user clicks on the chat settings button
@@ -151,12 +147,14 @@ function PreferenceClick() {
 		else PreferenceSettingsSensDepIndex = (PreferenceSettingsSensDepIndex + 1) % PreferenceSettingsSensDepList.length;
 		Player.GameplaySettings.SensDepChatLog = PreferenceSettingsSensDepList[PreferenceSettingsSensDepIndex];
 	}
+
+	// Preference check boxes
 	if ((MouseX >= 500) && (MouseX < 564)) {
-		//if ((MouseY >= 552) && (MouseY < 616)) Player.AudioSettings.PlayBeeps = !Player.AudioSettings.PlayBeeps;
 		if ((MouseY >= 472) && (MouseY < 536)) Player.GameplaySettings.BlindDisableExamine = !Player.GameplaySettings.BlindDisableExamine;
         if ((MouseY >= 552) && (MouseY < 616)) Player.GameplaySettings.DisableAutoRemoveLogin = !Player.GameplaySettings.DisableAutoRemoveLogin;
 		if ((MouseY >= 632) && (MouseY < 696)) Player.VisualSettings.ForceFullHeight = !Player.VisualSettings.ForceFullHeight;
 	}
+
 }
 
 // When the user exit the preference screen, we push the data back to the server
@@ -178,28 +176,27 @@ function PreferenceExit() {
 	} else PreferenceMessage = "ErrorInvalidColor";
 }
 
-// Redirected to from the main Run function if the player is in the chat settings subscreen
+// Redirected to from the main Run function if the player is in the audio settings subscreen
 function PreferenceSubscreenAudioRun () {
+	DrawCharacter(Player, 50, 50, 0.9);
 	MainCanvas.textAlign = "left";
-	DrawText(TextGet("Preferences"), 500, 125, "Black", "Gray");
+	DrawText(TextGet("AudioPreferences"), 500, 125, "Black", "Gray");
 	DrawText(TextGet("AudioVolume"), 800, 225, "Black", "Gray");
-
-	DrawText(TextGet("PlayBeeps"), 600, 305, "Black", "Gray");
+	DrawText(TextGet("AudioPlayBeeps"), 600, 305, "Black", "Gray");
     DrawButton(500, 272, 64, 64, "", "White", (Player.AudioSettings && Player.AudioSettings.PlayBeeps) ? "Icons/Checked.png" : "");
-    DrawText(TextGet("PlayVibes"), 600, 385, "Black", "Gray");
-	DrawButton(500, 352, 64, 64, "", "White", (Player.AudioSettings && Player.AudioSettings.PlayVibes) ? "Icons/Checked.png" : "");
-
+    DrawText(TextGet("AudioPlayItem"), 600, 385, "Black", "Gray");
+	DrawButton(500, 352, 64, 64, "", "White", (Player.AudioSettings && Player.AudioSettings.PlayItem) ? "Icons/Checked.png" : "");
 	MainCanvas.textAlign = "center";
     DrawBackNextButton(500, 193, 250, 64, Player.AudioSettings.Volume * 100 + "%", "White", "",
         () => PreferenceSettingsVolumeList[(PreferenceSettingsVolumeIndex + PreferenceSettingsVolumeList.length - 1) % PreferenceSettingsVolumeList.length] * 100 + "%",
         () => PreferenceSettingsVolumeList[(PreferenceSettingsVolumeIndex + 1) % PreferenceSettingsVolumeList.length] * 100 + "%");
-
 	DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png");
 }
 
+// Redirected to from the main Run function if the player is in the chat settings subscreen
 function PreferenceSubscreenChatRun() {
 	MainCanvas.textAlign = "left";
-	DrawText(TextGet("ChatDisplaySettings"), 500, 125, "Black", "Gray");
+	DrawText(TextGet("ChatPreferences"), 500, 125, "Black", "Gray");
 	DrawText(TextGet("ColorTheme"), 500, 225, "Black", "Gray");
 	DrawText(TextGet("EnterLeaveStyle"), 500, 325, "Black", "Gray");
 	DrawText(TextGet("DisplayMemberNumbers"), 500, 425, "Black", "Gray");
@@ -225,32 +222,34 @@ function PreferenceSubscreenChatRun() {
 	DrawCharacter(Player, 50, 50, 0.9);
 }
 
-
+// When the user clicks in the audio preference subscreen
 function PreferenceSubscreenAudioClick() {
+
 	// If the user clicked the exit icon to return to the main screen
 	if ((MouseX >= 1815) && (MouseX < 1905) && (MouseY >= 75) && (MouseY < 165) && (PreferenceColorPick == "")) {
 		PreferenceSubscreen = "";
 		ElementCreateInput("InputCharacterLabelColor", "text", Player.LabelColor);
 	}
 
-	//volume settings
+	// Volume increase/decrease control
     if ((MouseX >= 500) && (MouseX < 750) && (MouseY >= 193) && (MouseY < 257)) {
         if (MouseX <= 625) PreferenceSettingsVolumeIndex = (PreferenceSettingsVolumeList.length + PreferenceSettingsVolumeIndex - 1) % PreferenceSettingsVolumeList.length;
         else PreferenceSettingsVolumeIndex = (PreferenceSettingsVolumeIndex + 1) % PreferenceSettingsVolumeList.length;
         Player.AudioSettings.Volume = PreferenceSettingsVolumeList[PreferenceSettingsVolumeIndex];
     }
 
-	//Individual audio checkboxes
+	// Individual audio check-boxes
 	if ((MouseX >= 500) && (MouseX < 564)) {
-		if ((MouseY >= 272) && (MouseY < 272+64)) Player.AudioSettings.PlayBeeps = !Player.AudioSettings.PlayBeeps;
-		if ((MouseY >= 352) && (MouseY < 352+64)) Player.AudioSettings.PlayVibes = !Player.AudioSettings.PlayVibes;
+		if ((MouseY >= 272) && (MouseY < 336)) Player.AudioSettings.PlayBeeps = !Player.AudioSettings.PlayBeeps;
+		if ((MouseY >= 352) && (MouseY < 416)) Player.AudioSettings.PlayItem = !Player.AudioSettings.PlayItem;
 	}
-}
 
+}
 
 // Redirected to from the main Click function if the player is in the chat settings subscreen
 function PreferenceSubscreenChatClick() {
-	// If the user clicked one of the checkboxes
+
+	// If the user clicked one of the check-boxes
 	if ((MouseX >= 500) && (MouseX < 564)) {
 		if ((MouseY >= 492) && (MouseY < 556)) Player.ChatSettings.DisplayTimestamps = !Player.ChatSettings.DisplayTimestamps;
 		if ((MouseY >= 592) && (MouseY < 656)) Player.ChatSettings.ColorNames = !Player.ChatSettings.ColorNames;
@@ -283,6 +282,7 @@ function PreferenceSubscreenChatClick() {
 		PreferenceSubscreen = "";
 		ElementCreateInput("InputCharacterLabelColor", "text", Player.LabelColor);
 	}
+
 }
 
 // Return true if sensory deprivation is active
