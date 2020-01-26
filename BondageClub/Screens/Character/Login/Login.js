@@ -149,14 +149,11 @@ function LoginStableItems() {
 // Checks every owned item to see if its buygroup contains an item the player does not have
 // This allows the user to collect any items from a modified buy group already purchased
 function LoginValideBuyGroups() {
-	// Add any unowned item that belongs in the same buy group as an item already owned
-	for (var A = 0; A < Asset.length; A++) {
-		if (Asset[A].BuyGroup != null && Player.Inventory.filter(el => el.Name == Asset[A].Name && el.Group == Asset[A].Group.Name).length > 0)
-			for (var B = 0; B < Asset.length; B++) {
-				if ((Asset[B] != null) && (Asset[B].BuyGroup != null) && (Asset[B].BuyGroup == Asset[A].BuyGroup) && Player.Inventory.filter(el => el.Name == Asset[B].Name && el.Group == Asset[B].Group.Name).length == 0)
+	for (var A = 0; A < Asset.length; A++)
+		if ((Asset[A].BuyGroup != null) && InventoryAvailable(Player, Asset[A].Name, Asset[A].Group.Name))
+			for (var B = 0; B < Asset.length; B++)
+				if ((Asset[B] != null) && (Asset[B].BuyGroup != null) && (Asset[B].BuyGroup == Asset[A].BuyGroup) && !InventoryAvailable(Player, Asset[B].Name, Asset[B].Group.Name))
 					InventoryAdd(Player, Asset[B].Name, Asset[B].Group.Name);
-			}
-	}
 }
 
 // When the character logs, we analyze the data
