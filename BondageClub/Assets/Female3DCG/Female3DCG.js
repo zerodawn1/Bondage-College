@@ -640,7 +640,7 @@ var AssetFemale3DCG = [
 		Zone: [[100, 750, 300, 120]],
 		Asset: [
 			{ Name: "NylonRope", DefaultColor: "#909090", Value: 30, BuyGroup: ["NylonRope"], Time: 15, SetPose: ["LegsClosed"], Audio: "RopeLong" },
-			{ Name: "HempRope", Value: 60, Time: 15, Difficulty: 3, BuyGroup: ["HempRope"], SetPose: ["LegsClosed"], Extended: true, AllowType: ["Mermaid", "Suspension"], Audio: "RopeLong" },
+			{ Name: "HempRope", Value: 60, Time: 15, Difficulty: 3, BuyGroup: ["HempRope"], SetPose: ["LegsClosed"], Extended: true, AllowType: ["Mermaid", "Suspension"], Audio: "RopeLong", HideItem: ["ItemDevicesTeddyBear"] },
 			{ Name: "LeatherBelt", Value: 25, Time: 10, RemoveTime: 5, AllowLock: true, SetPose: ["LegsClosed"] },
 			{ Name: "SturdyLeatherBelts", Value: 50, Time: 10, RemoveTime: 5, AllowLock: true, SetPose: ["LegsClosed"], BuyGroup: "SturdyLeatherBelts", Extended: true, AllowType: ["One", "Two", "Three", "Four"] },
 			{ Name: "Irish8Cuffs", Value: 25, Time: 10, RemoveTime: 5, AllowLock: true, SetPose: ["LegsClosed"] },
@@ -1005,7 +1005,7 @@ var AssetFemale3DCG = [
 		Zone: [[30, 250, 100, 150], [370, 250, 100, 150]],
 		Asset: [
 			{ Name: "NylonRope", DefaultColor: "#909090", SelfBondage: false, Value: 30, BuyGroup: ["NylonRope"], SetPose: ["BackBoxTie"], Effect: ["Block", "Prone"], Time: 15, Audio: "RopeLong" },
-			{ Name: "HempRope", Extended: true, SelfBondage: false, Value: 60, SetPose: ["BackBoxTie"], AllowType: ["Hogtied", "SuspensionHogtied"], BuyGroup: ["HempRope"], Effect: ["Block", "Prone"], Time: 20, Difficulty: 3, RemoveItemOnRemove: [{ Name: "SuspensionHempRope", Group: "ItemHidden" }], Audio: "RopeLong" },
+			{ Name: "HempRope", Extended: true, SelfBondage: false, Value: 60, SetPose: ["BackBoxTie"], AllowType: ["Hogtied", "SuspensionHogtied"], BuyGroup: ["HempRope"], Effect: ["Block", "Prone"], HideItem: ["ItemDevicesTeddyBear"], Time: 20, Difficulty: 3, RemoveItemOnRemove: [{ Name: "SuspensionHempRope", Group: "ItemHidden" }], Audio: "RopeLong" },
 			{ Name: "MetalCuffs", Priority: 30, Value: 40, SetPose: ["BackCuffs"], Effect: ["Block", "Prone", "Lock"], Difficulty: 5, Time: 5 },
 			{ Name: "SturdyLeatherBelts", SelfBondage: false, AllowLock: true, Value: 50, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone"], Time: 20, Difficulty: 5, BuyGroup: "SturdyLeatherBelts", Extended: true, AllowType: ["One", "Two", "Three", "Four"] },
 			{ Name: "LeatherArmbinder", DefaultColor: "#404040", Extended: true, SelfBondage: false, SelfUnlock: false, Priority: 6, Value: 80, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone"], Block: ["ItemHands"], Time: 25, RemoveTime: 10, Difficulty: 10, AllowLock: true, RemoveItemOnRemove: [{ Name: "LeatherArmbinderStrap", Group: "ItemHidden" },{ Name: "LeatherArmbinderWrapStrap", Group: "ItemHidden"}] },
