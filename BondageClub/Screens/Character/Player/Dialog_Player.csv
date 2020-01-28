@@ -107,6 +107,51 @@ ReceivedBeep,,,Received at
 YourRoom,,,<i>Your private room</i>
 InRoom,,,in room
 PrivateRoom,,,<i>Private room</i>
+Introduction,,,Introduction
+KidnapLeague,,,Kidnappers League
+MaidQuarters,,,Maid Quarters
+MainHall,,,Main Hall
+Management,,,Club Management
+Private,,,Private Room
+Shibari,,,Shibari Dojo
+Bedroom,,,Bedroom
+HorseStable,,,Horse Stable
+Nursery,,,Nursery
+PrisonHall,,,Prison Hall
+BDSMRoomBlue,,,BDSM Room Blue
+BDSMRoomPurple,,,BDSM Room Purple
+BDSMRoomRed,,,BDSM Room Red
+Gardens,,,Gardens
+IndoorPool,,,Indoor Pool
+OutdoorPool,,,Outdoor Pool
+MaidCafe,,,Maid Café
+PublicBath,,,Public Bath
+ParkDay,,,Park Day
+ParkNight,,,Park Night
+ChillRoom,,,Chill Room
+Boudoir,,,Boudoir
+BondageBedChamber,,,Bondage Bedchamber
+Beach,,,Beach
+ForestPath,,,Forest Path
+DeepForest,,,Deep Forest
+SpookyForest,,,Spooky Forest
+SlumRuins,,,Slum Ruins
+AbandonedBuilding,,,Abandoned Building
+BalconyNight,,,Balcony Night
+CozyLivingRoom,,,Cozy Living Room
+RooftopParty,,,Rooftop Party
+CosyChalet,,,Cosy Chalet
+ParkWinter,,,Park Winter
+XmasEve,,,Xmas Eve Lounge
+XmasDay,,,Xmas Day Lounge
+StreetNight,,,Street Night
+SnowyStreet,,,Snowy Street
+AsylumEntrance,,,Entrance
+AsylumBedroom,,,Bedroom
+AsylumMeeting,,,Meeting
+AsylumTherapy,,,Therapy
+PaddedCell,,,Padded Cell
+PaddedCell2,,,Padded Cell 2
 IntroductionMaidGreetings,,,"(As you enter the luxurious hallway, a maid comes to greet you.)  Welcome to the Bondage Club, is this your first visit?"
 ServerMessageOfferStartTrial,,,"SourceCharacter is offering you to start a trial period as her submissive.  Click on her and manage your relationship to accept, don't do anything to refuse."
 ServerMessageStartTrial,,,The Bondage Club is pleased to announce that SourceCharacter is starting a 3 days minimum trial period as a submissive.
@@ -331,16 +376,27 @@ DuctTapeHeadSetDouble,,,SourceCharacter takes a piece of duct tape for TargetCha
 DuctTapeHeadSetWrap,,,SourceCharacter wraps some duct tape onto DestinationCharacter face.
 DuctTapeHeadTypeMummy,,,Mummy
 DuctTapeHeadSetMummy,,,SourceCharacter wraps DestinationCharacter head in tape with multiple layers. 
-SelectTieStyle,,,Select the tie style
-RopeStyleBasic,,,Basic Tie
-RopeStyleCrotchRope,,,Crotch Rope Tie
-RopeStyleDiamond,,,Diamond Harness
-RopeStyleMermaid,,,Mermaid Tie
-RopeHarnessSetBasic,,,SourceCharacter uses the rope on TargetCharacter to do a basic harness.
-RopeHarnessSetCrotchRope,,,SourceCharacter uses the rope on TargetCharacter to do a crotch rope tie.
-RopeHarnessSetDiamond,,,SourceCharacter uses the rope on TargetCharacter to do a Diamond style harness.
+SelectRopeBondage,,,Select the rope bondage
+RopeBondageBasic,,,Basic Tie
+RopeBondageMermaid,,,Mermaid Tie
+RopeBondageBoxTie,,,Box Tie
+RopeBondageHogtied,,,Hogtie
+RopeBondageSuspension,,,Suspension Tie
+RopeBondageSuspensionHogtied,,,Suspension Hogtie
+RopeBondageCrotch,,,Crotch Rope
+RopeBondageHarness,,,Body Harness
+RopeBondageDiamond,,,Diamond Style
+NoRequirement,,,No Requirement
+RequireBondageLevel,,,Need Bondage ReqLevel
+RopeHarnessSetCrotch,,,SourceCharacter uses the rope on TargetCharacter to do a crotch rope tie.
+RopeHarnessSetHarness,,,SourceCharacter uses the rope on TargetCharacter to do a body harness.
+RopeHarnessSetDiamond,,,SourceCharacter uses the rope on TargetCharacter to do a diamond style harness.
 LegRopeSetBasic,,,SourceCharacter uses the rope on TargetCharacter to do a basic tie.
 LegRopeSetMermaid,,,SourceCharacter uses the rope on TargetCharacter to do a mermaid tie.
+LegRopeSetSuspension,,,SourceCharacter uses the rope on TargetCharacter to do a suspension tie.
+ArmsRopeSetBoxTie,,,SourceCharacter uses the rope on TargetCharacter to do a box tie.
+ArmsRopeSetHogtied,,,SourceCharacter uses the rope on TargetCharacter to do a hogtie.
+ArmsRopeSetSuspensionHogtied,,,SourceCharacter uses the rope on TargetCharacter to do a suspension hogtie.
 Intensity-1,,,Item intensity: Disabled
 Intensity0,,,Item intensity: Low
 Intensity1,,,Item intensity: Medium
