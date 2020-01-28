@@ -645,8 +645,8 @@ var AssetFemale3DCG = [
 			{ Name: "SturdyLeatherBelts", Value: 50, Time: 10, RemoveTime: 5, AllowLock: true, SetPose: ["LegsClosed"], BuyGroup: "SturdyLeatherBelts", Extended: true, AllowType: ["One", "Two", "Three", "Four"] },
 			{ Name: "Irish8Cuffs", Value: 25, Time: 10, RemoveTime: 5, AllowLock: true, SetPose: ["LegsClosed"] },
 			{ Name: "DuctTape", Extended: true, Value: 50, Time: 15, RemoveTime: 10, BuyGroup: "DuctTape", SetPose: ["LegsClosed"], AllowType: ["HalfFeet", "MostFeet", "CompleteFeet"] },
-			{ Name: "LeatherAnkleCuffs", Value: 30, Time: 10, Difficulty: 2, Effect: [], Priority: 24, AllowPose: ["LegsClosed"], Extended: true, AllowLock: true, AllowEffect: ["Freeze", "Prone"] },
-			{ Name: "OrnateAnkleCuffs", Value: 90, Time: 10, Difficulty: 3, Effect: [], Priority: 24, AllowPose: ["LegsClosed"], Extended: true, AllowLock: true, AllowEffect: ["Freeze", "Prone"],
+			{ Name: "LeatherAnkleCuffs", Random: false, Value: 30, Time: 10, Difficulty: 2, Effect: [], Priority: 24, AllowPose: ["LegsClosed"], Extended: true, AllowLock: true, AllowEffect: ["Freeze", "Prone"] },
+			{ Name: "OrnateAnkleCuffs", Random: false, Value: 90, Time: 10, Difficulty: 3, Effect: [], Priority: 24, AllowPose: ["LegsClosed"], Extended: true, AllowLock: true, AllowEffect: ["Freeze", "Prone"],
 			Layer: [
 					{ Name: "Cuffs", AllowColorize: true },
 					{ Name: "Gems", AllowColorize: false }
@@ -679,8 +679,8 @@ var AssetFemale3DCG = [
 			{ Name: "LeatherBelt", Value: 25, Time: 5, AllowLock: true, SetPose: ["LegsClosed"] },
 			{ Name: "SturdyLeatherBelts", Value: 50, Time: 5, AllowLock: true, SetPose: ["LegsClosed"], BuyGroup: "SturdyLeatherBelts", Extended: true, AllowType: ["One", "Two", "Three", "Four"] },
 			{ Name: "DuctTape", Extended: true, Value: 50, Time: 15, RemoveTime: 10, BuyGroup: "DuctTape", SetPose: ["LegsClosed"], AllowType: ["HalfLegs", "MostLegs", "CompleteLegs"] },
-			{ Name: "LeatherLegCuffs", Value: 30, Time: 10, Difficulty: 2, Priority: 24, AllowPose: ["LegsClosed"], Extended: true, AllowLock: true, Effect: [], AllowEffect: ["Prone", "KneelFreeze"], AllowType: ["Closed"] },
-			{ Name: "OrnateLegCuffs", Value: 90, Time: 10, Difficulty: 3, Priority: 24, AllowPose: ["LegsClosed"], Extended: true, AllowLock: true, Effect: [], AllowEffect: ["Prone", "KneelFreeze"], AllowType: ["Closed"],
+			{ Name: "LeatherLegCuffs", Random: false, Value: 30, Time: 10, Difficulty: 2, Priority: 24, AllowPose: ["LegsClosed"], Extended: true, AllowLock: true, Effect: [], AllowEffect: ["Prone", "KneelFreeze"], AllowType: ["Closed"] },
+			{ Name: "OrnateLegCuffs", Random: false, Value: 90, Time: 10, Difficulty: 3, Priority: 24, AllowPose: ["LegsClosed"], Extended: true, AllowLock: true, Effect: [], AllowEffect: ["Prone", "KneelFreeze"], AllowType: ["Closed"],
 			Layer: [
 					{ Name: "Cuffs", AllowColorize: true },
 					{ Name: "Gems", AllowColorize: false }
@@ -1069,7 +1069,7 @@ var AssetFemale3DCG = [
 					{ Name: "Base", AllowColorize: false, AllowTypes: ["", "Base", "UnZip", "Latex"], HasType: false }
 				]
 			},
-			{ Name: "Zipties", SelfBondage: true, Value: 20, SetPose: ["BackElbowTouch"], Difficulty: 6, BuyGroup: "Zipties", RemoveTime: 6 },
+			{ Name: "Zipties", SelfBondage: true, Value: 20, SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone"], Difficulty: 6, BuyGroup: "Zipties", RemoveTime: 6 },
 			AssetSpankingToys
 		]
 	},
@@ -1683,7 +1683,7 @@ var PoseFemale3DCG = [
 	{
 		Name: "SuspensionHogtied",
 		OverrideHeight: 0,
-		Hide: ["BodyLower", "Hands", "ClothLower", "Socks", "Shoes", "Wings", "TailStraps", "Gloves", "Panties", "Pussy", "ItemHands", "ItemPelvis", "ItemVulva", "ItemButt", "ItemLegs", "ItemFeet"]
+		Hide: ["BodyLower", "Hands", "ClothLower", "Socks", "Shoes", "Wings", "TailStraps", "Gloves", "Panties", "Pussy", "ItemHands", "ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemButt", "ItemLegs", "ItemFeet", "ItemBoots"]
 	}
 
 ];
