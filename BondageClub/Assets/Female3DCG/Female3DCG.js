@@ -1002,7 +1002,7 @@ var AssetFemale3DCG = [
 		Color: ["Default"],
 		Left: 50,
 		Top: 200,
-		Zone: [[0, 200, 100, 200], [400, 200, 100, 200]],
+		Zone: [[10, 200, 90, 200], [400, 200, 90, 200]],
 		Asset: [
 			{ Name: "NylonRope", DefaultColor: "#909090", SelfBondage: false, Value: 30, BuyGroup: ["NylonRope"], SetPose: ["BackBoxTie"], Effect: ["Block", "Prone"], Time: 15, Audio: "RopeLong" },
 			{ Name: "HempRope", Extended: true, SelfBondage: false, Value: 60, SetPose: ["BackBoxTie"], AllowType: ["Hogtied", "SuspensionHogtied"], BuyGroup: ["HempRope"], Effect: ["Block", "Prone"], HideItem: ["ItemDevicesTeddyBear"], Time: 20, Difficulty: 3, RemoveItemOnRemove: [{ Name: "SuspensionHempRope", Group: "ItemHidden" }], Audio: "RopeLong" },
@@ -1082,7 +1082,7 @@ var AssetFemale3DCG = [
 		Default: false,
 		IsRestraint: true,
 		Color: ["Default"],
-		Zone: [[0, 400, 100, 200], [400, 400, 100, 200]],
+		Zone: [[10, 400, 90, 200], [400, 400, 90, 200]],
 		Asset: [
 			{ Name: "PaddedMittens", DefaultColor: "#bbbbbb", SelfBondage: false, Value: 40, AllowPose: ["BackBoxTie", "BackElbowTouch", "BackCuffs", "Yoked"], Effect: ["Block", "Prone"], Extended: true, Time: 15, Difficulty: 4, AllowLock: true },
 			{ Name: "PawMittens", DefaultColor: "#bbbbbb", SelfBondage: false, Value: 50, AllowPose: ["BackBoxTie", "BackElbowTouch", "BackCuffs", "Yoked"], Effect: ["Block", "Prone"], Extended: true, Time: 15, Difficulty: 4, AllowLock: true },
@@ -1543,7 +1543,7 @@ var AssetFemale3DCG = [
 		Default: false,
 		Color: ["Default"],
 		Top: -250,
-		Zone: [[0, 0, 100, 200]],
+		Zone: [[10, 0, 90, 200]],
 		Asset: [
 			{ Name: "MetalPadlock", Wear: false, Value: 15, Time: 10, IsLock: true, Effect: [] },
 			{ Name: "IntricatePadlock", Wear: false, Value: 50, Time: 30, IsLock: true, Effect: [] },
@@ -1572,7 +1572,7 @@ var AssetFemale3DCG = [
 		Color: ["Default"],
 		Left: 0,
 		Top: -250,
-		Zone: [[0, 600, 100, 400], [400, 600, 100, 400]],
+		Zone: [[10, 600, 90, 400], [400, 600, 90, 400]],
 		Asset: [
 			{ Name: "WoodenBox", RemoveAtLogin: true, Alpha: [[1, 1, 70, 999], [420, 1, 80, 999]], Effect: ["Prone", "Enclose", "BlindNormal", "GagLight", "Freeze"], Value: 60, Time: 15, RemoveTime: 10, Difficulty: -2, AllowLock: true, Prerequisite: ["NotSuspended", "NotHogtied"] },
 			{ Name: "SmallWoodenBox", RemoveAtLogin: true, Alpha: [[1, 1, 70, 999], [420, 1, 80, 999]], SetPose: ["Kneel"], Effect: ["ForceKneel", "Prone", "Enclose", "BlindNormal", "GagLight", "Freeze"], Value: 40, Time: 15, RemoveTime: 10, Difficulty: -2, AllowLock: true, Prerequisite: ["NotSuspended", "NotHogtied", "NotMounted", "NotKneelingSpread", "NoFeetSpreader"] },
@@ -1605,7 +1605,7 @@ var AssetFemale3DCG = [
 		Color: ["Default"],
 		Left: 0,
 		Top: -250,
-		Zone: [[400, 0, 100, 200]],
+		Zone: [[400, 0, 90, 200]],
 		Asset: [
 			{ Name: "BondageBenchStraps", RemoveAtLogin: false, IsRestraint: true, Extended: true, Block: ["ItemDevices"], AllowType: ["Light", "Normal", "Heavy", "Full"], Hide: ["HairBack", "Wings", "TailStraps", "ItemButt"], SelfBondage: false, AllowLock: true, Value: -1, SetPose: ["LegsClosed"], Effect: ["Block", "Prone"], Time: 5, Difficulty: 12 }
 		]
