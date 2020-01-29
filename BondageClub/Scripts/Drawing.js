@@ -154,12 +154,25 @@ function DrawCharacter(C, X, Y, Zoom, IsHeightResizeAllowed) {
 		if (C.Pose.indexOf("Suspension") >= 0) Y += (Zoom * Canvas.height * (1 - HeightRatio) / HeightRatio);
 
 		// Draws the character focus zones if we need too
-		if ((C.FocusGroup != null) && (C.FocusGroup.Zone != null))
+		if ((C.FocusGroup != null) && (C.FocusGroup.Zone != null)) {
+
+			// Draw all the possible zones in light gray
+			for (var A = 0; A < AssetGroup.length; A++)
+				if (AssetGroup[A].Zone != null)
+					for (var Z = 0; Z < AssetGroup[A].Zone.length; Z++)
+						if (C.Pose.indexOf("Suspension") >= 0)
+							DrawEmptyRect((HeightRatio * AssetGroup[A].Zone[Z][0]) + X, (1000 - (HeightRatio * (AssetGroup[A].Zone[Z][1] + Y + AssetGroup[A].Zone[Z][3]))) - C.HeightModifier, (HeightRatio * AssetGroup[A].Zone[Z][2]), (HeightRatio * AssetGroup[A].Zone[Z][3]), "#80808040");
+						else
+							DrawEmptyRect((HeightRatio * AssetGroup[A].Zone[Z][0]) + X, HeightRatio * (AssetGroup[A].Zone[Z][1] - C.HeightModifier) + Y, (HeightRatio * AssetGroup[A].Zone[Z][2]), (HeightRatio * AssetGroup[A].Zone[Z][3]), "#80808040");
+
+			// Draw the focused zone in cyan
 			for (var Z = 0; Z < C.FocusGroup.Zone.length; Z++)
 				if (C.Pose.indexOf("Suspension") >= 0)
 					DrawEmptyRect((HeightRatio * C.FocusGroup.Zone[Z][0]) + X, (1000 - (HeightRatio * (C.FocusGroup.Zone[Z][1] + Y + C.FocusGroup.Zone[Z][3]))) - C.HeightModifier, (HeightRatio * C.FocusGroup.Zone[Z][2]), (HeightRatio * C.FocusGroup.Zone[Z][3]), "cyan");
 				else
 					DrawEmptyRect((HeightRatio * C.FocusGroup.Zone[Z][0]) + X, HeightRatio * (C.FocusGroup.Zone[Z][1] - C.HeightModifier) + Y, (HeightRatio * C.FocusGroup.Zone[Z][2]), (HeightRatio * C.FocusGroup.Zone[Z][3]), "cyan");
+
+		}
 
 		// Draw the character name below herself
 		if ((C.Name != "") && ((CurrentModule == "Room") || (CurrentModule == "Online") || ((CurrentScreen == "Wardrobe") && (C.ID != 0))) && (CurrentScreen != "Private"))
