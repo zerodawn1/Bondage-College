@@ -154,15 +154,16 @@ function DrawCharacter(C, X, Y, Zoom, IsHeightResizeAllowed) {
 		if (C.Pose.indexOf("Suspension") >= 0) Y += (Zoom * Canvas.height * (1 - HeightRatio) / HeightRatio);
 
 		// Draws the character focus zones if we need too
-		if (C.FocusGroup != null && C.FocusGroup.Zone != null) {
+		if ((C.FocusGroup != null) && (C.FocusGroup.Zone != null)) {
 
-			// Draw all the possible zones in light gray
+			// Draw all the possible zones in transparent gray
 			for (var A = 0; A < AssetGroup.length; A++)
 				if (AssetGroup[A].Zone != null)
 					DrawAssetGroupZone(C, AssetGroup[A].Zone, HeightRatio, X, Y, "#80808040", 6);
 
 			// Draw the focused zone in cyan
 			DrawAssetGroupZone(C, C.FocusGroup.Zone, HeightRatio, X, Y, "cyan");
+
 		}
 
 		// Draw the character name below herself
@@ -176,13 +177,13 @@ function DrawCharacter(C, X, Y, Zoom, IsHeightResizeAllowed) {
 	}
 }
 
+// Scans the item zone and draws it over the character
 function DrawAssetGroupZone(C, Zone, HeightRatio, X, Y, Color, Thickness = 3) {
 	for (var Z = 0; Z < Zone.length; Z++)
 		if (C.Pose.indexOf("Suspension") >= 0)
 			DrawEmptyRect((HeightRatio * Zone[Z][0]) + X, (1000 - (HeightRatio * (Zone[Z][1] + Y + Zone[Z][3]))) - C.HeightModifier, (HeightRatio * Zone[Z][2]), (HeightRatio * Zone[Z][3]), Color, Thickness);
 		else
 			DrawEmptyRect((HeightRatio * Zone[Z][0]) + X, HeightRatio * (Zone[Z][1] - C.HeightModifier) + Y, (HeightRatio * Zone[Z][2]), (HeightRatio * Zone[Z][3]), Color, Thickness);
-
 }
 
 // Draw a zoomed image from a source to a specific canvas
