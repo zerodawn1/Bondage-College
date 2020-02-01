@@ -156,16 +156,13 @@ function DrawCharacter(C, X, Y, Zoom, IsHeightResizeAllowed) {
 		// Draws the character focus zones if we need too
 		if ((C.FocusGroup != null) && (C.FocusGroup.Zone != null)) {
 
-			// Draw all the possible zones in transparent gray
+			// Draw all the possible zones in transparent colors (gray if free, yellow if occupied, red if blocker)
 			for (var A = 0; A < AssetGroup.length; A++)
 				if (AssetGroup[A].Zone != null && AssetGroup[A].Name != C.FocusGroup.Name) {
-					var color = "#80808040";
-
-					if (InventoryGet(C, AssetGroup[A].Name) != null) color = "#d5a300";
-
-					if (InventoryGroupIsBlocked(C, AssetGroup[A].Name)) color = "#880005";
-
-					DrawAssetGroupZone(C, AssetGroup[A].Zone, HeightRatio, X, Y, color, 6);
+					var Color = "#80808040";
+					if (InventoryGroupIsBlocked(C, AssetGroup[A].Name)) Color = "#88000580";
+					else if (InventoryGet(C, AssetGroup[A].Name) != null) Color = "#D5A30080";
+					DrawAssetGroupZone(C, AssetGroup[A].Zone, HeightRatio, X, Y, Color, 5);
 				}
 
 			// Draw the focused zone in cyan
