@@ -77,20 +77,21 @@ function ChatRoomOwnerInside() {
 function ChatRoomDrawCharacter(DoClick) {
 
 	var DarkFactor = 1.0;
-	// If there's 2 characters, it's zoomed in
+	// If there's more than 2 characters, we apply a zoom factor, also apply the darkness factor if the player is blindfolded
 	if (!DoClick && (Player.Effect.indexOf("BlindHeavy") < 0)) {
+		
+		// Draws the zoomed background
 		if (ChatRoomCharacter.length <= 2) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + ".jpg", MainCanvas, 500, 0, 1000, 1000, 0, 0, 1000, 1000);
 		if (ChatRoomCharacter.length == 3) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + ".jpg", MainCanvas, 400, 0, 1200, 1000, 0, 50, 1000, 900);
 		if (ChatRoomCharacter.length == 4) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + ".jpg", MainCanvas, 200, 0, 1600, 1000, 0, 150, 1000, 700);
 		if (ChatRoomCharacter.length == 5) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + ".jpg", MainCanvas, 0, 0, 2000, 1000, 0, 250, 1000, 500);
 		if (ChatRoomCharacter.length >= 6) DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + ".jpg", MainCanvas, 0, 0, 2000, 1000, 0, 0, 1000, 500);
 
-		if (Player.Effect.indexOf("BlindNormal") >= 0) {
-			DarkFactor = 0.15;
-		} else if (Player.Effect.indexOf("BlindLight") >= 0) {
-			DarkFactor = 0.3;
-		}
+		// Draws a black overlay if the character is blind
+		if (Player.Effect.indexOf("BlindNormal") >= 0) DarkFactor = 0.15;
+		else if (Player.Effect.indexOf("BlindLight") >= 0) DarkFactor = 0.3;
 		if (DarkFactor < 1.0) DrawRect(0, 0, 2000, 1000, "rgba(0,0,0," + (1.0 - DarkFactor) + ")");
+
 	}
 
 	// Sets the X position
