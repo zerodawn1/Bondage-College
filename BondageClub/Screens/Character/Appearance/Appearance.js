@@ -362,9 +362,10 @@ function AppearanceLoad() {
 
 // Run the character appearance selection screen
 function AppearanceRun() {
-	var C = CharacterAppearanceSelection;
 
 	// Draw the background and the character twice
+	var C = CharacterAppearanceSelection;
+	var HideColorPicker = true;
 	if (CharacterAppearanceHeaderText == "") {
 		if (C.ID == 0) CharacterAppearanceHeaderText = TextGet("SelectYourAppearance");
 		else CharacterAppearanceHeaderText = TextGet("SelectSomeoneAppearance").replace("TargetCharacterName", C.Name);
@@ -372,8 +373,6 @@ function AppearanceRun() {
 	DrawCharacter(C, -600, (C.IsKneeling()) ? -1100 : -100, 4, false);
 	DrawCharacter(C, 750, 0, 1);
 	DrawText(CharacterAppearanceHeaderText, 400, 40, "White", "Black");
-
-	var HideColorPicker = true;
 
 	// Out of the color picker
 	if (!CharacterAppearanceWardrobeMode && CharacterAppearanceColorPicker == "") {
@@ -421,6 +420,7 @@ function AppearanceRun() {
 
 		// Draw the color picker
 		ElementPosition("InputColor", 1450, 65, 300);
+		DrawButton(1610, 37, 65, 65, "", "White", "Icons/Color.png");
 		HideColorPicker = false;
 		ColorPickerDraw(1300, 145, 675, 830, ElementValue("InputColor"), function (Color) {
 			CharacterAppearanceSetColorForGroup(C, Color, CharacterAppearanceColorPicker);
@@ -429,9 +429,8 @@ function AppearanceRun() {
 
 	}
 
-	if (HideColorPicker) {
-		ColorPickerHide();
-	}
+	// Hides the color picker if needed
+	if (HideColorPicker) ColorPickerHide();
 
 	// Draw the default buttons
 	DrawButton(1768, 25, 90, 90, "", "White", "Icons/Cancel.png", TextGet("Cancel"));
@@ -601,16 +600,16 @@ function AppearanceClick() {
 		if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceReady(C);
 
 	} else if (CharacterAppearanceWardrobeMode) {
+
+		// In warehouse mode, we draw the 12 possible warehouse slots for the character to save & load
 		if ((MouseX >= 1651) && (MouseX < 1741) && (MouseY >= 25) && (MouseY < 115)) {
 			CharacterAppearanceWardrobeOffset += 6;
 			if (CharacterAppearanceWardrobeOffset >= Player.Wardrobe.length) CharacterAppearanceWardrobeOffset = 0;
 		}
 		if ((MouseX >= 1300) && (MouseX < 1800) && (MouseY >= 430) && (MouseY < 970))
 			for (var W = CharacterAppearanceWardrobeOffset; W < Player.Wardrobe.length && W < CharacterAppearanceWardrobeOffset + 6; W++)
-				if ((MouseY >= 430 + (W - CharacterAppearanceWardrobeOffset) * 95) && (MouseY <= 495 + (W - CharacterAppearanceWardrobeOffset) * 95)) {
+				if ((MouseY >= 430 + (W - CharacterAppearanceWardrobeOffset) * 95) && (MouseY <= 495 + (W - CharacterAppearanceWardrobeOffset) * 95))
 					WardrobeFastLoad(C, W, false);
-				}
-
 		if ((MouseX >= 1820) && (MouseX < 1975) && (MouseY >= 430) && (MouseY < 970))
 			for (var W = CharacterAppearanceWardrobeOffset; W < Player.Wardrobe.length && W < CharacterAppearanceWardrobeOffset + 6; W++)
 				if ((MouseY >= 430 + (W - CharacterAppearanceWardrobeOffset) * 95) && (MouseY <= 495 + (W - CharacterAppearanceWardrobeOffset) * 95)) {
@@ -624,11 +623,11 @@ function AppearanceClick() {
 						CharacterAppearanceWardrobeText = TextGet("WardrobeNameError");
 					}
 				}
-
 		if ((MouseX >= 1417) && (MouseX < 1507) && (MouseY >= 25) && (MouseY < 115)) { CharacterAppearanceWardrobeMode = false; ElementRemove("InputWardrobeName"); }
 		if ((MouseX >= 1534) && (MouseX < 1624) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceNaked(C);
 		if ((MouseX >= 1768) && (MouseX < 1858) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceExit(C);
 		if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) CharacterAppearanceReady(C);
+
 	} else {
 
 		// Can set a color manually from the text field
