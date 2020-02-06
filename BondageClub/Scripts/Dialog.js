@@ -844,30 +844,26 @@ function DialogExtendItem(Item, SourceItem) {
 	CommonDynamicFunction("Inventory" + Item.Asset.Group.Name + Item.Asset.Name + "Load()");
 }
 
+// Validates that the player is allowed to change the item color and swaps it on the fly
 function DialogChangeItemColor(C, Color) {
-	if (!Player.CanInteract()) return;
 
+	// Validates that the player isn't blind and can interact with the item
+	if (!Player.CanInteract() || Player.IsBlind()) return;
+
+	// If the item is locked, make sure the player could unlock it before swapping colors
 	var Item = InventoryGet(C, C.FocusGroup.Name);
 	if (Item == null) return;
+	if (InventoryItemHasEffect(Item, "Lock", true) && !DialogCanUnlock(C, Item)) return;
 
-	var Locked = InventoryItemHasEffect(Item, "Lock", true) && !Player.IsBlind() && (Item.Property != null) && (Item.Property.LockedBy != null) && (Item.Property.LockedBy != "");
-	if (Locked) {
-		// check lock type and ownership
-		var CanUnLock = (InventoryItemHasEffect(Item, "Lock", true) && DialogCanUnlock(C, Item) && InventoryAllow(C, Item.Asset.Prerequisite) && !InventoryGroupIsBlocked(C) && (Player.CanInteract() || ((C.ID == 0) && InventoryItemHasEffect(Item, "Block", true))));
-		if (!CanUnLock) return;
-	}
+	// Make sure the item is allowed, the group isn't blocked and it's not an enclosing item
+	if (!InventoryAllow(C, Item.Asset.Prerequisite) || InventoryGroupIsBlocked(C)) return;
+	if (InventoryItemHasEffect(Item, "Enclose", true) && (C.ID == 0)) return;
 
-	var CanRemove = (Item != null) && !InventoryItemHasEffect(Item, "Lock", true) && !InventoryItemHasEffect(Item, "Enclose", true) && Player.CanInteract() && InventoryAllow(C, Item.Asset.Prerequisite) && !InventoryGroupIsBlocked(C);
-	if (!CanRemove) return;
-
-	// Apply color
+	// Apply the color & redraw the character after 100ms.  Prevent unnecessary redraws to reduce performance impact
 	Item.Color = Color;
-
-	// Redraw character after 100ms, prevent unnecessary redraws, reduce performance impact
 	clearTimeout(DialogFocusItemColorizationRedrawTimer);
-	DialogFocusItemColorizationRedrawTimer = setTimeout(function () {
-		CharacterAppearanceBuildCanvas(C);
-	}, 100);
+	DialogFocusItemColorizationRedrawTimer = setTimeout(function () { CharacterAppearanceBuildCanvas(C); }, 100);
+
 }
 
 // Draw the item menu dialog
@@ -888,9 +884,7 @@ function DialogDrawItemMenu(C) {
 		ElementPosition("InputColor", 1450, 65, 300);
 		ColorPickerDraw(1300, 145, 675, 830, document.getElementById("InputColor"), function (Color) { DialogChangeItemColor(C, Color) });
 		return;
-	} else {
-		ColorPickerHide();
-	}
+	} else ColorPickerHide();
 
 	// In item permission mode, the player can choose which item he allows other users to mess with.  Allowed items have a green background.  Disallowed have a red background.
 	if ((DialogItemPermissionMode && (C.ID == 0) && (DialogProgress < 0)) || (Player.CanInteract() && (DialogProgress < 0) && !InventoryGroupIsBlocked(C))) {
