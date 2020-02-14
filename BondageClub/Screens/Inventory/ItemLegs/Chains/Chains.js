@@ -25,9 +25,7 @@ function InventoryItemLegsChainsDraw() {
 		DrawText(DialogFind(Player, "ChainBondageStrict"), 1713, 800, "white", "gray");
 		DrawText(DialogFind(Player, "RequireBondageLevel").replace("ReqLevel", "2"), 1713, 850, "white", "gray");
 	}
-	else {
-		DrawText(DialogFind(Player, "CantChangeWhileLocked"), 1500, 500, "white", "gray");
-	}
+	else DrawText(DialogFind(Player, "CantChangeWhileLocked"), 1500, 500, "white", "gray");
 
 }
 
@@ -55,10 +53,8 @@ function InventoryItemLegsChainsSetType(NewType) {
 		if (NewType == null) DialogFocusItem.Property.Difficulty = 0;
 		if (NewType == "Strict") DialogFocusItem.Property.Difficulty = 2;
 	}
-	else { 
-		return; 
-	}
-	
+	else return;
+
 	// Adds the lock effect back if it was padlocked
 	if ((DialogFocusItem.Property.LockedBy != null) && (DialogFocusItem.Property.LockedBy != "")) {
 		if (DialogFocusItem.Property.Effect == null) DialogFocusItem.Property.Effect = [];
@@ -69,7 +65,7 @@ function InventoryItemLegsChainsSetType(NewType) {
 	// Sets the chatroom or NPC message
 	if (CurrentScreen == "ChatRoom") {
 		ChatRoomCharacterUpdate(C);
-		var msg = "LegRopeSet" + ((NewType) ? NewType : "Basic");
+		var msg = "LegChainSet" + ((NewType) ? NewType : "Basic");
 		var Dictionary = [];
 		Dictionary.push({Tag: "SourceCharacter", Text: Player.Name, MemberNumber: Player.MemberNumber});
 		Dictionary.push({Tag: "TargetCharacter", Text: C.Name, MemberNumber: C.MemberNumber});

@@ -3,7 +3,7 @@
 // Loads the item extension properties
 function InventoryItemFeetChainsLoad() {
 	if (DialogFocusItem.Property == null) DialogFocusItem.Property = { Type: null, Effect: [] };
-	DialogExtendedMessage = DialogFind(Player, "SelectChainsBondage");
+	DialogExtendedMessage = DialogFind(Player, "SelectChainBondage");
 }
 
 // Draw the item extension screen
@@ -30,9 +30,7 @@ function InventoryItemFeetChainsDraw() {
 		DrawText(DialogFind(Player, "ChainBondageSuspension"), 1838, 800, "white", "gray");
 		DrawText(DialogFind(Player, "RequireBondageLevel").replace("ReqLevel", "6"), 1838, 850, "white", "gray");
 	}
-	else {
-		DrawText(DialogFind(Player, "CantChangeWhileLocked"), 1500, 500, "white", "gray");
-	}
+	else DrawText(DialogFind(Player, "CantChangeWhileLocked"), 1500, 500, "white", "gray");
 
 }
 
@@ -46,7 +44,7 @@ function InventoryItemFeetChainsClick() {
 
 // Sets the feet bondage position (Basic, Strict, Suspension)
 function InventoryItemFeetChainsSetType(NewType) {
-	
+
 	// Loads the character and item
 	var C = (Player.FocusGroup != null) ? Player : CurrentCharacter;
 	if (CurrentScreen == "ChatRoom") {
@@ -77,10 +75,8 @@ function InventoryItemFeetChainsSetType(NewType) {
 			TimerInventoryRemoveSet(C, "Blush", 30);
 		}
 	}
-	else { 
-		return; 
-	}
-	
+	else return;
+
 	// Adds the lock effect back if it was padlocked
 	if ((DialogFocusItem.Property.LockedBy != null) && (DialogFocusItem.Property.LockedBy != "")) {
 		if (DialogFocusItem.Property.Effect == null) DialogFocusItem.Property.Effect = [];
