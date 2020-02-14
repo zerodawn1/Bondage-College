@@ -96,6 +96,7 @@ Private,,,Private
 Public,,,Public
 Locked,,,Locked
 Unlocked,,,Unlocked
+CantChangeWhileLocked,,,Cannot change while locked
 Delete,,,Delete
 ConfirmDelete,,,Confirm
 Beep,,,Beep
