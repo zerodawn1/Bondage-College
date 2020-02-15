@@ -40,17 +40,24 @@ function ChatRoomCreateElement() {
 		document.getElementById("InputChat").setAttribute("maxLength", 250);
 		document.getElementById("InputChat").setAttribute("autocomplete", "off");
 		ElementFocus("InputChat");
-	} else if (document.getElementById("InputChat").style.display == "none") {
-		ElementFocus("InputChat");
-	}
+	} else if (document.getElementById("InputChat").style.display == "none") ElementFocus("InputChat");
 
 	// Creates the chat log
 	if (document.getElementById("TextAreaChatLog") == null) {
+
+		// Sets the size and position
 		ElementCreateDiv("TextAreaChatLog");
 		ElementPositionFix("TextAreaChatLog", 36, 1005, 5, 988, 859);
-		ElementContent("TextAreaChatLog", "");
 		ElementScrollToEnd("TextAreaChatLog");
 		ChatRoomRefreshChatSettings(Player);
+
+		// If we relog, we reload the previous chat log
+		if (RelogChatLog != null) {
+			while (RelogChatLog.children.length > 0)
+				document.getElementById("TextAreaChatLog").appendChild(RelogChatLog.children[0]);
+			RelogChatLog = null;
+		} else ElementContent("TextAreaChatLog", "");
+
 	} else if (document.getElementById("TextAreaChatLog").style.display == "none") {
 		setTimeout(() => ElementScrollToEnd("TextAreaChatLog"), 100);
 		ChatRoomRefreshChatSettings(Player);
