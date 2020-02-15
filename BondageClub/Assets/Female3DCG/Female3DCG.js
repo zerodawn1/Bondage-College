@@ -91,9 +91,9 @@ var AssetFemale3DCG = [
 			{ Name: "BridesmaidDress1", Value: 100, Hide: ["ClothLower"], HideItem: ["ItemNipplesPiercingsRoundPiercing", "ItemNipplesPiercingsWeightedPiercing", "ItemDevicesStrapOnSmooth", "ItemDevicesStrapOnStuds"] },
 			{ Name: "Gown1", Value: 70, Random: false, HideItem: ["ClothLowerLatexSkirt1", "ClothLowerLatexSkirt2", "ClothLowerSkirt1", "ClothLowerSkirt2", "ClothLowerSkirt3", "ClothLowerTennisSkirt1", "ClothLowerClothSkirt1", "ItemNipplesPiercingsRoundPiercing", "ItemNipplesPiercingsWeightedPiercing", "ItemDevicesStrapOnSmooth", "ItemDevicesStrapOnStuds"] },
 			{ Name: "Gown2Top", Value: 90, Random: false, BuyGroup: "Gown2", Left: 125, Top: 220, Require: ["ClothLower"], HideItem: ["ItemNipplesPiercingsRoundPiercing", "ItemNipplesPiercingsWeightedPiercing", "ItemDevicesStrapOnSmooth", "ItemDevicesStrapOnStuds"] },
+			{ Name: "Gown3", Value: 70, Random: false, Left: 99, Top: 194, HideItem: ["ClothLowerLatexSkirt1", "ClothLowerLatexSkirt2", "ClothLowerSkirt1", "ClothLowerSkirt2", "ClothLowerSkirt3", "ClothLowerTennisSkirt1", "ClothLowerClothSkirt1", "ItemNipplesPiercingsRoundPiercing", "ItemNipplesPiercingsWeightedPiercing", "ItemDevicesStrapOnSmooth", "ItemDevicesStrapOnStuds"] },
 			{ Name: "MaidApron1", Value: -1, BuyGroup: "Maid", Hide: ["ClothLower"] },
 			{ Name: "MaidApron2", Value: -1, BuyGroup: "Maid", Hide: ["ClothLower"] }
-
 		]
 	},
 
@@ -364,7 +364,7 @@ var AssetFemale3DCG = [
 
 	{
 		Group: "Hat",
-		Priority: 47,
+		Priority: 46,
 		Default: false,
 		Clothing: true,
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
@@ -372,7 +372,7 @@ var AssetFemale3DCG = [
 		Left: 125,
 		Top: 0,
 		Asset: [
-			"Band1", "Beret1",
+			"Band1", "Band2", "Beret1",
 			{ Name: "MaidHairband1", Value: -1 },
 			{ Name: "NurseCap", Value: -1 },
 			{
@@ -388,13 +388,26 @@ var AssetFemale3DCG = [
 			{ Name: "PirateBandana1", Value: 15 },
 			{ Name: "PoliceWomanHat", Value: 40 },
 			{ Name: "HeadTowel1", Value: 15, Hide: ["HairFront", "HairBack"] },
-			{ Name: "CollegeDunce", Value: -1 }
+			{ Name: "CollegeDunce", Value: -1 },
+			{ 
+				Name: "Bonnet1", Value: 20,
+				Layer: [
+					{ Name: "Base", AllowColorize: true },
+					{ Name: "Lace", AllowColorize: false }
+				]
+			},
+			{ Name: "Bonnet2", Value: 20 },
+			{ Name: "Crown1", Value: 20 },
+			{ Name: "Crown2", Value: 20 },
+			{ Name: "Crown3", Value: 20 },
+			{ Name: "Crown4", Value: 20 },
+			{ Name: "Crown5", Value: 20 }
 		]
 	},
 
 	{
 		Group: "HairAccessory1",
-		Priority: 45,
+		Priority: 47,
 		Default: false,
 		Clothing: true,
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
@@ -405,6 +418,8 @@ var AssetFemale3DCG = [
 			"Ears1", "Ears2", "PonyEars1",
 			{ Name: "Ribbons1", Priority: 4, BuyGroup: "Ribbons1" },
 			{ Name: "Ribbons2", Priority: 4, Value: -1, BuyGroup: "Ribbons2" },
+			{ Name: "Ribbons3", BuyGroup: "Ribbons3" },
+			{ Name: "Ribbons4", BuyGroup: "Ribbons4" },
 			{ Name: "GiantBow1", Priority: 4, BuyGroup: "GiantBow1" },
 			{ Name: "BunnyEars1", Value: 10, BuyGroup: "BunnyEars1" },
 			{ Name: "BunnyEars2", Value: 20, BuyGroup: "BunnyEars2" },
@@ -430,7 +445,7 @@ var AssetFemale3DCG = [
 	
 	{
 		Group: "HairAccessory2",
-		Priority: 46,
+		Priority: 45,
 		Default: false,
 		Clothing: true,
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
@@ -441,6 +456,8 @@ var AssetFemale3DCG = [
 			"Ears1", "Ears2", "PonyEars1",
 			{ Name: "Ribbons1", Priority: 4, BuyGroup: "Ribbons1" },
 			{ Name: "Ribbons2", Priority: 4, Value: -1, BuyGroup: "Ribbons2" },
+			{ Name: "Ribbons3", BuyGroup: "Ribbons3" },
+			{ Name: "Ribbons4", BuyGroup: "Ribbons4" },
 			{ Name: "GiantBow1", Priority: 4, BuyGroup: "GiantBow1" },
 			{ Name: "BunnyEars1", Value: -1, BuyGroup: "BunnyEars1" },
 			{ Name: "BunnyEars2", Value: -1, BuyGroup: "BunnyEars2" },
@@ -476,6 +493,7 @@ var AssetFemale3DCG = [
 		Color: ["Default", "#cccccc", "#aaaaaa", "#888888", "#666666", "#444444", "#222222", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 		Asset: [
 			"Gloves1", "Gloves2",
+			{ Name: "Gloves3", Value: 15, Left: 60, Top: 109 },
 			{ Name: "MistressGloves", Value: -1 },
 			{ Name: "FingerlessGloves", Value: 20 },
 			{ 
