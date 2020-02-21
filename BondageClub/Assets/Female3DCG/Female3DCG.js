@@ -975,7 +975,6 @@ var AssetFemale3DCG = [
 		Priority: 17,
 		ParentGroup: "BodyLower",
 		Default: false,
-		AllowPose: ["TapedHands", "BackBoxTie", "BackCuffs", "BackElbowTouch", "Yoked"],
 		Color: ["Default"],
 		Left: 125,
 		Top: 375,
