@@ -1362,7 +1362,7 @@ var AssetFemale3DCG = [
 			{ Name: "PetCollar", Value: -1, Time: 5, Difficulty: 50, AllowLock: true },
 			{ Name: "MaidCollar", Value: 30, Time: 5, Difficulty: 50, AllowLock: true },
 			{ Name: "BordelleCollar", Value: 30, Time: 5, Difficulty: 50, AllowLock: true },
-			{ Name: "LoveLeatherCollar", Value: 50, Time: 5, Difficulty: 50, LoverOnly: false, AllowLock: true },
+			{ Name: "LoveLeatherCollar", Value: 50, Time: 5, Difficulty: 50, LoverOnly: false, Random: false, AllowLock: true },
 			{ Name: "StrictPostureCollar", Priority: 38, Value: 60, Time: 30, RemoveTime: 40, Difficulty: 50, AllowLock: true },
 			{ Name: "NobleCorsetCollar", Value: 45, Time: 5, Difficulty: 50, AllowLock: true },
 			{ Name: "HeartCollar", Value: 50, Time: 5, Difficulty: 50, AllowLock: true },
