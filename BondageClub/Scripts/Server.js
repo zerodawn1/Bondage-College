@@ -1,6 +1,7 @@
 "use strict";
 var ServerSocket = null;
 var ServerURL = "http://localhost:4288";
+var ServerRelog = null;
 var ServerBeep = {};
 var ServerBeepAudio = new Audio();
 
@@ -34,9 +35,39 @@ function ServerInfo(data) {
 	if (data.Time != null) CurrentTime = data.Time;
 }
 
-// When the server disconnects, we go back to the login screen
+// When the server disconnects, we enter in "Reconnect Mode"
 function ServerDisconnect(data) {
-	if (Player.Name != "") window.location = window.location;
+	if (Player.Name != "") {
+		if (CurrentScreen != "Relog") {
+
+			// Exits out of the chat room or a sub screen of the chatroom, so we'll be able to get in again when we log back
+			if (
+				(CurrentScreen == "ChatRoom")
+				|| (CurrentScreen == "ChatAdmin")
+				|| ((CurrentScreen == "Appearance") && (CharacterAppearanceReturnRoom == "ChatRoom"))
+				|| ((CurrentScreen == "InformationSheet") && (InformationSheetPreviousScreen == "ChatRoom"))
+				|| ((CurrentScreen == "Title") && (InformationSheetPreviousScreen == "ChatRoom"))
+				|| ((CurrentScreen == "OnlineProfile") && (InformationSheetPreviousScreen == "ChatRoom"))
+				|| ((CurrentScreen == "FriendList") && (InformationSheetPreviousScreen == "ChatRoom") && (FriendListReturn == null))
+				|| ((CurrentScreen == "Preference") && (InformationSheetPreviousScreen == "ChatRoom"))
+			) {
+				RelogChatLog = document.getElementById("TextAreaChatLog").cloneNode(true);
+				RelogChatLog.id = "RelogChatLog";
+				RelogChatLog.name = "RelogChatLog";
+				ElementRemove("InputChat");
+				ElementRemove("TextAreaChatLog");
+				CurrentScreen = "ChatSearch";
+				CurrentModule = "Online";
+				CurrentCharacter = null;
+			} else RelogChatLog = null;
+
+			// Keeps the relog data
+			RelogData = { Screen: CurrentScreen, Module: CurrentModule, Character: CurrentCharacter };
+			CurrentCharacter = null;
+			CommonSetScreen("Character", "Relog");
+
+		}
+	}
 	else if (CurrentScreen == "Login") LoginMessage = TextGet((data != null) ? data : "ErrorDisconnectedFromServer");
 }
 

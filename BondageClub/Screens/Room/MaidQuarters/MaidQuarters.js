@@ -104,6 +104,7 @@ function MaidQuartersRemoveMaidUniform() {
 		var PreviousItem = MaidQuartersItemClothPrev[ItemAssetGroupName];
 		InventoryRemove(Player, ItemAssetGroupName);
 		if(PreviousItem) InventoryWear(Player, PreviousItem.Asset.Name, ItemAssetGroupName, PreviousItem.Color);
+		if(PreviousItem && PreviousItem.Property) InventoryGet(Player, ItemAssetGroupName).Property = PreviousItem.Property
 		MaidQuartersItemClothPrev[ItemAssetGroupName] = null;
 	}
 
@@ -191,6 +192,8 @@ function MaidQuartersChangeInitiationMaid() {
 function MaidQuartersBecomMaid() {
 	InventoryAdd(Player, "MaidOutfit1", "Cloth");
 	InventoryAdd(Player, "MaidOutfit2", "Cloth");
+	InventoryAdd(Player, "MaidApron1", "Cloth");
+	InventoryAdd(Player, "MaidApron2", "Cloth");
 	InventoryAdd(Player, "MaidHairband1", "Hat");
 	InventoryWear(Player, "MaidOutfit1", "Cloth", "Default");
 	InventoryWear(Player, "MaidHairband1", "Hat", "Default");
