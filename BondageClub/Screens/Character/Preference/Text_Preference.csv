@@ -1,7 +1,7 @@
 Preferences,- Preferences -
 ChatPreferences,- Chat Preferences -
 AudioPreferences,- Audio Preferences -
-ArousalPreferences,- Arousal Meter Preferences -
+ArousalPreferences,- Arousal Meter & Sexual Activities Preferences -
 CharacterLabelColor,Character label color:
 ItemPermission,Item permission:
 PermissionLevel0,"Everyone, no exceptions"
@@ -37,14 +37,14 @@ DisableAutoRemoveLogin,Keep all of your restraints when relogging
 ForceFullHeight,Display all characters at maximum height
 EnableAfkTimer,Show AFK bubble if idle for 5 minutes
 ArousalActive,Activation:
-ArousalActiveInactive,Disable all sexual activities
-ArousalActiveNoMeter,Allow activities without a meter
-ArousalActiveManual,Allow activities with manual meter
-ArousalActiveAutomatic,Allow activities with automatic meter
-ArousalVisible,Visibility:
-ArousalVisibleAll,Show your meter to everyone
-ArousalVisibleAccess,Show only if they have access
-ArousalVisibleSelf,Only you can see your meter
+ArousalActiveInactive,Disable sexual activities
+ArousalActiveNoMeter,Allow without a meter
+ArousalActiveControl,Allow with controllable meter
+ArousalActiveAutomatic,Allow with automatic meter
+ArousalVisible,Meter Visibility:
+ArousalVisibleAll,Show arousal to everyone
+ArousalVisibleAccess,Show if they have access
+ArousalVisibleSelf,Show to yourself only
 ArousalActivity,Activity preferences:
 ArousalActivityTypeKiss,Kissing
 ArousalActivityTypeFrenchKiss,French Kissing
@@ -73,16 +73,16 @@ ArousalActivityLoveSelf,Done on yourself:
 ArousalActivityLoveOther,Doing it to others:
 ArousalActivityLove0,Hate it
 ArousalActivityLove1,Doesn't like it
-ArousalActivityLove2,Fine with it
+ArousalActivityLove2,Neutral on it
 ArousalActivityLove3,Like it
 ArousalActivityLove4,Love it
 ArousalSelectErogenousZones,Click on yourself to set your erogenous zones
-ArousalSelectErogenousZones,Configure this zone to be erogenous or not:
-ArousalHate,"You hate being touched on this zone, it's a big turn-off."
-ArousalDislike,"You don't enjoy being touched on this zone, it's a turn-off."
-ArousalIndifferent,"You don't care about this zone, it doesn't change your mood."
-ArousalLike,"You like being touched on this zone, it turns you on."
-ArousalLove,"You love being touched on this zone, it's a big turn-on."
+ArousalConfigureErogenousZones,Configure this zone to be erogenous or not
+ArousalZoneLove0,"Hate this zone, it's a big turn-off"
+ArousalZoneLove1,"Dislike this zone, it's a turn-off"
+ArousalZoneLove2,This zone isn't special for you
+ArousalZoneLove3,"Like this zone, it turns you on"
+ArousalZoneLove4,"Love this zone, it's a big turn-on"
 ArousalAllowOrgasm,This zone can give you an orgasm
 ArousalZoneItemBoots,Feet & Toes
 ArousalZoneItemFeet,Lower Legs
@@ -98,3 +98,4 @@ ArousalZoneItemHands,Hands
 ArousalZoneItemNeck,Neck
 ArousalZoneItemMouth,Mouth & Lips
 ArousalZoneItemHead,Head & Hair
+ArousalZoneItemEars,Ears

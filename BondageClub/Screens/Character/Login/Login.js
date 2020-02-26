@@ -246,7 +246,6 @@ function LoginResponse(C) {
 			Player.AudioSettings = C.AudioSettings;
 			Player.GameplaySettings = C.GameplaySettings;
 			Player.ArousalSettings = C.ArousalSettings;
-			console.log(C.ArousalSettings);
 			Player.WhiteList = C.WhiteList;
 			Player.BlackList = C.BlackList;
 			Player.FriendList = C.FriendList;
