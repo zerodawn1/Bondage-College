@@ -4,22 +4,95 @@ var PreferenceMessage = "";
 var PreferenceColorPick = "";
 var PreferenceSubscreen = "";
 var PreferenceChatColorThemeSelected = "";
-var PreferenceChatColorThemeList = null;
+var PreferenceChatColorThemeList = ["Light", "Dark"];
 var PreferenceChatColorThemeIndex = 0;
 var PreferenceChatEnterLeaveSelected = "";
-var PreferenceChatEnterLeaveList = null;
+var PreferenceChatEnterLeaveList = ["Normal", "Smaller", "Hidden"];
 var PreferenceChatEnterLeaveIndex = 0;
 var PreferenceChatMemberNumbersSelected = "";
-var PreferenceChatMemberNumbersList = null;
+var PreferenceChatMemberNumbersList = ["Always", "Never", "OnMouseover"];
 var PreferenceChatMemberNumbersIndex = 0;
-var PreferenceSettingsSensDepList = null;
+var PreferenceSettingsSensDepList = ["Normal", "SensDepNames", "SensDepTotal"];
 var PreferenceSettingsSensDepIndex = 0;
-var PreferenceSettingsVolumeList = null;
+var PreferenceSettingsVolumeList = [1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
 var PreferenceSettingsVolumeIndex = 0;
+var PreferenceArousalActiveList = ["Inactive", "NoMeter", "Manual", "Automatic"];
+var PreferenceArousalActiveIndex = 0;
+var PreferenceArousalVisibleList = ["All", "Access", "Self"];
+var PreferenceArousalVisibleIndex = 0;
+var PreferenceArousalActivityList = null;
+var PreferenceArousalActivityIndex = 0;
+var PreferenceArousalActivityFactorSelf = 0;
+var PreferenceArousalActivityFactorOther = 0;
 
-// When player logs in
-function PreferenceInit(Player) {
-	AfkTimerSetEnabled(Player.GameplaySettings && Player.GameplaySettings.EnableAfkTimer != false);
+// Returns the love factor of the activity for the character (0 is horrible, 2 is normal, 4 is great)
+function PreferenceGetActivityFactor(C, Type, Self) {
+	var Factor = 2;
+	if ((C.ArousalSettings != null) && (C.ArousalSettings.Activity != null))
+		for (var P = 0; P < C.ArousalSettings.Activity.length; P++)
+			if (C.ArousalSettings.Activity[P].Name == Type)
+				Factor = (Self) ? C.ArousalSettings.Activity[P].Self : C.ArousalSettings.Activity[P].Other;
+	if ((Factor == null) || (typeof Factor !== "number") || (Factor < 0) || (Factor > 4)) Factor = 2;
+	return Factor;
+}
+
+// Sets the love factor of the activity for the character (0 is horrible, 2 is normal, 4 is great)
+function PreferenceSetActivityFactor(C, Type, Self, Factor) {
+	if ((C.ArousalSettings != null) && (C.ArousalSettings.Activity != null))
+		for (var P = 0; P < C.ArousalSettings.Activity.length; P++)
+			if (C.ArousalSettings.Activity[P].Name == Type)
+				if (Self) C.ArousalSettings.Activity[P].Self = Factor;
+				else C.ArousalSettings.Activity[P].Other = Factor;
+}
+
+// Returns TRUE if we must active the preference controls
+function PreferenceArousalIsActive() {
+	return (PreferenceArousalActiveList[PreferenceArousalActiveIndex] == "Manual") || (PreferenceArousalActiveList[PreferenceArousalActiveIndex] == "Automatic");
+}
+
+// Loads the activity factor combo boxes based on the current activity selected
+function PreferenceLoadActivityFactor() {
+	PreferenceArousalActivityFactorSelf = PreferenceGetActivityFactor(Player, PreferenceArousalActivityList[PreferenceArousalActivityIndex], true);
+	PreferenceArousalActivityFactorOther = PreferenceGetActivityFactor(Player, PreferenceArousalActivityList[PreferenceArousalActivityIndex], false);
+}
+
+// Initialize and validates the character settings
+function PreferenceInit(C) {
+
+	// If the settings aren't set before, construct them to replicate the default behavior
+	if (!C.ChatSettings) C.ChatSettings = { DisplayTimestamps: true, ColorNames: true, ColorActions: true, ColorEmotes: true };
+	if (!C.VisualSettings) C.VisualSettings = { ForceFullHeight: false };
+    if (!C.AudioSettings || (typeof C.AudioSettings.Volume !== "number") || (typeof C.AudioSettings.PlayBeeps !== "boolean")) C.AudioSettings = { Volume: 1, PlayBeeps: false };
+
+	// Sets the default arousal settings
+	if (!C.ArousalSettings) C.ArousalSettings = { Active: "Automatic", Visible: "Access", Activity: [] };
+	if (typeof C.ArousalSettings.Active !== "string") C.ArousalSettings.Active = "Automatic";
+	if (typeof C.ArousalSettings.Visible !== "string") C.ArousalSettings.Visible = "Access";
+	if ((C.ArousalSettings.Activity == null) || !Array.isArray(C.ArousalSettings.Activity)) C.ArousalSettings.Activity = [];
+
+	// Sets the default game settings
+	if (!C.GameplaySettings) C.GameplaySettings = {};
+	if (typeof C.GameplaySettings.SensDepChatLog !== "string") C.GameplaySettings.SensDepChatLog = "Normal";
+	if (typeof C.GameplaySettings.BlindDisableExamine !== "boolean") C.GameplaySettings.BlindDisableExamine = false;
+	if (typeof C.GameplaySettings.DisableAutoRemoveLogin !== "boolean") C.GameplaySettings.DisableAutoRemoveLogin = false;
+	if (typeof C.GameplaySettings.EnableAfkTimer !== "boolean") C.GameplaySettings.EnableAfkTimer = true;
+	
+	// Validates all activities in the player preference, they must match with the game activities, default factor is 2 (normal love)
+	if (Player.AssetFamily == "Female3DCG")
+		for (var A = 0; A < ActivityFemale3DCG.length; A++) {
+			var Found = false;
+			for (var P = 0; P < C.ArousalSettings.Activity.length; P++)
+				if ((C.ArousalSettings.Activity[P] != null) && (C.ArousalSettings.Activity[P].Name != null) && (ActivityFemale3DCG[A].Name == C.ArousalSettings.Activity[P].Name)) {
+					Found = true;
+					if ((C.ArousalSettings.Activity[P].Self == null) || (typeof C.ArousalSettings.Activity[P].Self !== "number") || (C.ArousalSettings.Activity[P].Self < 0) || (C.ArousalSettings.Activity[P].Self > 4)) C.ArousalSettings.Activity[P].Self = 2;
+					if ((C.ArousalSettings.Activity[P].Other == null) || (typeof C.ArousalSettings.Activity[P].Other !== "number") || (C.ArousalSettings.Activity[P].Other < 0) || (C.ArousalSettings.Activity[P].Other > 4)) C.ArousalSettings.Activity[P].Other = 2;
+				}
+			if (!Found) C.ArousalSettings.Activity.push({ Name: ActivityFemale3DCG[A].Name, Self: 2, Other: 2 });
+		}
+
+	// Enables the AFK timer for the current player only
+	AfkTimerSetEnabled((C.ID == 0) && C.GameplaySettings && (C.GameplaySettings.EnableAfkTimer != false));
+
 }
 
 // When the preference screens loads
@@ -28,52 +101,27 @@ function PreferenceLoad() {
 	// Sets up the player label color
 	if (!CommonIsColor(Player.LabelColor)) Player.LabelColor = "#ffffff";
 	ElementCreateInput("InputCharacterLabelColor", "text", Player.LabelColor);
-
-	// If the user never set the chat settings before, construct them to replicate the default behavior
-	if (!Player.ChatSettings) Player.ChatSettings = {
-		DisplayTimestamps: true,
-		ColorNames: true,
-		ColorActions: true,
-		ColorEmotes: true
-	};
-
-	// If the user never set the visual settings before, construct them to replicate the default behavior
-	if (!Player.VisualSettings) Player.VisualSettings = {
-		ForceFullHeight: false
-	};
-
-	// If the user never set the audio settings before, construct them to replicate the default behavior
-    if (!Player.AudioSettings || (typeof Player.AudioSettings.Volume !== "number") || (typeof Player.AudioSettings.PlayBeeps !== "boolean")) Player.AudioSettings = {
-        Volume: 1,
-        PlayBeeps: false
-    };
-
-	// GameplaySettings
-	if (!Player.GameplaySettings)
-		Player.GameplaySettings = {};
-	if (typeof Player.GameplaySettings.SensDepChatLog !== "string")
-		Player.GameplaySettings.SensDepChatLog = "Normal";
-	if (typeof Player.GameplaySettings.BlindDisableExamine !== "boolean")
-		Player.GameplaySettings.BlindDisableExamine = false;
-	if (typeof Player.GameplaySettings.DisableAutoRemoveLogin !== "boolean")
-		Player.GameplaySettings.DisableAutoRemoveLogin = false;
-	if (typeof Player.GameplaySettings.EnableAfkTimer !== "boolean")
-		Player.GameplaySettings.EnableAfkTimer = true;
+	PreferenceInit(Player);
 
 	// Sets the chat themes
-	PreferenceChatColorThemeList = ["Light", "Dark"];
-	PreferenceChatEnterLeaveList = ["Normal", "Smaller", "Hidden"];
-	PreferenceChatMemberNumbersList = ["Always", "Never", "OnMouseover"];
-	PreferenceSettingsSensDepList = ["Normal", "SensDepNames", "SensDepTotal"];
-    PreferenceSettingsVolumeList = [1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
-	PreferenceChatColorThemeIndex = (!Player.ChatSettings || PreferenceChatColorThemeList.indexOf(Player.ChatSettings.ColorTheme) < 0) ? 0 : PreferenceChatColorThemeList.indexOf(Player.ChatSettings.ColorTheme);
-	PreferenceChatEnterLeaveIndex = (!Player.ChatSettings || PreferenceChatEnterLeaveList.indexOf(Player.ChatSettings.EnterLeave) < 0) ? 0 : PreferenceChatEnterLeaveList.indexOf(Player.ChatSettings.EnterLeave);
-	PreferenceChatMemberNumbersIndex = (!Player.ChatSettings || PreferenceChatMemberNumbersList.indexOf(Player.ChatSettings.MemberNumbers) < 0) ? 0 : PreferenceChatMemberNumbersList.indexOf(Player.ChatSettings.MemberNumbers);
-	PreferenceSettingsSensDepIndex = (!Player.GameplaySettings || PreferenceSettingsSensDepList.indexOf(Player.GameplaySettings.SensDepChatLog) < 0 ) ? 0 : PreferenceSettingsSensDepList.indexOf(Player.GameplaySettings.SensDepChatLog);
-    PreferenceSettingsVolumeIndex = (!Player.AudioSettings || PreferenceSettingsVolumeList.indexOf(Player.AudioSettings.Volume) < 0) ? 0 : PreferenceSettingsVolumeList.indexOf(Player.AudioSettings.Volume);
+	PreferenceChatColorThemeIndex = (PreferenceChatColorThemeList.indexOf(Player.ChatSettings.ColorTheme) < 0) ? 0 : PreferenceChatColorThemeList.indexOf(Player.ChatSettings.ColorTheme);
+	PreferenceChatEnterLeaveIndex = (PreferenceChatEnterLeaveList.indexOf(Player.ChatSettings.EnterLeave) < 0) ? 0 : PreferenceChatEnterLeaveList.indexOf(Player.ChatSettings.EnterLeave);
+	PreferenceChatMemberNumbersIndex = (PreferenceChatMemberNumbersList.indexOf(Player.ChatSettings.MemberNumbers) < 0) ? 0 : PreferenceChatMemberNumbersList.indexOf(Player.ChatSettings.MemberNumbers);
+	PreferenceSettingsSensDepIndex = (PreferenceSettingsSensDepList.indexOf(Player.GameplaySettings.SensDepChatLog) < 0 ) ? 0 : PreferenceSettingsSensDepList.indexOf(Player.GameplaySettings.SensDepChatLog);
+    PreferenceSettingsVolumeIndex = (PreferenceSettingsVolumeList.indexOf(Player.AudioSettings.Volume) < 0) ? 0 : PreferenceSettingsVolumeList.indexOf(Player.AudioSettings.Volume);
+    PreferenceArousalActiveIndex = (PreferenceArousalActiveList.indexOf(Player.ArousalSettings.Active) < 0) ? 0 : PreferenceArousalActiveList.indexOf(Player.ArousalSettings.Active);
+    PreferenceArousalVisibleIndex = (PreferenceArousalVisibleList.indexOf(Player.ArousalSettings.Visible) < 0) ? 0 : PreferenceArousalVisibleList.indexOf(Player.ArousalSettings.Visible);
 	PreferenceChatColorThemeSelected = PreferenceChatColorThemeList[PreferenceChatColorThemeIndex];
 	PreferenceChatEnterLeaveSelected = PreferenceChatEnterLeaveList[PreferenceChatEnterLeaveIndex];
 	PreferenceChatMemberNumbersSelected = PreferenceChatMemberNumbersList[PreferenceChatMemberNumbersIndex];
+
+	// Prepares the activity list
+	PreferenceArousalActivityList = [];
+	if (Player.AssetFamily == "Female3DCG")
+		for (var A = 0; A < ActivityFemale3DCG.length; A++)
+			PreferenceArousalActivityList.push(ActivityFemale3DCG[A].Name);
+	PreferenceArousalActivityIndex = 0;
+	PreferenceLoadActivityFactor();
 
 }
 
@@ -83,6 +131,7 @@ function PreferenceRun() {
 	// If a subscreen is active, draw that instead
 	if (PreferenceSubscreen == "Chat") return PreferenceSubscreenChatRun();
 	if (PreferenceSubscreen == "Audio") return PreferenceSubscreenAudioRun();
+	if (PreferenceSubscreen == "Arousal") return PreferenceSubscreenArousalRun();
 
 	// Draw the online preferences
 	MainCanvas.textAlign = "left";
@@ -118,6 +167,7 @@ function PreferenceRun() {
     	ColorPickerHide();
 		DrawButton(1815, 190, 90, 90, "", "White", "Icons/Chat.png");
 		DrawButton(1815, 305, 90, 90, "", "White", "Icons/Audio.png");
+		DrawButton(1815, 420, 90, 90, "", "White", "Icons/Arousal.png");
 	}
 }
 
@@ -127,6 +177,7 @@ function PreferenceClick() {
 	// If a subscreen is active, process that instead
 	if (PreferenceSubscreen == "Chat") return PreferenceSubscreenChatClick();
 	if (PreferenceSubscreen == "Audio") return PreferenceSubscreenAudioClick();
+	if (PreferenceSubscreen == "Arousal") return PreferenceSubscreenArousalClick();
 
 	// If the user clicks on "Exit"
 	if ((MouseX >= 1815) && (MouseX < 1905) && (MouseY >= 75) && (MouseY < 165) && (PreferenceColorPick == "")) PreferenceExit();
@@ -143,6 +194,12 @@ function PreferenceClick() {
 		PreferenceSubscreen = "Audio";
 	}
 
+	// If the user clicks on the arousal settings button
+	if ((MouseX >= 1815) && (MouseX < 1905) && (MouseY >= 420) && (MouseY < 510) && (PreferenceColorPick == "")) {
+		ElementRemove("InputCharacterLabelColor");
+		PreferenceSubscreen = "Arousal";
+	}
+	
 	// If we must change the restrain permission level
 	if ((MouseX >= 500) && (MouseX < 590) && (MouseY >= 280) && (MouseY < 370)) {
 		Player.ItemPermission++;
@@ -180,9 +237,11 @@ function PreferenceExit() {
 			LabelColor: Player.LabelColor,
 			ChatSettings: Player.ChatSettings,
 			VisualSettings: Player.VisualSettings,
-			AudioSettings: Player.AudioSettings,		
-			GameplaySettings: Player.GameplaySettings
+			AudioSettings: Player.AudioSettings,
+			GameplaySettings: Player.GameplaySettings,
+			ArousalSettings: Player.ArousalSettings
 		};
+		console.log(P);
 		ServerSend("AccountUpdate", P);
 		PreferenceMessage = "";
 		ElementRemove("InputCharacterLabelColor");
@@ -191,7 +250,7 @@ function PreferenceExit() {
 }
 
 // Redirected to from the main Run function if the player is in the audio settings subscreen
-function PreferenceSubscreenAudioRun () {
+function PreferenceSubscreenAudioRun() {
 	DrawCharacter(Player, 50, 50, 0.9);
 	MainCanvas.textAlign = "left";
 	DrawText(TextGet("AudioPreferences"), 500, 125, "Black", "Gray");
@@ -234,6 +293,46 @@ function PreferenceSubscreenChatRun() {
 	DrawButton(500, 792, 64, 64, "", "White", (Player.ChatSettings && Player.ChatSettings.ColorEmotes) ? "Icons/Checked.png" : "");
 	DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png");
 	DrawCharacter(Player, 50, 50, 0.9);
+}
+
+// Redirected to from the main Run function if the player is in the arousal settings subscreen
+function PreferenceSubscreenArousalRun() {
+
+	// Draws the main labels and player
+	DrawCharacter(Player, 50, 50, 0.9);
+	MainCanvas.textAlign = "left";
+	DrawText(TextGet("ArousalPreferences"), 500, 125, "Black", "Gray");
+	DrawText(TextGet("ArousalActive"), 500, 225, "Black", "Gray");
+	
+	// The other controls are only drawn if the arousal is active
+	if (PreferenceArousalIsActive()) {
+		
+		// Draws the label on the left side
+		DrawText(TextGet("ArousalVisible"), 1240, 225, "Black", "Gray");
+		DrawText(TextGet("ArousalActivity"), 500, 425, "Black", "Gray");
+		DrawText(TextGet("ArousalActivityLoveSelf"), 500, 525, "Black", "Gray");
+		DrawText(TextGet("ArousalActivityLoveOther"), 1255, 525, "Black", "Gray");
+		
+		// The zones can be drawn on the character
+		if (Player.FocusGroup != null) {
+			DrawText(TextGet("ArousalZone" + Player.FocusGroup.Name) + " - " + TextGet("ArousalSelectErogenousZones"), 500, 725, "Black", "Gray");
+		}
+		else DrawText(TextGet("ArousalSelectErogenousZones"), 500, 725, "Black", "Gray");
+
+		// Draws the sub-selection controls
+		MainCanvas.textAlign = "center";
+		DrawBackNextButton(1405, 193, 500, 64, TextGet("ArousalVisible" + PreferenceArousalVisibleList[PreferenceArousalVisibleIndex]), "White", "", () => "", () => "");
+		DrawBackNextButton(850, 393, 500, 64, TextGet("ArousalActivityType" + PreferenceArousalActivityList[PreferenceArousalActivityIndex]), "White", "", () => "", () => "");
+		DrawBackNextButton(850, 493, 300, 64, TextGet("ArousalActivityLove" + PreferenceArousalActivityFactorSelf), "White", "", () => "", () => "");
+		DrawBackNextButton(1605, 493, 300, 64, TextGet("ArousalActivityLove" + PreferenceArousalActivityFactorOther), "White", "", () => "", () => "");
+
+	}
+
+	// We always draw the active control
+	MainCanvas.textAlign = "center";
+	DrawBackNextButton(700, 193, 500, 64, TextGet("ArousalActive" + PreferenceArousalActiveList[PreferenceArousalActiveIndex]), "White", "", () => "", () => "");
+	DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png");
+
 }
 
 // When the user clicks in the audio preference subscreen
@@ -297,6 +396,57 @@ function PreferenceSubscreenChatClick() {
 		ElementCreateInput("InputCharacterLabelColor", "text", Player.LabelColor);
 	}
 
+}
+
+// When the user clicks in the arousal preference subscreen
+function PreferenceSubscreenArousalClick() {
+
+	// If the user clicked the exit icon to return to the main screen
+	if ((MouseX >= 1815) && (MouseX < 1905) && (MouseY >= 75) && (MouseY < 165) && (PreferenceColorPick == "")) {
+		PreferenceSubscreen = "";
+		ElementCreateInput("InputCharacterLabelColor", "text", Player.LabelColor);
+	}
+
+	// Arousal active control
+    if ((MouseX >= 700) && (MouseX < 1200) && (MouseY >= 193) && (MouseY < 257)) {
+        if (MouseX <= 950) PreferenceArousalActiveIndex = (PreferenceArousalActiveList.length + PreferenceArousalActiveIndex - 1) % PreferenceArousalActiveList.length;
+        else PreferenceArousalActiveIndex = (PreferenceArousalActiveIndex + 1) % PreferenceArousalActiveList.length;
+        Player.ArousalSettings.Active = PreferenceArousalActiveList[PreferenceArousalActiveIndex];
+    }
+
+	// If the arousal is active, we allow more controls
+	if (PreferenceArousalIsActive()) {
+
+		// Arousal visible control
+		if ((MouseX >= 1405) && (MouseX < 1905) && (MouseY >= 193) && (MouseY < 257)) {
+			if (MouseX <= 1655) PreferenceArousalVisibleIndex = (PreferenceArousalVisibleList.length + PreferenceArousalVisibleIndex - 1) % PreferenceArousalVisibleList.length;
+			else PreferenceArousalVisibleIndex = (PreferenceArousalVisibleIndex + 1) % PreferenceArousalVisibleList.length;
+			Player.ArousalSettings.Visible = PreferenceArousalVisibleList[PreferenceArousalVisibleIndex];
+		}
+
+		// Arousal activity control
+		if ((MouseX >= 850) && (MouseX < 1350) && (MouseY >= 393) && (MouseY < 457)) {
+			if (MouseX <= 1100) PreferenceArousalActivityIndex = (PreferenceArousalActivityList.length + PreferenceArousalActivityIndex - 1) % PreferenceArousalActivityList.length;
+			else PreferenceArousalActivityIndex = (PreferenceArousalActivityIndex + 1) % PreferenceArousalActivityList.length;
+			PreferenceLoadActivityFactor();
+		}
+
+		// Arousal activity love on self control
+		if ((MouseX >= 850) && (MouseX < 1150) && (MouseY >= 493) && (MouseY < 557)) {
+			if (MouseX <= 1000) PreferenceArousalActivityFactorSelf = (5 + PreferenceArousalActivityFactorSelf - 1) % 5;
+			else PreferenceArousalActivityFactorSelf = (PreferenceArousalActivityFactorSelf + 1) % 5;
+			PreferenceSetActivityFactor(Player, PreferenceArousalActivityList[PreferenceArousalActivityIndex], true, PreferenceArousalActivityFactorSelf);
+		}
+
+		// Arousal activity love on other control
+		if ((MouseX >= 1605) && (MouseX < 1905) && (MouseY >= 493) && (MouseY < 557)) {
+			if (MouseX <= 1755) PreferenceArousalActivityFactorOther = (5 + PreferenceArousalActivityFactorOther - 1) % 5;
+			else PreferenceArousalActivityFactorOther = (PreferenceArousalActivityFactorOther + 1) % 5;
+			PreferenceSetActivityFactor(Player, PreferenceArousalActivityList[PreferenceArousalActivityIndex], false, PreferenceArousalActivityFactorOther);
+		}
+	
+	}
+		
 }
 
 // Return true if sensory deprivation is active
