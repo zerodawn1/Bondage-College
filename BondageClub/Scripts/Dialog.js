@@ -962,7 +962,7 @@ function DialogDrawActivityMenu(C) {
 		var Hover = (MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && !CommonIsMobile;
 		DrawRect(X, Y, 225, 275, (Hover) ? "cyan" : "white");
 		DrawImageResize("Assets/" + C.AssetFamily + "/Activity/" + Act.Name + ".png", X + 2, Y + 2, 221, 221);
-		DrawTextFit(DialogFind(Player, "Activity" + Act.Name), X + 112, Y + 250, 221, "black");
+		DrawTextFit(ActivityDictionaryText("Activity" + Act.Name), X + 112, Y + 250, 221, "black");
 		X = X + 250;
 		if (X > 1800) {
 			X = 1000;

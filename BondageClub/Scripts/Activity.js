@@ -33,8 +33,8 @@ function ActivityDictionaryLoad() {
 // Searches in the dictionary for a specific keyword and returns the message linked to it
 function ActivityDictionaryText(KeyWord) {
 	for (var D = 0; D < ActivityDictionary.length; D++)
-		if (ActivityDictionary[0] == KeyWord)
-			return ActivityDictionary[1].trim();
+		if (ActivityDictionary[D][0] == KeyWord)
+			return ActivityDictionary[D][1].trim();
 	return "MISSING ACTIVITY DESCRIPTION FOR KEYWORD " + KeyWord;
 }
 
@@ -117,8 +117,8 @@ function CharacterSetArousalTimer(C, Progress) {
 	if ((C.ArousalSettings.ProgressTimer == null) || (typeof C.ArousalSettings.ProgressTimer !== "number") || isNaN(C.ArousalSettings.ProgressTimer)) C.ArousalSettings.ProgressTimer = 0;
 	C.ArousalSettings.ProgressTimer
 	Progress = Math.round((C.ArousalSettings.ProgressTimer / 2) + Progress);
-	if (Progress < -20) Progress = -20;
-	if (Progress > 20) Progress = 20;
+	if (Progress < -25) Progress = -25;
+	if (Progress > 25) Progress = 25;
 	if ((C.ArousalSettings.ProgressTimer == null) || (C.ArousalSettings.ProgressTimer != Progress)) {
 		C.ArousalSettings.ProgressTimer = Progress;
 		if ((C.ID == 0) && (CurrentScreen == "ChatRoom"))
