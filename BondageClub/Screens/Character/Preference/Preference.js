@@ -115,7 +115,10 @@ function PreferenceInit(C) {
 	if (!C.ArousalSettings) C.ArousalSettings = { Active: "Hybrid", Visible: "Access", Progress: 0, Activity: [], Zone: [] };
 	if (typeof C.ArousalSettings.Active !== "string") C.ArousalSettings.Active = "Hybrid";
 	if (typeof C.ArousalSettings.Visible !== "string") C.ArousalSettings.Visible = "Access";
-	if (typeof C.ArousalSettings.Progress !== "number") C.ArousalSettings.Progress = 0;
+	if (typeof C.ArousalSettings.ShowOtherMeter !== "boolean") C.ArousalSettings.ShowOtherMeter = true;
+	if (typeof C.ArousalSettings.AffectExpression !== "boolean") C.ArousalSettings.AffectExpression = true;
+	if ((typeof C.ArousalSettings.Progress !== "number") || isNaN(C.ArousalSettings.Progress)) C.ArousalSettings.Progress = 0;
+	if ((typeof C.ArousalSettings.ProgressTimer !== "number") || isNaN(C.ArousalSettings.ProgressTimer)) C.ArousalSettings.ProgressTimer = 0;
 	if ((C.ArousalSettings.Activity == null) || !Array.isArray(C.ArousalSettings.Activity)) C.ArousalSettings.Activity = [];
 	if ((C.ArousalSettings.Zone == null) || !Array.isArray(C.ArousalSettings.Zone)) C.ArousalSettings.Zone = [];
 
@@ -370,11 +373,13 @@ function PreferenceSubscreenArousalRun() {
 	MainCanvas.textAlign = "left";
 	DrawText(TextGet("ArousalPreferences"), 550, 125, "Black", "Gray");
 	DrawText(TextGet("ArousalActive"), 550, 225, "Black", "Gray");
-	
+	DrawCheckbox(550, 286, 64, 64, TextGet("ArousalShowOtherMeter"), Player.ArousalSettings.ShowOtherMeter);
+
 	// The other controls are only drawn if the arousal is active
 	if (PreferenceArousalIsActive()) {
-		
-		// Draws the label on the left side
+
+		// Draws the labels and check boxes
+		DrawCheckbox(1250, 286, 64, 64, TextGet("ArousalAffectExpression"), Player.ArousalSettings.AffectExpression);
 		DrawText(TextGet("ArousalVisible"), 1240, 225, "Black", "Gray");
 		DrawText(TextGet("ArousalActivity"), 550, 425, "Black", "Gray");
 		DrawText(TextGet("ArousalActivityLoveSelf"), 550, 525, "Black", "Gray");
@@ -401,7 +406,7 @@ function PreferenceSubscreenArousalRun() {
 		// Draws the sub-selection controls
 		MainCanvas.textAlign = "center";
 		DrawBackNextButton(1505, 193, 400, 64, TextGet("ArousalVisible" + PreferenceArousalVisibleList[PreferenceArousalVisibleIndex]), "White", "", () => "", () => "");
-		DrawBackNextButton(900, 393, 500, 64, TextGet("ArousalActivityType" + PreferenceArousalActivityList[PreferenceArousalActivityIndex]), "White", "", () => "", () => "");
+		DrawBackNextButton(900, 393, 500, 64, ActivityDictionaryText("Activity" + PreferenceArousalActivityList[PreferenceArousalActivityIndex]), "White", "", () => "", () => "");
 		DrawBackNextButton(900, 493, 300, 64, TextGet("ArousalActivityLove" + PreferenceArousalActivityFactorSelf), PreferenceGetFactorColor(PreferenceGetActivityFactor(Player, PreferenceArousalActivityList[PreferenceArousalActivityIndex], true)), "", () => "", () => "");
 		DrawBackNextButton(1605, 493, 300, 64, TextGet("ArousalActivityLove" + PreferenceArousalActivityFactorOther), PreferenceGetFactorColor(PreferenceGetActivityFactor(Player, PreferenceArousalActivityList[PreferenceArousalActivityIndex], false)), "", () => "", () => "");
 
@@ -501,8 +506,16 @@ function PreferenceSubscreenArousalClick() {
         Player.ArousalSettings.Active = PreferenceArousalActiveList[PreferenceArousalActiveIndex];
     }
 
+	// Show other player meter check box
+	if ((MouseX >= 550) && (MouseX < 614) && (MouseY >= 286) && (MouseY < 350)) 
+		Player.ArousalSettings.ShowOtherMeter = !Player.ArousalSettings.ShowOtherMeter;
+	
 	// If the arousal is active, we allow more controls
 	if (PreferenceArousalIsActive()) {
+
+		// Meter affect your facial expressions check box
+		if ((MouseX >= 1250) && (MouseX < 1314) && (MouseY >= 286) && (MouseY < 350)) 
+			Player.ArousalSettings.AffectExpression = !Player.ArousalSettings.AffectExpression;
 
 		// Arousal visible control
 		if ((MouseX >= 1505) && (MouseX < 1905) && (MouseY >= 193) && (MouseY < 257)) {
