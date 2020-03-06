@@ -588,11 +588,11 @@ function ChatRoomMessage(data) {
 				else if (data.Type == "ServerMessage") msg = "<b>" + msg + "</b>";
 			}
 
-			// Sets up the activity text
+			// Outputs the sexual activities text and runs the activity if the player is targeted
 			if ((data.Type != null) && (data.Type == "Activity")) {
 
-				// Creates the output message using the activity dictionary, keep some values to calculate the activity effects
-				msg = ActivityDictionaryText(msg);
+				// Creates the output message using the activity dictionary and tags, keep some values to calculate the activity effects on the player
+				msg = "(" + ActivityDictionaryText(msg) + ")";
 				var TargetMemberNumber = null;
 				var ActivityName = null;
 				var ActivityGroup = null;
@@ -608,6 +608,9 @@ function ChatRoomMessage(data) {
 				if ((TargetMemberNumber == Player.MemberNumber) && (SenderCharacter.MemberNumber != Player.MemberNumber))
 					if ((Player.ArousalSettings == null) || (Player.ArousalSettings.Active == null) || (Player.ArousalSettings.Active == "Hybrid") || (Player.ArousalSettings.Active == "Automatic"))
 						ActivityEffect(SenderCharacter, Player, ActivityName, ActivityGroup);
+
+				// Exits before outputting the text if the player doesn't want to see the sexual activity messages
+				if ((Player.ChatSettings != null) && (Player.ChatSettings.ShowActivities != null) && !Player.ChatSettings.ShowActivities) return;
 
 			}
 

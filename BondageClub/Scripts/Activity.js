@@ -134,6 +134,13 @@ function CharacterSetArousalTimer(C, Progress) {
 function ActivityOrgasm(C) {
 	if ((C.ID == 0) || (C.AccountName.substring(0, 4) == "NPC_") || (C.AccountName.substring(0, 4) == "NPC-")) {
 
+		// The orgasm can be outputted in the chatroom
+		if ((C.ID == 0) && (CurrentScreen == "ChatRoom")) {
+			var Dictionary = [];
+			Dictionary.push({Tag: "SourceCharacter", Text: Player.Name, MemberNumber: Player.MemberNumber});
+			ServerSend("ChatRoomChat", {Content: "Orgasm" + (Math.random() * 10).toString(), Type: "Activity", Dictionary: Dictionary});
+		}
+
 		// Starts the timer and exits from dialog if necessary
 		C.ArousalSettings.OrgasmTimer = CurrentTime + (Math.random() * 10000) + 5000;
 		ActivitySetArousal(C, 23);
