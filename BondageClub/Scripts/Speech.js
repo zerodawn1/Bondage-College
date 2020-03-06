@@ -426,7 +426,7 @@ function SpeechStutter(C, CD) {
 		// Gets the factor from current arousal
 		var Factor = 0;
 		if ((C.ArousalSettings == null) || (C.ArousalSettings.AffectStutter == null) || (C.ArousalSettings.AffectStutter == "Arousal") || (C.ArousalSettings.AffectStutter == "All"))
-			if ((C.ArousalSettings != null) && (C.ArousalSettings.Progress != null) && (typeof C.ArousalSettings.OrgasmTimer === "number") && !isNaN(C.ArousalSettings.Progress))
+			if ((C.ArousalSettings != null) && (C.ArousalSettings.Progress != null) && (typeof C.ArousalSettings.Progress === "number") && !isNaN(C.ArousalSettings.Progress))
 				Factor = Math.floor(C.ArousalSettings.Progress / 20);
 
 		// Checks all items that "eggs" with an intensity, and replaces the factor if it's higher
