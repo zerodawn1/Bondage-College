@@ -25,14 +25,14 @@ function InventoryItemArmsChainsDraw() {
 		DrawImage("Screens/Inventory/" + DialogFocusItem.Asset.Group.Name + "/" + DialogFocusItem.Asset.Name + "/Hogtied.png", 1587, 451);
 		DrawText(DialogFind(Player, "ChainBondageHogtied"), 1700, 400, "white", "gray");
 		DrawText(DialogFind(Player, "RequireBondageLevel").replace("ReqLevel", "4"), 1700, 430, "white", "gray");
-		DrawButton(1587, 750, 225, 225, "", ((DialogFocusItem.Property.Type != null) && (DialogFocusItem.Property.Type == "SuspensionHogtied")) ? "#888888" : (SkillGetLevelReal(Player, "Bondage") < 8) ? "Pink" : "White");
-		DrawImage("Screens/Inventory/" + DialogFocusItem.Asset.Group.Name + "/" + DialogFocusItem.Asset.Name + "/SuspensionHogtied.png", 1587, 751);
-		DrawText(DialogFind(Player, "ChainBondageSuspensionHogtied"), 1700, 705, "white", "gray");
-		DrawText(DialogFind(Player, "RequireBondageLevel").replace("ReqLevel", "8"), 1700, 735, "white", "gray");
 		DrawButton(1200, 750, 225, 225, "", ((DialogFocusItem.Property.Type != null) && (DialogFocusItem.Property.Type == "AllFours")) ? "#888888" : (SkillGetLevelReal(Player, "Bondage") < 4) ? "Pink" : "White");
 		DrawImage("Screens/Inventory/" + DialogFocusItem.Asset.Group.Name + "/" + DialogFocusItem.Asset.Name + "/AllFours.png", 1200, 751);
 		DrawText(DialogFind(Player, "ChainBondageAllFours"), 1313, 705, "white", "gray");
 		DrawText(DialogFind(Player, "RequireBondageLevel").replace("ReqLevel", "4"), 1313, 735, "white", "gray");
+		DrawButton(1587, 750, 225, 225, "", ((DialogFocusItem.Property.Type != null) && (DialogFocusItem.Property.Type == "SuspensionHogtied")) ? "#888888" : (SkillGetLevelReal(Player, "Bondage") < 8) ? "Pink" : "White");
+		DrawImage("Screens/Inventory/" + DialogFocusItem.Asset.Group.Name + "/" + DialogFocusItem.Asset.Name + "/SuspensionHogtied.png", 1587, 751);
+		DrawText(DialogFind(Player, "ChainBondageSuspensionHogtied"), 1700, 705, "white", "gray");
+		DrawText(DialogFind(Player, "RequireBondageLevel").replace("ReqLevel", "8"), 1700, 735, "white", "gray");
 	}
 	else DrawText(DialogFind(Player, "CantChangeWhileLocked"), 1500, 500, "white", "gray");
 
@@ -41,10 +41,10 @@ function InventoryItemArmsChainsDraw() {
 // Catches the item extension clicks
 function InventoryItemArmsChainsClick() {
 	if ((MouseX >= 1885) && (MouseX <= 1975) && (MouseY >= 25) && (MouseY <= 110)) DialogFocusItem = null;
-	if ((MouseX >= 1200) && (MouseX <= 1325) && (MouseY >= 450) && (MouseY <= 675) && (DialogFocusItem.Property.Type != null)) InventoryItemArmsChainsSetPose(null);
+	if ((MouseX >= 1200) && (MouseX <= 1425) && (MouseY >= 450) && (MouseY <= 675) && (DialogFocusItem.Property.Type != null)) InventoryItemArmsChainsSetPose(null);
 	if ((MouseX >= 1587) && (MouseX <= 1812) && (MouseY >= 450) && (MouseY <= 675) && ((DialogFocusItem.Property.Type == null) || (DialogFocusItem.Property.Type != "Hogtied")) && (SkillGetLevelReal(Player, "Bondage") >= 4)) InventoryItemArmsChainsSetPose("Hogtied");
+	if ((MouseX >= 1200) && (MouseX <= 1425) && (MouseY >= 750) && (MouseY <= 975) && ((DialogFocusItem.Property.Type == null) || (DialogFocusItem.Property.Type != "AllFours")) && (SkillGetLevelReal(Player, "Bondage") >= 4)) InventoryItemArmsChainsSetPose("AllFours");
 	if ((MouseX >= 1587) && (MouseX <= 1812) && (MouseY >= 750) && (MouseY <= 975) && ((DialogFocusItem.Property.Type == null) || (DialogFocusItem.Property.Type != "SuspensionHogtied")) && (SkillGetLevelReal(Player, "Bondage") >= 8)) InventoryItemArmsChainsSetPose("SuspensionHogtied");
-	if ((MouseX >= 1200) && (MouseX <= 1325) && (MouseY >= 750) && (MouseY <= 975) && ((DialogFocusItem.Property.Type == null) || (DialogFocusItem.Property.Type != "AllFours")) && (SkillGetLevelReal(Player, "Bondage") >= 4)) InventoryItemArmsChainsSetPose("AllFours");
 }
 
 // Sets the chain pose (hogtied, suspension, etc.)
