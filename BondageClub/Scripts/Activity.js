@@ -129,7 +129,7 @@ function ActivitySetArousalTimer(C, Activity, Zone, Progress) {
 
 	// Make sure we do not allow orgasms if the activity (MaxProgress) or the zone (AllowOrgasm) doesn't allow it
 	var Max = ((Activity.MaxProgress == null) || (Activity.MaxProgress > 100)) ? 100 : Activity.MaxProgress;
-	if ((Max == 100) && !PreferenceGetZoneOrgasm(C, Zone)) Max = 90;
+	if ((Max > 95) && !PreferenceGetZoneOrgasm(C, Zone)) Max = 95;
 	if ((Max > 67) && (Zone == "ActivityOnOther")) Max = 67;
 	if ((Progress > 0) && (C.ArousalSettings.Progress + Progress > Max)) Progress = (Max - C.ArousalSettings.Progress >= 0) ? Max - C.ArousalSettings.Progress : 0;
 
