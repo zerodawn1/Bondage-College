@@ -107,8 +107,8 @@ function TimerProcess(Timestamp) {
 		TimerPrivateOwnerBeep();
 	}
 
-	// Arousal events only occur in the chat or private rooms
-	if ((CurrentScreen == "ChatRoom") || (CurrentScreen == "Private")) {
+	// Arousal/Activity events only occur in allowed rooms
+	if (ActivityAllowed()) {
 
 		// Arousal can change every half a second, based on ProgressTimer
 		if ((TimerLastArousalProgress + 500 < CurrentTime) || (TimerLastArousalProgress - 500 > CurrentTime)) {
