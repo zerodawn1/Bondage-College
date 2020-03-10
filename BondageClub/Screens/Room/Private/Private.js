@@ -232,10 +232,14 @@ function PrivateClickCharacter() {
 							if (Arousal > 100) Arousal = 100;
 							if ((Player.ArousalSettings.AffectExpression == null) || Player.ArousalSettings.AffectExpression) ActivityExpression(Player, Arousal);
 							ActivitySetArousal(Player, Arousal);
-							if (Arousal == 100) ActivityOrgasm(Player);
+							if (Arousal == 100) ActivityOrgasmPrepare(Player);
 						}
 						return;
 					}
+
+				// Cannot click on a character that's having an orgasm
+				if ((PrivateCharacter[C].ID != 0) && (PrivateCharacter[C].ArousalSettings != null) && (PrivateCharacter[C].ArousalSettings.OrgasmTimer != null) && (PrivateCharacter[C].ArousalSettings.OrgasmTimer > 0))
+					return;
 
 				// Sets the new character (1000 if she's owner, 2000 if she's owned)
 				if (PrivateCharacter[C].ID != 0) {
