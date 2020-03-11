@@ -72,8 +72,8 @@ function ActivityDialogBuild(C) {
 						if ((Activity.Prerequisite[P] == "UseMouth") && !Player.CanTalk()) Allow = false;
 						if ((Activity.Prerequisite[P] == "UseHands") && !Player.CanInteract()) Allow = false;
 						if ((Activity.Prerequisite[P] == "UseFeet") && !Player.CanWalk()) Allow = false;
-						if ((Activity.Prerequisite[P] == "ZoneNaked") && ((C.FocusGroup.Name == "ItemButt") || (C.FocusGroup.Name == "ItemVulva")) && (InventoryPrerequisiteMessage(C, "AccessVulva") != "")) Allow = false;
-						if ((Activity.Prerequisite[P] == "ZoneNaked") && (C.FocusGroup.Name == "ItemBreast") && (InventoryPrerequisiteMessage(C, "AccessBreast") != "")) Allow = false;
+						if ((Activity.Prerequisite[P] == "ZoneNaked") && ((C.FocusGroup.Name == "ItemButt") || (C.FocusGroup.Name == "ItemVulva")) && ((InventoryPrerequisiteMessage(C, "AccessVulva") != "") || C.IsVulvaChaste())) Allow = false;
+						if ((Activity.Prerequisite[P] == "ZoneNaked") && (C.FocusGroup.Name == "ItemBreast") && ((InventoryPrerequisiteMessage(C, "AccessBreast") != "") || C.IsBreastChaste())) Allow = false;
 						if ((Activity.Prerequisite[P] == "ZoneNaked") && (C.FocusGroup.Name == "ItemBoots") && (InventoryPrerequisiteMessage(C, "NakedFeet") != "")) Allow = false;
 						if ((Activity.Prerequisite[P] == "ZoneNaked") && (C.FocusGroup.Name == "ItemHands") && (InventoryPrerequisiteMessage(C, "NakedHands") != "")) Allow = false;
 					}
@@ -183,6 +183,7 @@ function ActivityOrgasmStart(C) {
 			var Dictionary = [];
 			Dictionary.push({Tag: "SourceCharacter", Text: Player.Name, MemberNumber: Player.MemberNumber});
 			ServerSend("ChatRoomChat", {Content: "Orgasm" + (Math.floor(Math.random() * 10)).toString(), Type: "Activity", Dictionary: Dictionary});
+			ChatRoomCharacterUpdate(Player);
 		}
 	}
 }
@@ -236,9 +237,14 @@ function ActivityOrgasmPrepare(C) {
 		if (C.ID == 0) ActivityOrgasmGameTimer = C.ArousalSettings.OrgasmTimer - CurrentTime;
 		if ((CurrentCharacter != null) && (CurrentCharacter.ID == C.ID)) DialogLeave();
 
+		// Sends the orgasm preparation to the chatroom, the bar turns pink
+		if ((C.ID == 0) && (CurrentScreen == "ChatRoom"))
+			ChatRoomCharacterUpdate(Player);
+
 		// If an NPC orgasmed, it will raise her love based on the horny trait
 		if ((C.AccountName.substring(0, 4) == "NPC_") || (C.AccountName.substring(0, 4) == "NPC-"))
-			NPCLoveChange(C, Math.floor((NPCTraitGet(C, "Horny") + 100) / 20) + 1);
+			if ((C.Love == null) || (C.Love < 60) || (C.IsOwner()) || (C.IsOwnedByPlayer()) || C.IsLover())
+				NPCLoveChange(C, Math.floor((NPCTraitGet(C, "Horny") + 100) / 20) + 1);
 
 	}
 }

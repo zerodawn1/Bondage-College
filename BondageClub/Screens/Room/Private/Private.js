@@ -381,6 +381,7 @@ function PrivateLoadCharacter(C) {
 	}
 
 	// We allow items on NPC if 25+ dominant reputation, not owner or restrained
+	if (PrivateCharacter[C].ArousalSettings == null) NPCArousal(PrivateCharacter[C]);
 	PrivateCharacter[C].AllowItem = (((ReputationGet("Dominant") + 25 >= NPCTraitGet(PrivateCharacter[C], "Dominant")) && !PrivateCharacter[C].IsOwner()) || PrivateCharacter[C].IsOwnedByPlayer() || PrivateCharacter[C].IsRestrained() || !PrivateCharacter[C].CanTalk());
 
 }
