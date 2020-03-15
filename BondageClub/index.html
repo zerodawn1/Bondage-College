@@ -105,6 +105,7 @@
 <script src="Screens/Inventory/ItemNipples/VibeNippleClamp/VibeNippleClamp.js"></script>
 <script src="Screens/Inventory/ItemNipplesPiercings/VibeHeartPiercings/VibeHeartPiercings.js"></script>
 <script src="Screens/Inventory/ItemVulvaPiercings/VibeHeartClitPiercing/VibeHeartClitPiercing.js"></script>
+<script src="Screens/Inventory/ItemVulvaPiercings/TapedClitEgg/TapedClitEgg.js"></script>
 <script src="Screens/Inventory/ItemButt/ButtPump/ButtPump.js"></script>
 <script src="Screens/Inventory/ItemNeck/ShockCollar/ShockCollar.js"></script>
 <script src="Screens/Inventory/ItemNeckAccessories/CollarShockUnit/CollarShockUnit.js"></script>
@@ -197,10 +198,15 @@
 	OK - Seamless catsuit (Kirsty)
 	OK - New All four pose & items (gatetrek)
 	OK - Crotch chain + Locking Heels + Two new display cases (Kirsty)
-	BUY SENT - Catsuit & See-through gloves - Gloves for All Fours position (gatetrek)
+	OK - Catsuit & See-through gloves - Gloves for All Fours position (gatetrek)
 	BUG SENT - Both egg and vibrator could work on different variables - Demon tail + Clit&Dildo Vibrating belt + See-through + See-through zip catsuits (gatetrek)
 	OK - Text is too close, move up - All fours rope + chain bondage (gatetrek)
 	BUG SENT - Use a device strap-on on a suspended girl, should be hidden (wildsj)
+	BUG - Vibrating wand shows over wedding dress
+	BUG - Spanking toys doesn't output good item name when swapped
+	OK - New "Use Vibrator" rule for slaves (Atasly)
+	MOVE MENU - Email update system (Atasly)
+	OK - New bell clamps & piercings + Taped Vibrating Clit Egg + Frog-Tie Straps (Ayesha-678)
 
 	OK - Ghosting / Unghosting players from chat log /ghostadd /ghostremove
 	OK - New stuttering preferences
@@ -208,9 +214,14 @@
 	OK - Output orgasm text in chat log
 	OK - Manual arousal expression changes & orgasms
 	OK - Limit timer progress of some activities & zones that doesn't allow orgasms
-	TO DO - Doing activities on others can raise your own arousal
-	TO DO - Orgasm resist popup & mini-game
-	TO DO - Pink filter and lock screen after an orgasm
+	OK - Doing activities on others can raise your own arousal
+	OK - Vibrating items should raise arousal slowly & give orgasms
+	OK - Orgasm resist popup & mini-game
+	OK - Pink filter and lock screen after an orgasm
+	OK - Add missing activity texts
+	OK - Items such as the vibrating wand / spanking toys should affect the arousal
+	TO DO - NPC lovers will masturbate the player or put a vibrating egg inside, random with "I LOVE YOU" dialog
+	TO DO - NPC owners will lock the player in chastity with a vibrating egg inside
 	
 	IN PROGRESS - Add a new preference screen to configure your sexual preferences.  First, there will be a master selection with these options to allow sexual contacts or not:
 	-	Disable all sexual contacts
@@ -268,7 +279,7 @@
 // When the code is loaded, we start the game engine
 window.onload = function() {
 	//CheatImport();
-	ServerURL = "https://bondage-club-server.herokuapp.com/";
+	//ServerURL = "https://bondage-club-server.herokuapp.com/";
 	CommonIsMobile = CommonDetectMobile();
 	TranslationLoad();
 	DrawLoad();
