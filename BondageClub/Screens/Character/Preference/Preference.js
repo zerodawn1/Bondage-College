@@ -457,26 +457,13 @@ function PreferenceSubscreenSecurityRun() {
 	DrawCharacter(Player, 50, 50, 0.9);
 	MainCanvas.textAlign = "left";
 	DrawText(TextGet("SecurityPreferences"), 500, 125, "Black", "Gray");
-
 	DrawText(TextGet("UpdateEmailOld"), 500, 225, "Black", "Gray");
 	DrawText(TextGet("UpdateEmailNew"), 500, 305, "Black", "Gray");
-	ElementPosition("InputEmailOld", 1235, 225, 800);
-	ElementPosition("InputEmailNew", 1235, 305, 800);
-
+	ElementPosition("InputEmailOld", 1200, 225, 800);
+	ElementPosition("InputEmailNew", 1200, 305, 800);
+	DrawText(TextGet("UpdateEmailDescription"), 800, 397, "Black", "Gray");
 	MainCanvas.textAlign = "center";
 	DrawButton(500, 365, 250, 64, TextGet("UpdateEmail"), "White", "");
-
-	/*
-	DrawText(TextGet("AudioVolume"), 800, 225, "Black", "Gray");
-	DrawText(TextGet("AudioPlayBeeps"), 600, 305, "Black", "Gray");
-	DrawButton(500, 272, 64, 64, "", "White", (Player.AudioSettings && Player.AudioSettings.PlayBeeps) ? "Icons/Checked.png" : "");
-	DrawText(TextGet("AudioPlayItem"), 600, 385, "Black", "Gray");
-	DrawButton(500, 352, 64, 64, "", "White", (Player.AudioSettings && Player.AudioSettings.PlayItem) ? "Icons/Checked.png" : "");
-	MainCanvas.textAlign = "center";
-	DrawBackNextButton(500, 193, 250, 64, Player.AudioSettings.Volume * 100 + "%", "White", "",
-		() => PreferenceSettingsVolumeList[(PreferenceSettingsVolumeIndex + PreferenceSettingsVolumeList.length - 1) % PreferenceSettingsVolumeList.length] * 100 + "%",
-		() => PreferenceSettingsVolumeList[(PreferenceSettingsVolumeIndex + 1) % PreferenceSettingsVolumeList.length] * 100 + "%");
-	*/
 	DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png");
 }
 
@@ -648,28 +635,11 @@ function PreferenceSubscreenSecurityClick() {
 		var EmailOld = ElementValue("InputEmailOld");
 		var EmailNew = ElementValue("InputEmailNew");
 		var E = /^[a-zA-Z0-9@.!#$%&'*+/=?^_`{|}~-]+$/;
-		if ((EmailOld.match(E) || (EmailOld == "")) && (EmailOld.length <= 100) && (EmailNew.match(E) || (EmailNew == "")) && (EmailNew.length <= 100)) {
+		if ((EmailOld.match(E) || (EmailOld == "")) && (EmailOld.length <= 100) && (EmailNew.match(E) || (EmailNew == "")) && (EmailNew.length <= 100))
 			ServerSend("AccountUpdateEmail", { EmailOld: EmailOld, EmailNew: EmailNew });
-		}
-		else {
+		else
 			ElementValue("InputEmailNew", TextGet("UpdateEmailInvalid"));
-		}
 	}
-
-	/*
-	// Volume increase/decrease control
-	if ((MouseX >= 500) && (MouseX < 750) && (MouseY >= 193) && (MouseY < 257)) {
-		if (MouseX <= 625) PreferenceSettingsVolumeIndex = (PreferenceSettingsVolumeList.length + PreferenceSettingsVolumeIndex - 1) % PreferenceSettingsVolumeList.length;
-		else PreferenceSettingsVolumeIndex = (PreferenceSettingsVolumeIndex + 1) % PreferenceSettingsVolumeList.length;
-		Player.AudioSettings.Volume = PreferenceSettingsVolumeList[PreferenceSettingsVolumeIndex];
-	}
-
-	// Individual audio check-boxes
-	if ((MouseX >= 500) && (MouseX < 564)) {
-		if ((MouseY >= 272) && (MouseY < 336)) Player.AudioSettings.PlayBeeps = !Player.AudioSettings.PlayBeeps;
-		if ((MouseY >= 352) && (MouseY < 416)) Player.AudioSettings.PlayItem = !Player.AudioSettings.PlayItem;
-	}
-	*/
 
 }
 

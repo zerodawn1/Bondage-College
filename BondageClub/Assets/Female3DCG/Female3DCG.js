@@ -352,7 +352,7 @@ var AssetFemale3DCG = [
 			},
 			{ Name: "SocksStriped1", Value: 10 },
 			{ Name: "LatexSocks1", Value: 30 },
-			{ Name: "FootlessSocks1", Value: 15 },
+			{ Name: "FootlessSocks1", Value: 15 }
 		]
 	},
 
@@ -581,7 +581,7 @@ var AssetFemale3DCG = [
 			{ Name: "WolfTailStrap3", Value: 20 },
 			{ Name: "DemonPlug", Value: 30 },
 			{ Name: "MouseTailStrap1", Value: 20 },
-			{ Name: "MouseTailStrap2", Value: 20 },
+			{ Name: "MouseTailStrap2", Value: 20 }
 		]
 	},
 
