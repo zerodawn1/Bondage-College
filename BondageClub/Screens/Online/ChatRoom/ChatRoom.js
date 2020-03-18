@@ -243,22 +243,24 @@ function ChatRoomRun() {
 	DrawButton(1701, 2, 120, 60, "", "White", "Icons/Rectangle/Character.png", TextGet("MenuProfile"));
 	DrawButton(1875, 2, 120, 60, "", "White", "Icons/Rectangle/Preference.png", TextGet("MenuAdmin"));
 
-	// In orgasm mode, we add a pink filter and different controls depending on the stage
-	if ((Player.ArousalSettings != null) && (Player.ArousalSettings.OrgasmTimer != null) && (typeof Player.ArousalSettings.OrgasmTimer === "number") && !isNaN(Player.ArousalSettings.OrgasmTimer) && (Player.ArousalSettings.OrgasmTimer > 0)) {
-		DrawRect(0, 0, 1003, 1000, "#FFB0B0B0");
-		DrawRect(1003, 0, 993, 63, "#FFB0B0B0");
-		if (Player.ArousalSettings.OrgasmStage == null) Player.ArousalSettings.OrgasmStage = 0;
-		if (Player.ArousalSettings.OrgasmStage == 0) {
-			DrawText(TextGet("OrgasmComing"), 500, 410, "White", "Black");
-			DrawButton(200, 532, 250, 64, TextGet("OrgasmTryResist"), "White");
-			DrawButton(550, 532, 250, 64, TextGet("OrgasmSurrender"), "White");
+	// In orgasm mode, we add a pink filter and different controls depending on the stage.  The pink filter shows a little above 90
+	if ((Player.ArousalSettings != null) && (Player.ArousalSettings.Active != null) && (Player.ArousalSettings.Active != "Inactive") && (Player.ArousalSettings.Active != "NoMeter")) {
+		if ((Player.ArousalSettings.OrgasmTimer != null) && (typeof Player.ArousalSettings.OrgasmTimer === "number") && !isNaN(Player.ArousalSettings.OrgasmTimer) && (Player.ArousalSettings.OrgasmTimer > 0)) {
+			DrawRect(0, 0, 1003, 1000, "#FFB0B0B0");
+			DrawRect(1003, 0, 993, 63, "#FFB0B0B0");
+			if (Player.ArousalSettings.OrgasmStage == null) Player.ArousalSettings.OrgasmStage = 0;
+			if (Player.ArousalSettings.OrgasmStage == 0) {
+				DrawText(TextGet("OrgasmComing"), 500, 410, "White", "Black");
+				DrawButton(200, 532, 250, 64, TextGet("OrgasmTryResist"), "White");
+				DrawButton(550, 532, 250, 64, TextGet("OrgasmSurrender"), "White");
+			}
+			if (Player.ArousalSettings.OrgasmStage == 1) DrawButton(ActivityOrgasmGameButtonX, ActivityOrgasmGameButtonY, 250, 64, ActivityOrgasmResistLabel, "White");
+			if (Player.ArousalSettings.OrgasmStage == 2) DrawText(TextGet("OrgasmRecovering"), 500, 500, "White", "Black");
+			ActivityOrgasmProgressBar(50, 970);
+		} else if ((Player.ArousalSettings.Progress != null) && (Player.ArousalSettings.Progress >= 91) && (Player.ArousalSettings.Progress <= 99)) {
+			DrawRect(0, 0, 1003, 1000, "#FFB0B060");
+			DrawRect(1003, 0, 993, 63, "#FFB0B060");
 		}
-		if (Player.ArousalSettings.OrgasmStage == 1) DrawButton(ActivityOrgasmGameButtonX, ActivityOrgasmGameButtonY, 250, 64, ActivityOrgasmResistLabel, "White");
-		if (Player.ArousalSettings.OrgasmStage == 2) DrawText(TextGet("OrgasmRecovering"), 500, 500, "White", "Black");
-		ActivityOrgasmProgressBar(50, 970);
-	} else if ((Player.ArousalSettings != null) && (Player.ArousalSettings.Progress != null) && (Player.ArousalSettings.Progress >= 91) && (Player.ArousalSettings.Progress <= 99)) {
-		DrawRect(0, 0, 1003, 1000, "#FFB0B0" + (Player.ArousalSettings.Progress - 90).toString() + "0");
-		DrawRect(1003, 0, 993, 63, "#FFB0B0" + (Player.ArousalSettings.Progress - 90).toString() + "0");
 	}
 
 }
