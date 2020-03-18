@@ -560,7 +560,7 @@ function ChatRoomMessage(data) {
 
 		// Make sure the sender is in the room
 		var SenderCharacter = null;
-		for(var C = 0; C < ChatRoomCharacter.length; C++)
+		for (var C = 0; C < ChatRoomCharacter.length; C++)
 			if (ChatRoomCharacter[C].MemberNumber == data.Sender) {
 				SenderCharacter = ChatRoomCharacter[C]
 				break;
@@ -596,19 +596,32 @@ function ChatRoomMessage(data) {
 				msg = DialogFind(Player, msg);
 				if (data.Dictionary) {
 					var dictionary = data.Dictionary;
+					var SourceCharacter = null;
 					for (var D = 0; D < dictionary.length; D++) {
+
+						// If there's a member number in the dictionary packet, we use that number to alter the chat message
 						if (dictionary[D].MemberNumber) {
-							if ((dictionary[D].Tag == "DestinationCharacter") || (dictionary[D].Tag == "DestinationCharacterName")) msg = msg.replace(dictionary[D].Tag, ((SenderCharacter.MemberNumber == dictionary[D].MemberNumber) && (dictionary[D].Tag == "DestinationCharacter")) ? DialogFind(Player, "Her") :
-								(PreferenceIsPlayerInSensDep() && dictionary[D].MemberNumber != Player.MemberNumber ? DialogFind(Player, "Someone").toLowerCase() : ChatRoomHTMLEntities(dictionary[D].Text) + DialogFind(Player, "'s")));
-							else if ((dictionary[D].Tag == "TargetCharacter") || (dictionary[D].Tag == "TargetCharacterName")) msg = msg.replace(dictionary[D].Tag, ((SenderCharacter.MemberNumber == dictionary[D].MemberNumber) && (dictionary[D].Tag == "TargetCharacter")) ? DialogFind(Player, "Herself") :
-								(PreferenceIsPlayerInSensDep() && dictionary[D].MemberNumber != Player.MemberNumber ? DialogFind(Player, "Someone").toLowerCase() : ChatRoomHTMLEntities(dictionary[D].Text)));
-							else if (dictionary[D].Tag == "SourceCharacter") msg = msg.replace(dictionary[D].Tag, (PreferenceIsPlayerInSensDep() && (dictionary[D].MemberNumber != Player.MemberNumber)) ? DialogFind(Player, "Someone") : ChatRoomHTMLEntities(dictionary[D].Text));
+
+							// Alters the message displayed in the chat room log
+							if ((dictionary[D].Tag == "DestinationCharacter") || (dictionary[D].Tag == "DestinationCharacterName"))
+								msg = msg.replace(dictionary[D].Tag, ((SenderCharacter.MemberNumber == dictionary[D].MemberNumber) && (dictionary[D].Tag == "DestinationCharacter")) ? DialogFind(Player, "Her") : (PreferenceIsPlayerInSensDep() && dictionary[D].MemberNumber != Player.MemberNumber ? DialogFind(Player, "Someone").toLowerCase() : ChatRoomHTMLEntities(dictionary[D].Text) + DialogFind(Player, "'s")));
+							else if ((dictionary[D].Tag == "TargetCharacter") || (dictionary[D].Tag == "TargetCharacterName"))
+								msg = msg.replace(dictionary[D].Tag, ((SenderCharacter.MemberNumber == dictionary[D].MemberNumber) && (dictionary[D].Tag == "TargetCharacter")) ? DialogFind(Player, "Herself") : (PreferenceIsPlayerInSensDep() && dictionary[D].MemberNumber != Player.MemberNumber ? DialogFind(Player, "Someone").toLowerCase() : ChatRoomHTMLEntities(dictionary[D].Text)));
+							else if (dictionary[D].Tag == "SourceCharacter")
+								msg = msg.replace(dictionary[D].Tag, (PreferenceIsPlayerInSensDep() && (dictionary[D].MemberNumber != Player.MemberNumber)) ? DialogFind(Player, "Someone") : ChatRoomHTMLEntities(dictionary[D].Text));
+
+							// Keeps the source character for the next part of the code
+							if (dictionary[D].Tag == "SourceCharacter")
+								for (var T = 0; T < ChatRoomCharacter.length; T++)
+										if (ChatRoomCharacter[T].MemberNumber == dictionary[D].MemberNumber)
+											SourceCharacter = ChatRoomCharacter[T];
+
 						}
 						else if (dictionary[D].TextToLookUp) msg = msg.replace(dictionary[D].Tag, DialogFind(Player, ChatRoomHTMLEntities(dictionary[D].TextToLookUp)).toLowerCase());
 						else if (dictionary[D].AssetName) {
 							for (var A = 0; A < Asset.length; A++)
 								if (Asset[A].Name == dictionary[D].AssetName)
-									msg = msg.replace(dictionary[D].Tag, Asset[A].DynamicDescription().toLowerCase());
+									msg = msg.replace(dictionary[D].Tag, Asset[A].DynamicDescription(SourceCharacter || Player).toLowerCase());
 						}
 						else if (dictionary[D].AssetGroupName) {
 							for (var A = 0; A < AssetGroup.length; A++)
@@ -616,6 +629,7 @@ function ChatRoomMessage(data) {
 									msg = msg.replace(dictionary[D].Tag, AssetGroup[A].Description.toLowerCase());
 						}
 						else msg = msg.replace(dictionary[D].Tag, ChatRoomHTMLEntities(dictionary[D].Text));
+
 					}
 				}
 				AudioPlayContent(data);
