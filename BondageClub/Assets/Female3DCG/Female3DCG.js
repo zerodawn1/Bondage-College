@@ -463,7 +463,9 @@ var AssetFemale3DCG = [
 			{ Name: "PuppyEars2", Value: 20, BuyGroup: "PuppyEars2"},
 			{ Name: "RaccoonEars1", Value: 15, BuyGroup: "RaccoonEars1"},
 			{ Name: "WeddingVeil1", Priority: 4, Value: 30, BuyGroup: "WeddingVeil1"},
-			{ Name: "HairFeathers1", Value: 10, BuyGroup: "HairFeathers1"}
+			{ Name: "HairFeathers1", Value: 10, BuyGroup: "HairFeathers1"},
+			{ Name: "MouseEars1", Value: 20, BuyGroup: "MouseEars1"},
+			{ Name: "MouseEars2", Value: 20, BuyGroup: "MouseEars2"}
 		]
 	},
 	
@@ -503,7 +505,9 @@ var AssetFemale3DCG = [
 			{ Name: "PuppyEars2", Value: -1, BuyGroup: "PuppyEars2"},
 			{ Name: "RaccoonEars1", Value: -1, BuyGroup: "RaccoonEars1"},
 			{ Name: "WeddingVeil1", Priority: 4, Value: -1, BuyGroup: "WeddingVeil1"},
-			{ Name: "HairFeathers1", Value: -1, BuyGroup: "HairFeathers1"}
+			{ Name: "HairFeathers1", Value: -1, BuyGroup: "HairFeathers1"},
+			{ Name: "MouseEars1", Value: 20, BuyGroup: "MouseEars1"},
+			{ Name: "MouseEars2", Value: 20, BuyGroup: "MouseEars2"}
 		]
 	},
 
@@ -575,7 +579,9 @@ var AssetFemale3DCG = [
 			{ Name: "WolfTailStrap1", Value: 20 },
 			{ Name: "WolfTailStrap2", Value: 20 },
 			{ Name: "WolfTailStrap3", Value: 20 },
-			{ Name: "DemonPlug", Value: 30 }
+			{ Name: "DemonPlug", Value: 30 },
+			{ Name: "MouseTailStrap1", Value: 20 },
+			{ Name: "MouseTailStrap2", Value: 20 },
 		]
 	},
 
@@ -1008,6 +1014,8 @@ var AssetFemale3DCG = [
 			{ Name: "WolfTail2", Value: 45, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{ Group: "Blush", Name: "Low", Timer: 10 }] },
 			{ Name: "WolfTail3", Value: 45, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{ Group: "Blush", Name: "Low", Timer: 10 }] },
 			{ Name: "DemonPlug", Value: 45, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{ Group: "Blush", Name: "Low", Timer: 10 }] },
+			{ Name: "MouseTail1", Value: 45, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{ Group: "Blush", Name: "Low", Timer: 10 }] },
+			{ Name: "MouseTail2", Value: 45, Prerequisite: "AccessVulva", Time: 10, ExpressionTrigger: [{ Group: "Blush", Name: "Low", Timer: 10 }] },
 			AssetSpankingToys
 		]
 	},
