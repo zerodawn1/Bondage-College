@@ -75,7 +75,7 @@ function OnlineGameLoadStatus() {
 function OnlineGameDrawCharacter(C, X, Y, Zoom) {
 	if ((CurrentModule == "Online") && (CurrentScreen == "ChatRoom") && (OnlineGameName == "LARP")) {
 		GameLARPDrawIcon(C, X + 70 * Zoom, Y + 800 * Zoom, 0.6 * Zoom);
-		if ((GameLARPPlayer.length > 0) && (C.MemberNumber == GameLARPPlayer[GameLARPTurnPosition].MemberNumber) && (GameLARPStatus == "Running")) {
+		if ((GameLARPPlayer.length > 0) && (C.MemberNumber == GameLARPPlayer[GameLARPTurnPosition].MemberNumber) && (GameLARPStatus == "Running") && (GameLARPTurnFocusCharacter == null)) {
 			MainCanvas.font = "72px Arial";
 			var Time = Math.round((GameLARPTurnTimer - CurrentTime) / 1000);
 			DrawText(((Time < 0) || (Time > 15)) ? OnlineGameDictionaryText("TimerNA") : Time.toString(), X + 250 * Zoom, Y + 830 * Zoom, "Red", "Black");

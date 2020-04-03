@@ -1,6 +1,8 @@
 "use strict";
 var GameLARPBackground = "Sheet";
 var GameLARPClassList = ["Matron", "Seducer", "Trickster", "Servant", "Artist", "Protector"];
+var GameLARPClassOffensiveBonus = [30, 20, 20, 10, 10, 0];
+var GameLARPClassDefensiveBonus = [0, 10, 10, 20, 20, 30];
 var GameLARPTeamList = ["None", "Red", "Green", "Blue", "Yellow", "Cyan", "Purple", "Orange", "White", "Gray", "Black"];
 var GameLARPEntryClass = "";
 var GameLARPEntryTeam = "";
@@ -24,7 +26,7 @@ function GameLARPIsAdmin(C) {
 
 // Draws the LARP class/team icon of a character
 function GameLARPDrawIcon(C, X, Y, Zoom) {
-	if ((C != null) && (C.Game != null) && (C.Game.LARP != null) && (C.Game.LARP.Class != null) && (C.Game.LARP.Team != null) && (C.Game.LARP.Team != "None"))
+	if ((C != null) && (C.Game != null) && (C.Game.LARP != null) && (C.Game.LARP.Class != null) && (C.Game.LARP.Team != null) && (C.Game.LARP.Team != "") && (C.Game.LARP.Team != "None"))
 		DrawImageZoomCanvas("Icons/LARP/" + C.Game.LARP.Class + C.Game.LARP.Team + ".png", MainCanvas, 0, 0, 100, 100, X, Y, 100 * Zoom, 100 * Zoom);
 }
 
@@ -69,12 +71,12 @@ function GameLARPRunProcess() {
 	if (GameLARPTurnFocusCharacter != null) {
 		
 		// Draw a black background and the target character
-		DrawRect(0, 0, 1003, 1000, "black");
+		DrawImageZoomCanvas("Backgrounds/" + ChatRoomData.Background + "Dark.jpg", MainCanvas, 500, 0, 1000, 1000, 0, 0, 1000, 1000);
 		DrawCharacter(GameLARPTurnFocusCharacter, 500, 0, 1);
 		
 		// Draw all the possible options
 		for (var O = 0; O < GameLARPOption.length; O++)
-			DrawButton(50, 35 + (O * 100), 400, 65, OnlineGameDictionaryText("Option" + GameLARPOption[O].Name), "White");
+			DrawButton(50, 35 + (O * 100), 400, 65, OnlineGameDictionaryText("Option" + GameLARPOption[O].Name).replace("OptionOdds", GameLARPOption[O].Odds), "White");
 		DrawButton(50, 900, 400, 65, OnlineGameDictionaryText("BackToCharacters"), "White");
 		
 		// Draw the timer
@@ -195,13 +197,21 @@ function GameLARPCanLaunchGame() {
 // Build a clickable menu for everything that can be tempted on a character
 function GameLARPBuildOption() {
 	
-	// Builds the basic "Strip" / "Restrain" options
+	// Builds the basic "Strip" / "Restrain" options if that player isn't in the player team
 	GameLARPOption = [];
-	if (!CharacterIsInUnderwear(GameLARPTurnFocusCharacter)) GameLARPOption.push({ Name: "Strip", Odds: 50 });
-	else if (!GameLARPTurnFocusCharacter.CanWalk() && !GameLARPTurnFocusCharacter.CanTalk()) GameLARPOption.push({ Name: "RestrainArms", Odds: 50 });
-	else {
-		if (GameLARPTurnFocusCharacter.CanWalk()) GameLARPOption.push({ Name: "RestrainLegs", Odds: 50 });
-		if (GameLARPTurnFocusCharacter.CanTalk()) GameLARPOption.push({ Name: "RestrainMouth", Odds: 50 });
+	if (GameLARPTurnFocusCharacter.Game.LARP.Team != Player.Game.LARP.Team) {
+		
+		// The formula is 50% + the offensive bonus - the opponent defensive bonus
+		var Prc = 50 + GameLARPClassOffensiveBonus[GameLARPClassList.indexOf(Player.Game.LARP.Class)] - GameLARPClassDefensiveBonus[GameLARPClassList.indexOf(GameLARPTurnFocusCharacter.Game.LARP.Class)];
+
+		// Some actions are different based on the player current status
+		if (!CharacterIsInUnderwear(GameLARPTurnFocusCharacter)) GameLARPOption.push({ Name: "Strip", Odds: Prc });
+		else if (!GameLARPTurnFocusCharacter.CanWalk() && !GameLARPTurnFocusCharacter.CanTalk()) GameLARPOption.push({ Name: "RestrainArms", Odds: Prc });
+		else {
+			if (GameLARPTurnFocusCharacter.CanWalk()) GameLARPOption.push({ Name: "RestrainLegs", Odds: Prc });
+			if (GameLARPTurnFocusCharacter.CanTalk()) GameLARPOption.push({ Name: "RestrainMouth", Odds: Prc });
+		}
+
 	}
 
 }
@@ -210,7 +220,7 @@ function GameLARPBuildOption() {
 function GameLARPCharacterClick(C) {
 
 	// If it's the player turn, we allow clicking on a character to get the abilities menu
-	if ((GameLARPStatus == "Running") && (GameLARPPlayer[GameLARPTurnPosition].ID == 0)) {
+	if ((GameLARPStatus == "Running") && (GameLARPPlayer[GameLARPTurnPosition].ID == 0) && (C.Game != null) && (C.Game.LARP != null) && (C.Game.LARP.Team != null) && (C.Game.LARP.Team != "") && (C.Game.LARP.Team != "None") && C.CanInteract()) {
 		GameLARPTurnFocusCharacter = C;
 		GameLARPBuildOption();
 	}

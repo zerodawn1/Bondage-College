@@ -2,7 +2,7 @@ LARPTimerNA,NA
 LARPTurnStart,TargetName (TargetNumber) plays first and starts the game.
 LARPTurnSkip,"The turn is skipped, TargetName (TargetNumber) plays next."
 LARPBackToCharacters,Back to characters
-LARPOptionStrip,Strip her
-LARPOptionRestrainArms,Restrain her arms
-LARPOptionRestrainLegs,Restrain her legs
-LARPOptionRestrainMouth,Gag her
+LARPOptionStrip,Strip her (OptionOdds %)
+LARPOptionRestrainArms,Restrain arms (OptionOdds %)
+LARPOptionRestrainLegs,Restrain legs (OptionOdds %)
+LARPOptionRestrainMouth,Gag her (OptionOdds %)
