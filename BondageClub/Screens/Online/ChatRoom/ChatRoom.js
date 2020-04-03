@@ -178,6 +178,12 @@ function ChatRoomDrawCharacter(DoClick) {
 						ChatRoomCompleteSwap(ChatRoomCharacter[C].MemberNumber);
 						break;
 					}
+					
+					// Intercepts the LARP game clicks
+					if (DoClick && (ChatRoomSpace == "LARP") && (GameLARPGetStatus() != "")) {
+						GameLARPChatRoomClick(ChatRoomCharacter[C]);
+						return;
+					}
 
 					// Gives focus to the character
 					document.getElementById("InputChat").style.display = "none";
@@ -745,12 +751,16 @@ function ChatRoomSync(data) {
 
 		// If someone enters or leaves the chat room only that character must be updated
 		if (!Joining && ChatRoomCharacter && ChatRoomData && (ChatRoomData.Name == data.Name)) {
-			if (ChatRoomCharacter.length == data.Character.length + 1)
+			if (ChatRoomCharacter.length == data.Character.length + 1) {
 				ChatRoomCharacter = ChatRoomCharacter.filter(A => data.Character.some(B => A.MemberNumber == B.MemberNumber));
-			else if (ChatRoomCharacter.length == data.Character.length - 1)
+				ChatRoomData = data;
+				return;
+			}
+			else if (ChatRoomCharacter.length == data.Character.length - 1) {				
 				ChatRoomCharacter.push(CharacterLoadOnline(data.Character[data.Character.length - 1], data.SourceMemberNumber));
-			ChatRoomData = data;
-			return;
+				ChatRoomData = data;
+				return;
+			}
 		}
 
 		// Load the characters
