@@ -11,7 +11,6 @@ var ChatRoomPlayerCanJoin = false;
 var ChatRoomMoneyForOwner = 0;
 var ChatRoomQuestGiven = [];
 var ChatRoomSpace = "";
-var ChatRoomGame = "";
 var ChatRoomSwapTarget = null;
 
 // Returns TRUE if the dialog option is available
@@ -81,7 +80,7 @@ function ChatRoomLoad() {
 // When the chat room selection must start
 function ChatRoomStart(Space, Game, LeaveRoom, Background, BackgroundList) {
 	ChatRoomSpace = Space;
-	ChatRoomGame = Game;
+	OnlineGameName = Game;
 	ChatSearchLeaveRoom = LeaveRoom;
 	ChatSearchBackground = Background;
 	ChatCreateBackgroundList = BackgroundList;
@@ -98,6 +97,9 @@ function ChatRoomOwnerInside() {
 
 // Draw the characters in the room
 function ChatRoomDrawCharacter(DoClick) {
+
+	// Intercepts the online game chat room clicks if we need to
+	if (DoClick && OnlineGameClick()) return;
 
 	// The darkness factors varies with blindness level (1 is bright, 0 is pitch black)
 	var DarkFactor = 1.0;
@@ -179,11 +181,8 @@ function ChatRoomDrawCharacter(DoClick) {
 						break;
 					}
 					
-					// Intercepts the LARP game clicks
-					if (DoClick && (ChatRoomSpace == "LARP") && (GameLARPGetStatus() != "")) {
-						GameLARPChatRoomClick(ChatRoomCharacter[C]);
-						return;
-					}
+					// Intercepts the online game character clicks if we need to
+					if (DoClick && OnlineGameClickCharacter(ChatRoomCharacter[C])) return;
 
 					// Gives focus to the character
 					document.getElementById("InputChat").style.display = "none";
@@ -256,7 +255,7 @@ function ChatRoomRun() {
 	DrawButton(1005, 2, 120, 60, "", (ChatRoomCanLeave()) ? "White" : "Pink", "Icons/Rectangle/Exit.png", TextGet("MenuLeave"));
 	DrawButton(1179, 2, 120, 60, "", "White", "Icons/Rectangle/Cut.png", TextGet("MenuCut"));
 	DrawButton(1353, 2, 120, 60, "", (Player.CanKneel()) ? "White" : "Pink", "Icons/Rectangle/Kneel.png", TextGet("MenuKneel"));
-	if (ChatRoomGame == "") DrawButton(1527, 2, 120, 60, "", (Player.CanChange()) ? "White" : "Pink", "Icons/Rectangle/Dress.png", TextGet("MenuDress"));
+	if (OnlineGameName == "") DrawButton(1527, 2, 120, 60, "", (Player.CanChange()) ? "White" : "Pink", "Icons/Rectangle/Dress.png", TextGet("MenuDress"));
 	else DrawButton(1527, 2, 120, 60, "", "White", "Icons/Rectangle/GameOption.png", TextGet("MenuGameOption"));
 	DrawButton(1701, 2, 120, 60, "", "White", "Icons/Rectangle/Character.png", TextGet("MenuProfile"));
 	DrawButton(1875, 2, 120, 60, "", "White", "Icons/Rectangle/Preference.png", TextGet("MenuAdmin"));
@@ -282,6 +281,9 @@ function ChatRoomRun() {
 			else if (ChatRoomCharacter.length == 5) DrawRect(0, 250, 1003, 500, "#FFB0B040");
 		}
 	}
+
+	// Runs any needed online game script
+	OnlineGameRun();
 
 }
 
@@ -327,7 +329,7 @@ function ChatRoomClick() {
 	}
 
 	// When the user wants to change clothes
-	if ((MouseX >= 1527) && (MouseX < 1647) && (MouseY >= 0) && (MouseY <= 62) && Player.CanChange() && (ChatRoomGame == "")) { 
+	if ((MouseX >= 1527) && (MouseX < 1647) && (MouseY >= 0) && (MouseY <= 62) && Player.CanChange() && (OnlineGameName == "")) { 
 		document.getElementById("InputChat").style.display = "none";
 		document.getElementById("TextAreaChatLog").style.display = "none";
 		CharacterAppearanceReturnRoom = "ChatRoom"; 
@@ -336,10 +338,10 @@ function ChatRoomClick() {
 	}
 
 	// The change cloth button can become the game option button
-	if ((MouseX >= 1527) && (MouseX < 1647) && (MouseY >= 0) && (MouseY <= 62) && Player.CanChange() && (ChatRoomGame != "")) { 
+	if ((MouseX >= 1527) && (MouseX < 1647) && (MouseY >= 0) && (MouseY <= 62) && (OnlineGameName != "")) { 
 		document.getElementById("InputChat").style.display = "none";
 		document.getElementById("TextAreaChatLog").style.display = "none";
-		CommonSetScreen("Online", "Game" + ChatRoomGame);
+		CommonSetScreen("Online", "Game" + OnlineGameName);
 	}
 	
 	// When the user checks her profile
@@ -770,6 +772,9 @@ function ChatRoomSync(data) {
 
 		// Keeps a copy of the previous version
 		ChatRoomData = data;
+		
+		// Reloads the online game statuses if needed
+		OnlineGameLoadStatus();
 
 	}
 }
@@ -1044,5 +1049,5 @@ function ChatRoomPayQuest(data) {
 
 // When a game message comes in, we forward it to the current online game being played
 function ChatRoomGameResponse(data) {
-	if (ChatRoomGame == "LARP") GameLARPProcess(data);
+	if (OnlineGameName == "LARP") GameLARPProcess(data);
 }
