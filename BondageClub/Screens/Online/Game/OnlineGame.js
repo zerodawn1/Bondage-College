@@ -53,10 +53,16 @@ function OnlineGameClick() {
 
 // Run the online game scripts
 function OnlineGameRun() {
-	
+
 	// In LARP, the player turn can be skipped by an administrator after 20 seconds
 	if (OnlineGameName == "LARP") GameLARPRunProcess();
-	
+
+}
+
+// Returns TRUE if there's no online game that blocks changing
+function OnlineGameAllowChange() {
+	if ((OnlineGameName == "LARP") && (GameLARPStatus != "")) return false;
+	return true;
 }
 
 // Retrieves the current status of online games

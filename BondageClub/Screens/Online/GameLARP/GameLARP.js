@@ -265,7 +265,7 @@ function GameLARPCanLaunchGame() {
 	if (!GameLARPIsAdmin(Player)) return false;
 	var Team = "";
 	for (var C = 0; C < ChatRoomCharacter.length; C++)
-		if ((ChatRoomCharacter[C].Game.LARP.Team != "") && (ChatRoomCharacter[C].Game.LARP.Team != "None")) {
+		if ((ChatRoomCharacter[C].Game.LARP.Team != "") && (ChatRoomCharacter[C].Game.LARP.Team != "None") && (InventoryGet(ChatRoomCharacter[C], "ItemArms") == null)) {
 			if (Team == "")
 				Team = ChatRoomCharacter[C].Game.LARP.Team;
 			else
@@ -277,16 +277,40 @@ function GameLARPCanLaunchGame() {
 
 // Returns the odds of successfully doing an offensive action
 function GameLARPGetOdds(Action, Source, Target) {
-	if (Action == "Struggle") return 0.1;
-	if (Action == "Tighten") return 1;
-	return 0.5 + GameLARPClassOffensiveBonus[GameLARPClassList.indexOf(Source.Game.LARP.Class)] - GameLARPClassDefensiveBonus[GameLARPClassList.indexOf(Target.Game.LARP.Class)];
+
+	// The basic odds are 50% + Offensive bonus of source - Defensive bonus of target
+	var Odds = 0.5 + GameLARPClassOffensiveBonus[GameLARPClassList.indexOf(Source.Game.LARP.Class)] - GameLARPClassDefensiveBonus[GameLARPClassList.indexOf(Target.Game.LARP.Class)];
+
+	// Struggling starts at 10% + 10% for each new unsuccessful tries, tightening the bonds will reset it to 10%
+	if (Action == "Struggle") {
+		Odds = 0.1;
+		for (var P = 0; P < GameLARPProgress.length; P++) 
+			if (GameLARPProgress[P].Success != null) {
+				if ((GameLARPProgress[P].Sender == Source.MemberNumber) && (GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Struggle") && !GameLARPProgress[P].Success) Odds = Odds + 0.1;
+				if ((GameLARPProgress[P].Sender == Source.MemberNumber) && (GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Struggle") && GameLARPProgress[P].Success) Odds = 0.1;
+				if ((GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "RestrainArms") && GameLARPProgress[P].Success) Odds = 0.1;
+				if ((GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Tighten") && GameLARPProgress[P].Success) Odds = 0.1;
+			}
+	}
+
+	// Some actions are 100%
+	if ((Action == "Tighten") || (Action == "Pass")) return 1;
+
+	// Returns the % between 0 and 1
+	if (Odds > 1) Odds = 1;
+	if (Odds < 0) Odds = 0;
+	return Odds.toFixed(2);
+
 }
 
 // Build a clickable menu for everything that can be tempted on a character
 function GameLARPBuildOption() {
 
-	// If the player is restrained, she only has the struggle option on herself
+	// If a player clicks on herself, she can always pass her turn and do nothing
 	GameLARPOption = [];
+	if (GameLARPTurnFocusCharacter.ID == 0) GameLARPOption.push({ Name: "Pass", Odds: 100 });
+
+	// If the player is restrained, she only has the struggle option on herself
 	if ((InventoryGet(Player, "ItemArms") != null) && (GameLARPTurnFocusCharacter.ID == 0)) {
 		var Prc = GameLARPGetOdds("Struggle", Player, Player) * 100;
 		GameLARPOption.push({ Name: "Struggle", Odds: Prc });
@@ -354,9 +378,16 @@ function GameLARPProcessAction(Action, ItemName, Source, Target, RNG) {
 		}
 
 		// Publishes the success
-		GameLARPAddChatLog("Option" + Action + "Success", Source, Target, ItemDesc, RNG, Odds);
+		GameLARPAddChatLog("Option" + Action + "Success", Source, Target, ItemDesc, RNG, Odds, "#00B000");
+		GameLARPProgress[GameLARPProgress.length - 1].Success = true;
 
-	} else GameLARPAddChatLog("Option" + Action + "Fail", Source, Target, ItemDesc, RNG, Odds);
+	} else {
+
+		// Publishes the failure
+		GameLARPAddChatLog("Option" + Action + "Fail", Source, Target, ItemDesc, RNG, Odds, "#B00000");
+		GameLARPProgress[GameLARPProgress.length - 1].Success = false;
+
+	}
 
 }
 
@@ -376,7 +407,7 @@ function GameLARPCharacterClick(C) {
 }
 
 // Adds the LARP message to the chat log
-function GameLARPAddChatLog(Msg, Source, Target, ItemDescription, RNG, Odds) {
+function GameLARPAddChatLog(Msg, Source, Target, Description, RNG, Odds, Color) {
 
 	// Gets the message from the dictionary
 	Msg = OnlineGameDictionaryText(Msg);
@@ -386,12 +417,14 @@ function GameLARPAddChatLog(Msg, Source, Target, ItemDescription, RNG, Odds) {
 	Msg = Msg.replace("TargetNumber", Target.MemberNumber.toString());
 	Msg = Msg.replace("ActionRNG", Math.round(RNG * 100).toString());
 	Msg = Msg.replace("ActionOdds", Math.round(Odds * 100).toString());
-	Msg = Msg.replace("ItemDesc", ItemDescription);
+	Msg = Msg.replace("ItemDesc", Description);
+	Msg = Msg.replace("TeamName", Description);
 
 	// Adds the message and scrolls down unless the user has scrolled up
 	var div = document.createElement("div");
 	div.setAttribute('class', 'ChatMessage ChatMessageServerMessage');
 	div.setAttribute('data-time', ChatRoomCurrentTime());
+	if ((Color != null) && (Color != "")) div.style.color = Color;
 	div.innerHTML = Msg;
 	var Refocus = document.activeElement.id == "InputChat";
 	var ShouldScrollDown = ElementIsScrolledToEnd("TextAreaChatLog");
@@ -437,6 +470,32 @@ function GameLARPBuildPlayerList() {
 			GameLARPPlayer.push(ChatRoomCharacter[C]);
 }
 
+// Returns TRUE if the game ends and runs the end scripts
+function GameLARPContinue() {
+
+	// See if there's at least 2 teams in which players have free arms, return TRUE if that's the case
+	var Team = "";
+	for (var C = 0; C < ChatRoomCharacter.length; C++)
+		if ((ChatRoomCharacter[C].Game.LARP.Team != "") && (ChatRoomCharacter[C].Game.LARP.Team != "None") && (InventoryGet(ChatRoomCharacter[C], "ItemArms") == null)) {
+			if (Team == "")
+				Team = ChatRoomCharacter[C].Game.LARP.Team;
+			else
+				if (Team != ChatRoomCharacter[C].Game.LARP.Team)
+					return true;
+		}
+
+	// If there's a winning team, we announce it
+	if (Team != "") {
+		GameLARPAddChatLog("EndGame", Player, Player, OnlineGameDictionaryText("Team" + Team), 0, 0);
+		GameLARPStatus = "";
+		Player.Game.LARP.Status = "";
+		ServerSend("AccountUpdate", { Game: Player.Game });
+		ChatRoomCharacterUpdate(Player);
+		return false;
+	} else return true;
+
+}
+
 // Processes the LARP game messages
 function GameLARPProcess(P) {
 	if ((P != null) && (typeof P === "object") && (P.Data != null) && (typeof P.Data === "object") && (P.Sender != null) && (typeof P.Sender === "number") && (P.RNG != null) && (typeof P.RNG === "number")) {
@@ -463,9 +522,8 @@ function GameLARPProcess(P) {
 		if ((GameLARPPlayer[GameLARPTurnPosition].MemberNumber == P.Sender) && (P.Data.GameProgress == "Action") && (P.Data.Action != null) && (P.Data.Target != null)) {
 			GameLARPProgress.push({ Sender: P.Sender, Time: CurrentTime, RNG: P.RNG, Data: P.Data });
 			GameLARPProcessAction(P.Data.Action, P.Data.Item, GameLARPGetPlayer(P.Sender), GameLARPGetPlayer(P.Data.Target), P.RNG);
-			GameLARPNewTurn("TurnNext");
+			if (GameLARPContinue()) GameLARPNewTurn("TurnNext");
 		}
-		
-		console.log(P);
+
 	}
 }
