@@ -1,8 +1,8 @@
 "use strict";
 var GameLARPBackground = "Sheet";
-var GameLARPClassList = ["Matron", "Seducer", "Trickster", "Servant", "Artist", "Protector"];
-var GameLARPClassOffensiveBonus = [0.3, 0.2, 0.2, 0.1, 0.1, 0.0];
-var GameLARPClassDefensiveBonus = [0.0, 0.1, 0.1, 0.2, 0.2, 0.3];
+var GameLARPClassList = ["Matron", "Seducer", "Trickster", "Artist", "Servant", "Protector"];
+var GameLARPClassOffensiveBonus = [0.25, 0.20, 0.15, 0.10, 0.05, 0.00];
+var GameLARPClassDefensiveBonus = [0.00, 0.05, 0.10, 0.15, 0.20, 0.25];
 var GameLARPTeamList = ["None", "Red", "Green", "Blue", "Yellow", "Cyan", "Purple", "Orange", "White", "Gray", "Black"];
 var GameLARPEntryClass = "";
 var GameLARPEntryTeam = "";
@@ -216,6 +216,7 @@ function GameLARPClick() {
 		// Give two seconds to the server to shuffle the room before calling the start game function (could be reviewed, maybe this is not needed)
 		var waitUntil = new Date().getTime() + 2000;
 		while(new Date().getTime() < waitUntil) true;
+		GameLARPTurnTimer = CurrentTime + 20000;
 
 		// Notices everyone in the room that the game starts
 		var Dictionary = [];
@@ -283,13 +284,13 @@ function GameLARPGetOdds(Action, Source, Target) {
 
 	// Struggling starts at 10% + 10% for each new unsuccessful tries, tightening the bonds will reset it to 10%
 	if (Action == "Struggle") {
-		Odds = 0.1;
+		Odds = 0.05;
 		for (var P = 0; P < GameLARPProgress.length; P++) 
 			if (GameLARPProgress[P].Success != null) {
-				if ((GameLARPProgress[P].Sender == Source.MemberNumber) && (GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Struggle") && !GameLARPProgress[P].Success) Odds = Odds + 0.1;
-				if ((GameLARPProgress[P].Sender == Source.MemberNumber) && (GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Struggle") && GameLARPProgress[P].Success) Odds = 0.1;
-				if ((GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "RestrainArms") && GameLARPProgress[P].Success) Odds = 0.1;
-				if ((GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Tighten") && GameLARPProgress[P].Success) Odds = 0.1;
+				if ((GameLARPProgress[P].Sender == Source.MemberNumber) && (GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Struggle") && !GameLARPProgress[P].Success) Odds = Odds + 0.05;
+				if ((GameLARPProgress[P].Sender == Source.MemberNumber) && (GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Struggle") && GameLARPProgress[P].Success) Odds = 0.05;
+				if ((GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "RestrainArms") && GameLARPProgress[P].Success) Odds = 0.05;
+				if ((GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Tighten") && GameLARPProgress[P].Success) Odds = 0.05;
 			}
 	}
 
@@ -304,35 +305,37 @@ function GameLARPGetOdds(Action, Source, Target) {
 }
 
 // Build a clickable menu for everything that can be tempted on a character
-function GameLARPBuildOption() {
+function GameLARPBuildOption(Source, Target) {
 
-	// If a player clicks on herself, she can always pass her turn and do nothing
-	GameLARPOption = [];
-	if (GameLARPTurnFocusCharacter.ID == 0) GameLARPOption.push({ Name: "Pass", Odds: 100 });
+	// If the source clicks on herself, she can always pass her turn and do nothing
+	var Option = [];
+	if (Source.MemberNumber == Target.MemberNumber) Option.push({ Name: "Pass", Odds: 100 });
 
-	// If the player is restrained, she only has the struggle option on herself
-	if ((InventoryGet(Player, "ItemArms") != null) && (GameLARPTurnFocusCharacter.ID == 0)) {
-		var Prc = GameLARPGetOdds("Struggle", Player, Player) * 100;
-		GameLARPOption.push({ Name: "Struggle", Odds: Prc });
-		return;
+	// If the source is restrained, she only has the struggle option on herself
+	if ((InventoryGet(Source, "ItemArms") != null) && (Source.MemberNumber == Target.MemberNumber)) {
+		var Prc = GameLARPGetOdds("Struggle", Source, Source) * 100;
+		Option.push({ Name: "Struggle", Odds: Prc });
 	}
 
-	// Builds the basic "Strip" / "Restrain" options if that player isn't in the player team
-	if (GameLARPTurnFocusCharacter.Game.LARP.Team != Player.Game.LARP.Team) {
+	// Builds the "Strip" & "Restrain" options if the target isn't in the source team
+	if ((Target.Game.LARP.Team != Source.Game.LARP.Team) && (InventoryGet(Source, "ItemArms") == null)) {
 
 		// The formula is 50% + the offensive bonus - the opponent defensive bonus
-		var Prc = GameLARPGetOdds("Strip", Player, GameLARPTurnFocusCharacter) * 100;
+		var Prc = GameLARPGetOdds("Strip", Source, Target) * 100;
 
-		// Some actions are different based on the player current status
-		if (InventoryGet(GameLARPTurnFocusCharacter, "Cloth") != null) GameLARPOption.push({ Name: "Strip", Odds: Prc });
-		else if (InventoryGet(GameLARPTurnFocusCharacter, "ItemArms") != null) GameLARPOption.push({ Name: "Tighten", Odds: 100 });
-		else if ((InventoryGet(GameLARPTurnFocusCharacter, "ItemMouth") != null) && (InventoryGet(GameLARPTurnFocusCharacter, "ItemFeet") != null)) GameLARPOption.push({ Name: "RestrainArms", Odds: Prc });
+		// Some actions are different based on the target current restrains
+		if (InventoryGet(Target, "Cloth") != null) Option.push({ Name: "Strip", Odds: Prc });
+		else if (InventoryGet(Target, "ItemArms") != null) Option.push({ Name: "Tighten", Odds: 100 });
+		else if ((InventoryGet(Target, "ItemMouth") != null) && (InventoryGet(Target, "ItemFeet") != null)) Option.push({ Name: "RestrainArms", Odds: Prc });
 		else {
-			if (InventoryGet(GameLARPTurnFocusCharacter, "ItemFeet") == null) GameLARPOption.push({ Name: "RestrainLegs", Odds: Prc });
-			if (InventoryGet(GameLARPTurnFocusCharacter, "ItemMouth") == null) GameLARPOption.push({ Name: "RestrainMouth", Odds: Prc });
+			if (InventoryGet(Target, "ItemFeet") == null) Option.push({ Name: "RestrainLegs", Odds: Prc });
+			if (InventoryGet(Target, "ItemMouth") == null) Option.push({ Name: "RestrainMouth", Odds: Prc });
 		}
 
 	}
+
+	// Returns all valid options
+	return Option;
 
 }
 
@@ -360,9 +363,9 @@ function GameLARPProcessAction(Action, ItemName, Source, Target, RNG) {
 		if ((A != null) && (A.Description != null)) ItemDesc = A.Description;
 	}
 
-	// If the odds are successful
+	// If the odds are successful (0% never succeeds, 100% always succeeds)
 	var Odds = GameLARPGetOdds(Action, Source, Target);
-	if (Odds >= RNG.toFixed(2)) {
+	if ((Odds >= 0.01) && ((Odds >= 1) || (Odds >= RNG.toFixed(2)))) {
 
 		// Regular restrain actions
 		if (Action == "RestrainLegs") InventoryWear(Target, ItemName, "ItemFeet");
@@ -398,7 +401,7 @@ function GameLARPCharacterClick(C) {
 	if ((GameLARPStatus == "Running") && (GameLARPPlayer[GameLARPTurnPosition].ID == 0) && (C.Game != null) && (C.Game.LARP != null) && (C.Game.LARP.Team != null) && (C.Game.LARP.Team != "") && (C.Game.LARP.Team != "None")) {
 		GameLARPTurnFocusCharacter = C;
 		GameLARPTurnFocusGroup = null;
-		GameLARPBuildOption();
+		GameLARPOption = GameLARPBuildOption(Player, GameLARPTurnFocusCharacter);
 	}
 
 	// Flags that transaction as being handled
@@ -484,14 +487,21 @@ function GameLARPContinue() {
 					return true;
 		}
 
-	// If there's a winning team, we announce it
+	// If there's a winning team, we announce it and stop the game
 	if (Team != "") {
+
+		// Shows the winning team and updates the player status
 		GameLARPAddChatLog("EndGame", Player, Player, OnlineGameDictionaryText("Team" + Team), 0, 0);
 		GameLARPStatus = "";
 		Player.Game.LARP.Status = "";
 		ServerSend("AccountUpdate", { Game: Player.Game });
+
+		// Calculate the reputation gained, the longer the game took, the higher it will rise the rep, times 2 if the player team won
+		var RepGain = Math.round(GameLARPProgress.length / GameLARPPlayer.length * ((Player.Game.LARP.Team == Team) ? 0.6 : 0.3));
+		if (RepGain > 0) DialogChangeReputation("LARP", RepGain);
 		ChatRoomCharacterUpdate(Player);
 		return false;
+
 	} else return true;
 
 }
@@ -513,16 +523,28 @@ function GameLARPProcess(P) {
 		}
 
 		// The turn administrator can skip turns after the delay has ran out
-		if ((GameLARPTurnAdmin == P.Sender) && (P.Data.GameProgress == "Skip")) {
+		if ((GameLARPStatus == "Running") && (GameLARPTurnAdmin == P.Sender) && (P.Data.GameProgress == "Skip")) {
 			GameLARPProgress.push({ Sender: P.Sender, Time: CurrentTime, RNG: P.RNG, Data: P.Data });
 			GameLARPNewTurn("TurnSkip");
 		}
 
 		// The current turn player can trigger an action
-		if ((GameLARPPlayer[GameLARPTurnPosition].MemberNumber == P.Sender) && (P.Data.GameProgress == "Action") && (P.Data.Action != null) && (P.Data.Target != null)) {
-			GameLARPProgress.push({ Sender: P.Sender, Time: CurrentTime, RNG: P.RNG, Data: P.Data });
-			GameLARPProcessAction(P.Data.Action, P.Data.Item, GameLARPGetPlayer(P.Sender), GameLARPGetPlayer(P.Data.Target), P.RNG);
-			if (GameLARPContinue()) GameLARPNewTurn("TurnNext");
+		if ((GameLARPStatus == "Running") && (GameLARPPlayer[GameLARPTurnPosition].MemberNumber == P.Sender) && (P.Data.GameProgress == "Action") && (P.Data.Action != null) && (P.Data.Target != null)) {
+
+			// Before we process it, we make sure the action is valid by checking all possible options
+			var Source = GameLARPGetPlayer(P.Sender);
+			var Target = GameLARPGetPlayer(P.Data.Target);
+			if ((Source != null) && (Target != null)) {
+				var Option = GameLARPBuildOption(Source, Target);
+				for (var O = 0; O < Option.length; O++)
+					if (Option[O].Name == P.Data.Action) {
+						GameLARPProgress.push({ Sender: P.Sender, Time: CurrentTime, RNG: P.RNG, Data: P.Data });
+						GameLARPProcessAction(P.Data.Action, P.Data.Item, Source, Target, P.RNG);
+						if (GameLARPContinue()) GameLARPNewTurn("TurnNext");
+						return;
+					}
+			}
+
 		}
 
 	}
