@@ -86,6 +86,7 @@ function DialogPrerequisite(D) {
 
 // Searches for an item in the player inventory to unlock a specific item
 function DialogCanUnlock(C, Item) {
+	if ((C.ID != 0) && !Player.CanInteract()) return false;
 	if ((Item != null) && (Item.Asset != null) && (Item.Asset.OwnerOnly == true)) return Item.Asset.Enable && C.IsOwnedByPlayer();
 	if ((Item != null) && (Item.Asset != null) && (Item.Asset.LoverOnly == true)) return Item.Asset.Enable && C.IsLoverOfPlayer();
 	if ((Item != null) && (Item.Asset != null) && (Item.Asset.SelfUnlock != null) && (Item.Asset.SelfUnlock == false) && !Player.CanInteract()) return false;
@@ -98,7 +99,6 @@ function DialogCanUnlock(C, Item) {
 		if (InventoryItemHasEffect(Player.Inventory[I], UnlockName)) {
 			var Lock = InventoryGetLock(Item);
 			if (Lock != null) {
-				if (C.ID != 0 && !Player.CanInteract()) return false;
 				if (Lock.Asset.LoverOnly && !C.IsLoverOfPlayer()) return false;
 				if (Lock.Asset.OwnerOnly && !C.IsOwnedByPlayer()) return false;
 				return true;
