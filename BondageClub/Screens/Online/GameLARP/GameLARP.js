@@ -1,8 +1,37 @@
 "use strict";
 var GameLARPBackground = "Sheet";
-var GameLARPClassList = ["Matron", "Seducer", "Trickster", "Artist", "Servant", "Protector"];
-var GameLARPClassOffensiveBonus = [0.25, 0.20, 0.15, 0.10, 0.05, 0.00];
-var GameLARPClassDefensiveBonus = [0.00, 0.05, 0.10, 0.15, 0.20, 0.25];
+var GameLARPClass = [
+	{
+		Name: "Matron",
+		Bonus: [0.25, 0.00],
+		Ability: ["Charge", "Control", "Detain"]
+	},
+	{
+		Name: "Seducer",
+		Bonus: [0.20, 0.05],
+		Ability: ["Expose", "Inspire", "Seduce"]
+	},
+	{
+		Name: "Trickster",
+		Bonus: [0.15, 0.10],
+		Ability: ["Confuse", "Gamble", "Hide"]
+	},
+	{
+		Name: "Artist",
+		Bonus: [0.10, 0.15],
+		Ability: ["Cheer", "Costume", "Evasion"]
+	},
+	{
+		Name: "Servant",
+		Bonus: [0.05, 0.20],
+		Ability: ["Rescue", "Support", "Yield"]
+	},
+	{
+		Name: "Protector",
+		Bonus: [0.00, 0.25],
+		Ability: ["Cover", "Dress", "Sacrifice"]
+	},
+];
 var GameLARPTeamList = ["None", "Red", "Green", "Blue", "Yellow", "Cyan", "Purple", "Orange", "White", "Gray", "Black"];
 var GameLARPEntryClass = "";
 var GameLARPEntryTeam = "";
@@ -109,7 +138,7 @@ function GameLARPRunProcess() {
 
 			// Draw the timer
 			MainCanvas.font = "108px Arial";
-			var Time = Math.round((GameLARPTurnTimer - CurrentTime) / 1000);
+			var Time = Math.ceil((GameLARPTurnTimer - CurrentTime) / 1000);
 			DrawText(((Time < 0) || (Time > 20)) ? OnlineGameDictionaryText("TimerNA") : Time.toString(), 250, 800, "Red", "White");
 			MainCanvas.font = "36px Arial";
 
@@ -192,8 +221,13 @@ function GameLARPClick() {
 
 	// When the user selects a new class
 	if ((MouseX >= 900) && (MouseX < 1300) && (MouseY >= 193) && (MouseY < 257) && (GameLARPStatus == "")) {
-		if (MouseX <= 1100) Player.Game.LARP.Class = (GameLARPClassList.indexOf(Player.Game.LARP.Class) <= 0) ? GameLARPClassList[GameLARPClassList.length - 1] : GameLARPClassList[GameLARPClassList.indexOf(Player.Game.LARP.Class) - 1];
-		else Player.Game.LARP.Class = (GameLARPClassList.indexOf(Player.Game.LARP.Class) >= GameLARPClassList.length - 1) ? GameLARPClassList[0] : GameLARPClassList[GameLARPClassList.indexOf(Player.Game.LARP.Class) + 1];
+		var Index = 0;
+		for (var I = 0; I < GameLARPClass.length; I++)
+			if (GameLARPClass[I].Name == Player.Game.LARP.Class)
+				Index = I;
+		if (MouseX <= 1100) Index = (Index <= 0) ? GameLARPClass.length - 1 : Index - 1;
+		else Index = (Index >= GameLARPClass.length - 1) ? 0 : Index + 1;		
+		Player.Game.LARP.Class = GameLARPClass[Index].Name;
 	}
 	
 	// When the user selects a new team
@@ -276,11 +310,19 @@ function GameLARPCanLaunchGame() {
 	return false;
 }
 
+// Gets a specific bonus from the character class
+function GameLARPGetBonus(Char, BonusType) {
+	for (var C = 0; C < GameLARPClass.length; C++)
+		if (Char.Game.LARP.Class == GameLARPClass[C].Name)
+			return GameLARPClass[C].Bonus[BonusType];
+	return 0;
+}
+
 // Returns the odds of successfully doing an offensive action
 function GameLARPGetOdds(Action, Source, Target) {
 
 	// The basic odds are 50% + Offensive bonus of source - Defensive bonus of target
-	var Odds = 0.5 + GameLARPClassOffensiveBonus[GameLARPClassList.indexOf(Source.Game.LARP.Class)] - GameLARPClassDefensiveBonus[GameLARPClassList.indexOf(Target.Game.LARP.Class)];
+	var Odds = 0.5 + GameLARPGetBonus(Source, 0) - GameLARPGetBonus(Target, 1);
 
 	// Struggling starts at 10% + 10% for each new unsuccessful tries, tightening the bonds will reset it to 10%
 	if (Action == "Struggle") {
@@ -304,6 +346,54 @@ function GameLARPGetOdds(Action, Source, Target) {
 
 }
 
+// Adds all available class abilities to the valid options
+function GameLARPBuildOptionAbility(Source, Target, Option, Ability) {
+
+	// If the ability was already used in that battle, it cannot be used anymore
+	for (var P = 0; P < GameLARPProgress.length; P++) 
+		if ((GameLARPProgress[P].Sender == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == Ability))
+			return;
+
+	// If the player targets herself
+	if (Source.MemberNumber == Target.MemberNumber) {
+
+		// Abilities that can be used on yourself
+		if (Ability == "Charge") Option.push({ Name: Ability, Odds: 100 });
+		if (Ability == "Control") Option.push({ Name: Ability, Odds: 100 });
+		if (Ability == "Gamble") Option.push({ Name: Ability, Odds: 100 });
+		if (Ability == "Hide") Option.push({ Name: Ability, Odds: 100 });
+		if (Ability == "Evasion") Option.push({ Name: Ability, Odds: 100 });
+		if (Ability == "Support") Option.push({ Name: Ability, Odds: 100 });
+		if (Ability == "Sacrifice") Option.push({ Name: Ability, Odds: 100 });
+
+	} else {
+
+		// If the player targets someone from her team
+		if (Source.Game.LARP.Team == Target.Game.LARP.Team) {
+
+			// Abilities that can be used on someone from your team
+			if (Ability == "Inspire") Option.push({ Name: Ability, Odds: 100 });
+			if (Ability == "Cheer") Option.push({ Name: Ability, Odds: 100 });
+			if (Ability == "Costume") Option.push({ Name: Ability, Odds: 100 });
+			if (Ability == "Rescue") Option.push({ Name: Ability, Odds: 100 });
+			if (Ability == "Yield") Option.push({ Name: Ability, Odds: 100 });
+			if (Ability == "Cover") Option.push({ Name: Ability, Odds: 100 });
+			if (Ability == "Dress") Option.push({ Name: Ability, Odds: 100 });
+
+		} else {
+
+			// Abilities that are used on players from another team
+			if (Ability == "Detain") Option.push({ Name: Ability, Odds: 100 });
+			if (Ability == "Expose") Option.push({ Name: Ability, Odds: 100 });
+			if (Ability == "Seduce") Option.push({ Name: Ability, Odds: 100 });
+			if (Ability == "Confuse") Option.push({ Name: Ability, Odds: 100 });
+
+		}
+
+	}
+
+}
+
 // Build a clickable menu for everything that can be tempted on a character
 function GameLARPBuildOption(Source, Target) {
 
@@ -315,6 +405,16 @@ function GameLARPBuildOption(Source, Target) {
 	if ((InventoryGet(Source, "ItemArms") != null) && (Source.MemberNumber == Target.MemberNumber)) {
 		var Prc = GameLARPGetOdds("Struggle", Source, Source) * 100;
 		Option.push({ Name: "Struggle", Odds: Prc });
+	}
+
+	// Gets all abilities for the class and assigns which one can be used
+	if (InventoryGet(Source, "ItemArms") == null) {
+		var Ability = [];
+		for (var C = 0; C < GameLARPClass.length; C++)
+			if (Source.Game.LARP.Class == GameLARPClass[C].Name)
+				Ability = GameLARPClass[C].Ability;
+		for (var A = 0; A < Ability.length; A++)
+			GameLARPBuildOptionAbility(Source, Target, Option, Ability[A]);
 	}
 
 	// Builds the "Strip" & "Restrain" options if the target isn't in the source team
@@ -368,10 +468,10 @@ function GameLARPProcessAction(Action, ItemName, Source, Target, RNG) {
 	if ((Odds >= 0.01) && ((Odds >= 1) || (Odds >= RNG.toFixed(2)))) {
 
 		// Regular restrain actions
-		if (Action == "RestrainLegs") InventoryWear(Target, ItemName, "ItemFeet");
-		if (Action == "RestrainArms") InventoryWear(Target, ItemName, "ItemArms");
-		if (Action == "RestrainMouth") InventoryWear(Target, ItemName, "ItemMouth");
-		if (Action == "Struggle") InventoryRemove(Target, "ItemArms");
+		if (Action == "RestrainLegs") InventoryWear(Target, ItemName, "ItemFeet", null, 6);
+		if (Action == "RestrainArms") InventoryWear(Target, ItemName, "ItemArms", null, 6);
+		if (Action == "RestrainMouth") InventoryWear(Target, ItemName, "ItemMouth", null, 6);
+		if (Action == "Struggle") InventoryRemove(Target, "ItemArms", null, 5);
 
 		// Stripping removes the cloth items
 		if (Action == "Strip") {
