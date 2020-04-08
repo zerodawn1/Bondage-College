@@ -36,10 +36,12 @@ LARPOptionTightenSuccess,SourceName (SourceNumber) tightens TargetName (TargetNu
 LARPOptionStruggle,Struggle (OptionOdds %)
 LARPOptionStruggleSuccess,TargetName (TargetNumber) struggles out successfully and frees her arms.  [ActionOdds >= ActionRNG]
 LARPOptionStruggleFail,TargetName (TargetNumber) tries to struggle out but fails.  [ActionOdds < ActionRNG]
-LARPOption,Charge (OptionOdds %)
+LARPOptionCharge,Charge (OptionOdds %)
 LARPOptionControl,Control (OptionOdds %)
 LARPOptionDetain,Detain (OptionOdds %)
+LARPOptionDetainSuccess,SourceName (SourceNumber) detrains TargetName (TargetNumber) and restrains her arms using ItemDesc.
 LARPOptionExpose,Expose (OptionOdds %)
+LARPOptionExposeSuccess,SourceName (SourceNumber) exposes TargetName (TargetNumber) and removes her clothes.
 LARPOptionInspire,Inspire (OptionOdds %)
 LARPOptionSeduce,Seduce (OptionOdds %)
 LARPOptionConfuse,Confuse (OptionOdds %)
@@ -49,8 +51,9 @@ LARPOptionCheer,Cheer (OptionOdds %)
 LARPOptionCostume,Costume (OptionOdds %)
 LARPOptionEvasion,Evasion (OptionOdds %)
 LARPOptionRescue,Rescue (OptionOdds %)
+LARPOptionSilence,Silence (OptionOdds %)
+LARPOptionSilenceSuccess,SourceName (SourceNumber) silences TargetName (TargetNumber) and gag her using ItemDesc.
 LARPOptionSupport,Support (OptionOdds %)
-LARPOptionYield,Yield (OptionOdds %)
 LARPOptionCover,Cover (OptionOdds %)
 LARPOptionDress,Dress (OptionOdds %)
 LARPOptionSacrifice,Sacrifice (OptionOdds %)

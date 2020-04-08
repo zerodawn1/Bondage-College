@@ -24,7 +24,7 @@ var GameLARPClass = [
 	{
 		Name: "Servant",
 		Bonus: [0.05, 0.20],
-		Ability: ["Rescue", "Support", "Yield"]
+		Ability: ["Rescue", "Silence", "Support"]
 	},
 	{
 		Name: "Protector",
@@ -133,7 +133,7 @@ function GameLARPRunProcess() {
 			// Draw all the possible options
 			DrawCharacter(GameLARPTurnFocusCharacter, 500, 0, 1);
 			for (var O = 0; O < GameLARPOption.length; O++)
-				DrawButton(50, 35 + (O * 100), 400, 65, OnlineGameDictionaryText("Option" + GameLARPOption[O].Name).replace("OptionOdds", GameLARPOption[O].Odds), "White");
+				DrawButton(50, 35 + (O * 100), 400, 65, OnlineGameDictionaryText("Option" + GameLARPOption[O].Name).replace("OptionOdds", Math.round(GameLARPOption[O].Odds * 100)), "White");
 			DrawButton(50, 900, 400, 65, OnlineGameDictionaryText("BackToCharacters"), "White");
 
 			// Draw the timer
@@ -159,11 +159,11 @@ function GameLARPBuildInventory(FocusGroup) {
 }
 
 // When an option is selected for a target
-function GameLARPClickOption(Name, Odds) {
+function GameLARPClickOption(Name) {
 	GameLARPAction = Name;
 	if (Name == "RestrainLegs") return GameLARPBuildInventory("ItemFeet");
-	if (Name == "RestrainMouth") return GameLARPBuildInventory("ItemMouth");
-	if (Name == "RestrainArms") return GameLARPBuildInventory("ItemArms");
+	if ((Name == "RestrainMouth") || (Name == "Silence")) return GameLARPBuildInventory("ItemMouth");
+	if ((Name == "RestrainArms") || (Name == "Detain")) return GameLARPBuildInventory("ItemArms");
 	ServerSend("ChatRoomGame", { GameProgress: "Action", Action: Name, Target: GameLARPTurnFocusCharacter.MemberNumber });
 }
 
@@ -201,7 +201,7 @@ function GameLARPClickProcess() {
 		// If we must catch the click on one of the buttons
 		for (var O = 0; O < GameLARPOption.length; O++)
 			if ((MouseX >= 50) && (MouseX < 450) && (MouseY >= 35 + (O * 100)) && (MouseY <= 100 + (O * 100)))
-				GameLARPClickOption(GameLARPOption[O].Name, GameLARPOption[O].Odds);
+				GameLARPClickOption(GameLARPOption[O].Name);
 
 		// If we must exit from the currently focused character
 		if ((MouseX >= 50) && (MouseX < 450) && (MouseY >= 900) && (MouseY <= 965)) GameLARPTurnFocusCharacter = null;
@@ -336,8 +336,11 @@ function GameLARPGetOdds(Action, Source, Target) {
 			}
 	}
 
-	// Some actions are 100%
-	if ((Action == "Tighten") || (Action == "Pass")) return 1;
+	// Many actions have fixed %
+	if (["Pass", "Charge", "Control", "Hide", "Evasion", "Support", "Sacrifice", "Dress"].indexOf(Action) >= 0) return (Source.MemberNumber == Target.MemberNumber) ? 1 : 0;
+	if (["Gamble"].indexOf(Action) >= 0) return (Source.MemberNumber == Target.MemberNumber) ? 0.5 : 0;
+	if (["Inspire", "Cheer", "Costume", "Rescue", "Cover"].indexOf(Action) >= 0) return ((Source.MemberNumber != Target.MemberNumber) && (Source.Game.LARP.Team == Target.Game.LARP.Team)) ? 1 : 0;
+	if (["Detain", "Expose", "Seduce", "Confuse", "Silence"].indexOf(Action) >= 0) return ((Source.MemberNumber != Target.MemberNumber) && (Source.Game.LARP.Team != Target.Game.LARP.Team)) ? 1 : 0;
 
 	// Returns the % between 0 and 1
 	if (Odds > 1) Odds = 1;
@@ -358,35 +361,38 @@ function GameLARPBuildOptionAbility(Source, Target, Option, Ability) {
 	if (Source.MemberNumber == Target.MemberNumber) {
 
 		// Abilities that can be used on yourself
-		if (Ability == "Charge") Option.push({ Name: Ability, Odds: 100 });
-		if (Ability == "Control") Option.push({ Name: Ability, Odds: 100 });
-		if (Ability == "Gamble") Option.push({ Name: Ability, Odds: 100 });
-		if (Ability == "Hide") Option.push({ Name: Ability, Odds: 100 });
-		if (Ability == "Evasion") Option.push({ Name: Ability, Odds: 100 });
-		if (Ability == "Support") Option.push({ Name: Ability, Odds: 100 });
-		if (Ability == "Sacrifice") Option.push({ Name: Ability, Odds: 100 });
+		var Odds = GameLARPGetOdds(Ability, Source, Source);
+		if (Ability == "Charge") Option.push({ Name: Ability, Odds: Odds });
+		if (Ability == "Control") Option.push({ Name: Ability, Odds: Odds });
+		if (Ability == "Gamble") Option.push({ Name: Ability, Odds: Odds });
+		if (Ability == "Hide") Option.push({ Name: Ability, Odds: Odds });
+		if (Ability == "Evasion") Option.push({ Name: Ability, Odds: Odds });
+		if (Ability == "Support") Option.push({ Name: Ability, Odds: Odds });
+		if (Ability == "Sacrifice") Option.push({ Name: Ability, Odds: Odds });
+		if (Ability == "Dress") Option.push({ Name: Ability, Odds: Odds });
 
 	} else {
 
 		// If the player targets someone from her team
+		var Odds = GameLARPGetOdds(Ability, Source, Target);
 		if (Source.Game.LARP.Team == Target.Game.LARP.Team) {
 
 			// Abilities that can be used on someone from your team
-			if (Ability == "Inspire") Option.push({ Name: Ability, Odds: 100 });
-			if (Ability == "Cheer") Option.push({ Name: Ability, Odds: 100 });
-			if (Ability == "Costume") Option.push({ Name: Ability, Odds: 100 });
-			if (Ability == "Rescue") Option.push({ Name: Ability, Odds: 100 });
-			if (Ability == "Yield") Option.push({ Name: Ability, Odds: 100 });
-			if (Ability == "Cover") Option.push({ Name: Ability, Odds: 100 });
-			if (Ability == "Dress") Option.push({ Name: Ability, Odds: 100 });
+			if (Ability == "Inspire") Option.push({ Name: Ability, Odds: Odds });
+			if (Ability == "Cheer") Option.push({ Name: Ability, Odds: Odds });
+			if (Ability == "Costume") Option.push({ Name: Ability, Odds: Odds });
+			if (Ability == "Rescue") Option.push({ Name: Ability, Odds: Odds });
+			if (Ability == "Cover") Option.push({ Name: Ability, Odds: Odds });
 
 		} else {
 
-			// Abilities that are used on players from another team
-			if (Ability == "Detain") Option.push({ Name: Ability, Odds: 100 });
-			if (Ability == "Expose") Option.push({ Name: Ability, Odds: 100 });
-			if (Ability == "Seduce") Option.push({ Name: Ability, Odds: 100 });
-			if (Ability == "Confuse") Option.push({ Name: Ability, Odds: 100 });
+			// Abilities that are used on players from another team, cannot be used if target arms are restrained
+			if (InventoryGet(Target, "ItemArms") != null) return;
+			if ((Ability == "Detain") && (InventoryGet(Target, "Cloth") == null) && (InventoryGet(Target, "ItemMouth") != null) && (InventoryGet(Target, "ItemFeet") != null)) Option.push({ Name: Ability, Odds: Odds });
+			if ((Ability == "Expose") && (InventoryGet(Target, "Cloth") != null)) Option.push({ Name: Ability, Odds: Odds });
+			if (Ability == "Seduce") Option.push({ Name: Ability, Odds: Odds });
+			if (Ability == "Confuse") Option.push({ Name: Ability, Odds: Odds });
+			if ((Ability == "Silence") && (InventoryGet(Target, "Cloth") == null) && (InventoryGet(Target, "ItemMouth") == null)) Option.push({ Name: Ability, Odds: Odds });
 
 		}
 
@@ -399,13 +405,11 @@ function GameLARPBuildOption(Source, Target) {
 
 	// If the source clicks on herself, she can always pass her turn and do nothing
 	var Option = [];
-	if (Source.MemberNumber == Target.MemberNumber) Option.push({ Name: "Pass", Odds: 100 });
+	if (Source.MemberNumber == Target.MemberNumber) Option.push({ Name: "Pass", Odds: GameLARPGetOdds("Pass", Source, Source) });
 
 	// If the source is restrained, she only has the struggle option on herself
-	if ((InventoryGet(Source, "ItemArms") != null) && (Source.MemberNumber == Target.MemberNumber)) {
-		var Prc = GameLARPGetOdds("Struggle", Source, Source) * 100;
-		Option.push({ Name: "Struggle", Odds: Prc });
-	}
+	if ((InventoryGet(Source, "ItemArms") != null) && (Source.MemberNumber == Target.MemberNumber))
+		Option.push({ Name: "Struggle", Odds: GameLARPGetOdds("Struggle", Source, Source) });
 
 	// Gets all abilities for the class and assigns which one can be used
 	if (InventoryGet(Source, "ItemArms") == null) {
@@ -420,16 +424,13 @@ function GameLARPBuildOption(Source, Target) {
 	// Builds the "Strip" & "Restrain" options if the target isn't in the source team
 	if ((Target.Game.LARP.Team != Source.Game.LARP.Team) && (InventoryGet(Source, "ItemArms") == null)) {
 
-		// The formula is 50% + the offensive bonus - the opponent defensive bonus
-		var Prc = GameLARPGetOdds("Strip", Source, Target) * 100;
-
 		// Some actions are different based on the target current restrains
-		if (InventoryGet(Target, "Cloth") != null) Option.push({ Name: "Strip", Odds: Prc });
-		else if (InventoryGet(Target, "ItemArms") != null) Option.push({ Name: "Tighten", Odds: 100 });
-		else if ((InventoryGet(Target, "ItemMouth") != null) && (InventoryGet(Target, "ItemFeet") != null)) Option.push({ Name: "RestrainArms", Odds: Prc });
+		if (InventoryGet(Target, "Cloth") != null) Option.push({ Name: "Strip", Odds: GameLARPGetOdds("Strip", Source, Target) });
+		else if (InventoryGet(Target, "ItemArms") != null) Option.push({ Name: "Tighten", Odds: GameLARPGetOdds("Tighten", Source, Target) });
+		else if ((InventoryGet(Target, "ItemMouth") != null) && (InventoryGet(Target, "ItemFeet") != null)) Option.push({ Name: "RestrainArms", Odds: GameLARPGetOdds("RestrainArms", Source, Target) });
 		else {
-			if (InventoryGet(Target, "ItemFeet") == null) Option.push({ Name: "RestrainLegs", Odds: Prc });
-			if (InventoryGet(Target, "ItemMouth") == null) Option.push({ Name: "RestrainMouth", Odds: Prc });
+			if (InventoryGet(Target, "ItemFeet") == null) Option.push({ Name: "RestrainLegs", Odds: GameLARPGetOdds("RestrainLegs", Source, Target) });
+			if (InventoryGet(Target, "ItemMouth") == null) Option.push({ Name: "RestrainMouth", Odds: GameLARPGetOdds("RestrainMouth", Source, Target) });
 		}
 
 	}
@@ -458,8 +459,8 @@ function GameLARPProcessAction(Action, ItemName, Source, Target, RNG) {
 	if (ItemName != "") {
 		var A;
 		if (Action == "RestrainLegs") A = AssetGet(Target.AssetFamily, "ItemLegs", ItemName);
-		if (Action == "RestrainArms") A = AssetGet(Target.AssetFamily, "ItemArms", ItemName);
-		if (Action == "RestrainMouth") A = AssetGet(Target.AssetFamily, "ItemMouth", ItemName);
+		if ((Action == "RestrainArms") || (Action == "Detain")) A = AssetGet(Target.AssetFamily, "ItemArms", ItemName);
+		if ((Action == "RestrainMouth") || (Action == "Silence")) A = AssetGet(Target.AssetFamily, "ItemMouth", ItemName);
 		if ((A != null) && (A.Description != null)) ItemDesc = A.Description;
 	}
 
@@ -469,12 +470,12 @@ function GameLARPProcessAction(Action, ItemName, Source, Target, RNG) {
 
 		// Regular restrain actions
 		if (Action == "RestrainLegs") InventoryWear(Target, ItemName, "ItemFeet", null, 6);
-		if (Action == "RestrainArms") InventoryWear(Target, ItemName, "ItemArms", null, 6);
-		if (Action == "RestrainMouth") InventoryWear(Target, ItemName, "ItemMouth", null, 6);
+		if ((Action == "RestrainArms") || (Action == "Detain")) InventoryWear(Target, ItemName, "ItemArms", null, 6);
+		if ((Action == "RestrainMouth") || (Action == "Silence")) InventoryWear(Target, ItemName, "ItemMouth", null, 6);
 		if (Action == "Struggle") InventoryRemove(Target, "ItemArms", null, 5);
 
-		// Stripping removes the cloth items
-		if (Action == "Strip") {
+		// Strip / Expose removes the cloth items
+		if ((Action == "Strip") || (Action == "Expose")) {
 			InventoryRemove(Target, "Cloth");
 			InventoryRemove(Target, "ClothLower");
 			InventoryRemove(Target, "ClothAccessory");
