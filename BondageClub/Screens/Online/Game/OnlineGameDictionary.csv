@@ -37,7 +37,9 @@ LARPOptionStruggle,Struggle (OptionOdds %)
 LARPOptionStruggleSuccess,TargetName (TargetNumber) struggles out successfully and frees her arms.  [ActionOdds >= ActionRNG]
 LARPOptionStruggleFail,TargetName (TargetNumber) tries to struggle out but fails.  [ActionOdds < ActionRNG]
 LARPOptionCharge,Charge (OptionOdds %)
+LARPOptionChargeSuccess,"SourceName (SourceNumber) charges with her team, giving a 25% offensive bonus for a full cycle."
 LARPOptionControl,Control (OptionOdds %)
+LARPOptionControlSuccess,"SourceName (SourceNumber) controls the room, prevent everyone from using special abilities for a full cycle."
 LARPOptionDetain,Detain (OptionOdds %)
 LARPOptionDetainSuccess,SourceName (SourceNumber) detrains TargetName (TargetNumber) and restrains her arms using ItemDesc.
 LARPOptionExpose,Expose (OptionOdds %)
@@ -48,12 +50,14 @@ LARPOptionConfuse,Confuse (OptionOdds %)
 LARPOptionGamble,Gamble (OptionOdds %)
 LARPOptionHide,Hide (OptionOdds %)
 LARPOptionCheer,Cheer (OptionOdds %)
+LARPOptionCheerSuccess,"SourceName (SourceNumber) cheers for TargetName (TargetNumber), giving her a 25% offensive and defensive bonus for a full cycle."
 LARPOptionCostume,Costume (OptionOdds %)
 LARPOptionEvasion,Evasion (OptionOdds %)
 LARPOptionRescue,Rescue (OptionOdds %)
 LARPOptionSilence,Silence (OptionOdds %)
 LARPOptionSilenceSuccess,SourceName (SourceNumber) silences TargetName (TargetNumber) and gag her using ItemDesc.
 LARPOptionSupport,Support (OptionOdds %)
+LARPOptionSupportSuccess,"SourceName (SourceNumber) supports her team, giving a 25% defensive bonus for a full cycle."
 LARPOptionCover,Cover (OptionOdds %)
 LARPOptionDress,Dress (OptionOdds %)
 LARPOptionSacrifice,Sacrifice (OptionOdds %)

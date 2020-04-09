@@ -95,7 +95,10 @@ function GameLARPRun() {
 function GameLARPRunProcess() {
 
 	// If the player is an admin, she can make player skip their turns
-	if ((GameLARPStatus == "Running") && (CurrentTime > GameLARPTurnTimer) && GameLARPIsAdmin(Player)) ServerSend("ChatRoomGame", { GameProgress: "Skip" });
+	if ((GameLARPStatus == "Running") && (CurrentTime > GameLARPTurnTimer) && GameLARPIsAdmin(Player)) {
+		GameLARPTurnTimer = CurrentTime + 20000;
+		ServerSend("ChatRoomGame", { GameProgress: "Skip" });
+	}
 
 	// Clears the focused character if it's not the player turn
 	if ((GameLARPTurnFocusCharacter != null) && ((GameLARPStatus != "Running") || (GameLARPPlayer[GameLARPTurnPosition].ID != 0))) GameLARPTurnFocusCharacter = null;
@@ -311,11 +314,27 @@ function GameLARPCanLaunchGame() {
 }
 
 // Gets a specific bonus from the character class
-function GameLARPGetBonus(Char, BonusType) {
+function GameLARPGetBonus(Target, BonusType) {
+
+	// Gets the base class bonus
+	var ClassBonus = 0;
 	for (var C = 0; C < GameLARPClass.length; C++)
-		if (Char.Game.LARP.Class == GameLARPClass[C].Name)
-			return GameLARPClass[C].Bonus[BonusType];
-	return 0;
+		if (Target.Game.LARP.Class == GameLARPClass[C].Name)
+			ClassBonus = GameLARPClass[C].Bonus[BonusType];
+		
+	// The ability bonuses only work for a full cycle (GameLARPPlayer.length * 2)
+	var AbilityBonus = 0;
+	for (var P = ((GameLARPProgress.length - GameLARPPlayer.length * 2 + 1 > 0) ? GameLARPProgress.length - GameLARPPlayer.length * 2 + 1 : 0); P < GameLARPProgress.length; P++)
+		if ((GameLARPProgress[P].Success != null) && (GameLARPProgress[P].Data.GameProgress == "Action")) {
+			var Source = GameLARPGetPlayer(GameLARPProgress[P].Sender);
+			if ((Source.Game.LARP.Team == Target.Game.LARP.Team) && (GameLARPProgress[P].Data.Action == "Charge") && (BonusType == 0)) AbilityBonus = 0.25;
+			if ((Source.Game.LARP.Team == Target.Game.LARP.Team) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Support") && (BonusType == 1)) AbilityBonus = 0.25;
+			if ((GameLARPProgress[P].Data.Target == Target.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Cheer")) AbilityBonus = 0.25;
+		}
+
+	// Returns both bonuses
+	return ClassBonus + AbilityBonus;
+
 }
 
 // Returns the odds of successfully doing an offensive action
@@ -328,11 +347,11 @@ function GameLARPGetOdds(Action, Source, Target) {
 	if (Action == "Struggle") {
 		Odds = 0.05;
 		for (var P = 0; P < GameLARPProgress.length; P++) 
-			if (GameLARPProgress[P].Success != null) {
-				if ((GameLARPProgress[P].Sender == Source.MemberNumber) && (GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Struggle") && !GameLARPProgress[P].Success) Odds = Odds + 0.05;
-				if ((GameLARPProgress[P].Sender == Source.MemberNumber) && (GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Struggle") && GameLARPProgress[P].Success) Odds = 0.05;
-				if ((GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "RestrainArms") && GameLARPProgress[P].Success) Odds = 0.05;
-				if ((GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Tighten") && GameLARPProgress[P].Success) Odds = 0.05;
+			if ((GameLARPProgress[P].Success != null) && (GameLARPProgress[P].Data.GameProgress == "Action")) {
+				if ((GameLARPProgress[P].Sender == Source.MemberNumber) && (GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.Action == "Struggle") && !GameLARPProgress[P].Success) Odds = Odds + 0.05;
+				if ((GameLARPProgress[P].Sender == Source.MemberNumber) && (GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.Action == "Struggle") && GameLARPProgress[P].Success) Odds = 0.05;
+				if ((GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.Action == "RestrainArms") && GameLARPProgress[P].Success) Odds = 0.05;
+				if ((GameLARPProgress[P].Data.Target == Source.MemberNumber) && (GameLARPProgress[P].Data.Action == "Tighten") && GameLARPProgress[P].Success) Odds = 0.05;
 			}
 	}
 
@@ -357,17 +376,22 @@ function GameLARPBuildOptionAbility(Source, Target, Option, Ability) {
 		if ((GameLARPProgress[P].Sender == Source.MemberNumber) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == Ability))
 			return;
 
+	// If "Control" is in progress for this cycle, no class abilities can be used
+	for (var P = ((GameLARPProgress.length - GameLARPPlayer.length * 2 + 1 > 0) ? GameLARPProgress.length - GameLARPPlayer.length * 2 + 1 : 0); P < GameLARPProgress.length; P++)
+		if ((GameLARPProgress[P].Success != null) && (GameLARPProgress[P].Data.GameProgress == "Action") && (GameLARPProgress[P].Data.Action == "Control"))
+			return;
+
 	// If the player targets herself
 	if (Source.MemberNumber == Target.MemberNumber) {
 
 		// Abilities that can be used on yourself
 		var Odds = GameLARPGetOdds(Ability, Source, Source);
-		if (Ability == "Charge") Option.push({ Name: Ability, Odds: Odds });
+		if ((Ability == "Charge") && (InventoryGet(Source, "ItemFeet") == null)) Option.push({ Name: Ability, Odds: Odds });
 		if (Ability == "Control") Option.push({ Name: Ability, Odds: Odds });
 		if (Ability == "Gamble") Option.push({ Name: Ability, Odds: Odds });
 		if (Ability == "Hide") Option.push({ Name: Ability, Odds: Odds });
 		if (Ability == "Evasion") Option.push({ Name: Ability, Odds: Odds });
-		if (Ability == "Support") Option.push({ Name: Ability, Odds: Odds });
+		if ((Ability == "Support") && (InventoryGet(Source, "ItemMouth") == null)) Option.push({ Name: Ability, Odds: Odds });
 		if (Ability == "Sacrifice") Option.push({ Name: Ability, Odds: Odds });
 		if (Ability == "Dress") Option.push({ Name: Ability, Odds: Odds });
 
@@ -379,7 +403,7 @@ function GameLARPBuildOptionAbility(Source, Target, Option, Ability) {
 
 			// Abilities that can be used on someone from your team
 			if (Ability == "Inspire") Option.push({ Name: Ability, Odds: Odds });
-			if (Ability == "Cheer") Option.push({ Name: Ability, Odds: Odds });
+			if ((Ability == "Cheer") && (InventoryGet(Source, "ItemMouth") == null)) Option.push({ Name: Ability, Odds: Odds });
 			if (Ability == "Costume") Option.push({ Name: Ability, Odds: Odds });
 			if (Ability == "Rescue") Option.push({ Name: Ability, Odds: Odds });
 			if (Ability == "Cover") Option.push({ Name: Ability, Odds: Odds });
@@ -619,7 +643,6 @@ function GameLARPProcess(P) {
 			GameLARPTurnAscending = true;
 			GameLARPBuildPlayerList();
 			GameLARPProgress = [];
-			GameLARPProgress.push({ Sender: P.Sender, Time: CurrentTime, RNG: P.RNG, Data: P.Data });
 			GameLARPNewTurn("TurnStart");
 		}
 
