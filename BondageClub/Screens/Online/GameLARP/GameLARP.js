@@ -374,6 +374,14 @@ function GameLARPCanWalk(C) { return (InventoryGet(C, "ItemFeet") == null) }
 function GameLARPCanAct(C) { return (InventoryGet(C, "ItemArms") == null) }
 function GameLARPClothed(C) { return (InventoryGet(C, "Cloth") != null) }
 
+// Returns TRUE if we can remove an item at a specific zone (cannot remove if there's a custom lock)
+function GameLARPCanRemoveItem(C, Zone) {
+	var Item = InventoryGet(C, Zone);
+	if (Item == null) return false;
+	if (InventoryGetLock(Item) != null) return false;
+	return true;
+}
+
 // Adds all available class abilities to the valid options
 function GameLARPBuildOptionAbility(Source, Target, Option, Ability) {
 
@@ -402,7 +410,7 @@ function GameLARPBuildOptionAbility(Source, Target, Option, Ability) {
 		if ((Ability == "Charge") && GameLARPCanWalk(Source)) Option.push({ Name: Ability, Odds: Odds });
 		if ((Ability == "Control") && GameLARPCanTalk(Source)) Option.push({ Name: Ability, Odds: Odds });
 		if (Ability == "Hide") Option.push({ Name: Ability, Odds: Odds });
-		if ((Ability == "Evasion") && (!GameLARPCanWalk(Source) || !GameLARPCanAct(Source))) Option.push({ Name: Ability, Odds: Odds });
+		if ((Ability == "Evasion") && (GameLARPCanRemoveItem(Source, "ItemFeet") || GameLARPCanRemoveItem(Source, "ItemArms"))) Option.push({ Name: Ability, Odds: Odds });
 		if ((Ability == "Support") && GameLARPCanTalk(Source)) Option.push({ Name: Ability, Odds: Odds });
 		if (Ability == "Dress") Option.push({ Name: Ability, Odds: Odds });
 
@@ -416,9 +424,9 @@ function GameLARPBuildOptionAbility(Source, Target, Option, Ability) {
 			if (Ability == "Inspire") Option.push({ Name: Ability, Odds: Odds });
 			if ((Ability == "Cheer") && GameLARPCanTalk(Source)) Option.push({ Name: Ability, Odds: Odds });
 			if ((Ability == "Costume") && GameLARPCanWalk(Source)) Option.push({ Name: Ability, Odds: Odds });
-			if ((Ability == "Rescue") && GameLARPCanWalk(Source) && (!GameLARPCanWalk(Target) || !GameLARPCanAct(Target))) Option.push({ Name: Ability, Odds: Odds });
+			if ((Ability == "Rescue") && GameLARPCanWalk(Source) && (GameLARPCanRemoveItem(Target, "ItemFeet") || GameLARPCanRemoveItem(Target, "ItemArms"))) Option.push({ Name: Ability, Odds: Odds });
 			if ((Ability == "Cover") && GameLARPCanWalk(Source)) Option.push({ Name: Ability, Odds: Odds });
-			if ((Ability == "Ungag") && !GameLARPCanTalk(Target)) Option.push({ Name: Ability, Odds: Odds });
+			if ((Ability == "Ungag") && GameLARPCanRemoveItem(Target, "ItemMouth")) Option.push({ Name: Ability, Odds: Odds });
 
 		} else {
 
