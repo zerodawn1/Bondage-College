@@ -157,7 +157,7 @@ function GameLARPBuildInventory(FocusGroup) {
 	GameLARPInventory = [];
 	GameLARPInventoryOffset = 0;
 	for(var A = 0; A < Player.Inventory.length; A++)
-		if ((Player.Inventory[A].Asset != null) && (Player.Inventory[A].Asset.Group.Name == FocusGroup) && Player.Inventory[A].Asset.Enable)
+		if ((Player.Inventory[A].Asset != null) && (Player.Inventory[A].Asset.Group.Name == FocusGroup) && Player.Inventory[A].Asset.Enable && Player.Inventory[A].Asset.Wear && Player.Inventory[A].Asset.Random)
 			GameLARPInventory.push(Player.Inventory[A].Asset);
 }
 
