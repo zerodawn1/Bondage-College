@@ -162,11 +162,9 @@ function ChatRoomDrawCharacter(DoClick) {
 									if ((Player.ArousalSettings != null) && (Player.ArousalSettings.Active != null) && (Player.ArousalSettings.Progress != null)) {
 										if ((Player.ArousalSettings.Active == "Manual") || (Player.ArousalSettings.Active == "Hybrid")) {
 											var Arousal = Math.round((Y + (Math.floor(C / 5) * 500 + 625 * Zoom) - MouseY) / (4 * Zoom), 0);
-											if (Arousal < 0) Arousal = 0;
-											if (Arousal > 100) Arousal = 100;
-											if ((Player.ArousalSettings.AffectExpression == null) || Player.ArousalSettings.AffectExpression) ActivityExpression(Player, Arousal);
 											ActivitySetArousal(Player, Arousal);
-											if (Arousal == 100) ActivityOrgasmPrepare(Player);
+											if ((Player.ArousalSettings.AffectExpression == null) || Player.ArousalSettings.AffectExpression) ActivityExpression(Player, Player.ArousalSettings.Progress);
+											if (Player.ArousalSettings.Progress == 100) ActivityOrgasmPrepare(Player);
 										}
 										return;
 									}
@@ -581,7 +579,6 @@ function ChatRoomCharacterUpdate(C) {
 		ActivePose: C.ActivePose,
 		Appearance: ServerAppearanceBundle(C.Appearance)
 	};
-	if (C.ID == 0) data.ArousalSettings = C.ArousalSettings;
 	ServerSend("ChatRoomCharacterUpdate", data);
 }
 
@@ -846,6 +843,31 @@ function ChatRoomSyncPose(data) {
 			for (var C = 0; C < ChatRoomData.Character.length; C++)
 				if (ChatRoomData.Character[C].MemberNumber == data.MemberNumber)
 					ChatRoomData.Character[C].ActivePose = data.Pose;
+			return;
+
+		}
+}
+
+// Updates a single character arousal progress in the chatroom
+function ChatRoomSyncArousal(data) {
+	if ((data == null) || (typeof data !== "object")) return;
+	for (var C = 0; C < ChatRoomCharacter.length; C++)
+		if ((ChatRoomCharacter[C].MemberNumber == data.MemberNumber) && (ChatRoomCharacter[C].ArousalSettings != null)) {
+
+			// Sets the active pose
+			ChatRoomCharacter[C].ArousalSettings.OrgasmTimer = data.OrgasmTimer;
+			ChatRoomCharacter[C].ArousalSettings.Progress = data.Progress;
+			ChatRoomCharacter[C].ArousalSettings.ProgressTimer = data.ProgressTimer;
+			if ((ChatRoomCharacter[C].ArousalSettings.AffectExpression == null) || ChatRoomCharacter[C].ArousalSettings.AffectExpression) ActivityExpression(ChatRoomCharacter[C], ChatRoomCharacter[C].ArousalSettings.Progress);
+
+			// Keeps a copy of the previous version
+			for (var C = 0; C < ChatRoomData.Character.length; C++)
+				if (ChatRoomData.Character[C].MemberNumber == data.MemberNumber) {
+					ChatRoomData.Character[C].ArousalSettings.OrgasmTimer = data.OrgasmTimer;
+					ChatRoomData.Character[C].ArousalSettings.Progress = data.Progress;
+					ChatRoomData.Character[C].ArousalSettings.ProgressTimer = data.ProgressTimer;
+					ChatRoomData.Character[C].Appearance = ChatRoomCharacter[C].Appearance;
+				}
 			return;
 
 		}
