@@ -550,7 +550,7 @@ function CharacterSetFacialExpression(C, AssetGroup, Expression, Timer) {
 					C.Appearance[A].Property.Expression = Expression;
 					CharacterRefresh(C, false);
 					if (CurrentScreen == "ChatRoom") {
-						if (C.ID == 0) ServerSend("ChatRoomCharacterExpressionUpdate", { Name: Expression, Group: AssetGroup });
+						if (C.ID == 0) ServerSend("ChatRoomCharacterExpressionUpdate", { Name: Expression, Group: AssetGroup, Appearance: ServerAppearanceBundle(C.Appearance) });
 						else ChatRoomCharacterUpdate(C);
 					}
 				}
