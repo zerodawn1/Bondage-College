@@ -537,10 +537,9 @@ function ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem
 		// Prepares the message
 		var msg = "";
 		var Dictionary = [];
-
 		if (Action == null) {
 			if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null) && (DialogProgressPrevItem.Asset.Name == DialogProgressNextItem.Asset.Name) && (DialogProgressPrevItem.Color != DialogProgressNextItem.Color)) msg = "ActionChangeColor";
-		  else if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null) && !DialogProgressNextItem.Asset.IsLock) msg = "ActionSwap";
+			else if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null) && !DialogProgressNextItem.Asset.IsLock) msg = "ActionSwap";
 			else if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null) && DialogProgressNextItem.Asset.IsLock) msg = "ActionAddLock";
 			else if (InventoryItemHasEffect(DialogProgressNextItem, "Lock")) msg = "ActionLock";
 			else if (DialogProgressNextItem != null) msg = "ActionUse";
@@ -555,9 +554,23 @@ function ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem
 		if (DialogProgressNextItem != null) Dictionary.push({Tag: "NextAsset", AssetName: DialogProgressNextItem.Asset.Name});
 		if (C.FocusGroup != null) Dictionary.push({ Tag: "FocusAssetGroup", AssetGroupName: C.FocusGroup.Name});
 
+		// Prepares the item packet to be sent to other players in the chatroom
+		// PREVIOUS CALL: ChatRoomCharacterUpdate(C);
+		if (C.FocusGroup != null) {
+			var P = {};
+			P.Target = C.MemberNumber;
+			P.Group = C.FocusGroup.Name;
+			P.Name = (DialogProgressNextItem == null) ? null : ((DialogProgressNextItem.Asset.IsLock) ? DialogProgressPrevItem.Asset.Name : DialogProgressNextItem.Asset.Name);
+			P.Color = (DialogProgressNextItem == null) ? null : DialogProgressNextItem.Color;
+			P.Difficulty = (DialogProgressNextItem == null) ? null : DialogProgressNextItem.Difficulty;
+			P.LockName = ((DialogProgressNextItem != null) && DialogProgressNextItem.Asset.IsLock) ? DialogProgressNextItem.Asset.Name : null;
+			P.LockMember = ((DialogProgressNextItem != null) && (DialogProgressPrevItem != null) && (DialogProgressPrevItem.Property != null) && DialogProgressNextItem.Asset.IsLock) ? DialogProgressPrevItem.Property.LockMemberNumber : null;
+			P.RemoveTimer = ((DialogProgressNextItem == null) || (DialogProgressNextItem.Property == null)) ? null : DialogProgressNextItem.Property.RemoveTimer;
+			ServerSend("ChatRoomCharacterItemUpdate", P);
+		}
+
 		// Sends the result to the server and leaves the dialog if we need to
 		ServerSend("ChatRoomChat", { Content: msg, Type: "Action", Dictionary: Dictionary} );
-		ChatRoomCharacterUpdate(C);
 		if (LeaveDialog && (CurrentCharacter != null)) DialogLeave();
 
 	}
@@ -869,6 +882,43 @@ function ChatRoomSyncArousal(data) {
 					ChatRoomData.Character[C].Appearance = ChatRoomCharacter[C].Appearance;
 				}
 			return;
+
+		}
+}
+
+// Updates a single character item in the chatroom
+function ChatRoomSyncItem(data) {
+	if ((data == null) || (typeof data !== "object") || (data.Source == null) || (typeof data.Source !== "number") || (data.Item == null) || (typeof data.Item !== "object") || (data.Item.Target == null) || (typeof data.Item.Target !== "number") || (data.Item.Group == null) || (typeof data.Item.Group !== "string")) return;
+	for (var C = 0; C < ChatRoomCharacter.length; C++)
+		if (ChatRoomCharacter[C].MemberNumber == data.Item.Target) {
+
+			// Prevent changing the item if the current item is locked by owner/lover locks
+			var Item = InventoryGet(ChatRoomCharacter[C], data.Item.Group);
+			if ((ChatRoomCharacter[C].Ownership != null) && (ChatRoomCharacter[C].Ownership.MemberNumber != data.Source) && InventoryOwnerOnlyItem(Item)) return;
+			if ((ChatRoomCharacter[C].Lovership != null) && (ChatRoomCharacter[C].Lovership.MemberNumber != data.Source) && InventoryLoverOnlyItem(Item))
+				if ((ChatRoomCharacter[C].Ownership == null) || (ChatRoomCharacter[C].Ownership.MemberNumber != data.Source))
+					return;
+
+			// If there's no name in the item packet, we remove the item instead of wearing it
+			if ((data.Item.Name == null) || (data.Item.Name == "")) {
+				InventoryRemove(ChatRoomCharacter[C], data.Item.Group);
+			} else {
+				
+				console.log(data);
+
+				// Wear the item and applies locks or timers if we need to
+				InventoryWear(ChatRoomCharacter[C], data.Item.Name, data.Item.Group, data.Item.Color, data.Item.Difficulty);
+				Item = InventoryGet(ChatRoomCharacter[C], data.Item.Group);
+				if (Item != null) {
+					if ((data.Item.LockName != null) && (typeof data.Item.LockName === "string")) InventoryLock(ChatRoomCharacter[C], Item, data.Item.LockName, data.Item.LockMember);
+					if ((data.Item.RemoveTimer != null) && (typeof data.Item.RemoveTimer === "number")) {
+						if (Item.Property == null) Item.Property = {};
+						Item.Property.RemoveTimer = data.Item.RemoveTimer;
+					}
+					ServerValidateProperties(ChatRoomCharacter[C], Item);
+				}
+
+			}
 
 		}
 }
