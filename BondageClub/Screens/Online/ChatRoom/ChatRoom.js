@@ -553,19 +553,20 @@ function ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem
 		if (DialogProgressPrevItem != null) Dictionary.push({Tag: "PrevAsset", AssetName: DialogProgressPrevItem.Asset.Name});
 		if (DialogProgressNextItem != null) Dictionary.push({Tag: "NextAsset", AssetName: DialogProgressNextItem.Asset.Name});
 		if (C.FocusGroup != null) Dictionary.push({ Tag: "FocusAssetGroup", AssetGroupName: C.FocusGroup.Name});
-
+		
 		// Prepares the item packet to be sent to other players in the chatroom
 		// PREVIOUS CALL: ChatRoomCharacterUpdate(C);
 		if (C.FocusGroup != null) {
+			var Item = InventoryGet(C, C.FocusGroup.Name);			
 			var P = {};
 			P.Target = C.MemberNumber;
 			P.Group = C.FocusGroup.Name;
-			P.Name = (DialogProgressNextItem == null) ? null : ((DialogProgressNextItem.Asset.IsLock) ? DialogProgressPrevItem.Asset.Name : DialogProgressNextItem.Asset.Name);
-			P.Color = (DialogProgressNextItem == null) ? null : DialogProgressNextItem.Color;
-			P.Difficulty = (DialogProgressNextItem == null) ? null : DialogProgressNextItem.Difficulty;
-			P.LockName = ((DialogProgressNextItem != null) && DialogProgressNextItem.Asset.IsLock) ? DialogProgressNextItem.Asset.Name : null;
-			P.LockMember = ((DialogProgressNextItem != null) && (DialogProgressPrevItem != null) && (DialogProgressPrevItem.Property != null) && DialogProgressNextItem.Asset.IsLock) ? DialogProgressPrevItem.Property.LockMemberNumber : null;
-			P.RemoveTimer = ((DialogProgressNextItem == null) || (DialogProgressNextItem.Property == null)) ? null : DialogProgressNextItem.Property.RemoveTimer;
+			P.Name = (Item != null) ? Item.Asset.Name : null;
+			P.Color = (Item != null) ? Item.Color : null;
+			P.Difficulty = (Item != null) ? Item.Difficulty : null;
+			P.LockName = ((Item != null) && (Item.Property != null)) ? Item.Property.LockedBy : null; 
+			P.LockMember = ((Item != null) && (Item.Property != null)) ? Item.Property.LockMemberNumber : null; 
+			P.RemoveTimer = ((Item != null) && (Item.Property != null)) ? Item.Property.RemoveTimer : null; 
 			ServerSend("ChatRoomCharacterItemUpdate", P);
 		}
 
@@ -903,8 +904,6 @@ function ChatRoomSyncItem(data) {
 			if ((data.Item.Name == null) || (data.Item.Name == "")) {
 				InventoryRemove(ChatRoomCharacter[C], data.Item.Group);
 			} else {
-				
-				console.log(data);
 
 				// Wear the item and applies locks or timers if we need to
 				InventoryWear(ChatRoomCharacter[C], data.Item.Name, data.Item.Group, data.Item.Color, data.Item.Difficulty);
