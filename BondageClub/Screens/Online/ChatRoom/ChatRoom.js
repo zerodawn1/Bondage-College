@@ -76,6 +76,7 @@ function ChatRoomLoad() {
 	ElementRemove("InputSize");
 	ChatRoomCreateElement();
 	ChatRoomCharacterUpdate(Player);
+	ActivityChatRoomArousalSync(Player);
 }
 
 // When the chat room selection must start
