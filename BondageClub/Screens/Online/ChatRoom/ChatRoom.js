@@ -916,7 +916,7 @@ function ChatRoomSyncItem(data) {
 					if (Item != null) {
 						Item.Property = data.Item.Property;
 						ServerValidateProperties(ChatRoomCharacter[C], Item);
-						CharacterRefresh(ChatRoomCharacter[C], false);
+						CharacterRefresh(ChatRoomCharacter[C]);
 					}
 				}
 
