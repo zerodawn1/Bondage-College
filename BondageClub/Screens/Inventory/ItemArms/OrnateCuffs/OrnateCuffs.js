@@ -77,7 +77,8 @@ function InventoryItemArmsOrnateCuffsSetPose(NewPose) {
 	var Dictionary = [];
 	Dictionary.push({Tag: "SourceCharacter", Text: Player.Name, MemberNumber: Player.MemberNumber});
 	Dictionary.push({Tag: "DestinationCharacter", Text: C.Name, MemberNumber: C.MemberNumber});
-	ChatRoomPublishCustomAction(msg, true, Dictionary);
+	ChatRoomPublishCustomAction(msg, true, Dictionary, false);
+	ChatRoomCharacterUpdate(C);
 
 	// Rebuilds the inventory menu
 	if (DialogInventory != null) {
