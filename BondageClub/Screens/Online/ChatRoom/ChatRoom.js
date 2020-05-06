@@ -578,7 +578,6 @@ function ChatRoomCharacterItemUpdate(C, Group) {
 		P.Color = ((Item != null) && (Item.Color != null)) ? Item.Color : "Default";
 		P.Difficulty = SkillGetLevel(Player, "Bondage");
 		P.Property = ((Item != null) && (Item.Property != null)) ? Item.Property : null;
-		console.log(P);
 		ServerSend("ChatRoomCharacterItemUpdate", P);
 	}
 }
