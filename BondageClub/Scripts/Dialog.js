@@ -1098,7 +1098,7 @@ function DialogDrawItemMenu(C) {
 			// The player can use another item right away, for another character we jump back to her reaction
 			if (C.ID == 0) {
 				if (DialogProgressNextItem == null) SkillProgress("Evasion", DialogProgressSkill);
-				if ((DialogProgressPrevItem == null) && (DialogProgressNextItem != null)) SkillProgress("SelfBondage", DialogProgressSkill);
+				if ((DialogProgressPrevItem == null) && (DialogProgressNextItem != null)) SkillProgress("SelfBondage", (DialogProgressSkill + DialogProgressNextItem.Asset.SelfBondage) * 2);
 				if ((DialogProgressNextItem == null) || !DialogProgressNextItem.Asset.Extended) {
 					DialogInventoryBuild(C);
 					DialogProgress = -1;
