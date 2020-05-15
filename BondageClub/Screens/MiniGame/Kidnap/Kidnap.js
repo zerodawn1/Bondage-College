@@ -48,10 +48,10 @@ function KidnapInventoryBuild() {
 	if (KidnapOpponent.FocusGroup != null)
 		for(var A = 0; A < Player.Inventory.length; A++)
 			if ((Player.Inventory[A].Asset != null) && (Player.Inventory[A].Asset.Group.Name == KidnapOpponent.FocusGroup.Name) && Player.Inventory[A].Asset.Enable && Player.Inventory[A].Asset.Wear && Player.Inventory[A].Asset.Random)
-				DialogInventoryAdd(KidnapOpponent, Player.Inventory[A], false);
+				DialogInventoryAdd(KidnapOpponent, Player.Inventory[A], false, 1);
+	DialogInventorySort();
 
 }
-
 
 // Sets the new kidnap mode and timer
 function KidnapSetMode(NewMode) {
@@ -142,6 +142,11 @@ function KidnapUpperHandMoveAvailable(MoveType, DoMove) {
 		var I = InventoryGet(C, KidnapUpperHandMoveType[MoveType].replace("Undo", ""));
 		if ((I != null) && ((C.ID != 0) || !InventoryItemHasEffect(I, "Lock", true))) {
 			if (DoMove) InventoryRemove(C, KidnapUpperHandMoveType[MoveType].replace("Undo", ""));
+			// If removing a collar, also remove collar accessories & restraints
+			if (DoMove && MoveType == 5) {
+				InventoryRemove(C, "ItemNeckAccessories");
+				InventoryRemove(C, "ItemNeckRestraints");
+			}
 			return true;
 		}
 	}

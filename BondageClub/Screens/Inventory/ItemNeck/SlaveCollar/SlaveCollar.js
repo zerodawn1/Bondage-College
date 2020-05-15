@@ -110,7 +110,7 @@ function InventoryItemNeckSlaveCollarDraw() {
 
             // In color picking mode, we allow the user to change the collar color
             ElementPosition("InputColor", 1450, 65, 300);
-            ColorPickerDraw(1300, 145, 675, 830, document.getElementById("InputColor"));
+            ColorPickerDraw(1300, 145, 675, 830, document.getElementById("InputColor"), function (Color) { DialogChangeItemColor(C, Color) });
             DrawButton(1665, 25, 90, 90, "", "White", "Icons/ColorSelect.png");
             DrawButton(1775, 25, 90, 90, "", "White", "Icons/ColorCancel.png");
 
@@ -155,7 +155,7 @@ function InventoryItemNeckSlaveCollarClick() {
                     CharacterAppearanceSetColorForGroup(C, Color, "ItemNeck");
                     InventoryItemNeckSlaveCollarColorMode = false;
                     ElementRemove("InputColor");
-                    ChatRoomCharacterUpdate(C);
+                    ChatRoomCharacterItemUpdate(C);
                     if (CurrentScreen != "ChatRoom") CharacterRefresh(C);
                     DialogFocusItem = null;
                 }
@@ -206,5 +206,5 @@ function InventoryItemNeckSlaveCollarSetType(NewType) {
     Dictionary.push({Tag: "DestinationCharacter", Text: C.Name, MemberNumber: C.MemberNumber});
     Dictionary.push({Tag: "SourceCharacter", Text: Player.Name, MemberNumber: Player.MemberNumber});
     ChatRoomPublishCustomAction("SlaveCollarChangeType", true, Dictionary);
-    if (CurrentScreen != "ChatRoom") CharacterRefresh(C);
+    CharacterRefresh(C);
 }

@@ -1,6 +1,18 @@
 SelectItem,,,Select an item to use.
+SelectItemGroup,,,Select an item to use on the GroupName.
 SelectActivity,,,Select an activity.
+SelectActivityGroup,,,Select an activity to use on the GroupName.
 CannotUseOnSelf,,,Cannot use on yourself.
+RequireSelfBondage1,,,Require self-bondage 1.
+RequireSelfBondage2,,,Require self-bondage 2.
+RequireSelfBondage3,,,Require self-bondage 3.
+RequireSelfBondage4,,,Require self-bondage 4.
+RequireSelfBondage5,,,Require self-bondage 5.
+RequireSelfBondage6,,,Require self-bondage 6.
+RequireSelfBondage7,,,Require self-bondage 7.
+RequireSelfBondage8,,,Require self-bondage 8.
+RequireSelfBondage9,,,Require self-bondage 9.
+RequireSelfBondage10,,,Require self-bondage 10.
 RemoveClothesForItem,,,Remove some clothes first.
 UnZipSuitForItem,,,Unzip the suit first.
 RemoveSuspensionForItem,,,Remove the suspension first.
@@ -21,12 +33,13 @@ LegsCannotClose,,,Legs cannot close.
 MustBeAbleToKneel,,,Must be able to kneel.
 MustStandUpFirst,,,Must stand up first.
 MustFreeFeetFirst,,,Must free feet first.
+MustFreeArmsFirst,,,Must free arms first.
 MustFreeLegsFirst,,,Must free legs first.
 MustFreeHandsFirst,,,Must free hands first.
 RemoveShacklesFirst,,,Must remove shackles first.
 CanOnlyEquipOneOfThisGag,,,Gag type already present.
 CannotBeUsedOverFlatGag,,,Cannot be used on a flat gag.
-CannotUseMultipleCorsetGags,,,Corset Gag already present.
+CannotUseMultipleCorsetGags,,,Corset gag already present.
 Cancel,,,Cancel
 Exit,,,Back to character
 Next,,,View next items
@@ -39,10 +52,11 @@ Lock,,,Use a lock
 Unlock,,,Unlock the item
 InspectLock,,,Inspect the lock
 Remote,,,Use your remote
-DialogNormalMode,,,Exit Permission Mode
-DialogPermissionMode,,,Edit Item Permissions
-Activity,,,Sexual Activities
-ButtPump,,,Use the Butt Plug's pump
+DialogNormalMode,,,Exit permission mode
+DialogPermissionMode,,,Edit item permissions
+Activity,,,Sexual activities
+UpPosition,,,Show all zones
+ButtPump,,,Use the butt plug's pump
 ColorPick,,,Color of next item
 ColorSelect,,,Use this color
 ColorCancel,,,Default color
@@ -79,6 +93,7 @@ SuctionLevel1,,,Suction Cup level: Light
 SuctionLevel2,,,Suction Cup level: Medium
 SuctionLevel3,,,Suction Cup level: Heavy
 SuctionLevel4,,,Suction Cup level: Max
+ClearFacialExpressions,,,Clear facial expressions
 DeflateIt,,,Deflate it
 PumpIt,,,Pump it
 pumps,,,pumps
@@ -94,6 +109,8 @@ Someone,,,Someone
 KneelDown,,,SourceCharacter kneels down
 StandUp,,,SourceCharacter stands up
 ChangeClothes,,,SourceCharacter changes DestinationCharacter clothes.
+LARPChangeTeamClass,,,SourceCharacter selects her team and class.
+LARPGameStart,,,SourceCharacter has started the LARP game.
 Private,,,Private
 Public,,,Public
 Locked,,,Locked
@@ -111,6 +128,7 @@ ReceivedBeep,,,Received at
 YourRoom,,,<i>Your private room</i>
 InRoom,,,in room
 PrivateRoom,,,<i>Private room</i>
+WrestlingRing,,,Wrestling Ring
 Introduction,,,Introduction
 KidnapLeague,,,Kidnappers League
 MaidQuarters,,,Maid Quarters
@@ -157,10 +175,22 @@ AlchemistOffice,,,Alchemist Office
 ResearchPrep,,,Research Lab
 ResearchProgress,,,Research Lab
 HellEntrance,,,Entrance to Hell
+HeavenEntrance,,,Entrance to Heaven
 PirateIsland,,,Pirate Island
 PirateIslandNight,,,Pirate Island Night
 ShipDeck,,,Ship's Deck
+Shipwreck,,,Ship Wreck
 CaptainCabin,,,Captain Cabin
+UnderwaterOne,,,Underwater One
+BeachHotel,,,Beach Hotel
+DystopianCity,,,Dystopian City
+ForestCave,,,Forest Cave
+Kennels,,,Kennels
+LockerRoom,,,Locker Room
+SciFiCell,,,Sci Fi Cell
+SpaceCaptainBedroom,,,Space Station Captain Bedroom
+TiledBathroom,,,Tiled Bathroom
+WoodenCabin,,,Wooden Cabin
 MedinaMarket,,,Medina Market
 ThroneRoom,,,Throne Room
 Dungeon,,,Dungeon
@@ -174,7 +204,8 @@ BarRestaurant,,,Bar Restaurant
 DungeonRuin,,,Ruined Dungeon
 SlipperyClassroom,,,Slippery Classroom
 MiddletownSchool,,,Middletown School
-SchoolRuins,,,Abanoned School
+SchoolHospital,,,School Hospital
+SchoolRuins,,,Abandoned School
 SecretChamber,,,Secret Chamber
 VaultCorridor,,,Vault Corridor
 AncientRuins,,,Ancient Ruins
@@ -219,7 +250,6 @@ ServerMessageOwnerRuleRemoteAllowSelf,,,Your owner is now allowing you to use re
 ServerMessageOwnerRuleRemoteConfiscate,,,Your owner has confiscated your remotes.  All your remotes are lost.
 ServerMessageOwnerRuleRemoteBlock,,,Your owner is now preventing you from getting new remotes.  The club shop will not sell remotes to you anymore.
 ServerMessageOwnerRuleRemoteBlockSelf,,,Your owner is now preventing you from using remotes on yourself.
-ServerMessageWhisperBlocked,,,You're on SourceCharacter blacklist.  Your message was blocked by the server.
 ServerMessageOfferBeginDating,,,"SourceCharacter is asking you to be her girlfriend.  Click on her and manage your relationship to accept, don't do anything to refuse."
 ServerMessageBeginDating,,,The Bondage Club is pleased to announce that SourceCharacter and TargetCharacter are starting a 7 days minimum period as lovers.
 ServerMessageOfferBeginEngagement,,,"SourceCharacter is asking you to become her fiancée.  Click on her and manage your relationship to accept, don't do anything to refuse."
@@ -234,10 +264,11 @@ ServerKick,,,TargetCharacterName was kicked-out by SourceCharacter.
 ServerMoveLeft,,,TargetCharacterName was moved to the left by SourceCharacter.
 ServerMoveRight,,,TargetCharacterName was moved to the right by SourceCharacter.
 ServerSwap,,,SourceCharacter swapped TargetCharacterName and DestinationCharacterName places.
+ServerShuffle,,,SourceCharacter shuffles the position of everyone in the room randomly.
 ServerPromoteAdmin,,,TargetCharacterName was promoted to administrator by SourceCharacter.
 ServerDemoteAdmin,,,TargetCharacterName was demoted from administration by SourceCharacter.
 ServerUpdateRoom,,,SourceCharacter updated the room. Name: ChatRoomName. Limit: ChatRoomLimit.  ChatRoomPrivacy.  ChatRoomLocked.
-ChatRoomHelp,,,"Commands available : * or /me : write an emote, ** or /action : write an action, /coin : flip a coin, /dice Y or XdY : roll X dice with Y-faces, /friendlistadd [ID], /friendlistremove [ID], /whitelistadd [ID], /whitelistremove [ID], /blacklistadd [ID], /blacklistremove [ID], /kick [ID], /ban [ID], /unban [ID], /promote [ID], /demote [ID]"
+ChatRoomHelp,,,"Commands available : /help : show this help text, * or /me : write an emote, ** or /action : write an action, click on someone's name on the left to whisper, PgUp/PgDn keys to navigate chat input history, /coin : flip a coin, /dice Y or XdY : roll X dice with Y-sides (from 2 to 100 sides), /friendlistadd [ID], /friendlistremove [ID], /whitelistadd [ID], /whitelistremove [ID], /blacklistadd [ID], /blacklistremove [ID], /ghostadd [ID], /ghostremove [ID], /kick [ID], /ban [ID], /unban [ID], /promote [ID], /demote [ID]"
 ActionSwap,,,SourceCharacter swaps a PrevAsset for a NextAsset on DestinationCharacter FocusAssetGroup.
 ActionUse,,,SourceCharacter uses a NextAsset on DestinationCharacter FocusAssetGroup.
 ActionChangeColor,,,SourceCharacter changes the color of NextAsset on DestinationCharacter FocusAssetGroup.
@@ -276,6 +307,9 @@ RestartTimer,,,Restart Timer
 TimerAddTime,,,SourceCharacter adds TimerTime TimerUnit to the padlock on DestinationCharacter FocusAssetGroup.
 TimerRemoveTime,,,SourceCharacter removes TimerTime TimerUnit to the padlock on DestinationCharacter FocusAssetGroup.
 TimerAddRemoveUnknownTime,,,an unknown amount of time
+CombinationFail,,,SourceCharacter tries the code CombinationNumber but fails to open the padlock on DestinationCharacter FocusAssetGroup.
+CombinationChangeSuccess,,,SourceCharacter changes the code of the padlock on DestinationCharacter FocusAssetGroup.
+CombinationChangeFail,,,SourceCharacter tries to change the code of the padlock on DestinationCharacter FocusAssetGroup but fails.
 EnableRandomInput,,,Enable random input of time from everyone else
 AddTimerTimeMinutes,,,Add TimerTime minutes to the Timer
 AddTimerTime,,,Add
@@ -286,6 +320,12 @@ ShowItemWithTimerRemaining,,,Show the time remaining/being added
 Random,,,Random
 Minutes,,,minutes
 Hours,,,hours
+CombinationOld,,,Current Code :
+CombinationNew,,,New Code :
+CombinationEnter,,,Open lock
+CombinationChange,,,Change code
+CombinationError,,,Wrong code
+CombinationErrorInput,,,Use 4 digits as a code
 SelectBondagePosition,,,Select the bondage position
 SelectTapeWrapping,,,Select the tape wrapping
 SelectAttachmentState,,,Select an item attachment
@@ -294,6 +334,7 @@ CannotUnlockIfElbowBound,,,A victim cannot unlock herself if her elbows are boun
 ItemMiscMetalPadlockIntro,,,"""From your friendly hardware store"""
 ItemMiscIntricatePadlockIntro,,,"""To keep your loved one secure"""
 ItemMiscTimerPadlockIntro,,,You can restart the timer but cannot unlock
+ItemMiscCombinationPadlockIntro,,,"""If at first, you don't succeed..."""
 ItemMiscOwnerPadlockIntro,,,"""Never forget who you belong to"""
 ItemMiscOwnerPadlockDetail,,,Can only be locked or unlocked by her owner
 ItemMiscOwnerTimerPadlockIntro,,,"""Never forget who you belong to"""
@@ -304,6 +345,8 @@ ItemMiscLoversTimerPadlockIntro,,,"""A loving embrace"""
 ItemMiscLoversTimerPadlockDetail,,,Can only be unlocked or extended by her lover
 ItemMiscMistressPadlockIntro,,,Can only be locked or unlocked by a Club Mistress
 ItemMiscMistressTimerPadlockIntro,,,Can only be unlocked or extended by a Club Mistress
+ItemMiscExclusivePadlockIntro,,,"""Keeping you safe from yourself"""
+ItemMiscExclusivePadlockDetail,,,Can be opened by anyone but the wearer
 LeatherCuffsPoseNone,,,Detached
 LeatherCuffsPoseWrist,,,Bind wrists
 LeatherCuffsPoseElbow,,,Bind elbows
@@ -455,14 +498,22 @@ RopeBondageBoxTie,,,Box Tie
 RopeBondageHogtied,,,Hogtie
 RopeBondageSuspension,,,Suspension Tie
 RopeBondageSuspensionHogtied,,,Suspension Hogtie
+RopeBondageWristElbowTie,,,Wrist and Elbow Tie
+RopeBondageWristTie,,,Wrist Tie
+RopeBondageRopeCuffs,,,Rope Cuffs
+RopeBondageWristElbowHarnessTie,,,Wrist and Elbow Harness Tie
 RopeBondageAllFours,,,All Fours
 RopeBondageCrotch,,,Crotch Rope
 RopeBondageHarness,,,Body Harness
+RopeBondageStar,,,Star Harness Tie
+RopeBondageWaist,,,Waist Rope
 RopeBondageDiamond,,,Diamond Style
 NoRequirement,,,No Requirement
 RequireBondageLevel,,,Need Bondage ReqLevel
 RopeHarnessSetCrotch,,,SourceCharacter uses the rope on TargetCharacter to do a crotch rope tie.
 RopeHarnessSetHarness,,,SourceCharacter uses the rope on TargetCharacter to do a body harness.
+RopeHarnessSetStar,,,SourceCharacter uses the rope on TargetCharacter to tie a star harness.
+RopeHarnessSetWaist,,,SourceCharacter uses the rope on TargetCharacter to tie a waist rope on her.
 RopeHarnessSetDiamond,,,SourceCharacter uses the rope on TargetCharacter to do a diamond style harness.
 LegRopeSetBasic,,,SourceCharacter uses the rope on TargetCharacter to do a basic tie.
 LegRopeSetMermaid,,,SourceCharacter uses the rope on TargetCharacter to do a mermaid tie.
@@ -470,6 +521,10 @@ LegRopeSetSuspension,,,SourceCharacter uses the rope on TargetCharacter to do a 
 ArmsRopeSetBoxTie,,,SourceCharacter uses the rope on TargetCharacter to do a box tie.
 ArmsRopeSetHogtied,,,SourceCharacter uses the rope on TargetCharacter to do a hogtie.
 ArmsRopeSetSuspensionHogtied,,,SourceCharacter uses the rope on TargetCharacter to do a suspension hogtie.
+ArmsRopeSetWristElbowTie,,,SourceCharacter uses the rope on TargetCharacter to tie her wrists and elbows together behind her back.
+ArmsRopeSetWristTie,,,SourceCharacter uses the rope on TargetCharacter to tie her wrists together behind her back.
+ArmsRopeSetRopeCuffs,,,SourceCharacter uses the rope on TargetCharacter to tie rope cuffs on her wrists
+ArmsRopeSetWristElbowHarnessTie,,,SourceCharacter uses the rope on TargetCharacter to tie her wrists and elbows in a harness behind her back.
 ArmsRopeSetAllFours,,,SourceCharacter uses the rope on TargetCharacter to have her crawling on all fours.
 Intensity-1,,,Item intensity: Disabled
 Intensity0,,,Item intensity: Low
@@ -618,6 +673,21 @@ BeltIncreaseTo0,,,DestinationCharacterName vibrating wand starts teasing her lig
 BeltIncreaseTo1,,,DestinationCharacterName vibrating wand builds up to a moderate pace.
 BeltIncreaseTo2,,,DestinationCharacterName vibrating wand starts buzzing strongly!
 BeltIncreaseTo3,,,DestinationCharacterName vibrating wand jumps up to maximum intensity!
+HempRopeBeltecreaseTo0,,,DestinationCharacterName vibrating wand slows down into a light tease.
+HempRopeBeltDecreaseTo1,,,DestinationCharacterName vibrating wand returns to a moderate pace.
+HempRopeBeltDecreaseTo2,,,DestinationCharacterName vibrating wand slows down a tiny bit.
+HempRopeBeltIncreaseTo0,,,DestinationCharacterName vibrating wand starts teasing her lightly.
+HempRopeBeltIncreaseTo1,,,DestinationCharacterName vibrating wand builds up to a moderate pace.
+HempRopeBeltIncreaseTo2,,,DestinationCharacterName vibrating wand starts buzzing strongly!
+HempRopeBeltsIncreaseTo3,,,DestinationCharacterName vibrating wand jumps up to maximum intensity!
+SpreaderVibratingDildoBarDecreaseTo-1,,,The dildo on DestinationCharacterName Vibrating Spreader Dildo Bar stops vibrating.
+SpreaderVibratingDildoBarDecreaseTo0,,,The dildo on DestinationCharacterName Vibrating Spreader Dildo Bar slows down into a light tease.
+SpreaderVibratingDildoBarDecreaseTo1,,,The dildo on DestinationCharacterName Vibrating Spreader Dildo Bar returns to a moderate pace.
+SpreaderVibratingDildoBarDecreaseTo2,,,The dildo on DestinationCharacterName Vibrating Spreader Dildo Bar slows down a tiny bit.
+SpreaderVibratingDildoBarIncreaseTo0,,,The dildo on DestinationCharacterName Vibrating Spreader Dildo Bar starts teasing her lightly.
+SpreaderVibratingDildoBarIncreaseTo1,,,The dildo on DestinationCharacterName Vibrating Spreader Dildo Bar builds up to a moderate pace.
+SpreaderVibratingDildoBarIncreaseTo2,,,The dildo on DestinationCharacterName Vibrating Spreader Dildo Bar starts buzzing strongly!
+SpreaderVibratingDildoBarIncreaseTo3,,,The dildo on DestinationCharacterName Vibrating Spreader Dildo Bar jumps up to maximum intensity!
 BPumpsdeflatesTo0,,,SourceCharacter deflates DestinationCharacter butt pump till it's empty.
 BPumpsdeflatesTo1,,,SourceCharacter deflates DestinationCharacter butt pump till only slighty filled.
 BPumpsdeflatesTo2,,,SourceCharacter deflates DestinationCharacter butt pump till it's half full.
@@ -946,15 +1016,28 @@ ChainBondageBoxTie,,,Box Tie
 ChainBondageHogtied,,,Hogtie
 ChainBondageSuspension,,,Suspension Tie
 ChainBondageSuspensionHogtied,,,Suspension Hogtie
+ChainBondageWristElbowTie,,,Wrist and Elbow Tie
+ChainBondageWristElbowHarnessTie,,,Wrist and Elbow Harness Tie
+ChainBondageWristTie,,,Wrist Tie
+ChainBondageChainCuffs,,,Chain Cuffs
 ChainBondageAllFours,,,All Fours
 LegChainSetBasic,,,SourceCharacter uses the chain on TargetCharacter to do a basic tie.
 LegChainSetStrict,,,SourceCharacter uses the chain on TargetCharacter to do a strict tie.
 LegChainSetSuspension,,,SourceCharacter uses the chain on TargetCharacter to do a suspension tie.
 ArmsChainSetBoxTie,,,SourceCharacter uses the chain on TargetCharacter to do a box tie.
 ArmsChainSetHogtied,,,SourceCharacter uses the chain on TargetCharacter to do a hogtie.
-ArmsChainSetSuspensionHogtied,,,SourceCharacter uses the Chain on TargetCharacter to do a suspension hogtie.
-ArmsChainSetAllFours,,,SourceCharacter uses the Chain on TargetCharacter to have her crawling on all fours.
+ArmsChainSetSuspensionHogtied,,,SourceCharacter uses the chain on TargetCharacter to do a suspension hogtie.
+ArmsChainSetWristElbowTie,,,SourceCharacter uses the chain on TargetCharacter to tie her wrists and elbows together behind her back.
+ArmsChainSetWristTie,,,SourceCharacter uses the chain on TargetCharacter to tie her wrists together behind her back.
+ArmsChainSetChainCuffs,,,SourceCharacter uses the chain on TargetCharacter to tie chain cuffs on her wrists.
+ArmsChainSetAllFours,,,SourceCharacter uses the chain on TargetCharacter to have her crawling on all fours.
+ArmsChainSetWristElbowHarnessTie,,,SourceCharacter uses the chain on TargetCharacter to tie her wrists and elbows in a harness behind her back.
 MermaidSuitTypeZipped,,,Zipped Up
 MermaidSuitTypeUnZip,,,Unzipped
 MermaidSuitSetZipped,,,SourceCharacter zips up TargetCharacter suit.
 MermaidSuitSetUnZip,,,SourceCharacter unzips TargetCharacter suit.
+SelectBackShield,,,Selected chastity belt backing
+ChastityOpenBack,,,Open Back
+ChastityClosedBack,,,Closed Back
+ChastityBeltBackShieldOpenBack,,,SourceCharacter removes the shield from the back of DestinationCharacter's belt.
+ChastityBeltBackShieldClosedBack,,,SourceCharacter adds the shield to the back of DestinationCharacter's belt.
