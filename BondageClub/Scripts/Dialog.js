@@ -293,7 +293,7 @@ function DialogInventoryBuild(C) {
 		var Item = null;
 		var CurItem = null;
 		for(var A = 0; A < C.Appearance.length; A++)
-			if ((C.Appearance[A].Asset.Group.Name == C.FocusGroup.Name) && C.Appearance[A].Asset.DynamicAllowInventoryAdd()) {
+			if ((C.Appearance[A].Asset.Group.Name == C.FocusGroup.Name) && C.Appearance[A].Asset.DynamicAllowInventoryAdd(C)) {
 				DialogInventoryAdd(C, C.Appearance[A], true, 1);
 				CurItem = C.Appearance[A];
 				break;
@@ -308,13 +308,13 @@ function DialogInventoryBuild(C) {
 		} else {
 			// Second, we add everything from the victim inventory
 			for(var A = 0; A < C.Inventory.length; A++)
-				if ((C.Inventory[A].Asset != null) && (C.Inventory[A].Asset.Group.Name == C.FocusGroup.Name) && C.Inventory[A].Asset.DynamicAllowInventoryAdd())
+				if ((C.Inventory[A].Asset != null) && (C.Inventory[A].Asset.Group.Name == C.FocusGroup.Name) && C.Inventory[A].Asset.DynamicAllowInventoryAdd(C))
 					DialogInventoryAdd(C, C.Inventory[A], false, 2);
 
 			// Third, we add everything from the player inventory if the player isn't the victim
 			if (C.ID != 0)
 				for(var A = 0; A < Player.Inventory.length; A++)
-					if ((Player.Inventory[A].Asset != null) && (Player.Inventory[A].Asset.Group.Name == C.FocusGroup.Name) && Player.Inventory[A].Asset.DynamicAllowInventoryAdd())
+					if ((Player.Inventory[A].Asset != null) && (Player.Inventory[A].Asset.Group.Name == C.FocusGroup.Name) && Player.Inventory[A].Asset.DynamicAllowInventoryAdd(C))
 						DialogInventoryAdd(C, Player.Inventory[A], false, 2);
 
 		}
@@ -691,7 +691,7 @@ function DialogItemClick(ClickItem) {
 	}
 
 	// If the item is blocked for that character, we do not use it
-	if (InventoryIsPermissionBlocked(C, ClickItem.Asset.Name, ClickItem.Asset.Group.Name)) return;
+	if (InventoryIsPermissionBlocked(C, ClickItem.Asset.DynamicName(Player), ClickItem.Asset.DynamicGroupName)) return;
 
 	// If the item is limited for that character, based on item permissions
 	if (!InventoryCheckLimitedPermission(C, ClickItem)) return;
@@ -1049,14 +1049,14 @@ function DialogDrawItemMenu(C) {
 		for (var I = DialogInventoryOffset; (I < DialogInventory.length) && (I < DialogInventoryOffset + 12); I++) {
 			var Item = DialogInventory[I];
 			var Hover = (MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && !CommonIsMobile;
-			var Block = InventoryIsPermissionBlocked(C, Item.Asset.Name, Item.Asset.Group.Name);
+			var Block = InventoryIsPermissionBlocked(C, Item.Asset.DynamicName(Player), Item.Asset.DynamicGroupName);
 			var Limit = InventoryIsPermissionLimited(C, Item.Asset.Name, Item.Asset.Group.Name);
 			var Blocked = DialogInventory[I].SortOrder.startsWith("3");
 			DrawRect(X, Y, 225, 275, (DialogItemPermissionMode && C.ID == 0) ? 
 				(DialogInventory[I].Worn ? "gray" : Block ? Hover ? "red" : "pink" : Limit ? Hover ? "orange" : "#fed8b1" : Hover ? "green" : "lime") :
 				((Hover && !Blocked) ? "cyan" : DialogInventory[I].Worn ? "pink" : Blocked ? "gray" : "white"));
 			if (Item.Worn && InventoryItemHasEffect(InventoryGet(C, Item.Asset.Group.Name), "Vibrating", true)) DrawImageResize("Assets/" + Item.Asset.Group.Family + "/" + Item.Asset.Group.Name + "/Preview/" + Item.Asset.Name + ".png", X + Math.floor(Math.random() * 3) + 1, Y + Math.floor(Math.random() * 3) + 1, 221, 221);
-			else DrawImageResize("Assets/" + Item.Asset.Group.Family + "/" + Item.Asset.Group.Name + "/Preview/" + Item.Asset.Name + Item.Asset.DynamicPreviewIcon(Player) + ".png", X + 2, Y + 2, 221, 221);
+			else DrawImageResize("Assets/" + Item.Asset.Group.Family + "/" + Item.Asset.DynamicGroupName + "/Preview/" + Item.Asset.Name + Item.Asset.DynamicPreviewIcon(CharacterGetCurrent()) + ".png", X + 2, Y + 2, 221, 221);
 			DrawTextFit(Item.Asset.DynamicDescription(Player), X + 112, Y + 250, 221, "black");
 			if (Item.Icon != "") DrawImage("Icons/" + Item.Icon + ".png", X + 2, Y + 110);
 			X = X + 250;
