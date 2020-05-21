@@ -505,16 +505,11 @@ function CharacterRelease(C) {
 	CharacterRefresh(C);
 }
 
-// Removes all locks from the character except owner and lover locks
-function CharacterUnlockCombinationLock(C) {
+// Removes all locks that matches LockName from a character
+function CharacterReleaseFromLock(C, LockName) {
 	for (var A = 0; A < C.Appearance.length; A++)
-		if (C.Appearance[A].Property && C.Appearance[A].Property.LockedBy == "CombinationPadlock") {
-			for (var E = 0; E < C.Appearance[A].Property.Effect.length; E++)
-				if (C.Appearance[A].Property.Effect == "Lock") C.Appearance[A].Property.Effect.splice(E, 1);
-			C.Appearance[A].Property.LockMemberNumber = null;
-			C.Appearance[A].Property.LockedBy = null;
-		}
-	CharacterRefresh(C);
+		if ((C.Appearance[A].Property != null) && (C.Appearance[A].Property.LockedBy == LockName))
+			InventoryUnlock(C, C.Appearance[A]);
 }
 
 // Removes any binding item from the character if there's no specific padlock on it
