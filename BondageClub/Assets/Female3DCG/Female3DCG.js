@@ -2151,11 +2151,11 @@ var AssetFemale3DCG = [
 			{ Name: "LeatherToeCuffs", Value: 50, Difficulty: 3, Time: 10, RemoveTime: 5, AllowLock: true, Prerequisite: "ToeTied", Hide: ["Shoes"], SetPose: ["LegsClosed"], Effect: ["Freeze", "Prone"] },
 			{ Name: "ToeTie", Value: 15, Difficulty: 2, Time: 10, RemoveTime: 5, DefaultColor: "#956B1C", Prerequisite: "ToeTied", Hide: ["Shoes"], SetPose: ["LegsClosed"], Effect: ["Freeze", "Prone"] },
 			{ Name: "ThighHighLatexHeels", Value: -1, Time: 10, RemoveTime: 15, AllowLock: true, BuyGroup: "ThighHighLatexHeels", Hide: ["Shoes"], Alpha: [[75, 850, 140, 200], [290, 850, 140, 200]], Height: 30 },
-			{ Name: "LockingHeels", Value: 40, Difficulty: 6, Time: 10, RemoveTime: 15, AllowLock: true, Hide: ["Shoes"], Height: 15},
-			{ Name: "LockingHeels2", Value: 40, Difficulty: 7, Time: 10, RemoveTime: 15, AllowLock: true, Hide: ["Shoes"], Height: 15},
-			{ Name: "LockingShoes1", Value: 20, Difficulty: 5, Time: 5, RemoveTime: 8, AllowLock: true, Hide: ["Shoes"], Height: 6},
-			{ Name: "LockingShoes2", Value: 30, Difficulty: 6, Time: 5, RemoveTime: 8, AllowLock: true, Hide: ["Shoes"], Height: 6},
-			{ Name: "LockingShoes3", Value: 50, Difficulty: 8, Time: 7, RemoveTime: 14, AllowLock: true, Hide: ["Shoes"], Height: 9,
+			{ Name: "LockingHeels", Value: 20, Difficulty: 6, Time: 10, RemoveTime: 15, AllowLock: true, Hide: ["Shoes"], Height: 15},
+			{ Name: "LockingHeels2", Value: 25, Difficulty: 7, Time: 10, RemoveTime: 15, AllowLock: true, Hide: ["Shoes"], Height: 15},
+			{ Name: "LockingShoes1", Value: 15, Difficulty: 3, Time: 5, RemoveTime: 8, AllowLock: true, Hide: ["Shoes"], Height: 6},
+			{ Name: "LockingShoes2", Value: 20, Difficulty: 4, Time: 5, RemoveTime: 8, AllowLock: true, Hide: ["Shoes"], Height: 6},
+			{ Name: "LockingBoots1", Value: 30, Difficulty: 6, Time: 7, RemoveTime: 14, AllowLock: true, Hide: ["Shoes"], Height: 9,
 		      Layer: [
 				  { Name: "Boots", AllowColorize: true},
 				  { Name: "Straps", AllowColorize: false}
