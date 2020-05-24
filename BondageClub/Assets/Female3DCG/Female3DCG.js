@@ -408,7 +408,8 @@ var AssetFemale3DCG = [
 			{ Name: "SocksStriped1", Value: 10 },
 			{ Name: "LatexSocks1", Value: 30 },
 			{ Name: "FootlessSocks1", Value: 15 },
-			{ Name: "ReverseBunnySuit", Value: 100, BuyGroup: "ReverseBunnySuit"}
+			{ Name: "ReverseBunnySuit", Value: 100, BuyGroup: "ReverseBunnySuit"},
+			{ Name: "LeatherSocks1", Value: 80}
 		],
 		Color: ["Default", "#cccccc", "#aaaaaa", "#888888", "#666666", "#444444", "#222222", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"]
 	},
@@ -2179,6 +2180,13 @@ var AssetFemale3DCG = [
 				  { Name: "Boots", AllowColorize: true},
 				  { Name: "Straps", AllowColorize: false}
 			  ]},
+			  { Name: "LeatherFootMitts1", Value: 35, Difficulty: 4, Time: 6, RemoveTime: 7, AllowLock: true, Hide: ["Shoes", "Socks"], 
+		    Layer: [
+				{ Name: "Mitts", AllowColorize: true},
+				{ Name: "Straps", AllowColorize: false}
+
+			]
+		},
 			AssetSpankingToys
 		],
 		Color: ["Default"]
