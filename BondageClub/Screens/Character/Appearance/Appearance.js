@@ -14,7 +14,7 @@ var CharacterAppearanceReturnModule = "Room";
 var CharacterAppearanceWardrobeOffset = 0;
 var CharacterAppearanceWardrobeMode = false;
 var CharacterAppearanceWardrobeText = "";
-var CharacterAppearanceForceTopPosition = false;
+var CharacterAppearanceForceUpCharacter = 0;
 
 // Builds all the assets that can be used to dress up the character
 function CharacterAppearanceBuildAssets(C) {
@@ -237,18 +237,18 @@ function CharacterAppearanceStripLayer(C) {
 // Returns the character appearance sorted by drawing priority
 function CharacterAppearanceSort(AP) {
 	function GetPriority(A) {
-		return ((A.Property != null) && (A.Property.OverridePriority != null)) ? A.Property.OverridePriority : A.DrawingPriority != null ? A.DrawingPriority : A.Group.DrawingPriority;
+		return ((A.Property != null) && (A.Property.OverridePriority != null)) ? A.Property.OverridePriority : A.Asset.DrawingPriority != null ? A.Asset.DrawingPriority : A.Asset.Group.DrawingPriority;
 	}
 
 	for (var i = 1; i < AP.length; i++) {
 		var key = AP[i];
 		var j = i - 1;
-		var valuePriority = GetPriority(AP[j].Asset);
-		var keyPriority = GetPriority(key.Asset);
+		var valuePriority = GetPriority(AP[j]);
+		var keyPriority = GetPriority(key);
 		while ((j >= 0) && (valuePriority > keyPriority)) {
 			AP[j + 1] = AP[j];
 			j--;
-			if (j >= 0) valuePriority = GetPriority(AP[j].Asset);
+			if (j >= 0) valuePriority = GetPriority(AP[j]);
 		}
 		AP[j + 1] = key;
 	}
@@ -274,7 +274,7 @@ function CharacterAppearanceVisible(C, AssetName, GroupName) {
 
 // Sets the height modifier which determines the character's vertical position on screen
 function CharacterApperanceSetHeightModifier(C) {
-	if (CharacterAppearanceForceTopPosition == true) {
+	if (CharacterAppearanceForceUpCharacter == C.MemberNumber) {
 		C.HeightModifier = 0;
 	} else {
 		var Height = 0;
@@ -744,6 +744,7 @@ function CharacterAppearanceExit(C) {
 	else CommonSetScreen("Character", "Login");
 	CharacterAppearanceReturnRoom = "MainHall";
 	CharacterAppearanceReturnModule = "Room";
+	CharacterAppearanceHeaderText = "";
 }
 
 // When the player is ready, we make sure she at least has an outfit

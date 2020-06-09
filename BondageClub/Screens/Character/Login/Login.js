@@ -4,10 +4,10 @@ var LoginMessage = "";
 var LoginCredits = null;
 var LoginCreditsPosition = 0;
 var LoginThankYou = "";
-var LoginThankYouList = ["Alvin", "Ayezona", "BlueEyedCat", "BlueWiner", "Bryce", "Christian", "Dan", "Dini", "DonOlaf", "Escurse",
-						 "Fluffythewhat", "Greendragon", "John", "Laioken", "Lennart", "Michal", "Mindtie", "Misa", "MuchyCat", "Nera",
-						 "Nick", "Overlord", "Rashiash", "Reire", "Robin", "Rutherford", "Ryner", "Samuel", "Setsu", "Shadow",
-						 "Simeon", "SirCody", "Sky", "Terry", "Thomas", "Trent", "William", "Winterisbest", "Xepherio"];
+var LoginThankYouList = ["Alvin", "Ayezona", "BlueEyedCat", "BlueWiner", "Bryce", "Christian", "Dan", "Dini", "Epona", "Escurse",
+						 "Fluffythewhat", "Greendragon", "John", "Laioken", "Lennart", "Michal", "Mindtie", "Misa", "Mitchell", "MuchyCat",
+						 "Mzklopyu", "Nera", "Nick", "Overlord", "Rashiash", "Ray", "Reire", "Robin", "Rutherford", "Ryner", 
+						 "Samuel", "Setsu", "Shadow", "Sky", "Thomas", "Trent", "William", "Xepherio"];
 var LoginThankYouNext = 0;
 //var LoginLastCT = 0;
 
@@ -247,9 +247,16 @@ function LoginResponse(C) {
 				Player.Owner = (Player.Ownership.Stage == 1) ? Player.Ownership.Name : "";
 
 			// Loads the lovership data
-			Player.Lovership = C.Lovership;
-			if ((Player.Lovership != null) && (Player.Lovership.Name != null))
-				Player.Lover = (Player.Lovership.Stage == 2) ? Player.Lovership.Name : "";
+			Player.Lovership = Array.isArray(C.Lovership) ? C.Lovership.length > 0 ? C.Lovership[0] : null : C.Lovership;
+			if (((C.Lover != null) && (C.Lover != "undefined") && C.Lover.startsWith("NPC-")) ||
+				(Player.Lovership && ((Player.Lovership.Name.startsWith("NPC-") || ((Player.Lovership.Stage) && (Player.Lovership.Stage == 2)))))) {
+				Player.Lover = C.Lover;
+				ServerPlayerSync();
+			}
+			else {
+				Player.Lover = "";
+				ServerPlayerSync();
+			}
 
 			// Gets the online preferences
 			Player.LabelColor = C.LabelColor;
