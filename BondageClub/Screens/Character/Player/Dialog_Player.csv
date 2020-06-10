@@ -524,6 +524,8 @@ DuctTapeHeadSetMummy,,,SourceCharacter wraps DestinationCharacter head in tape w
 SelectRopeBondage,,,Select the rope bondage,,
 RopeBondageBasic,,,Basic Tie,,
 RopeBondageMermaid,,,Mermaid Tie,,
+RopeBondageFullBinding,,,Full Binding Tie,,
+RopeBondageFrogtie,,,Frogtie Tie,,
 RopeBondageBoxTie,,,Box Tie,,
 RopeBondageHogtied,,,Hogtie,,
 ToeTapePoseToes,,,Toes
@@ -551,6 +553,8 @@ RopeHarnessSetWaist,,,SourceCharacter uses the rope on TargetCharacter to tie a 
 RopeHarnessSetDiamond,,,SourceCharacter uses the rope on TargetCharacter to do a diamond style harness.,,
 LegRopeSetBasic,,,SourceCharacter uses the rope on TargetCharacter to do a basic tie.,,
 LegRopeSetMermaid,,,SourceCharacter uses the rope on TargetCharacter to do a mermaid tie.,,
+LegRopeSetFullBinding,,,SourceCharacter uses the rope on TargetCharacter to do a full binding tie.,,
+LegRopeSetFrogtie,,,SourceCharacter uses the rope on TargetCharacter to do a frogtie tie.,,
 LegRopeSetSuspension,,,SourceCharacter uses the rope on TargetCharacter to do a suspension tie.,,
 ArmsRopeSetBoxTie,,,SourceCharacter uses the rope on TargetCharacter to do a box tie.,,
 ArmsRopeSetHogtied,,,SourceCharacter uses the rope on TargetCharacter to do a hogtie.,,
