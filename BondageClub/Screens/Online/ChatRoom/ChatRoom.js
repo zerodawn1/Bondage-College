@@ -193,8 +193,6 @@ function ChatRoomDrawCharacter(DoClick) {
 					ChatRoomOwnershipOption = "";
 					ChatRoomLovershipOption = "";
 					if (ChatRoomCharacter[C].ID != 0) ServerSend("ChatRoomAllowItem", { MemberNumber: ChatRoomCharacter[C].MemberNumber });
-					if (ChatRoomCharacter[C].ID != 0) ServerSend("AccountOwnership", { MemberNumber: ChatRoomCharacter[C].MemberNumber });
-					if (ChatRoomCharacter[C].ID != 0) ServerSend("AccountLovership", { MemberNumber: ChatRoomCharacter[C].MemberNumber });
 					CharacterSetCurrent(ChatRoomCharacter[C]);
 
 				} else
@@ -225,6 +223,13 @@ function ChatRoomDrawCharacter(DoClick) {
 
 		}
 
+}
+
+// Sends the request to the server to check relationships
+function ChatRoomCheckRelationships(){
+	var C = (Player.FocusGroup != null) ? Player : CurrentCharacter;
+	if (C.ID != 0) ServerSend("AccountOwnership", { MemberNumber: C.MemberNumber });
+	if (C.ID != 0) ServerSend("AccountLovership", { MemberNumber: C.MemberNumber });
 }
 
 // Displays /help content to the player if it's their first visit to a chatroom this session
@@ -928,10 +933,8 @@ function ChatRoomSyncItem(data) {
 			if ((Item != null) && (ChatRoomCharacter[C].Ownership != null) && (ChatRoomCharacter[C].Ownership.MemberNumber != data.Source) && InventoryOwnerOnlyItem(Item))
 				if (!ChatRoomAllowChangeLockedItem(data, Item))
 					return;
-			if ((Item != null) && (ChatRoomCharacter[C].Lovership != null) && (ChatRoomCharacter[C].Lovership.MemberNumber != data.Source) && InventoryLoverOnlyItem(Item))
-				if ((ChatRoomCharacter[C].Ownership == null) || (ChatRoomCharacter[C].Ownership.MemberNumber != data.Source))
-					if (!ChatRoomAllowChangeLockedItem(data, Item))
-						return;
+			if ((Item != null) && (ChatRoomCharacter[C].GetLoversNumbers().indexOf(data.Source) < 0) && InventoryLoverOnlyItem(Item)
+				&& ((ChatRoomCharacter[C].Ownership == null) || (ChatRoomCharacter[C].Ownership.MemberNumber != data.Source)) && !ChatRoomAllowChangeLockedItem(data, Item)) { return; }
 
 			// If there's no name in the item packet, we remove the item instead of wearing it
 			ChatRoomAllowCharacterUpdate = false;
