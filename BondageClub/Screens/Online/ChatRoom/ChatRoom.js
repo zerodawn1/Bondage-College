@@ -8,6 +8,7 @@ var ChatRoomTargetMemberNumber = null;
 var ChatRoomOwnershipOption = "";
 var ChatRoomLovershipOption = "";
 var ChatRoomPlayerCanJoin = false;
+var ChatRoomPlayerJoiningAsAdmin = false;
 var ChatRoomMoneyForOwner = 0;
 var ChatRoomQuestGiven = [];
 var ChatRoomSpace = "";
@@ -31,7 +32,7 @@ function ChatRoomCanTakeDrink() { return ((CurrentCharacter != null) && (Current
 function ChatRoomIsCollaredByPlayer() { return ((CurrentCharacter != null) && (CurrentCharacter.Ownership != null) && (CurrentCharacter.Ownership.Stage == 1) && (CurrentCharacter.Ownership.MemberNumber == Player.MemberNumber)) }
 function ChatRoomCanServeDrink() { return ((CurrentCharacter != null) && CurrentCharacter.CanWalk() && (ReputationCharacterGet(CurrentCharacter, "Maid") > 0) && CurrentCharacter.CanTalk()) }
 function ChatRoomCanGiveMoneyForOwner() { return ((ChatRoomMoneyForOwner > 0) && (CurrentCharacter != null) && (Player.Ownership != null) && (Player.Ownership.Stage == 1) && (Player.Ownership.MemberNumber == CurrentCharacter.MemberNumber)) }
-function ChatRoomPlayerIsAdmin() { return ((ChatRoomData.Admin != null) && (ChatRoomData.Admin.indexOf(Player.MemberNumber) >= 0)) }
+function ChatRoomPlayerIsAdmin() { return ((ChatRoomData != null && ChatRoomData.Admin != null) && (ChatRoomData.Admin.indexOf(Player.MemberNumber) >= 0)) }
 function ChatRoomCurrentCharacterIsAdmin() { return ((CurrentCharacter != null) && (ChatRoomData.Admin != null) && (ChatRoomData.Admin.indexOf(CurrentCharacter.MemberNumber) >= 0)) }
 function ChatRoomHasSwapTarget() { return ChatRoomSwapTarget != null }
 
@@ -797,6 +798,23 @@ function ChatRoomSync(data) {
 				Joining = true;
 				ChatRoomPlayerCanJoin = false;
 				CommonSetScreen("Online", "ChatRoom");
+				if (ChatRoomPlayerJoiningAsAdmin) {
+					ChatRoomPlayerJoiningAsAdmin = false;
+					// Check if we should push banned members
+					if (Player.ChatSettings && data.Character.length == 1) {
+						var BanList = [];
+						if (Player.ChatSettings.AutoBanBlackList) {
+							BanList = BanList.concat(Player.BlackList);
+						}
+						if (Player.ChatSettings.AutoBanGhostList) {
+							BanList = BanList.concat(Player.GhostList);
+						}
+						if (BanList.length > 0) { 
+							data.Ban = BanList;
+							ServerSend("ChatRoomAdmin", { MemberNumber: Player.ID, Room: data, Action: "Update" });
+						}
+					}
+				}
 			} else return;
 		}
 
