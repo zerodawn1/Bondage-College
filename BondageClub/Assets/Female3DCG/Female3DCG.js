@@ -1860,7 +1860,7 @@ var AssetFemale3DCG = [
 				]
 			},
 			{ Name: "GasMaskGag", Priority: 48, Value: 40, Difficulty: 4, Time: 20, Random: false, AllowLock: true, BuyGroup: "GasMaskGag", Hide: ["Mouth"], HideItem: ["ItemHeadNoseRing"], Effect: ["GagEasy"], Block: ["ItemMouth2", "ItemMouth3"] },
-			{ Name: "WebGag", Value: 30, Difficulty: 3, Time: 5, RemoveTime: 10, BuyGroup: "WebGag", Prerequisite: "GagFlat", Hide: ["Mouth"], SetPose: ["GagFlat"], Effect: ["GagEasy"]},
+			{ Name: "WebGag", Value: 30, Difficulty: 3, Time: 5, RemoveTime: 10, Random: false, BuyGroup: "WebGag", Prerequisite: "GagFlat", Hide: ["Mouth"], SetPose: ["GagFlat"], Effect: ["GagEasy"]},
 			{ Name: "RopeGag", Value: 60, Difficulty: 3, Time: 20, RemoveTime: 10, BuyGroup: "HempRope", Prerequisite: "GagUnique", DefaultColor: "#956B1C", SetPose: ["GagUnique"], Effect: ["GagLight"]},
 			{ Name: "MilkBottle", Priority: 50, Value: 30, Difficulty: -50, Time: 1, Random: false, AllowLock: false, Left: 199, Top: 0, BuyGroup: "MilkBottle", Prerequisite: "GagUnique", Effect: ["GagVeryLight"], Block: ["ItemMouth2", "ItemMouth3"], ExpressionTrigger: [{ Name: "Light", Group: "Blush", Timer: 5 }, { Name: "Closed", Group: "Eyes", Timer: 5 }], IgnoreParentGroup: true, Extended: true, AllowType: ["Rest", "Raised", "Chug"] },
 			AssetSpankingToys
@@ -1955,7 +1955,7 @@ var AssetFemale3DCG = [
 			{ Name: "StitchedMuzzleGag", Value: 60, Difficulty: 5, Time: 15, AllowLock: true, BuyGroup: "StitchedMuzzleGag", Prerequisite: "GagFlat", Hide: ["Mouth"], SetPose: ["GagFlat"], Effect: ["GagEasy"], Block: ["ItemMouth"] },
 			{ Name: "LatexBallMuzzleGag", Value: 65, Difficulty: 6, Time: 15, AllowLock: true, BuyGroup: "LatexBallMuzzleGag", Prerequisite: "GagFlat", Hide: ["Mouth"], SetPose: ["GagFlat"], Effect: ["GagMedium"], Block: ["ItemMouth"] },
 			{ Name: "GasMaskGag", Priority: 48, Value: 40, Difficulty: 4, Time: 20, Random: false, AllowLock: true, BuyGroup: "GasMaskGag", Hide: ["Mouth"], HideItem: ["ItemHeadNoseRing"], Effect: ["GagEasy"], Prerequisite: "GagFlat",  SetPose: ["GagFlat"],  Block: ["ItemMouth", "ItemMouth3"]},
-			{ Name: "WebGag", Value: 30, Difficulty: 3, Time: 5, RemoveTime: 10, BuyGroup: "WebGag", Prerequisite: "GagFlat", Hide: ["Mouth"], SetPose: ["GagFlat"], Effect: ["GagLight"], Block: ["ItemMouth"] },
+			{ Name: "WebGag", Value: 30, Difficulty: 3, Time: 5, RemoveTime: 10, Random: false, BuyGroup: "WebGag", Prerequisite: "GagFlat", Hide: ["Mouth"], SetPose: ["GagFlat"], Effect: ["GagLight"], Block: ["ItemMouth"] },
 			{ Name: "RopeGag", Value: 60, Difficulty: 3, Time: 20, RemoveTime: 10, Prerequisite: "GagUnique", DefaultColor: "#956B1C", BuyGroup: "HempRope", SetPose: ["GagUnique"], Block: ["ItemMouth"], Effect: ["GagLight"]}
 		],
 		Color: ["Default"]
@@ -2048,7 +2048,7 @@ var AssetFemale3DCG = [
 			{ Name: "StitchedMuzzleGag", Value: 60, Difficulty: 5, Time: 15, AllowLock: true, BuyGroup: "StitchedMuzzleGag", Prerequisite: "GagFlat", Hide: ["Mouth"], SetPose: ["GagFlat"], Effect: ["GagEasy"], Block: ["ItemMouth", "ItemMouth2"] },
 			{ Name: "LatexBallMuzzleGag", Value: 65, Difficulty: 6, Time: 15, AllowLock: true, BuyGroup: "LatexBallMuzzleGag", Prerequisite: "GagFlat", Hide: ["Mouth"], SetPose: ["GagFlat"], Effect: ["GagMedium"], Block: ["ItemMouth", "ItemMouth2"] }, 
 			{ Name: "GasMaskGag", Priority: 48, Value: 40, Difficulty: 4, Time: 20, Random: false, AllowLock: true, BuyGroup: "GasMaskGag", Hide: ["Mouth"], HideItem: ["ItemHeadNoseRing"], Effect: ["GagEasy"], Prerequisite: "GagFlat",  SetPose: ["GagFlat"],  Block: ["ItemMouth", "ItemMouth2"]},
-			{ Name: "WebGag", Value: 30, Difficulty: 3, Time: 5, RemoveTime: 10, BuyGroup: "WebGag", Prerequisite: "GagFlat", Hide: ["Mouth"], SetPose: ["GagFlat"], Effect: ["GagLight"], Block: ["ItemMouth", "ItemMouth2"] },
+			{ Name: "WebGag", Value: 30, Difficulty: 3, Time: 5, RemoveTime: 10, Random: false, BuyGroup: "WebGag", Prerequisite: "GagFlat", Hide: ["Mouth"], SetPose: ["GagFlat"], Effect: ["GagLight"], Block: ["ItemMouth", "ItemMouth2"] },
 			{ Name: "RopeGag", Value: 60, Difficulty: 3, Time: 20, RemoveTime: 10, Prerequisite: "GagUnique", DefaultColor: "#956B1C", BuyGroup: "HempRope", SetPose: ["GagUnique"], Block: ["ItemMouth", "ItemMouth2"], Effect: ["GagLight"]}
 		],
 		Color: ["Default"]
@@ -2083,8 +2083,8 @@ var AssetFemale3DCG = [
 			{ Name: "LatexHoodOpenHair", Value: 45, Difficulty: 50, Time: 15, AllowLock: true, DefaultColor: "#555555", Prerequisite: ["NotHogtied"], Hide: ["HairFront", "HairBack", "Hat", "HairAccessory1", "HairAccessory2"], Alpha: [[150, 50, 200, 87]], Block: ["ItemEars"] },
 			{ Name: "LeatherHoodSealed", Value: 70, Difficulty: 50, Time: 15, AllowLock: true, DefaultColor: "#555555", Prerequisite: ["NotHogtied"], Hide: ["HairFront", "HairBack", "Glasses", "ItemMouth", "ItemMouth2", "ItemMouth3", "Eyes", "Hat", "HairAccessory1", "HairAccessory2"], Effect: ["BlindHeavy", "Prone", "GagLight"], Alpha: [[150, 50, 200, 100]], Block: ["ItemMouth", "ItemMouth2", "ItemMouth3", "ItemEars", "ItemNeck"] },
 			{ Name: "PolishedSteelHood", Value: 85, Difficulty: 50, Time: 15, AllowLock: true, Hide: ["HairFront", "HairBack", "Glasses", "ItemMouth", "ItemMouth2", "ItemMouth3", "Eyes", "HairAccessory1", "HairAccessory2"], HideItem: ["HatBand1", "HatBand2", "HatTiara1"], Effect: ["BlindHeavy", "DeafLight", "Prone", "GagHeavy"], Block: ["ItemMouth", "ItemMouth2", "ItemMouth3", "ItemEars", "ItemNeck"] },			
-			{ Name: "NoseRing", Value: 25, Difficulty: 50, Time: 15, AllowLock: true, Left: 50, AllowEffect: ["Tethered", "Freeze", "ForceKneel"], AllowType: ["Base", "ChainShort", "ChainLong", "Leash"], AllowPose: ["Kneel"], Extended: true },
-			{ Name: "NoseHook", Priority: 26, Value: 25, Difficulty: 20, Time: 15, AllowLock: true, Layer: [
+			{ Name: "NoseRing", Value: 25, Difficulty: 50, Time: 15, Random: false, AllowLock: true, Left: 50, AllowEffect: ["Tethered", "Freeze", "ForceKneel"], AllowType: ["Base", "ChainShort", "ChainLong", "Leash"], AllowPose: ["Kneel"], Extended: true },
+			{ Name: "NoseHook", Priority: 26, Value: 25, Difficulty: 20, Time: 15, Random: false, AllowLock: true, Layer: [
 				{ Name: "Band", AllowColorize: true },
 				{ Name: "Hook", AllowColorize: false },
 			] },
@@ -2100,9 +2100,9 @@ var AssetFemale3DCG = [
 			{ Name: "FoxyMask", Value: 50, Difficulty: 2, Time: 15, Random: false, AllowLock: true, Effect: ["GagLight"], Block: ["ItemMouth", "ItemMouth2", "ItemMouth3"] },
 			{ Name: "SleepMask", Value: 5, Time: 5, Hide: ["Glasses"], Effect: ["BlindLight", "Prone"] },
 			{ Name: "BlackoutLenses", Value: 60, Difficulty: 10, Random: false, DefaultColor: "#333333", Hide: ["Glasses", "Eyes"], Effect: ["BlindHeavy", "Prone"] },
-			{ Name: "WebBlindfold", Value: 50, Difficulty: 5, Time: 10, RemoveTime: 20, Hide: ["Glasses"], AllowBlock: ["ItemMouth", "ItemMouth2", "ItemMouth3", "ItemEars"], AllowEffect: ["BlindHeavy", "GagNormal"], AllowType: ["Cocoon"], Effect: ["BlindLight", "Prone"], Extended: true },
+			{ Name: "WebBlindfold", Value: 50, Difficulty: 5, Time: 10, RemoveTime: 20, Random: false, Hide: ["Glasses"], AllowBlock: ["ItemMouth", "ItemMouth2", "ItemMouth3", "ItemEars"], AllowEffect: ["BlindHeavy", "GagNormal"], AllowType: ["Cocoon"], Effect: ["BlindLight", "Prone"], Extended: true },
 			{ Name: "RopeBlindfold", Value: 60, Time: 15, DefaultColor: "#956B1C", BuyGroup: "HempRope", Hide: ["Glasses"], Effect: ["BlindLight", "Prone"] },
-			{ Name: "PonyHood", Value: -1, Difficulty: 50, Time: 15, AllowLock: true, DefaultColor: "#404040", Hide: ["HairFront", "HairBack", "Glasses", "ItemMouth", "ItemMouth2", "ItemMouth3","Eyes", "HairAccessory1", "HairAccessory2"], Effect: ["BlindHeavy", "DeafLight", "Prone", "GagNormal"], Block: ["ItemMouth", "ItemMouth2", "ItemMouth3", "ItemEars", "ItemNeck"] },
+			{ Name: "PonyHood", Value: -1, Difficulty: 50, Time: 15, Random: false, AllowLock: true, DefaultColor: "#404040", Hide: ["HairFront", "HairBack", "Glasses", "ItemMouth", "ItemMouth2", "ItemMouth3","Eyes", "HairAccessory1", "HairAccessory2"], Effect: ["BlindHeavy", "DeafLight", "Prone", "GagNormal"], Block: ["ItemMouth", "ItemMouth2", "ItemMouth3", "ItemEars", "ItemNeck"] },
 			AssetSpankingToys
 		],
 		Color: ["Default"]
