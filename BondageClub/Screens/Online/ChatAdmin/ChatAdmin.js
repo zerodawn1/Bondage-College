@@ -14,9 +14,7 @@ function ChatAdminLoad() {
 	// If the current room background isn't valid, we pick the first one
 	ChatAdminBackgroundSelect = ChatAdminBackgroundSelected || ChatRoomData.Background;
 	ChatAdminBackgroundIndex = ChatCreateBackgroundList.indexOf(ChatAdminBackgroundSelect);
-	if (ChatAdminBackgroundIndex < 0) {
-		ChatAdminBackgroundIndex = 0;
-	}
+	if (ChatAdminBackgroundIndex < 0) ChatAdminBackgroundIndex = 0;
 	ChatAdminBackgroundSelect = ChatCreateBackgroundList[ChatAdminBackgroundIndex];
 
 	// Prepares the controls to edit a room
@@ -66,8 +64,8 @@ function ChatAdminRun() {
 	ElementPosition("InputAdminList", 390, 685, 530, 300);
 	DrawText(TextGet("RoomBanList"), 960, 490, "Black", "Gray");
 	ElementPosition("InputBanList", 960, 640, 530, 210);
-	DrawButton(700, 780, 250, 65, TextGet("QuickbanBlackList"), ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4");
-	DrawButton(965, 780, 250, 65, TextGet("QuickbanGhostList"), ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4");
+	DrawButton(695, 770, 250, 65, TextGet("QuickbanBlackList"), ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4");
+	DrawButton(975, 770, 250, 65, TextGet("QuickbanGhostList"), ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4");
 
 	// Background selection
 	DrawImageResize("Backgrounds/" + ChatAdminBackgroundSelect + "Dark.jpg", 1300, 75, 600, 400);
@@ -108,8 +106,8 @@ function ChatAdminClick() {
 		if ((MouseX >= 1486) && (MouseX <= 1550) && (MouseY >= 708) && (MouseY <= 772)) ChatAdminPrivate = !ChatAdminPrivate;
 		if ((MouseX >= 1786) && (MouseX <= 1850) && (MouseY >= 708) && (MouseY <= 772)) ChatAdminLocked = !ChatAdminLocked;
 		if ((MouseX >= 1325) && (MouseX < 1575) && (MouseY >= 840) && (MouseY < 905) && ChatRoomPlayerIsAdmin()) ChatAdminUpdateRoom();
-		if ((MouseX >= 700) && (MouseX < 950) && (MouseY >= 780) && (MouseY < 845)) ElementValue("InputBanList", CommonConvertArrayToString(ChatRoomConcatenateBanList(true, false, CommonConvertStringToArray(ElementValue("InputBanList").trim()))));
-		if ((MouseX >= 965) && (MouseX < 1215) && (MouseY >= 780) && (MouseY < 845)) ElementValue("InputBanList", CommonConvertArrayToString(ChatRoomConcatenateBanList(false, true, CommonConvertStringToArray(ElementValue("InputBanList").trim()))));
+		if ((MouseX >= 695) && (MouseX < 945) && (MouseY >= 770) && (MouseY < 835)) ElementValue("InputBanList", CommonConvertArrayToString(ChatRoomConcatenateBanList(true, false, CommonConvertStringToArray(ElementValue("InputBanList").trim()))));
+		if ((MouseX >= 975) && (MouseX < 1225) && (MouseY >= 770) && (MouseY < 835)) ElementValue("InputBanList", CommonConvertArrayToString(ChatRoomConcatenateBanList(false, true, CommonConvertStringToArray(ElementValue("InputBanList").trim()))));
 		
 		if ((MouseX >= 1450) && (MouseX <= 1750) && (MouseY >= 600) && (MouseY <= 665)) {
 			ElementRemove("InputName");

@@ -1247,13 +1247,9 @@ function ChatRoomGameResponse(data) {
  * @param {number[]} [ExistingList] - The existing Banlist, if applicable
  * @returns {number[]} Complete array of members to ban
  */
-function ChatRoomConcatenateBanList(IncludesBlackList, IncludesGhostList, ExistingList) { 
+function ChatRoomConcatenateBanList(IncludesBlackList, IncludesGhostList, ExistingList) {
 	var BanList = Array.isArray(ExistingList) ? ExistingList : [];
-	if (IncludesBlackList) {
-		BanList = BanList.concat(Player.BlackList);
-	}
-	if (IncludesGhostList) {
-		BanList = BanList.concat(Player.GhostList);
-	}
+	if (IncludesBlackList) BanList = BanList.concat(Player.BlackList);
+	if (IncludesGhostList) BanList = BanList.concat(Player.GhostList);
 	return BanList.filter((MemberNumber, Idx, Arr) => Arr.indexOf(MemberNumber) == Idx);
 }
