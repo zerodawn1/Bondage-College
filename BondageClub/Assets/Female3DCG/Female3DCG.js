@@ -140,6 +140,7 @@ var AssetFemale3DCG = [
 		],
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"]
 	},
+
 	{
 		Group: "Necklace",
 		ParentGroup: "BodyUpper",
@@ -168,14 +169,11 @@ var AssetFemale3DCG = [
 				{ Name: "Card", AllowColorize: false}
 			   ]
 		
-			},
-
+			}
 
 		],
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"]
 	},
-
-
 
 	{
 	    Group: "Suit",
@@ -216,14 +214,14 @@ var AssetFemale3DCG = [
 		AllowPose: ["LegsClosed", "Kneel", "StraitDressOpen", "Horse", "KneelingSpread"],
 		Asset: [
 			{ Name: "Skirt1", HideItem: ["ItemDevicesStrapOnSmooth", "ItemDevicesStrapOnStuds"], Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"] },
-			{ 
+			{
 				Name: "Skirt2", HideItem: ["ItemDevicesStrapOnSmooth", "ItemDevicesStrapOnStuds"], Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"], Layer: [
 					{ Name: "Color", AllowColorize: true },
 					{ Name: "Stripe", AllowColorize: false }
 				],
 				ParentItem: "StudentOutfit3"
 			},
-			{ 
+			{
 				Name: "Skirt3", HideItem: ["ItemDevicesStrapOnSmooth", "ItemDevicesStrapOnStuds"], Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"], Layer: [
 					{ Name: "Color", AllowColorize: true },
 					{ Name: "Stripe", AllowColorize: false }
