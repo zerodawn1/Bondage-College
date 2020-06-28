@@ -1,10 +1,4 @@
 "use strict";
-
-const CCharacterDeafLevelFactorLight  = 1;
-const CCharacterDeafLevelFactorNormal = 2;
-const CCharacterDeafLevelFactorHeavy  = 3;
-const CCharacterDeafLevelFactorTotal  = 4;
-
 var Character = [];
 
 // Loads a character in the buffer
@@ -71,14 +65,14 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 			return LoversNumbers;
 		},
 		GetDeafLevel: function () {
-			var deafLevel =0;
-			for (var i = 0; i < this.Appearance.length; i++) {
-				// Sum up the various level of deafness. Light: 1, Normal: 2, Heavy: 3, Total: 4
-				if(this.Appearance[i].Asset.Effect != null){
-					if (this.Appearance[i].Asset.Effect.indexOf ("DeafLight") >= 0) deafLevel += CCharacterDeafLevelFactorLight;
-					else if (this.Appearance[i].Asset.Effect.indexOf ("DeafNormal") >= 0) deafLevel += CCharacterDeafLevelFactorNormal;
-					else if (this.Appearance[i].Asset.Effect.indexOf ("DeafHeavy") >= 0) deafLevel += CCharacterDeafLevelFactorHeavy;
-					else if (this.Appearance[i].Asset.Effect.indexOf ("DeafTotal") >= 0) deafLevel += CCharacterDeafLevelFactorTotal;
+			var deafLevel = 0;
+			for (var A = 0; A < this.Appearance.length; A++) {
+				// Sum up the various level of deafness and returns the final value, Light: 1, Normal: 2, Heavy: 3, Total: 4
+				if (this.Appearance[A].Asset.Effect != null) {
+					if (this.Appearance[A].Asset.Effect.indexOf("DeafLight") >= 0) deafLevel += 1;
+					else if (this.Appearance[A].Asset.Effect.indexOf("DeafNormal") >= 0) deafLevel += 2;
+					else if (this.Appearance[A].Asset.Effect.indexOf("DeafHeavy") >= 0) deafLevel += 3;
+					else if (this.Appearance[A].Asset.Effect.indexOf("DeafTotal") >= 0) deafLevel += 4;
 				}
 			}
 			return deafLevel;
