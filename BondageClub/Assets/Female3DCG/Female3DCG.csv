@@ -304,11 +304,11 @@ Glasses,Glasses5,Style 5
 Glasses,Glasses6,Style 6
 Glasses,SunGlasses1,Sunglasses 1
 Glasses,SunGlasses2,Sunglasses 2
-Glasses,Mask1,Venetian Mask
-Glasses,Mask2,Domino Mask
-Glasses,ButterflyMask1,Butterfly Mask
 Glasses,EyePatch1,Eye Patch
 Mask,,Mask
+Mask,VenetianMask,Venetian Mask
+Mask,DominoMask,Domino Mask
+Mask,ButterflyMask,Butterfly Mask
 Mask,ShinobiMask,Shinobi Mask
 Mask,FoxMask,Fox Mask
 TailStraps,,Tail Strap
@@ -950,7 +950,7 @@ ItemAddon,BondageBenchStraps,Leather Belt Straps
 ItemAddon,OldGasMaskLenses,Blinding Lenses
 ItemAddon,OldGasMaskTube1,Gas Mask Tube
 ItemAddon,OldGasMaskTube2,Gas Mask Tube
-ItemAddon,OldGasMaskRebreather,Rebreather,
+ItemAddon,OldGasMaskRebreather,Rebreather
 ItemAddon,Covers,Blanket
 ItemAddon,BedRopes,Bed Ropes
 ItemAddon,BedStraps,Bed Straps
