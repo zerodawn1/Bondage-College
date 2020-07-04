@@ -30,20 +30,14 @@ function InventoryAdd(C, NewItemName, NewItemGroup, Push) {
 
 /**
  * Creates a new item for a character based on asset group and name
- *
  * @param {Character} C - The character to create the item for
  * @param {string} Group - The name of the asset group the item belongs to
  * @param {string} Name - The name of the asset for the item
- *
- * @return {Item} A new item for character using the specified asset name, or null if the specified asset could not be
- * 		found in the named group
+ * @return {Item} A new item for character using the specified asset name, or null if the specified asset could not be found in the named group
  */
 function InventoryItemCreate(C, Group, Name) {
 	var NewItemAsset = AssetGet(C.AssetFamily, Group, Name);
-	if (NewItemAsset) {
-		// Only create the new inventory item if the asset was found
-		return { Name, Group, Asset: NewItemAsset };
-	}
+	if (NewItemAsset) return { Name, Group, Asset: NewItemAsset };
 	return null;
 }
 
@@ -133,7 +127,6 @@ function InventoryPrerequisiteMessage(C, Prerequisite) {
 	if (Prerequisite == "StraitDressOpen") return (C.Pose.indexOf("StraitDressOpen") >= 0) ? "StraitDressOpen" : "";
 	if (Prerequisite == "AllFours") return (C.Pose.indexOf("AllFours") >= 0) ? "StraitDressOpen" : "";
 	if (Prerequisite == "OnBed") return ((InventoryGet(C, "ItemDevices") == null) || (InventoryGet(C, "ItemDevices").Asset.Name != "Bed")) ? "MustBeOnBed" : "";
-
 
 	// Checks for torso access based on clothes
 	var Cloth = InventoryGet(C, "Cloth");
