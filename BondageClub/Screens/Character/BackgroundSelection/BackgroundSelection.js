@@ -13,14 +13,11 @@ var BackgroundSelectionPreviousScreen = "";
 var BackgroundSelectionAll = [];
 var BackgroundSelectionView = [];
 
-
 /**
  * @description Change the current screen to the background selection screen
- * 
  * @param {string[]} List - The list of possible Background names
  * @param {number} Idx - The index of the current background
  * @param {function} Callback - The function to call when a new background has been selected
- * 
  * @returns {void} - Nothing
  */
 function BackgroundSelectionMake(List, Idx, Callback) {
@@ -32,11 +29,9 @@ function BackgroundSelectionMake(List, Idx, Callback) {
 	CommonSetScreen("Character", "BackgroundSelection");
 }
 
-// When the background selection screens loads
 /**
  * @description Initializes the Background selection screen. 
  * Function coiuld be called dynamically, so the body has to be there, even if it does nothing.
- * 
  * @returns {void} - Nothing
  */
 function BackgroundSelectionLoad() {
@@ -44,10 +39,8 @@ function BackgroundSelectionLoad() {
 	BackgroundSelectionSelectName = DialogFind(Player, BackgroundSelectionSelect);
 	BackgroundSelectionOffset = Math.floor(BackgroundSelectionIndex / BackgroundSelectionSize) * BackgroundSelectionSize;
 	BackgroundSelectionBackground = BackgroundSelectionList[BackgroundSelectionIndex] || "Introduction";
-
 	BackgroundSelectionAll = BackgroundSelectionList.map(B => { var D = DialogFind(Player, B); return { Name: B, Description: D, Low: D.toLowerCase() }; });
 	BackgroundSelectionView = BackgroundSelectionAll.slice(0);
-
 	ElementCreateInput("InputBackground", "text", "", "30");
 	document.getElementById("InputBackground").oninput = BackgroundSelectionInputChanged;
 }
@@ -55,7 +48,6 @@ function BackgroundSelectionLoad() {
 /**
  * @description Handles input in the text box in the topmost row of the selection screen 
  * and changes the offset of the background selection appropriately
- * 
  * @returns {void} - Nothing
  */
 function BackgroundSelectionInputChanged() {
@@ -75,7 +67,6 @@ function BackgroundSelectionInputChanged() {
  * - draws all the buttons and the text input field on the topmost rows
  * - paints the first (max) 12 possible backgrounds in the lower part of the screen
  * The function is called dynamically
- * 
  * @returns {void} - Nothing
  */
 function BackgroundSelectionRun() {
@@ -124,15 +115,10 @@ function BackgroundSelectionRun() {
  * @returns {void} - Nothing
  */
 function BackgroundSelectionClick() {
-	// set and exit
-	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) {
-		BackgroundSelectionExit(true);
-	}
 
-	// cancel and exit
-	if ((MouseX >= 1785) && (MouseX < 1875) && (MouseY >= 25) && (MouseY < 115)) {
-		BackgroundSelectionExit(false);
-	}
+	// Exit by selecting or cancelling
+	if ((MouseX >= 1885) && (MouseX < 1975) && (MouseY >= 25) && (MouseY < 115)) BackgroundSelectionExit(true);
+	if ((MouseX >= 1785) && (MouseX < 1875) && (MouseY >= 25) && (MouseY < 115)) BackgroundSelectionExit(false);
 
 	// Set next offset backward
 	if ((MouseX >= 1585) && (MouseX < 1675) && (MouseY >= 25) && (MouseY < 115)) {
@@ -165,12 +151,12 @@ function BackgroundSelectionClick() {
 			Y += 225 + 55;
 		}
 	}
+
 }
 
 /**
  * @description Handles key events in the background selection screen:
  * - When the user presses "enter", we exit
- * 
  * @returns {void} - Nothing
  */
 function BackgroundSelectionKeyDown() {
@@ -179,11 +165,8 @@ function BackgroundSelectionKeyDown() {
 
 /**
  * @description Handles the exit of the selection screen. Sets the new background, if necessary, and 
- * calls the previously defined callback function. Then exits the screen to the screen, the player was 
- * before
- * 
+ * calls the previously defined callback function. Then exits the screen to the screen, the player was before
  * @param {boolean} SetBackground - Defines, wether the background must be changed (true) or not (false)
- * 
  * @returns {void} - Nothing
  */
 function BackgroundSelectionExit(SetBackground) {
