@@ -14,31 +14,37 @@ function InventoryAdd(C, NewItemName, NewItemGroup, Push) {
 		if ((C.Inventory[I].Name == NewItemName) && (C.Inventory[I].Group == NewItemGroup))
 			return;
 
-	// Searches to find the item asset in the current character assets family
-	var NewItemAsset = null;
-	for (var A = 0; A < Asset.length; A++)
-		if ((Asset[A].Name == NewItemName) && (Asset[A].Group.Name == NewItemGroup) && (Asset[A].Group.Family == C.AssetFamily)) {
-			NewItemAsset = Asset[A];
-			break;
-		}
+	// Create the new item for current character's asset family, group name and item name
+	var NewItem = InventoryItemCreate(C, NewItemGroup, NewItemName);
 
 	// Only add the item if we found the asset
-	if (NewItemAsset != null) {
-		
-		// Creates the item and pushes it in the inventory queue
-		var NewItem = {
-			Name: NewItemName,
-			Group: NewItemGroup,
-			Asset: NewItemAsset
-		}
+	if (NewItem) {
+		// Pushes the new item to the inventory queue
 		C.Inventory.push(NewItem);
 
 		// Sends the new item to the server if it's for the current player
 		if ((C.ID == 0) && ((Push == null) || Push))
 			ServerPlayerInventorySync();
-
 	}
+}
 
+/**
+ * Creates a new item for a character based on asset group and name
+ *
+ * @param {Character} C - The character to create the item for
+ * @param {string} Group - The name of the asset group the item belongs to
+ * @param {string} Name - The name of the asset for the item
+ *
+ * @return {Item} A new item for character using the specified asset name, or null if the specified asset could not be
+ * 		found in the named group
+ */
+function InventoryItemCreate(C, Group, Name) {
+	var NewItemAsset = AssetGet(C.AssetFamily, Group, Name);
+	if (NewItemAsset) {
+		// Only create the new inventory item if the asset was found
+		return { Name, Group, Asset: NewItemAsset };
+	}
+	return null;
 }
 
 /**
