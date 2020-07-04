@@ -124,7 +124,7 @@ function BackgroundSelectionClick() {
 	if ((MouseX >= 1585) && (MouseX < 1675) && (MouseY >= 25) && (MouseY < 115)) {
 		BackgroundSelectionOffset -= BackgroundSelectionSize;
 		if (BackgroundSelectionOffset < 0) {
-			BackgroundSelectionOffset = BackgroundSelectionView.length - BackgroundSelectionSize - (BackgroundSelectionView.length - BackgroundSelectionSize) % BackgroundSelectionSize;
+			BackgroundSelectionOffset = Math.ceil(BackgroundSelectionView.length / BackgroundSelectionSize - 1) * BackgroundSelectionSize;
 		}
 	}
 
