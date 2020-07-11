@@ -1521,6 +1521,11 @@ var AssetFemale3DCG = [
 					{ Name: "Straps", AllowColorize: false }
 				]
 			},
+			{ Name: "LatexSleevelessLeotard", Value: 120, Priority: 23, Difficulty: 14, SelfBondage: 7, Time: 35, RemoveTime: 20, AllowLock: true, DefaultColor: "#d986a2", Hide: ["Cloth", "ItemNipplesPiercings"], HideItem: ["ItemButtAnalBeads2", "ItemVulvaVibratingDildo", "ItemVulvaInflatableVibeDildo", "ItemVulvaClitSuctionCup"], SetPose: ["BackElbowTouch"], Effect: ["Block", "Prone"], Block: ["ItemNipples", "ItemNipplesPiercings", "ItemVulva", "ItemVulvaPiercings", "ItemButt", "ItemPelvis", "ItemTorso", "ItemBreast", "ItemHands"], SelfUnlock: false, Layer: [
+					{ Name: "Latex", AllowColorize: true },
+					{ Name: "Highlights", AllowColorize: false }
+				]
+			},
 			AssetSpankingToys
 		],
 		Color: ["Default"]
