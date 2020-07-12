@@ -21,7 +21,7 @@ function PasswordResetLoad() {
 	document.getElementById("InputResetNumber").setAttribute("autocomplete", "off");
 	document.getElementById("InputPassword1").setAttribute("autocomplete", "off");
 	document.getElementById("InputPassword2").setAttribute("autocomplete", "off");
-	
+
 	// Clears the fields after a little while
 	setTimeout(function() {
 		ElementValue("InputResetNumber", "");
@@ -35,13 +35,13 @@ function PasswordResetLoad() {
  * @returns {void} Nothing
  */
 function PasswordResetRun() {
-	
+
 	// Draw the email validation controls
 	if (PasswordResetMessage == "") PasswordResetMessage = TextGet("EnterEmail");
 	DrawText(PasswordResetMessage, 1000, 60, "White", "Black");
 	ElementPosition("InputEmail", 1000, 120, 1000);
 	DrawButton(800, 180, 400, 60, TextGet("SendEmail"), "White", "");
-	
+
 	// Draw the recovery controls
 	DrawText(TextGet("AccountName"), 1000, 320, "White", "Black");
 	ElementPosition("InputAccountName", 1000, 380, 500);
@@ -123,9 +123,7 @@ function PasswordResetClick() {
 	}
 
 	// Go back to the login screen
-	if ((MouseX >= 1025) && (MouseX <= 1325) && (MouseY >= 890) && (MouseY <= 950)) {
-		PasswordResetExit();
-	}
+	if ((MouseX >= 1025) && (MouseX <= 1325) && (MouseY >= 890) && (MouseY <= 950)) PasswordResetExit();
 
 }
 

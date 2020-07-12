@@ -437,11 +437,11 @@ function LoginClick() {
 }
 
 /**
- * Handles player keyboard events on the character login screen
+ * Handles player keyboard events on the character login screen, "enter" will login
  * @returns {void} Nothing
  */
 function LoginKeyDown() {
-	if (KeyPress == 13) LoginDoLogin(); // On an "enter" keypress, attempt to login
+	if (KeyPress == 13) LoginDoLogin();
 }
 
 /**
@@ -449,6 +449,7 @@ function LoginKeyDown() {
  * @returns {void} Nothing
  */
 function LoginDoLogin() {
+
     // Ensure the login request is not sent twice
 	if (!LoginSubmitted) {
 		var Name = ElementValue("InputName");
@@ -460,6 +461,7 @@ function LoginDoLogin() {
 		} else LoginStatusReset("InvalidNamePassword");
 	}
     LoginUpdateMessage();
+
 }
 
 /**
@@ -474,8 +476,7 @@ function LoginSetSubmitted() {
 /**
  * Resets the login submission state
  * @param {boolean} IsRelog - whether or not we're on the relog screen
- * @param {string} ErrorMessage - the login error message to set if the login is invalid - if not specified, will clear
- * the login error message
+ * @param {string} ErrorMessage - the login error message to set if the login is invalid - if not specified, will clear the login error message
  * @returns {void} Nothing
  */
 function LoginStatusReset(ErrorMessage, IsRelog) {
@@ -497,13 +498,8 @@ function LoginUpdateMessage() {
  * @returns {string} The key of the message to display
  */
 function LoginGetMessageKey() {
-    if (LoginErrorMessage) {
-        return LoginErrorMessage;
-    } else if (!ServerIsConnected) {
-        return "ConnectingToServer";
-    } else if (LoginSubmitted) {
-        return "ValidatingNamePassword";
-    } else {
-        return LoginIsRelog ? "EnterPassword" : "EnterNamePassword";
-    }
+    if (LoginErrorMessage) return LoginErrorMessage;
+    else if (!ServerIsConnected) return "ConnectingToServer";
+    else if (LoginSubmitted) return "ValidatingNamePassword";
+    else return LoginIsRelog ? "EnterPassword" : "EnterNamePassword";
 }
