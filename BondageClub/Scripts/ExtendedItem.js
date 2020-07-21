@@ -85,14 +85,14 @@ function ExtendedItemDraw(Options, DialogPrefix) {
  * @returns {void} Nothing
  */
 function ExtendedItemClick(Options) {
+
 	// Exit button
-	if (CommonIsClickAt(1885, 25, 90, 85)) {
+	if (MouseIn(1885, 25, 90, 85)) {
 		DialogFocusItem = null;
 		return;
 	}
 
 	var IsSelfBondage = CharacterGetCurrent().ID === 0;
-
 	if (Options.length === 2) {
 		ExtendedItemClickTwo(Options, IsSelfBondage);
 	} else {
@@ -223,7 +223,7 @@ function ExtendedItemClickTwo(Options, IsSelfBondage) {
 		var X = 1175 + I * 425;
 		var Y = 550;
 		var Option = Options[I];
-		if (CommonIsClickAt(X, Y, 225, 225) && DialogFocusItem.Property.Type !== Option.Property.Type) {
+		if (MouseIn(X, Y, 225, 225) && DialogFocusItem.Property.Type !== Option.Property.Type) {
 			ExtendedItemHandleOptionClick(Options, Option, IsSelfBondage);
 		}
 	}
@@ -237,10 +237,10 @@ function ExtendedItemClickTwo(Options, IsSelfBondage) {
  * @returns {void} Nothing
  */
 function ExtendedItemClickGrid(Options, IsSelfBondage) {
+
 	// Pagination button
-	if (Options.length > 4 && CommonIsClickAt(1775, 25, 90, 85)) {
+	if ((Options.length > 4) && MouseIn(1775, 25, 90, 85))
 		ExtendedItemNextPage(InventoryItemArmsWebOptions);
-	}
 
 	var ItemOptionsOffset = ExtendedItemGetOffset();
 
@@ -249,7 +249,7 @@ function ExtendedItemClickGrid(Options, IsSelfBondage) {
 		var X = 1200 + (offset % 2 * 387);
 		var Y = 450 + (Math.floor(offset / 2) * 300);
 		var Option = Options[I];
-		if (CommonIsClickAt(X, Y, 225, 225) && DialogFocusItem.Property.Type !== Option.Property.Type) {
+		if (MouseIn(X, Y, 225, 225) && DialogFocusItem.Property.Type !== Option.Property.Type) {
 			ExtendedItemHandleOptionClick(Options, Option, IsSelfBondage);
 		}
 	}

@@ -77,7 +77,7 @@ function init(){
 					color2("#0c3863", i);
 					group1.add(model);
 					 //merge all fbx files
-					console.log(`${path3d}${i}.fbx`);
+					//console.log(`${path3d}${i}.fbx`);
 
 					},
 					undefined,
