@@ -58,7 +58,7 @@ function KidnapSetMode(NewMode) {
 
 	// Removes the focus group if not selecting an item
 	if (NewMode != "SelectItem") KidnapOpponent.FocusGroup = null;
-	
+
 	// If we must enter in Upper Hand mode
 	if (KidnapMode == "UpperHand") KidnapUpperHandVictim = null;
 	if ((NewMode == "SelectMove") && (KidnapUpperHandVictim != null)) NewMode = "UpperHand";
@@ -72,11 +72,11 @@ function KidnapSetMode(NewMode) {
 	}
 
 	// If we must end the mini game in defeat
-	if ((NewMode == "SelectMove") && (Player.KidnapWillpower <= 0)) { 
+	if ((NewMode == "SelectMove") && (Player.KidnapWillpower <= 0)) {
 		InventoryWearRandom(Player, "ItemArms", KidnapDifficulty);
-		NewMode = "End"; 
+		NewMode = "End";
 	}
-	
+
 	// If we must end the mini game in victory, one last item can be equipped
 	if ((NewMode == "SelectMove") && (KidnapOpponent.KidnapWillpower <= 0)) {
 		if (!KidnapVictory) {
@@ -89,8 +89,8 @@ function KidnapSetMode(NewMode) {
 			NewMode = (KidnapOpponent.FocusGroup != null) ? "SelectItem" : "End";
 			KidnapVictory = true;
 		} else NewMode = "End";
-	}	
-	
+	}
+
 	// Sets the mode and timer
 	KidnapMode = NewMode;
 	if ((NewMode == "Intro") || (NewMode == "SuddenDeath") || (NewMode == "End")) KidnapTimer = CommonTime() + 5000;
