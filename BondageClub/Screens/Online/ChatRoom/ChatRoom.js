@@ -594,10 +594,10 @@ function ChatRoomCharacterItemUpdate(C, Group) {
 		var P = {};
 		P.Target = C.MemberNumber;
 		P.Group = Group;
-		P.Name = (Item != null) ? Item.Asset.Name : null;
+		P.Name = (Item != null) ? Item.Asset.Name : undefined;
 		P.Color = ((Item != null) && (Item.Color != null)) ? Item.Color : "Default";
 		P.Difficulty = SkillGetWithRatio("Bondage");
-		P.Property = ((Item != null) && (Item.Property != null)) ? Item.Property : null;
+		P.Property = ((Item != null) && (Item.Property != null)) ? Item.Property : undefined;
 		ServerSend("ChatRoomCharacterItemUpdate", P);
 	}
 }
