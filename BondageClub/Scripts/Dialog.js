@@ -29,11 +29,10 @@ var DialogItemPermissionMode = false;
 var DialogExtendedMessage = "";
 var DialogActivityMode = false;
 var DialogActivity = [];
-
-const DialogSortOrderEnabled = 1;
-const DialogSortOrderUsable = 2;
-const DialogSortOrderUnusable = 3;
-const DialogSortOrderBlocked = 4;
+var DialogSortOrderEnabled = 1;
+var DialogSortOrderUsable = 2;
+var DialogSortOrderUnusable = 3;
+var DialogSortOrderBlocked = 4;
 
 /**
  * Compares the player's reputation with a given value 
@@ -428,24 +427,25 @@ function DialogLeaveFocusItem() {
  * @param {Item} NewInv - The item that should be added to the player's inventory
  * @param {boolean} NewInvWorn - Should be true, if the item is worn, false otherwise
  * @param {number} SortOrder - Defines the group the item is added to. 
- * @returns {boolean} - Returns true, if the item could be added to the player's inventory, false otherwise
+ * @returns {void} - Nothing
  */
 function DialogInventoryAdd(C, NewInv, NewInvWorn, SortOrder) {
+
 	// Make sure we do not add owner/lover only items for invalid characters, owner/lover locks can be applied on the player by the player for self-bondage
 	if (NewInv.Asset.OwnerOnly && !NewInvWorn && !C.IsOwnedByPlayer())
 		if ((C.ID != 0) || ((C.Owner == "") && (C.Ownership == null)) || !NewInv.Asset.IsLock || ((C.ID == 0) && LogQuery("BlockOwnerLockSelf", "OwnerRule")))
-			return false;
+			return;
 	if (NewInv.Asset.LoverOnly && !NewInvWorn && !C.IsLoverOfPlayer())
 		if ((C.ID != 0) || (C.Lovership.length < 0) || !NewInv.Asset.IsLock)
-			return false;
+			return;
 
 	// Do not show keys if they are in the deposit
-	if (LogQuery("KeyDeposit", "Cell") && InventoryIsKey(NewInv)) return false;
+	if (LogQuery("KeyDeposit", "Cell") && InventoryIsKey(NewInv)) return;
 
 	// Make sure we do not duplicate the non-blocked item
 	for (var I = 0; I < DialogInventory.length; I++)
 		if ((DialogInventory[I].Asset.Group.Name == NewInv.Asset.Group.Name) && (DialogInventory[I].Asset.Name == NewInv.Asset.Name))
-			return false;
+			return;
 
 	// If the item is blocked, we show it at the end of the list
 	if (InventoryIsPermissionBlocked(C, NewInv.Asset.Name, NewInv.Asset.Group.Name) || !InventoryCheckLimitedPermission(C, NewInv))
@@ -464,7 +464,6 @@ function DialogInventoryAdd(C, NewInv, NewInvWorn, SortOrder) {
 	if (!NewInvWorn && InventoryItemHasEffect(NewInv, "Lock", true)) DI.Icon = "Unlocked";
 	DialogInventory.push(DI);
 
-	return true;
 }
 
 /**
@@ -556,7 +555,7 @@ function DialogInventoryBuild(C) {
 		var CurItem = null;
 		for (var A = 0; A < C.Appearance.length; A++)
 			if ((C.Appearance[A].Asset.Group.Name == C.FocusGroup.Name) && C.Appearance[A].Asset.DynamicAllowInventoryAdd(C)) {
-				DialogInventoryAdd(C, C.Appearance[A], true, 1);
+				DialogInventoryAdd(C, C.Appearance[A], true, DialogSortOrderEnabled);
 				CurItem = C.Appearance[A];
 				break;
 			}
@@ -576,25 +575,18 @@ function DialogInventoryBuild(C) {
 				}
 
 		} else {
+
 			// Second, we add everything from the victim inventory
 			for (var A = 0; A < C.Inventory.length; A++)
-				if ((C.Inventory[A].Asset != null) && (C.Inventory[A].Asset.Group.Name == C.FocusGroup.Name) && C.Inventory[A].Asset.DynamicAllowInventoryAdd(C)) {
-					if (InventoryAllow(C, C.Inventory[A].Asset.Prerequisite, false)) {
-						DialogInventoryAdd(C, C.Inventory[A], false, DialogSortOrderUsable);
-					} else {
-						DialogInventoryAdd(C, C.Inventory[A], false, DialogSortOrderUnusable);
-					}
-				}
+				if ((C.Inventory[A].Asset != null) && (C.Inventory[A].Asset.Group.Name == C.FocusGroup.Name) && C.Inventory[A].Asset.DynamicAllowInventoryAdd(C))
+					DialogInventoryAdd(C, C.Inventory[A], false, (InventoryAllow(C, C.Inventory[A].Asset.Prerequisite, false)) ? DialogSortOrderUsable : DialogSortOrderUnusable);
 
 			// Third, we add everything from the player inventory if the player isn't the victim
 			if (C.ID != 0)
 				for (var A = 0; A < Player.Inventory.length; A++)
 					if ((Player.Inventory[A].Asset != null) && (Player.Inventory[A].Asset.Group.Name == C.FocusGroup.Name) && Player.Inventory[A].Asset.DynamicAllowInventoryAdd(C))
-						if (InventoryAllow(C, Player.Inventory[A].Asset.Prerequisite, false)) {
-							DialogInventoryAdd(C, Player.Inventory[A], false, DialogSortOrderUsable);
-						} else {
-							DialogInventoryAdd(C, Player.Inventory[A], false, DialogSortOrderUnusable);
-						}
+						DialogInventoryAdd(C, Player.Inventory[A], false, (InventoryAllow(C, Player.Inventory[A].Asset.Prerequisite, false)) ? DialogSortOrderUsable : DialogSortOrderUnusable);
+
 		}
 
 		// Rebuilds the dialog menu and it's buttons
@@ -839,7 +831,7 @@ function DialogMenuButtonClick() {
 						DialogItemToLock = Item;
 						for (var A = 0; A < Player.Inventory.length; A++)
 							if ((Player.Inventory[A].Asset != null) && Player.Inventory[A].Asset.IsLock)
-								DialogInventoryAdd(C, Player.Inventory[A], false, 2);
+								DialogInventoryAdd(C, Player.Inventory[A], false, DialogSortOrderUsable);
 						DialogInventorySort();
 					}
 				} else {
