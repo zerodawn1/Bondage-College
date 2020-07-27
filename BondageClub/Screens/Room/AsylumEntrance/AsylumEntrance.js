@@ -73,12 +73,12 @@ function AsylumEntranceClick() {
 		ManagementClubSlaveDialog(AsylumEntranceNurse);
 		CharacterSetCurrent(AsylumEntranceNurse);
 	}
-	if ((MouseIn(1885, 25, 90, 90)) && Player.CanWalk() && (LogValue("Committed", "Asylum") < CurrentTime)) CommonSetScreen("Room", "MainHall");
-	if ((MouseIn(1885, 145, 90, 90))) InformationSheetLoadCharacter(Player);
-	if ((MouseIn(1885, 265, 90, 90)) && AsylumEntranceCanWander()) AsylumEntranceStartChat();
-	if ((MouseIn(1885, 385, 90, 90)) && AsylumEntranceCanWander()) CommonSetScreen("Room", "AsylumBedroom");
-	if ((MouseIn(1885, 505, 90, 90)) && AsylumEntranceCanWander()) CommonSetScreen("Room", "AsylumMeeting");
-	if ((MouseIn(1885, 625, 90, 90)) && AsylumEntranceCanWander()) CommonSetScreen("Room", "AsylumTherapy");
+	if (MouseIn(1885, 25, 90, 90) && Player.CanWalk() && (LogValue("Committed", "Asylum") < CurrentTime)) CommonSetScreen("Room", "MainHall");
+	if (MouseIn(1885, 145, 90, 90)) InformationSheetLoadCharacter(Player);
+	if (MouseIn(1885, 265, 90, 90) && AsylumEntranceCanWander()) AsylumEntranceStartChat();
+	if (MouseIn(1885, 385, 90, 90) && AsylumEntranceCanWander()) CommonSetScreen("Room", "AsylumBedroom");
+	if (MouseIn(1885, 505, 90, 90) && AsylumEntranceCanWander()) CommonSetScreen("Room", "AsylumMeeting");
+	if (MouseIn(1885, 625, 90, 90) && AsylumEntranceCanWander()) CommonSetScreen("Room", "AsylumTherapy");
 }
 
 /**

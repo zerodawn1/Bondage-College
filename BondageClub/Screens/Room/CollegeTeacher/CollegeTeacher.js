@@ -85,9 +85,9 @@ function CollegeTeacherRun() {
  * @returns {void} - Nothing
  */
 function CollegeTeacherClick() {
-	if ((MouseIn(500, 0, 500, 1000)) && (CollegeTeacherMildred != null) && !CollegeTeacherMildred.GoneAway) CharacterSetCurrent(CollegeTeacherMildred);
-	if ((MouseIn(1885, 25, 90, 90)) && Player.CanWalk()) CommonSetScreen("Room", "CollegeEntrance");
-	if ((MouseIn(1885, 145, 90, 90))) InformationSheetLoadCharacter(Player);
+	if (MouseIn(500, 0, 500, 1000) && (CollegeTeacherMildred != null) && !CollegeTeacherMildred.GoneAway) CharacterSetCurrent(CollegeTeacherMildred);
+	if (MouseIn(1885, 25, 90, 90) && Player.CanWalk()) CommonSetScreen("Room", "CollegeEntrance");
+	if (MouseIn(1885, 145, 90, 90)) InformationSheetLoadCharacter(Player);
 }
 
 /**

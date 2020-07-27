@@ -30,7 +30,7 @@ function AsylumBedroomRun() {
  */
 function AsylumBedroomClick() {
 	if (MouseIn(750, 0, 500, 1000)) CharacterSetCurrent(Player);
-	if ((MouseIn(1885, 25, 90, 90)) && Player.CanWalk()) CommonSetScreen("Room", "AsylumEntrance");
+	if (MouseIn(1885, 25, 90, 90) && Player.CanWalk()) CommonSetScreen("Room", "AsylumEntrance");
 	if (MouseIn(1885, 145, 90, 90)) InformationSheetLoadCharacter(Player);
-	if ((MouseIn(1885, 265, 90, 90)) && LogValue("Committed", "Asylum") >= CurrentTime) window.location = window.location;
+	if (MouseIn(1885, 265, 90, 90) && LogValue("Committed", "Asylum") >= CurrentTime) window.location = window.location;
 }

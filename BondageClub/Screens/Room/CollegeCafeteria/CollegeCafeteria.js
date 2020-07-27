@@ -105,11 +105,11 @@ function CollegeCafeteriaRun() {
  * @returns {void} - Nothing
  */
 function CollegeCafeteriaClick() {
-	if ((MouseIn(485, 0, 510, 1000))) CharacterSetCurrent(CollegeCafeteriaSidney);
-	if ((MouseIn(925, 0, 500, 1000))) CharacterSetCurrent(CollegeCafeteriaStudentRight);
-	if ((MouseIn(1395, 0, 490, 1000))) CharacterSetCurrent(CollegeCafeteriaStudentFarRight);
-	if ((MouseIn(1885, 25, 90, 90)) && Player.CanWalk()) CommonSetScreen("Room", "CollegeEntrance");
-	if ((MouseIn(1885, 145, 90, 90))) InformationSheetLoadCharacter(Player);
+	if (MouseIn(485, 0, 510, 1000)) CharacterSetCurrent(CollegeCafeteriaSidney);
+	if (MouseIn(925, 0, 500, 1000)) CharacterSetCurrent(CollegeCafeteriaStudentRight);
+	if (MouseIn(1395, 0, 490, 1000)) CharacterSetCurrent(CollegeCafeteriaStudentFarRight);
+	if (MouseIn(1885, 25, 90, 90) && Player.CanWalk()) CommonSetScreen("Room", "CollegeEntrance");
+	if (MouseIn(1885, 145, 90, 90)) InformationSheetLoadCharacter(Player);
 }
 
 /**

@@ -63,11 +63,11 @@ function AsylumMeetingRun() {
  * @returns {void} - Nothing
  */
 function AsylumMeetingClick() {
-	if ((MouseIn(250, 0, 500, 1000)) && !AsylumMeetingPatientLeft.RunAway) CharacterSetCurrent(AsylumMeetingPatientLeft);
-	if ((MouseIn(750, 0, 500, 1000))) CharacterSetCurrent(Player);
-	if ((MouseIn(1250, 0, 500, 1000))) CharacterSetCurrent(AsylumMeetingPatientRight);
-	if ((MouseIn(1885, 25, 90, 90)) && Player.CanWalk()) CommonSetScreen("Room", "AsylumEntrance");
-	if ((MouseIn(1885, 145, 90, 90))) InformationSheetLoadCharacter(Player);
+	if (MouseIn(250, 0, 500, 1000) && !AsylumMeetingPatientLeft.RunAway) CharacterSetCurrent(AsylumMeetingPatientLeft);
+	if (MouseIn(750, 0, 500, 1000)) CharacterSetCurrent(Player);
+	if (MouseIn(1250, 0, 500, 1000)) CharacterSetCurrent(AsylumMeetingPatientRight);
+	if (MouseIn(1885, 25, 90, 90) && Player.CanWalk()) CommonSetScreen("Room", "AsylumEntrance");
+	if (MouseIn(1885, 145, 90, 90)) InformationSheetLoadCharacter(Player);
 }
 
 /**

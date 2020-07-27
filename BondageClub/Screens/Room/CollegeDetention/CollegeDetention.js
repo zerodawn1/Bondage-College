@@ -104,9 +104,9 @@ function CollegeDetentionRun() {
  * @returns {void} - Nothing
  */
 function CollegeDetentionClick() {
-	if ((MouseIn(1000, 0, 500, 1000)) && (CollegeDetentionYuki != null) && !CollegeDetentionYuki.GoneAway) CharacterSetCurrent(CollegeDetentionYuki);
-	if ((MouseIn(1885, 25, 90, 90)) && Player.CanWalk()) CommonSetScreen("Room", "CollegeEntrance");
-	if ((MouseIn(1885, 145, 90, 90))) InformationSheetLoadCharacter(Player);
+	if (MouseIn(1000, 0, 500, 1000) && (CollegeDetentionYuki != null) && !CollegeDetentionYuki.GoneAway) CharacterSetCurrent(CollegeDetentionYuki);
+	if (MouseIn(1885, 25, 90, 90) && Player.CanWalk()) CommonSetScreen("Room", "CollegeEntrance");
+	if (MouseIn(1885, 145, 90, 90)) InformationSheetLoadCharacter(Player);
 }
 
 /**
