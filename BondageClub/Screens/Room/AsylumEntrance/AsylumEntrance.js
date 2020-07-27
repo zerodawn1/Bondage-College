@@ -86,7 +86,7 @@ function AsylumEntranceClick() {
  * @returns {void} - Nothing
  */
 function AsylumEntranceStartChat() {
-	ChatRoomStart("Asylum", "", "AsylumEntrance", "AsylumEntranceDark", BackgroundsList.filter(bg => bg.Tag.indexOf(BackgroundsTagAsylum) >= 0).map(bg => bg.Name));
+	ChatRoomStart("Asylum", "", "AsylumEntrance", "AsylumEntranceDark", [BackgroundsTagAsylum]);
 }
 
 // Wears the nurse clothes on a character (same as nursery)

@@ -85,12 +85,13 @@ function ChatRoomLoad() {
 }
 
 // When the chat room selection must start
-function ChatRoomStart(Space, Game, LeaveRoom, Background, BackgroundList) {
+function ChatRoomStart(Space, Game, LeaveRoom, Background, BackgroundTagList) {
 	ChatRoomSpace = Space;
 	OnlineGameName = Game;
 	ChatSearchLeaveRoom = LeaveRoom;
 	ChatSearchBackground = Background;
-	ChatCreateBackgroundList = BackgroundList;
+	ChatCreateBackgroundList = BackgroundsGenerateList(BackgroundTagList);
+	BackgroundSelectionTagList = BackgroundTagList;
 	CommonSetScreen("Online", "ChatSearch");
 }
 

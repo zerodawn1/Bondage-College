@@ -11,13 +11,6 @@ var CommonCSVCache = {};
 var CutsceneStage = 0;
 
 /**
- * List of all the common backgrounds names.
- * @constant 
- * @type {string[]}
- */
-var CommonBackgroundList = BackgroundsList.filter(bg => bg.Public).map(bg => bg.Name);
-
-/**
  * Checks if a variable is a number
  * @param {*} n - Variable to check for 
  * @returns {boolean} - Returns TRUE if the variable is a finite number

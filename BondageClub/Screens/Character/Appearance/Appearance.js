@@ -190,11 +190,10 @@ function CharacterAppearanceFullRandom(C, ClothOnly) {
 					if (CharacterAppearanceGetCurrentValue(C, SelectedAsset.Group.ParentColor, "Color") != "None")
 						SelectedColor = CharacterAppearanceGetCurrentValue(C, SelectedAsset.Group.ParentColor, "Color");
 				// Rare chance of keeping eyes of a different color
-				if (SelectedAsset.Group.Name == "Eyes2" && Math.random() < 0.999) {
+				if (SelectedAsset.Group.Name == "Eyes2" && Math.random() < 0.995)
 					for (var A = 0; A < C.Appearance.length; A++)
 						if (C.Appearance[A].Asset.Group.Name == "Eyes")
 							SelectedColor = C.Appearance[A].Color;
-				}
 				var NA = {
 					Asset: SelectedAsset,
 					Color: SelectedColor
@@ -510,11 +509,9 @@ function CharacterAppearanceGetCurrentValue(C, Group, Type) {
 function AppearanceLoad() {
 	if (!CharacterAppearanceSelection) CharacterAppearanceSelection = Player;
 	var C = CharacterAppearanceSelection;
-
 	CharacterAppearanceBuildAssets(Player);
-	CharacterAppearanceBackup = C.Appearance.map(Item => Object.assign({}, Item));
+	CharacterAppearanceBackup = C.Appearance.slice();
 }
-
 
 /**
  * Run the character appearance selection screen. The function name is created dynamically.
