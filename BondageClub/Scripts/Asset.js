@@ -32,6 +32,7 @@ function AssetGroupAdd(NewAssetFamily, NewAsset) {
 		AllowPose: NewAsset.AllowPose,
 		AllowExpression: NewAsset.AllowExpression,
 		Effect: NewAsset.Effect,
+		MirrorGroup: (NewAsset.MirrorGroup == null) ? "" : NewAsset.MirrorGroup,
 		RemoveItemOnRemove: (NewAsset.RemoveItemOnRemove == null) ? [] : NewAsset.RemoveItemOnRemove,
 		DrawingPriority: (NewAsset.Priority == null) ? AssetGroup.length : NewAsset.Priority,
 		DrawingLeft: (NewAsset.Left == null) ? 0 : NewAsset.Left,
