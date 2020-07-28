@@ -950,13 +950,24 @@ function ChatRoomSyncArousal(data) {
 		}
 }
 
-// Return TRUE if we can allow to change the item properties, when this item is owner/lover locked
+/**
+ * Determines whether or not an owner/lover exclusive item can be modified by a non-owner/lover
+ * @param {object} Data - The item data received from the server which defines the modification being made to the item
+ * @param Item - The currently equipped item
+ * @return {boolean} - Returns true if the defined modification is permitted, false otherwise.
+ */
 function ChatRoomAllowChangeLockedItem(Data, Item) {
+	// Slave collars cannot be modified
 	if (Item.Asset.Name == "SlaveCollar") return false;
+	// Items with AllowRemoveExclusive can always be removed
+	if (Data.Item.Name == null && Item.Asset.AllowRemoveExclusive) return true;
+	// Otherwise non-owners/lovers cannot remove/change the item
 	if ((Data.Item.Name == null) || (Data.Item.Name == "") || (Data.Item.Name != Item.Asset.Name)) return false;
+	// Lock member numbers cannot be modified
 	if ((Data.Item.Property == null) || (Data.Item.Property.LockedBy == null) || (Data.Item.Property.LockedBy != Item.Property.LockedBy) || (Data.Item.Property.LockMemberNumber == null) || (Data.Item.Property.LockMemberNumber != Item.Property.LockMemberNumber)) return false;
 	return true;
 }
+
 
 // Updates a single character item in the chatroom
 function ChatRoomSyncItem(data) {

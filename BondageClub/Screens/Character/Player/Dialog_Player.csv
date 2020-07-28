@@ -368,6 +368,7 @@ MaidDrinkPickHotChocolate,,,SourceCharacter buys a hot chocolate from Destinatio
 MaidDrinkPickExpresso,,,SourceCharacter buys an espresso from DestinationCharacter tray.,,
 MaidDrinkPickCappuccino,,,SourceCharacter buys a cappuccino from DestinationCharacter tray.,,
 LockMemberNumber,,,Member number on lock:,,
+ItemMemberNumber,,,Item member number:,,
 TimerLeft,,,Time left:,,
 TimerRestart,,,SourceCharacter restarts the five minutes timer padlock on DestinationCharacter FocusAssetGroup.,,
 TimerUnknown,,,Unknown time left,,
