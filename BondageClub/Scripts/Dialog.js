@@ -635,6 +635,7 @@ function DialogFacialExpressionsBuild() {
 		if (!ExpressionList || !ExpressionList.length || PA.Asset.Group.Name == "Eyes2") continue;
 		var Item = {};
 		Item.Appearance = PA;
+		Item.Group = PA.Asset.Group.Name;
 		Item.CurrentExpression = (PA.Property == null) ? null : PA.Property.Expression;
 		var Index = ExpressionList.indexOf(Item.CurrentExpression);
 		Item.MenuExpression1 = (Index < 0) ? ExpressionList[ExpressionList.length - 1] : (Index == 0) ? null : ExpressionList[Index - 1];
@@ -1252,10 +1253,12 @@ function DialogClick() {
 			});
 		} else if (MouseIn(120, 50, 90, 90)) { 
 			var EyesExpression = WardrobeGetExpression(Player);
-			CharacterSetFacialExpression(Player, "Eyes1", (EyesExpression.Eyes !== "Closed") ? "Closed" : (EyesExpression.Eyes2 !== "Closed" ? EyesExpression.Eyes2 : null));
+			var CurrentExpression = DialogFacialExpressions.find(FE => FE.Group == "Eyes").CurrentExpression;
+			CharacterSetFacialExpression(Player, "Eyes1", (EyesExpression.Eyes !== "Closed") ? "Closed" : (CurrentExpression !== "Closed" ? CurrentExpression : null));
 		} else if (MouseIn(220, 50, 90, 90)) { 
 			var EyesExpression = WardrobeGetExpression(Player);
-			CharacterSetFacialExpression(Player, "Eyes2", (EyesExpression.Eyes2 !== "Closed") ? "Closed" : (EyesExpression.Eyes !== "Closed" ? EyesExpression.Eyes : null));
+			var CurrentExpression = DialogFacialExpressions.find(FE => FE.Group == "Eyes").CurrentExpression;
+			CharacterSetFacialExpression(Player, "Eyes2", (EyesExpression.Eyes2 !== "Closed") ? "Closed" : (CurrentExpression !== "Closed" ? CurrentExpression : null));
 		} else for (var I = 0; I < DialogFacialExpressions.length; I++) {
 			var FE = DialogFacialExpressions[I];
 			if ((MouseY >= 160 + 120 * I) && (MouseY <= (160 + 120 * I) + 90)) {
