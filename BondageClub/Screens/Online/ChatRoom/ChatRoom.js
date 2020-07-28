@@ -931,8 +931,9 @@ function ChatRoomSyncArousal(data) {
 	for (var C = 0; C < ChatRoomCharacter.length; C++)
 		if ((ChatRoomCharacter[C].MemberNumber == data.MemberNumber) && (ChatRoomCharacter[C].ArousalSettings != null)) {
 
-			// Sets the active pose
+			// Sets the orgasm count & progress
 			ChatRoomCharacter[C].ArousalSettings.OrgasmTimer = data.OrgasmTimer;
+			ChatRoomCharacter[C].ArousalSettings.OrgasmCount = data.OrgasmCount;
 			ChatRoomCharacter[C].ArousalSettings.Progress = data.Progress;
 			ChatRoomCharacter[C].ArousalSettings.ProgressTimer = data.ProgressTimer;
 			if ((ChatRoomCharacter[C].ArousalSettings.AffectExpression == null) || ChatRoomCharacter[C].ArousalSettings.AffectExpression) ActivityExpression(ChatRoomCharacter[C], ChatRoomCharacter[C].ArousalSettings.Progress);
@@ -941,6 +942,7 @@ function ChatRoomSyncArousal(data) {
 			for (var C = 0; C < ChatRoomData.Character.length; C++)
 				if (ChatRoomData.Character[C].MemberNumber == data.MemberNumber) {
 					ChatRoomData.Character[C].ArousalSettings.OrgasmTimer = data.OrgasmTimer;
+					ChatRoomData.Character[C].ArousalSettings.OrgasmCount = data.OrgasmCount;
 					ChatRoomData.Character[C].ArousalSettings.Progress = data.Progress;
 					ChatRoomData.Character[C].ArousalSettings.ProgressTimer = data.ProgressTimer;
 					ChatRoomData.Character[C].Appearance = ChatRoomCharacter[C].Appearance;
