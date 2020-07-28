@@ -86,28 +86,25 @@ function InventoryItemVulvaLoversVibratorDraw() {
 }
 
 function InventoryItemVulvaLoversVibratorClick() {
+
 	// Exit Button
-	if (CommonIsClickAt(1885, 25, 90, 85)) {
-		DialogFocusItem = null;
-	}
+	if (MouseIn(1885, 25, 90, 85)) DialogFocusItem = null;
 
 	var Y = 525;
 	InventoryItemVulvaLoversVibratorOptions.some((OptionGroup) => {
 		var Handled = OptionGroup.some((Option, I) => {
 			var X = 1175 + (I % 3) * 225;
-			if (I % 3 === 0) {
-				Y += 75;
-			}
-			if (CommonIsClickAt(X, Y, 200, 55)) {
-				if (Option.Property.Mode !== DialogFocusItem.Property.Mode) {
+			if (I % 3 === 0) Y += 75;
+			if (MouseIn(X, Y, 200, 55)) {
+				if (Option.Property.Mode !== DialogFocusItem.Property.Mode)
 					InventoryItemVulvaLoversVibratorOptionSetMode(Option);
-				}
 				return true;
 			}
 		});
 		Y += 40;
 		return Handled;
 	});
+
 }
 
 function InventoryItemVulvaLoversVibratorOptionSetMode(Option) {
