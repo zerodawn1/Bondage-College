@@ -597,7 +597,7 @@ function ChatRoomCharacterItemUpdate(C, Group) {
 		P.Group = Group;
 		P.Name = (Item != null) ? Item.Asset.Name : undefined;
 		P.Color = ((Item != null) && (Item.Color != null)) ? Item.Color : "Default";
-		P.Difficulty = Item != null ? (Item.Difficulty - Item.Asset.Difficulty) : SkillGetWithRatio("Bondage");
+		P.Difficulty = (Item != null) ? (Item.Difficulty - Item.Asset.Difficulty) : SkillGetWithRatio("Bondage");
 		P.Property = ((Item != null) && (Item.Property != null)) ? Item.Property : undefined;
 		ServerSend("ChatRoomCharacterItemUpdate", P);
 	}
@@ -679,12 +679,13 @@ function ChatRoomMessage(data) {
 				if (data.Dictionary) {
 					var dictionary = data.Dictionary;
 					var SourceCharacter = null;
-					var isPlayerInvolved = SenderCharacter.MemberNumber == Player.MemberNumber;
+					var IsPlayerInvolved = (SenderCharacter.MemberNumber == Player.MemberNumber);
 					var TargetMemberNumber = null;
 					var ActivityName = null;
 					var GroupName = null;
 					var ActivityCounter = 1;
 					for (var D = 0; D < dictionary.length; D++) {
+
 						// If there's a member number in the dictionary packet, we use that number to alter the chat message
 						if (dictionary[D].MemberNumber) {
 
@@ -704,10 +705,11 @@ function ChatRoomMessage(data) {
 										SourceCharacter = ChatRoomCharacter[T];
 							}
 
-							// Checks if the player is involved in the action
-							if (!isPlayerInvolved && ((dictionary[D].Tag == "DestinationCharacter") || (dictionary[D].Tag == "DestinationCharacterName") || (dictionary[D].Tag == "TargetCharacter") || (dictionary[D].Tag == "TargetCharacterName") || (dictionary[D].Tag == "SourceCharacter")))
+							// Sets if the player is involved in the action
+							if (!IsPlayerInvolved && ((dictionary[D].Tag == "DestinationCharacter") || (dictionary[D].Tag == "DestinationCharacterName") || (dictionary[D].Tag == "TargetCharacter") || (dictionary[D].Tag == "TargetCharacterName") || (dictionary[D].Tag == "SourceCharacter")))
 								if (dictionary[D].MemberNumber == Player.MemberNumber)
-									isPlayerInvolved = true;
+									IsPlayerInvolved = true;
+
 						}
 						else if (dictionary[D].TextToLookUp) msg = msg.replace(dictionary[D].Tag, DialogFind(Player, ChatRoomHTMLEntities(dictionary[D].TextToLookUp)).toLowerCase());
 						else if (dictionary[D].AssetName) {
@@ -725,19 +727,19 @@ function ChatRoomMessage(data) {
 									GroupName = dictionary[D].AssetGroupName;
 								}
 						}
-						else if (dictionary[D].ActivityCounter) {
-							ActivityCounter = dictionary[D].ActivityCounter;
-						}
+						else if (dictionary[D].ActivityCounter) ActivityCounter = dictionary[D].ActivityCounter;
 						else if (msg != null) msg = msg.replace(dictionary[D].Tag, ChatRoomHTMLEntities(dictionary[D].Text));
 					}
+
 					// If another player is using an item which applies an activity on the current player, apply the effect here
 					if ((ActivityName != null) && (TargetMemberNumber != null) && (TargetMemberNumber == Player.MemberNumber) && (SenderCharacter.MemberNumber != Player.MemberNumber))
-						if ((Player.ArousalSettings == null) || (Player.ArousalSettings.Active == null) || (Player.ArousalSettings.Active == "Hybrid") || (Player.ArousalSettings.Active == "Automatic")) {
+						if ((Player.ArousalSettings == null) || (Player.ArousalSettings.Active == null) || (Player.ArousalSettings.Active == "Hybrid") || (Player.ArousalSettings.Active == "Automatic"))
 							ActivityEffect(SenderCharacter, Player, ActivityName, GroupName, ActivityCounter);
-						}
 
-					if (!Player.AudioSettings.PlayItemPlayerOnly || isPlayerInvolved)
+					// Launches the audio file if allowed
+					if (!Player.AudioSettings.PlayItemPlayerOnly || IsPlayerInvolved)
 						AudioPlayContent(data);
+
 				}
 			}
 
@@ -777,9 +779,8 @@ function ChatRoomMessage(data) {
 					}
 				// If the player does the activity on herself or an NPC, we calculate the result right away
 				if ((data.Type === "Action") || ((TargetMemberNumber == Player.MemberNumber) && (SenderCharacter.MemberNumber != Player.MemberNumber)))
-					if ((Player.ArousalSettings == null) || (Player.ArousalSettings.Active == null) || (Player.ArousalSettings.Active == "Hybrid") || (Player.ArousalSettings.Active == "Automatic")) {
+					if ((Player.ArousalSettings == null) || (Player.ArousalSettings.Active == null) || (Player.ArousalSettings.Active == "Hybrid") || (Player.ArousalSettings.Active == "Automatic"))
 						ActivityEffect(SenderCharacter, Player, ActivityName, GroupName, ActivityCounter);
-					}
 
 				// Exits before outputting the text if the player doesn't want to see the sexual activity messages
 				if ((Player.ChatSettings != null) && (Player.ChatSettings.ShowActivities != null) && !Player.ChatSettings.ShowActivities) return;
@@ -795,6 +796,7 @@ function ChatRoomMessage(data) {
 				div.setAttribute('style', 'background-color:' + ChatRoomGetTransparentColor(SenderCharacter.LabelColor) + ';');
 			div.innerHTML = msg;
 
+			// Returns the focus on the chat box
 			var Refocus = document.activeElement.id == "InputChat";
 			var ShouldScrollDown = ElementIsScrolledToEnd("TextAreaChatLog");
 			if (document.getElementById("TextAreaChatLog") != null) {
@@ -802,6 +804,7 @@ function ChatRoomMessage(data) {
 				if (ShouldScrollDown) ElementScrollToEnd("TextAreaChatLog");
 				if (Refocus) ElementFocus("InputChat");
 			}
+
 		}
 	}
 }
@@ -1295,13 +1298,12 @@ function ChatRoomGameResponse(data) {
 
 // When the player uses the /safeword command, we revert the character if safewords are enabled, and display a warning in chat if not
 function ChatRoomSafewordChatCommand() {
-	if(DialogChatRoomCanSafeword())
+	if (DialogChatRoomCanSafeword())
 		ChatRoomSafewordRevert();
-	else if(CurrentScreen == "ChatRoom") {
-		var msg = {Sender: Player.MemberNumber, Content: "SafewordDisabled", Type: "Action"}
+	else if (CurrentScreen == "ChatRoom") {
+		var msg = {Sender: Player.MemberNumber, Content: "SafewordDisabled", Type: "Action"};
 		ChatRoomMessage(msg);
 	}
-
 }
 
 // When the player activates her safeword to revert, we swap her appearance to the state when she entered the chat room lobby, minimum permission becomes whitelist and up

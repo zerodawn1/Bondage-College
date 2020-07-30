@@ -128,19 +128,21 @@ function ActivityDialogBuild(C) {
  * If you don't want an activity to modify arousal, set this parameter to '0'
  * @return {void} - Nothing
  */
-function ActivityEffect(S, C, A, Z, count) {
+function ActivityEffect(S, C, A, Z, Count) {
+
 	// Converts from activity name to the activity object
 	if (typeof A === "string") A = AssetGetActivity(C.AssetFamily, A);
 	if ((A == null) || (typeof A === "string")) return;
-	if ((count == null) || (count == undefined)) count = 1;
+	if ((Count == null) || (Count == undefined) || (Count == 0)) Count = 1;
 
 	// Calculates the next progress factor
 	var Factor = (PreferenceGetActivityFactor(C, A.Name, (C.ID == 0)) * 5) - 10; // Check how much the character likes the activity, from -10 to +10
 	Factor = Factor + (PreferenceGetZoneFactor(C, Z) * 5) - 10; // The zone used also adds from -10 to +10
 	Factor = Factor + Math.floor((Math.random() * 8)); // Random 0 to 7 bonus
 	if ((C.ID != S.ID) && (((C.ID != 0) && C.IsLoverOfPlayer()) || ((C.ID == 0) && S.IsLoverOfPlayer()))) Factor = Factor + Math.floor((Math.random() * 8)); // Another random 0 to 7 bonus if the target is the player's lover
-	// if the action is done repeatedly, multiply the factor with the count
-	ActivitySetArousalTimer(C, A, Z, Factor * count);
+	Factor = Factor + Math.round(Factor * (Count - 1) / 3); // if the action is done repeatedly, we apply a multiplication factor based on the count
+	ActivitySetArousalTimer(C, A, Z, Factor);
+
 }
 
 /**
