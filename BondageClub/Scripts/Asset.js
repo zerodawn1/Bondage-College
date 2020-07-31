@@ -241,3 +241,20 @@ function AssetGetActivity(Family, Name) {
 				return ActivityFemale3DCG[A];
 	return null;
 }
+
+/**
+ * Cleans the given array of assets of any items that no longer exists
+ * @param {Array.<{Name: string, Group: string}>} AssetArray - The arrays of items to clean
+ * @returns {Array.<{Name: string, Group: string}>} - The cleaned up array
+ */
+function AssetCleanArray(AssetArray) { 
+	var CleanArray = [];
+	// Only save the existing items
+	for (var A = 0; A < Asset.length; A++)
+		for (var AA = 0; AA < AssetArray.length; AA++)
+			if (AssetArray[AA].Name == Asset[A].Name && AssetArray[AA].Group == Asset[A].Group.Name) {
+				CleanArray.push(AssetArray[AA]);
+				break;
+			}
+	return CleanArray;
+}
