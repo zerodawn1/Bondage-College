@@ -2796,6 +2796,10 @@ var FetishFemale3DCG = [
 		GetFactor: function (C) { return ActivityFetishItemFactor(C, "Lingerie") }
 	},
 	{
+		Name: "Pet",
+		GetFactor: function (C) { return ActivityFetishItemFactor(C, "Pet") }
+	},
+	{
 		Name: "Pony",
 		GetFactor: function (C) { return ActivityFetishItemFactor(C, "Pony") }
 	},
