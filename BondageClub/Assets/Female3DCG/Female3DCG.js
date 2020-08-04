@@ -1586,6 +1586,12 @@ var AssetFemale3DCG = [
 					{ Name: "Highlights", AllowColorize: false, AllowTypes: ["", "Polished"] },
 				]
 			},
+			{
+				Name: "PrisonLockdownSuit", Value: 125, Difficulty: 7, SelfBondage: 7, Time: 50, RemoveTime: 30, Random: false, AllowLock: true, BuyGroup: "PrisonLockdownSuit", DefaultColor: "#ab5207", Hide: ["ItemNeck", "BodyLower", "Cloth", "ClothLower", "Shoes", "Socks", "ItemLegs", "ItemFeet", "ItemPelvis", "ItemBoots", "SuitLower", "Panties"], SetPose: ["LegsClosed", "BackElbowTouch"], Prerequisite: ["NotSuspended", "NotKneeling", "NotHogtied", "NotMounted", "NotKneelingSpread", "NoFeetSpreader", "NotShackled"], Effect: ["Block", "Prone", "BlockKneel"], AllowEffect: ["Freeze"], AllowType: ["Ankles", "Thighs", "Full"], Block: ["ItemBreast", "ItemNipplePiercings", "ItemNipples", "ItemTorso", "ItemPelvis", "ItemHands", "ItemVulva", "ItemVulvaPiercings", "ItemButt", "ItemLegs", "ItemFeet", "ItemBoots"], Extended: true, SelfUnlock: false, Layer: [
+					{ Name: "Suit", AllowTypes: ["", "Ankles", "Thighs", "Full"] },
+					{ Name: "Belts", AllowColorize: false, AllowTypes: ["", "Ankles", "Thighs", "Full"] },
+				],
+			},
 			AssetSpankingToys
 		],
 		Color: ["Default"]
@@ -1984,6 +1990,13 @@ var AssetFemale3DCG = [
 				]
 			},
 			{ Name: "RegressedMilk", Fetish: ["ABDL"], Value: -1, Time: 10, Random: false, Visible: false, BuyGroup: "RegressedMilk", Block: [], Effect: ["RegressedTalk"], ExpressionTrigger: [{ Name: "DroolSides", Group: "Fluids", Timer: 30 }]},
+			{
+				Name: "PrisonLockdownGag", Value: -1, Difficulty: 5, Time: 20, AllowLock: true, BuyGroup: "PrisonLockdownSuit", Prerequisite: "GagFlat", DefaultColor: "#8c4309", Hide: ["Mouth"], HideItem: ["ItemNoseNoseRing"], SetPose: ["GagFlat"],
+				Layer: [
+					{ Name: "Mask" },
+					{ Name: "Straps", AllowColorize: false, }
+				]
+			},
 			AssetSpankingToys
 		],
 		Color: ["Default"]
@@ -2097,6 +2110,13 @@ var AssetFemale3DCG = [
 				]
 			},
 			{ Name: "RegressedMilk", Fetish: ["ABDL"], Value: -1, Time: 10, Random: false, Visible: false, BuyGroup: "RegressedMilk", Block: [], Effect: ["RegressedTalk"], ExpressionTrigger: [{ Name: "DroolSides", Group: "Fluids", Timer: 30 }]},
+			{
+				Name: "PrisonLockdownGag", Value: -1, Difficulty: 5, Time: 20, AllowLock: true, BuyGroup: "PrisonLockdownSuit", Prerequisite: "GagFlat", DefaultColor: "#8c4309", Hide: ["Mouth"], HideItem: ["ItemNoseNoseRing"], SetPose: ["GagFlat"],
+				Layer: [
+					{ Name: "Mask" },
+					{ Name: "Straps", AllowColorize: false, }
+				]
+			}
 		],
 		Color: ["Default"]
 	},
@@ -2209,6 +2229,13 @@ var AssetFemale3DCG = [
 				]
 			},
 			{ Name: "RegressedMilk", Fetish: ["ABDL"], Value: -1, Time: 10, Random: false, Visible: false, BuyGroup: "RegressedMilk", Block: [], Effect: ["RegressedTalk"], ExpressionTrigger: [{ Name: "DroolSides", Group: "Fluids", Timer: 30 }]},
+			{
+				Name: "PrisonLockdownGag", Value: -1, Difficulty: 5, Time: 20, AllowLock: true, BuyGroup: "PrisonLockdownSuit", Prerequisite: "GagFlat", DefaultColor: "#8c4309", Hide: ["Mouth"], HideItem: ["ItemNoseNoseRing"], SetPose: ["GagFlat"],
+				Layer: [
+					{ Name: "Mask" },
+					{ Name: "Straps", AllowColorize: false, }
+				]
+			}
 		],
 		Color: ["Default"]
 	},
@@ -2242,6 +2269,7 @@ var AssetFemale3DCG = [
 			{ Name: "WebBlindfold", Fetish: ["Tape"], Value: 50, Difficulty: 5, Time: 10, RemoveTime: 20, Random: false, Hide: ["Glasses", "Mask"], AllowBlock: ["ItemMouth", "ItemMouth2", "ItemMouth3", "ItemEars", "ItemHood", "ItemNose"], AllowEffect: ["BlindHeavy", "GagNormal", "BlockMouth"], AllowType: ["Cocoon"], Effect: ["BlindLight", "Prone"], Extended: true },
 			{ Name: "RopeBlindfold", Fetish: ["Rope"], Value: 60, Time: 15, DefaultColor: "#956B1C", BuyGroup: "HempRope", Hide: ["Glasses", "Mask"], Effect: ["BlindLight", "Prone"] },
 			{ Name: "SleepMask", Value: 5, Time: 5, Hide: ["Glasses", "Mask"], Effect: ["BlindLight", "Prone"] },
+			{ Name: "PrisonLockdownBlindfold", Priority: 34, Value: -1, Time: 5, BuyGroup: "PrisonLockdownSuit", DefaultColor: "#77511f", Hide: ["Glasses"], Effect: ["BlindNormal", "Prone"] },
 			AssetSpankingToys
 		],
 		Color: ["Default"]
