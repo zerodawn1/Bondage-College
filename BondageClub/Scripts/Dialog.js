@@ -616,6 +616,14 @@ function DialogInventoryBuild(C, Offset) {
 						var DialogSortOrder = Player.Inventory[A].Asset.DialogSortOverride != null ? Player.Inventory[A].Asset.DialogSortOverride : (InventoryAllow(C, Player.Inventory[A].Asset.Prerequisite, false)) ? DialogSortOrderUsable : DialogSortOrderUnusable;
 						DialogInventoryAdd(C, Player.Inventory[A], false, DialogSortOrder);
 					}
+
+			// Fourth, we add all free items (especially useful for clothes)
+			for (var A = 0; A < Asset.length; A++)
+				if ((Asset[A].Group.Name == C.FocusGroup.Name) && (Asset[A].Value == 0)) {
+					var DialogSortOrder = Asset[A].DialogSortOverride != null ? Asset[A].DialogSortOverride : (InventoryAllow(C, Asset[A].Prerequisite, false)) ? DialogSortOrderUsable : DialogSortOrderUnusable;
+					DialogInventoryAdd(C, { Asset: Asset[A] }, false, DialogSortOrder);
+				}
+
 		}
 
 		// Rebuilds the dialog menu and it's buttons
