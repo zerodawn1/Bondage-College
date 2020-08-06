@@ -902,6 +902,7 @@ function AppearanceClick() {
 		if ((MouseX >= 1768) && (MouseX < 1858) && (MouseY >= 25) && (MouseY < 115)) {
 			CharacterAppearanceSetColorForGroup(C, CharacterAppearanceColorPickerBackup, CharacterAppearanceColorPicker);
 			CharacterAppearanceColorPicker = "";
+			AppearanceExit();
 		}
 
 		// Cancels out of color picking
