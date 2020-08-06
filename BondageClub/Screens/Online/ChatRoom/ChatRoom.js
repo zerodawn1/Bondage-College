@@ -294,11 +294,12 @@ function ChatRoomRun() {
 		ChatRoomSlowtimer = 0;
 		ChatRoomSlowStop = false;
 	}
-	//Player is slow and can leave and is not stopped by other player.
-	if (Player.IsSlow() && ChatRoomCanLeave() && ChatRoomSlowStop == false){
-		if (ChatRoomSlowtimer == 0) DrawButton(1005, 2, 120, 60, "", "rgb(39, 68, 233)", "Icons/Rectangle/Exit.png", TextGet("MenuLeave"));//Draw blue exit for slow
-		if (CurrentTime < ChatRoomSlowtimer && ChatRoomSlowtimer != 0) DrawButton(1005, 2, 120, 60, "", "White", "Icons/Rectangle/CancelRect.png", TextGet("MenuCancel"));//Draw cancel, player has started auto leave.
-		if (CurrentTime > ChatRoomSlowtimer && ChatRoomSlowtimer != 0 ){//Auto leave once timer completes. Reset slow Timers
+
+	// If the player is slow (ex: ball & chains), she can leave the room with a timer and can be blocked by others
+	if (Player.IsSlow() && ChatRoomCanLeave() && (ChatRoomSlowStop == false)) {
+		if (ChatRoomSlowtimer == 0) DrawButton(1005, 2, 120, 60, "", "#FFFF00", "Icons/Rectangle/Exit.png", TextGet("MenuLeave"));
+		if ((CurrentTime < ChatRoomSlowtimer) && (ChatRoomSlowtimer != 0)) DrawButton(1005, 2, 120, 60, "", "White", "Icons/Rectangle/Cancel.png", TextGet("MenuCancel"));
+		if ((CurrentTime > ChatRoomSlowtimer) && (ChatRoomSlowtimer != 0)) {
 			ChatRoomSlowtimer = 0;
 			ChatRoomSlowStop = false;
 			ElementRemove("InputChat");
@@ -307,20 +308,21 @@ function ChatRoomRun() {
 			CommonSetScreen("Online", "ChatSearch");
 		}
 	}
-	//Player is stopped by other player and is slow.
-	if (ChatRoomSlowStop == true && Player.IsSlow()){
-		DrawButton(1005, 2, 120, 60, "", "Pink", "Icons/Rectangle/Exit.png", TextGet("MenuLeave"));//Player is currently kept in room while slow by other player.
-		if (CurrentTime > ChatRoomSlowtimer){//Stopped player has their stop timer expire, reset. 
+
+	// If the player is slow and was stopped from leaving by another player
+	if ((ChatRoomSlowStop == true) && Player.IsSlow()) {
+		DrawButton(1005, 2, 120, 60, "", "Pink", "Icons/Rectangle/Exit.png", TextGet("MenuLeave"));
+		if (CurrentTime > ChatRoomSlowtimer) {
 			 ChatRoomSlowtimer = 0;
 			 ChatRoomSlowStop = false;
 		}
-		
 	}
-	// Draws the top button, in red if they aren't enabled	- Check for slow, make sure slow timer is not active.
+
+	// Draws the top buttons in pink if they aren't available
 	if (!Player.IsSlow()){
 		if (ChatRoomSlowtimer != 0) ChatRoomSlowtimer = 0;
 		DrawButton(1005, 2, 120, 60, "", (ChatRoomCanLeave()) ? "White" : "Pink", "Icons/Rectangle/Exit.png", TextGet("MenuLeave"));
-	}
+	}	
 	if (OnlineGameName == "") DrawButton(1179, 2, 120, 60, "", "White", "Icons/Rectangle/Cut.png", TextGet("MenuCut"));
 	else DrawButton(1179, 2, 120, 60, "", "White", "Icons/Rectangle/GameOption.png", TextGet("MenuGameOption"));
 	DrawButton(1353, 2, 120, 60, "", (Player.CanKneel()) ? "White" : "Pink", "Icons/Rectangle/Kneel.png", TextGet("MenuKneel"));
@@ -382,18 +384,21 @@ function ChatRoomClick() {
 		CharacterDeleteAllOnline();
 	}
 
-	//When the player is slow and attempts leave
-	if ((MouseX >= 1005) && (MouseX < 1125) && (MouseY >= 0) && (MouseY <= 62) && ChatRoomCanLeave() && Player.IsSlow()){
-		//Player clicked to leave, start timer, send chat message player is heading for exit.
-		if (ChatRoomSlowtimer == 0 && ChatRoomSlowStop == false){
+	// When the player is slow and attempts to leave
+	if ((MouseX >= 1005) && (MouseX < 1125) && (MouseY >= 0) && (MouseY <= 62) && ChatRoomCanLeave() && Player.IsSlow()) {
+
+		// If the player clicked to leave, we start a timer based on evasion level and send a chat message
+		if ((ChatRoomSlowtimer == 0) && (ChatRoomSlowStop == false)) {
 			ServerSend("ChatRoomChat", { Content: "SlowLeaveAttempt", Type: "Action", Dictionary: [{Tag: "SourceCharacter", Text: Player.Name, MemberNumber: Player.MemberNumber}]});
-			ChatRoomSlowtimer = CurrentTime + (10 * (1000-(50 * SkillGetLevelReal(Player,"Evasion") ) ) );//10seconds max - 5 sec min
+			ChatRoomSlowtimer = CurrentTime + (10 * (1000 - (50 * SkillGetLevelReal(Player, "Evasion"))));
 		}
-		//Player clicked to cancel leaving, reset timer to 0, send chat message player stops leaving.
-		else if (ChatRoomSlowtimer != 0 && ChatRoomSlowStop == false){
+
+		// If the player clicked to cancel leaving, we alert the room and stop the timer
+		else if ((ChatRoomSlowtimer != 0) && (ChatRoomSlowStop == false)) {
 			ServerSend("ChatRoomChat", { Content: "SlowLeaveCancel", Type: "Action", Dictionary: [{Tag: "SourceCharacter", Text: Player.Name, MemberNumber: Player.MemberNumber}]});
 			ChatRoomSlowtimer = 0;
 		}
+
 	}
 
 	// When the user wants to remove the top part of his chat to speed up the screen, we only keep the last 20 entries
@@ -830,6 +835,7 @@ function ChatRoomMessage(data) {
 
 			// Outputs the sexual activities text and runs the activity if the player is targeted
 			if ((data.Type != null) && (data.Type === "Activity")) {
+
 				// Creates the output message using the activity dictionary and tags, keep some values to calculate the activity effects on the player
 				msg = "(" + ActivityDictionaryText(msg) + ")";
 				var TargetMemberNumber = null;
@@ -844,6 +850,7 @@ function ChatRoomMessage(data) {
 						if (data.Dictionary[D].Tag == "ActivityGroup") ActivityGroup = data.Dictionary[D].Text;
 						if (data.Dictionary[D].ActivityCounter != null) ActivityCounter = data.Dictionary[D].ActivityCounter;
 					}
+
 				// If the player does the activity on herself or an NPC, we calculate the result right away
 				if ((data.Type === "Action") || ((TargetMemberNumber == Player.MemberNumber) && (SenderCharacter.MemberNumber != Player.MemberNumber)))
 					if ((Player.ArousalSettings == null) || (Player.ArousalSettings.Active == null) || (Player.ArousalSettings.Active == "Hybrid") || (Player.ArousalSettings.Active == "Automatic"))
