@@ -756,7 +756,8 @@ var AssetFemale3DCG = [
 		AllowColorize: false,
 		AllowPose: ["LegsClosed", "Kneel", "Horse", "KneelingSpread", "Spread"],
 		Asset: ["Small", "Normal", "Large", "XLarge"],
-		Color: ["White", "Asian", "Black"]
+		Color: ["Default", "White", "Asian", "Black"],
+		InheritColor: "BodyUpper"
 	},
 
 	{
@@ -764,10 +765,10 @@ var AssetFemale3DCG = [
 		ParentColor: "BodyUpper",
 		Priority: 27,
 		AllowNone: false,
-		AllowColorize: false,
+		AllowCustomize: false,
 		AllowPose: ["TapedHands", "BackBoxTie", "BackCuffs", "BackElbowTouch", "AllFours"],
 		Asset: ["Default"],
-		Color: ["White", "Asian", "Black"]
+		InheritColor: "BodyUpper"
 	},
 
 	{
