@@ -1084,6 +1084,7 @@ function ChatRoomRefreshChatSettings(C) {
 			ElementSetDataAttribute("TextAreaChatLog", "ColorNames", "false");
 			ElementSetDataAttribute("TextAreaChatLog", "ColorActions", "false");
 			ElementSetDataAttribute("TextAreaChatLog", "ColorEmotes", "false");
+			ElementSetDataAttribute("TextAreaChatLog", "ColorActivities", "false");
 			ElementSetDataAttribute("TextAreaChatLog", "MemberNumbers", "Never");
 		}
 	}
