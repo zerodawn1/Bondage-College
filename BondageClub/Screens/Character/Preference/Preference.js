@@ -31,6 +31,16 @@ var PreferenceArousalZoneFactor = 0;
 var PreferenceArousalFetishList = null;
 var PreferenceArousalFetishIndex = 0;
 var PreferenceArousalFetishFactor = 0;
+var PreferenceVisibilityGroupList = [];
+var PreferenceVisibilityGroupIndex = 0;
+var PreferenceVisibilityAssetIndex = 0;
+var PreferenceVisibilityHideChecked = false;
+var PreferenceVisibilityBlockChecked = false;
+var PreferenceVisibilityCanBlock = true;
+var PreferenceVisibilityPreviewImg = null;
+var PreferenceVisibilityHiddenList = [];
+var PreferenceVisibilityBlockList = [];
+var PreferenceVisibilityResetClicked = false;
 
 /**
  * Gets the effect of a sexual activity on the player
@@ -184,7 +194,7 @@ function PreferenceLoadFetishFactor() {
 function PreferenceInit(C) {
 
 	// If the settings aren't set before, construct them to replicate the default behavior
-	if (!C.ChatSettings) C.ChatSettings = { DisplayTimestamps: true, ColorNames: true, ColorActions: true, ColorEmotes: true, ShowActivities: true, AutoBanGhostList: true, AutoBanBlackList: false };
+	if (!C.ChatSettings) C.ChatSettings = { DisplayTimestamps: true, ColorNames: true, ColorActions: true, ColorEmotes: true, ShowActivities: true, AutoBanGhostList: true, AutoBanBlackList: false, SearchShowsFullRooms: true, SearchFriendsFirst: false };
 	if (C.ChatSettings.DisplayTimestamps == null) C.ChatSettings.DisplayTimestamps = true;
 	if (C.ChatSettings.ColorNames == null) C.ChatSettings.ColorNames = true;
 	if (C.ChatSettings.ColorActions == null) C.ChatSettings.ColorActions = true;
@@ -192,6 +202,8 @@ function PreferenceInit(C) {
 	if (C.ChatSettings.ShowActivities == null) C.ChatSettings.ShowActivities = true;
 	if (C.ChatSettings.AutoBanBlackList == null) C.ChatSettings.AutoBanBlackList = false;
 	if (C.ChatSettings.AutoBanGhostList == null) C.ChatSettings.AutoBanGhostList = true;
+	if (C.ChatSettings.SearchShowsFullRooms == null) C.ChatSettings.SearchShowsFullRooms = true;
+	if (C.ChatSettings.SearchFriendsFirst == null) C.ChatSettings.SearchFriendsFirst = false;
 	if (!C.VisualSettings) C.VisualSettings = { ForceFullHeight: false };
 
 	// Sets the default audio settings
@@ -325,6 +337,7 @@ function PreferenceRun() {
 	if (PreferenceSubscreen == "Audio") return PreferenceSubscreenAudioRun();
 	if (PreferenceSubscreen == "Arousal") return PreferenceSubscreenArousalRun();
 	if (PreferenceSubscreen == "Security") return PreferenceSubscreenSecurityRun();
+	if (PreferenceSubscreen == "Visibility") return PreferenceSubscreenVisibilityRun();
 
 	// Draw the online preferences
 	MainCanvas.textAlign = "left";
@@ -364,6 +377,7 @@ function PreferenceRun() {
 		DrawButton(1815, 305, 90, 90, "", "White", "Icons/Audio.png");
 		DrawButton(1815, 420, 90, 90, "", "White", "Icons/Activity.png");
 		DrawButton(1815, 535, 90, 90, "", "White", "Icons/Lock.png");
+		DrawButton(1815, 650, 90, 90, "", "White", "Icons/Private.png");
 	}
 }
 
@@ -378,6 +392,7 @@ function PreferenceClick() {
 	if (PreferenceSubscreen == "Audio") return PreferenceSubscreenAudioClick();
 	if (PreferenceSubscreen == "Arousal") return PreferenceSubscreenArousalClick();
 	if (PreferenceSubscreen == "Security") return PreferenceSubscreenSecurityClick();
+	if (PreferenceSubscreen == "Visibility") return PreferenceSubscreenVisibilityClick();
 
 	// If the user clicks on "Exit"
 	if ((MouseX >= 1815) && (MouseX < 1905) && (MouseY >= 75) && (MouseY < 165) && (PreferenceColorPick == "")) PreferenceExit();
@@ -409,6 +424,12 @@ function PreferenceClick() {
 		PreferenceSubscreen = "Security";
 	}
 
+	// If the user clicks on the security settings button
+	if ((MouseX >= 1815) && (MouseX < 1905) && (MouseY >= 650) && (MouseY < 740) && (PreferenceColorPick == "")) {
+		PreferenceMainScreenExit();
+		PreferenceSubscreen = "Visibility";
+	}
+	
 	// If we must change the restrain permission level
 	if ((MouseX >= 500) && (MouseX < 590) && (MouseY >= 280) && (MouseY < 370)) {
 		Player.ItemPermission++;
@@ -502,6 +523,8 @@ function PreferenceSubscreenChatRun() {
 	DrawCheckbox(500, 812, 64, 64, TextGet("ShowActivities"), Player.ChatSettings.ShowActivities);
 	DrawCheckbox(1200, 492, 64, 64, TextGet("AutoBanBlackList"), Player.ChatSettings.AutoBanBlackList);
 	DrawCheckbox(1200, 572, 64, 64, TextGet("AutoBanGhostList"), Player.ChatSettings.AutoBanGhostList);
+	DrawCheckbox(1200, 652, 64, 64, TextGet("SearchShowsFullRooms"), Player.ChatSettings.SearchShowsFullRooms);
+	DrawCheckbox(1200, 732, 64, 64, TextGet("SearchFriendsFirst"), Player.ChatSettings.SearchFriendsFirst);
 	MainCanvas.textAlign = "center";
 	DrawBackNextButton(1000, 190, 350, 70, TextGet(PreferenceChatColorThemeSelected), "White", "",
 		() => TextGet((PreferenceChatColorThemeIndex == 0) ? PreferenceChatColorThemeList[PreferenceChatColorThemeList.length - 1] : PreferenceChatColorThemeList[PreferenceChatColorThemeIndex - 1]),
@@ -597,6 +620,45 @@ function PreferenceSubscreenSecurityRun() {
 }
 
 /**
+ * Sets the item visibility preferences for a player. Redirected to from the main Run function if the player is in the visibility settings subscreen
+ * @returns {void} - Nothing
+ */
+function PreferenceSubscreenVisibilityRun() {
+	// Load the full asset list on the first call
+	if (PreferenceVisibilityGroupList.length == 0) PreferenceVisibilityLoad();
+
+	DrawCharacter(Player, 50, 50, 0.9);
+
+	// Exit buttons
+	DrawButton(1720, 60, 90, 90, "", "White", "Icons/Accept.png", TextGet("LeaveSave"));
+	DrawButton(1820, 60, 90, 90, "", "White", "Icons/Cancel.png", TextGet("LeaveNoSave"));
+
+	// Left-aligned text controls
+	MainCanvas.textAlign = "left";
+	DrawText(TextGet("VisibilityPreferences"), 500, 125, "Black", "Gray");
+	DrawText(TextGet("VisibilityGroup"), 500, 225, "Black", "Gray");
+	DrawText(TextGet("VisibilityAsset"), 500, 304, "Black", "Gray");
+	DrawCheckbox(500, 352, 64, 64, TextGet("VisibilityCheckboxHide"), PreferenceVisibilityHideChecked);
+	if (PreferenceVisibilityCanBlock) DrawCheckbox(500, 432, 64, 64, TextGet("VisibilityCheckboxBlock"), PreferenceVisibilityBlockChecked);
+	if (PreferenceVisibilityHideChecked) {
+		DrawImageResize("Screens/Character/Player/HiddenItem.png", 500, 516, 86, 86);
+		DrawText(TextGet("VisibilityWarning"), 600, 548, "Black", "Gray");
+	}
+	if (PreferenceVisibilityResetClicked) DrawText(TextGet("VisibilityResetDescription"), 500, 732, "Black", "Gray");
+	MainCanvas.textAlign = "center";
+
+	// Buttons
+	DrawBackNextButton(650, 193, 500, 64, PreferenceVisibilityGroupList[PreferenceVisibilityGroupIndex].Group.Description, "White", "", () => "", () => "");
+	DrawBackNextButton(650, 272, 500, 64, PreferenceVisibilityGroupList[PreferenceVisibilityGroupIndex].Assets[PreferenceVisibilityAssetIndex].Asset.Description, "White", "", () => "", () => "");
+	DrawButton(500, PreferenceVisibilityResetClicked ? 780 : 700, 300, 64, TextGet("VisibilityReset"), "White", "");
+	
+	// Preview icon
+	DrawEmptyRect(1200, 193, 225, 225, "Black");
+	if (PreferenceVisibilityPreviewImg == null) DrawRect(1203, 196, 219, 219, "LightGray");
+	else DrawImageResize(PreferenceVisibilityPreviewImg, 1202, 195, 221, 221);
+}
+
+/**
  * Handles click events for the audio preference settings. 
  * Redirected to from the main Click function if the player is in the audio settings subscreen
  * @returns {void} - Nothing
@@ -643,6 +705,8 @@ function PreferenceSubscreenChatClick() {
 	if ((MouseX >= 1200) && (MouseX <= 1264)) {
 		if ((MouseY >= 492) && (MouseY <= 556)) Player.ChatSettings.AutoBanBlackList = !Player.ChatSettings.AutoBanBlackList;
 		if ((MouseY >= 572) && (MouseY <= 636)) Player.ChatSettings.AutoBanGhostList = !Player.ChatSettings.AutoBanGhostList;
+		if ((MouseY >= 652) && (MouseY <= 716)) Player.ChatSettings.SearchShowsFullRooms = !Player.ChatSettings.SearchShowsFullRooms;
+		if ((MouseY >= 732) && (MouseY <= 796)) Player.ChatSettings.SearchFriendsFirst = !Player.ChatSettings.SearchFriendsFirst;
 	}
 
 	// If the user used one of the BackNextButtons
@@ -806,6 +870,172 @@ function PreferenceSubscreenSecurityClick() {
 			ElementValue("InputEmailNew", TextGet("UpdateEmailInvalid"));
 	}
 
+}
+
+/**
+ * Handles the click events for the visibility settings of a player
+ * Redirected to from the main Click function if the player is in the visibility settings subscreen
+ */
+function PreferenceSubscreenVisibilityClick() {
+
+	// Group button
+	if (MouseIn(650, 193, 500, 64)) {
+		if (MouseX >= 900) {
+			PreferenceVisibilityGroupIndex++;
+			if (PreferenceVisibilityGroupIndex >= PreferenceVisibilityGroupList.length) PreferenceVisibilityGroupIndex = 0;
+		}
+		else {
+			PreferenceVisibilityGroupIndex--;
+			if (PreferenceVisibilityGroupIndex < 0) PreferenceVisibilityGroupIndex = PreferenceVisibilityGroupList.length - 1;
+		}
+		PreferenceVisibilityAssetIndex = 0;
+		PreferenceVisibilityAssetChanged(true);
+	}
+
+	// Asset button
+	if (MouseIn(650, 272, 500, 64)) {
+		if (MouseX >= 900) {
+			PreferenceVisibilityAssetIndex++;
+			if (PreferenceVisibilityAssetIndex >= PreferenceVisibilityGroupList[PreferenceVisibilityGroupIndex].Assets.length) PreferenceVisibilityAssetIndex = 0;
+		}
+		else {
+			PreferenceVisibilityAssetIndex--;
+			if (PreferenceVisibilityAssetIndex < 0) PreferenceVisibilityAssetIndex = PreferenceVisibilityGroupList[PreferenceVisibilityGroupIndex].Assets.length - 1;
+		}
+		PreferenceVisibilityAssetChanged(true);
+	}
+
+	// Hide checkbox
+	if (MouseIn(500, 352, 64, 64)) {
+		PreferenceVisibilityHideChange();
+		if (PreferenceVisibilityHideChecked != PreferenceVisibilityBlockChecked && PreferenceVisibilityCanBlock) PreferenceVisibilityBlockChange();
+	}
+
+	// Block checkbox
+	if (MouseIn(500, 432, 64, 64) && PreferenceVisibilityCanBlock) {
+		PreferenceVisibilityBlockChange();
+	}
+
+	// Reset button
+	if (MouseIn(500, PreferenceVisibilityResetClicked ? 780 : 700, 300, 64)) {
+		if (PreferenceVisibilityResetClicked) {
+			Player.HiddenItems = [];
+			PreferenceVisibilityExit(true);
+		}
+		else PreferenceVisibilityResetClicked = true;
+	}
+
+	// Confirm button
+	if (MouseIn(1720, 60, 90, 90)) {
+		Player.HiddenItems = PreferenceVisibilityHiddenList;
+		Player.BlockItems = PreferenceVisibilityBlockList;
+		PreferenceVisibilityExit(true);
+	}
+
+	// Cancel button
+	if (MouseIn(1820, 60, 90, 90)) {
+		PreferenceVisibilityExit(false);
+	}
+}
+
+/** Load the full list of items and clothes along with the player settings for them */
+function PreferenceVisibilityLoad() {
+	PreferenceVisibilityHiddenList = Player.HiddenItems.slice();
+	PreferenceVisibilityBlockList = Player.BlockItems.slice();
+
+	for (let G = 0; G < AssetGroup.length; G++)
+		if (AssetGroup[G].Clothing || AssetGroup[G].Category != "Appearance") {
+			var AssetList = [];
+			for (let A = 0; A < Asset.length; A++)
+				if (Asset[A].Group.Name == AssetGroup[G].Name && Asset[A].Visible)
+					AssetList.push({
+						Asset: Asset[A],
+						Hidden: CharacterAppearanceItemIsHidden(Asset[A].Name, AssetGroup[G].Name),
+						Blocked: InventoryIsPermissionBlocked(Player, Asset[A].Name, AssetGroup[G].Name),
+						Limited: InventoryIsPermissionLimited(Player, Asset[A].Name, AssetGroup[G].Name)
+					});
+			if (AssetList.length > 0) PreferenceVisibilityGroupList.push({ Group: AssetGroup[G], Assets: AssetList });
+		}
+	PreferenceVisibilityAssetChanged(true);
+}
+
+/**
+ * Update the checkbox settings and asset preview image based on the new asset selection
+ * @param {boolean} RefreshCheckboxes - If TRUE, load the new asset settings. If FALSE, a checkbox was just manually changed so don't refresh them
+ */
+function PreferenceVisibilityAssetChanged(RefreshCheckboxes) {
+	var CurrAsset = PreferenceVisibilityGroupList[PreferenceVisibilityGroupIndex].Assets[PreferenceVisibilityAssetIndex];
+
+	// Load info for the new asset
+	if (RefreshCheckboxes) {
+		PreferenceVisibilityHideChecked = CurrAsset.Hidden;
+		PreferenceVisibilityBlockChecked = CurrAsset.Blocked;
+	}
+
+	// Can't change the Block setting if the item is worn or set to limited permissions
+	var WornItem = InventoryGet(Player, PreferenceVisibilityGroupList[PreferenceVisibilityGroupIndex].Group.Name);
+	PreferenceVisibilityCanBlock = (WornItem == null || WornItem.Asset.Name != CurrAsset.Asset.Name) && !CurrAsset.Limited;
+
+	// Get the preview image path
+	if (PreferenceVisibilityHideChecked) PreferenceVisibilityPreviewImg = "Icons/HiddenItem.png";
+	else PreferenceVisibilityPreviewImg = "Assets/" + CurrAsset.Asset.Group.Family + "/" + CurrAsset.Asset.Group.Name + "/Preview/" + CurrAsset.Asset.Name + ".png";
+
+	PreferenceVisibilityResetClicked = false;
+}
+
+/**
+ * Toggles the Hide checkbox
+ */
+function PreferenceVisibilityHideChange() {
+	PreferenceVisibilityHideChecked = !PreferenceVisibilityHideChecked;
+	PreferenceVisibilityCheckboxChanged(PreferenceVisibilityHiddenList, PreferenceVisibilityHideChecked);
+	PreferenceVisibilityGroupList[PreferenceVisibilityGroupIndex].Assets[PreferenceVisibilityAssetIndex].Hidden = PreferenceVisibilityHideChecked;
+	PreferenceVisibilityAssetChanged(false);
+}
+
+/**
+ * Toggles the Block checkbox
+ */
+function PreferenceVisibilityBlockChange() {
+	PreferenceVisibilityBlockChecked = !PreferenceVisibilityBlockChecked;
+	PreferenceVisibilityCheckboxChanged(PreferenceVisibilityBlockList, PreferenceVisibilityBlockChecked);
+	PreferenceVisibilityGroupList[PreferenceVisibilityGroupIndex].Assets[PreferenceVisibilityAssetIndex].Blocked = PreferenceVisibilityBlockChecked;
+	PreferenceVisibilityAssetChanged(false);
+}
+
+/**
+ * Adds or removes the current item to/from the list based on the new state of the corresponding checkbox
+ * @param {Array} List - The list to add or remove the item from
+ * @param {boolean} CheckSetting - The new true/false setting of the checkbox
+ */
+function PreferenceVisibilityCheckboxChanged(List, CheckSetting) {
+	var CurrGroup = PreferenceVisibilityGroupList[PreferenceVisibilityGroupIndex].Group.Name;
+	var CurrAsset = PreferenceVisibilityGroupList[PreferenceVisibilityGroupIndex].Assets[PreferenceVisibilityAssetIndex].Asset.Name;
+	if (CheckSetting == true) {
+		List.push({ Name: CurrAsset, Group: CurrGroup });
+	}
+	else {
+		for (let A = 0; A < List.length; A++)
+			if (List[A].Name == CurrAsset && List[A].Group == CurrGroup) {
+				List.splice(A, 1);
+				break;
+			}
+	}
+}
+
+/**
+ * Saves changes to the settings, disposes of large lists & exits the visibility preference screen.
+ * @param {boolean} SaveChanges - If TRUE, update HiddenItems and BlockItems for the account
+ * @returns {void} - Nothing
+ */
+function PreferenceVisibilityExit(SaveChanges) {
+	if (SaveChanges) ServerSend("AccountUpdate", { HiddenItems: Player.HiddenItems, BlockItems: Player.BlockItems });
+
+	PreferenceVisibilityGroupList = [];
+	PreferenceVisibilityHiddenList = [];
+	PreferenceVisibilityBlockList = [];
+	PreferenceSubscreen = "";
+	PreferenceMainScreenLoad();
 }
 
 /**

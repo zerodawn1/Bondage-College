@@ -25,7 +25,8 @@ var InventoryItemArmsHighSecurityStraitJacketCrotchOptions = [
 		Name: "c1",
 		Difficulty: 1,
 		Block: ["ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemButt"],
-		Hide: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
+		Hide: ["ItemVulva", "ItemVulvaPiercings"],
+		HideItem: ["ItemButtAnalBeads2"],
 	},
 ];
 
@@ -55,19 +56,20 @@ var InventoryItemArmsHighSecurityStraitJacketStrapsOptions = [
 		Name: "s1",
 		Difficulty: 1,
 		Block: ["ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemButt"],
-		Hide: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
+		Hide: ["ItemVulvaPiercings"],
+		HideItem: ["ItemButtAnalBeads2"],
 	},
 	{
 		Name: "s2",
 		Difficulty: 2,
 		Block: ["ItemPelvis"],
-		Hide: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
 	},
 	{
 		Name: "s3",
 		Difficulty: 2,
 		Block: ["ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemButt"],
-		Hide: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
+		Hide: ["ItemVulvaPiercings"],
+		HideItem: ["ItemButtAnalBeads2"],
 	},
 ];
 
@@ -90,9 +92,12 @@ var InventoryItemArmsHighSecurityStraitJacketClickFunctions = {
 function InventoryItemArmsHighSecurityStraitJacketLoad() {
 	if (!DialogFocusItem.Property) {
 		// Default to the base configuration if no property is set
-		var [c, a, s] = InventoryItemArmsHighSecurityStraitJacketParseCurrent();
-		DialogFocusItem.Property = InventoryItemArmsHighSecurityStraitJacketMergeOptions(c, a, s);
-		CharacterRefresh(CharacterGetCurrent());
+		var C = CharacterGetCurrent();
+		var currentConfig = InventoryItemArmsHighSecurityStraitJacketParseCurrent();
+		DialogFocusItem.Property =
+			InventoryItemArmsHighSecurityStraitJacketMergeOptions(currentConfig[0], currentConfig[1], currentConfig[2]);
+		CharacterRefresh(C);
+		ChatRoomCharacterItemUpdate(C, DialogFocusItem.Asset.Group.Name);
 	}
 	DialogExtendedMessage = DialogFind(Player, "ItemArmsHighSecurityStraitJacketSelectBase");
 }
@@ -123,12 +128,12 @@ function InventoryItemArmsHighSecurityStraitJacketDrawCommon(buttonDefinitions) 
 	DrawTextFit(A.Description, 1500, 310, 221, "#000");
 	DrawText(DialogExtendedMessage, 1500, 375, "#fff", "#808080");
 
-	buttonDefinitions.forEach(([imageUrl, textKey, color], i) => {
+	buttonDefinitions.forEach((buttonDefinition, i) => {
 		var x = 1200 + (i % 2 * 387);
 		var y = 450 + (Math.floor(i / 2) * 300);
-		DrawButton(x, y, 225, 225, "", color || "#fff");
-		DrawImage(imageUrl, x, y);
-		DrawText(DialogFind(Player, textKey), x + 113, y - 20, "#fff", "#808080");
+		DrawButton(x, y, 225, 225, "", buttonDefinition[2] || "#fff");
+		DrawImage(buttonDefinition[0], x, y);
+		DrawText(DialogFind(Player, buttonDefinition[1]), x + 113, y - 20, "#fff", "#808080");
 	});
 }
 
@@ -147,11 +152,11 @@ function InventoryItemArmsHighSecurityStraitJacketMapButtonDefinition(option) {
 function InventoryItemArmsHighSecurityStraitJacketDrawBase() {
 	var A = DialogFocusItem.Asset;
 	var DialogPrefix = "ItemArmsHighSecurityStraitJacketConfigure";
-	var [c, a, s] = InventoryItemArmsHighSecurityStraitJacketParseCurrent();
+	var currentConfig = InventoryItemArmsHighSecurityStraitJacketParseCurrent();
 	InventoryItemArmsHighSecurityStraitJacketDrawCommon([
-		["Screens/Inventory/" + A.Group.Name + "/" + A.Name + "/c" + c + ".png", DialogPrefix + "Crotch"],
-		["Screens/Inventory/" + A.Group.Name + "/" + A.Name + "/a" + a + ".png", DialogPrefix + "Arms"],
-		["Screens/Inventory/" + A.Group.Name + "/" + A.Name + "/s" + s + ".png", DialogPrefix + "Straps"],
+		["Screens/Inventory/" + A.Group.Name + "/" + A.Name + "/c" + currentConfig[0] + ".png", DialogPrefix + "Crotch"],
+		["Screens/Inventory/" + A.Group.Name + "/" + A.Name + "/a" + currentConfig[1] + ".png", DialogPrefix + "Arms"],
+		["Screens/Inventory/" + A.Group.Name + "/" + A.Name + "/s" + currentConfig[2] + ".png", DialogPrefix + "Straps"],
 	]);
 }
 
@@ -223,8 +228,8 @@ function InventoryItemArmsHighSecurityStraitJacketClickStraps() {
 
 function InventoryItemArmsHighSecurityStraitJacketParseCurrent() {
 	var type = (DialogFocusItem.Property && DialogFocusItem.Property.Type) || "c0a0s0";
-	var [, c, a, s] = type.match(/^c(\d)a(\d)s(\d)$/);
-	return [Number(c), Number(a), Number(s)];
+	var match = type.match(/^c(\d)a(\d)s(\d)$/);
+	return [Number(match[1]), Number(match[2]), Number(match[3])];
 }
 
 function InventoryItemArmsHighSecurityStraitJacketSetType(option) {
@@ -243,7 +248,10 @@ function InventoryItemArmsHighSecurityStraitJacketSetType(option) {
 		return;
 	}
 
-	var [c, a, s] = InventoryItemArmsHighSecurityStraitJacketParseCurrent();
+	var currentConfig = InventoryItemArmsHighSecurityStraitJacketParseCurrent();
+	var c = currentConfig[0];
+	var a = currentConfig[1];
+	var s = currentConfig[2];
 	var componentType = option.Name[0];
 	var componentIndex = Number(option.Name[1]);
 	var hasChanged = false;
@@ -289,12 +297,14 @@ function InventoryItemArmsHighSecurityStraitJacketMergeOptions(c, a, s) {
 		prop.Difficulty += (componentProp.Difficulty || 0);
 		if (componentProp.Block) InventoryItemArmsHighSecurityStraitJacketAddToArray(prop.Block, componentProp.Block);
 		if (componentProp.Hide) InventoryItemArmsHighSecurityStraitJacketAddToArray(prop.Hide, componentProp.Hide);
+		if (componentProp.HideItem) InventoryItemArmsHighSecurityStraitJacketAddToArray(prop.HideItem, componentProp.HideItem);
 		return prop;
 	}, {
 		Type: `c${c}a${a}s${s}`,
 		Difficulty: 0,
 		Block: ["ItemNipples", "ItemNipplesPiercings", "ItemTorso", "ItemBreast", "ItemHands"],
 		Hide: ["Cloth", "ItemNipplesPiercings"],
+		HideItem: [],
 	});
 }
 
