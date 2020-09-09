@@ -1376,8 +1376,7 @@ var AssetFemale3DCG = [
 		Zone: [[200, 270, 100, 70]],
 		Asset: [
 			{ Name: "StraightPiercing", Fetish: ["Metal"], Value: 10, Difficulty: 10, Time: 15, AllowLock: true, Prerequisite: ["AccessBreast", "AccessBreastSuitZip"], ExpressionTrigger: [{ Name: "Closed", Group: "Eyes", Timer: 5 }, { Name: "Angry", Group: "Eyebrows", Timer: 5 }] },
-			{ Name: "RoundPiercing", Fetish: ["Metal"], Value: 30, Difficulty: 10, Time: 15, AllowLock: true, Prerequisite: ["AccessBreast", "AccessBreastSuitZip"], AllowType: ["Base", "Chain"], ExpressionTrigger: [{ Name: "Closed", Group: "Eyes", Timer: 5 }, { Name: "Angry", Group: "Eyebrows", Timer: 5 }], Extended: true },
-			{ Name: "WeightedPiercing", Fetish: ["Metal"], Value: 40, Difficulty: 10, Time: 10, AllowLock: true, Prerequisite: ["AccessBreast", "AccessBreastSuitZip"], AllowType: ["Base", "Chain"], ExpressionTrigger: [{ Name: "Closed", Group: "Eyes", Timer: 5 }, { Name: "Soft", Group: "Eyebrows", Timer: 5 }], Extended: true },
+			{ Name: "RoundPiercing", Fetish: ["Metal"], Value: 40, Difficulty: 10, Time: 15, AllowLock: true, Prerequisite: ["AccessBreast", "AccessBreastSuitZip"], AllowType: ["Base", "Chain", "Weighted", "WeightedChain"], ExpressionTrigger: [{ Name: "Closed", Group: "Eyes", Timer: 5 }, { Name: "Angry", Group: "Eyebrows", Timer: 5 }], Extended: true },
 			{ Name: "NippleAccessory1", Fetish: ["Metal"], Value: 15, Difficulty: 10, Time: 5, AllowLock: true, Prerequisite: ["AccessBreast", "AccessBreastSuitZip"] },
 			{ Name: "NippleAccessory2", Fetish: ["Metal"], Value: 15, Difficulty: 10, Time: 5, AllowLock: true, Prerequisite: ["AccessBreast", "AccessBreastSuitZip"] },
 			{ Name: "NippleAccessory3", Fetish: ["Metal"], Value: 15, Difficulty: 10, Time: 5, AllowLock: true, Prerequisite: ["AccessBreast", "AccessBreastSuitZip"] },
@@ -1747,9 +1746,13 @@ var AssetFemale3DCG = [
 		Left: 185,
 		Top: 160,
 		Zone: [[200, 200, 100, 70]],
-		RemoveItemOnRemove: [{ Group: "ItemNeckAccessories", Name: "" },
-			{ Group: "ItemNeckRestraints", Name: "" },
-			{ Name: "CollarCuffs", Group: "ItemArms" }],
+		RemoveItemOnRemove: [
+			{ Group: "ItemNeckAccessories", Name: ""},
+			{ Group: "ItemNeckRestraints", Name: ""},
+			{ Group: "ItemArms", Name: "CollarCuffs"},
+			{ Group: "ItemNipplesPiercings", Name: "RoundPiercing", Type: "Chain"},
+			{ Group: "ItemNipplesPiercings", Name: "RoundPiercing", Type: "WeightedChain"},
+		],
 		Activity: ["Bite", "Kiss", "Lick", "Nibble", "Caress", "MassageHands", "Choke", "TickleItem", "RubItem", "RollItem"],
 		Asset: [
 			{ Name: "LeatherCollar", Fetish: ["Leather"], Value: 20, Difficulty: 50, Time: 5, AllowLock: true },
