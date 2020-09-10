@@ -51,6 +51,7 @@ function InventoryItemArmsBitchSuitPublishAction(C, Option) {
 	var Dictionary = [
 		{ Tag: "SourceCharacter", Text: Player.Name, MemberNumber: Player.MemberNumber },
 		{ Tag: "DestinationCharacter", Text: C.Name, MemberNumber: C.MemberNumber },
+		{ Tag: "Action", Text: msg },
 	];
 	ChatRoomPublishCustomAction(msg, true, Dictionary);
 }
