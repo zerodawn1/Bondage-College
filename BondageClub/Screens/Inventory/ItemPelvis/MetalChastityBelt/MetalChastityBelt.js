@@ -41,3 +41,7 @@ function InventoryItemPelvisMetalChastityBeltPublishAction(C, Option) {
 	];
 	ChatRoomPublishCustomAction(msg, true, Dictionary);
 }
+
+function InventoryItemPelvisMetalChastityBeltNpcDialog(C, Option) {
+	C.CurrentDialog = DialogFind(C, "Chastity" + Option.Name, "ItemPelvis");
+}
