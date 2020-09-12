@@ -773,6 +773,7 @@ var AssetFemale3DCG = [
 		Asset: ["Small", "Normal", "Large", "XLarge"],
 		Color: ["Default", "White", "Asian", "Black"],
 		InheritColor: "BodyUpper"
+
 	},
 
 	{
@@ -871,30 +872,43 @@ var AssetFemale3DCG = [
 		Color: ["Default", "#6a3628", "#443330", "#222222"]
 	},
 
-	{
-		Group: "Head",
-		ParentColor: "BodyUpper",
-		Priority: 7,
-		AllowNone: false,
-		AllowColorize: false,
-		AllowCustomize: false,
-		Asset: ["Default"],
-		InheritColor: "BodyUpper"
-	},
-
-	{
-		Group: "Hands",
-		ParentColor: "BodyUpper",
-		Priority: 27,
-		AllowNone: false,
-		AllowColorize: false,
-		AllowCustomize: false,
-		AllowPose: ["TapedHands", "BackBoxTie", "BackCuffs", "BackElbowTouch", "AllFours"],
-		Asset: ["Default"],
-		InheritColor: "BodyUpper"
-	},
-
 	// Facial Expression specific
+	{
+		Group: "Blush",
+		Priority: 8,
+		Left: 190,
+		Top: 100,
+		AllowNone: false,
+		AllowColorize: true,
+		AllowCustomize: true,
+		AllowExpression: ["Low", "Medium", "High", "VeryHigh", "Extreme", "ShortBreath"],
+		Asset: ["Blush"]
+	},
+
+	{
+		Group: "Fluids",
+		Priority: 11,
+		Left: 200,
+		Top: 145,
+		AllowNone: false,
+		AllowColorize: true,
+		AllowCustomize: true,
+		AllowExpression: ["DroolLow", "DroolMedium", "DroolHigh", "DroolSides", "DroolMessy", "DroolTearsLow", "DroolTearsMedium", "DroolTearsHigh", "DroolTearsMessy", "DroolTearsSides", "TearsHigh", "TearsMedium", "TearsLow"],
+		Asset: ["Fluids"]
+	},
+
+	{
+		Group: "Emoticon",
+		Priority: 60,
+		Left: 250,
+		Top: 0,
+		AllowNone: false,
+		AllowColorize: true,
+		AllowCustomize: true,
+		AllowExpression: ["Afk", "Sleep", "Hearts", "Tear", "Hearing", "Confusion", "Exclamation", "Annoyed", "Read", "RaisedHand", "Spectator", "ThumbsDown", "ThumbsUp", "Wardrobe"],
+		Asset: ["Emoticon"]
+	},
+	// Uncolorable body parts
 	{
 		Group: "Eyebrows",
 		Priority: 9,
@@ -906,41 +920,28 @@ var AssetFemale3DCG = [
 		AllowExpression: ["Raised", "Lowered", "OneRaised", "Harsh", "Angry", "Soft"],
 		Asset: ["Eyebrows1"]
 	},
-
+	
 	{
-		Group: "Blush",
-		Priority: 8,
-		Left: 190,
-		Top: 100,
+		Group: "Hands",
+		ParentColor: "BodyUpper",
+		Priority: 27,
 		AllowNone: false,
 		AllowColorize: false,
 		AllowCustomize: false,
-		AllowExpression: ["Low", "Medium", "High", "VeryHigh", "Extreme", "ShortBreath"],
-		Asset: ["Blush"]
+		AllowPose: ["TapedHands", "BackBoxTie", "BackCuffs", "BackElbowTouch", "AllFours"],
+		Asset: ["Default"],
+		InheritColor: "BodyUpper"
 	},
-
+	
 	{
-		Group: "Fluids",
-		Priority: 11,
-		Left: 200,
-		Top: 145,
+		Group: "Head",
+		ParentColor: "BodyUpper",
+		Priority: 7,
 		AllowNone: false,
 		AllowColorize: false,
 		AllowCustomize: false,
-		AllowExpression: ["DroolLow", "DroolMedium", "DroolHigh", "DroolSides", "DroolMessy", "DroolTearsLow", "DroolTearsMedium", "DroolTearsHigh", "DroolTearsMessy", "DroolTearsSides", "TearsHigh", "TearsMedium", "TearsLow"],
-		Asset: ["Fluids"]
-	},
-
-	{
-		Group: "Emoticon",
-		Priority: 60,
-		Left: 250,
-		Top: 0,
-		AllowNone: false,
-		AllowColorize: false,
-		AllowCustomize: false,
-		AllowExpression: ["Afk", "Sleep", "Hearts", "Tear", "Hearing", "Confusion", "Exclamation", "Annoyed", "Read", "RaisedHand", "Spectator", "ThumbsDown", "ThumbsUp", "Wardrobe"],
-		Asset: ["Emoticon"]
+		Asset: ["Default"],
+		InheritColor: "BodyUpper"
 	},
 
 	// Item specific
