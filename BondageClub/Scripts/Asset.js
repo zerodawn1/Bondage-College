@@ -145,7 +145,6 @@ function AssetAdd(NewAsset) {
 		DynamicAudio: (typeof NewAsset.DynamicAudio === 'function') ? NewAsset.DynamicAudio : null,
 		CharacterRestricted: typeof NewAsset.CharacterRestricted === 'boolean' ? NewAsset.CharacterRestricted : false,
 		AllowRemoveExclusive: typeof NewAsset.AllowRemoveExclusive === 'boolean' ? NewAsset.CharacterRestricted : false,
-		Audio: NewAsset.Audio,
 		InheritColor: NewAsset.InheritColor,
 		DynamicBeforeDraw: (typeof NewAsset.DynamicBeforeDraw === 'boolean') ? NewAsset.DynamicBeforeDraw : false,
 		DynamicAfterDraw: (typeof NewAsset.DynamicAfterDraw === 'boolean') ? NewAsset.DynamicAfterDraw : false,
