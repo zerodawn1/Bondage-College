@@ -986,8 +986,7 @@ function AppearanceClick() {
 function AppearanceExit() {
 	// We quit the extended item menu instead, if applicable.
 	if (CharacterAppearanceMode == "Cloth" && DialogFocusItem) {
-		DialogLeaveFocusItem();
-		DialogFocusItem = null;
+		DialogLeaveFocusItem();		
 		return;
 	}
 	

@@ -618,6 +618,29 @@ function CharacterRefresh(C, Push) {
 		ChatRoomRefreshChatSettings(C);
 		ServerPlayerAppearanceSync();
 	}
+	// Also refresh the current dialog menu if the refreshed character is the current character.
+	var Current = CharacterGetCurrent();
+	if (Current && C.ID == Current.ID) {
+		if (DialogFocusItem && DialogFocusItem.Asset) {
+			if (!DialogFocusItem.Asset.IsLock) {
+				DialogFocusItem = C.Appearance.find(Item =>
+					Item.Asset.Name == DialogFocusItem.Asset.Name && Item.Asset.Group.Name == DialogFocusItem.Asset.Group.Name
+				);
+				if (DialogFocusItem && DialogFocusItem.Asset.Extended && typeof window["Inventory" + DialogFocusItem.Asset.Group.Name + DialogFocusItem.Asset.Name + "Load"] === "function") window["Inventory" + DialogFocusItem.Asset.Group.Name + DialogFocusItem.Asset.Name + "Load"]();
+			} else {
+				var DFSI = DialogFocusSourceItem && DialogFocusSourceItem.Asset && C.Appearance.find(Item =>
+					Item.Asset.Name == DialogFocusSourceItem.Asset.Name && Item.Asset.Group.Name == DialogFocusSourceItem.Asset.Group.Name
+				);
+				var Lock = DFSI && InventoryGetLock(DFSI);
+				if (!DFSI || !Lock) DialogLeaveFocusItem();
+				else DialogExtendItem(Lock, DFSI);
+			}
+		} else if (DialogFocusItem) DialogLeaveFocusItem();
+		if (!DialogFocusItem) {
+			DialogInventoryBuild(C, DialogInventoryOffset);
+			ActivityDialogBuild(C);
+		}
+	}
 }
 
 /**

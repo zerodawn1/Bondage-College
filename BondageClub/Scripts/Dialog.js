@@ -449,11 +449,13 @@ function DialogLeaveItemMenu() {
  */
 function DialogLeaveFocusItem() {
 	if (DialogFocusItem != null) {
-		var funcName = "Inventory" + DialogFocusItem.Asset.Group.Name + DialogFocusItem.Asset.Name + "Exit()";
-		if (typeof window[funcName.substr(0, funcName.indexOf("("))] === "function") {
-			window[funcName.replace("()", "")]();
+		var funcName = "Inventory" + DialogFocusItem.Asset.Group.Name + DialogFocusItem.Asset.Name + "Exit";
+		if (typeof window[funcName] === "function") {
+			window[funcName]();
+			DialogFocusItem = null;
 			return true;
 		}
+		DialogFocusItem = null;
 	}
 	return false;
 }
@@ -1637,21 +1639,6 @@ function DialogDraw() {
 	if (((Player.FocusGroup != null) || ((CurrentCharacter.FocusGroup != null) && CurrentCharacter.AllowItem)) && (DialogIntro() != "")) {
 
 		var C = CharacterGetCurrent();
-		// We leave if the dialog focus item is no longer there
-		if (DialogFocusItem != null && (InventoryGet(C, DialogFocusItem.Asset.Group.Name) == null || InventoryGet(C, DialogFocusItem.Asset.Group.Name).Asset.Name != DialogFocusItem.Asset.Name) && !DialogFocusItem.Asset.IsLock) {
-			DialogLeaveFocusItem();
-			DialogFocusItem = null;
-		}
-
-		// We rebuild the menu if things changed
-		if (DialogPreviousCharacterData.Appearance !== JSON.stringify(ServerAppearanceBundle(C.Appearance)) || JSON.stringify(DialogPreviousCharacterData.Limited) !== JSON.stringify(C.LimitedItems) || JSON.stringify(DialogPreviousCharacterData.Blocked) !== JSON.stringify(C.BlockItems) || DialogPreviousCharacterData.ActivePose !== C.ActivePose) {
-			DialogInventoryBuild(C, DialogInventoryOffset);
-			ActivityDialogBuild(C);
-			DialogPreviousCharacterData.Appearance = JSON.stringify(ServerAppearanceBundle(C.Appearance));
-			DialogPreviousCharacterData.Limited = C.LimitedItems;
-			DialogPreviousCharacterData.Blocked = C.BlockItems;
-			DialogPreviousCharacterData.ActivePose = C.ActivePose;
-		}
 
 		// The view can show one specific extended item or the list of all items for a group
 		if (DialogFocusItem != null) {
