@@ -94,6 +94,7 @@ ClothLower,AdmiralSkirt,Admiral Skirt
 ClothLower,JeanSkirt,Jean Skirt
 ClothLower,PencilSkirt,Pencil Skirt
 ClothLower,JeansShorts,Jeans Shorts
+ClothLower,PleatedSkirt,Pleated Skirt
 SuitLower,,Suit Lower
 SuitLower,Catsuit,Catsuit
 SuitLower,SeamlessCatsuit, Seamless Catsuit
@@ -434,6 +435,8 @@ HairFront,HairFront13,Style 13
 HairFront,HairFront13b,Style 13b
 HairFront,HairFront14,Style 14
 HairFront,HairFront14b,Style 14b
+HairFront,HairFront1,Style 15
+HairFront,HairFront1,Style 16
 Eyes,,Left eye
 Eyes,Eyes1,Style 1
 Eyes,Eyes2,Style 2
@@ -447,6 +450,7 @@ Eyes,Eyes9,Style 9
 Eyes,Eyes10,Style 10
 Eyes,Eyes11,Style 11
 Eyes,Eyes12,Style 12
+Eyes,Eyes13,Style 13
 Eyes2,,Right eye
 Eyes2,Eyes1,Style 1
 Eyes2,Eyes2,Style 2
@@ -460,6 +464,7 @@ Eyes2,Eyes9,Style 9
 Eyes2,Eyes10,Style 10
 Eyes2,Eyes11,Style 11
 Eyes2,Eyes12,Style 12
+Eyes2,Eyes13,Style 13
 Mouth,,Mouth
 Mouth,Regular,Regular
 Mouth,Discreet,Discreet
