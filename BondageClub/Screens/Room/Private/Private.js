@@ -1330,6 +1330,7 @@ function PrivatePlayerTurnTablesStart() {
  */
 function PrivatePlayerTurnTablesRemove() {
 	PrivateNPCInteraction(-20);
+	NPCEventDelete(CurrentCharacter, "EndSubTrial");
 	ManagementReleaseFromOwner(6);
 }
 
@@ -1339,7 +1340,9 @@ function PrivatePlayerTurnTablesRemove() {
  */
 function PrivatePlayerTurnTablesCollar() {
 	ManagementReleaseFromOwner(12);
+	NPCEventDelete(CurrentCharacter, "EndSubTrial");
 	NPCEventAdd(CurrentCharacter, "NPCCollaring", CurrentTime);
+	CurrentCharacter.Owner = Player.Name;
 	InventoryWear(CurrentCharacter, "SlaveCollar", "ItemNeck");
 	ServerPrivateCharacterSync();
 }
