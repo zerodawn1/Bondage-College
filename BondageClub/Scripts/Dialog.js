@@ -1871,6 +1871,7 @@ function DialogDrawOwnerRulesMenu() {
 	if (LogQuery("BlockKey", "OwnerRule")) ToDisplay.push({ Tag: "BlockKey" });
 	if (LogQuery("BlockRemote", "OwnerRule")) ToDisplay.push({ Tag: "BlockRemote" });
 	if (LogQuery("BlockRemoteSelf", "OwnerRule")) ToDisplay.push({ Tag: "BlockRemoteSelf" });
+	if (LogQuery("ReleasedCollar", "OwnerRule")) ToDisplay.push({ Tag: "ReleasedCollar" });
 	if (ToDisplay.length == 0) ToDisplay.push({ Tag: "Empty" });
 	
 	for (let I = 0; I < ToDisplay.length; I++) { 
