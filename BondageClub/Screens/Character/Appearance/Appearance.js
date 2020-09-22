@@ -209,17 +209,19 @@ function CharacterAppearanceFullRandom(C, ClothOnly) {
 }
 
 /**
- * Removes all items that can be removed, making the character naked. Currently includes cosplay items, like tails, wings or ears.
+ * Removes all items that can be removed, making the character naked. Checks for a blocking of CosPlayItem removal. 
  * @param {Character} C - The character to undress
  * @returns {void} - Nothing
  */
 function CharacterAppearanceNaked(C) {
 
 	// For each item group (non default items only show at a 20% rate)
-	for (let A = C.Appearance.length-1; A >= 0; A--)
-		if (C.Appearance[A].Asset.Group.AllowNone && !C.Appearance[A].Asset.Group.KeepNaked && (C.Appearance[A].Asset.Group.Category == "Appearance")) {
+	for (let A = C.Appearance.length-1 ; A >= 0; A--) {
+		if (C.Appearance[A].Asset.Group.AllowNone && (C.Appearance[A].Asset.Group.Category == "Appearance") &&
+			( C.IsNpc() || !(C.OnlineSharedSettings.BlockBodyCosplay && C.Appearance[A].Asset.Group.BodyCosplay))) {
 			C.Appearance.splice(A, 1);
 		}
+	}
 
 	// Loads the new character canvas
 	CharacterLoadCanvas(C);
