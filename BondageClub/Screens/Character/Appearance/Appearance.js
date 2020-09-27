@@ -360,7 +360,7 @@ function CharacterAppearanceVisible(C, AssetName, GroupName) {
 	if (C.Pose != null)
 		for (let A = 0; A < C.Pose.length; A++)
 			for (let P = 0; P < Pose.length; P++)
-				if (Pose[P].Name == C.Pose[A])
+				if (Pose[P].Name === C.Pose[A])
 					if ((Pose[P].Hide != null) && (Pose[P].Hide.indexOf(GroupName) >= 0))
 						return false;
 	return true;
@@ -395,7 +395,7 @@ function CharacterApperanceSetHeightModifier(C) {
 		if (C.Pose != null) 
 			for (let A = 0; A < C.Pose.length; A++)
 				for (let P = 0; P < Pose.length; P++)
-					if (Pose[P].Name == C.Pose[A])
+					if (Pose[P].Name === C.Pose[A])
 						if (Pose[P].OverrideHeight != null) {
 							// Ignore kneel, if player is hogtied. Allows the use of a short chain on hogtied players
 							// Ignore overthehead if kneeling
