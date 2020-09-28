@@ -656,6 +656,10 @@ function CharacterRefresh(C, Push) {
 			}
 			ActivityDialogBuild(C);
 		}
+		if (DialogColor != null) { 
+			if (ItemColorItem == null || InventoryGet(C, ItemColorItem.Asset.Group.Name) == null || InventoryGet(C, ItemColorItem.Asset.Group.Name).Asset.Name != ItemColorItem.Asset.Name)
+				ItemColorExit();
+		}
 	}
 }
 
