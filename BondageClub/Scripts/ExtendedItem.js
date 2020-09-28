@@ -131,11 +131,9 @@ function ExtendedItemDraw(Options, DialogPrefix, OptionsPerPage, ShowImages = tr
 	OptionsPerPage = OptionsPerPage || Math.min(Options.length, XYPositions.length - 1);
 	
 	// If we have to paginate, draw the back/next buttons
-	if (ItemOptionsOffset >= OptionsPerPage) {
-		DrawButton(1555, 25, 90, 90, "", "White", "Icons/Prev.png");
-	}
-	if (ItemOptionsOffset + OptionsPerPage < Options.length) {
-		DrawButton(1665, 25, 90, 90, "", "White", "Icons/Next.png");
+	if (Options.length > OptionsPerPage) {
+		DrawButton(1665, 240, 90, 90, "", "White", "Icons/Prev.png");
+		DrawButton(1775, 240, 90, 90, "", "White", "Icons/Next.png");
 	}
 	
 	// Draw the header and item
@@ -201,11 +199,13 @@ function ExtendedItemClick(Options, IsCloth, OptionsPerPage, ShowImages = true) 
 	}
 	
 	// Pagination buttons
-	if (MouseIn(1555, 25, 90, 90) && ItemOptionsOffset >= OptionsPerPage) {
-		ExtendedItemSetOffset(ItemOptionsOffset - OptionsPerPage);
+	if (MouseIn(1665, 240, 90, 90) && Options.length > OptionsPerPage) {
+		if (ItemOptionsOffset - OptionsPerPage < 0) ExtendedItemSetOffset(OptionsPerPage * (Math.ceil(Options.length / OptionsPerPage) - 1));
+		else ExtendedItemSetOffset(ItemOptionsOffset - OptionsPerPage);
 	}
-	if (MouseIn(1665, 25, 90, 90) && ItemOptionsOffset + OptionsPerPage < Options.length) {
-		ExtendedItemSetOffset(ItemOptionsOffset + OptionsPerPage);
+	if (MouseIn(1775, 240, 90, 90) && Options.length > OptionsPerPage) {
+		if (ItemOptionsOffset + OptionsPerPage >= Options.length) ExtendedItemSetOffset(0);
+		else ExtendedItemSetOffset(ItemOptionsOffset + OptionsPerPage);
 	}
 	
 	// Options
