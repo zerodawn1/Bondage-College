@@ -146,13 +146,12 @@ function ExtendedItemDraw(Options, DialogPrefix, OptionsPerPage, ShowImages = tr
 
 	// Draw the possible variants and their requirements, arranged based on the number per page
 	for (let I = ItemOptionsOffset; I < Options.length && I < ItemOptionsOffset + OptionsPerPage; I++) {
-		var C = CharacterGetCurrent();
 		var PageOffset = I - ItemOptionsOffset;
 		var X = XYPositions[OptionsPerPage][PageOffset][0];
 		var Y = XYPositions[OptionsPerPage][PageOffset][1];
+		
 		var Option = Options[I];
-		var Height = (ShowImages) ? 275 : 55;
-		var Hover = (MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + Height) && !CommonIsMobile;
+		var Hover = MouseIn(X, Y, 225, 55 + ImageHeight) && !CommonIsMobile;
 		var FailSkillCheck = !!ExtendedItemRequirementCheckMessage(Option, IsSelfBondage);
 		var IsSelected = DialogFocusItem.Property.Type == Option.Property.Type;
 		var Blocked = InventoryIsPermissionBlocked(C, DialogFocusItem.Asset.DynamicName(Player), DialogFocusItem.Asset.DynamicGroupName, Option.Property.Type);
@@ -216,21 +215,21 @@ function ExtendedItemClick(Options, IsCloth, OptionsPerPage, ShowImages = true) 
 		var Y = XYPositions[OptionsPerPage][PageOffset][1];
 		var Option = Options[I];
 		if (MouseIn(X, Y, 225, 55 + ImageHeight)) {
-			ExtendedItemHandleOptionClick(Options, Option, IsSelfBondage, IsCloth);
+			ExtendedItemHandleOptionClick(C, Options, Option, IsSelfBondage, IsCloth);
 		}
 	}
 }
 
 /**
  * Handler function for setting the type of an extended item
+ * @param {Character} C - The character wearing the item
  * @param {ExtendedItemOption[]} Options - An Array of type definitions for each allowed extended type. The first item in the array should
  *     be the default option.
  * @param {ExtendedItemOption} Option - The selected type definition
  * @param {boolean} IsCloth - Whether or not the click is performed on a clothing item.
  * @returns {void} Nothing
  */
-function ExtendedItemSetType(Options, Option, IsCloth) {
-	var C = CharacterGetCurrent() || CharacterAppearanceSelection;
+function ExtendedItemSetType(C, Options, Option, IsCloth) {
 	var FunctionPrefix = ExtendedItemFunctionPrefix();
 
 	// An extendable item may provide a validation function. Returning false from the validation function will drop out of
@@ -294,6 +293,7 @@ function ExtendedItemSetType(Options, Option, IsCloth) {
 
 /**
  * Handler function called when an option on the type selection screen is clicked
+ * @param {Character} C - The character wearing the item
  * @param {ExtendedItemOption[]} Options - An Array of type definitions for each allowed extended type. The first item in the array should
  *     be the default option.
  * @param {ExtendedItemOption} Option - The selected type definition
@@ -301,8 +301,7 @@ function ExtendedItemSetType(Options, Option, IsCloth) {
  * @param {boolean} IsCloth - Whether or not the click is performed on a clothing item.
  * @returns {void} Nothing
  */
-function ExtendedItemHandleOptionClick(Options, Option, IsSelfBondage, IsCloth) {
-	var C = CharacterGetCurrent();
+function ExtendedItemHandleOptionClick(C, Options, Option, IsSelfBondage, IsCloth) {
 	if (ExtendedItemPermissionMode) {
 		if (Option.Property.Type == null || (C.ID == 0 && DialogFocusItem.Property.Type == Option.Property.Type)) return;
 		InventoryTogglePermission(DialogFocusItem, Option.Property.Type);
@@ -315,7 +314,7 @@ function ExtendedItemHandleOptionClick(Options, Option, IsSelfBondage, IsCloth) 
 		if (requirementMessage) {
 			DialogExtendedMessage = requirementMessage;
 		} else {
-			ExtendedItemSetType(Options, Option, IsCloth);
+			ExtendedItemSetType(C, Options, Option, IsCloth);
 		}
 	}
 }
