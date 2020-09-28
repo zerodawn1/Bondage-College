@@ -235,7 +235,7 @@ function ExtendedItemSetType(C, Options, Option, IsCloth) {
 	// An extendable item may provide a validation function. Returning false from the validation function will drop out of
 	// this function, and the new type will not be applied.
 	if (typeof window[FunctionPrefix + "Validate"] === "function") {
-		if (CommonCallFunctionByName(FunctionPrefix + "Validate", Option) === false) {
+		if (CommonCallFunctionByName(FunctionPrefix + "Validate", C, Option) === false) {
 			return;
 		}
 	}

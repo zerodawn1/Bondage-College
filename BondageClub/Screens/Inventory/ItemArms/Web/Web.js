@@ -105,9 +105,7 @@ function InventoryItemArmsWebClick() {
 	ExtendedItemClick(InventoryItemArmsWebOptions);
 }
 
-function InventoryItemArmsWebValidate(Option) {
-	var C = CharacterGetCurrent();
-
+function InventoryItemArmsWebValidate(C, Option) {
 	// Validates some prerequisites before allowing more advanced poses
 	if (Option.Prerequisite) {
 		var Allowed = true;
