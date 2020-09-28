@@ -125,6 +125,7 @@ function InventoryItemArmsWebValidate(C, Option) {
 		CharacterAppearanceSetItem(C, "ItemArms", Web.Asset, Web.Color, DifficultyFactor, null, false);
 		InventoryGet(C, "ItemArms").Property = Web.Property;
 		CharacterRefresh(C);
+		DialogFocusItem = InventoryGet(C, C.FocusGroup.Name);
 
 		return Allowed;
 	}
