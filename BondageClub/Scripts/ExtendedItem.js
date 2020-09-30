@@ -105,7 +105,7 @@ function ExtendedItemLoad(Options, DialogKey) {
 		}
 	}
 
-	ExtendedItemSetOffset(0);
+	if (ExtendedItemOffsets[ExtendedItemOffsetKey()] == null) ExtendedItemSetOffset(0);
 
 	DialogExtendedMessage = DialogFind(Player, DialogKey);
 }
