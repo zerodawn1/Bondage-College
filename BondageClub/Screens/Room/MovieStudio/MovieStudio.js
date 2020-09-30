@@ -12,6 +12,12 @@ var MovieStudioDecay = 0;
 var MovieStudioActivity = [];
 
 /**
+ * The player can play in a movie if she doesn't have any locked restraints
+ * @returns {void} - TRUE if the player can play in a movie
+ */
+function MovieStudioCanPlayInMovie() { return !InventoryCharacterHasLockedRestraint(Player) }
+
+/**
  * When the player fails the movie, we jump back to the director
  * @param {number} Factor - The number to add or substract from the meter
  * @returns {void} - Nothing
@@ -47,7 +53,15 @@ function MovieStudioProcessDecay() {
 		MovieStudioChangeMeter(-1);
 	}
 	if (CurrentTime >= MovieStudioTimer) {
-		if (MovieStudioMeter < 0) MovieStudioFail();
+		if (MovieStudioMeter < 0) return MovieStudioFail();
+		if ((MovieStudioCurrentMovie == "Interview") && (MovieStudioCurrentScene == "1")) {
+			MovieStudioProgress(MovieStudioCurrentMovie, "2", "");
+			MovieStudioActor1 = null;
+			MovieStudioActor1 = CharacterLoadNPC("NPC_MovieStudio_Interview_Maid");
+			MovieStudioActor1.CurrentDialog = TextGet("MaidIntro" + (InventoryIsWorn(Player, "LeatherCuffs", "ItemArms") ? "Cross" : "NoCross") + Math.floor(Math.random() * 2).toString());
+			MovieStudioActor1.Stage = "0";
+			CharacterSetCurrent(MovieStudioActor1);
+		}
 	}
 }
 
@@ -82,7 +96,7 @@ function MovieStudioRun() {
 	}
 	
 	// In the interview first scene, the player can check a drawer and a X Cross
-	if ((MovieStudioCurrentMovie == "Interview") && (MovieStudioCurrentScene == "1")) {
+	if ((MovieStudioCurrentMovie == "Interview") && ((MovieStudioCurrentScene == "1") || (MovieStudioCurrentScene == "2"))) {
 		DrawCharacter(MovieStudioActor1, 250, 0, 1);
 		if (InventoryIsWorn(Player, "X-Cross", "ItemDevices")) {
 			DrawCharacter(Player, 1250, 0, 1);
@@ -100,10 +114,10 @@ function MovieStudioRun() {
 		DrawRect(1875, 500, 50, 300, "Red");
 		DrawRect(1875, 499 + MovieStudioMeter * -3, 50, 3, "White");
 		DrawButton(1855, 25, 90, 90, "", "White", "Icons/Wait.png", TextGet("Wait"));
-		DrawText(TextGet("Recording"), 1900, 900, "#FF4444", "White");
-		DrawText(TimermsToTime(MovieStudioTimer - CurrentTime), 1900, 960, "#FF4444", "White");
+		DrawText(TextGet("Scene" + MovieStudioCurrentScene.toString()), 1900, 900, "White", "Black");
+		DrawText(TimermsToTime(MovieStudioTimer - CurrentTime), 1900, 960, "White", "Black");
 	}
-	
+
 }
 
 /**
@@ -116,8 +130,9 @@ function MovieStudioClick() {
 	if ((MovieStudioCurrentMovie == "") && MouseIn(1885, 25, 90, 90) && Player.CanWalk()) CommonSetScreen("Room", "MainHall");
 	if ((MovieStudioCurrentMovie == "") && MouseIn(1885, 145, 90, 90)) InformationSheetLoadCharacter(Player);
 	if ((MovieStudioCurrentMovie == "Interview") && (MovieStudioCurrentScene == "1") && MouseIn(250, 0, 500, 1000) && !InventoryIsWorn(Player, "X-Cross", "ItemDevices")) CharacterSetCurrent(MovieStudioActor1);
+	if ((MovieStudioCurrentMovie == "Interview") && (MovieStudioCurrentScene == "2") && MouseIn(250, 0, 500, 1000)) CharacterSetCurrent(MovieStudioActor1);
 	if ((MovieStudioCurrentMovie == "Interview") && (MovieStudioCurrentScene == "1") && MouseIn(1250, 0, 500, 1000)) CharacterSetCurrent(MovieStudioActor2);
-	if ((MovieStudioCurrentMovie != "") && MouseIn(1885, 25, 90, 90)) { MovieStudioChangeMeter(-20); MovieStudioTimer = MovieStudioTimer - 60000; }
+	if ((MovieStudioCurrentMovie != "") && MouseIn(1855, 25, 90, 90)) { MovieStudioChangeMeter(-20); MovieStudioTimer = MovieStudioTimer - 60000; }
 }
 
 /**
@@ -132,6 +147,12 @@ function MovieStudioChange(Cloth) {
 		InventoryWear(Player, "Glasses1", "Glasses", "#333333");
 		InventoryWear(Player, "Socks5", "Socks", "#444458");
 		InventoryWear(Player, "Shoes2", "Shoes", "#111111");
+		InventoryRemove(Player, "ItemHead");
+		InventoryRemove(Player, "ItemArms");
+		InventoryRemove(Player, "ItemHands");
+		InventoryRemove(Player, "ItemLegs");
+		InventoryRemove(Player, "ItemFeet");
+		InventoryRemove(Player, "ItemBoots");
 	}
 }
 
@@ -154,8 +175,10 @@ function MovieStudioProgress(Movie, Scene, Role) {
 		MovieStudioBackground = CommonRandomItemFromList("", ["BDSMRoomRed", "BDSMRoomBlue", "BDSMRoomPurple"]);
 		MovieStudioActor1 = CharacterLoadNPC("NPC_MovieStudio_Interview_Drawer");
 		MovieStudioActor1.FixedImage = "Screens/Room/MovieStudio/Drawer.png";
+		MovieStudioActor1.Stage = "0";
 		MovieStudioActor2 = CharacterLoadNPC("NPC_MovieStudio_Interview_XCross");
 		MovieStudioActor2.FixedImage = "Screens/Room/MovieStudio/XCross.png";
+		MovieStudioActor2.Stage = "0";
 	}
 	if (CurrentCharacter != null) DialogLeave();
 }
@@ -177,13 +200,15 @@ function MovieStudioDoActivity(Activity) {
 	if (Count >= 3) MovieStudioChangeMeter(-10);
 	if (Count >= 4) CurrentCharacter.CurrentDialog = TextGet("OtherActivity" + Math.floor(Math.random() * 4).toString());
 	MovieStudioActivity.push(Activity);
-	if (Activity == "DressCatsuit") { CharacterNaked(Player); InventoryWear(Player, "Catsuit", "Suit", "#202020"); InventoryWear(Player, "Catsuit", "SuitLower", "#202020"); }
-	if (Activity == "DressNaked") CharacterNaked(Player);
+	if (Activity == "DressCatsuit") { CharacterNaked(Player); InventoryWear(Player, "Catsuit", "Suit", "#202020"); InventoryWear(Player, "Catsuit", "SuitLower", "#202020"); InventoryWear(Player, "Glasses1", "Glasses", "#333333"); }
+	if (Activity == "DressLingerie") { CharacterNaked(Player); InventoryWear(Player, "CorsetBikini1", "Bra", "#202020"); InventoryWear(Player, "Stockings1", "Socks"); InventoryWear(Player, "Glasses1", "Glasses", "#333333"); }
+	if (Activity == "DressNaked") { CharacterNaked(Player); InventoryWear(Player, "Glasses1", "Glasses", "#333333"); }
 	if (Activity == "InterviewWearCorset") InventoryWear(Player, "LatexCorset1", "Bra");
 	if (Activity == "InterviewWearBoots") InventoryWear(Player, "BalletHeels", "ItemBoots");
 	if (Activity == "InterviewWearCuffs") { InventoryWear(Player, "LeatherCuffs", "ItemArms"); InventoryWear(Player, "LeatherLegCuffs", "ItemLegs"); InventoryWear(Player, "LeatherAnkleCuffs", "ItemFeet"); }
 	if (Activity == "InterviewWearCollar") InventoryWear(Player, "BordelleCollar", "ItemNeck");
-	if (Activity == "InterviewCrossRestrain") InventoryWear(Player, "X-Cross", "ItemDevices");
+	if (Activity == "InterviewCrossRestrain") { InventoryWear(Player, "X-Cross", "ItemDevices"); MovieStudioActor2.FixedImage = "Screens/Room/MovieStudio/Empty.png"; }
+	MovieStudioProcessDecay();
 }
 
 /**
