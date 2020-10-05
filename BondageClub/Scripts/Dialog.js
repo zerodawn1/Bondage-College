@@ -356,6 +356,7 @@ function DialogIntro() {
  */
 function DialogLeave() {
 	if (DialogItemPermissionMode && CurrentScreen == "ChatRoom") ChatRoomCharacterUpdate(Player);
+	DialogLeaveFocusItem();
 	DialogItemPermissionMode = false;
 	DialogActivityMode = false;
 	DialogItemToLock = null;
