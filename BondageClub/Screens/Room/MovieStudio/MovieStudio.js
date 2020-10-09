@@ -87,11 +87,12 @@ function MovieStudioProcessDecay() {
 		}
 		if ((MovieStudioCurrentMovie == "Interview") && (MovieStudioCurrentScene == "3")) {
 			MovieStudioMoney = MovieStudioMoney + Math.floor(MovieStudioMeter / 10);
-			MovieStudioDirector.CurrentDialog = TextGet("InterviewDirectorSuccess" + Math.floor(Math.random() * 4).toString());
 			MovieStudioDirector.Stage = "1030";
 			CharacterSetCurrent(MovieStudioDirector);
+			MovieStudioDirector.CurrentDialog = TextGet("InterviewDirectorSuccess" + Math.floor(Math.random() * 4).toString());
 			MovieStudioCurrentMovie = "";
 			MovieStudioCurrentScene = "";
+			MovieStudioBackground = "MovieStudio"
 			return;
 		}
 	}
@@ -217,7 +218,7 @@ function MovieStudioChange(Cloth) {
  * @returns {void} - Nothing
  */
 function MovieStudioProgress(Movie, Scene, Role) {
-	if (Role == "Journalist") MovieStudioMoney = 20;
+	if (Role == "Journalist") MovieStudioMoney = 15;
 	MovieStudioTimer = CurrentTime + 600000;
 	MovieStudioMeter = 0;
 	MovieStudioDecay = CurrentTime + 5000;
