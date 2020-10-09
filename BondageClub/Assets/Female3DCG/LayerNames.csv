@@ -157,7 +157,11 @@ ItemNeckHighCollarLeather,Leather
 ItemNeckHighCollarRings,Rings
 ItemNeckOrnateCollarCollar,Collar
 ItemNeckOrnateCollarGem,Gems
+ItemNeckAccessoriesCustomCollarTagTag,Tag
+ItemNeckAccessoriesCustomCollarTagText,Text
 ItemMiscWoodenSignSign,Sign
+ItemMiscWoodenSignRope,Rope
+ItemMiscWoodenSignText,Text
 ItemMiscWoodenSignRope,Rope
 ItemMiscWoodenSignText,Text
 ItemDevicesBedPillow,Pillow

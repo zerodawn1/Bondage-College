@@ -12,12 +12,12 @@ This changelog follows the format outlined in [keepachangelog.com](https://keepa
 
 Changelog last updated: 2020-10-09
 
-Last recorded PR: [#1477](https://github.com/Ben987/Bondage-College/pull/1477)
+Last recorded PR: [#1478](https://github.com/Ben987/Bondage-College/pull/1478)
 
 ## [R61]
 
 ### [Added]
-* Ace - New custom collar tag ([#1324](https://github.com/Ben987/Bondage-College/pull/1324))
+* Ace - New custom collar tag ([#1324](https://github.com/Ben987/Bondage-College/pull/1324), [#1478](https://github.com/Ben987/Bondage-College/pull/1478))
 * Ace - The key and lock necklaces can now be worn over clothes or tucked in via the 👆 icon in the wardrobe ([#1294](https://github.com/Ben987/Bondage-College/pull/1294))
 * Ruu/Poi - 15 new room backgrounds ([#1383](https://github.com/Ben987/Bondage-College/pull/1383))
 * Ellie - 5 new advanced vibrator modes on several vibrators ([#1327](https://github.com/Ben987/Bondage-College/pull/1327))
