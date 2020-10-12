@@ -445,13 +445,20 @@ function MovieStudioDoActivity(Activity) {
 		CharacterRefresh(MovieStudioActor1);
 		DialogLeave();
 	}
-	if (Activity == "InterviewMaidTurnTablesKiss") {
+	if ((Activity == "InterviewMaidTurnTablesKiss") || (Activity == "InterviewMistressMasturbate") || (Activity == "InterviewMistressMakeOut") || (Activity == "InterviewMistressTease")) {
 		CharacterSetFacialExpression(Player, "Blush", "Medium", 5);
 		CharacterSetFacialExpression(Player, "Eyes", "Lewd", 5);
 		CharacterSetFacialExpression(Player, "Eyes2", "Lewd", 5);
 		CharacterSetFacialExpression(MovieStudioActor1, "Blush", "Medium", 5);
 		CharacterSetFacialExpression(MovieStudioActor1, "Eyes", "Lewd", 5);
 		CharacterSetFacialExpression(MovieStudioActor1, "Eyes2", "Lewd", 5);
+	}
+	if (Activity == "InterviewMistressGag") InventoryWearRandom(MovieStudioActor2, "ItemMouth");
+	if (Activity == "InterviewMistressUngag") InventoryRemove(MovieStudioActor2, "ItemMouth");
+	if ((Activity == "InterviewMistressSpank") || (Activity == "InterviewMistressCrop") || (Activity == "InterviewMistressWhip") || (Activity == "InterviewMistressProd")) {
+		CharacterSetFacialExpression(MovieStudioActor1, "Blush", "Medium", 5);
+		CharacterSetFacialExpression(MovieStudioActor1, "Eyes", "Closed", 5);
+		CharacterSetFacialExpression(MovieStudioActor1, "Eyes2", "Closed", 5);
 	}
 
 	// Check for decay
@@ -499,6 +506,10 @@ function MovieStudioCanDoActivity(Activity) {
 	if (Activity == "InterviewMaidGetCrop") return ((InventoryGet(Player, "ItemHands") == null) || (InventoryGet(Player, "ItemHands").Property.Type != "Crop"));
 	if (Activity == "InterviewMaidGetWhip") return ((InventoryGet(Player, "ItemHands") == null) || (InventoryGet(Player, "ItemHands").Property.Type != "Whip"));
 	if (Activity == "InterviewMaidGetProd") return ((InventoryGet(Player, "ItemHands") == null) || (InventoryGet(Player, "ItemHands").Property.Type != "CattleProd"));
+	if (Activity == "InterviewMistressGag") return (InventoryGet(MovieStudioActor2, "ItemMouth") == null);
+	if (Activity == "InterviewMistressCrop") return ((InventoryGet(Player, "ItemHands") != null) && (InventoryGet(Player, "ItemHands").Property.Type == "Crop"));
+	if (Activity == "InterviewMistressWhip") return ((InventoryGet(Player, "ItemHands") != null) && (InventoryGet(Player, "ItemHands").Property.Type == "Whip"));
+	if (Activity == "InterviewMistressProd") return ((InventoryGet(Player, "ItemHands") != null) && (InventoryGet(Player, "ItemHands").Property.Type == "CattleProd"));
 }
 
 /**
