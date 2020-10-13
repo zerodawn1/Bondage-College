@@ -317,6 +317,7 @@ function ChatSearchResponse(data) {
  */
 function ChatSearchResultResponse(data) { 
 	ChatSearchResult = data;
+	ChatSearchResultOffset = 0;
 	ChatSearchQuerySort();
 }
 
