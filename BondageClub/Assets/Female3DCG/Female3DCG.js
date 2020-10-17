@@ -1,4 +1,4 @@
-// *** Item Value Guidelines ***
+// *** Item value guidelines ***
 // First, check if there's a similar item and use that price.  If there isn't, use the real price in US dollars
 // If it's an item that can only used once in real life (duct tape), raise the price a lot (you buy a great quantity of it)
 // If it's an item with extended capabilities, raise the price
@@ -10,11 +10,14 @@
 // Empty value is a free item that everyone has from the start
 // -1 value items cannot be bought, they must be acquired in-game in some other ways
 
-// Sort order of asset properties:
+// *** Sort order of asset & asset group properties ***
 // Name, Priority, Value, Difficulty, SelfBondage, Time, RemoveTime, Enable, Visible, Random, Wear, IsRestraint, AllowLock, OwnerOnly, LoverOnly, Left, Top, DefaultColor, BuyGroup, Prerequisite, Hide, HideItem, everything else
-
-// Sort order of asset group properties:
 // Group, ParentGroup, ParentSize, ParentColor, Category, Priority, Default, Clothing, Underwear, Random, IsRestraint, Blink, Left, Top, Color, FullAlpha, AllowNone, AllowColorize, AllowCustomize, AllowPose, SetPose, Effect, Zone, Activity
+
+// *** Item addition & modification guidelines ***
+// Don't include images, sounds or names that are obviously copyrighted
+// Don't create anything that could be viewed by lots of players as racist, sexist, anti-LGBT, pedophilic, religious or political
+// If you change an item or a piece of code made by someone else, make sure to get their approval first
 
 // Spanking Toys Asset
 var AssetSpankingToys = {
