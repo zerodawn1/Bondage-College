@@ -33,7 +33,6 @@ var AssetSpankingToys = {
 	ParentGroup: null,
 	Effect: [],
 	DialogSortOverride: DialogSortOrderEquipped
-
 };
 
 // 3D Custom Girl based assets
@@ -814,7 +813,8 @@ var AssetFemale3DCG = [
 			},
 			{ Name: "LaceMask1", Fetish: ["Lingerie"], Value: 25, Left: 150, Top: 20, HideItem: ["ItemNoseNoseRing", "HatVeil1", "HatVeil2"], Hide: ["Glasses"] },
 			{ Name: "LaceMask2", Fetish: ["Lingerie"], Value: 25, Left: 150, Top: 20, HideItem: ["ItemNoseNoseRing", "HatVeil1", "HatVeil2"], Hide: ["Glasses"] },
-			{ Name: "FuturisticVisor", BuyGroup: "FuturisticVisor", Value: 35, Priority: 27, HideItem: ["ItemNoseNoseRing"] }],
+			{ Name: "FuturisticVisor", BuyGroup: "FuturisticVisor", Value: 35, Priority: 27, HideItem: ["ItemNoseNoseRing"] }
+		],
 		Color: ["Default", "#303030", "#808080", "#e0e0e0", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 	},
 
@@ -2274,20 +2274,20 @@ var AssetFemale3DCG = [
 				]
 			},
 			{
-				Name: "FuturisticPanelGag", Fetish: ["Metal"], Value: 100, Difficulty: 4, Time: 15, AllowLock: true, DefaultColor: ["#50913C", "Default"], BuyGroup: "FuturisticPanelGag", Prerequisite: "GagFlat", Hide: ["Mouth"], Effect: ["BlockMouth"], AllowEffect: ["BlockMouth", "GagMedium", "GagTotal"], AllowType: ["Padded", "Ball", "Plug"], HideItem: ["ItemNoseNoseRing"], Extended: true,
+				Name: "FuturisticPanelGag", Fetish: ["Metal"], Value: 100, Difficulty: 4, Time: 15, Random: false, AllowLock: true, DefaultColor: ["#50913C", "Default"], BuyGroup: "FuturisticPanelGag", Prerequisite: "GagFlat", Hide: ["Mouth"], Effect: ["BlockMouth"], AllowEffect: ["BlockMouth", "GagMedium", "GagTotal"], AllowType: ["Padded", "Ball", "Plug"], HideItem: ["ItemNoseNoseRing"], Extended: true,
 				Layer: [
 					{ Name: "Ball", AllowColorize: true, HasType: false },
 					{ Name: "Mask" , AllowColorize: true, HasType: false },
 				]
 			},
-      {
-				Name: "FuturisticHarnessPanelGag", Fetish: ["Metal"], Value: -1, Difficulty: 6, Time: 15, AllowLock: true, DefaultColor: ["#50913C", "Default"], BuyGroup: "FuturisticPanelGag", Prerequisite: "GagFlat", Hide: ["Mouth"], Effect: ["BlockMouth"], AllowEffect: ["BlockMouth", "GagMedium", "GagTotal"], AllowType: ["Padded", "Ball", "Plug"], HideItem: ["ItemNoseNoseRing"], Extended: true,
+			{
+				Name: "FuturisticHarnessPanelGag", Fetish: ["Metal"], Value: -1, Difficulty: 6, Time: 15, Random: false, AllowLock: true, DefaultColor: ["#50913C", "Default"], BuyGroup: "FuturisticPanelGag", Prerequisite: "GagFlat", Hide: ["Mouth"], Effect: ["BlockMouth"], AllowEffect: ["BlockMouth", "GagMedium", "GagTotal"], AllowType: ["Padded", "Ball", "Plug"], HideItem: ["ItemNoseNoseRing"], Extended: true,
 				Layer: [
 					{ Name: "Ball", AllowColorize: true, HasType: false },
 					{ Name: "Straps" , AllowColorize: true, HasType: false },
 					{ Name: "Mask" , AllowColorize: true, HasType: false },
-        ]
-      },
+				]
+			},
 			{ Name: "RegularSleepingPill", Value: -1, Enable: false, Wear: false, Bonus: [{ Factor: 3, Type: "KidnapSneakiness" }] },
 			{
 				Name: "PantiesMask", Fetish: ["Lingerie"], Value: 20, Time: 15, Random: false, BuyGroup: "PantiesMask", Hide: ["Mouth"], Effect: ["BlockMouth", "GagVeryLight"], HideItem: ["ItemNoseNoseRing"], Layer: [
