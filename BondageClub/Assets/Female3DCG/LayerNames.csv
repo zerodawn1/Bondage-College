@@ -168,11 +168,16 @@ ItemMiscWoodenSignRope,Rope
 ItemMiscWoodenSignText,Text
 ItemDevicesBedPillow,Pillow
 ItemDevicesBedMattress,Mattress
+ItemDevicesBedHeadboard,Headboard
 ItemDevicesBedBedFrame,Frame
 ItemDevicesCoffinInside,Velvet
 ItemDevicesCoffinFrame,Frame
 ItemDevicesCoffinOpen,Lid (open)
 ItemDevicesCoffinClosed,Lid (closed)
+ItemDevicesCryoCapsuleInside,Bottom
+ItemDevicesCryoCapsuleFrame,Frame
+ItemDevicesCryoCapsuleOpen,Lid (open)
+ItemDevicesCryoCapsuleClosed,Lid (closed)
 ItemAddonCoversOuter,Outer
 ItemAddonCoversInner,Inner
 ItemDevicesCageFrame,Frame

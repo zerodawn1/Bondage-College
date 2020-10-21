@@ -1,6 +1,6 @@
 "use strict";
 
-var InventoryItemDevicesCoffinOptions = [
+var InventoryItemDevicesCryoCapsuleOptions = [
 	{
 		Name: "Open",
 		Property: {
@@ -22,21 +22,21 @@ var InventoryItemDevicesCoffinOptions = [
 ];
 
 // Loads the item extension properties
-function InventoryItemDevicesCoffinLoad() {
-	ExtendedItemLoad(InventoryItemDevicesCoffinOptions, "SelectCoffinType");
+function InventoryItemDevicesCryoCapsuleLoad() {
+	ExtendedItemLoad(InventoryItemDevicesCryoCapsuleOptions, "SelectCryoCapsuleType");
 }
 
 // Draw the item extension screen
-function InventoryItemDevicesCoffinDraw() {
-	ExtendedItemDraw(InventoryItemDevicesCoffinOptions, "CoffinType");
+function InventoryItemDevicesCryoCapsuleDraw() {
+	ExtendedItemDraw(InventoryItemDevicesCryoCapsuleOptions, "CryoCapsuleType");
 }
 
 // Catches the item extension clicks
-function InventoryItemDevicesCoffinClick() {
-	ExtendedItemClick(InventoryItemDevicesCoffinOptions);
+function InventoryItemDevicesCryoCapsuleClick() {
+	ExtendedItemClick(InventoryItemDevicesCryoCapsuleOptions);
 }
 
-function InventoryItemDevicesCoffinValidate() {
+function InventoryItemDevicesCryoCapsuleValidate() {
 	var C = CharacterGetCurrent();
 	var Allowed = true;
 
@@ -48,8 +48,8 @@ function InventoryItemDevicesCoffinValidate() {
 	return Allowed;
 }
 
-function InventoryItemDevicesCoffinPublishAction(C, Option) {
-	var msg = "CoffinSet" + Option.Name;
+function InventoryItemDevicesCryoCapsulePublishAction(C, Option) {
+	var msg = "CryoCapsuleSet" + Option.Name;
 	var Dictionary = [
 		{ Tag: "SourceCharacter", Text: Player.Name, MemberNumber: Player.MemberNumber },
 		{ Tag: "DestinationCharacter", Text: C.Name, MemberNumber: C.MemberNumber },
@@ -57,6 +57,6 @@ function InventoryItemDevicesCoffinPublishAction(C, Option) {
 	ChatRoomPublishCustomAction(msg, true, Dictionary);
 }
 
-function InventoryItemDevicesCoffinNpcDialog(C, Option) {
-	C.CurrentDialog = DialogFind(C, "ItemDevicesCoffin" + Option.Name, "ItemDevices");
+function InventoryItemDevicesCryoCapsuleNpcDialog(C, Option) {
+	C.CurrentDialog = DialogFind(C, "ItemDevicesCryoCapsule" + Option.Name, "ItemDevices");
 }
