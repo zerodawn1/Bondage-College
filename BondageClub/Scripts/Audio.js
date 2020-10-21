@@ -72,6 +72,10 @@ var AudioActions = [
 		Sound: "CuffsMetal"
 	},
 	{
+		IsAction: (data) => ["FuturisticChastityBeltShock"].find(A => data.Content.includes(A)),
+		Sound: "Shocks"
+	},
+	{
 		IsAction: (data) => ["FuturisticPanelGagMouthSetAutoInflate"].find(A => data.Content.includes(A)),
 		Sound: "Inflation"
 	},
