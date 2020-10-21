@@ -2251,7 +2251,7 @@ var AssetFemale3DCG = [
 		Top: 0,
 		Effect: ["BlockMouth", "GagNormal"],
 		Zone: [[100, 130, 100, 70]],
-		Activity: ["Bite", "Kiss", "FrenchKiss", "PoliteKiss", "Lick", "Nibble", "Caress", "HandGag", "TickleItem", "RubItem", "RollItem", "PenetrateSlow", "PenetrateFast"],
+		Activity: ["Bite", "Kiss", "FrenchKiss", "PoliteKiss", "Lick", "Nibble", "Caress", "HandGag", "TickleItem", "RubItem", "RollItem", "PenetrateSlow", "PenetrateFast", "MoanGag", "MoanGagTalk", "MoanGagWhimper", "MoanGagGroan", "MoanGagAngry", "GagKiss"],
 		Asset: [
 			{ Name: "ClothGag", Value: 15, Difficulty: -4, Time: 10, DefaultColor: "#B0B0B0", BuyGroup: "ClothGag", Prerequisite: "GagFlat", Effect: ["BlockMouth", "GagVeryLight"], AllowEffect: ["BlockMouth", "GagVeryLight", "GagLight", "GagEasy"], AllowType: ["Small", "Cleave", "OTM", "OTN"], ExpressionTrigger: [{ Name: "DroolSides", Group: "Fluids", Timer: 30 }], Extended: true },
 			{
@@ -3456,6 +3456,11 @@ var ActivityFemale3DCG = [
 		Prerequisite: ["ZoneAccessible", "UseMouth"]
 	},
 	{
+		Name: "GagKiss",
+		MaxProgress: 55,
+		Prerequisite: ["ZoneAccessible", "UseMouth", "TargetMouthBlocked"]
+	},
+	{
 		Name: "FrenchKiss",
 		MaxProgress: 70,
 		Prerequisite: ["ZoneAccessible", "UseTongue", "ZoneNaked", "TargetCanUseTongue"]
@@ -3582,6 +3587,36 @@ var ActivityFemale3DCG = [
 		MaxProgress: 40,
 		TargetSelf: ["ItemMouth"],
 		Prerequisite: ["UseHands"]
+	},
+	{
+		Name: "MoanGag",
+		MaxProgress: 60,
+		TargetSelf: ["ItemMouth"],
+		Prerequisite: ["IsGagged", "SelfOnly"]
+	},
+	{
+		Name: "MoanGagTalk",
+		MaxProgress: 10,
+		TargetSelf: ["ItemMouth"],
+		Prerequisite: ["IsGagged", "SelfOnly"]
+	},
+	{
+		Name: "MoanGagWhimper",
+		MaxProgress: 40,
+		TargetSelf: ["ItemMouth"],
+		Prerequisite: ["IsGagged", "SelfOnly"]
+	},
+	{
+		Name: "MoanGagAngry",
+		MaxProgress: 10,
+		TargetSelf: ["ItemMouth"],
+		Prerequisite: ["IsGagged", "SelfOnly"]
+	},
+	{
+		Name: "MoanGagGroan",
+		MaxProgress: 30,
+		TargetSelf: ["ItemMouth"],
+		Prerequisite: ["IsGagged", "SelfOnly"]
 	},
 	{
 		Name: "MasturbateTongue",
