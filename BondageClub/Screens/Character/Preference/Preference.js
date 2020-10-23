@@ -2,6 +2,7 @@
 var PreferenceBackground = "Sheet";
 var PreferenceMessage = "";
 var PreferenceSafewordConfirm = false;
+var PreferenceMaidsButton = true;
 var PreferenceColorPick = "";
 var PreferenceSubscreen = "";
 var PreferenceSubscreenList = ["General", "Chat", "Audio", "Arousal", "Security", "Online", "Visibility"];
@@ -233,6 +234,7 @@ function PreferenceInit(C) {
 	if (typeof C.GameplaySettings.BlindDisableExamine !== "boolean") C.GameplaySettings.BlindDisableExamine = false;
 	if (typeof C.GameplaySettings.DisableAutoRemoveLogin !== "boolean") C.GameplaySettings.DisableAutoRemoveLogin = false;
 	if (typeof C.GameplaySettings.EnableSafeword !== "boolean") C.GameplaySettings.EnableSafeword = true;
+	if (typeof C.GameplaySettings.DisableAutoMaid !== "boolean") C.GameplaySettings.DisableAutoMaid = false;
 
 	if (!C.OnlineSettings) C.OnlineSettings = {};
 	if (!C.OnlineSharedSettings) C.OnlineSharedSettings = {};
@@ -395,6 +397,7 @@ function PreferenceSubscreenGeneralRun() {
 	DrawCheckbox(500, 552, 64, 64, TextGet("DisableAutoRemoveLogin"), Player.GameplaySettings.DisableAutoRemoveLogin);
 	DrawCheckbox(500, 632, 64, 64, TextGet("ForceFullHeight"), Player.VisualSettings.ForceFullHeight);
 	DrawCheckbox(500, 712, 64, 64, TextGet(PreferenceSafewordConfirm ? "ConfirmSafeword" : "EnableSafeword"), Player.GameplaySettings.EnableSafeword);
+	DrawCheckbox(500, 792, 64, 64, TextGet("DisableAutoMaid"), !Player.GameplaySettings.DisableAutoMaid);
 
 	MainCanvas.textAlign = "center";
 	DrawBackNextButton(500, 392, 250, 64, TextGet(Player.GameplaySettings.SensDepChatLog), "White", "",
@@ -482,6 +485,7 @@ function PreferenceSubscreenGeneralClick() {
 	} else {
 		PreferenceSafewordConfirm = false;
 	}
+	if (MouseIn(500, 792, 64, 64)) Player.GameplaySettings.DisableAutoMaid = !Player.GameplaySettings.DisableAutoMaid;
 }
 
 /**
