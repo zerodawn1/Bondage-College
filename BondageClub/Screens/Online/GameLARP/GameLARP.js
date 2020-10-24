@@ -875,7 +875,7 @@ function GameLARPContinue() {
 	// See if there's at least 2 teams in which players have free arms, return TRUE if that's the case
 	var Team = "";
 	for (let C = 0; C < GameLARPPlayer.length; C++)
-		if ((GameLARPPlayer[C].Game.LARP.Team != "") && (GameLARPPlayer[C].Game.LARP.Team != "None") && (InventoryGet(GameLARPPlayer[C], "ItemArms") == null)) {
+		if ((GameLARPPlayer[C].Game.LARP.Team != "") && (GameLARPPlayer[C].Game.LARP.Team != "None") && (InventoryGet(GameLARPPlayer[C], "ItemArms") == null) && OnlineGameCharacterInChatRoom(GameLARPPlayer[C].MemberNumber)) {
 			if (Team == "")
 				Team = GameLARPPlayer[C].Game.LARP.Team;
 			else
@@ -940,7 +940,7 @@ function GameLARPProcess(P) {
 		// The turn administrator can skip turns after the delay has ran out
 		if ((GameLARPStatus == "Running") && (GameLARPTurnAdmin == P.Sender) && (P.Data.GameProgress == "Skip")) {
 			GameLARPProgress.push({ Sender: P.Sender, Time: CurrentTime, RNG: P.RNG, Data: P.Data });
-			GameLARPNewTurn("TurnSkip");
+			if (GameLARPContinue()) GameLARPNewTurn("TurnSkip");
 		}
 
 		// The current turn player can trigger an action
