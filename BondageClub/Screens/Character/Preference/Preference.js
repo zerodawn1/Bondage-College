@@ -209,7 +209,7 @@ function PreferenceInit(C) {
 	if (C.ChatSettings.WhiteSpace == null) C.ChatSettings.WhiteSpace = "Preserve";
 	if (C.ChatSettings.ColorActivities == null) C.ChatSettings.ColorActivities = true;
 	if (C.ChatSettings.AutoOOC == null) C.ChatSettings.AutoOOC = false;
-	if (C.ChatSettings.OOCWhispers == null) C.ChatSettings.OOCWhispers = true;
+	if (C.ChatSettings.OOCWhispers == null) C.ChatSettings.OOCWhispers = false;
 	if (!C.VisualSettings) C.VisualSettings = { ForceFullHeight: false };
 
 	// Sets the default audio settings
