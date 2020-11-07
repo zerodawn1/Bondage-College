@@ -23,7 +23,13 @@ function MovieStudioCanPlayInMovie() { return !InventoryCharacterHasLockedRestra
  * Returns TRUE if the player can receive the camera as a payment
  * @returns {boolean} - TRUE if the player can get the camera
  */
-function MovieStudioCanGetCamera() { return !InventoryAvailable(Player, "Camera1", "ClothAccessory") }
+function MovieStudioCanGetCamera() { return (!InventoryAvailable(Player, "Camera1", "ClothAccessory") && (MovieStudioCurrentRole == "Journalist")) }
+
+/**
+ * Returns TRUE if the player can receive the gavel as a payment
+ * @returns {boolean} - TRUE if the player can get the gavel
+ */
+function MovieStudioCanGetGavel() { return (!InventoryAvailable(Player, "SpankingToysGavel", "ItemHands") && (MovieStudioCurrentRole == "Mistress") && (MovieStudioActor1.TrialDone)) }
 
 /**
  * When the player fails the movie, we jump back to the director
@@ -503,13 +509,13 @@ function MovieStudioDoActivity(Activity) {
 		CharacterSetFacialExpression(MovieStudioActor2, "Eyes", "Angry", 5);
 		CharacterSetFacialExpression(MovieStudioActor2, "Eyes2", "Angry", 5);
 	}
-	if (Activity == "InterviewMistressSpankLazyMaid") {
+	if ((Activity == "InterviewMistressSpankLazyMaid") || (Activity == "InterviewMistressCourtSpankMaid") || (Activity == "InterviewMistressMaidCleanSpank")) {
 		CharacterSetFacialExpression(MovieStudioActor1, "Blush", "Medium", 5);
 		CharacterSetFacialExpression(MovieStudioActor1, "Eyes", "Closed", 5);
 		CharacterSetFacialExpression(MovieStudioActor1, "Eyes2", "Closed", 5);
 	}
 	if (Activity == "InterviewMistressStartTrial") {
-		MovieStudioActor1.CanTurnTables = false;
+		MovieStudioActor1.TrialDone = true;
 		MovieStudioActor1.Stage = "2100";
 		MovieStudioActor2.Stage = "2100";
 		InventoryWear(Player, "SpankingToys", "ItemHands");
@@ -518,9 +524,49 @@ function MovieStudioDoActivity(Activity) {
 		DialogLeave();
 	}
 	if (Activity == "InterviewMistressSkipTrial") {
-		MovieStudioActor1.CanTurnTables = true;
+		MovieStudioActor1.TrialDone = false;
 		MovieStudioActor1.Stage = "2200";
 		MovieStudioActor2.Stage = "2200";
+	}
+	if (Activity == "InterviewMistressMaidStrapToClean") {
+		CharacterSetActivePose(MovieStudioActor1, null, true);
+		CharacterRelease(MovieStudioActor1);
+		InventoryWearRandom(MovieStudioActor1, "ItemLegs");
+		InventoryWearRandom(MovieStudioActor1, "ItemArms");
+		InventoryWear(MovieStudioActor1, "DusterGag", "ItemMouth");
+	}
+	if (Activity == "InterviewMistressMaidCleanGrope") {
+		CharacterSetFacialExpression(MovieStudioActor1, "Blush", "High", 8);
+		CharacterSetFacialExpression(MovieStudioActor1, "Eyes", "Horny", 8);
+		CharacterSetFacialExpression(MovieStudioActor1, "Eyes2", "Horny", 8);
+	}
+	if (Activity == "InterviewMistressCourtMasturbate") {
+		CharacterSetFacialExpression(Player, "Blush", "High", 8);
+		CharacterSetFacialExpression(Player, "Eyes", "Horny", 8);
+		CharacterSetFacialExpression(Player, "Eyes2", "Horny", 8);
+	}
+	if (Activity == "InterviewMistressCourtRestrainMaid") {
+		CharacterSetActivePose(MovieStudioActor1, null, true);
+		CharacterRelease(MovieStudioActor1);
+		InventoryWearRandom(MovieStudioActor1, "ItemFeet");
+		InventoryWearRandom(MovieStudioActor1, "ItemLegs");
+		InventoryWearRandom(MovieStudioActor1, "ItemArms");
+	}
+	if ((Activity == "InterviewMistressInterviewRestrainJournalist") || (Activity == "InterviewMistressCourtRestrainJournalist")) {
+		CharacterSetActivePose(MovieStudioActor2, null, true);
+		CharacterRelease(MovieStudioActor2);
+		InventoryWearRandom(MovieStudioActor2, "ItemFeet");
+		InventoryWearRandom(MovieStudioActor2, "ItemLegs");
+		InventoryWearRandom(MovieStudioActor2, "ItemArms");
+	}
+	if (Activity == "InterviewMistressInterviewReleaseJournalist") {
+		CharacterSetActivePose(MovieStudioActor2, null, true);
+		CharacterRelease(MovieStudioActor2);
+	}
+	if (Activity == "InterviewMistressInterviewFlirt") {
+		CharacterSetFacialExpression(MovieStudioActor2, "Blush", "Medium", 8);
+		CharacterSetFacialExpression(MovieStudioActor2, "Eyes", "Dazed", 8);
+		CharacterSetFacialExpression(MovieStudioActor2, "Eyes2", "Dazed", 8);
 	}
 
 	// Check for decay
