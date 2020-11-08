@@ -211,5 +211,11 @@ PlayerGagged,,,That gag looks great on you.  It sounds good also.  (She laughs.)
 2200,2210,Submit to me girl.,(She grumbles and nods.)  How will you punish me Miss?,,
 2200,,(Check the room.),,DialogLeave(),
 2210,,,How will you punish me Miss?,,
-2210,,TO DO,TO DO,,
+2210,,(Restrain her.),(You strap her up as the camera zooms on the action.)  You're good at this Miss.,"DoActivity(""InterviewMistressPunishRestrain"")",
+2210,,(Gag her.),(She doesn't protest as you pick up a gag for her.),"DoActivity(""InterviewMistressPunishGag"")",
+2210,,(Strap her on the cross.),(She spreads her arms and legs as you restrain her on the cross.)  This might better than cleaning.,"DoActivity(""InterviewMistressPunishCross"")","CanDoActivity(""InterviewMistressPunishCross"")"
+2210,,(Release her.),(She stretches happily as you release her.)  Thanks a lot Miss.,"DoActivity(""InterviewMistressPunishRelease"")",CurrentCharacter.IsRestrained()
+2210,,(Spank her.),(You spank her pretty hard as she whimpers from the pain.)  You're very strong.,"DoActivity(""InterviewMistressPunishSpank"")",
+2210,,(Slap her.),(You slap her on the face a few times as she bows her head and stays silent.),"DoActivity(""InterviewMistressPunishSlap"")",
+2210,,(Hit her with the gavel.),(You hit her body a few times with the gavel as she whimpers.)  I won't break the rules again Miss.,"DoActivity(""InterviewMistressPunishGavel"")","CanDoActivity(""InterviewMistressPunishGavel"")"
 2210,,(Check the room.),,DialogLeave(),
