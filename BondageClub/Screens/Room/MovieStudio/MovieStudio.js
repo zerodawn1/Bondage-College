@@ -563,6 +563,8 @@ function MovieStudioDoActivity(Activity) {
 		CharacterSetActivePose(CurrentCharacter, null, true);
 		CharacterRelease(CurrentCharacter);
 		if (!MovieStudioActor1.IsRestrained() && !MovieStudioActor2.IsRestrained() && !MovieStudioActor1.TrialDone) {
+			CharacterRelease(MovieStudioActor1);
+			CharacterRelease(MovieStudioActor2);
 			MovieStudioActor1.Stage = "2300";
 			MovieStudioActor2.Stage = "2250";
 			CharacterSetCurrent(MovieStudioActor2);
@@ -593,6 +595,12 @@ function MovieStudioDoActivity(Activity) {
 	}
 	if (Activity == "InterviewMistressTurnTablesArms") InventoryWearRandom(Player, "ItemArms");
 	if (Activity == "InterviewMistressTurnTablesLegs") { InventoryWearRandom(Player, "ItemFeet"); InventoryWearRandom(Player, "ItemLegs"); }
+	if (Activity == "InterviewMistressTurnTablesEndTrial") {
+		MovieStudioActor1.Stage = "2350";
+		MovieStudioActor2.Stage = "2350";
+		CharacterSetFacialExpression(Player, "Eyes", "Angry", 8);
+		CharacterSetFacialExpression(Player, "Eyes", "Angry", 8);
+	}
 
 	// Check for decay
 	MovieStudioProcessDecay();
