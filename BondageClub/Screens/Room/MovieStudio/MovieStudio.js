@@ -601,6 +601,27 @@ function MovieStudioDoActivity(Activity) {
 		CharacterSetFacialExpression(Player, "Eyes", "Angry", 8);
 		CharacterSetFacialExpression(Player, "Eyes", "Angry", 8);
 	}
+	if (Activity == "InterviewMistressTurnTablesSentenceMaid") {
+		InventoryWear(Player, "DusterGag", "ItemMouth");
+		InventoryWear(Player, "MaidHairband1", "Hat");
+		CharacterSetFacialExpression(Player, "Eyes", "Dazed", 8);
+		CharacterSetFacialExpression(Player, "Eyes2", "Dazed", 8);
+	}
+	if (Activity == "InterviewMistressTurnTablesSentenceJournalist") {
+		CharacterRelease(Player);
+		CharacterNaked(Player);
+		InventoryWearRandom(Player, "ItemFeet");
+		InventoryWearRandom(Player, "ItemLegs");
+		InventoryWearRandom(Player, "ItemArms");
+		CharacterNaked(MovieStudioActor2);
+		InventoryWear(MovieStudioActor2, "Camera1", "ClothAccessory", "Default");
+		InventoryWear(MovieStudioActor2, "TeacherOutfit1", "Cloth", "Default");
+		InventoryWear(MovieStudioActor2, "Glasses1", "Glasses", "#333333");
+		InventoryWear(MovieStudioActor2, "Socks5", "Socks", "#444458");
+		InventoryWear(MovieStudioActor2, "Shoes2", "Shoes", "#111111");
+		CharacterSetFacialExpression(Player, "Eyes", "Dazed", 8);
+		CharacterSetFacialExpression(Player, "Eyes2", "Dazed", 8);
+	}
 
 	// Check for decay
 	MovieStudioProcessDecay();
