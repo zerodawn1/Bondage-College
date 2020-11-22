@@ -91,7 +91,7 @@ function LoginLoad() {
 
 	// Resets the player and other characters
 	Character = [];
-	NextCharacterId = 1;
+	CharacterNextId = 1;
 	CharacterReset(0, "Female3DCG");
 	LoginDoNextThankYou();
 	CharacterLoadCSVDialog(Player);

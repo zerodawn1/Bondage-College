@@ -1,6 +1,6 @@
 "use strict";
 var Character = [];
-var NextCharacterId = 1;
+var CharacterNextId = 1;
 
 /**
  * Loads a character into the buffer, creates it if it does not exist
@@ -274,7 +274,7 @@ function CharacterLoadNPC(NPCType) {
 			return Character[C];
 
 	// Randomize the new character
-	CharacterReset(NextCharacterId++, "Female3DCG");
+	CharacterReset(CharacterNextId++, "Female3DCG");
 	let C = Character[Character.length - 1];
 	C.AccountName = NPCType;
 	CharacterLoadCSVDialog(C);
@@ -352,7 +352,7 @@ function CharacterLoadOnline(data, SourceMemberNumber) {
 			}
 		
 		// Creates the new character from the online template
-		CharacterReset(NextCharacterId++, "Female3DCG");
+		CharacterReset(CharacterNextId++, "Female3DCG");
 		Char = Character[Character.length - 1];
 		Char.Name = data.Name;
 		Char.Lover = (data.Lover != null) ? data.Lover : "";
