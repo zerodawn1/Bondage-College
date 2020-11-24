@@ -5,7 +5,7 @@ var PreferenceSafewordConfirm = false;
 var PreferenceMaidsButton = true;
 var PreferenceColorPick = "";
 var PreferenceSubscreen = "";
-var PreferenceSubscreenList = ["General", "Difficulty", "Chat", "Audio", "Arousal", "Security", "Online", "Visibility", "Immersion", "Graphics"];
+var PreferenceSubscreenList = ["General", "Difficulty", "Restriction", "Chat", "Audio", "Arousal", "Security", "Online", "Visibility", "Immersion", "Graphics"];
 var PreferenceChatColorThemeSelected = "";
 var PreferenceChatColorThemeList = ["Light", "Dark"];
 var PreferenceChatColorThemeIndex = 0;
@@ -243,15 +243,21 @@ function PreferenceInit(C) {
 	if (typeof C.GameplaySettings.EnableSafeword !== "boolean") C.GameplaySettings.EnableSafeword = true;
 	if (typeof C.GameplaySettings.DisableAutoMaid !== "boolean") C.GameplaySettings.DisableAutoMaid = false;
 	
-	
 	// Sets the default immersion settings
 	if (!C.ImmersionSettings) C.ImmersionSettings = {};
 	if (typeof C.ImmersionSettings.BlockGaggedOOC !== "boolean") C.ImmersionSettings.BlockGaggedOOC = false;
 
+	// Sets the default restriction settings
+	if (!C.RestrictionSettings) C.RestrictionSettings = {};
+	if (typeof C.RestrictionSettings.BypassStruggle !== "boolean") C.RestrictionSettings.BypassStruggle = false;
+	if ((C.ID == 0) && (C.GetDifficulty() != 0)) C.RestrictionSettings.BypassStruggle = false;
+
+	// Sets the default online settings
 	if (!C.OnlineSettings) C.OnlineSettings = {};
 	if (!C.OnlineSharedSettings) C.OnlineSharedSettings = {};
 	if (C.OnlineSharedSettings.AllowFullWardrobeAccess == null) C.OnlineSharedSettings.AllowFullWardrobeAccess = false;
 	if (C.OnlineSharedSettings.BlockBodyCosplay == null) C.OnlineSharedSettings.BlockBodyCosplay = false;
+
 	// TODO: The following preferences were migrated September 2020 in for R61 - replace with standard preference code after a few months
 	PreferenceMigrate(C.ChatSettings, C.OnlineSettings, "AutoBanBlackList", false);
 	PreferenceMigrate(C.ChatSettings, C.OnlineSettings, "AutoBanGhostList", true);
@@ -428,7 +434,7 @@ function PreferenceSubscreenGeneralRun() {
 }
 
 /**
- * Handles click events in the preference screen that are propagated from CommonClick()
+ * Runs and draw the preference screen, difficulty subscreen
  * @returns {void} - Nothing
  */
 function PreferenceSubscreenDifficultyRun() {
@@ -471,6 +477,29 @@ function PreferenceSubscreenDifficultyRun() {
 		} else DrawText(TextGet("DifficultyAlreadyPlayingOn"), 500, 825, 1050, 120, "Black", "White");
 		MainCanvas.textAlign = "center";
 
+	}
+
+}
+
+/**
+ * Runs and draw the preference screen, restriction subscreen
+ * @returns {void} - Nothing
+ */
+function PreferenceSubscreenRestrictionRun() {
+
+	// Draw the character and the controls
+	MainCanvas.textAlign = "left";
+	DrawCharacter(Player, 50, 50, 0.9);
+	DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png");
+	DrawText(TextGet("RestrictionPreferences"), 500, 125, "Black", "Gray");
+	if (Player.GetDifficulty() == 0) {
+		DrawText(TextGet("RestrictionAccess"), 500, 225, "Black", "Gray");
+		DrawCheckbox(500, 325, 64, 64, TextGet("RestrictionBypassStruggle"), Player.RestrictionSettings.BypassStruggle);		
+	} else {
+		DrawText(TextGet("RestrictionNoAccess"), 500, 225, "Black", "Gray");
+		DrawRect(500, 325, 64, 64, "#ebebe4");
+		DrawEmptyRect(500, 325, 64, 64, "Black");
+		DrawText(TextGet("RestrictionBypassStruggle"), 600, 355, "Black", "Gray");
 	}
 
 }
@@ -559,6 +588,7 @@ function PreferenceSubscreenDifficultyClick() {
 				if (MouseIn(500, 825, 300, 64) && PreferenceDifficultyAccept) {
 					Player.Difficulty = { LastChange: CurrentTime, Level: PreferenceDifficultyLevel };
 					ServerSend("AccountDifficulty", PreferenceDifficultyLevel);
+					PreferenceInit(Player);
 					PreferenceDifficultyLevel = null;
 					PreferenceSubscreenDifficultyExit();
 				}
@@ -566,6 +596,17 @@ function PreferenceSubscreenDifficultyClick() {
 		}
 
 	}
+
+}
+
+/**
+ * Handles the click events in the preference screen, restriction sub-screen, propagated from CommonClick()
+ * @returns {void} - Nothing
+ */
+function PreferenceSubscreenRestrictionClick() {
+
+	if (MouseIn(1815, 75, 90, 90)) PreferenceSubscreenDifficultyExit();
+	if (MouseIn(500, 325, 64, 64) && (Player.GetDifficulty() == 0)) Player.RestrictionSettings.BypassStruggle = !Player.RestrictionSettings.BypassStruggle;
 
 }
 
@@ -640,6 +681,7 @@ function PreferenceExit() {
 		AudioSettings: Player.AudioSettings,
 		GameplaySettings: Player.GameplaySettings,
 		ImmersionSettings: Player.ImmersionSettings,
+		RestrictionSettings: Player.RestrictionSettings,
 		ArousalSettings: Player.ArousalSettings,
 		OnlineSettings: Player.OnlineSettings,
 		OnlineSharedSettings: Player.OnlineSharedSettings

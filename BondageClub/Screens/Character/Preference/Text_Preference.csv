@@ -1,6 +1,7 @@
 Preferences,- Preferences -
 GeneralPreferences,- General Preferences -
 DifficultyPreferences,- Multi Player Difficulty Preferences -
+RestrictionPreferences,- Restriction Preferences -
 ChatPreferences,- Chat Preferences -
 AudioPreferences,- Audio Preferences -
 ArousalPreferences,- Arousal Meter & Sexual Activities Preferences -
@@ -11,6 +12,7 @@ OnlinePreferences,- Online Preferences -
 ImmersionPreferences,- Immersion Preferences -
 HomepageGeneral,General
 HomepageDifficulty,Difficulty
+HomepageRestriction,Restriction
 HomepageChat,Chat
 HomepageAudio,Audio
 HomepageArousal,Arousal
@@ -56,6 +58,9 @@ DifficultyAlreadyPlayingOn,You're already playing on that difficulty mode.
 DifficultyWaitSevenDays,You need to wait NumberOfHours hours before you can activate this mode.
 DifficultyIAccept,I accept the consequences and want to use this mode.
 DifficultyChangeMode,Go
+RestrictionAccess,You can configure game restrictions to bypass in the multi-player environment.
+RestrictionNoAccess,Players using the Roleplay difficulty can configure multi-player restrictions to bypass.
+RestrictionBypassStruggle,Bypass the struggling mini-game.
 CharacterLabelColor,Character label color:
 ItemPermission,Item permission:
 PermissionLevel0,"Everyone, no exceptions"
