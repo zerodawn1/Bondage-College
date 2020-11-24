@@ -362,6 +362,7 @@ function CharacterLoadOnline(data, SourceMemberNumber) {
 		Char.Description = data.Description;
 		Char.AccountName = "Online-" + data.ID.toString();
 		Char.MemberNumber = data.MemberNumber;
+		Char.Difficulty = data.Difficulty;
 		Char.AllowItem = false;
 		CharacterLoadCSVDialog(Char, "Screens/Online/ChatRoom/Dialog_Online");
 		CharacterOnlineRefresh(Char, data, SourceMemberNumber);
