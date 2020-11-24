@@ -105,11 +105,12 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		HasNoItem: function () { return CharacterHasNoItem(this); },
 		IsEdged: function () { return CharacterIsEdged(this); },
 		IsNpc: function () { return (this.AccountName.substring(0, 4) === "NPC_" || this.AccountName.substring(0, 4) === "NPC-"); },
+		GetDifficulty: function () { return ((this.Difficulty == null) || (this.Difficulty.Level == null) || (typeof this.Difficulty.Level !== "number") || (this.Difficulty.Level < 0) || (this.Difficulty.Level > 3)) ? 1 : this.Difficulty.Level; }
 	};
 
 	// If the character doesn't exist, we create it
 	var CharacterIndex = Character.findIndex(c => c.ID == CharacterID);
-	if(CharacterIndex == -1)
+	if (CharacterIndex == -1)
 		Character.push(NewCharacter);
 	else
 		Character[CharacterIndex] = NewCharacter;
