@@ -251,6 +251,8 @@ function PreferenceInit(C) {
 	if (!C.RestrictionSettings) C.RestrictionSettings = {};
 	if (typeof C.RestrictionSettings.BypassStruggle !== "boolean") C.RestrictionSettings.BypassStruggle = false;
 	if ((C.ID == 0) && (C.GetDifficulty() != 0)) C.RestrictionSettings.BypassStruggle = false;
+	if (typeof C.RestrictionSettings.SlowImmunity !== "boolean") C.RestrictionSettings.SlowImmunity = false;
+	if ((C.ID == 0) && (C.GetDifficulty() != 0)) C.RestrictionSettings.SlowImmunity = false;
 
 	// Sets the default online settings
 	if (!C.OnlineSettings) C.OnlineSettings = {};
@@ -494,12 +496,16 @@ function PreferenceSubscreenRestrictionRun() {
 	DrawText(TextGet("RestrictionPreferences"), 500, 125, "Black", "Gray");
 	if (Player.GetDifficulty() == 0) {
 		DrawText(TextGet("RestrictionAccess"), 500, 225, "Black", "Gray");
-		DrawCheckbox(500, 325, 64, 64, TextGet("RestrictionBypassStruggle"), Player.RestrictionSettings.BypassStruggle);		
+		DrawCheckbox(500, 325, 64, 64, TextGet("RestrictionBypassStruggle"), Player.RestrictionSettings.BypassStruggle);
+		DrawCheckbox(500, 425, 64, 64, TextGet("RestrictionSlowImmunity"), Player.RestrictionSettings.SlowImmunity);
 	} else {
 		DrawText(TextGet("RestrictionNoAccess"), 500, 225, "Black", "Gray");
 		DrawRect(500, 325, 64, 64, "#ebebe4");
 		DrawEmptyRect(500, 325, 64, 64, "Black");
 		DrawText(TextGet("RestrictionBypassStruggle"), 600, 355, "Black", "Gray");
+		DrawRect(500, 425, 64, 64, "#ebebe4");
+		DrawEmptyRect(500, 425, 64, 64, "Black");
+		DrawText(TextGet("RestrictionSlowImmunity"), 600, 455, "Black", "Gray");
 	}
 
 }
@@ -604,10 +610,9 @@ function PreferenceSubscreenDifficultyClick() {
  * @returns {void} - Nothing
  */
 function PreferenceSubscreenRestrictionClick() {
-
 	if (MouseIn(1815, 75, 90, 90)) PreferenceSubscreenDifficultyExit();
 	if (MouseIn(500, 325, 64, 64) && (Player.GetDifficulty() == 0)) Player.RestrictionSettings.BypassStruggle = !Player.RestrictionSettings.BypassStruggle;
-
+	if (MouseIn(500, 425, 64, 64) && (Player.GetDifficulty() == 0)) Player.RestrictionSettings.SlowImmunity = !Player.RestrictionSettings.SlowImmunity;
 }
 
 /**
