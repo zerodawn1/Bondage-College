@@ -51,7 +51,10 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		/** Look for blindness effects and return the worst (limited by settings), Light: 1, Normal: 2, Heavy: 3 */
 		GetBlindLevel: function () {
 			let blindLevel = 0;
-			if (this.Effect.includes("BlindHeavy")) blindLevel = 3;
+			if ((this.Effect.includes("BlindHeavy")) ||
+			((InventoryGet(this, "Eyes").Property.Expression === "Closed") &&
+			(InventoryGet(this, "Eyes2").Property.Expression === "Closed"))
+			) blindLevel = 3;
 			else if (this.Effect.includes("BlindNormal")) blindLevel = 2;
 			else if (this.Effect.includes("BlindLight")) blindLevel = 1;
 			// Light sensory deprivation setting limits blindness
