@@ -958,7 +958,7 @@ function ChatRoomMessage(data) {
 				} 
 				if (msg == "HoldLeash"){
 					if (SenderCharacter.MemberNumber != ChatRoomLeashPlayer) {
-						ServerSend("ChatRoomChat", { Content: "RemoveLeash", Type: "Hidden", Target: SenderCharacter.MemberNumber });
+						ServerSend("ChatRoomChat", { Content: "RemoveLeash", Type: "Hidden", Target: ChatRoomLeashPlayer });
 					}
 					if (ChatRoomCanBeLeashed(Player)) {
 						ChatRoomLeashPlayer = SenderCharacter.MemberNumber
@@ -1192,6 +1192,12 @@ function ChatRoomSync(data) {
 			else if (ChatRoomCharacter.length == data.Character.length - 1) {
 				ChatRoomCharacter.push(CharacterLoadOnline(data.Character[data.Character.length - 1], data.SourceMemberNumber));
 				ChatRoomData = data;
+				
+				if (ChatRoomLeashList.indexOf(data.SourceMemberNumber) >= 0) {
+					// Ping to make sure they are still leashed
+					ServerSend("ChatRoomChat", { Content: "PingHoldLeash", Type: "Hidden", Target: data.SourceMemberNumber });
+				}
+				
 				return;
 			}
 		}
