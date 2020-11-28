@@ -43,10 +43,8 @@ function FriendListRun() {
 	ElementPositionFix("FriendList", 36, 5, 75, 1985, 890);
 	DrawButton(1865, 5, 60, 60, "", "White", "Icons/Small/Next.png");
 	DrawButton(1935, 5, 60, 60, "", "White", "Icons/Small/Exit.png");
-	if (FriendListNextCheck !== null && Date.now() >= FriendListNextCheck) {
-		FriendListNextCheck = null;
+	if ((FriendListNextCheck !== null) && (CurrentTime >= FriendListNextCheck))
 		ServerSend("AccountQuery", { Query: "OnlineFriends" });
-	}
 }
 
 /**
@@ -88,7 +86,10 @@ function FriendListExit() {
  * @returns {void} - Nothing
  */
 function FriendListLoadFriendList(data) {
-	FriendListNextCheck = Date.now() + 5000;
+
+	// Refresh the friend list automatically again in 30 seconds
+	FriendListNextCheck = CurrentTime + 30000;
+
 	// Loads the header caption
 	const BeepCaption = DialogFind(Player, "Beep");
 	const DeleteCaption = DialogFind(Player, "Delete");
