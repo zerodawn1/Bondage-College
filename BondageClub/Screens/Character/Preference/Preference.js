@@ -249,18 +249,9 @@ function PreferenceInit(C) {
 	if (typeof C.GameplaySettings.OfflineLockedRestrained !== "boolean") C.GameplaySettings.OfflineLockedRestrained = false;
 	if ((C.ID == 0) && (C.GetDifficulty() >= 2)) C.GameplaySettings.OfflineLockedRestrained = true;
 
-	// Sets the default immersion settings, force them for Extreme mode
+	// Sets the default immersion settings
 	if (!C.ImmersionSettings) C.ImmersionSettings = {};
 	if (typeof C.ImmersionSettings.BlockGaggedOOC !== "boolean") C.ImmersionSettings.BlockGaggedOOC = false;
-	if ((C.ID == 0) && (C.GetDifficulty() >= 3)) {
-		Player.GameplaySettings.BlindDisableExamine = true;
-		Player.GameplaySettings.DisableAutoRemoveLogin = true;
-		Player.ImmersionSettings.BlockGaggedOOC = true;
-		Player.GameplaySettings.ImmersionLockSetting = true;
-		Player.OnlineSharedSettings.AllowPlayerLeashing = true;
-		PreferenceSettingsSensDepIndex = PreferenceSettingsSensDepList.length - 1;
-		Player.GameplaySettings.SensDepChatLog = PreferenceSettingsSensDepList[PreferenceSettingsSensDepIndex];
-	}
 
 	// Sets the default restriction settings
 	if (!C.RestrictionSettings) C.RestrictionSettings = {};
@@ -276,6 +267,17 @@ function PreferenceInit(C) {
 	if (C.OnlineSharedSettings.BlockBodyCosplay == null) C.OnlineSharedSettings.BlockBodyCosplay = false;
 	if (typeof C.OnlineSharedSettings.AllowPlayerLeashing !== "boolean") C.OnlineSharedSettings.AllowPlayerLeashing = true;
 
+	// Forces some preferences when playing in Extreme mode
+	if ((C.ID == 0) && (C.GetDifficulty() >= 3)) {
+		Player.GameplaySettings.BlindDisableExamine = true;
+		Player.GameplaySettings.DisableAutoRemoveLogin = true;
+		Player.ImmersionSettings.BlockGaggedOOC = true;
+		Player.GameplaySettings.ImmersionLockSetting = true;
+		Player.OnlineSharedSettings.AllowPlayerLeashing = true;
+		PreferenceSettingsSensDepIndex = PreferenceSettingsSensDepList.length - 1;
+		Player.GameplaySettings.SensDepChatLog = PreferenceSettingsSensDepList[PreferenceSettingsSensDepIndex];
+	}
+	
 	// TODO: The following preferences were migrated September 2020 in for R61 - replace with standard preference code after a few months
 	PreferenceMigrate(C.ChatSettings, C.OnlineSettings, "AutoBanBlackList", false);
 	PreferenceMigrate(C.ChatSettings, C.OnlineSettings, "AutoBanGhostList", true);
