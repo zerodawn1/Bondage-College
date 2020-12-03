@@ -284,7 +284,7 @@ function LoginDifficulty() {
 
 	// If Extreme mode, the player cannot control her blocked items
 	if (Player.GetDifficulty() >= 3) {
-		Player.BlockItems = [{Name: "CombinationPadlock", Group: "ItemMisc", Type: null}];
+		Player.BlockItems = [{Name: "CombinationPadlock", Group: "ItemMisc", Type: null}, {Name: "PasswordPadlock", Group: "ItemMisc", Type: null}];
 		Player.LimitedItems = [];
 		Player.HiddenItems = [];
 		ServerSend("AccountUpdate", { BlockItems: Player.BlockItems, LimitedItems: Player.LimitedItems, HiddenItems: Player.HiddenItems });
