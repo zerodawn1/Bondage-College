@@ -644,7 +644,8 @@ var AssetFemale3DCG = [
 			{ Name: "SmallHat1", Value: 30 },
 			{ Name: "Veil1", Fetish: ["Lingerie"], Value: 40 },
 			{ Name: "Veil2", Fetish: ["Lingerie"], Value: 40 },
-			{ Name: "BakerBoyHat", Value: 40, }
+			{ Name: "BakerBoyHat", Value: 40, },
+			{ Name: "ReindeerBand", Value: 10 },
 		],
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"]
 	},
