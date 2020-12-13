@@ -539,7 +539,7 @@ var AssetFemale3DCG = [
 		Clothing: true,
 		Left: 115,
 		Top: 500,
-		AllowPose: ["LegsClosed", "Kneel", "Hogtied", "Spread"],
+		AllowPose: ["LegsClosed", "Spread"],
 		Asset: [
 			{ Name: "BandAnklet", BuyGroup: ["BandAnklet"]}
 	
@@ -3569,19 +3569,19 @@ var PoseFemale3DCG = [
 		Category: "BodyLower",
 		AllowMenu: true,
 		OverrideHeight: -250,
-		Hide: ["ItemFeet"]
+		Hide: ["ItemFeet", "LeftAnklet", "RightAnklet"]
 	},
 	{
 		Name: "Horse",
 		Category: "BodyLower",
 		OverrideHeight: -75,
-		Hide: ["ItemFeet"]
+		Hide: ["ItemFeet", "LeftAnklet", "RightAnklet"]
 	},
 	{
 		Name: "KneelingSpread",
 		Category: "BodyLower",
 		OverrideHeight: -250,
-		Hide: ["ItemFeet"]
+		Hide: ["ItemFeet", "LeftAnklet", "RightAnklet"]
 	},
 	{
 		Name: "Yoked",
@@ -3600,7 +3600,7 @@ var PoseFemale3DCG = [
 		Name: "Hogtied",
 		Category: "BodyFull",
 		OverrideHeight: -575,
-		Hide: ["BodyLower", "Head", "Hands", "ClothLower", "Wings", "TailStraps", "Gloves", "Panties", "Pussy", "ItemHands", "ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemButt", "ItemLegs", "ItemFeet", "SuitLower"],
+		Hide: ["BodyLower", "Head", "Hands", "ClothLower", "Wings", "TailStraps", "Gloves", "Panties", "Pussy", "ItemHands", "ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemButt", "ItemLegs", "ItemFeet", "SuitLower", "LeftAnklet", "RightAnklet"],
 		MovePosition: [{ Group: "Socks", X: 0, Y: -400 }, { Group: "Shoes", X: 0, Y: -500 }, { Group: "ItemBoots", X: 0, Y: -500 }]
 	},
 	{
@@ -3613,13 +3613,13 @@ var PoseFemale3DCG = [
 		Name: "SuspensionHogtied",
 		Category: "BodyFull",
 		OverrideHeight: 0,
-		Hide: ["BodyLower", "Hands", "ClothLower", "Wings", "TailStraps", "Gloves", "Panties", "Pussy", "ItemHands", "ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemButt", "ItemLegs", "ItemFeet", "SuitLower", "ItemDevices"]
+		Hide: ["BodyLower", "Hands", "ClothLower", "Wings", "TailStraps", "Gloves", "Panties", "Pussy", "ItemHands", "ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemButt", "ItemLegs", "ItemFeet", "SuitLower", "ItemDevices", "LeftAnklet", "RightAnklet"]
 	},
 	{
 		Name: "AllFours",
 		Category: "BodyFull",
 		OverrideHeight: -560,
-		Hide: ["ItemFeet", "ClothLower", "SuitLower", "Nipples", "Pussy", "BodyLower", "Head", "Wings", "ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemLegs", "ItemBoots", "Suit", "Panties", "Bra", "Socks", "Shoes"],
+		Hide: ["ItemFeet", "ClothLower", "SuitLower", "Nipples", "Pussy", "BodyLower", "Head", "Wings", "ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemLegs", "ItemBoots", "Suit", "Panties", "Bra", "Socks", "Shoes", "LeftAnklet", "RightAnklet"],
 		MovePosition: [{ Group: "TailStraps", X: 0, Y: -300 }, { Group: "ItemButt", X: 0, Y: -300 }]
 	},
 	{
