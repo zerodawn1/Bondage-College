@@ -3649,7 +3649,6 @@ var PoseFemale3DCG = [
 	},
 	{
 		Name: "TapedHands",
-		Category: "BodyUpper",
 	},
 	{
 		Name: "LegsOpen",
