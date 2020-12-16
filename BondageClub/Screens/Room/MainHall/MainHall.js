@@ -351,7 +351,9 @@ function MainHallClick() {
 	} else {
 
 		// Special permission to enter the maid quarters if doing the maid serving drinks quest while being restrained
-		if ((MouseX >= 1765) && (MouseX < 1855) && (MouseY >= 265) && (MouseY < 355)) MainHallWalk("MaidQuarters");
+		if (Player.CanWalk() && (InventoryIsWorn(Player, "WoodenMaidTray", "ItemMisc") || InventoryIsWorn(Player, "WoodenMaidTrayFull", "ItemMisc")))
+			if ((MouseX >= 1765) && (MouseX < 1855) && (MouseY >= 265) && (MouseY < 355))
+				MainHallWalk("MaidQuarters");
 
 	}
 
