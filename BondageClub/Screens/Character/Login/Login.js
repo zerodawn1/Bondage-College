@@ -380,7 +380,7 @@ function LoginResponse(C) {
 			if (typeof C.FriendNames === "string") { 
 				try {
 					Player.FriendNames = new Map(JSON.parse(LZString.decompressFromUTF16(C.FriendNames)));
-				} catch {
+				} catch(err) {
 					console.warn("An error occured while parsing friendnames, entries have been reset.");
 				}
 			}
