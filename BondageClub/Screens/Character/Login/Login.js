@@ -48,7 +48,7 @@ function LoginDrawCredits() {
 	else DrawText("Calculating Average FPS...", 1000, 975, "white");*/
 
 	// For each credits in the list
-	LoginCreditsPosition++;
+	LoginCreditsPosition += (TimerRunInterval * 60) / 1000;
 	MainCanvas.font = "30px Arial";
 	for (let C = 0; C < LoginCredits.length; C++) {
 
