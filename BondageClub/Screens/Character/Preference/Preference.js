@@ -200,7 +200,21 @@ function PreferenceLoadFetishFactor() {
  * @returns {void} - Nothing
  */
 function PreferenceInit(C) {
-
+	// Save settings for comparison
+	var PrefBefore = {
+		ItemPermission: C.ItemPermission,
+		LabelColor: C.LabelColor,
+		ChatSettings: C.ChatSettings,
+		VisualSettings: C.VisualSettings,
+		AudioSettings: C.AudioSettings,
+		GameplaySettings: C.GameplaySettings,
+		ImmersionSettings: C.ImmersionSettings,
+		RestrictionSettings: C.RestrictionSettings,
+		ArousalSettings: C.ArousalSettings,
+		OnlineSettings: C.OnlineSettings,
+		OnlineSharedSettings: C.OnlineSharedSettings
+	};
+	
 	// If the settings aren't set before, construct them to replicate the default behavior
 	if (!C.ChatSettings) C.ChatSettings = { DisplayTimestamps: true, ColorNames: true, ColorActions: true, ColorEmotes: true, ShowActivities: true, AutoBanGhostList: true, AutoBanBlackList: false, SearchShowsFullRooms: true, SearchFriendsFirst: false, ShowAutomaticMessages: false };
 	if (C.ChatSettings.DisplayTimestamps == null) C.ChatSettings.DisplayTimestamps = true;
@@ -333,6 +347,31 @@ function PreferenceInit(C) {
 	// Enables the AFK timer for the current player only
 	AfkTimerSetEnabled((C.ID == 0) && C.OnlineSettings && (C.OnlineSettings.EnableAfkTimer != false));
 
+	// Sync settings if anything changed
+	if (C.ID == 0) {
+		var PrefAfter = {
+			ItemPermission: Player.ItemPermission,
+			LabelColor: Player.LabelColor,
+			ChatSettings: Player.ChatSettings,
+			VisualSettings: Player.VisualSettings,
+			AudioSettings: Player.AudioSettings,
+			GameplaySettings: Player.GameplaySettings,
+			ImmersionSettings: Player.ImmersionSettings,
+			RestrictionSettings: Player.RestrictionSettings,
+			ArousalSettings: Player.ArousalSettings,
+			OnlineSettings: Player.OnlineSettings,
+			OnlineSharedSettings: Player.OnlineSharedSettings
+		};
+		var toUpdate = {}
+
+		for (let prop in PrefAfter)
+			if (JSON.stringify(PrefBefore[prop]) !== JSON.stringify(PrefAfter[prop]))
+				toUpdate[prop] = PrefAfter[prop];
+
+		if (Object.keys(toUpdate).length > 0) {
+			ServerSend("AccountUpdate", toUpdate);
+		}
+	}
 }
 
 /**
