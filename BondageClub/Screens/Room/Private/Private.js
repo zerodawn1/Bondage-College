@@ -593,8 +593,9 @@ function PrivateClick() {
 	if (MouseIn(1885, 625, 90, 90) && LogQuery("RentRoom", "PrivateRoom") && LogQuery("Expansion", "PrivateRoom")) PrivateCharacterOffset = (PrivateCharacterOffset + 4 == PrivateCharacterMax) ? 0 : PrivateCharacterOffset + 4;
 	if (MouseIn(1885, 745, 90, 90) && LogQuery("RentRoom", "PrivateRoom")) {
 		if (Player.VisualSettings == null) Player.VisualSettings = {};
-		const backgrounds = BackgroundsGenerateList(BackgroundsTagList.concat(["Asylum"]));
-		const index = backgrounds.indexOf(MainHallBackground);
+		let backgrounds = BackgroundsGenerateList(BackgroundsPrivateRoomTagList);
+		let index = backgrounds.indexOf(MainHallBackground);
+		if (index < 0) index = 0;
 		BackgroundSelectionMake(backgrounds, index, Name => {
 			Player.VisualSettings.MainHallBackground = Name;
 			ServerSend("AccountUpdate", { VisualSettings: Player.VisualSettings });
@@ -602,8 +603,9 @@ function PrivateClick() {
 	}
 	if (MouseIn(1885, 865, 90, 90) && LogQuery("RentRoom", "PrivateRoom")) {
 		if (Player.VisualSettings == null) Player.VisualSettings = {};
-		const backgrounds = BackgroundsGenerateList(BackgroundsTagList.concat(["Asylum"]));
-		const index = backgrounds.indexOf(PrivateBackground);
+		let backgrounds = BackgroundsGenerateList(BackgroundsPrivateRoomTagList);
+		let index = backgrounds.indexOf(PrivateBackground);
+		if (index < 0) index = 0;
 		BackgroundSelectionMake(backgrounds, index, Name => {
 			Player.VisualSettings.PrivateRoomBackground = Name;
 			PrivateBackground = Name;
