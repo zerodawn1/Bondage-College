@@ -702,13 +702,17 @@ function DialogInventoryBuild(C, Offset) {
 						DialogInventoryAdd(C, Player.Inventory[A], false, DialogSortOrder);
 					}
 
-			// Fourth, we add all free items (especially useful for clothes)
-			for (let A = 0; A < Asset.length; A++)
-				if ((Asset[A].Group.Name == C.FocusGroup.Name) && (Asset[A].Value == 0) && Asset[A].DynamicAllowInventoryAdd(C)) {
-					var DialogSortOrder = Asset[A].DialogSortOverride != null ? Asset[A].DialogSortOverride : (InventoryAllow(C, Asset[A].Prerequisite, false) && InventoryChatRoomAllow(Asset[A].Category)) ? DialogSortOrderUsable : DialogSortOrderUnusable;
-					DialogInventoryAdd(C, { Asset: Asset[A] }, false, DialogSortOrder);
+			// Fourth, we add all free items (especially useful for clothes), or location-specific always available items
+			for (let A = 0; A < Asset.length; A++) {
+				if (Asset[A].Group.Name === C.FocusGroup.Name && Asset[A].DynamicAllowInventoryAdd(C)) {
+					if (Asset[A].Value === 0 || (Asset[A].AvailableLocations.includes("Asylum") && (CurrentScreen.startsWith("Asylum") || ChatRoomSpace === "Asylum"))) {
+						var DialogSortOrder = Asset[A].DialogSortOverride != null ? Asset[A].DialogSortOverride :
+							(InventoryAllow(C, Asset[A].Prerequisite, false) && InventoryChatRoomAllow(Asset[A].Category)) ?
+								DialogSortOrderUsable : DialogSortOrderUnusable;
+						DialogInventoryAdd(C, { Asset: Asset[A] }, false, DialogSortOrder);
+					}
 				}
-
+			}
 		}
 
 		// Rebuilds the dialog menu and it's buttons
