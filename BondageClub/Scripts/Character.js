@@ -560,7 +560,7 @@ function CharacterLoadPose(C) {
 		
 		for (let P = 0; P < ActivePoses.length; P++) {
 			var HasPose = C.Pose.includes(ActivePoses[P].Name);
-			var IsAllowed = C.AllowedActivePose.includes(ActivePoses[P].Name);
+			var IsAllowed = C.AllowedActivePose.includes(ActivePoses[P].Name) && CharacterItemsHavePoseAvailable(Player, ActivePoses[P].Category, ActivePoses[P].Name);
 			var MissingGroup = !Poses.find(Pose => Pose.Category == "BodyFull") && !Poses.find(Pose => Pose.Category == ActivePoses[P].Category);
 			var IsFullBody = C.Pose.length > 0 && ActivePoses[P].Category == "BodyFull";
 			if (!HasPose && (IsAllowed || (MissingGroup && !IsFullBody)))
