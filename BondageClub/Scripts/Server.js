@@ -429,7 +429,7 @@ function ServerAppearanceLoadFromBundle(C, AssetFamily, Bundle, SourceMemberNumb
 	// We do not check if the load is from the Player
 	var FromSelf = (SourceMemberNumber != null) && (SourceMemberNumber == C.MemberNumber);
 	var FromOwner = (SourceMemberNumber != null) && (C.Ownership != null) && ((SourceMemberNumber == C.Ownership.MemberNumber) || FromSelf);
-	var LoverNumbers = C.GetLoversNumbers();
+	var LoverNumbers = CharacterGetLoversNumbers(C);
 	var FromLoversOrOwner = (SourceMemberNumber != null) && (LoverNumbers.length != 0) && (LoverNumbers.includes(SourceMemberNumber) || FromOwner);
 
 	// Clears the appearance to begin
