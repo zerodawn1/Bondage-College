@@ -81,8 +81,8 @@ function LoginDrawCredits() {
 	}
 
 	// Restore the canvas font
-	MainCanvas.font = "36px Arial";
-	
+	MainCanvas.font = CommonGetFont(36);
+
 }
 
 /**
@@ -119,7 +119,7 @@ function LoginRun() {
 	if (LoginCredits != null) LoginDrawCredits();
 
 	if (!LoginMessage) LoginUpdateMessage();
-	
+
 	// Draw the login controls
 	DrawText(TextGet("Welcome"), 1000, 50, "White", "Black");
 	DrawText(LoginMessage, 1000, 100, "White", "Black");
@@ -278,15 +278,15 @@ function LoginValideBuyGroups() {
  * Checks if the player arrays contains any item that does not exists and saves them.
  * @returns {void} Nothing
  */
-function LoginValidateArrays() { 
+function LoginValidateArrays() {
 	var CleanBlockItems = AssetCleanArray(Player.BlockItems);
-	if (CleanBlockItems.length != Player.BlockItems.length) { 
+	if (CleanBlockItems.length != Player.BlockItems.length) {
 		Player.BlockItems = CleanBlockItems;
 		ServerSend("AccountUpdate", { BlockItems: Player.BlockItems });
 	}
-	
+
 	var CleanLimitedItems = AssetCleanArray(Player.LimitedItems);
-	if (CleanLimitedItems.length != Player.LimitedItems.length) { 
+	if (CleanLimitedItems.length != Player.LimitedItems.length) {
 		Player.LimitedItems = CleanLimitedItems;
 		ServerSend("AccountUpdate", { LimitedItems: Player.LimitedItems });
 	}
@@ -368,7 +368,7 @@ function LoginResponse(C) {
 			Player.HiddenItems = ((C.HiddenItems == null) || !Array.isArray(C.HiddenItems)) ? [] : C.HiddenItems;
 			Player.Difficulty = C.Difficulty;
 			Player.WardrobeCharacterNames = C.WardrobeCharacterNames;
-			WardrobeCharacter = [];			
+			WardrobeCharacter = [];
 			LoginDifficulty();
 
 			// Loads the ownership data
@@ -411,6 +411,7 @@ function LoginResponse(C) {
 			}
 			Player.SubmissivesList = typeof C.SubmissivesList === "string" ? new Set(JSON.parse(LZString.decompressFromUTF16(C.SubmissivesList))) : new Set();
 			Player.GhostList = ((C.GhostList == null) || !Array.isArray(C.GhostList)) ? [] : C.GhostList;
+         Player.GraphicsSettings = C.GraphicsSettings;
 
 			// Loads the player character model and data
 			Player.Appearance = ServerAppearanceLoadFromBundle(Player, C.AssetFamily, C.Appearance);
@@ -501,7 +502,7 @@ function LoginResponse(C) {
  * @returns {void} Nothing
  */
 function LoginClick() {
-	
+
 	// Opens the cheat panel
 	if (CheatAllow && ((MouseX >= 825) && (MouseX <= 1175) && (MouseY >= 870) && (MouseY <= 930))) {
 		ElementRemove("InputName");
@@ -526,7 +527,7 @@ function LoginClick() {
 		InventoryRemove(Player, "ItemArms");
 		CharacterAppearanceLoadCharacter(Player);
 	}
-	
+
 	// Try to login
 	if ((MouseX >= 775) && (MouseX <= 975) && (MouseY >= 500) && (MouseY <= 560)) LoginDoLogin();
 
@@ -538,7 +539,7 @@ function LoginClick() {
 		AssetLoadDescription("Female3DCG");
 		LoginUpdateMessage();
 	}
-	
+
 }
 
 /**
