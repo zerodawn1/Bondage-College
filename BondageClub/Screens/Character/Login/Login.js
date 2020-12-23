@@ -402,6 +402,10 @@ function LoginResponse(C) {
 
 			// Calls the preference init to make sure the preferences are loaded correctly
 			PreferenceInit(Player);
+			if (Player.VisualSettings) {
+				if (Player.VisualSettings.PrivateRoomBackground) PrivateBackground = Player.VisualSettings.PrivateRoomBackground;
+				if (Player.VisualSettings.MainHallBackground) MainHallBackground = Player.VisualSettings.MainHallBackground;
+			}
 			ActivitySetArousal(Player, 0);
 			ActivityTimerProgress(Player, 0);
 

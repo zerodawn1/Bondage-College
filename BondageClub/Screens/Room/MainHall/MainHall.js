@@ -11,7 +11,10 @@ var MainHallHasLoverLock = false;
 var MainHallHasSlaveCollar = false;
 var MainHallTip = 0;
 var MainHallMaidWasCalledManually = false;
-var MainHallRemoveLockTypes = ["CombinationPadlock", "PasswordPadlock"]
+var MainHallRemoveLockTypes = [
+	"CombinationPadlock",
+	"PasswordPadlock",
+]
 
 /**
  * Checks to see if the player needs help in any way
@@ -107,7 +110,8 @@ function MainHallLoad() {
 		ServerSend("ChatRoomCharacterPoseUpdate", { Pose: Player.ActivePose });
 		ChatSearchPreviousActivePose = null;
 	}
-	MainHallBackground = "MainHall";
+	MainHallBackground = Player.VisualSettings && Player.VisualSettings.MainHallBackground && !MainHallHasSeenHomeScreen ? Player.VisualSettings.MainHallBackground : "MainHall";
+	MainHallHasSeenHomeScreen = true;
 	MainHallStartEventTimer = null;
 	MainHallNextEventTimer = null;
 	MainHallMaid = CharacterLoadNPC("NPC_MainHall_Maid");
