@@ -28,7 +28,7 @@ var TitleList = [
 	{ Name: "PonyCold", Requirement: function () { return (SkillGetLevel(Player, "Dressage") == 3) }, Earned: true },
 	{ Name: "PonyFarm", Requirement: function () { return (SkillGetLevel(Player, "Dressage") == 2) }, Earned: true },
 	{ Name: "PonyFoal", Requirement: function () { return ((SkillGetLevel(Player, "Dressage") == 1) || ((SkillGetLevel(Player, "Dressage") >= 1) && (ReputationGet("ABDL") >= 1))) }, Earned: true },
-	{ Name: "Duchess", Requirement: function () { return LogQuery("VivaLaRevolution", "Sarah") }, Earned: true},
+	{ Name: "Duchess", Requirement: function () { return LogQuery("KidnapSophie", "Sarah") }, Earned: true},
 	{ Name: "LittleOne", Requirement: function () { return (ReputationGet("ABDL") >= 1) }, Earned: true },
 	{ Name: "Baby", Requirement: function () { return (ReputationGet("ABDL") >= 1) }, Earned: true },
 	{ Name: "DL", Requirement: function () { return (ReputationGet("ABDL") >= 1) }, Earned: true },
