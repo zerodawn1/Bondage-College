@@ -47,7 +47,7 @@ function CollegeChessClick() {
 function CollegeChessGameStart(Difficulty, Bet) {
 	CollegeChessDifficulty = parseInt(Difficulty);
 	CollegeChessBet = Bet;
-	if (Bet == "Money") CharacterChangeMoney(Player, (CollegeChessDifficulty + 1) * -10);
+	if (Bet == "Money") CharacterChangeMoney(Player, CollegeChessDifficulty * -10);
 	ChessCharacterLeft = Player;
 	ChessCharacterRight = CollegeChessOpponent;
 	MiniGameStart("Chess", CollegeChessDifficulty, "CollegeChessGameEnd");
@@ -59,8 +59,8 @@ function CollegeChessGameStart(Difficulty, Bet) {
  */
 function CollegeChessGameEnd() {
 	CommonSetScreen("Room", "CollegeChess");
-	if ((CollegeChessBet == "Money") && (ChessEndStatus == "Draw")) CharacterChangeMoney(Player, (CollegeChessDifficulty + 1) * 10);
-	if ((CollegeChessBet == "Money") && (ChessEndStatus == "Victory")) CharacterChangeMoney(Player, (CollegeChessDifficulty + 1) * 20);
+	if ((CollegeChessBet == "Money") && (ChessEndStatus == "Draw")) CharacterChangeMoney(Player, CollegeChessDifficulty * 10);
+	if ((CollegeChessBet == "Money") && (ChessEndStatus == "Victory")) CharacterChangeMoney(Player, CollegeChessDifficulty * 20);
 	CollegeChessOpponent.Stage = "Result" + ChessEndStatus + CollegeChessBet;
 	CollegeChessOpponent.CurrentDialog = DialogFind(CollegeChessOpponent, "Intro" + ChessEndStatus + CollegeChessBet);
 	CharacterSetCurrent(CollegeChessOpponent);
