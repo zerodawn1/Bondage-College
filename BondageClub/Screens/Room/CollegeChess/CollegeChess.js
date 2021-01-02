@@ -6,6 +6,11 @@ var CollegeChessBet = "";
 var CollegeChessPlayerAppearance = null;
 var CollegeChessOpponentAppearance = null;
 
+// Quick functions for player interactions with the chess opponent
+function CollegeChessCanStripPlayer() { return !CharacterIsNaked(Player) }
+function CollegeChessCanStripOpponent() { return !CharacterIsNaked(CollegeChessOpponent) }
+function CollegeChessCanMakeLove() { return (CharacterIsNaked(Player) && CharacterIsNaked(CollegeChessOpponent) && !Player.IsChaste()) }
+
 /**
  * Loads the college chest screen by generating the opponent.
  * @returns {void} - Nothing
@@ -151,4 +156,5 @@ function CollegeChessRestoreAppearance() {
 	CharacterRefresh(CollegeChessOpponent);
 	Player.Appearance = CollegeChessPlayerAppearance.slice(0);
 	CharacterRefresh(Player, true);
+	CollegeChessOpponent.AllowItem = false;
 }
