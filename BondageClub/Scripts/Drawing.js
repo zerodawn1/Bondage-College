@@ -258,14 +258,6 @@ function DrawCharacter(C, X, Y, Zoom, IsHeightResizeAllowed) {
 		var seconds = new Date().getTime();
 		var Canvas = (Math.round(seconds / 400) % C.BlinkFactor == 0) ? C.CanvasBlink : C.Canvas;
 
-		// Applies an offset to X and Y based on the HeightRatio.  If the player prefers full height, we always use 1.0
-		var HeightRatio = 1.0;
-		if ((IsHeightResizeAllowed == undefined) || IsHeightResizeAllowed) HeightRatio = CharacterAppearanceGetCurrentValue(C, "Height", "Zoom");
-		if ((Player != null) && (Player.VisualSettings != null) && (Player.VisualSettings.ForceFullHeight != null) && Player.VisualSettings.ForceFullHeight) HeightRatio = 1.0;
-		if (Zoom == null) Zoom = 1;
-		X += Zoom * Canvas.width * (1 - HeightRatio) / 2;
-		if ((C.Pose.indexOf("Suspension") < 0) && (C.Pose.indexOf("SuspensionHogtied") < 0)) Y += Zoom * Canvas.height * (1 - HeightRatio);
-
 		// If we must dark the Canvas characters
 		if ((C.ID != 0) && Player.IsBlind() && (CurrentScreen != "InformationSheet")) {
 			var CanvasH = document.createElement("canvas");
@@ -284,28 +276,34 @@ function DrawCharacter(C, X, Y, Zoom, IsHeightResizeAllowed) {
 		}
 
 		// If we must flip the canvas vertically
-		if (C.Pose.indexOf("Suspension") >= 0) {
+		let IsInverted = C.Pose.indexOf("Suspension") >= 0;
+		if (IsInverted) {
 			var CanvasH = document.createElement("canvas");
 			CanvasH.width = Canvas.width;
 			CanvasH.height = Canvas.height;
 			CanvasH.getContext("2d").rotate(Math.PI);
 			CanvasH.getContext("2d").translate(-Canvas.width, -Canvas.height);
 			// Render to the flipped canvas, and crop off the height modifier to prevent vertical overflow
-			CanvasH.getContext("2d").drawImage(Canvas, 0, 0, Canvas.width, Canvas.height - C.HeightModifier, 0, 0, Canvas.width, Canvas.height - C.HeightModifier);
+			CanvasH.getContext("2d").drawImage(Canvas, 0, 0, Canvas.width, Canvas.height, 0, 0, Canvas.width, Canvas.height);
 			Canvas = CanvasH;
 		}
 
-		// Draw the character and applies the zoom ratio, the canvas to draw can be shrunk based on the height modifier
-		Zoom *= HeightRatio;
-		var H = Canvas.height + (((C.HeightModifier != null) && (C.HeightModifier < 0)) ? C.HeightModifier : 0);
-		MainCanvas.drawImage(Canvas, 0, 0, Canvas.width, H, X, Y - (C.HeightModifier * Zoom), Canvas.width * Zoom, H * Zoom);
-
-		// Applies a Y offset if the character is suspended
-		if (C.Pose.indexOf("Suspension") >= 0) Y += (Zoom * Canvas.height * (1 - HeightRatio) / HeightRatio);
+		// Get the height ratio and X & Y offsets based on it
+		let HeightRatio = (IsHeightResizeAllowed == null || IsHeightResizeAllowed == true) ? C.HeightRatio : 1;
+		let XOffset = CharacterAppearanceXOffset(C, HeightRatio);
+		let YOffset = CharacterAppearanceYOffset(C, HeightRatio);
+		
+		// Calculate the vertical parameters, factoring in the character's height ratio, modifiers and the excess canvas overflow
+		let YStart = CanvasUpperOverflow - YOffset / HeightRatio;
+		let SourceHeight = 1000 / HeightRatio;
+		let SourceY = IsInverted ? Canvas.height - (YStart + SourceHeight) : YStart;
+		
+		// Draw the character into a 500x1000 space
+		MainCanvas.drawImage(Canvas, 0, SourceY, Canvas.width / HeightRatio, SourceHeight, X + XOffset * Zoom, Y, 500 * Zoom, 1000 * Zoom);
 
 		// Draw the arousal meter & game images on certain conditions
-		DrawArousalMeter(C, X - Zoom * Canvas.width * (1 - HeightRatio) / 2, Y - Zoom * Canvas.height * (1 - HeightRatio), Zoom / HeightRatio);
-		OnlineGameDrawCharacter(C, X - Zoom * Canvas.width * (1 - HeightRatio) / 2, Y - Zoom * Canvas.height * (1 - HeightRatio), Zoom / HeightRatio);
+		DrawArousalMeter(C, X, Y, Zoom);
+		OnlineGameDrawCharacter(C, X, Y, Zoom);
 		if (C.HasHiddenItems) DrawImageZoomCanvas("Screens/Character/Player/HiddenItem.png", MainCanvas, 0, 0, 86, 86, X + 54 * Zoom, Y + 880 * Zoom, 70 * Zoom, 70 * Zoom);
 
 		// Draws the character focus zones if we need too
@@ -317,18 +315,18 @@ function DrawCharacter(C, X, Y, Zoom, IsHeightResizeAllowed) {
 					var Color = "#80808040";
 					if (InventoryGroupIsBlocked(C, AssetGroup[A].Name)) Color = "#88000580";
 					else if (InventoryGet(C, AssetGroup[A].Name) != null) Color = "#D5A30080";
-					DrawAssetGroupZone(C, AssetGroup[A].Zone, HeightRatio, X, Y, Color, 5);
+					DrawAssetGroupZone(C, AssetGroup[A].Zone, HeightRatio * Zoom, X + XOffset * Zoom, Y + YOffset * Zoom, Color, 5);
 				}
 
 			// Draw the focused zone in cyan
-			DrawAssetGroupZone(C, C.FocusGroup.Zone, HeightRatio, X, Y, "cyan");
+			DrawAssetGroupZone(C, C.FocusGroup.Zone, HeightRatio * Zoom, X + XOffset * Zoom, Y + YOffset * Zoom, "cyan");
 		}
 
 		// Draw the character name below herself
 		if ((C.Name != "") && ((CurrentModule == "Room") || (CurrentModule == "Online") || ((CurrentScreen == "Wardrobe") && (C.ID != 0))) && (CurrentScreen != "Private"))
 			if (!Player.IsBlind() || (Player.GameplaySettings && Player.GameplaySettings.SensDepChatLog == "SensDepLight")) {
 				MainCanvas.font = CommonGetFont(30);
-				DrawText(C.Name, X + 255 * Zoom, Y + 980 * ((C.Pose.indexOf("SuspensionHogtied") < 0) ? Zoom : Zoom / HeightRatio), (CommonIsColor(C.LabelColor)) ? C.LabelColor : "White", "Black");
+				DrawText(C.Name, X + 255 * Zoom, Y + 980 * Zoom, (CommonIsColor(C.LabelColor)) ? C.LabelColor : "White", "Black");
 				MainCanvas.font = CommonGetFont(36);
 			}
 
@@ -339,37 +337,24 @@ function DrawCharacter(C, X, Y, Zoom, IsHeightResizeAllowed) {
  * Draws an asset group zone outline over the character
  * @param {Character} C - Character for which to draw the zone
  * @param {number[][]} Zone - Zone to be drawn
- * @param {number} HeightRatio - Height ratio of the character
+ * @param {number} Zoom - Height ratio of the character
  * @param {number} X - Position of the character on the X axis
  * @param {number} Y - Position of the character on the Y axis
  * @param {string} Color - Color of the zone outline
  * @param {number} [Thickness=3] - Thickness of the outline
+ * @param {string} FillColor - If non-empty, the color to fill the rectangle with
  * @returns {void} - Nothing
  */
-function DrawAssetGroupZone(C, Zone, HeightRatio, X, Y, Color, Thickness = 3) {
-	for (let Z = 0; Z < Zone.length; Z++)
-		if (C.Pose.indexOf("Suspension") >= 0)
-			DrawEmptyRect((HeightRatio * Zone[Z][0]) + X, (1000 - (HeightRatio * (Zone[Z][1] + Y + Zone[Z][3]))) - C.HeightModifier, (HeightRatio * Zone[Z][2]), (HeightRatio * Zone[Z][3]), Color, Thickness);
-		else
-			DrawEmptyRect((HeightRatio * Zone[Z][0]) + X, HeightRatio * (Zone[Z][1] - C.HeightModifier) + Y, (HeightRatio * Zone[Z][2]), (HeightRatio * Zone[Z][3]), Color, Thickness);
-}
+function DrawAssetGroupZone(C, Zone, Zoom, X, Y, Color, Thickness = 3, FillColor) {
+	for (let Z = 0; Z < Zone.length; Z++) {
+		let Left = X + Zone[Z][0] * Zoom;
+		let Top = C.Pose.indexOf("Suspension") >= 0 ? 1000 - (Y + (Zone[Z][1] + Zone[Z][3]) * Zoom) : Y + Zone[Z][1] * Zoom;
+		let Width = Zone[Z][2] * Zoom;
+		let Height = Zone[Z][3] * Zoom;
 
-/**
- * Draws an asset group zone background over the character
- * @param {Character} C - Character for which to draw the zone
- * @param {number[][]} Zone - Zone to be drawn
- * @param {number} HeightRatio - Height ratio of the character
- * @param {number} X - Position of the character on the X axis
- * @param {number} Y - Position of the character on the Y axis
- * @param {string} Color - Color of the zone background
- * @returns {void} - Nothing
- */
-function DrawAssetGroupZoneBackground(C, Zone, HeightRatio, X, Y, Color) {
-	for (let Z = 0; Z < Zone.length; Z++)
-		if (C.Pose.indexOf("Suspension") >= 0)
-			DrawRect((HeightRatio * Zone[Z][0]) + X, (1000 - (HeightRatio * (Zone[Z][1] + Y + Zone[Z][3]))) - C.HeightModifier, (HeightRatio * Zone[Z][2]), (HeightRatio * Zone[Z][3]), Color);
-		else
-			DrawRect((HeightRatio * Zone[Z][0]) + X, HeightRatio * (Zone[Z][1] - C.HeightModifier) + Y, (HeightRatio * Zone[Z][2]), (HeightRatio * Zone[Z][3]), Color);
+		if (FillColor != null) DrawRect(Left, Top, Width, Height, FillColor);
+		DrawEmptyRect(Left, Top, Width, Height, Color, Thickness);
+	}
 }
 
 /**

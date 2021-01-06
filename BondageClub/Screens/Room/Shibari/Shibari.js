@@ -96,7 +96,11 @@ function ShibariRandomBondage(C, Level) {
 			InventoryGet(C, "ItemArms").Property = { Type: null };
 			if (Level == 1) InventoryGet(C, "ItemFeet").Property = { Type: "Suspension", SetPose: ["Suspension", "LegsClosed"], Difficulty: 0, Effect: [] };
 			if (Level == 2) InventoryGet(C, "ItemArms").Property = { Type: "Hogtied", SetPose: ["Hogtied"], Difficulty: 0, Block: ["ItemHands", "ItemLegs", "ItemFeet", "ItemBoots"], Effect: ["Block", "Freeze", "Prone"] };
-			if (Level == 3) InventoryGet(C, "ItemArms").Property = { Type: "SuspensionHogtied", SetPose: ["Hogtied", "SuspensionHogtied"], Block: ["ItemHands", "ItemLegs", "ItemFeet", "ItemBoots"], Difficulty: 0, Effect: ["Block", "Freeze", "Prone"] };
+			if (Level == 3) {
+				let SuspensionHogtiedProperty = InventoryItemArmsHempRopeOptions.find(O => O.Name == "SuspensionHogtied").Property;
+				SuspensionHogtiedProperty.Difficulty = 0;
+				InventoryGet(C, "ItemArms").Property = SuspensionHogtiedProperty;
+			}
 		}
 		CharacterRefresh(C);
 	}

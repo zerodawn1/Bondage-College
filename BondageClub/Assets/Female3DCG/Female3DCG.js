@@ -3695,19 +3695,19 @@ var PoseFemale3DCG = [
 		Name: "Kneel",
 		Category: "BodyLower",
 		AllowMenu: true,
-		OverrideHeight: -250,
+		OverrideHeight: { Height: -250, Priority: 20 },
 		Hide: ["ItemFeet", "LeftAnklet", "RightAnklet"]
 	},
 	{
 		Name: "Horse",
 		Category: "BodyLower",
-		OverrideHeight: -75,
+		OverrideHeight: { Height: -75, Priority: 20 },
 		Hide: ["ItemFeet", "LeftAnklet", "RightAnklet"]
 	},
 	{
 		Name: "KneelingSpread",
 		Category: "BodyLower",
-		OverrideHeight: -250,
+		OverrideHeight: { Height: -250, Priority: 20 },
 		Hide: ["ItemFeet", "LeftAnklet", "RightAnklet"]
 	},
 	{
@@ -3720,32 +3720,32 @@ var PoseFemale3DCG = [
 		Name: "OverTheHead",
 		Category: "BodyUpper",
 		AllowMenu: true,
-		OverrideHeight: -25,
+		OverrideHeight: { Height: -25, Priority: 10 },
 		Hide: ["Hands"],
 	},
 	{
 		Name: "Hogtied",
 		Category: "BodyFull",
-		OverrideHeight: -575,
+		OverrideHeight: { Height: -575, Priority: 50 },
 		Hide: ["BodyLower", "Head", "Hands", "ClothLower", "Wings", "TailStraps", "Gloves", "Panties", "Pussy", "ItemHands", "ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemButt", "ItemLegs", "ItemFeet", "LeftAnklet", "RightAnklet"],
 		MovePosition: [{ Group: "Socks", X: 0, Y: -400 }, { Group: "Shoes", X: 0, Y: -500 }, { Group: "ItemBoots", X: 0, Y: -500 }, { Group: "SuitLower", X: 30, Y: -380 }]
 	},
 	{
 		Name: "Suspension",
 		Category: "BodyFull",
-		OverrideHeight: 150,
+		OverrideHeight: { Height: -150, Priority: 40 },
 		Hide: []
 	},
 	{
 		Name: "SuspensionHogtied",
 		Category: "BodyFull",
-		OverrideHeight: 0,
+		OverrideHeight: { Height: 0, Priority: 50 },
 		Hide: ["BodyLower", "Hands", "ClothLower", "Wings", "TailStraps", "Gloves", "Panties", "Pussy", "ItemHands", "ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemButt", "ItemLegs", "ItemFeet", "SuitLower", "ItemDevices", "LeftAnklet", "RightAnklet"]
 	},
 	{
 		Name: "AllFours",
 		Category: "BodyFull",
-		OverrideHeight: -560,
+		OverrideHeight: { Height: -560, Priority: 50 },
 		Hide: ["ItemFeet", "ClothLower", "SuitLower", "Nipples", "Pussy", "BodyLower", "Head", "Wings", "ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemLegs", "ItemBoots", "Suit", "Panties", "Bra", "Socks", "Shoes", "LeftAnklet", "RightAnklet"],
 		MovePosition: [{ Group: "TailStraps", X: 0, Y: -300 }, { Group: "ItemButt", X: 0, Y: -300 }]
 	},

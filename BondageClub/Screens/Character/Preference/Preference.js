@@ -905,10 +905,8 @@ function PreferenceSubscreenArousalRun() {
 
 		// Draws all the available character zones
 		for (let A = 0; A < AssetGroup.length; A++)
-			if ((AssetGroup[A].Zone != null) && (AssetGroup[A].Activity != null)) {
-				DrawAssetGroupZoneBackground(Player, AssetGroup[A].Zone, 0.9, 50, 50, PreferenceGetFactorColor(PreferenceGetZoneFactor(Player, AssetGroup[A].Name)));
-				DrawAssetGroupZone(Player, AssetGroup[A].Zone, 0.9, 50, 50, "#808080FF", 3);
-			}
+			if ((AssetGroup[A].Zone != null) && (AssetGroup[A].Activity != null))
+				DrawAssetGroupZone(Player, AssetGroup[A].Zone, 0.9, 50, 50, "#808080FF", 3, PreferenceGetFactorColor(PreferenceGetZoneFactor(Player, AssetGroup[A].Name)));
 
 		// The zones can be selected and drawn on the character
 		if (Player.FocusGroup != null) {
@@ -1241,8 +1239,7 @@ function PreferenceSubscreenArousalClick() {
 		for (let A = 0; A < AssetGroup.length; A++)
 			if ((AssetGroup[A].Zone != null) && (AssetGroup[A].Activity != null))
 				for (let Z = 0; Z < AssetGroup[A].Zone.length; Z++)
-					if (((Player.Pose.indexOf("Suspension") < 0) && (MouseX >= ((AssetGroup[A].Zone[Z][0] * 0.9) + 50)) && (MouseY >= (((AssetGroup[A].Zone[Z][1] - Player.HeightModifier) * 0.9) + 50)) && (MouseX <= (((AssetGroup[A].Zone[Z][0] + AssetGroup[A].Zone[Z][2]) * 0.9) + 50)) && (MouseY <= (((AssetGroup[A].Zone[Z][1] + AssetGroup[A].Zone[Z][3] - Player.HeightModifier) * 0.9) + 50)))
-						|| ((Player.Pose.indexOf("Suspension") >= 0) && (MouseX >= ((AssetGroup[A].Zone[Z][0] * 0.9) + 50)) && (MouseY >= 0.9 * ((1000 - (AssetGroup[A].Zone[Z][1] + AssetGroup[A].Zone[Z][3])) - Player.HeightModifier)) && (MouseX <= (((AssetGroup[A].Zone[Z][0] + AssetGroup[A].Zone[Z][2]) * 0.9) + 50)) && (MouseY <= 0.9 * (1000 - ((AssetGroup[A].Zone[Z][1])) - Player.HeightModifier)))) {
+					if (DialogClickedInZone(Player, AssetGroup[A].Zone[Z], 0.9, 50, 50)) {
 						Player.FocusGroup = AssetGroup[A];
 						PreferenceArousalZoneFactor = PreferenceGetZoneFactor(Player, AssetGroup[A].Name);
 					}
