@@ -183,3 +183,8 @@ TextArea {
     font-family: 'Calligraffitti';
     src: url('../Fonts/Calligraffitti/Calligraffitti-Regular.ttf');
 }
+
+@font-face {
+  font-family: 'Saira Stencil One';
+  src: url('../Fonts/Saira Stencil One/SairaStencilOne-Regular.ttf');
+}
