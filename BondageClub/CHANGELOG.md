@@ -10,9 +10,9 @@ This changelog follows the format outlined in [keepachangelog.com](https://keepa
 
 **Note to contributors:** To avoid merge conflicts, please don't update this file yourself in your PRs - one of the developers will update the changelog with your change before your PR is merged.
 
-Changelog last updated: 2021-01-09
+Changelog last updated: 2021-01-10
 
-Last recorded PR: [#1858](https://github.com/Ben987/Bondage-College/pull/1858)
+Last recorded PR: [#1868](https://github.com/Ben987/Bondage-College/pull/1868)
 
 ## [R64]
 
@@ -44,7 +44,9 @@ Last recorded PR: [#1858](https://github.com/Ben987/Bondage-College/pull/1858)
     * Lover rule: prevent/allow a lover from using lover locks on themselves - allowed by default
     * Lover rule: prevent/allow a lover's owner from using lover locks on her - allowed by default
 * Ace - Added the ability inside your private room to choose the background of your private room or the main hall ([#1786](https://github.com/Ben987/Bondage-College/pull/1786))
-* Cecilia/Ellie - Added a new set of medical bed restraints, which can be obtained (as either a nurse or a patient) from the Asylum ([#1778](https://github.com/Ben987/Bondage-College/pull/1778))
+* Cecilia/Ellie - Added two new items ([#1778](https://github.com/Ben987/Bondage-College/pull/1778), [#1860](https://github.com/Ben987/Bondage-College/pull/1860))
+    * A set of medical bed restraints, which can be obtained (as either a nurse or a patient) from the Asylum
+    * Vac-Cube
 * Saya - Added the ability for players to change the game font through their graphical preference page ([#1799](https://github.com/Ben987/Bondage-College/pull/1799))
 * Ada - Added functionality to allow room owners to block the use of player leashing within their rooms ([#1831](https://github.com/Ben987/Bondage-College/pull/1831))
 * Aeren - Added 16 new player titles and tweaked the unlock requirements for certain titles ([#1713](https://github.com/Ben987/Bondage-College/pull/1713))
@@ -54,6 +56,9 @@ Last recorded PR: [#1858](https://github.com/Ben987/Bondage-College/pull/1858)
 * Nina - Added a new graphics preference which will flip rooms vertically when the player is suspended upside down ([#1846](https://github.com/Ben987/Bondage-College/pull/1846))
 * wildsj - Added multicolor support to the Harness Pacifier ([#1849](https://github.com/Ben987/Bondage-College/pull/1849))
 * Jomshir - Added a new Ceiling Shackles item ([#1851](https://github.com/Ben987/Bondage-College/pull/1851))
+* Ellie - Added the ability to add custom text to the Canvas Hood ([#1861](https://github.com/Ben987/Bondage-College/pull/1861))
+* Ellie - Added new alternative light & dark chatroom themes ([#1862](https://github.com/Ben987/Bondage-College/pull/1862))
+* Nina - Added multicolor support to the Kitty Butt Plug and the Fox Tails butt plug ([#1863](https://github.com/Ben987/Bondage-College/pull/1863))
 
 ### [Removed]
 
@@ -83,9 +88,12 @@ Last recorded PR: [#1858](https://github.com/Ben987/Bondage-College/pull/1858)
 * Ellie - Fixed clipping issues with the Open Crotch Straitdress when worn over lower body clothing ([#1829](https://github.com/Ben987/Bondage-College/pull/1829))
 * Nina - Fixed an issue when players get banned/kicked from a chatoom whilst in another screen ([#1841](https://github.com/Ben987/Bondage-College/pull/1841))
 * Ellie - Fixed an issue with the Deny and Edge vibrator modes not working in combination with some items ([#1842](https://github.com/Ben987/Bondage-College/pull/1842))
-* Nina - Fixed the longstanding issue of tails not being visible when hogtied ([#1847](https://github.com/Ben987/Bondage-College/pull/1847))
+* Nina - Fixed the longstanding issue of tails not being visible when hogtied or suspension hogtied ([#1847](https://github.com/Ben987/Bondage-College/pull/1847), [#1868](https://github.com/Ben987/Bondage-College/pull/1868))
 * Jomshir - Fixed an issue where disconnects would sometimes result in the relog screen not working properly ([#1856](https://github.com/Ben987/Bondage-College/pull/1856))
 * Nina - Fixed a bug where the photography studio NPC wouldn't pose correctly when telling her to relax her arms ([#1858](https://github.com/Ben987/Bondage-College/pull/1858))
+* Nina - Fixed an error at the end of the stable exam ([#1864](https://github.com/Ben987/Bondage-College/pull/1864))
+* Nina - Fixed some visual issues with the Magic Show's Water Torture Cell ([#1866](https://github.com/Ben987/Bondage-College/pull/1866))
+* Nina - Fixed some missing text in the Halloween Monster and Familiar sets ([#1867](https://github.com/Ben987/Bondage-College/pull/1867))
 
 ### [Technical]
 
@@ -96,7 +104,7 @@ Last recorded PR: [#1858](https://github.com/Ben987/Bondage-College/pull/1858)
     * Ada - [#1812](https://github.com/Ben987/Bondage-College/pull/1812), [#1790](https://github.com/Ben987/Bondage-College/pull/1790)
     * Sandrine - [#1818](https://github.com/Ben987/Bondage-College/pull/1818)
     * Rui - [#1822](https://github.com/Ben987/Bondage-College/pull/1822)
-    * Nina - [#1825](https://github.com/Ben987/Bondage-College/pull/1825), [#1840](https://github.com/Ben987/Bondage-College/pull/1840), [#1845](https://github.com/Ben987/Bondage-College/pull/1845)
+    * Nina - [#1825](https://github.com/Ben987/Bondage-College/pull/1825), [#1840](https://github.com/Ben987/Bondage-College/pull/1840), [#1845](https://github.com/Ben987/Bondage-College/pull/1845), [#1865](https://github.com/Ben987/Bondage-College/pull/1865)
     * Ace - [#1791](https://github.com/Ben987/Bondage-College/pull/1791)
     * tickler2000 - [#1850](https://github.com/Ben987/Bondage-College/pull/1850)
 
