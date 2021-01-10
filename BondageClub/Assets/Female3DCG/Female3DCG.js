@@ -3589,6 +3589,20 @@ var AssetFemale3DCG = [
 				{ Name: "Wheelholders" },
 				{ Name: "Wheels" }
 			] },
+			{
+				Name: "VacCube", Fetish: ["Latex"], Value: 250, Difficulty: 50, Priority: 36, Top: -70, Left: 0, SelfBondage: 4, Time: 20, RemoveAtLogin: true, DefaultColor: "#480000",
+				Prerequisite: ["NoItemArms", "NoItemLegs", "AllFours", "NotSuspended", "NotHogtied", "NotKneelingSpread", "NotYoked", "LegsOpen", "NoHorse", "NoItemFeet"],
+				Hide: ["BodyLower", "Hands", "HairBack", "Cloth", "ClothLower", "ClothAccessory", "Necklace", "Suit", "SuitLower", "Bra", "Panties", "Socks", "RightAnklet", "LeftAnklet", "Shoes", "Gloves", "TailStraps", "Wings", "ItemFeet", "ItemLegs", "ItemVulva", "ItemVulvaPiercings", "ItemButt", "ItemPelvis", "ItemTorso", "ItemNipples", "ItemNipplesPiercings", "ItemBreast", "ItemArms", "ItemHands", "ItemBoots"],
+				SetPose: ["BaseUpper", "BaseLower"],
+				Effect: ["Prone", "Freeze", "Block"],
+				Block: ["ItemArms", "ItemBoots", "ItemBreast", "ItemButt", "ItemFeet", "ItemHands", "ItemLegs", "ItemNipples", "ItemNipplesPiercings", "ItemPelvis", "ItemTorso", "ItemVulva", "ItemVulvaPiercings", "ItemAddon"],
+				OverrideHeight: { Height: -570, Priority: 60, HeightRatioProportion: 0.95 },
+				Alpha: [{Group: ["BodyUpper"], Masks: [[0, 225, 500, 775]]}],
+				Layer: [
+					{ Name: "Latex", ParentGroup: "BodyUpper" },
+					{ Name: "Highlights", ParentGroup: null, AllowColorize: false },
+				]
+			},
 		],
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"]
 	},
