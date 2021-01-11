@@ -3621,6 +3621,7 @@ var AssetFemale3DCG = [
 				SetPose: ["BaseUpper", "BaseLower"],
 				Effect: ["Prone", "Freeze", "Block"],
 				Block: ["ItemArms", "ItemBoots", "ItemBreast", "ItemButt", "ItemFeet", "ItemHands", "ItemLegs", "ItemNipples", "ItemNipplesPiercings", "ItemPelvis", "ItemTorso", "ItemVulva", "ItemVulvaPiercings", "ItemAddon"],
+				AllowActivityOn: ["ItemArms", "ItemBoots", "ItemBreast", "ItemFeet", "ItemLegs", "ItemNipples", "ItemPelvis", "ItemTorso"],
 				OverrideHeight: { Height: -570, Priority: 60, HeightRatioProportion: 0.95 },
 				Alpha: [{Group: ["BodyUpper"], Masks: [[0, 225, 500, 775]]}],
 				Layer: [
