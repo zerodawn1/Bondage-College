@@ -1466,7 +1466,7 @@ var AssetFemale3DCG = [
 				]
 			},
 			{
-				Name: "WiredEgg", ParentGroup: "BodyLower", Value: 30, Time: 5, Prerequisite: "AccessVulva", AllowPose: ["LegsClosed"], Effect: ["Egged"],
+				Name: "WiredEgg", ParentGroup: "BodyLower", Value: 30, Time: 5, Prerequisite: "AccessVulva", AllowPose: ["LegsClosed"], Effect: ["Egged"], DynamicScriptDraw: true,
 				Layer: [
 					{ Name: "Remote" },
 					{ Name: "Strap" }
