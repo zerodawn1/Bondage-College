@@ -378,6 +378,12 @@ function ServerValidateProperties(C, Item, Validation) {
 	// Remove impossible combinations
 	if ((Item.Property != null) && (Item.Property.Type == null) && (Item.Property.Restrain == null))
 		["SetPose", "Difficulty", "SelfUnlock", "Hide"].forEach(P => delete Item.Property[P]);
+
+	// Keeps item opacity within the allowed range
+	if (Item.Property && typeof Item.Property.Opacity === "number") {
+		if (Item.Property.Opacity > Item.Asset.MaxOpacity) Item.Property.Opacity = Item.Asset.MaxOpacity;
+		if (Item.Property.Opacity < Item.Asset.MinOpacity) Item.Property.Opacity = Item.Asset.MinOpacity;
+	}
 }
 
 /**
