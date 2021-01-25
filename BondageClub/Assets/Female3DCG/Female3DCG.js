@@ -1710,11 +1710,14 @@ var AssetFemale3DCG = [
 					{ Name: "Mesh", AllowColorize: true, ParentGroup: null,},
 				]
 			},
-			{ Name: "FuturisticHarness2", Fetish: ["Metal"], Category: ["SciFi"], Priority: 15, Value: -1, BuyGroup: "FuturisticHarness", Difficulty: 20, Time: 17, RemoveTime: 12, Audio: "FuturisticApply", DefaultColor: ["#50913C", "Default", "#889FA7"], AllowLock: true, Prerequisite: "AccessTorso", Hide: ["ItemNipples", "ItemNipplesPiercings"],
+			{ Name: "FuturisticHarness2", Fetish: ["Metal"], Category: ["SciFi"], Value: -1, BuyGroup: "FuturisticHarness", Difficulty: 20, Time: 17, RemoveTime: 12, Audio: "FuturisticApply", DefaultColor: ["#50913C", "Default", "#889FA7"], AllowLock: true, Prerequisite: "AccessTorso", Hide: ["ItemNipples", "ItemNipplesPiercings"],
 				Layer:[
-					{ Name: "Display", AllowColorize: true, ParentGroup: null,},
-					{ Name: "Band", AllowColorize: true },
-					{ Name: "Mesh", AllowColorize: true, ParentGroup: null,},
+					{ Name: "Display", AllowColorize: true, ParentGroup: null, Priority: 15,},
+					{ Name: "Band", AllowColorize: true, Priority: 15 },
+					{ Name: "Mesh", AllowColorize: true, ParentGroup: null, Priority: 15,},
+					{ Name: "Display2", AllowColorize: true, CopyLayerColor: "Display", ParentGroup: null,},
+					{ Name: "Band2", AllowColorize: true, CopyLayerColor: "Band" },
+					
 				]
 			},
 			{ Name: "Corset3", Fetish: ["Lingerie"], Priority: 22, Value: 25, Difficulty: 8, Time: 15, RemoveTime: 10, AllowLock: true, BuyGroup: "Corset3", Prerequisite: "AccessTorso", Hide: ["ItemNipples", "ItemNipplesPiercings"] },
