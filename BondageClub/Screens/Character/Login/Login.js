@@ -307,13 +307,22 @@ function LoginDifficulty() {
 
 	// If Extreme mode, the player cannot control her blocked items
 	if (Player.GetDifficulty() >= 3) {
-		Player.BlockItems = [];
-		Player.LimitedItems = [{Name: "CombinationPadlock", Group: "ItemMisc", Type: null}, {Name: "PasswordPadlock", Group: "ItemMisc", Type: null}, {Name: "TimerPasswordPadlock", Group: "ItemMisc", Type: null}];
-		Player.HiddenItems = [];
+		LoginExtremeItemSettings();
 		ServerSend("AccountUpdate", { BlockItems: Player.BlockItems, LimitedItems: Player.LimitedItems, HiddenItems: Player.HiddenItems });
 	}
-
 }
+
+/**
+ * Set the item permissions for the Extreme difficulty
+ * @returns {void} Nothing
+ */
+function LoginExtremeItemSettings() {
+	Player.BlockItems = [];
+	// If the permissions are "Owner/Lover/Whitelist" don't limit the locks so that whitelist can use them
+	Player.LimitedItems = (Player.ItemPermission == 3) ? [] : MainHallStrongLocks;
+	Player.HiddenItems = [];
+}
+
 
 /**
  * Handles player login response data
@@ -373,8 +382,7 @@ function LoginResponse(C) {
 			Player.Difficulty = C.Difficulty;
 			Player.WardrobeCharacterNames = C.WardrobeCharacterNames;
 			WardrobeCharacter = [];
-			LoginDifficulty();
-
+			
 			// Load the last chat room
 			Player.LastChatRoom = C.LastChatRoom;
 			Player.LastChatRoomBG = C.LastChatRoomBG;
@@ -427,7 +435,8 @@ function LoginResponse(C) {
 			}
 			Player.SubmissivesList = typeof C.SubmissivesList === "string" ? new Set(JSON.parse(LZString.decompressFromUTF16(C.SubmissivesList))) : new Set();
 			Player.GhostList = ((C.GhostList == null) || !Array.isArray(C.GhostList)) ? [] : C.GhostList;
-			
+			LoginDifficulty();
+
 			// Loads the player character model and data
 			Player.Appearance = ServerAppearanceLoadFromBundle(Player, C.AssetFamily, C.Appearance);
 			InventoryLoad(Player, C.Inventory);

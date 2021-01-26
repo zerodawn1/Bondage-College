@@ -644,6 +644,7 @@ function PreferenceSubscreenGeneralClick() {
 	if ((MouseX >= 500) && (MouseX < 590) && (MouseY >= 280) && (MouseY < 370)) {
 		Player.ItemPermission++;
 		if (Player.ItemPermission > 5) Player.ItemPermission = 0;
+		if (Player.GetDifficulty() >= 3) LoginExtremeItemSettings();
 	}
 
 	// If we must show/hide/use the color picker
@@ -817,6 +818,7 @@ function PreferenceExit() {
 		OnlineSharedSettings: Player.OnlineSharedSettings,
 		GraphicsSettings: Player.GraphicsSettings,
 		NotificationSettings: Player.NotificationSettings,
+		LimitedItems: Player.LimitedItems,
 	};
 	ServerSend("AccountUpdate", P);
 	PreferenceMessage = "";
