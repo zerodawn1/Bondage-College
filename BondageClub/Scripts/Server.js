@@ -395,6 +395,7 @@ function ServerDeleteLock(Property) {
 	if (Property) {
 		delete Property.LockedBy;
 		delete Property.LockMemberNumber;
+		delete Property.LockMemberNumberList;
 		delete Property.CombinationNumber;
 		delete Property.Password;
 		delete Property.Hint;

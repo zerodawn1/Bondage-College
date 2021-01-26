@@ -129,8 +129,94 @@ function ChatRoomCurrentCharacterIsAdmin() { return ((CurrentCharacter != null) 
  * @returns {boolean} - TRUE if the player is in a swap operation.
  */
 function ChatRoomHasSwapTarget() { return (ChatRoomSwapTarget != null) }
+
+/**
+ * Checks if the player can give the target character her high security keys.
+ * @returns {boolean} - TRUE if the player can interact and is allowed to interact with the current character.
+ */
+function ChatRoomCanGiveHighSecurityKeys() {
+	if (!CurrentCharacter.AllowItem) return false
+	if (Player.Appearance != null)
+		for (let A = 0; A < Player.Appearance.length; A++)
+			if (Player.Appearance[A].Asset.IsRestraint && Player.Appearance[A].Property && Player.Appearance[A].Asset.ExclusiveUnlock
+			&& (Player.Appearance[A].Property.MemberNumberList)
+			&& (Player.Appearance[A].Property.MemberNumberList
+			&& CommonConvertStringToArray("" + Player.Appearance[A].Property.MemberNumberList).indexOf(Player.MemberNumber) >= 0
+			&& CommonConvertStringToArray("" + Player.Appearance[A].Property.MemberNumberList).indexOf(CurrentCharacter.MemberNumber) < 0)) // Make sure you have a lock they dont have the keys to
+				return true;
+	return false
+}
+
+/**
+ * Checks if the player can give the target character her high security keys, while also removing the ones from her possession
+ * @returns {boolean} - TRUE if the player can interact and is allowed to interact with the current character.
+ */
+function ChatRoomCanGiveHighSecurityKeysAll() {
+	if (!CurrentCharacter.AllowItem) return false
+	if (Player.Appearance != null)
+		for (let A = 0; A < Player.Appearance.length; A++)
+			if (Player.Appearance[A].Asset.IsRestraint && Player.Appearance[A].Property && Player.Appearance[A].Asset.ExclusiveUnlock
+			&& (Player.Appearance[A].Property.MemberNumberList || (!Player.Appearance[A].Property.MemberNumberList && Player.Appearance[A].Property.LockMemberNumber == Player.MemberNumber))
+			&& (!Player.Appearance[A].Property.MemberNumberList
+			|| (CommonConvertStringToArray("" + Player.Appearance[A].Property.MemberNumberList).indexOf(Player.MemberNumber) >= 0))) // Make sure you have a lock they dont have the keys to
+				return true;
+	return false
+}
+
+function ChatRoomGiveHighSecurityKeys() {
+	var C = Player
+	if (C.Appearance != null)
+		for (let A = 0; A < C.Appearance.length; A++)
+			if (C.Appearance[A].Asset.IsRestraint && C.Appearance[A].Property && C.Appearance[A].Asset.ExclusiveUnlock
+			&& C.Appearance[A].Property.MemberNumberList
+			&& CommonConvertStringToArray("" + C.Appearance[A].Property.MemberNumberList).indexOf(Player.MemberNumber) >= 0
+			&& CommonConvertStringToArray("" + C.Appearance[A].Property.MemberNumberList).indexOf(CurrentCharacter.MemberNumber) < 0) // Make sure you have a lock they dont have the keys to
+				C.Appearance[A].Property.MemberNumberList = C.Appearance[A].Property.MemberNumberList + "," + CurrentCharacter.MemberNumber
+	CharacterRefresh(Player)
+	ChatRoomCharacterUpdate(Player);
+}
+function ChatRoomGiveHighSecurityKeysAll() {
+	var C = Player
+	if (C.Appearance != null)
+		for (let A = 0; A < C.Appearance.length; A++)
+			if (C.Appearance[A].Asset.IsRestraint && C.Appearance[A].Property && C.Appearance[A].Asset.ExclusiveUnlock
+			&& (C.Appearance[A].Property.MemberNumberList || (!C.Appearance[A].Property.MemberNumberList && C.Appearance[A].Property.LockMemberNumber == Player.MemberNumber))
+			&& (!C.Appearance[A].Property.MemberNumberList || (C.Appearance[A].Property.MemberNumberList
+			&& CommonConvertStringToArray("" + C.Appearance[A].Property.MemberNumberList).indexOf(Player.MemberNumber) >= 0))) // Make sure you have a lock they dont have the keys to
+			{
+				if (C.Appearance[A].Property.MemberNumberList) {
+					var list = CommonConvertStringToArray("" + C.Appearance[A].Property.MemberNumberList)
+					
+					if (list) {
+						list = list.filter(x => x !== Player.MemberNumber);
+						if (list.indexOf(CurrentCharacter.MemberNumber) < 0)
+							list.push(CurrentCharacter.MemberNumber)
+						C.Appearance[A].Property.MemberNumberList = "" + 
+							CommonConvertArrayToString(list) // Convert to array and back; can only save strings on server
+					}
+				}
+				C.Appearance[A].Property.LockMemberNumber = CurrentCharacter.MemberNumber
+			}
+	CharacterRefresh(Player)
+	ChatRoomCharacterUpdate(Player);
+}
+
+
+
 /**
  * Checks if the player can help the current character to struggle free.
+ * @returns {boolean} - TRUE if the player can interact and is allowed to interact with the current character.
+ */
+function ChatRoomCanGiveLockpicks() { 
+	if (CurrentCharacter.AllowItem && CurrentCharacter.IsLocked())
+		for (let I = 0; I < Player.Inventory.length; I++)
+			if (Player.Inventory[I].Name == "Lockpicks") {
+				return true;  
+			}
+	return false;
+}
+/**
+ * Checks if the player can help the current character by giving her lockpicks
  * @returns {boolean} - TRUE if the player can interact and is allowed to interact with the current character.
  */
 function ChatRoomCanAssistStruggle() { return CurrentCharacter.AllowItem && !CurrentCharacter.CanInteract() }
@@ -139,6 +225,11 @@ function ChatRoomCanAssistStruggle() { return CurrentCharacter.AllowItem && !Cur
  * @returns {boolean} - Whether or not the player can interact with the target character
  */
 function ChatRoomCanPerformCharacterAction() { return ChatRoomCanAssistStand() || ChatRoomCanAssistKneel() || ChatRoomCanAssistStruggle() || ChatRoomCanHoldLeash() || ChatRoomCanStopHoldLeash()}
+/**
+ * Checks if the security options menu is available.
+ * @returns {boolean} - Whether or not the player can interact with the target character
+ */
+function ChatRoomCanPerformSecurityAction() { return ChatRoomCanGiveLockpicks() || ChatRoomCanGiveHighSecurityKeys() || ChatRoomCanGiveHighSecurityKeysAll()}
 /**
  * Checks if the target character can be helped back on her feet. This is different than CurrentCharacter.CanKneel() because it listens for the current active pose and removes certain checks that are not required for someone else to help a person kneel down.
  * @returns {boolean} - Whether or not the target character can stand
@@ -232,7 +323,6 @@ function DialogCanCallMaids() { return (CurrentScreen == "ChatRoom" && (ChatRoom
  * @returns {void} - Nothing.
  */
 function ChatRoomCreateElement() {
-
 	// Creates the chat box
 	if (document.getElementById("InputChat") == null) {
 		ElementCreateTextArea("InputChat");
@@ -656,6 +746,7 @@ function ChatRoomRun() {
 		if ((CurrentTime > ChatRoomSlowtimer) && (ChatRoomSlowtimer != 0)) {
 			ChatRoomSlowtimer = 0;
 			ChatRoomSlowStop = false;
+			DialogLentLockpicks = false;
 			ChatRoomClearAllElements();
 			ChatRoomSetLastChatRoom("")
 			ServerSend("ChatRoomLeave", "");
@@ -740,6 +831,7 @@ function ChatRoomClick() {
 
 	// When the user leaves
 	if (MouseIn(1005, 0, 120, 62) && ChatRoomCanLeave() && !PlayerIsSlow) {
+		DialogLentLockpicks = false;
 		ChatRoomClearAllElements();
 		ServerSend("ChatRoomLeave", "");
 		ChatRoomSetLastChatRoom("")		
@@ -1171,11 +1263,18 @@ function ChatRoomMessage(data) {
 						ServerSend("ChatRoomChat", { Content: "RemoveLeash", Type: "Hidden", Target: SenderCharacter.MemberNumber });
 					}
 				}
- 				else if (msg == "RemoveLeash" || msg == "RemoveLeashNotFriend"){
+ 				else if (msg == "RemoveLeash" || msg == "RemoveLeashNotFriend") {
 					if (ChatRoomLeashList.indexOf(SenderCharacter.MemberNumber) >= 0) {
 						ChatRoomLeashList.splice(ChatRoomLeashList.indexOf(SenderCharacter.MemberNumber), 1)
 					} 
-				}
+				} 
+				if (msg == "GiveLockpicks") DialogLentLockpicks = true;
+				if (msg == "MaidDrinkPick0") MaidQuartersOnlineDrinkPick(data.Sender, 0);
+				if (msg == "MaidDrinkPick5") MaidQuartersOnlineDrinkPick(data.Sender, 5);
+				if (msg == "MaidDrinkPick10") MaidQuartersOnlineDrinkPick(data.Sender, 10);
+				if (msg.substring(0, 8) == "PayQuest") ChatRoomPayQuest(data);
+				if (msg.substring(0, 9) == "OwnerRule") data = ChatRoomSetRule(data);
+				if (data.Type == "Hidden") return;
  				return;
 			}
 
@@ -1672,6 +1771,20 @@ function ChatRoomStruggleAssist() {
 }
 
 /**
+
+ * Triggered when the player assists another player to by giving lockpicks
+ * @returns {void} - Nothing.
+ */
+function ChatRoomGiveLockpicks() {
+	var Dictionary = [];
+	Dictionary.push({ Tag: "SourceCharacter", Text: Player.Name, MemberNumber: Player.MemberNumber });
+	Dictionary.push({ Tag: "TargetCharacter", Text: CurrentCharacter.Name, MemberNumber: CurrentCharacter.MemberNumber });
+	ServerSend("ChatRoomChat", { Content: "GiveLockpicks", Type: "Action", Dictionary: Dictionary });
+	ServerSend("ChatRoomChat", { Content: "GiveLockpicks", Type: "Hidden", Target: CurrentCharacter.MemberNumber });
+	DialogLeave();
+}
+
+/*
  * Triggered when the player grabs another player's leash
  * @returns {void} - Nothing.
  */
@@ -1713,7 +1826,6 @@ function ChatRoomPingLeashedPlayers(NoBeep) {
 		}
 	}
 }
-
 
 
 /**
@@ -1975,7 +2087,7 @@ function ChatRoomSetRule(data) {
 
 		// Key rules
 		if (data.Content == "OwnerRuleKeyAllow") LogDelete("BlockKey", "OwnerRule");
-		if (data.Content == "OwnerRuleKeyConfiscate") InventoryConfiscateKey();
+		if (data.Content == "OwnerRuleKeyConfiscate") {InventoryConfiscateKey(); DialogLentLockpicks = false;}
 		if (data.Content == "OwnerRuleKeyBlock") LogAdd("BlockKey", "OwnerRule");
 		if (data.Content == "OwnerRuleSelfOwnerLockAllow") LogDelete("BlockOwnerLockSelf", "OwnerRule");
 		if (data.Content == "OwnerRuleSelfOwnerLockBlock") LogAdd("BlockOwnerLockSelf", "OwnerRule");
@@ -1995,6 +2107,8 @@ function ChatRoomSetRule(data) {
 		if (data.Content == "OwnerRuleTimerCell60") TimerCell = 60;
 		if (TimerCell > 0) {
 			ServerSend("ChatRoomChat", { Content: "ActionGrabbedForCell", Type: "Action", Dictionary: [{ Tag: "TargetCharacterName", Text: Player.Name, MemberNumber: Player.MemberNumber }] });
+
+			DialogLentLockpicks = false;
 			ChatRoomClearAllElements();
 			ServerSend("ChatRoomLeave", "");
 			CharacterDeleteAllOnline();
@@ -2023,6 +2137,7 @@ function ChatRoomSetRule(data) {
 			CharacterSetActivePose(Player, null);
 			var D = TextGet("ActionGrabbedToServeDrinksIntro");
 			ServerSend("ChatRoomChat", { Content: "ActionGrabbedToServeDrinks", Type: "Action", Dictionary: [{ Tag: "TargetCharacterName", Text: Player.Name, MemberNumber: Player.MemberNumber }] });
+			DialogLentLockpicks = false;
 			ChatRoomClearAllElements();
 			ServerSend("ChatRoomLeave", "");
 			CharacterDeleteAllOnline();
@@ -2134,6 +2249,8 @@ function ChatRoomSafewordRelease() {
 	CharacterReleaseTotal(Player);
 	CharacterRefresh(Player);
 	ServerSend("ChatRoomChat", { Content: "ActionActivateSafewordRelease", Type: "Action", Dictionary: [{Tag: "SourceCharacter", Text: Player.Name}] });
+
+	DialogLentLockpicks = false;
 	ChatRoomClearAllElements();
 	ServerSend("ChatRoomLeave", "");
 	CommonSetScreen("Online","ChatSearch");
