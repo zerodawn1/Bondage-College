@@ -31,7 +31,8 @@ const AssetGroupType = {
 	FullAlpha: "Maybe Boolean",
 	Blink: "Maybe Boolean",
 	InheritColor: "Maybe String",
-	FreezeActivePose: "Maybe [String]"
+	FreezeActivePose: "Maybe [String]",
+
 };
 
 const AssetType = {
@@ -56,6 +57,8 @@ const AssetType = {
 	Require: "[String]",
 	SetPose: "[String]",
 	AllowPose: "[String]",
+	HideForPose: "[String]",
+	OverrideAllowPose: "[String]",
 	AllowActivePose: "[String]",
 	WhitelistActivePose: "[String]",
 	Value: "Number",
