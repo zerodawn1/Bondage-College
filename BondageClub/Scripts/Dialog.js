@@ -1005,17 +1005,18 @@ function DialogLockPickProgressStart(C, Item) {
 	var LockPickingImpossible = false
 	if (Item != null && lock) {
 		// Gets the lock rating
+		var BondageLevel = (Item.Difficulty - Item.Asset.Difficulty)
 		
 		// Gets the required skill / challenge level based on player/rigger skill and item difficulty (0 by default is easy to pick)
 		var S = 0;
 		S = S + SkillGetWithRatio("LockPicking"); // Add the player evasion level (modified by the effectiveness ratio)
-		if (lock.Asset.PickDifficulty != null) {
+		if (lock.Asset.PickDifficulty && lock.Asset.PickDifficulty > 0) {
 			S = S - lock.Asset.PickDifficulty; // Subtract the item difficulty (regular difficulty + player that restrained difficulty)
 			LockRating = lock.Asset.PickDifficulty // Some features of the minigame are independent of the relative skill level
 		}
-		if (Item.Asset && Item.Asset.Difficulty) {
-			S -= (Item.Difficulty - Item.Asset.Difficulty)/2 // Adds the bondage skill of the item but not the base difficulty!
-		}
+		//if (Item.Asset && Item.Asset.Difficulty) {
+		//	S -= BondageLevel/2 // Adds the bondage skill of the item but not the base difficulty!
+		//}
 		
 		if (Player.IsEnclose() || Player.IsMounted()) S = S - 2; // A little harder if there's an enclosing or mounting item
 
@@ -1110,18 +1111,15 @@ function DialogLockPickProgressStart(C, Item) {
 			if (NumPins >= 8) DialogLockPickImpossiblePins.push(DialogLockPickOrder[DialogLockPickOrder.length-3])
 		}
 
-		var NumTries = NumPins * 4
 		// At 4 pins we have a base of 16 tries, with 10 maximum permutions possible
-		// At 10 pins we have a base of 40 tries, with 55 maximum permutions possible
-		NumTries = Math.floor(Math.max(NumPins*1.5, NumTries - Math.max(
-			Math.max(0, -S)*Math.max(0, -S)/3,
-			Math.max(0, -S-S*NumPins/5)
-			))) // negative skill of 1 subtracts 2 from the normal lock and 4 from 10 pin locks,
+		// At 10 pins we have a base of 40-30 tries, with 55 maximum permutions possible
+		var NumTries = Math.floor(Math.max(NumPins * (2.25 - BondageLevel/10),
+				NumPins * (4 - BondageLevel/10) - Math.max(0, DialogLockPickProgressChallenge*NumPins/4) - BondageLevel/2))
+			    // negative skill of 1 subtracts 2 from the normal lock and 4 from 10 pin locks,
 				// negative skill of 6 subtracts 12 from all locks
 	
 
-		DialogLockPickProgressMaxTries = NumTries;
-
+		DialogLockPickProgressMaxTries = NumTries - NumPins;
 	}
 }
 
@@ -1859,15 +1857,15 @@ function DialogLockPickClick(C) {
 				var XX = X - PinWidth/2 + (0.5-DialogLockPickSet.length/2 + P) * PinSpacing
 				if (MouseIn(XX + PinSpacing/2, Y - PinHeight, PinSpacing, PinWidth+PinHeight)) {
 					if (DialogLockPickProgressCurrentTries < DialogLockPickProgressMaxTries) {
-						DialogLockPickProgressCurrentTries += 1
 						
 						if (DialogLockPickOrder[current_pins] == P && DialogLockPickImpossiblePins.filter(x => x==P).length == 0) {
 							DialogLockPickSet[P] = true
 							DialogLockPickArousalText = ""; // Reset arousal text
-
+						} else {
+							DialogLockPickProgressCurrentTries += 1
 						}
-						var order = DialogLockPickImpossiblePins.indexOf(P)/DialogLockPickSet.length * skill/10 // At higher skills you can see which pins are later in the order
-						DialogLockPickOffsetTarget[P] = (DialogLockPickSet[P]) ? PinHeight : PinHeight*(0.1+0.7*order+Math.random()*0.6*(1.0 - skill/15))
+						var order = Math.max(0, DialogLockPickOrder.indexOf(P)-current_pins)/Math.max(1, DialogLockPickSet.length-current_pins) * (0.25+0.75*skill/10) // At higher skills you can see which pins are later in the order
+						DialogLockPickOffsetTarget[P] = (DialogLockPickSet[P]) ? PinHeight : PinHeight*(0.1+0.8*order)
 						
 						if (DialogLockPickProgressCurrentTries == DialogLockPickProgressMaxTries && DialogLockPickSet.filter(x => x==false).length > 0 ) {
 							SkillProgress("LockPicking", DialogLockPickProgressSkillLose);
