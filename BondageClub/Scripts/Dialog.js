@@ -1798,9 +1798,9 @@ function DialogDrawActivityMenu(C) {
 function DialogDrawStruggleProgress(C) {
 	// Draw one or both items
 	if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null)) {
-		DrawItemPreview(1200, 250, DialogProgressPrevItem);
-		DrawItemPreview(1575, 250, DialogProgressNextItem);
-	} else DrawItemPreview(1387, 250, (DialogProgressPrevItem != null) ? DialogProgressPrevItem : DialogProgressNextItem);
+		DrawAssetPreview(1200, 250, DialogProgressPrevItem.Asset);
+		DrawAssetPreview(1575, 250, DialogProgressNextItem.Asset);
+	} else DrawAssetPreview(1387, 250, (DialogProgressPrevItem != null) ? DialogProgressPrevItem.Asset : DialogProgressNextItem.Asset);
 
 	// Add or subtract to the automatic progression, doesn't move in color picking mode
 	DialogProgress = DialogProgress + DialogProgressAuto;
@@ -2148,22 +2148,15 @@ function DialogDrawItemMenu(C) {
 		var X = 1000;
 		var Y = 125;
 		for (let I = DialogInventoryOffset; (I < DialogInventory.length) && (I < DialogInventoryOffset + 12); I++) {
-			var Item = DialogInventory[I];
-			var Hover = (MouseX >= X) && (MouseX < X + 225) && (MouseY >= Y) && (MouseY < Y + 275) && !CommonIsMobile;
-			var Block = InventoryIsPermissionBlocked(C, Item.Asset.DynamicName(Player), Item.Asset.DynamicGroupName);
-			var Limit = InventoryIsPermissionLimited(C, Item.Asset.Name, Item.Asset.Group.Name);
-			var Unusable = DialogInventory[I].SortOrder.startsWith(DialogSortOrderUnusable.toString());
-			var Blocked = DialogInventory[I].SortOrder.startsWith(DialogSortOrderBlocked.toString());
-			DrawRect(X, Y, 225, 275, (DialogItemPermissionMode && C.ID == 0) ?
-				(Item.Worn ? "gray" : Block ? Hover ? "red" : "pink" : Limit ? Hover ? "orange" : "#fed8b1" : Hover ? "green" : "lime") :
-				((Hover && !Blocked) ? "cyan" : Item.Worn ? "pink" : Blocked ? "red" : Unusable ? "gray" : "white"));
-			if (!CharacterAppearanceItemIsHidden(Item.Asset.Name, Item.Asset.Group.Name)) {
-				if (ControllerActive == true) setButton(X + 2, Y + 2);
-				if (Item.Worn && InventoryItemHasEffect(InventoryGet(C, Item.Asset.Group.Name), "Vibrating", true)) DrawImageResize("Assets/" + Item.Asset.Group.Family + "/" + Item.Asset.DynamicGroupName + "/Preview/" + Item.Asset.Name + ".png", X + Math.floor(Math.random() * 3) + 1, Y + Math.floor(Math.random() * 3) + 1, 221, 221);
-				else DrawImageResize("Assets/" + Item.Asset.Group.Family + "/" + Item.Asset.DynamicGroupName + "/Preview/" + Item.Asset.Name + Item.Asset.DynamicPreviewIcon(CharacterGetCurrent()) + ".png", X + 2, Y + 2, 221, 221);
-			}
-			else DrawImageResize("Icons/HiddenItem.png", X + 2, Y + 2, 221, 221);
-			DrawTextFit(Item.Asset.DynamicDescription(Player), X + 112, Y + 250, 221, "black");
+			const Item = DialogInventory[I];
+			const Hover = MouseIn(X, Y, 225, 275) && !CommonIsMobile;
+			const Background = AppearanceGetPreviewImageColor(C, Item, Hover);
+			const Vibrating = Item.Worn && InventoryItemHasEffect(InventoryGet(C, Item.Asset.Group.Name), "Vibrating", true);
+			const Hidden = CharacterAppearanceItemIsHidden(Item.Asset.Name, Item.Asset.Group.Name);
+
+			if (Hidden) DrawPreviewBox(X, Y, "Icons/HiddenItem.png", Item.Asset.DynamicDescription(Player), { Background });
+			else DrawAssetPreview(X, Y, Item.Asset, { C: Player, Background, Vibrating });
+
 			if (Item.Icon != "") DrawImage("Icons/" + Item.Icon + ".png", X + 2, Y + 110);
 			X = X + 250;
 			if (X > 1800) {
@@ -2189,19 +2182,15 @@ function DialogDrawItemMenu(C) {
 		return;
 	}
 
-	
-	
-	
-	
+
+
+
+
 
 	// If we must draw the current item from the group
 	if (FocusItem != null) {
-		if (InventoryItemHasEffect(FocusItem, "Vibrating", true)) {
-			DrawRect(1387, 250, 225, 275, "white");
-			DrawImageResize("Assets/" + FocusItem.Asset.Group.Family + "/" + FocusItem.Asset.DynamicGroupName + "/Preview/" + FocusItem.Asset.Name + ".png", 1389 + Math.floor(Math.random() * 3) - 2, 252 + Math.floor(Math.random() * 3) - 2, 221, 221);
-			DrawTextFit(FocusItem.Asset.Description, 1497, 500, 221, "black");
-		}
-		else DrawItemPreview(1387, 250, FocusItem);
+		const Vibrating = InventoryItemHasEffect(FocusItem, "Vibrating", true);
+		DrawAssetPreview(1387, 250, FocusItem.Asset, { C, Vibrating });
 	}
 
 	// Show the no access text
