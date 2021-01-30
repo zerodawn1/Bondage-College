@@ -146,20 +146,19 @@ function ExtendedItemDraw(Options, DialogPrefix, OptionsPerPage, ShowImages = tr
 	DrawText(DialogExtendedMessage, 1500, 375, "white", "gray");
 
 	// Draw the possible variants and their requirements, arranged based on the number per page
-    for (let I = ItemOptionsOffset; I < Options.length && I < ItemOptionsOffset + OptionsPerPage; I++) {
-        var PageOffset = I - ItemOptionsOffset;
-        var X = XYPositions[OptionsPerPage][PageOffset][0];
-        var Y = XYPositions[OptionsPerPage][PageOffset][1];
-
-        var Option = Options[I];
-        var Hover = MouseIn(X, Y, 225, 55 + ImageHeight) && !CommonIsMobile;
-        var FailSkillCheck = !!ExtendedItemRequirementCheckMessageMemo(Option, IsSelfBondage);
-        var IsSelected = DialogFocusItem.Property.Type == Option.Property.Type;
-        var Blocked = InventoryIsPermissionBlocked(C, DialogFocusItem.Asset.DynamicName(Player), DialogFocusItem.Asset.DynamicGroupName, Option.Property.Type);
-        var Limited = !InventoryCheckLimitedPermission(C, DialogFocusItem, Option.Property.Type);
-        var PlayerBlocked = InventoryIsPermissionBlocked(Player, DialogFocusItem.Asset.DynamicName(Player), DialogFocusItem.Asset.DynamicGroupName, Option.Property.Type);
-        var PlayerLimited = InventoryIsPermissionLimited(Player, DialogFocusItem.Asset.Name, DialogFocusItem.Asset.Group.Name, Option.Property.Type);
-        var Color = ExtendedItemPermissionMode ? ((C.ID == 0 && IsSelected) || Option.Property.Type == null ? "#888888" : PlayerBlocked ? Hover ? "red" : "pink" : PlayerLimited ? Hover ? "orange" : "#fed8b1" : Hover ? "green" : "lime") : (IsSelected ? "#888888" : (Blocked || Limited) ? "Red" : FailSkillCheck ? "Pink" : Hover ? "Cyan" : "White");
+	for (let I = ItemOptionsOffset; I < Options.length && I < ItemOptionsOffset + OptionsPerPage; I++) {
+		var PageOffset = I - ItemOptionsOffset;
+		var X = XYPositions[OptionsPerPage][PageOffset][0];
+		var Y = XYPositions[OptionsPerPage][PageOffset][1];
+		
+		var Option = Options[I];
+		var Hover = MouseIn(X, Y, 225, 55 + ImageHeight) && !CommonIsMobile;
+		var FailSkillCheck = !!ExtendedItemRequirementCheckMessageMemo(Option, IsSelfBondage);
+		var IsSelected = DialogFocusItem.Property.Type == Option.Property.Type;
+		var BlockedOrLimited = InventoryBlockedOrLimited(C, DialogFocusItem, Option.Property.Type);
+		var PlayerBlocked = InventoryIsPermissionBlocked(Player, DialogFocusItem.Asset.DynamicName(Player), DialogFocusItem.Asset.DynamicGroupName, Option.Property.Type);
+		var PlayerLimited = InventoryIsPermissionLimited(Player, DialogFocusItem.Asset.Name, DialogFocusItem.Asset.Group.Name, Option.Property.Type);
+		var Color = ExtendedItemPermissionMode ? ((C.ID == 0 && IsSelected) || Option.Property.Type == null ? "#888888" : PlayerBlocked ? Hover ? "red" : "pink" : PlayerLimited ? Hover ? "orange" : "#fed8b1" : Hover ? "green" : "lime") : (IsSelected ? "#888888" : BlockedOrLimited ? "Red" : FailSkillCheck ? "Pink" : Hover ? "Cyan" : "White");
 
 		DrawButton(X, Y, 225, 55 + ImageHeight, "", Color, null, null, IsSelected);
 		if (ShowImages) DrawImage("Screens/Inventory/" + Asset.Group.Name + "/" + Asset.Name + "/" + Option.Name + ".png", X + 2, Y);
@@ -312,9 +311,8 @@ function ExtendedItemHandleOptionClick(C, Options, Option, IsSelfBondage, IsClot
 		if (Option.Property.Type == null || (C.ID == 0 && DialogFocusItem.Property.Type == Option.Property.Type)) return;
 		InventoryTogglePermission(DialogFocusItem, Option.Property.Type);
 	} else {
-		var Blocked = InventoryIsPermissionBlocked(C, DialogFocusItem.Asset.DynamicName(Player), DialogFocusItem.Asset.DynamicGroupName, Option.Property.Type);
-		var Limited = !InventoryCheckLimitedPermission(C, DialogFocusItem, Option.Property.Type);
-		if (DialogFocusItem.Property.Type === Option.Property.Type || Blocked || Limited) return;
+		var BlockedOrLimited = InventoryBlockedOrLimited(C, DialogFocusItem, Option.Property.Type);
+		if (DialogFocusItem.Property.Type === Option.Property.Type || BlockedOrLimited) return;
 		
 		// use the unmemoized function to ensure we make a final check to the requirements
 		var RequirementMessage = ExtendedItemRequirementCheckMessage(Option, IsSelfBondage);
