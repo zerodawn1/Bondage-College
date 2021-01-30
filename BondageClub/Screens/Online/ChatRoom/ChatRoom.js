@@ -163,11 +163,11 @@ function ChatRoomCanGiveHighSecurityKeys() {
 	if (!CurrentCharacter.AllowItem) return false
 	if (Player.Appearance != null)
 		for (let A = 0; A < Player.Appearance.length; A++)
-			if (Player.Appearance[A].Asset.IsRestraint && Player.Appearance[A].Property && Player.Appearance[A].Asset.ExclusiveUnlock
-			&& (Player.Appearance[A].Property.MemberNumberList)
-			&& (Player.Appearance[A].Property.MemberNumberList
-			&& CommonConvertStringToArray("" + Player.Appearance[A].Property.MemberNumberList).indexOf(Player.MemberNumber) >= 0
-			&& CommonConvertStringToArray("" + Player.Appearance[A].Property.MemberNumberList).indexOf(CurrentCharacter.MemberNumber) < 0)) // Make sure you have a lock they dont have the keys to
+			if (Player.Appearance[A].Asset.IsRestraint && Player.Appearance[A].Property && InventoryGetLock(Player.Appearance[A]) && InventoryGetLock(Player.Appearance[A]).Asset.ExclusiveUnlock
+			&& (Player.Appearance[A].Property.MemberNumberListKeys)
+			&& (Player.Appearance[A].Property.MemberNumberListKeys
+			&& CommonConvertStringToArray("" + Player.Appearance[A].Property.MemberNumberListKeys).indexOf(Player.MemberNumber) >= 0
+			&& CommonConvertStringToArray("" + Player.Appearance[A].Property.MemberNumberListKeys).indexOf(CurrentCharacter.MemberNumber) < 0)) // Make sure you have a lock they dont have the keys to
 				return true;
 	return false
 }
@@ -180,10 +180,10 @@ function ChatRoomCanGiveHighSecurityKeysAll() {
 	if (!CurrentCharacter.AllowItem) return false
 	if (Player.Appearance != null)
 		for (let A = 0; A < Player.Appearance.length; A++)
-			if (Player.Appearance[A].Asset.IsRestraint && Player.Appearance[A].Property && Player.Appearance[A].Asset.ExclusiveUnlock
-			&& (Player.Appearance[A].Property.MemberNumberList || (!Player.Appearance[A].Property.MemberNumberList && Player.Appearance[A].Property.LockMemberNumber == Player.MemberNumber))
-			&& (!Player.Appearance[A].Property.MemberNumberList
-			|| (CommonConvertStringToArray("" + Player.Appearance[A].Property.MemberNumberList).indexOf(Player.MemberNumber) >= 0))) // Make sure you have a lock they dont have the keys to
+			if (Player.Appearance[A].Asset.IsRestraint && Player.Appearance[A].Property && InventoryGetLock(Player.Appearance[A]) && InventoryGetLock(Player.Appearance[A]).Asset.ExclusiveUnlock
+			&& (Player.Appearance[A].Property.MemberNumberListKeys || (!Player.Appearance[A].Property.MemberNumberListKeys && Player.Appearance[A].Property.LockMemberNumber == Player.MemberNumber))
+			&& (!Player.Appearance[A].Property.MemberNumberListKeys
+			|| (CommonConvertStringToArray("" + Player.Appearance[A].Property.MemberNumberListKeys).indexOf(Player.MemberNumber) >= 0))) // Make sure you have a lock they dont have the keys to
 				return true;
 	return false
 }
@@ -192,11 +192,11 @@ function ChatRoomGiveHighSecurityKeys() {
 	var C = Player
 	if (C.Appearance != null)
 		for (let A = 0; A < C.Appearance.length; A++)
-			if (C.Appearance[A].Asset.IsRestraint && C.Appearance[A].Property && C.Appearance[A].Asset.ExclusiveUnlock
-			&& C.Appearance[A].Property.MemberNumberList
-			&& CommonConvertStringToArray("" + C.Appearance[A].Property.MemberNumberList).indexOf(Player.MemberNumber) >= 0
-			&& CommonConvertStringToArray("" + C.Appearance[A].Property.MemberNumberList).indexOf(CurrentCharacter.MemberNumber) < 0) // Make sure you have a lock they dont have the keys to
-				C.Appearance[A].Property.MemberNumberList = C.Appearance[A].Property.MemberNumberList + "," + CurrentCharacter.MemberNumber
+			if (C.Appearance[A].Asset.IsRestraint && C.Appearance[A].Property && InventoryGetLock(Player.Appearance[A]) && InventoryGetLock(Player.Appearance[A]).Asset.ExclusiveUnlock
+			&& C.Appearance[A].Property.MemberNumberListKeys
+			&& CommonConvertStringToArray("" + C.Appearance[A].Property.MemberNumberListKeys).indexOf(Player.MemberNumber) >= 0
+			&& CommonConvertStringToArray("" + C.Appearance[A].Property.MemberNumberListKeys).indexOf(CurrentCharacter.MemberNumber) < 0) // Make sure you have a lock they dont have the keys to
+				C.Appearance[A].Property.MemberNumberListKeys = C.Appearance[A].Property.MemberNumberListKeys + "," + CurrentCharacter.MemberNumber
 	CharacterRefresh(Player)
 	ChatRoomCharacterUpdate(Player);
 }
@@ -204,19 +204,19 @@ function ChatRoomGiveHighSecurityKeysAll() {
 	var C = Player
 	if (C.Appearance != null)
 		for (let A = 0; A < C.Appearance.length; A++)
-			if (C.Appearance[A].Asset.IsRestraint && C.Appearance[A].Property && C.Appearance[A].Asset.ExclusiveUnlock
-			&& (C.Appearance[A].Property.MemberNumberList || (!C.Appearance[A].Property.MemberNumberList && C.Appearance[A].Property.LockMemberNumber == Player.MemberNumber))
-			&& (!C.Appearance[A].Property.MemberNumberList || (C.Appearance[A].Property.MemberNumberList
-			&& CommonConvertStringToArray("" + C.Appearance[A].Property.MemberNumberList).indexOf(Player.MemberNumber) >= 0))) // Make sure you have a lock they dont have the keys to
+			if (C.Appearance[A].Asset.IsRestraint && C.Appearance[A].Property && InventoryGetLock(Player.Appearance[A]) && InventoryGetLock(Player.Appearance[A]).Asset.ExclusiveUnlock
+			&& (C.Appearance[A].Property.MemberNumberListKeys || (!C.Appearance[A].Property.MemberNumberListKeys && C.Appearance[A].Property.LockMemberNumber == Player.MemberNumber))
+			&& (!C.Appearance[A].Property.MemberNumberListKeys || (C.Appearance[A].Property.MemberNumberListKeys
+			&& CommonConvertStringToArray("" + C.Appearance[A].Property.MemberNumberListKeys).indexOf(Player.MemberNumber) >= 0))) // Make sure you have a lock they dont have the keys to
 			{
-				if (C.Appearance[A].Property.MemberNumberList) {
-					var list = CommonConvertStringToArray("" + C.Appearance[A].Property.MemberNumberList)
+				if (C.Appearance[A].Property.MemberNumberListKeys) {
+					var list = CommonConvertStringToArray("" + C.Appearance[A].Property.MemberNumberListKeys)
 					
 					if (list) {
 						list = list.filter(x => x !== Player.MemberNumber);
 						if (list.indexOf(CurrentCharacter.MemberNumber) < 0)
 							list.push(CurrentCharacter.MemberNumber)
-						C.Appearance[A].Property.MemberNumberList = "" + 
+						C.Appearance[A].Property.MemberNumberListKeys = "" + 
 							CommonConvertArrayToString(list) // Convert to array and back; can only save strings on server
 					}
 				}
