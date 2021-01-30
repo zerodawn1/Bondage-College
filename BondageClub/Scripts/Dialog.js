@@ -2132,7 +2132,7 @@ function DialogDrawItemMenu(C) {
 		if (DialogInventory == null) DialogInventoryBuild(C);
 
 		//If only activities are allowed, only add items to the DialogInventory, which can be used for interactions
-		if (InventoryGroupIsBlocked(C)) {
+		if (!DialogItemPermissionMode && InventoryGroupIsBlocked(C)) {
 			var tempDialogInventory = [];
 			for (let I = 0; I < DialogInventory.length; I++) {
 				if ((DialogInventory[I].Asset.Name == "SpankingToys") && (C.FocusGroup.Name != "ItemHands")) tempDialogInventory.push(DialogInventory[I]);
@@ -2167,7 +2167,7 @@ function DialogDrawItemMenu(C) {
 		}
 
 		if (DialogInventory.length > 0) {
-			if (InventoryGroupIsBlocked(C)) DrawText(DialogFindPlayer("ZoneBlocked"), 1500, 700, "White", "Black");
+			if (!DialogItemPermissionMode && InventoryGroupIsBlocked(C)) DrawText(DialogFindPlayer("ZoneBlocked"), 1500, 700, "White", "Black");
 			return;
 		}
 	}
