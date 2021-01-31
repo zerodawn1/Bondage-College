@@ -887,9 +887,14 @@ function AppearanceClick() {
 		CommonDynamicFunction("Inventory" + DialogFocusItem.Asset.Group.Name + DialogFocusItem.Asset.Name + "Click()");
 	}
 
+	// In item coloring mode
+	else if (CharacterAppearanceMode == "Color") {
+		ItemColorClick(CharacterAppearanceSelection, CharacterAppearanceColorPickerGroupName, 1200, 25, 775, 950, true);
+	}
+
 	// Selecting a button in the row at the top
 	else if (MouseYIn(25, 90)) AppearanceMenuClick(C);
-	
+
 	// In regular dress-up mode
 	else if (CharacterAppearanceMode == "") {
 
@@ -960,11 +965,6 @@ function AppearanceClick() {
 					}
 				}
 		return;
-	}
-
-	// In item coloring mode
-	else if (CharacterAppearanceMode == "Color") {
-		ItemColorClick(CharacterAppearanceSelection, CharacterAppearanceColorPickerGroupName, 1200, 25, 775, 950, true);
 	}
 
 	// In cloth selection mode
