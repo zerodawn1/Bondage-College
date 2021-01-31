@@ -770,7 +770,7 @@ function PrivateChange(NewCloth) {
 	if (NewCloth == "Naked") CharacterNaked(CurrentCharacter);
 	if (NewCloth == "Custom") {
 		PrivateNPCInteraction(10);
-		CharacterChangeMoney(Player, -50);
+		if (CheatFactor("FreeNPCDress", 0) != 0) CharacterChangeMoney(Player, -50);
 		PrivateCharacterNewClothes = CurrentCharacter;
 		DialogLeave();
 		CharacterAppearanceLoadCharacter(PrivateCharacterNewClothes);
