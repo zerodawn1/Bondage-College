@@ -323,9 +323,6 @@ function PreferenceInit(C) {
 	if (typeof C.GameplaySettings.EnableSafeword !== "boolean") C.GameplaySettings.EnableSafeword = true;
 	if ((C.ID == 0) && (C.GetDifficulty() >= 2)) C.GameplaySettings.EnableSafeword = false;
 	if (typeof C.GameplaySettings.DisableAutoMaid !== "boolean") C.GameplaySettings.DisableAutoMaid = false;
-	if (typeof C.OnlineSharedSettings.DisablePickingLocksOnSelf !== "boolean") C.OnlineSharedSettings.DisablePickingLocksOnSelf = false;
-	if ((C.ID == 0) && (C.GetDifficulty() >= 2)) C.OnlineSharedSettings.DisablePickingLocksOnSelf = true;
-	
 	
 	// Sets the default immersion settings
 	if ((C.ID == 0) && (C.GetDifficulty() >= 2)) C.GameplaySettings.DisableAutoMaid = true;
@@ -360,6 +357,8 @@ function PreferenceInit(C) {
 	if (C.OnlineSharedSettings.AllowFullWardrobeAccess == null) C.OnlineSharedSettings.AllowFullWardrobeAccess = false;
 	if (C.OnlineSharedSettings.BlockBodyCosplay == null) C.OnlineSharedSettings.BlockBodyCosplay = false;
 	if (typeof C.OnlineSharedSettings.AllowPlayerLeashing !== "boolean") C.OnlineSharedSettings.AllowPlayerLeashing = true;
+	if (typeof C.OnlineSharedSettings.DisablePickingLocksOnSelf !== "boolean") C.OnlineSharedSettings.DisablePickingLocksOnSelf = false;
+	if ((C.ID == 0) && (C.GetDifficulty() >= 2)) C.OnlineSharedSettings.DisablePickingLocksOnSelf = true;
 
 	// Forces some preferences when playing in Extreme mode
 	if ((C.ID == 0) && (C.GetDifficulty() >= 3)) {
