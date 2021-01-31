@@ -996,6 +996,7 @@ function AppearanceClick() {
 					if (InventoryBlockedOrLimited(C, Item)) return;
 					if (InventoryAllow(C, Item.Asset.Prerequisite)) {
 						CharacterAppearanceSetItem(C, C.FocusGroup.Name, DialogInventory[I].Asset);
+						DialogInventoryBuild(C, DialogInventoryOffset);
 						AppearanceMenuBuild(C);
 					} else {
 						CharacterAppearanceHeaderTextTime = DialogTextDefaultTimer;
