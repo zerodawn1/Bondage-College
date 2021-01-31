@@ -2088,7 +2088,7 @@ var AssetFemale3DCG = [
 				Effect: ["Block", "Prone", "Freeze", "BlockKneel"],
 				AllowBlock: ["ItemBreast", "ItemNipples", "ItemNipplesPiercings", "ItemVulvaPiercings", "ItemButt"],
 				AllowEffect: ["Egged", "Vibrating"],
-				AllowType: ["", "Base", "UnZip", "Latex"],
+				AllowType: ["", "UnZip"],
 				Block: ["ItemBoots", "ItemPelvis", "ItemTorso", "ItemHands", "ItemLegs", "ItemFeet"],
 				Extended: true,
 				Layer: [
