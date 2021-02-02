@@ -66,9 +66,6 @@ function DrawLoad() {
 	MainCanvas.textAlign = "center";
 	MainCanvas.textBaseline = "middle";
 
-	// Loads the 3D engine as well
-	Draw3DLoad();
-
 }
 
 /**
@@ -227,12 +224,6 @@ function DrawCharacter(C, X, Y, Zoom, IsHeightResizeAllowed) {
 		// If there's a fixed image to draw instead of the character
 		if (C.FixedImage != null) {
 			DrawImageZoomCanvas(C.FixedImage, MainCanvas, 0, 0, 500, 1000, X, Y, 500 * Zoom, 1000 * Zoom);
-			return;
-		}
-
-		// Shortcuts drawing the character to 3D if needed
-		if (Draw3DEnabled) {
-			Draw3DCharacter(C, X, Y, Zoom, IsHeightResizeAllowed);
 			return;
 		}
 
@@ -1069,9 +1060,6 @@ function DrawProcess() {
 
 	// Draws beep from online player sent by the server
 	ServerDrawBeep();
-
-	// Draws the 3D objects
-	Draw3DProcess();
 
 	// Leave dialogs AFTER drawing everything
 	// If needed
