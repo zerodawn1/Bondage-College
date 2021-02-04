@@ -259,6 +259,11 @@ ItemDevicesX-CrossCross,Frame
 ItemDevicesX-CrossPadding,Padding
 ItemDevicesChangingTableFrame,Frame
 ItemDevicesChangingTableTable,Tabletop
+ItemDevicesCribFrame,Frame
+ItemDevicesCribMattress,Mattress
+ItemDevicesCribPillow,Pillow
+ItemDevicesCribPillowTrim,Pillow Trim
+ItemDevicesCribPlushies,Plushies
 ItemDevicesConcealingCloakFront,Cloak
 ItemDevicesConcealingCloakStrap,Straps
 ItemDevicesTransportWoodenBoxBox,Box
