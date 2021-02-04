@@ -1100,7 +1100,7 @@ function DrawProcess() {
 			const Invert = Player.GraphicsSettings && Player.GraphicsSettings.InvertRoom && Player.IsInverted();
 			if (!DrawImage("Backgrounds/" + B + ".jpg", 0, 0, Invert)) {
 				// Draw empty background to overdraw old content if background image isn't ready
-				DrawRect(0, 0, 2000, 1000, "#555");
+				DrawRect(0, 0, 2000, 1000, "#000");
 			}
 		}
 		if (DarkFactor < 1.0) DrawRect(0, 0, 2000, 1000, "rgba(0,0,0," + (1.0 - DarkFactor) + ")");
