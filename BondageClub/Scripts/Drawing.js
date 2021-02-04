@@ -1100,10 +1100,7 @@ function DrawProcess() {
 		if (DarkFactor < 1.0) DrawRect(0, 0, 2000, 1000, "rgba(0,0,0," + (1.0 - DarkFactor) + ")");
 	}
 
-	// Draws the dialog screen or current screen if there's no loaded character
-	if (CurrentCharacter != null) DialogDraw();
-	else if (!RefreshDrawFunction) DrawRun();
-	else {
+	if (RefreshDrawFunction) {
 		DrawRun = DrawRunMap.get(CurrentScreen);
 		if (DrawRun == null) {
 			if (typeof window[CurrentScreen + "Run"] === 'function') {
@@ -1114,8 +1111,11 @@ function DrawProcess() {
 				DrawRun = () => { };
 			}
 		}
-		DrawRun();
 	}
+
+	// Draws the dialog screen or current screen if there's no loaded character
+	if (CurrentCharacter != null) DialogDraw();
+	else DrawRun();
 
 	// Draws beep from online player sent by the server
 	ServerDrawBeep();
