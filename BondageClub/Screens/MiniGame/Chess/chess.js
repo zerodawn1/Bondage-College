@@ -303,8 +303,6 @@ function MiniGameChessStart(Depth) {
 		var div = document.createElement("div");
 		div.setAttribute("ID", "DivChessBoard");
 		div.className = "HideOnDisconnect";
-		div.style.width = "600px";
-		div.style.height = "600px";
 		document.body.appendChild(div);
 	}
 
@@ -324,51 +322,7 @@ function MiniGameChessStart(Depth) {
 	board.clear();
 	board.start();
 	game.reset();
-	MiniGameChessResize();
 	MiniGameChessBoard = board;
 	MiniGameChessGame = game;
-
-}
-
-// Resizes the chess board to fit the screen
-function MiniGameChessResize() {
-
-	// Gets the chess board
-	let TileSize = (MainCanvas.height / 8).toString() + "px";
-	let FullSize = MainCanvas.height.toString() + "px";
-	var div = document.getElementById("DivChessBoard");
-
-	// If the board must be resized
-	if (DivChessBoard.style.width != FullSize) {
-		DivChessBoard.style.width = FullSize;
-		DivChessBoard.style.height = FullSize;
-		DivChessBoard.style.padding = "0";
-		DivChessBoard.style.margin = "auto";
-		DivChessBoard.style.outline = "none";
-		DivChessBoard.style.display = "block";
-		DivChessBoard.style.top = "0";
-		DivChessBoard.style.bottom = "0";
-		DivChessBoard.style.left = "0";
-		DivChessBoard.style.right = "0";
-		DivChessBoard.style.position = "absolute";
-		for (let L0 = 0; L0 < DivChessBoard.children.length; L0++) {
-			DivChessBoard.children[L0].style.width = FullSize;
-			for (let L1 = 0; L1 < DivChessBoard.children[L0].children.length; L1++) {
-				DivChessBoard.children[L0].children[L1].style.width = FullSize;
-				for (let L2 = 0; L2 < DivChessBoard.children[L0].children[L1].children.length; L2++) {
-					DivChessBoard.children[L0].children[L1].children[L2].style.width = FullSize;
-					DivChessBoard.children[L0].children[L1].children[L2].style.height = TileSize;
-					for (let L3 = 0; L3 < DivChessBoard.children[L0].children[L1].children[L2].children.length; L3++) {
-						DivChessBoard.children[L0].children[L1].children[L2].children[L3].style.width = TileSize;
-						DivChessBoard.children[L0].children[L1].children[L2].children[L3].style.height = TileSize;
-						for (let L4 = 0; L4 < DivChessBoard.children[L0].children[L1].children[L2].children[L3].children.length; L4++) {
-							DivChessBoard.children[L0].children[L1].children[L2].children[L3].children[L4].style.width = TileSize;
-							DivChessBoard.children[L0].children[L1].children[L2].children[L3].children[L4].style.height = TileSize;
-						}
-					}
-				}
-			}
-		}
-	}
 
 }
