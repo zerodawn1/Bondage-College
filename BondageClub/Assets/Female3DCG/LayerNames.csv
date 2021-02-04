@@ -266,9 +266,10 @@ ItemDevicesCribPillowTrim,Pillow Trim
 ItemDevicesCribPlushies,Plushies
 ItemDevicesConcealingCloakFront,Cloak
 ItemDevicesConcealingCloakStrap,Straps
-ItemDevicesTransportWoodenBoxBox,Box
+ItemDevicesTransportWoodenBoxBack,Wood
 ItemDevicesTransportWoodenBoxWheelholders,Wheel Holders
 ItemDevicesTransportWoodenBoxWheels,Wheels
+ItemDevicesTransportWoodenBoxText,Text
 ItemDevicesWoodenBoxBack,Wood
 ItemDevicesWoodenBoxText,Text
 ItemDevicesPetBowlBowl,Bowl

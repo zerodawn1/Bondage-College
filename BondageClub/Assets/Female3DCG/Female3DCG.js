@@ -3779,11 +3779,23 @@ var AssetFemale3DCG = [
 					]}]}
 				],
 			},
-			{ Name: "TransportWoodenBox", Value: 60, Difficulty: -2, SelfBondage: 5, Time: 15, RemoveTime: 10, AllowLock: true, Audio: "LockLarge", Prerequisite: ["NotSuspended", "NotHogtied"], Effect: ["Prone", "Enclose", "BlindNormal", "GagLight", "Freeze", "Leash"], HideItem: ["ShoesFlippers"],  Alpha: [{ Masks: [[1, 1, 70, 999], [420, 1, 80, 999]] }], RemoveAtLogin: true, SetPose: ["BaseLower"], Layer: [
-				{ Name: "Box" },
-				{ Name: "Wheelholders" },
-				{ Name: "Wheels" }
-			] },
+			{
+				Name: "TransportWoodenBox", Value: 60, Difficulty: -2, SelfBondage: 5, Time: 15, RemoveTime: 10, AllowLock: true, Audio: "LockLarge", DefaultColor: ["Default", "Default", "Default", "#600"], Extended: true, RemoveAtLogin: true, SetPose: ["BaseLower"], MinOpacity: 0, Opacity: 0, DynamicAfterDraw: true,
+				AllowType: ["NWSE"],
+				AllowPose: ["Kneel"],
+				Prerequisite: ["NotSuspended", "NotHogtied"],
+				Effect: ["Prone", "Enclose", "Freeze", "Leash"],
+				AllowEffect: ["Prone", "Enclose", "BlindNormal", "GagLight", "Freeze", "Leash"],
+				HideItem: ["ShoesFlippers"],
+				Alpha: [{ Group: ["Cloth", "ClothLower", "TailStraps", "Wings", "ItemButt", "ItemArms"], Masks: [[0, 0, 90, 1000], [400, 0, 100, 1000]] }],
+				 Layer: [
+					{ Name: "Back", Priority: 1, MinOpacity: 1, HasType: false },
+					{ Name: "Panel", CopyLayerColor: "Back", HasType: false },
+					{ Name: "Wheelholders", MinOpacity: 1, HasType: false },
+					{ Name: "Wheels", MinOpacity: 1, HasType: false },
+					{ Name: "Text", HasImage: false, HasType: false },
+				],
+			},
 			{
 				Name: "VacCube", Fetish: ["Latex"], Value: 250, Difficulty: 50, Priority: 36, Top: -70, Left: 0, SelfBondage: 4, Time: 20, RemoveAtLogin: true, DefaultColor: "#480000",
 				Prerequisite: ["NoItemArms", "NoItemLegs", "AllFours", "NotSuspended", "NotHogtied", "NotKneelingSpread", "NotYoked", "LegsOpen", "NoHorse", "NoItemFeet"],
