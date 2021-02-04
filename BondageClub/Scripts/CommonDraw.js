@@ -129,10 +129,18 @@ function CommonDrawAppearanceBuild(C, {
 		});
 
 		// Check if we need to draw a different expression (for facial features)
-		var Expression = "";
-		if (AG.AllowExpression && AG.AllowExpression.length)
-			if ((Property && Property.Expression && AG.AllowExpression.includes(Property.Expression)))
-				Expression = Property.Expression + "/";
+		let Expression = "";
+		let CurrentExpression = InventoryGetItemProperty(CA, "Expression");
+		if (!CurrentExpression && Layer.MirrorExpression) {
+			const MirroredItem = InventoryGet(C, Layer.MirrorExpression);
+			CurrentExpression = InventoryGetItemProperty(MirroredItem, "Expression");
+		}
+		if (CurrentExpression) {
+			const AllowExpression = InventoryGetItemProperty(CA, "AllowExpression", true);
+			if (CurrentExpression && AllowExpression && AllowExpression.includes(CurrentExpression)) {
+				Expression = CurrentExpression + "/";
+			}
+		}
 
 		let GroupName = A.DynamicGroupName;
 
