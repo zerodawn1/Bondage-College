@@ -1002,8 +1002,8 @@ function ChatRoomRun() {
 	// Runs any needed online game script
 	OnlineGameRun();
 
-	// Clear any new message notification once they are seen
-	ChatRoomNotificationCheck();
+	// Clear any notifications if needed
+	NotificationsChatRoomReset();
 }
 
 /**
@@ -1576,7 +1576,7 @@ function ChatRoomMessage(data) {
 					if (!Player.AudioSettings.PlayItemPlayerOnly || IsPlayerInvolved)
 						AudioPlayContent(data);
 
-					if (data.Type == "Action" && IsPlayerInvolved && Player.NotificationSettings.ChatActions) ChatRoomNotification();
+					if (data.Type == "Action" && IsPlayerInvolved && SenderCharacter.MemberNumber !== Player.MemberNumber && Player.NotificationSettings.ChatActions) NotificationsChatRoomIncrement();
 				}
 			}
 
@@ -1626,7 +1626,8 @@ function ChatRoomMessage(data) {
 				else if (data.Type == "Action") msg = "(" + msg + ")";
 				else if (data.Type == "ServerMessage") msg = "<b>" + msg + "</b>";
 
-				if (Player.NotificationSettings.Chat && (data.Type == "Chat" || data.Type == "Whisper" || data.Type == "Emote")) ChatRoomNotification();
+				if (Player.NotificationSettings.Chat && SenderCharacter.MemberNumber !== Player.MemberNumber
+					&& (data.Type == "Chat" || data.Type == "Whisper" || data.Type == "Emote")) NotificationsChatRoomIncrement();
 			}
 
 			// Outputs the sexual activities text and runs the activity if the player is targeted
@@ -1662,7 +1663,7 @@ function ChatRoomMessage(data) {
 				// Exits before outputting the text if the player doesn't want to see the sexual activity messages
 				if ((Player.ChatSettings != null) && (Player.ChatSettings.ShowActivities != null) && !Player.ChatSettings.ShowActivities) return;
 
-				if (TargetMemberNumber == Player.MemberNumber && Player.NotificationSettings.ChatActions) ChatRoomNotification();
+				if (TargetMemberNumber === Player.MemberNumber && SenderCharacter.MemberNumber !== Player.MemberNumber && Player.NotificationSettings.ChatActions) NotificationsChatRoomIncrement();
 			}
 
 			if (!(
@@ -1735,9 +1736,11 @@ function ChatRoomSync(data) {
 				return;
 			}
 			else if (ChatRoomCharacter.length == data.Character.length - 1) {
-				ChatRoomCharacter.push(CharacterLoadOnline(data.Character[data.Character.length - 1], data.SourceMemberNumber));
+				let C = CharacterLoadOnline(data.Character[data.Character.length - 1], data.SourceMemberNumber);
+				ChatRoomCharacter.push(C);
 				ChatRoomData = data;
-				
+				NotificationsChatRoomJoin(C);
+
 				if (ChatRoomLeashList.indexOf(data.SourceMemberNumber) >= 0) {
 					// Ping to make sure they are still leashed
 					ServerSend("ChatRoomChat", { Content: "PingHoldLeash", Type: "Hidden", Target: data.SourceMemberNumber });
@@ -2561,37 +2564,6 @@ function ChatRoomGetLoadRules(C) {
  */
 function ChatRoomSetLoadRules(C, Rule) {
 	if (Array.isArray(Rule)) C.Rule = Rule;
-}
-
-/**
- * Increase the number of unread messages in the notifications
- * @returns {void} - Nothing
- */
-function ChatRoomNotification() {
-	if (!ChatRoomNewMessageVisible()) {
-		ChatRoomUnreadMessages = true;
-		CommonNotificationIncrement("Chat");
-	}
-}
-
-/**
- * Remove the notifications if there are new messages that have been seen
- * @returns {void} - Nothing
- */
-function ChatRoomNotificationCheck() {
-	if (ChatRoomUnreadMessages && ChatRoomNewMessageVisible()) {
-		ChatRoomUnreadMessages = false;
-		CommonNotificationReset("Chat");
-	}
-}
-
-/**
- * Returns whether the most recent chat message is on screen
- * @returns {boolean} - TRUE if the screen has focus and the chat log is scrolled to the bottom
- */
-function ChatRoomNewMessageVisible() {
-	if (!document.hasFocus()) return false;
-	else return ElementIsScrolledToEnd("TextAreaChatLog");
 }
 
 /**
