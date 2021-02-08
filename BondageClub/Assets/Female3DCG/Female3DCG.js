@@ -2302,6 +2302,26 @@ var AssetFemale3DCG = [
 					{ Name: "Straps"}
 				],
 			},
+			{
+				Name: "TransportJacket", Value: 100, Difficulty: 7, Time: 25, RemoveTime: 15, AllowLock: true, DrawLocks: false, Left: 100, AllowPose: ["LegsClosed", "Horse", "KneelingSpread", "Spread"], SetPose: ["BackElbowTouch"], Extended: true, DynamicAfterDraw: true,
+				DefaultColor: ["#888", "#801612", "#888", "#eee", "#801612", "#888"],
+				AllowType: ["Shorts", "ShortsAndStraps"],
+				Effect: ["Block", "Prone"],
+				Hide: ["Cloth", "ClothLower", "ItemNipplesPiercings"],
+				HideItemExclude: ["ClothLowerJeans1", "ClothLowerJeans2", "ClothLowerJeansShorts", "ClothLowerLatexPants1", "ClothLowerLeggings1", "ClothLowerLeggings2", "ClothLowerMistressBottom"],
+				Block: ["ItemNipples", "ItemNipplesPiercings", "ItemTorso", "ItemBreast", "ItemHands", "ItemPelvis"],
+				AllowBlock: ["ItemNipples", "ItemNipplesPiercings", "ItemTorso", "ItemBreast", "ItemHands", "ItemVulva", "ItemVulvaPiercings", "ItemButt", "ItemPelvis"],
+				Layer: [
+					{ Name: "Shorts", ColorGroup: "Canvas", ParentGroup: "BodyLower", AllowTypes: ["Shorts", "ShortsAndStraps"], HasType: false, HideForPose: ["Horse", "KneelingSpread", "Spread"] },
+					{ Name: "StripesLegs", ColorGroup: "Stripes", ParentGroup: null, AllowTypes: ["Shorts", "ShortsAndStraps"], HasType: false, HideForPose: ["Horse", "KneelingSpread", "Spread"] },
+					{ Name: "Jacket", ColorGroup: "Canvas", ParentGroup: null, HasType: false, OverrideAllowPose: [] },
+					{ Name: "Text", HasImage: false },
+					{ Name: "Stripes", ColorGroup: "Stripes", ParentGroup: null, HasType: false, OverrideAllowPose: [] },
+					{ Name: "CrotchStraps", CopyLayerColor: "Straps", ParentGroup: null, HasType: false, OverrideAllowPose: ["Horse", "KneelingSpread", "Spread"], HideForPose: ["Horse", "KneelingSpread", "Spread"] },
+					{ Name: "Straps", ParentGroup: null, HasType: false, OverrideAllowPose: [] },
+					{ Name: "StrapsLegs", CopyLayerColor: "Straps", ParentGroup: "BodyLower", AllowTypes: ["ShortsAndStraps"], HasType: false, HideForPose: ["Horse", "KneelingSpread", "Spread"] },
+				],
+			},
 			AssetSpankingToys
 		],
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
