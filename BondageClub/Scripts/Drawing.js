@@ -1085,18 +1085,6 @@ function DrawWindowResize() {
 	if ((DrawScreenWidth != W) || (DrawScreenHeight != H)) {
 		DrawScreenWidth = W;
 		DrawScreenHeight = H;
-		const Scale = (W <= H * 2) ? 2000 / W : 1000 / H;
-		const MainCanvasRect = MainCanvas.canvas.getBoundingClientRect();
-		MouseMove = function MouseMove(event) {
-			MouseX = Math.round((event.clientX - MainCanvasRect.left) * Scale);
-			MouseY = Math.round((event.clientY - MainCanvasRect.top) * Scale);
-		}
-		TouchStart = function TouchStart(event) {
-			if (!CommonIsMobile) return;
-			MouseX = Math.round((event.touches[0].clientX - MainCanvasRect.left) * Scale);
-			MouseY = Math.round((event.touches[0].clientY - MainCanvasRect.top) * Scale);
-			CommonClick();
-		}
 	}
 }
 
