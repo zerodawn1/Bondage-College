@@ -2303,7 +2303,7 @@ var AssetFemale3DCG = [
 				],
 			},
 			{
-				Name: "TransportJacket", Value: 100, Difficulty: 7, Time: 25, RemoveTime: 15, AllowLock: true, DrawLocks: false, Left: 100, AllowPose: ["LegsClosed", "Horse", "KneelingSpread", "Spread"], SetPose: ["BackElbowTouch"], Extended: true, DynamicAfterDraw: true,
+				Name: "TransportJacket", Value: 100, Difficulty: 7, Time: 25, RemoveTime: 15, AllowLock: true, DrawLocks: false, Left: 100, AllowPose: ["Kneel", "LegsClosed", "Horse", "KneelingSpread", "Spread"], SetPose: ["BackElbowTouch"], Extended: true, DynamicAfterDraw: true,
 				DefaultColor: ["#888", "#801612", "#888", "#eee", "#801612", "#888"],
 				AllowType: ["Shorts", "ShortsAndStraps"],
 				Effect: ["Block", "Prone"],
