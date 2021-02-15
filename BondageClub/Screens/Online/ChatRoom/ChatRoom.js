@@ -1906,15 +1906,12 @@ function ChatRoomSyncItem(data) {
 
 			// From another user, we prevent changing the item if the current item is locked by owner/lover locks
 			if (!FromOwner) {
-				var Item = InventoryGet(ChatRoomCharacter[C], data.Item.Group);
+				const Item = InventoryGet(ChatRoomCharacter[C], data.Item.Group);
 				if ((Item != null) && (InventoryOwnerOnlyItem(Item) || (!FromLoversOrOwner && InventoryLoverOnlyItem(Item)))) {
-					if (data.Item.Property == null) return;
-					if (Item.Asset.OwnerOnly) return;
-					if (Item.Asset.LoverOnly) return;
-					if (Item.Asset.Name === data.Item.Name) {
-						ServerItemCopyProperty(ChatRoomCharacter[C], Item, data.Item.Property)
+					if (!ChatRoomAllowChangeLockedItem(data, Item)) return;
+					else if (Item.Asset.Name === data.Item.Name && data.Item.Property != null) {
+						ServerItemCopyProperty(ChatRoomCharacter[C], Item, data.Item.Property);
 					}
-					return;
 				}
 			}
 
