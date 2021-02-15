@@ -815,7 +815,7 @@ var AssetFemale3DCG = [
 			{ Name: "ElfEars", Value: 20, BuyGroup: "ElfEars", BodyCosplay: true, InheritColor: "BodyUpper" },
 			{ Name: "CowHorns", Fetish: ["Pet"], Value: 15, BuyGroup: "CowHorns", BodyCosplay: true },
 			{
-				Name: "Halo", Value: 20, BuyGroup: "Halo", Top: -100, Left: 0, DefaultColor: ["#fe6", "#fe6", "#fff"], Extended: true, MinOpacity: 0, Opacity: 0, DynamicGroupName: "HairAccessory3", OverrideAllowPose: [],
+				Name: "Halo", Value: 20, BuyGroup: "Halo", Top: -100, Left: 0, DefaultColor: ["#fe6", "#fe6", "#fff"], Extended: true, MinOpacity: 0, Opacity: 0, DynamicGroupName: "HairAccessory3", AllowType: ["Broken"], OverrideAllowPose: [],
 				Layer: [
 					{ Name: "Glow", Opacity: 0 },
 					{ Name: "Base", MinOpacity: 1 },
