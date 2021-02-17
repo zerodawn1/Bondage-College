@@ -13,7 +13,7 @@ This changelog follows the format outlined in [keepachangelog.com](https://keepa
 
 Changelog last updated: 2021-02-15
 
-Last recorded PR: [#2110](https://github.com/Ben987/Bondage-College/pull/2110)
+Last recorded PR: [#2112](https://github.com/Ben987/Bondage-College/pull/2112)
 
 ## [R65]
 
@@ -134,7 +134,7 @@ Last recorded PR: [#2110](https://github.com/Ben987/Bondage-College/pull/2110)
 
 ### [Beta Fixes]
 
-* Jomshir - [Server #66](https://github.com/Ben987/Bondage-Club-Server/pull/66), [#2081](https://github.com/Ben987/Bondage-College/pull/2081), [#2083](https://github.com/Ben987/Bondage-College/pull/2083), [#2090](https://github.com/Ben987/Bondage-College/pull/2090), [#2094](https://github.com/Ben987/Bondage-College/pull/2094), [#2099](https://github.com/Ben987/Bondage-College/pull/2099)
+* Jomshir - [Server #66](https://github.com/Ben987/Bondage-Club-Server/pull/66), [#2081](https://github.com/Ben987/Bondage-College/pull/2081), [#2083](https://github.com/Ben987/Bondage-College/pull/2083), [#2090](https://github.com/Ben987/Bondage-College/pull/2090), [#2094](https://github.com/Ben987/Bondage-College/pull/2094), [#2099](https://github.com/Ben987/Bondage-College/pull/2099), [#2112](https://github.com/Ben987/Bondage-College/pull/2112)
 * Nina - [#2063](https://github.com/Ben987/Bondage-College/pull/2063), [#2064](https://github.com/Ben987/Bondage-College/pull/2064), [#2067](https://github.com/Ben987/Bondage-College/pull/2067), [#2069](https://github.com/Ben987/Bondage-College/pull/2069), [#2071](https://github.com/Ben987/Bondage-College/pull/2071), [#2084](https://github.com/Ben987/Bondage-College/pull/2084), [#2088](https://github.com/Ben987/Bondage-College/pull/2088), [#2089](https://github.com/Ben987/Bondage-College/pull/2089), [#2085](https://github.com/Ben987/Bondage-College/pull/2085), [#2087](https://github.com/Ben987/Bondage-College/pull/2087), [#2092](https://github.com/Ben987/Bondage-College/pull/2092), [#2095](https://github.com/Ben987/Bondage-College/pull/2095), [#2096](https://github.com/Ben987/Bondage-College/pull/2096), [#2097](https://github.com/Ben987/Bondage-College/pull/2097), [#2102](https://github.com/Ben987/Bondage-College/pull/2102), [#2104](https://github.com/Ben987/Bondage-College/pull/2104)
 * Ellie - [#2065](https://github.com/Ben987/Bondage-College/pull/2065), [#2066](https://github.com/Ben987/Bondage-College/pull/2066), [#2073](https://github.com/Ben987/Bondage-College/pull/2073), [#2074](https://github.com/Ben987/Bondage-College/pull/2074), [#2076](https://github.com/Ben987/Bondage-College/pull/2076), [#2082](https://github.com/Ben987/Bondage-College/pull/2082), [#2093](https://github.com/Ben987/Bondage-College/pull/2093), [#2098](https://github.com/Ben987/Bondage-College/pull/2098), [#2105](https://github.com/Ben987/Bondage-College/pull/2105), [#2106](https://github.com/Ben987/Bondage-College/pull/2106), [#2107](https://github.com/Ben987/Bondage-College/pull/2107), [#2108](https://github.com/Ben987/Bondage-College/pull/2108), [#2109](https://github.com/Ben987/Bondage-College/pull/2109)
 * Sekkmer - [#2068](https://github.com/Ben987/Bondage-College/pull/2068)
