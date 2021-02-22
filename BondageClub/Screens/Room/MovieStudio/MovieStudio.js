@@ -664,6 +664,27 @@ function MovieStudioDoActivity(Activity) {
 		CharacterRefresh(Player);
 		MovieStudioChangeMeter(-10);
 	}
+	if ((Activity == "InterviewMaidTickleJournalist") || (Activity == "InterviewMaidCaressJournalist") || (Activity == "InterviewMaidSpankJournalist") || (Activity == "InterviewMaidMasturbateJournalist") || (Activity == "InterviewMaidDusterGagJournalist") || (Activity == "InterviewMaidFeatherDusterJournalist") || (Activity == "InterviewMaidLongDusterJournalist") || (Activity == "InterviewMaidToothbrushJournalist") || (Activity == "InterviewMaidWandOrgasmJournalist")) {
+		CharacterSetFacialExpression(MovieStudioActor2, "Blush", "Medium", 10);
+		CharacterSetFacialExpression(MovieStudioActor2, "Eyes", "Closed", 5);
+		CharacterSetFacialExpression(MovieStudioActor2, "Eyes2", "Closed", 5);
+	}
+	if ((Activity == "InterviewMaidAllowOrgasmJournalist") || (Activity == "InterviewMaidWandRepeatOrgasmJournalist")) {
+		MovieStudioActor2.OweFavor = true;
+		CharacterSetFacialExpression(MovieStudioActor2, "Blush", "High", 10);
+		CharacterSetFacialExpression(MovieStudioActor2, "Eyes", "Dazed", 5);
+		CharacterSetFacialExpression(MovieStudioActor2, "Eyes2", "Dazed", 5);
+	}	
+	if (Activity == "InterviewMaidReleaseJournalist") {
+		CharacterRelease(MovieStudioActor2);
+		CharacterNaked(MovieStudioActor2);
+		InventoryWear(MovieStudioActor2, "Camera1", "ClothAccessory", "Default");
+		InventoryWear(MovieStudioActor2, "TeacherOutfit1", "Cloth", "Default");
+		InventoryWear(MovieStudioActor2, "Glasses1", "Glasses", "#333333");
+		InventoryWear(MovieStudioActor2, "Socks5", "Socks", "#444458");
+		InventoryWear(MovieStudioActor2, "Shoes2", "Shoes", "#111111");
+		DialogLeave();
+	}
 
 	// Check for decay
 	MovieStudioProcessDecay();
@@ -718,6 +739,11 @@ function MovieStudioCanDoActivity(Activity) {
 	if (Activity == "InterviewMistressPunishGavel") return InventoryIsWorn(Player, "SpankingToys", "ItemHands");
 	if (Activity == "InterviewWearDusterGag") return (InventoryGet(Player, "ItemMouth") == null);
 	if (Activity == "InterviewLeaveHandItem") return !(InventoryGet(Player, "ItemHands") == null);
+	if (Activity == "InterviewMaidFeatherDusterJournalist") return (InventoryIsWorn(Player, "SpankingToys", "ItemHands") && (InventoryGet(Player, "ItemHands").Property.Type == "FeatherDuster"));
+	if (Activity == "InterviewMaidLongDusterJournalist") return (InventoryIsWorn(Player, "SpankingToys", "ItemHands") && (InventoryGet(Player, "ItemHands").Property.Type == "LongDuster"));
+	if (Activity == "InterviewMaidToothbrushJournalist") return (InventoryIsWorn(Player, "SpankingToys", "ItemHands") && (InventoryGet(Player, "ItemHands").Property.Type == "ElectricToothbrush"));
+	if (Activity == "InterviewMaidWandOrgasmJournalist") return (InventoryIsWorn(Player, "SpankingToys", "ItemHands") && (InventoryGet(Player, "ItemHands").Property.Type == "VibratingWand") && (MovieStudioActor2.OweFavor == null));
+	if (Activity == "InterviewMaidWandRepeatOrgasmJournalist") return (InventoryIsWorn(Player, "SpankingToys", "ItemHands") && (InventoryGet(Player, "ItemHands").Property.Type == "VibratingWand") && (MovieStudioActor2.OweFavor != null));
 	return false;
 }
 
