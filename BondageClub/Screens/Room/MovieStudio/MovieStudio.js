@@ -81,7 +81,7 @@ function MovieStudioProcessDecay() {
 			CharacterSetCurrent(MovieStudioActor1);
 			return;
 		}
-		if ((MovieStudioCurrentMovie == "Interview") && (MovieStudioCurrentScene == "2")) {
+		if ((MovieStudioCurrentMovie == "Interview") && (MovieStudioCurrentScene == "2") && (MovieStudioCurrentRole == "Journalist")) {
 			MovieStudioMoney = MovieStudioMoney + Math.floor(MovieStudioMeter / 10);
 			MovieStudioProgress(MovieStudioCurrentMovie, "3", "");
 			MovieStudioActor2 = null;
@@ -90,6 +90,17 @@ function MovieStudioProcessDecay() {
 			MovieStudioActor2.Stage = "0";
 			MovieStudioActor1.Stage = "300";
 			CharacterSetCurrent(MovieStudioActor2);
+			return;
+		}
+		if ((MovieStudioCurrentMovie == "Interview") && (MovieStudioCurrentScene == "2") && (MovieStudioCurrentRole == "Maid")) {
+			MovieStudioMoney = MovieStudioMoney + Math.floor(MovieStudioMeter / 10);
+			MovieStudioProgress(MovieStudioCurrentMovie, "3", "");
+			MovieStudioActor1 = null;
+			MovieStudioActor1 = CharacterLoadNPC("NPC_MovieStudio_Interview_Mistress");
+			MovieStudioActor1.CurrentDialog = TextGet("InterviewMistressIntro" + Math.floor(Math.random() * 4).toString());
+			MovieStudioActor1.Stage = "2000";
+			MovieStudioActor2.Stage = (MovieStudioActor2.CanInteract()) ? "1100" : "1000";
+			CharacterSetCurrent(MovieStudioActor1);
 			return;
 		}
 		if ((MovieStudioCurrentMovie == "Interview") && (MovieStudioCurrentScene == "3")) {
@@ -685,6 +696,14 @@ function MovieStudioDoActivity(Activity) {
 		InventoryWear(MovieStudioActor2, "Shoes2", "Shoes", "#111111");
 		DialogLeave();
 	}
+	if (Activity == "InterviewCuffPlayer") {
+		InventoryWear(Player, "LeatherCuffs", "ItemArms");
+		InventoryWear(Player, "LeatherLegCuffs", "ItemLegs");
+		InventoryWear(Player, "LeatherAnkleCuffs", "ItemFeet");
+	}
+	if (Activity == "InterviewCuffElbowPlayer") { InventoryGet(Player, "ItemArms").Property = { Type: "Elbow", Effect: ["Block"], SetPose: ["BackElbowTouch"] }; CharacterRefresh(Player); }
+	if (Activity == "InterviewCuffBoxTiePlayer") { InventoryGet(Player, "ItemArms").Property = { Type: "Wrist", Effect: ["Block"], SetPose: ["BackBoxTie"] }; CharacterRefresh(Player); }
+	if (Activity == "InterviewCuffLegsPlayer") { InventoryGet(Player, "ItemLegs").Property = { SetPose: ["LegsClosed"] }; CharacterRefresh(Player); }
 
 	// Check for decay
 	MovieStudioProcessDecay();
