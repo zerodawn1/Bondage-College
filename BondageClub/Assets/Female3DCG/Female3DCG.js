@@ -3805,18 +3805,16 @@ var AssetFemale3DCG = [
 			{ 
 				Name: "Crib", Category: ["ABDL"], Fetish: ["ABDL"], Priority: 1, Value: 100,
 				Difficulty: 0, SelfBondage: 1, Time: 15, RemoveTime: 10, IsRestraint: true, AllowLock: true, Left: -30, Top: -235,
-				Effect: ["Freeze", "Leash"], HideItem: ["ShoesFlippers"], RemoveAtLogin: true, Prerequisite: ["AllFours", "NotSuspended", "NotHogtied", "NoFeetSpreader"], Extended: true, 
-				AllowType: ["g0p0", "g0p1", "g1p0", "g1p1"], SetPose: ["BaseLower"], 
-				Layer: 
-				[
-					{ Name: "GateClosed", CopyLayerColor: "Frame", AllowTypes: ["g1p0", "g1p1"], HasType: false },
-					{ Name: "GateOpen", CopyLayerColor: "Frame", AllowTypes: ["g0p0", "g0p1"], HasType: false },
-					{ Name: "Frame", ColorGroup: "Frame", ParentGroup: null, AllowTypes: ["g0p0", "g0p1", "g1p0", "g1p1"], HasType: false },
-					{ Name: "Mattress", ColorGroup: "Mattress", ParentGroup: null, AllowTypes: ["g0p0", "g0p1", "g1p0", "g1p1"], HasType: false },
-					{ Name: "Pillow", ColorGroup: "Pillow", ParentGroup: null, AllowTypes: ["g0p0", "g0p1", "g1p0", "g1p1"], HasType: false },
-					{ Name: "PillowTrim", ColorGroup: "PillowTrim", ParentGroup: null, AllowTypes: ["g0p0", "g0p1", "g1p0", "g1p1"], HasType: false },
-					{ Name: "Plushies", Priority: 54, ColorGroup: "Plushies", ParentGroup: null, AllowTypes: ["g0p1", "g1p1"], HasType: false }
-				]
+				Effect: ["Freeze", "Leash"], HideItem: ["ShoesFlippers"], RemoveAtLogin: true, Prerequisite: ["AllFours", "NotSuspended", "NotHogtied", "NoFeetSpreader"], Extended: true, SetPose: ["BaseLower"],
+				Layer: [
+					{ Name: "GateClosed", CopyLayerColor: "Frame", AllowModuleTypes: ["g1"], HasType: false },
+					{ Name: "GateOpen", CopyLayerColor: "Frame", AllowModuleTypes: ["g0"], HasType: false },
+					{ Name: "Frame", ColorGroup: "Frame", ParentGroup: null, HasType: false },
+					{ Name: "Mattress", ColorGroup: "Mattress", ParentGroup: null, HasType: false },
+					{ Name: "Pillow", ColorGroup: "Pillow", ParentGroup: null, HasType: false },
+					{ Name: "PillowTrim", ColorGroup: "PillowTrim", ParentGroup: null, HasType: false },
+					{ Name: "Plushies", Priority: 54, ColorGroup: "Plushies", ParentGroup: null, AllowModuleTypes: ["p1"], HasType: false }
+				],
 			},
 			{
 				Name: "Bed", Value: 100, Priority: 1, Difficulty: -20, SelfBondage: 0, Time: 5, RemoveTime: 5, RemoveAtLogin: true, DefaultColor: ["#523629", "#888990", "#808284"], BuyGroup: "Bed",
