@@ -1366,30 +1366,30 @@ function ChatRoomSendChat() {
 /**
  * Publishes common player actions (add, remove, swap) to the chat.
  * @param {Character} C - Character on which the action is done.
- * @param {Asset} DialogProgressPrevItem - The item that has been removed.
- * @param {Asset} DialogProgressNextItem - The item that has been added.
+ * @param {Asset} StruggleProgressPrevItem - The item that has been removed.
+ * @param {Asset} StruggleProgressNextItem - The item that has been added.
  * @param {boolean} LeaveDialog - Whether to leave the current dialog after publishing the action.
  * @param {string} [Action] - Action modifier 
  * @returns {void} - Nothing.
  */
-function ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem, LeaveDialog, Action = null) {
+function ChatRoomPublishAction(C, StruggleProgressPrevItem, StruggleProgressNextItem, LeaveDialog, Action = null) {
 	if (CurrentScreen == "ChatRoom") {
 
 		// Prepares the message
 		var msg = "";
 		var Dictionary = [];
 		if (Action == null) {
-			if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null) && (DialogProgressPrevItem.Asset.Name == DialogProgressNextItem.Asset.Name) && (DialogProgressPrevItem.Color != DialogProgressNextItem.Color)) msg = "ActionChangeColor";
-			else if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null) && !DialogProgressNextItem.Asset.IsLock) msg = "ActionSwap";
-			else if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null) && DialogProgressNextItem.Asset.IsLock) msg = "ActionAddLock";
-			else if (InventoryItemHasEffect(DialogProgressNextItem, "Lock")) msg = "ActionLock";
-			else if ((DialogProgressNextItem != null) && (!DialogProgressNextItem.Asset.Wear) && (DialogProgressNextItem.Asset.DynamicActivity(Player) != null)) msg = "ActionActivity" + DialogProgressNextItem.Asset.DynamicActivity(Player);
-			else if (DialogProgressNextItem != null) msg = "ActionUse";
-			else if (InventoryItemHasEffect(DialogProgressPrevItem, "Lock")) msg = "ActionUnlockAndRemove";
+			if ((StruggleProgressPrevItem != null) && (StruggleProgressNextItem != null) && (StruggleProgressPrevItem.Asset.Name == StruggleProgressNextItem.Asset.Name) && (StruggleProgressPrevItem.Color != StruggleProgressNextItem.Color)) msg = "ActionChangeColor";
+			else if ((StruggleProgressPrevItem != null) && (StruggleProgressNextItem != null) && !StruggleProgressNextItem.Asset.IsLock) msg = "ActionSwap";
+			else if ((StruggleProgressPrevItem != null) && (StruggleProgressNextItem != null) && StruggleProgressNextItem.Asset.IsLock) msg = "ActionAddLock";
+			else if (InventoryItemHasEffect(StruggleProgressNextItem, "Lock")) msg = "ActionLock";
+			else if ((StruggleProgressNextItem != null) && (!StruggleProgressNextItem.Asset.Wear) && (StruggleProgressNextItem.Asset.DynamicActivity(Player) != null)) msg = "ActionActivity" + StruggleProgressNextItem.Asset.DynamicActivity(Player);
+			else if (StruggleProgressNextItem != null) msg = "ActionUse";
+			else if (InventoryItemHasEffect(StruggleProgressPrevItem, "Lock")) msg = "ActionUnlockAndRemove";
 			else msg = "ActionRemove";
 		} else if (Action == "interrupted") {
-			if ((DialogProgressPrevItem != null) && (DialogProgressNextItem != null) && !DialogProgressNextItem.Asset.IsLock) msg = "ActionInterruptedSwap";
-			else if (DialogProgressNextItem != null) msg = "ActionInterruptedAdd";
+			if ((StruggleProgressPrevItem != null) && (StruggleProgressNextItem != null) && !StruggleProgressNextItem.Asset.IsLock) msg = "ActionInterruptedSwap";
+			else if (StruggleProgressNextItem != null) msg = "ActionInterruptedAdd";
 			else msg = "ActionInterruptedRemove";
 			Dictionary.push({ Tag: "TargetCharacter", Text: C.Name, MemberNumber: C.MemberNumber });
 		} else msg = Action;
@@ -1397,8 +1397,8 @@ function ChatRoomPublishAction(C, DialogProgressPrevItem, DialogProgressNextItem
 		// Replaces the action tags to build the phrase
 		Dictionary.push({ Tag: "SourceCharacter", Text: Player.Name, MemberNumber: Player.MemberNumber });
 		Dictionary.push({ Tag: "DestinationCharacter", Text: C.Name, MemberNumber: C.MemberNumber });
-		if (DialogProgressPrevItem != null) Dictionary.push({ Tag: "PrevAsset", AssetName: DialogProgressPrevItem.Asset.Name });
-		if (DialogProgressNextItem != null) Dictionary.push({ Tag: "NextAsset", AssetName: DialogProgressNextItem.Asset.Name });
+		if (StruggleProgressPrevItem != null) Dictionary.push({ Tag: "PrevAsset", AssetName: StruggleProgressPrevItem.Asset.Name });
+		if (StruggleProgressNextItem != null) Dictionary.push({ Tag: "NextAsset", AssetName: StruggleProgressNextItem.Asset.Name });
 		if (C.FocusGroup != null) Dictionary.push({ Tag: "FocusAssetGroup", AssetGroupName: C.FocusGroup.Name });
 
 		// Prepares the item packet to be sent to other players in the chatroom
