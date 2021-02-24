@@ -291,23 +291,26 @@ function LoginValideBuyGroups() {
  * @returns {void} Nothing
  */
 function LoginValidateArrays() {
+	let update = false;
 	var CleanBlockItems = AssetCleanArray(Player.BlockItems);
 	if (CleanBlockItems.length != Player.BlockItems.length) {
 		Player.BlockItems = CleanBlockItems;
-		ServerSend("AccountUpdate", { BlockItems: Player.BlockItems });
+		update = true;
 	}
 
 	var CleanLimitedItems = AssetCleanArray(Player.LimitedItems);
 	if (CleanLimitedItems.length != Player.LimitedItems.length) {
 		Player.LimitedItems = CleanLimitedItems;
-		ServerSend("AccountUpdate", { LimitedItems: Player.LimitedItems });
+		update = true;
 	}
 
 	var CleanHiddenItems = AssetCleanArray(Player.HiddenItems);
 	if (CleanHiddenItems.length != Player.HiddenItems.length) {
 		Player.HiddenItems = CleanHiddenItems;
-		ServerSend("AccountUpdate", { HiddenItems: Player.HiddenItems });
+		update = true;
 	}
+	if (update)
+		ServerPlayerBlockItemsSync();
 }
 
 /**
@@ -319,7 +322,7 @@ function LoginDifficulty() {
 	// If Extreme mode, the player cannot control her blocked items
 	if (Player.GetDifficulty() >= 3) {
 		LoginExtremeItemSettings();
-		ServerSend("AccountUpdate", { BlockItems: Player.BlockItems, LimitedItems: Player.LimitedItems, HiddenItems: Player.HiddenItems });
+		ServerPlayerBlockItemsSync();
 	}
 }
 
@@ -395,6 +398,11 @@ function LoginResponse(C) {
 			Player.LimitedItems = Array.isArray(C.LimitedItems) ? C.LimitedItems :
 				typeof C.LimitedItems === "object" && C.LimitedItems ? CommonUnpackItemArray(C.LimitedItems) : [];
 			Player.HiddenItems = ((C.HiddenItems == null) || !Array.isArray(C.HiddenItems)) ? [] : C.HiddenItems;
+			// TODO: Migration code; remove after few versions (added R66)
+			if (Array.isArray(C.BlockItems) || Array.isArray(C.LimitedItems)) {
+				ServerPlayerBlockItemsSync();
+			}
+
 			Player.Difficulty = C.Difficulty;
 			Player.WardrobeCharacterNames = C.WardrobeCharacterNames;
 			WardrobeCharacter = [];
