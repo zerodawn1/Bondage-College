@@ -182,6 +182,7 @@ function LoginMistressItems() {
 		InventoryAdd(Player, "MistressPadlock", "ItemMisc", false);
 		InventoryAdd(Player, "MistressPadlockKey", "ItemMisc", false);
 		InventoryAdd(Player, "MistressTimerPadlock", "ItemMisc", false);
+		InventoryAdd(Player, "DeluxeBoots", "Shoes", false);
 	} else {
 		InventoryDelete(Player, "MistressPadlock", "ItemMisc", false);
 		InventoryDelete(Player, "MistressPadlockKey", "ItemMisc", false);
@@ -190,6 +191,7 @@ function LoginMistressItems() {
 		InventoryDelete(Player, "MistressBoots", "Shoes", false);
 		InventoryDelete(Player, "MistressTop", "Cloth", false);
 		InventoryDelete(Player, "MistressBottom", "ClothLower", false);
+		InventoryDelete(Player, "DeluxeBoots", "Shoes", false);
 	}
 }
 
