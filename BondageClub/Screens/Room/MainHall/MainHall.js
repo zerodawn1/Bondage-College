@@ -432,6 +432,7 @@ function MainHallClick() {
  */
 function MainHallOpenChangelog() {
 	window.open("./changelog.html", "_blank");
+	DialogLeave();
 }
 
 /**
