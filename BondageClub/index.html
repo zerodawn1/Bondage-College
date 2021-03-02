@@ -343,9 +343,7 @@ window.onload = function() {
 	ServerURL = "https://bondage-club-server.herokuapp.com/";
 	GameVersion = "R66Alpha";
 	console.log("Version: " + GameVersion + ", Server: " + ServerURL);
-	if (!GameVersionFormat.test(GameVersion)) {
-		console.error("GameVersion is not valid!");
-	}
+	if (!GameVersionFormat.test(GameVersion)) console.error("GameVersion is not valid!");
 	CommonIsMobile = CommonDetectMobile();
 	TranslationLoad();
 	DrawLoad();
