@@ -269,7 +269,7 @@ function DrawCharacter(C, X, Y, Zoom, IsHeightResizeAllowed) {
 
 		// If we must dark the Canvas characters
 		if ((C.ID != 0) && Player.IsBlind() && (CurrentScreen != "InformationSheet")) {
-			const DarkFactor = ( CurrentScreen == "KinkyDungeon") ? 1.0 : Math.min(CharacterGetDarkFactor(Player) * 2, 1);
+			const DarkFactor = Math.min(CharacterGetDarkFactor(Player) * 2, 1);
 			
 			CharacterCanvas.globalCompositeOperation = "copy";
 			CharacterCanvas.drawImage(Canvas, 0, 0);
