@@ -2848,7 +2848,7 @@ function ChatRoomNotificationReset() {
 	if (CurrentScreen !== "ChatRoom" || ChatRoomNotificationNewMessageVisible()) {
 		NotificationReset(NotificationEventType.CHATMESSAGE);
 	}
-	NotificationReset(NotificationEventType.CHATJOIN);
+	if (document.hasFocus()) NotificationReset(NotificationEventType.CHATJOIN);
 }
 
 /**
