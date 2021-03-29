@@ -113,7 +113,8 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		IsNpc: function () { return (this.AccountName.substring(0, 4) === "NPC_" || this.AccountName.substring(0, 4) === "NPC-"); },
 		GetDifficulty: function () { return ((this.Difficulty == null) || (this.Difficulty.Level == null) || (typeof this.Difficulty.Level !== "number") || (this.Difficulty.Level < 0) || (this.Difficulty.Level > 3)) ? 1 : this.Difficulty.Level; },
 		IsInverted: function () { return this.Pose.indexOf("Suspension") >= 0; },
-		CanChangeToPose: function(Pose) { return CharacterCanChangeToPose(this, Pose); }
+		CanChangeToPose: function(Pose) { return CharacterCanChangeToPose(this, Pose); },
+		GetClumsiness: function() { return CharacterGetClumsiness(this); },
 	};
 
 	// If the character doesn't exist, we create it
@@ -1250,4 +1251,18 @@ function CharacterGetDarkFactor(C, eyesOnly = false) {
 	else if (blindLevel === 2) DarkFactor = 0.15;
 	else if (blindLevel === 1) DarkFactor = 0.3;
 	return DarkFactor;
+}
+
+/**
+ * Gets the clumsiness level of a character. This represents dexterity when interacting with locks etc. and can have a
+ * maximum value of 5.
+ * @param {Character} C - The character to check
+ * @returns {number} - The clumsiness rating of the player, a number between 0 and 5 inclusive.
+ */
+function CharacterGetClumsiness(C) {
+	let clumsiness = 0;
+	if (!C.CanInteract()) clumsiness += 2;
+	const handItem = InventoryGet(C, "ItemHands");
+	if (handItem && handItem.Asset.IsRestraint) clumsiness += 3;
+	return Math.min(clumsiness, 5);
 }
