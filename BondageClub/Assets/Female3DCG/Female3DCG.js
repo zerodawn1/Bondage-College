@@ -1222,7 +1222,6 @@ var AssetFemale3DCG = [
 		Group: "Nipples",
 		ParentGroup: "BodyUpper",
 		Priority: 11,
-		Default: false,
 		Left: 175,
 		Top: 285,
 		AllowNone: false,
