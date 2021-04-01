@@ -57,6 +57,12 @@ var DialogSelfMenuOptions = [
 		Click: DialogClickPoseMenu,
 	},
 	{
+		Name: "SavedExpressions",
+		IsAvailable: () => true,
+		Draw: DialogDrawSavedExpressionsMenu,
+		Click: DialogClickSavedExpressionsMenu,
+	},
+	{
 		Name: "OwnerRules",
 		IsAvailable: () => DialogSelfMenuSelected && DialogSelfMenuSelected.Name == "OwnerRules",
 		Draw: DialogDrawOwnerRulesMenu,
@@ -818,6 +824,57 @@ function DialogFacialExpressionsBuild() {
 	DialogFacialExpressions = DialogFacialExpressions.sort(function (a, b) {
 		return a.Appearance.Asset.Group.Name < b.Appearance.Asset.Group.Name ? -1 : a.Appearance.Asset.Group.Name > b.Appearance.Asset.Group.Name ? 1 : 0;
 	});
+}
+
+/**
+ * saves the expressions to a slot
+ * @param {any} Slot slot 0-4
+ */
+function DialogFacialExpressionsSave(Slot) {
+	Player.SavedExpressions[Slot] = [];
+	for (let x = 0; x < DialogFacialExpressions.length; x++) {
+		Player.SavedExpressions[Slot].push({ Group: DialogFacialExpressions[x].Group, CurrentExpression: DialogFacialExpressions[x].CurrentExpression });
+	}
+	ServerSend("AccountUpdate", { SavedExpressions: Player.SavedExpressions });
+}
+/**
+ * loads expressions from a slot
+ * @param {any} Slot slot 0-4
+ */
+function DialogFacialExpressionsLoad(Slot) {
+	if (Player.SavedExpressions[Slot] != null) {
+		for (let x = 0; x < Player.SavedExpressions[Slot].length; x++) {
+			CharacterSetFacialExpression(Player, Player.SavedExpressions[Slot][x].Group, Player.SavedExpressions[Slot][x].CurrentExpression);
+		}
+		DialogFacialExpressionsBuild();
+	}
+}
+/**draws the savedexpressions menu */
+function DialogDrawSavedExpressionsMenu() {
+	DrawText(DialogFindPlayer("SavedExpressions"), 195, 25, "White", "Black");
+	DrawText(DialogFindPlayer("SavedExpressionsSave"), 140, 180, "White", "Black");
+	DrawText(DialogFindPlayer("SavedExpressionsLoad"), 260, 180, "White", "Black");
+	for (let x = 0; x < 5; x++) {
+		DrawButton(100, 200 + (x * 100), 80, 80, x + 1, "White");
+		DrawButton(220, 200 + (x * 100), 80, 80, x + 1, "White");
+	}
+}
+/**handles clicks in the savedexpressions menu */
+function DialogClickSavedExpressionsMenu() {
+	if (MouseXIn(100, 80)) {
+		for (let x = 0; x < 5; x++) {
+			if (MouseYIn(200 + (x * 100), 80)) {
+				DialogFacialExpressionsSave(x);
+			}
+		}
+	}
+	if (MouseXIn(220, 80)) {
+		for (let x = 0; x < 5; x++) {
+			if (MouseYIn(200 + (x * 100), 80)) {
+				DialogFacialExpressionsLoad(x);
+			}
+		}
+	}
 }
 
 /**
