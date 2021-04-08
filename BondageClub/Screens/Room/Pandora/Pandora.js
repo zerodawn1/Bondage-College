@@ -1,6 +1,7 @@
 "use strict";
 var PandoraBackground = "Pandora/Ground/Entrance";
 var PandoraCurrentRoom = null;
+var PandoraPreviousRoom = null;
 var PandoraRoom = [];
 var PandoraDirectionList = ["South", "North", "East", "West"];
 var PandoraDirectionListFrom = ["North", "South", "West", "East"];
@@ -124,17 +125,33 @@ function PandoraClick() {
 					} else PandoraMsgBox(TextGet("AlreadyFound").replace("TargetName", InfiltrationTarget.Name));
 					return;
 				}
-				return PandoraCurrentRoom = PandoraCurrentRoom.Path[P];
+				return PandoraEnterRoom(PandoraCurrentRoom.Path[P]);
 			}
-		if (MouseIn(1827, 655, 90, 90) && (PandoraCurrentRoom.DirectionMap.indexOf("North") >= 0)) return PandoraCurrentRoom = PandoraCurrentRoom.PathMap[PandoraCurrentRoom.DirectionMap.indexOf("North")];
-		if (MouseIn(1770, 770, 90, 90) && (PandoraCurrentRoom.DirectionMap.indexOf("West") >= 0)) return PandoraCurrentRoom = PandoraCurrentRoom.PathMap[PandoraCurrentRoom.DirectionMap.indexOf("West")];
-		if (MouseIn(1885, 770, 90, 90) && (PandoraCurrentRoom.DirectionMap.indexOf("East") >= 0)) return PandoraCurrentRoom = PandoraCurrentRoom.PathMap[PandoraCurrentRoom.DirectionMap.indexOf("East")];
-		if (MouseIn(1827, 885, 90, 90) && (PandoraCurrentRoom.DirectionMap.indexOf("South") >= 0)) return PandoraCurrentRoom = PandoraCurrentRoom.PathMap[PandoraCurrentRoom.DirectionMap.indexOf("South")];
+		if (MouseIn(1827, 655, 90, 90) && (PandoraCurrentRoom.DirectionMap.indexOf("North") >= 0)) return PandoraEnterRoom(PandoraCurrentRoom.PathMap[PandoraCurrentRoom.DirectionMap.indexOf("North")]);
+		if (MouseIn(1770, 770, 90, 90) && (PandoraCurrentRoom.DirectionMap.indexOf("West") >= 0)) return PandoraEnterRoom(PandoraCurrentRoom.PathMap[PandoraCurrentRoom.DirectionMap.indexOf("West")]);
+		if (MouseIn(1885, 770, 90, 90) && (PandoraCurrentRoom.DirectionMap.indexOf("East") >= 0)) return PandoraEnterRoom(PandoraCurrentRoom.PathMap[PandoraCurrentRoom.DirectionMap.indexOf("East")]);
+		if (MouseIn(1827, 885, 90, 90) && (PandoraCurrentRoom.DirectionMap.indexOf("South") >= 0)) return PandoraEnterRoom(PandoraCurrentRoom.PathMap[PandoraCurrentRoom.DirectionMap.indexOf("South")]);
 	}
 
 }
 
-// Generates X rooms linked on the entry room
+/**
+ * When the players enters a new room, we keep the previous room
+ * @param {object} Room - The room to step into
+ * @returns {void} - Nothing
+ */
+function PandoraEnterRoom(Room) {
+	PandoraPreviousRoom = PandoraCurrentRoom;
+	PandoraCurrentRoom = Room;
+}
+
+/**
+ * Generates random rooms linked on the entry room
+ * @param {object} EntryRoom - The room object that's leading to that floor
+ * @param {string} The entry direction
+ * @param {number} The room level, the higher it goes, the higher the chances it will be a dead-end
+ * @returns {void} - Nothing
+ */
 function PandoraGenerateRoom(EntryRoom, DirectionFrom, RoomLevel) {
 	
 	// The higher the room level, the less paths there will be
@@ -203,11 +220,12 @@ function PandoraGenerateRoom(EntryRoom, DirectionFrom, RoomLevel) {
 	}	
 }
 
-
 /**
  * Loads the Pandora's Box screen
  * @param {string} FloorName - The name of the floor in which we must generate rooms
- * @param {object} Entry - The room object that's leading to that floor
+ * @param {object} EntryRoom - The room object that's leading to that floor
+ * @param {string} The entry direction
+ * @param {string} The opposite direction
  * @returns {void} - Nothing
  */
 function PandoraGenerateFloor(FloorName, EntryRoom, DirectionFrom, DirectionTo) {
@@ -263,6 +281,7 @@ function PandoraBuildMainHall() {
 	// Generates the floors and sets the starting room
 	PandoraGenerateFloor("Underground", Room, "StairsUp", "StairsDown");
 	PandoraCurrentRoom = Room;
+	PandoraPreviousRoom = null;
 
 	// Picks a random cell room for the final target
 	let RoomFound = false;
@@ -282,6 +301,12 @@ function PandoraBuildMainHall() {
 				Victim.AllowItem = true;
 				Victim.Stage = "0";
 				Room.Character.push(Victim);
+				let Guard = CharacterLoadNPC("NPC_Pandora_RescueGuard");
+				InventoryWear(Guard, "PoliceWomanHat", "Hat", "Default");
+				Guard.AllowItem = false;
+				Guard.AllowMove = false;
+				Guard.Stage = "0";				
+				Room.PathMap[0].Character.push(Guard);
 			}
 			if (InfiltrationMission == "Kidnap") {
 				let Target = CharacterLoadNPC("NPC_Pandora_KidnapTarget");
@@ -308,6 +333,15 @@ function PandoraRemoveCurrentCharacter() {
 			break;
 		}
 	CharacterDelete(CurrentCharacter.AccountName);
+	DialogLeave();
+}
+
+/**
+ * Flags the current character to allow moves and exits any dialog with her
+ * @returns {void} - Nothing
+ */
+function PandoraCharacterAllowMove() {
+	CurrentCharacter.AllowMove = true;
 	DialogLeave();
 }
 
@@ -344,6 +378,7 @@ function PandoraCharacterFightEnd() {
 	CurrentCharacter.Stage = (KidnapVictory) ? "100" : "200";
 	CharacterRelease(KidnapVictory ? Player : CurrentCharacter);
 	CurrentCharacter.AllowItem = KidnapVictory;
+	if (KidnapVictory) CurrentCharacter.AllowMove = true;
 	CommonSetScreen("Room", "Pandora");
 	CurrentCharacter.CurrentDialog = DialogFind(CurrentCharacter, (KidnapVictory) ? "FightVictory" : "FightDefeat");
 }
@@ -356,5 +391,16 @@ function PandoraMissionFail() {
 	InfiltrationTarget.Fail = true;
 	CharacterRelease(Player);
 	CommonSetScreen("Room", "Infiltration");
+	DialogLeave();
+}
+
+/**
+ * When the player must walk back to the previous room he entered from
+ * @returns {void} - Nothing
+ */
+function PandoraWalkBack() {
+	if (PandoraPreviousRoom == null) return;
+	PandoraCurrentRoom = PandoraPreviousRoom;
+	PandoraPreviousRoom = null;
 	DialogLeave();
 }
