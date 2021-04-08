@@ -7,6 +7,8 @@ var PandoraDirectionListFrom = ["North", "South", "West", "East"];
 var PandoraSeachMode = false;
 var PandoraSeachSquare = null;
 var PandoraMessage = null;
+var PandoraParty = [];
+var PandoraFightCharacter = null;
 
 /**
  * Prepares a text popup for Pandora's Box
@@ -41,11 +43,13 @@ function PandoraRun() {
 	}
 
 	// Draws up to 4 characters in the room, including the player
-	let Pos = 690 - PandoraCurrentRoom.Character.length * 230;
+	let Pos = 690 - (PandoraCurrentRoom.Character.length + PandoraParty.length) * 230;
 	DrawCharacter(Player, Pos, 0, 1);
 	let AllowMove = true;
+	for (let C = 0; C < PandoraParty.length; C++)
+		DrawCharacter(PandoraParty[C], Pos + ((C + 1) * 460), 0, 1);
 	for (let C = 0; C < PandoraCurrentRoom.Character.length; C++) {
-		DrawCharacter(PandoraCurrentRoom.Character[C], Pos + ((C + 1) * 460), 0, 1);
+		DrawCharacter(PandoraCurrentRoom.Character[C], Pos + ((C + 1 + PandoraParty.length) * 460), 0, 1);
 		if ((PandoraCurrentRoom.Character[C].AllowMove != null) && (PandoraCurrentRoom.Character[C].AllowMove == false)) AllowMove = false;
 	}
 
@@ -77,7 +81,6 @@ function PandoraClick() {
 
 	// Checks if we clicked on the player
 	if (PandoraRoom.length == 0) return;
-	let Pos = 690 - PandoraCurrentRoom.Character.length * 230;
 
 	// If there's a message running, we do not allow any clicks
 	if ((PandoraMessage != null) && (PandoraMessage.Timer != null) && (PandoraMessage.Text != null) && (PandoraMessage.Timer >= CommonTime()))
@@ -97,11 +100,15 @@ function PandoraClick() {
 		return;
 	}
 
-	// Checks if we clicked on a character
+	// Checks if we clicked on a character	
+	let Pos = 690 - (PandoraCurrentRoom.Character.length + PandoraParty.length) * 230;
 	if (MouseIn(Pos, 0, 500, 1000)) return CharacterSetCurrent(Player);
 	let AllowMove = true;
+	for (let C = 0; C < PandoraParty.length; C++)
+		if (MouseIn(Pos + ((C + 1) * 460), 0, 500, 1000))
+			return CharacterSetCurrent(PandoraParty[C]);
 	for (let C = 0; C < PandoraCurrentRoom.Character.length; C++) {
-		if (MouseIn(Pos + ((C + 1) * 460), 0, 500, 1000)) return CharacterSetCurrent(PandoraCurrentRoom.Character[C]);
+		if (MouseIn(Pos + ((C + 1 + PandoraParty.length) * 460), 0, 500, 1000)) return CharacterSetCurrent(PandoraCurrentRoom.Character[C]);
 		if ((PandoraCurrentRoom.Character[C].AllowMove != null) && (PandoraCurrentRoom.Character[C].AllowMove == false)) AllowMove = false;
 	}
 
@@ -150,7 +157,7 @@ function PandoraGenerateRoom(EntryRoom, DirectionFrom, RoomLevel) {
 		}
 		Path.push(PathNum);
 		
-		// Generates a background for the room, tries not to repeat it
+		// Generates a background for the room, tries not to repeat it and do not allow the same background as the previous room
 		let RoomBack;
 		Continue = false;
 		while (!Continue) {
@@ -160,12 +167,13 @@ function PandoraGenerateRoom(EntryRoom, DirectionFrom, RoomLevel) {
 			if ((RoomLevel == 3) && (Math.random() >= 0.5)) RoomBack = (Math.random() >= 0.7) ? "Fork" : "Tunnel";
 			if ((RoomLevel == 4) && (Math.random() >= 0.75)) RoomBack = (Math.random() >= 0.85) ? "Fork" : "Tunnel";
 			RoomBack = RoomBack + Math.floor(Math.random() * 6);
-			Continue = true;
-			for (let R = 0; R < PandoraRoom.length; R++)
-				if ((PandoraRoom[R].Background == RoomBack) && (Math.random() >= 0.25)) {
-					Continue = false;
-					break;
-				}
+			Continue = (RoomBack !== EntryRoom.Background);
+			if (Continue)
+				for (let R = 0; R < PandoraRoom.length; R++)
+					if ((PandoraRoom[R].Background == RoomBack) && (Math.random() >= 0.25)) {
+						Continue = false;
+						break;
+					}
 		}
 		
 		// Creates the room
@@ -231,6 +239,7 @@ function PandoraGenerateFloor(FloorName, EntryRoom, DirectionFrom, DirectionTo) 
 function PandoraBuildMainHall() {
 	
 	// Creates the ground entrance room
+	PandoraParty = [];
 	PandoraRoom = [];
 	let Room = {};
 	let Char = CharacterLoadNPC("NPC_Pandora_EntranceMaid");
@@ -264,6 +273,23 @@ function PandoraBuildMainHall() {
 				Room.ItemX = 50 + Math.floor(Math.random() * 1700);
 				Room.ItemY = 50 + Math.floor(Math.random() * 900);
 			}
+			if (InfiltrationMission == "Rescue") {
+				let Victim = CharacterLoadNPC("NPC_Pandora_RescueVictim");
+				Victim.Name = InfiltrationTarget.Name;
+				if (Math.random() >= 0.333) CharacterRandomUnderwear(Victim);
+				else if (Math.random() >= 0.5) CharacterNaked(Victim);
+				CharacterFullRandomRestrain(Victim, "LOT", true);
+				Victim.AllowItem = true;
+				Victim.Stage = "0";
+				Room.Character.push(Victim);
+			}
+			if (InfiltrationMission == "Kidnap") {
+				let Target = CharacterLoadNPC("NPC_Pandora_KidnapTarget");
+				Target.Name = InfiltrationTarget.Name;
+				Target.AllowItem = false;
+				Target.Stage = "0";
+				Room.Character.push(Target);
+			}
 			RoomFound = true;
 		}
 	}
@@ -282,5 +308,53 @@ function PandoraRemoveCurrentCharacter() {
 			break;
 		}
 	CharacterDelete(CurrentCharacter.AccountName);
+	DialogLeave();
+}
+
+/**
+ * When the current character joins the player's party
+ * @returns {void} - Nothing
+ */
+function PandoraCharacterJoin() {	
+	PandoraParty.push(CurrentCharacter);
+	if (CurrentCharacter.Name == InfiltrationTarget.Name) InfiltrationTarget.Found = true;
+	for (let C = 0; C < PandoraCurrentRoom.Character.length; C++)
+		if (PandoraCurrentRoom.Character[C].AccountName == CurrentCharacter.AccountName) {
+			PandoraCurrentRoom.Character.splice(C, 1);
+			break;
+		}
+}
+
+/**
+ * When the current character starts to fight against the player
+ * @returns {void} - Nothing
+ */
+function PandoraCharacterFight() {
+	PandoraFightCharacter = CurrentCharacter;
+	KidnapStart(CurrentCharacter, PandoraBackground, InfiltrationDifficulty + Math.floor(Math.random() * 3), "PandoraCharacterFightEnd()");
+}
+
+/**
+ * Resolves the fight between the player and the current character
+ * @returns {void} - Nothing
+ */
+function PandoraCharacterFightEnd() {
+	CharacterSetCurrent(PandoraFightCharacter);
+	SkillProgress("Willpower", ((Player.KidnapMaxWillpower - Player.KidnapWillpower) + (CurrentCharacter.KidnapMaxWillpower - CurrentCharacter.KidnapWillpower)));
+	CurrentCharacter.Stage = (KidnapVictory) ? "100" : "200";
+	CharacterRelease(KidnapVictory ? Player : CurrentCharacter);
+	CurrentCharacter.AllowItem = KidnapVictory;
+	CommonSetScreen("Room", "Pandora");
+	CurrentCharacter.CurrentDialog = DialogFind(CurrentCharacter, (KidnapVictory) ? "FightVictory" : "FightDefeat");
+}
+
+/**
+ * When the mission fails, we go back to the infiltration room
+ * @returns {void} - Nothing
+ */
+function PandoraMissionFail() {
+	InfiltrationTarget.Fail = true;
+	CharacterRelease(Player);
+	CommonSetScreen("Room", "Infiltration");
 	DialogLeave();
 }
