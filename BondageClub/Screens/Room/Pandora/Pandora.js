@@ -461,3 +461,11 @@ function PandoraWalkBack() {
 	PandoraPreviousRoom = null;
 	DialogLeave();
 }
+
+/**
+ * When the player must strips the current character
+ * @returns {void} - Nothing
+ */
+function PandoraCharacterNaked() {
+	CharacterNaked(CurrentCharacter);
+}
