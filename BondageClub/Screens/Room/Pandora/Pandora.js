@@ -469,3 +469,12 @@ function PandoraWalkBack() {
 function PandoraCharacterNaked() {
 	CharacterNaked(CurrentCharacter);
 }
+
+/**
+ * When the player changes in the clothes of someone else (type)
+ * @param {string} Type - The type of character to dress as (ex: Guard)
+ * @returns {void} - Nothing
+ */
+function PandoraPlayerClothes(Type) {
+	PandoraDress(Player, Type);
+}
