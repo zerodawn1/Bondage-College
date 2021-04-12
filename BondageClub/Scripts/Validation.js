@@ -206,7 +206,7 @@ function ValidationResolveModifyDiff(previousItem, newItem, params) {
 	if (!ValidationCanAddItem(newItem, params)) {
 		const warningSuffix = ValidationItemWarningMessage(previousItem, params);
 		// Block changing the color of non-clothing appearance items/cosplay items if the target does not permit that
-		if (newItem.Color !== previousItem.Color) {
+		if (!CommonColorsEqual(newItem.Color, previousItem.Color)) {
 			console.warn(`Invalid modification of color for item ${warningSuffix}`);
 			newItem.Color = previousItem.Color;
 			valid = false;
