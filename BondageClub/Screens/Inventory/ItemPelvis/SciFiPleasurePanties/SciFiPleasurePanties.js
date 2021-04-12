@@ -211,7 +211,8 @@ function InventoryItemPelvisSciFiPleasurePantiesShockTrigger() {
 	}
 
 	var Dictionary = [];
-	Dictionary.push({Tag: "AssetName", Text: DialogFocusItem.Asset.Description.toLowerCase()});		
+	Dictionary.push({ Tag: "AssetName", Text: DialogFocusItem.Asset.Description.toLowerCase() });		
+	Dictionary.push({ Tag: "DestinationCharacterName", Text: C.Name, MemberNumber: C.MemberNumber });
     ChatRoomPublishCustomAction("SciFiPleasurePantiesShockTrigger" + DialogFocusItem.Property.ShockLevel, true, Dictionary);
     
     CharacterSetFacialExpression(C, "Eyebrows", "Soft", 10);
