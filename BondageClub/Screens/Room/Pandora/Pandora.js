@@ -12,6 +12,7 @@ var PandoraParty = [];
 var PandoraFightCharacter = null;
 var PandoraRandomNPCList = ["Member", "Mistress", "Slave", "Maid"];
 var PandoraMoveDirectionTimer = { Direction: "", Timer: 0 };
+var PandoraTargetRoom = null;
 
 /**
  * Loads the Pandora's Box screen
@@ -246,6 +247,7 @@ function PandoraEnterRoom(Room, Direction) {
 		Char.AllowItem = false;
 		Char.AllowMove = false;
 		Char.Stage = "0";
+		Char.Recruit = 0;
 		PandoraDress(Char, Type);
 		Room.Character.push(Char);
 	}
@@ -391,10 +393,10 @@ function PandoraBuildMainHall() {
 	PandoraGenerateFloor("Underground", Room, "StairsUp", "StairsDown");
 	PandoraCurrentRoom = Room;
 	PandoraPreviousRoom = null;
+	PandoraTargetRoom = null;
 
 	// Picks a random cell room for the final target
-	let RoomFound = false;
-	while (!RoomFound) {
+	while (PandoraTargetRoom == null) {
 		Room = PandoraRoom[Math.floor(Math.random() * PandoraRoom.length)];
 		if (Room.Background.indexOf("Cell") == 0) {
 			if ((InfiltrationMission == "Retrieve") || (InfiltrationMission == "Steal")) {
@@ -424,7 +426,7 @@ function PandoraBuildMainHall() {
 				Target.Stage = "0";
 				Room.Character.push(Target);
 			}
-			RoomFound = true;
+			PandoraTargetRoom = Room;
 		}
 	}
 	
@@ -529,4 +531,83 @@ function PandoraCharacterNaked() {
  */
 function PandoraPlayerClothes(Type) {
 	PandoraDress(Player, Type);
+}
+
+/**
+ * The player can only try once to recruit a random NPC, the odds are set when conversation starts
+ * @returns {void} - Nothing
+ */
+function PandoraStartRecruit() {
+	CurrentCharacter.Recruit = Math.random();
+}
+
+/**
+ * The player can only try once to recruit a random NPC
+ * @returns {void} - Nothing
+ */
+function PandoraCanStartRecruit() { return ((CurrentCharacter.Recruit == null) || (CurrentCharacter.Recruit == 0)) }
+
+/**
+ * Returns TRUE if the NPC would be recruited by the player to join the Bondage Club.  The recruiter perks helps by 20%
+ * @returns {boolean} - TRUE if the NPC would join
+ */
+function PandoraCanRecruit() { return (CurrentCharacter.Recruit + (InfiltrationPerksActive("Recruiter") ? 0.25 : 0) >= 0.75) }
+
+/**
+ * Increases the infiltration skill on some events
+ * @param {string} Progress - The progression factor
+ * @returns {void} - Nothing
+ */
+function PandoraInfiltrationChange(Progress) {
+	SkillProgress("Infiltration", parseInt(Progress));
+}
+
+/**
+ * Checks if the player can bring the NPC to her private room
+ * @returns {boolean} - Returns true if the player can
+ */
+function PandoraCanJoinPrivateRoom() { return (LogQuery("RentRoom", "PrivateRoom") && (PrivateCharacter.length < PrivateCharacterMax) && !LogQuery("LockOutOfPrivateRoom", "Rule")) }
+
+/**
+ * When a random NPC joins the player private room, we add that character and exits the dialog
+ * @returns {void} - Nothing
+ */
+function PandoraCharacterJoinPrivateRoom() {
+	CurrentScreen = "Private";
+	PrivateAddCharacter(CurrentCharacter);
+	CurrentScreen = "Pandora";
+	PandoraRemoveCurrentCharacter();
+}
+
+/**
+ * Checks if the mission is the one provided in the parameter
+ * @param {string} Type - The mission type
+ * @returns {boolean} - Returns TRUE if it's the current mission
+ */
+function PandoraMissionIs(Type) { return (InfiltrationMission === Type) }
+
+/**
+ * Checks if the perk specified is currently selected
+ * @param {string} Type - The perk type
+ * @returns {boolean} - Returns TRUE if it's selected
+ */
+function PandoraHasPerk(Type) { return InfiltrationPerksActive(Type) }
+
+/**
+ * Prepares an information text based on the bribe amount provided
+ * @param {string} Amount - The bribe amount
+ * @param {string} Type - The perk type
+ * @returns {void} - Nothing
+ */
+function PandoraBribeInfo(Amount, Type) {
+	let Money = parseInt(Amount);
+	CharacterChangeMoney(Player, Money * -1);
+	CurrentCharacter.CurrentDialog = DialogFind(CurrentCharacter, "BribeInfo" + InfiltrationMission + Type);
+	CurrentCharacter.CurrentDialog = CurrentCharacter.CurrentDialog.replace("LevelName", TextGet("LevelName" + PandoraTargetRoom.Floor));
+	let Room = PandoraTargetRoom;
+	while (Room.PathMap[0].Background.indexOf("Entrance") != 0)
+		Room = Room.PathMap[0];
+	let Dir = Room.DirectionMap[0];
+	Dir = PandoraDirectionListFrom[PandoraDirectionList.indexOf(Dir)];
+	CurrentCharacter.CurrentDialog = CurrentCharacter.CurrentDialog.replace("FirstDirection", TextGet("FirstDirection" + Dir));
 }
