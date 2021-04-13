@@ -238,13 +238,15 @@ function PandoraEnterRoom(Room, Direction) {
 			return;
 		}
 
-	// 3% odds of spawning a new random NPC in the room
+	// 5% odds of spawning a new random NPC in the room
 	if ((PandoraCurrentRoom.Background.indexOf("Entrance") < 0) && (PandoraCurrentRoom.Character.length == 0) && (Math.random() > 0.95)) {
 		let Type = CommonRandomItemFromList("", PandoraRandomNPCList);
+		CharacterDelete("NPC_Pandora_Random" + Type);
+		delete CommonCSVCache["Screens/Room/Pandora/Dialog_NPC_Pandora_Random" + Type + ".csv"];
 		let Char = CharacterLoadNPC("NPC_Pandora_Random" + Type);
 		CharacterRandomName(Char);
 		CharacterAppearanceFullRandom(Char);
-		Char.AllowItem = false;
+		Char.AllowItem = (Type === "Slave");
 		Char.AllowMove = false;
 		Char.Stage = "0";
 		Char.Recruit = 0;
