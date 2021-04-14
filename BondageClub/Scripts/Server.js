@@ -177,7 +177,8 @@ function ServerPlayerIsInChatRoom() {
 		|| ((CurrentScreen == "Title") && (InformationSheetPreviousScreen == "ChatRoom"))
 		|| ((CurrentScreen == "OnlineProfile") && (InformationSheetPreviousScreen == "ChatRoom"))
 		|| ((CurrentScreen == "FriendList") && (InformationSheetPreviousScreen == "ChatRoom") && (FriendListReturn == null))
-		|| ((CurrentScreen == "Preference") && (InformationSheetPreviousScreen == "ChatRoom"));
+		|| ((CurrentScreen == "Preference") && (InformationSheetPreviousScreen == "ChatRoom"))
+		|| ((CurrentModule == "MiniGame") && (DialogGamingPreviousRoom == "ChatRoom"));
 }
 
 /** Sends a message with the given data to the server via socket.emit */
