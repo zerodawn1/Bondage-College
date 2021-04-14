@@ -1267,8 +1267,10 @@ function CharacterGetDarkFactor(C, eyesOnly = false) {
  */
 function CharacterGetClumsiness(C) {
 	let clumsiness = 0;
-	if (!C.CanInteract()) clumsiness += 2;
+	if (!C.CanInteract()) clumsiness += 1;
+	const armItem = InventoryGet(C, "ItemArms");
+	if (armItem && armItem.Asset.IsRestraint && InventoryItemHasEffect(armItem, "Block")) clumsiness += 2;
 	const handItem = InventoryGet(C, "ItemHands");
-	if (handItem && handItem.Asset.IsRestraint) clumsiness += 3;
+	if (handItem && handItem.Asset.IsRestraint && InventoryItemHasEffect(handItem, "Block")) clumsiness += 3;
 	return Math.min(clumsiness, 5);
 }
