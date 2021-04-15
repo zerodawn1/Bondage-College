@@ -248,10 +248,12 @@ function PandoraEnterRoom(Room, Direction) {
 		let Char = CharacterLoadNPC("NPC_Pandora_Random" + Type);
 		CharacterRandomName(Char);
 		CharacterAppearanceFullRandom(Char);
+		Char.Type = Type;
 		Char.AllowItem = (Type === "Slave");
 		Char.AllowMove = false;
 		Char.Stage = "0";
 		Char.Recruit = 0;
+		Char.RecruitOdds = (Type === "Slave") ? 1 : 0.75;
 		PandoraDress(Char, Type);
 		Room.Character.push(Char);
 	}
@@ -555,7 +557,7 @@ function PandoraCanStartRecruit() { return ((CurrentCharacter.Recruit == null) |
  * Returns TRUE if the NPC would be recruited by the player to join the Bondage Club.  The recruiter perks helps by 20%
  * @returns {boolean} - TRUE if the NPC would join
  */
-function PandoraCanRecruit() { return (CurrentCharacter.Recruit + (InfiltrationPerksActive("Recruiter") ? 0.25 : 0) >= 0.75) }
+function PandoraCanRecruit() { return (CurrentCharacter.Recruit + (InfiltrationPerksActive("Recruiter") ? 0.25 : 0) >= CurrentCharacter.RecruitOdds) }
 
 /**
  * Increases the infiltration skill on some events
@@ -578,7 +580,7 @@ function PandoraCanJoinPrivateRoom() { return (LogQuery("RentRoom", "PrivateRoom
  */
 function PandoraCharacterJoinPrivateRoom() {
 	CurrentScreen = "Private";
-	PrivateAddCharacter(CurrentCharacter);
+	PrivateAddCharacter(CurrentCharacter, (CurrentCharacter.Type === "Slave") ? "Submissive" : null);
 	CurrentScreen = "Pandora";
 	PandoraRemoveCurrentCharacter();
 }
@@ -614,4 +616,13 @@ function PandoraBribeInfo(Amount, Type) {
 	let Dir = Room.DirectionMap[0];
 	Dir = PandoraDirectionListFrom[PandoraDirectionList.indexOf(Dir)];
 	CurrentCharacter.CurrentDialog = CurrentCharacter.CurrentDialog.replace("FirstDirection", TextGet("FirstDirection" + Dir));
+}
+
+/**
+ * When an activity is done on a slave, it gives a 5% boost in odds to recruit her later, works up to 5 fives
+ * @returns {void} - Nothing
+ */
+function PandoraSlaveActivity() {
+	if (CurrentCharacter.RecruitOdds >= 0.75)
+		CurrentCharacter.RecruitOdds = CurrentCharacter.RecruitOdds - 0.05;
 }
