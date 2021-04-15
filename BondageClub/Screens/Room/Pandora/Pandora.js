@@ -45,7 +45,8 @@ function PandoraRun() {
 	// In search mode
 	if (PandoraSeachMode) {
 		DrawButton(1885, 885, 90, 90, "", "White", "Icons/Search.png", TextGet("SearchStop"));
-		if (PandoraSeachSquare != null) DrawEmptyRect(PandoraSeachSquare.X - 100, PandoraSeachSquare.Y - 100, 200, 200, "Cyan", 3);
+		let Radius = InfiltrationPerksActive("Investigation") ? 150 : 100;
+		if (PandoraSeachSquare != null) DrawEmptyRect(PandoraSeachSquare.X - Radius, PandoraSeachSquare.Y - Radius, Radius * 2, Radius * 2, "Cyan", 3);
 		return;
 	}
 
@@ -94,9 +95,10 @@ function PandoraClick() {
 
 	// In search mode, we can click anywhere on the screen
 	if (PandoraSeachMode) {
-		if (MouseIn(0, 0, 1800, 1000)) {
+		if (MouseIn(0, 0, 1850, 1000)) {
 			PandoraSeachSquare = { X: MouseX, Y: MouseY };
-			if ((PandoraCurrentRoom.ItemX != null) && (PandoraCurrentRoom.ItemY != null) && MouseIn(PandoraCurrentRoom.ItemX - 100, PandoraCurrentRoom.ItemY - 100, 200, 200)) {
+			let Radius = InfiltrationPerksActive("Investigation") ? 150 : 100;
+			if ((PandoraCurrentRoom.ItemX != null) && (PandoraCurrentRoom.ItemY != null) && MouseIn(PandoraCurrentRoom.ItemX - Radius, PandoraCurrentRoom.ItemY - Radius, Radius * 2, Radius * 2)) {
 				InfiltrationTarget.Found = true;
 				PandoraSeachMode = false;
 				PandoraMsgBox(TextGet("FoundItem").replace("TargetName", InfiltrationTarget.Name));
