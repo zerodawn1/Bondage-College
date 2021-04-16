@@ -159,7 +159,7 @@ function ValidationResolveModifyDiff(previousItem, newItem, params) {
 	                    ValidationIsItemBlockedOrLimited(
 		                    C, sourceMemberNumber, group.Name, asset.Name, newProperty.Type);
 
-	// If the type has changed and the new type is blocked/limited for the source character, prevent modifications
+	// If the type has changed and the new type is blocked/limited for the target character, prevent modifications
 	if (newProperty.Type !== previousProperty.Type && itemBlocked) {
 		return { item: previousItem, valid: false };
 	}
@@ -195,12 +195,12 @@ function ValidationResolveModifyDiff(previousItem, newItem, params) {
 		} else {
 			// Otherwise, delete any lock
 			console.warn(`Invalid addition of lock ${ValidationItemWarningMessage(newLock, params)}`);
-			valid = valid && !ValidationDeleteLock(newItem.Property);
+			valid = !ValidationDeleteLock(newItem.Property) && valid;
 		}
 	} else if (lockModified) {
 		// If the lock has been modified, then ensure lock properties don't change (except where they should be able to)
 		const hasLockPermissions = ValidationIsLockChangePermitted(previousLock, params) && !newLockBlocked;
-		valid = valid && !ValidationCopyLockProperties(previousProperty, newProperty, hasLockPermissions);
+		valid = !ValidationCopyLockProperties(previousProperty, newProperty, hasLockPermissions) && valid;
 	}
 
 	// If the source wouldn't usually be able to add the item, ensure that some properties are not modified
@@ -226,7 +226,7 @@ function ValidationResolveModifyDiff(previousItem, newItem, params) {
 		const newKeys = Object.keys(newProperty).filter(key => !ValidationModifiableProperties.includes(key));
 
 		previousKeys.forEach(key => {
-			valid = valid && !ValidationCopyProperty(previousProperty, newProperty, key);
+			valid = !ValidationCopyProperty(previousProperty, newProperty, key) && valid;
 		});
 		newKeys.forEach((key) => {
 			if (!previousKeys.includes(key)) {
@@ -285,13 +285,13 @@ function ValidationIsLockChangePermitted(lock, { fromOwner, fromLover }, remove)
 function ValidationCopyLockProperties(sourceProperty, targetProperty, hasLockPermissions) {
 	let changed = false;
 	ValidationLockProperties.forEach((key) => {
-		changed = changed || ValidationCopyProperty(sourceProperty, targetProperty, key);
+		changed = ValidationCopyProperty(sourceProperty, targetProperty, key) || changed;
 	});
 	if (!hasLockPermissions) {
-		changed = changed || ValidationCopyProperty(sourceProperty, targetProperty, "EnableRandomInput");
+		changed = ValidationCopyProperty(sourceProperty, targetProperty, "EnableRandomInput") || changed;
 		if (!targetProperty.EnableRandomInput) {
 			ValidationTimerLockProperties.forEach((key) => {
-				changed = changed || ValidationCopyProperty(sourceProperty, targetProperty, key);
+				changed = ValidationCopyProperty(sourceProperty, targetProperty, key) || changed;
 			});
 		}
 	}
