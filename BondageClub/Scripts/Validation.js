@@ -486,7 +486,7 @@ function ValidationSanitizeProperties(C, item) {
 	}
 
 	// Remove invalid properties from non-typed items
-	if (property.Type == null) {
+	if (!asset.AllowType || !asset.AllowType.length) {
 		["SetPose", "Difficulty", "SelfUnlock", "Hide"].forEach(P => {
 			if (property[P] != null) {
 				console.warn(`Removing invalid property "${P}" from ${asset.Name}`);
