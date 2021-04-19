@@ -241,8 +241,8 @@ function PandoraDress(C, Type) {
 		return;
 	}
 
-	// Since no defined type is found, we fully randomize the clothes
-	CharacterAppearanceFullRandom(Char);
+	// Since no defined type is found, we fully randomize the clothes and appearance
+	CharacterAppearanceFullRandom(C);
 	CharacterRefresh(C, false);
 
 }
