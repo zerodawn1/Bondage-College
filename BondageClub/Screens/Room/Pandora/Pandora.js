@@ -645,11 +645,17 @@ function PandoraSlaveActivity() {
 }
 
 /**
- * When the user leaves Pandora from a dialog option, the mission fails
+ * Starts the player punishment process and jumps to the punishment Dominatrix
  * @returns {void} - Nothing
  */
-function PandoraFailMission() {
-	InfiltrationTarget.Fail = true;
-	DialogLeave();
-	CommonSetScreen("Room", "Infiltration");
+function PandoraPunishmentIntro() {
+	let IntroText;
+	if (SkillGetLevel(Player, "Infiltration") >= 8) IntroText = DialogFind(CurrentCharacter, "Punishment8");
+	else if (SkillGetLevel(Player, "Infiltration") >= 5) IntroText = DialogFind(CurrentCharacter, "Punishment5");
+	else if (SkillGetLevel(Player, "Infiltration") >= 2) IntroText = DialogFind(CurrentCharacter, "Punishment2");
+	else IntroText = DialogFind(CurrentCharacter, "Punishment0");
+	PandoraBackground = "Pandora/Underground/Cell" + Math.floor(Math.random() * 6).toString();
+	let Dominatrix = PandoraGenerateNPC("Punishment", "Mistress", "RANDOM", false);
+	CharacterSetCurrent(Dominatrix);
+	CurrentCharacter.CurrentDialog = IntroText;
 }

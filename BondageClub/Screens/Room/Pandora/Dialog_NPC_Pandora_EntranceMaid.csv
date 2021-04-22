@@ -1,6 +1,10 @@
 PlayerGagged,,,(She checks your gag.)  This gag is a perfect fit Miss.,,
 FightVictory,,,(She seems pretty mad.)  What do you think you're doing?   You will get caught right away.,,
 FightDefeat,,,(She seems very happy.)  You're no match for Pandora's staff.  Now it's time to prepare your punishment.,,
+Punishment8,,,"(A Dominatrix takes you away from the maid.)  So, we've caught the infamous DialogPlayerName.  You'll never forget this lesson.",,
+Punishment5,,,(A Dominatrix takes you away from the maid.)  You've been on list for a while DialogPlayerName.  I'll teach you a lesson.,,
+Punishment2,,,"(A Dominatrix takes you away from the maid.)  (She cracks her knuckles.)  So, you're a troublemaker?  I'll teach you a lesson.",,
+Punishment0,,,(A Dominatrix takes you away from the maid.)  (She stares at you.)  You've caused some trouble?  Then it's time for your lesson.,,
 0,,,"Welcome to Pandora's Box, the best BDSM club in town.  It will be my pleasure to introduce you.",,
 0,95,I'm a member.  (Show your fake ID.),"(She looks at your ID and nods.)  I'm so sorry Miss, please come inside and have fun.",,"HasPerk(""Forgery"")"
 0,80,Thanks.  What goes on around here?,"We are an adult club, aimed at fulfilling your wildest fantasies.  Be careful when you open the box.  (She giggles.)",,
@@ -27,7 +31,7 @@ FightDefeat,,,(She seems very happy.)  You're no match for Pandora's staff.  Now
 30,,(Look around.),,DialogLeave(),
 50,,,You're not welcome here.  You need to go now.,,
 50,,(Fight her.),,CharacterFight(),
-50,,(Leave Pandora's Box.),,FailMission(),
+50,,(Leave Pandora's Box.),,MissionFail(),
 50,,(Look around.),,DialogLeave(),
 80,,Tell me about this club.,"Pandora's Box is a young BDSM club, but we are growing quickly.  We have the best Dominatrixes in town.",DialogRemove(),
 80,,Who runs this club?,"The leaders are called the Dominatrixes, they wear golden leather, you cannot miss them.",DialogRemove(),
@@ -55,4 +59,4 @@ FightDefeat,,,(She seems very happy.)  You're no match for Pandora's staff.  Now
 200,210,(Bow your head and stay silent.),Good girl.  A Dominatrix will take care of you soon.,,!Player.CanTalk()
 210,,Can we negotiate?,It's too late for that.  Just wait and be quiet.,DialogRemove(),Player.CanTalk()
 210,,I will have my revenge.,You won't.  We will teach you a lesson that you will never forget.,DialogRemove(),Player.CanTalk()
-210,,(Wait for the Dominatrix.),TO DO,,
+210,,(Wait for the Dominatrix.),,PunishmentIntro(),
