@@ -101,6 +101,8 @@ function InfiltrationPrepareMission() {
  * @returns {void} - Nothing
  */
 function InfiltrationStartMission() {
+	PandoraWillpower = 20 + (SkillGetLevel(Player, "Willpower") * 2) + (InfiltrationPerksActive("Resilience") ? 5 : 0) + (InfiltrationPerksActive("Endurance") ? 5 : 0);
+	PandoraMaxWillpower = PandoraWillpower;
 	DialogLeave();
 	CommonSetScreen("Room", "Pandora");
 	PandoraBuildMainHall();

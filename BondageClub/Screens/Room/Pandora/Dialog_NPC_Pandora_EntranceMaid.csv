@@ -50,7 +50,7 @@ Punishment0,,,(A Dominatrix takes you away from the maid.)  (She stares at you.)
 100,105,(Wear her clothes.),(She stares at you as you quickly dress up as her.),"PlayerClothes(""Maid"")",CurrentCharacter.IsNaked()
 100,110,(Lock her up in a broom closet.),(She tries to resist as you lock her up in a broom closet.)  (Your infiltration skill has gone up.),InfiltrationChange(30),
 105,110,(Lock her up in a broom closet.),(She tries to resist as you lock her up in a broom closet.)  (Your infiltration skill has gone up.),InfiltrationChange(30),
-110,,Have fun!  (Leave her.),,RemoveCurrentCharacter(),
+110,,(Leave her.),,RemoveCurrentCharacter(),
 200,210,Punishment?  What do you mean?,"You will understand and remember your lesson.  Don't try anything funny, a Dominatrix will take care of you soon.",,Player.CanTalk()
 200,210,You're not punishing me girl.,"Of course, I won't do it myself, a Dominatrix will take care of you soon.",,Player.CanTalk()
 200,210,I will accept it Miss.,"Very good, you're already learning.  A Dominatrix will take care of you soon.",,Player.CanTalk()
