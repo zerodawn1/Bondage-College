@@ -51,7 +51,7 @@ function InfiltrationLoad() {
 function InfiltrationRun() {
 	DrawCharacter(Player, 500, 0, 1);
 	DrawCharacter(InfiltrationSupervisor, 1000, 0, 1);
-	DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png", TextGet("Exit"));
+	if ((InfiltrationSupervisor.Stage !== "End") && Player.CanWalk()) DrawButton(1885, 25, 90, 90, "", "White", "Icons/Exit.png", TextGet("Exit"));
 	DrawButton(1885, 145, 90, 90, "", "White", "Icons/Character.png", TextGet("Profile"));
 	DrawButton(1885, 265, 90, 90, "", "White", "Icons/Infiltration.png", TextGet("Perks"));
 }
@@ -62,7 +62,7 @@ function InfiltrationRun() {
  */
 function InfiltrationClick() {
 	if (MouseIn(1000, 0, 500, 1000)) CharacterSetCurrent(InfiltrationSupervisor);
-	if (MouseIn(1885, 25, 90, 90) && Player.CanWalk()) CommonSetScreen("Room", "MainHall");
+	if ((InfiltrationSupervisor.Stage !== "End") && MouseIn(1885, 25, 90, 90) && Player.CanWalk()) CommonSetScreen("Room", "MainHall");
 	if (MouseIn(1885, 145, 90, 90)) InformationSheetLoadCharacter(Player);
 	if (MouseIn(1885, 265, 90, 90)) CommonSetScreen("Room", "InfiltrationPerks");
 }
@@ -124,4 +124,16 @@ function InfiltrationCompleteMission() {
 	let Money = 15;
 	if (InfiltrationPerksActive("Negotiation")) Money = Math.round(Money * 1.2);
 	CharacterChangeMoney(Player, Money);
+}
+
+/**
+ * Before all missions, the player can wear random clothes
+ * @returns {void} - Nothing
+ */
+function InfiltrationRandomClothes() {
+	CharacterNaked(Player);
+	CharacterAppearanceFullRandom(Player, true);
+	CharacterRelease(Player);
+	InventoryRemove(Player, "ItemHands");
+	PandoraClothes = "Random";
 }

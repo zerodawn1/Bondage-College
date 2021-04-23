@@ -13,6 +13,7 @@ var PandoraFightCharacter = null;
 var PandoraRandomNPCList = ["Member", "Mistress", "Slave", "Maid"];
 var PandoraMoveDirectionTimer = { Direction: "", Timer: 0 };
 var PandoraTargetRoom = null;
+var PandoraClothes = "Random";
 
 /**
  * Loads the Pandora's Box screen
@@ -554,6 +555,7 @@ function PandoraCharacterNaked() {
  */
 function PandoraPlayerClothes(Type) {
 	PandoraDress(Player, Type);
+	PandoraClothes = Type;
 }
 
 /**
