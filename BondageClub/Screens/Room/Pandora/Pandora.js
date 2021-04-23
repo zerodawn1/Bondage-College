@@ -302,6 +302,9 @@ function PandoraEnterRoom(Room, Direction) {
  * @returns {void} - Nothing
  */
 function PandoraGenerateRoom(EntryRoom, DirectionFrom, RoomLevel) {
+	
+	// Over 100, the dungeon layout is always invalid
+	if (PandoraRoom.length >= 100) return;
 
 	// The higher the room level, the less paths there will be
 	let PathCount = 0;
@@ -328,10 +331,10 @@ function PandoraGenerateRoom(EntryRoom, DirectionFrom, RoomLevel) {
 		Continue = false;
 		while (!Continue) {
 			RoomBack = "Cell";
-			if (RoomLevel == 1) RoomBack = (Math.random() >= 0.4) ? "Fork" : "Tunnel";
-			if ((RoomLevel == 2) && (Math.random() >= 0.25)) RoomBack = (Math.random() >= 0.55) ? "Fork" : "Tunnel";
-			if ((RoomLevel == 3) && (Math.random() >= 0.5)) RoomBack = (Math.random() >= 0.7) ? "Fork" : "Tunnel";
-			if ((RoomLevel == 4) && (Math.random() >= 0.75)) RoomBack = (Math.random() >= 0.85) ? "Fork" : "Tunnel";
+			let DeadEndOdds = (RoomLevel - InfiltrationDifficulty) * 0.2;
+			let TunnelOdds = 0.25 + (RoomLevel * 0.1);			
+			if (TunnelOdds > 0.75) TunnelOdds = 0.75;
+			if (Math.random() >= DeadEndOdds) RoomBack = (Math.random() >= TunnelOdds) ? "Fork" : "Tunnel";
 			RoomBack = RoomBack + Math.floor(Math.random() * 6);
 			Continue = (RoomBack !== EntryRoom.Background);
 			if (Continue)
@@ -408,7 +411,6 @@ function PandoraBuildMainHall() {
 	
 	// Creates the ground entrance room with a maid
 	PandoraParty = [];
-	PandoraRoom = [];
 	let Room = {};
 	let Char = PandoraGenerateNPC("Entrance", "Maid", "RANDOM", false);
 	if (SkillGetLevel(Player, "Infiltration") >= 9) Char.Stage = "30";
@@ -418,19 +420,27 @@ function PandoraBuildMainHall() {
 	Room.Character.push(Char);
 	Room.Floor = "Ground";
 	Room.Background = "Entrance";
-	Room.Path = [];
 	Room.PathMap = [];
-	PandoraRoom.push(Room);
-	
-	// Creates the exit room in the entrance
 	let ExitRoom = { Floor: "Exit" };
-	Room.Path.push(ExitRoom);
-	Room.Direction = [];
-	Room.Direction.push("Exit");
 	Room.DirectionMap = [];
 	
-	// Generates the floors and sets the starting room
-	PandoraGenerateFloor("Underground", Room, "StairsUp", "StairsDown");
+	// Generates the floors and sets the starting room, there's a min-max number of rooms based on difficulty
+	let MinRoom = 15;
+	let MaxRoom = 24;
+	if (InfiltrationDifficulty == 1) { MinRoom = 25; MaxRoom = 39; }
+	if (InfiltrationDifficulty == 2) { MinRoom = 40; MaxRoom = 54; }
+	if (InfiltrationDifficulty == 3) { MinRoom = 55; MaxRoom = 74; }
+	if (InfiltrationDifficulty == 4) { MinRoom = 75; MaxRoom = 99; }
+	PandoraRoom = [];
+	while ((PandoraRoom.length < MinRoom) || (PandoraRoom.length > MaxRoom)) {
+		PandoraRoom = [];
+		Room.Path = [];
+		Room.Path.push(ExitRoom);
+		Room.Direction = [];
+		Room.Direction.push("Exit");
+		PandoraRoom.push(Room);
+		PandoraGenerateFloor("Underground", Room, "StairsUp", "StairsDown");
+	}
 	PandoraCurrentRoom = Room;
 	PandoraPreviousRoom = null;
 	PandoraTargetRoom = null;
@@ -505,7 +515,7 @@ function PandoraCharacterJoin() {
  */
 function PandoraCharacterFight() {
 	PandoraFightCharacter = CurrentCharacter;
-	let Difficulty = InfiltrationDifficulty + Math.floor(Math.random() * 3);
+	let Difficulty = (InfiltrationDifficulty * 2) + Math.floor(Math.random() * 3);
 	KidnapStart(CurrentCharacter, PandoraBackground, Difficulty, "PandoraCharacterFightEnd()");
 }
 
@@ -595,7 +605,12 @@ function PandoraCanRecruit() { return (CurrentCharacter.Recruit + (InfiltrationP
  * @returns {void} - Nothing
  */
 function PandoraInfiltrationChange(Progress) {
-	SkillProgress("Infiltration", parseInt(Progress));
+	let P = parseInt(Progress);
+	if (InfiltrationDifficulty == 1) P = Math.round(P * 1.5);
+	if (InfiltrationDifficulty == 2) P = Math.round(P * 2.25);
+	if (InfiltrationDifficulty == 3) P = Math.round(P * 3.25);
+	if (InfiltrationDifficulty == 4) P = Math.round(P * 4.5);
+	SkillProgress("Infiltration", P);
 }
 
 /**

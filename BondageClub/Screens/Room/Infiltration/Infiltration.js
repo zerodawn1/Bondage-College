@@ -122,8 +122,12 @@ function InfiltrationReturnMission() {
  * @returns {void} - Nothing
  */
 function InfiltrationCompleteMission() {
-	SkillProgress("Infiltration", 60);
-	let Money = 15;
+	if (InfiltrationDifficulty == 0) SkillProgress("Infiltration", 100);
+	if (InfiltrationDifficulty == 1) SkillProgress("Infiltration", 200);
+	if (InfiltrationDifficulty == 2) SkillProgress("Infiltration", 350);
+	if (InfiltrationDifficulty == 3) SkillProgress("Infiltration", 600);
+	if (InfiltrationDifficulty == 4) SkillProgress("Infiltration", 1000);
+	let Money = 12 + (InfiltrationDifficulty * 6);
 	if (InfiltrationPerksActive("Negotiation")) Money = Math.round(Money * 1.2);
 	CharacterChangeMoney(Player, Money);
 }
