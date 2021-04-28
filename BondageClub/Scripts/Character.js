@@ -13,6 +13,7 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 	// Prepares the character sheet
 	var NewCharacter = {
 		ID: CharacterID,
+		Hooks: null,
 		Name: "",
 		AssetFamily: CharacterAssetFamily,
 		AccountName: "",
@@ -27,6 +28,8 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		Reputation: [],
 		Skill: [],
 		Pose: [],
+		DrawPose: [],
+		DrawAppearance: [],
 		AllowedActivePose: [],
 		Effect: [],
 		FocusGroup: null,
@@ -116,6 +119,36 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		IsInverted: function () { return this.Pose.indexOf("Suspension") >= 0; },
 		CanChangeToPose: function(Pose) { return CharacterCanChangeToPose(this, Pose); },
 		GetClumsiness: function() { return CharacterGetClumsiness(this); },
+		// Adds a new hook with a Name (determines when the hook will happen, an Instance ID (used to differentiate between different hooks happening at the same time), and a function that is run when the hook is called)
+		RegisterHook: function(hookName, hookInstance, callback) {
+			if (!this.Hooks) this.Hooks = new Map();
+
+			let hooks = this.Hooks.get(hookName);
+			if (!hooks) {
+				hooks = new Map();
+				this.Hooks.set(hookName, hooks);
+			}
+
+			if (!hooks.has(hookInstance)) {
+				hooks.set(hookInstance, callback);
+				return true;
+			}
+			return false;
+		},
+		// Removes a hook based on hookName and hookInstance
+		UnregisterHook: function(hookName, hookInstance) {
+			if (!this.Hooks) return false;
+
+			const hooks = this.Hooks.get(hookName);
+			if (hooks && hooks.delete(hookInstance)) {
+				if (hooks.size == 0) {
+					this.Hooks.delete(hookName);
+				}
+				return true;
+			}
+
+			return false;
+		}
 	};
 
 	// If the character doesn't exist, we create it
@@ -689,9 +722,28 @@ function CharacterLoadCanvas(C) {
 	// Reset the property that tracks if wearing a hidden item
 	C.HasHiddenItems = false;
 
+	// We add a temporary appearance and pose here so that it can be modified by hooks.  We copy the arrays so no hooks can alter the reference accidentally
+	C.DrawAppearance = AppearanceItemParse( CharacterAppearanceStringify(C))
+	C.DrawPose = [...C.Pose] // Deep copy of pose array
+	
+	
+	// Run BeforeSortLayers hook
+	if (C.Hooks && typeof C.Hooks.get == "function") {
+		let hooks = C.Hooks.get("BeforeSortLayers");
+		if (hooks)
+		    hooks.forEach((hook) => hook(C)); // If there's a hook, call it
+	}
+
 	// Generates a layer array from the character's appearance array, sorted by drawing order
 	C.AppearanceLayers = CharacterAppearanceSortLayers(C);
-
+	
+	// Run AfterLoadCanvas hooks
+	if (C.Hooks && typeof C.Hooks.get == "function") {
+		let hooks = C.Hooks.get("AfterLoadCanvas");
+		if (hooks)
+		    hooks.forEach((hook) => hook(C)); // If there's a hook, call it
+	}
+	
 	// Sets the total height modifier for that character
 	CharacterAppearanceSetHeightModifiers(C);
 	
@@ -1275,4 +1327,29 @@ function CharacterGetClumsiness(C) {
 	const handItem = InventoryGet(C, "ItemHands");
 	if (handItem && handItem.Asset.IsRestraint && InventoryItemHasEffect(handItem, "Block")) clumsiness += 3;
 	return Math.min(clumsiness, 5);
+}
+
+
+/**
+ * Applies hooks to a character based on conditions
+ * Future hooks go here
+ * @param {Character} C - The character to check
+ * @param {boolean} IgnoreHooks - Whether to remove hooks from the player (such as during character dialog)
+ * @returns {boolean} - If a hook was applied or removed
+ */
+function CharacterCheckHooks(C, IgnoreHooks) {
+	var refresh = false
+	if (C && C.DrawAppearance) {
+		if (!IgnoreHooks && Player.Effect.includes("VRAvatars") && C.Effect.includes("HideRestraints")) {
+			// Then when that character enters the virtual world, register a hook to strip out restraint layers (if needed):
+			if (C.RegisterHook("BeforeSortLayers", "HideRestraints", (C) => {
+				C.DrawAppearance = C.DrawAppearance.filter((Layer) => !(Layer.Asset && Layer.Asset.IsRestraint));
+				C.DrawPose = C.DrawPose.filter((Pose) => (Pose != "TapedHands"));
+				
+			})) refresh = true;
+		} else if (C.UnregisterHook("BeforeSortLayers", "HideRestraints")) refresh = true;
+	}
+
+	if (refresh) CharacterLoadCanvas(C);
+	return refresh;
 }
