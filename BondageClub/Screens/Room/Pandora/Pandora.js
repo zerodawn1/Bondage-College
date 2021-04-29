@@ -18,6 +18,15 @@ var PandoraWillpower = 20;
 var PandoraMaxWillpower = 20;
 
 /**
+ * NPC Dialog functions
+ * @returns {boolean} - TRUE if the dialog option will be available to the player
+ */
+function PandoraCanStartRecruit() { return ((CurrentCharacter.Recruit == null) || (CurrentCharacter.Recruit == 0)) }
+function PandoraCanRecruit() { return (CurrentCharacter.Recruit + (InfiltrationPerksActive("Recruiter") ? 0.25 : 0) >= CurrentCharacter.RecruitOdds) }
+function PandoraCharacterCanJoin() { return ((PandoraParty.length == 0) || (PandoraParty[0].Name != CurrentCharacter.Name)) }
+function PandoraCharacterCanLeave() { return ((PandoraParty.length == 1) && (PandoraParty[0].Name == CurrentCharacter.Name) && ((PandoraCurrentRoom.Character == null) || (PandoraCurrentRoom.Character.length <= 1))) }
+
+/**
  * Loads the Pandora's Box screen
  * @returns {void} - Nothing
  */
@@ -32,7 +41,7 @@ function PandoraDirectionButtonColor(Direction) {
 	if ((PandoraMoveDirectionTimer.Timer >= CommonTime()) && (PandoraMoveDirectionTimer.Direction === Direction))
 		return (PandoraCurrentRoom.DirectionMap.indexOf(Direction) >= 0) ? "#80FF80" : "#408040";
 	else
-		return (PandoraCurrentRoom.DirectionMap.indexOf(Direction) >= 0) ? "White" : "Silver";
+		return (PandoraCurrentRoom.DirectionMap.indexOf(Direction) >= 0) ? "White" : "#BF8080";
 }
 
 /**
@@ -272,9 +281,9 @@ function PandoraEnterRoom(Room, Direction) {
 	PandoraPreviousRoom = PandoraCurrentRoom;
 	PandoraCurrentRoom = Room;
 
-	// 33% odds of removing a previous random NPC
+	// 33% odds of removing a previous random NPC if she can walk
 	if (PandoraCurrentRoom.Character.length == 1)
-		if ((PandoraCurrentRoom.Character[0].AccountName.indexOf("NPC_Pandora_Random") == 0) && (Math.random() > 0.667)) {
+		if ((PandoraCurrentRoom.Character[0].AccountName.indexOf("NPC_Pandora_Random") == 0) && (Math.random() > 0.667) && PandoraCurrentRoom.Character[0].CanWalk()) {
 			let Char = PandoraCurrentRoom.Character[0];
 			PandoraCurrentRoom.Character = [];
 			CharacterDelete(Char);
@@ -478,7 +487,7 @@ function PandoraBuildMainHall() {
  */
 function PandoraRemoveCurrentCharacter() {
 	for (let C = 0; C < PandoraCurrentRoom.Character.length; C++)
-		if (PandoraCurrentRoom.Character[C].AccountName == CurrentCharacter.AccountName) {
+		if (PandoraCurrentRoom.Character[C].ID == CurrentCharacter.ID) {
 			PandoraCurrentRoom.Character.splice(C, 1);
 			break;
 		}
@@ -499,14 +508,26 @@ function PandoraCharacterAllowMove() {
  * When the current character joins the player's party
  * @returns {void} - Nothing
  */
-function PandoraCharacterJoin() {	
+function PandoraCharacterJoin() {
+	CurrentCharacter.AllowMove = true;
+	if ((PandoraParty != null) && (PandoraParty.length == 1))
+		PandoraCurrentRoom.Character.push(PandoraParty[0]);
+	PandoraParty = [];
 	PandoraParty.push(CurrentCharacter);
-	if (CurrentCharacter.Name == InfiltrationTarget.Name) InfiltrationTarget.Found = true;
 	for (let C = 0; C < PandoraCurrentRoom.Character.length; C++)
-		if (PandoraCurrentRoom.Character[C].AccountName == CurrentCharacter.AccountName) {
+		if (PandoraCurrentRoom.Character[C].ID == CurrentCharacter.ID) {
 			PandoraCurrentRoom.Character.splice(C, 1);
 			break;
 		}
+}
+
+/**
+ * When the current character leaves the player's party
+ * @returns {void} - Nothing
+ */
+function PandoraCharacterLeave() {
+	PandoraCurrentRoom.Character.push(CurrentCharacter);
+	PandoraParty = [];
 }
 
 /**
@@ -586,18 +607,6 @@ function PandoraPlayerClothes(Type) {
 function PandoraStartRecruit() {
 	CurrentCharacter.Recruit = Math.random();
 }
-
-/**
- * The player can only try once to recruit a random NPC
- * @returns {void} - Nothing
- */
-function PandoraCanStartRecruit() { return ((CurrentCharacter.Recruit == null) || (CurrentCharacter.Recruit == 0)) }
-
-/**
- * Returns TRUE if the NPC would be recruited by the player to join the Bondage Club.  The recruiter perks helps by 20%
- * @returns {boolean} - TRUE if the NPC would join
- */
-function PandoraCanRecruit() { return (CurrentCharacter.Recruit + (InfiltrationPerksActive("Recruiter") ? 0.25 : 0) >= CurrentCharacter.RecruitOdds) }
 
 /**
  * Increases the infiltration skill on some events
