@@ -37,11 +37,13 @@ Punishment0,,,(A Dominatrix takes you away from the maid.)  (She stares at you.)
 80,,Who runs this club?,"The leaders are called the Dominatrixes, they wear golden leather, you cannot miss them.",DialogRemove(),
 80,,Can anyone join?,"Yes, anyone that's open minded can enter.  Don't cause any trouble or you'll get punished.",DialogRemove(),
 80,90,Can I visit?,Absolutely.  Do you need help on how to explore Pandora's Box or you're fine on your own?,,
-90,,,(She does a maid curtsy.)  Is there anything else you'd like to know Miss?,,
-90,,I can go anywhere?,"Yes and no.  If someone is on official duty, she might not let you pass.  Just go back from where you came from.",DialogRemove(),
-90,,There are many levels?,Pandora's Box has three levels.  We are on the ground level.  You can go downstairs for the dungeons or upstairs for the chambers.,DialogRemove(),
-90,,What if I get lost?,Just scream.  (She giggles.)  I know this place might be confusing but keep on walking and you'll find your way back.,DialogRemove(),
-90,,Can you come with me?,"(She shakes her head no.)  I'm sorry Miss, I'm working at the entrance right now.  Maybe you'll find more help inside.",DialogRemove(),
+90,,,Hi sister!  How can I help you?,,"CostumeIs(""Maid"")"
+90,,,Hello Miss Guard.  (She does a maid curtsy.)  Is there anything I can do for you?,,"CostumeIs(""Guard"")"
+90,,,(She does a maid curtsy.)  Is there anything else you'd like to know Miss?,,"CostumeIs(""Random"")"
+90,,I can go anywhere?,"Yes and no.  If someone is on official duty, she might not let you pass.  Just go back from where you came from.",DialogRemove(),"CostumeIs(""Random"")"
+90,,There are many levels?,Pandora's Box has three levels.  We are on the ground level.  You can go downstairs for the dungeons or upstairs for the chambers.,DialogRemove(),"CostumeIs(""Random"")"
+90,,What if I get lost?,Just scream.  (She giggles.)  I know this place might be confusing but keep on walking and you'll find your way back.,DialogRemove(),"CostumeIs(""Random"")"
+90,,Can you come with me?,"(She shakes her head no.)  I'm sorry Miss, I'm working at the entrance right now.  Maybe you'll find more help inside.",DialogRemove(),"CostumeIs(""Random"")"
 90,,"I should be fine, thanks.  (Go explore.)",,CharacterAllowMove(),
 95,,,It's always a pleasure to see you Miss.,,
 95,,Take care.  (Go explore.),,CharacterAllowMove(),
