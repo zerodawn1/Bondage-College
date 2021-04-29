@@ -1793,8 +1793,8 @@ function ChatRoomMessage(data) {
 						AudioPlayContent(data);
 
 					// Raise a notification if required
-					if (data.Type === "Action" && IsPlayerInvolved)
-						ChatRoomNotificationRaiseChatMessage(SenderCharacter, msg, true);
+					if (data.Type === "Action" && IsPlayerInvolved && Player.NotificationSettings.ChatMessage.Activity)
+						ChatRoomNotificationRaiseChatMessage(SenderCharacter, msg);
 				}
 			}
 
@@ -1834,7 +1834,9 @@ function ChatRoomMessage(data) {
 						return;
 					}
 
-					ChatRoomNotificationRaiseChatMessage(SenderCharacter, chatMsg, false);
+					if ((data.Type === "Chat" && Player.NotificationSettings.ChatMessage.Normal)
+						|| (data.Type === "Whisper" && Player.NotificationSettings.ChatMessage.Whisper))
+						ChatRoomNotificationRaiseChatMessage(SenderCharacter, chatMsg);
 				}
 				else if (data.Type == "Emote") {
 					if (HideOthersMessages && !msg.toLowerCase().includes(Player.Name.toLowerCase())) {
@@ -1853,7 +1855,8 @@ function ChatRoomMessage(data) {
 					}
 					else msg = "*" + SenderCharacter.Name + " " + msg + "*";
 
-					ChatRoomNotificationRaiseChatMessage(SenderCharacter, msg, false);
+					if (Player.NotificationSettings.ChatMessage.Normal)
+						ChatRoomNotificationRaiseChatMessage(SenderCharacter, msg);
 				}
 				else if (data.Type == "Action") msg = "(" + msg + ")";
 				else if (data.Type == "ServerMessage") msg = "<b>" + msg + "</b>";
@@ -1893,8 +1896,8 @@ function ChatRoomMessage(data) {
 				if ((Player.ChatSettings != null) && (Player.ChatSettings.ShowActivities != null) && !Player.ChatSettings.ShowActivities) return;
 
 				// Raise a notification if required
-				if (TargetMemberNumber === Player.MemberNumber)
-					ChatRoomNotificationRaiseChatMessage(SenderCharacter, msg, true);
+				if (TargetMemberNumber === Player.MemberNumber && Player.NotificationSettings.ChatMessage.Activity)
+					ChatRoomNotificationRaiseChatMessage(SenderCharacter, msg);
 			}
 
 			// Adds the message and scrolls down unless the user has scrolled up
@@ -3116,13 +3119,11 @@ function ChatRoomNotificationNewMessageVisible() {
  * Raise a notification for the new chat message if required
  * @param {Character} C - The character that sent the message
  * @param {string} msg - The text of the message
- * @param {boolean} isAction - If TRUE the chat message was an automatic action or activity rather than a manually typed message
  * @returns {void} - Nothing
  */
-function ChatRoomNotificationRaiseChatMessage(C, msg, isAction) {
+function ChatRoomNotificationRaiseChatMessage(C, msg) {
 	if (C.ID !== 0
 		&& Player.NotificationSettings.ChatMessage.AlertType !== NotificationAlertType.NONE
-		&& (!isAction || Player.NotificationSettings.ChatMessage.IncludeActions)
 		&& !ChatRoomNotificationNewMessageVisible())
 	{
 		NotificationRaise(NotificationEventType.CHATMESSAGE, { body: msg, character: C, useCharAsIcon: true });
