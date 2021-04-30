@@ -6,20 +6,23 @@ Punishment5,,,(A Dominatrix takes you away from the maid.)  You've been on list 
 Punishment2,,,"(A Dominatrix takes you away from the maid.)  (She cracks her knuckles.)  So, you're a troublemaker?  I'll teach you a lesson.",,
 Punishment0,,,(A Dominatrix takes you away from the maid.)  (She stares at you.)  You've caused some trouble?  Then it's time for your lesson.,,
 0,,,"Hello there sister, I hope you're doing well.",,"CostumeIs(""Maid"")"
-0,,,Hello Miss Guard.  (She does a maid curtsy.)  Do you need a refreshing drink for your hard work?,,"CostumeIs(""Guard"")"
+0,,,Hello Miss guard.  (She does a maid curtsy.)  Do you need a refreshing drink for your hard work?,,"CostumeIs(""Guard"")"
 0,,,(She ponders.)  Miss?  You know you look a little like the infamous DialogPlayerName?,,"DialogSkillGreater(""Infiltration"", 9)"
 0,,,"(She does a maid curtsy.)  Hello Miss, I think we've met before.  I'm maid DialogCharacterName.",,"DialogSkillGreater(""Infiltration"", 4)"
 0,,,"Hello Miss, it's a pleasure to meet you.",,
 0,,Who are you?,(She does a maid curtsy.)  I'm maid DialogCharacterName.  Do you require my assistance?,DialogRemove(),
-0,10,I'll have something to drink.,Of course!  Let me get the menu.  (She shows you the drink menu.),,
+0,10,I'll have something to drink.,Of course!  Let me get the menu.  (She shows you the drink menu.),,"!CostumeIs(""Maid"")"
+0,,I'll have something to drink.,(She giggles.)  Then go get it yourself sister.,DialogRemove(),"CostumeIs(""Maid"")"
 0,20,I need your clothes.,(She takes a step back and looks suspicious.)  My clothes?  Why is that?,,"!CostumeIs(""Maid"")"
+0,,(Give her a sisterly hug.),(She hugs you back.)  Thanks!  Sister hugs are the best.,RecruitBoost(),"CostumeIs(""Maid"")"
+0,50,Are you getting paid enough for your work?,"(She ponders.)  The salary isn't great, but it's a fun job.",StartRecruit(),CanStartRecruit()
 0,,I don't need anything.  (Go explore.),,CharacterAllowMove(),
 10,0,A glass of water. (0$),(She comes back with a glass of water for you to enjoy.)  Anything else?,BuyMaidDrink(0),
 10,0,A cup of coffee. (0$),(She comes back with a cup of coffee for you to enjoy.)  Anything else?,BuyMaidDrink(0),
-10,0,A beer please. (5$),(She comes back with a beer for you to enjoy.  You give her 5$.)  Anything else?,BuyMaidDrink(5),
-10,0,A glass of wine. (5$),(She comes back with a glass of wine for you to enjoy.  You give her 5$.)  Anything else?,BuyMaidDrink(5),
-10,0,A martini. (10$),(She comes back with a martini for you to enjoy.  You give her 10$.)  Anything else?,BuyMaidDrink(10),
-10,0,A margarita. (10$),(She comes back with a margarita for you to enjoy.  You give her 10$.)  Anything else?,BuyMaidDrink(10),
+10,0,A beer please. (5$),(She comes back with a beer for you to enjoy.  You give her 5$.)  Anything else?,BuyMaidDrink(5),DialogMoneyGreater(5)
+10,0,A glass of wine. (5$),(She comes back with a glass of wine for you to enjoy.  You give her 5$.)  Anything else?,BuyMaidDrink(5),DialogMoneyGreater(5)
+10,0,A martini. (10$),(She comes back with a martini for you to enjoy.  You give her 10$.)  Anything else?,BuyMaidDrink(10),DialogMoneyGreater(10)
+10,0,A margarita. (10$),(She comes back with a margarita for you to enjoy.  You give her 10$.)  Anything else?,BuyMaidDrink(10),DialogMoneyGreater(10)
 10,0,"Nothing, I'm good.","Very well, is there anything else I can do for you?",,
 20,30,"I'm a spy, I need a costume.",A spy?  I will never help you!  Surrender right now!,,
 20,30,Stop talking and strip girl.,No!  Are you a thief?  Surrender right now!,,
@@ -27,6 +30,20 @@ Punishment0,,,(A Dominatrix takes you away from the maid.)  (She stares at you.)
 20,,(Fight her.),,CharacterFight(),
 30,,(Fight her.),,CharacterFight(),
 30,CommonWaitDominatrix,(Surrender.),(You surrender as she quickly restrains you.)  A Dominatrix will come to take you away.,RestrainPlayer(),
+50,0,You should start a union.,(She laughs.)  Don't be ridiculous!  A maid union?  We would get punished for years.,,
+50,0,Having fun is enough I guess.,"(She nods.)  Yes, absolutely.  Having fun while working is enough for me.",,
+50,60,You deserve a better salary.,You think so?  Is there a place that would pay more for the same job?,,
+50,60,I found a great maid sorority.,Now I'm curious sister.   Where did you found that?,,"CostumeIs(""Maid"")"
+60,70,Have you heard of the Bondage Club?,I've heard good things about it.  Do you think they would hire a maid like me?,,CanRecruit()
+60,0,Have you heard of the Bondage Club?,"I've worked there before, but I prefer Pandora's Box.  Sorry.",,!CanRecruit()
+60,0,At my house.,(She raises her eyes.)  You're not funny.  Let's talk about something else then.,,
+60,0,(Shrugs.)  I don't now.,"(She sighs.)  Too bad, let's talk about something else then.",,
+70,80,Yes!  You could get a job right now.,"This is wonderful!  Thanks a lot, I will go there and join as a maid.  (Your infiltration skill has increased.)",InfiltrationChange(20),
+70,90,Yes!  And I have a room that we could share.,This is wonderful!  I will meet you there in your room.  (Your infiltration skill has increased.),InfiltrationChange(15),CanJoinPrivateRoom()
+70,0,I don't know.,"I can't risk losing my job here, I need the money.  Let's talk about something else.",,
+70,0,Not right now.,"I can't risk losing my job here, I need the money.  Let's talk about something else.",,
+80,,(Let her go to the Bondage Club.),,RemoveCurrentCharacter(),
+90,,(Let her go to your private room.),,CharacterJoinPrivateRoom(),
 100,,,You think you're smart?  You will never get away.,,
 100,,"Maid, go get me a drink.",(She grumbles.)  You think you're funny?  You won't have much to drink when you rot in a cell.,DialogRemove(),
 100,,(Bring her with you.),Hey!  I have a job to do you know?  (She will follow you from room to room.),CharacterJoin(),CharacterCanJoin()

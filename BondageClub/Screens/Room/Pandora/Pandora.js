@@ -25,7 +25,9 @@ function PandoraCanStartRecruit() { return ((CurrentCharacter.Recruit == null) |
 function PandoraCanRecruit() { return (CurrentCharacter.Recruit + (InfiltrationPerksActive("Recruiter") ? 0.25 : 0) >= CurrentCharacter.RecruitOdds) }
 function PandoraCharacterCanJoin() { return ((PandoraParty.length == 0) || (PandoraParty[0].Name != CurrentCharacter.Name)) }
 function PandoraCharacterCanLeave() { return ((PandoraParty.length == 1) && (PandoraParty[0].Name == CurrentCharacter.Name) && ((PandoraCurrentRoom.Character == null) || (PandoraCurrentRoom.Character.length <= 1))) }
-function PandoraOdds50() { return ((CurrentCharacter.RandomOdds == null) || (CurrentCharacter.RandomOdds > 0.5)) }
+function PandoraOdds75() { return ((CurrentCharacter.RandomOdds == null) || (CurrentCharacter.RandomOdds > 0.25)) }
+function PandoraOdds50() { return ((CurrentCharacter.RandomOdds == null) || (CurrentCharacter.RandomOdds > 0.50)) }
+function PandoraOdds25() { return ((CurrentCharacter.RandomOdds == null) || (CurrentCharacter.RandomOdds > 0.75)) }
 function PandoraCostumeIs(Costume) { return (PandoraClothes == Costume) }
 
 /**
@@ -633,8 +635,8 @@ function PandoraInfiltrationChange(Progress) {
 	let P = parseInt(Progress);
 	if (InfiltrationDifficulty == 1) P = Math.round(P * 1.5);
 	if (InfiltrationDifficulty == 2) P = Math.round(P * 2.25);
-	if (InfiltrationDifficulty == 3) P = Math.round(P * 3.25);
-	if (InfiltrationDifficulty == 4) P = Math.round(P * 4.5);
+	if (InfiltrationDifficulty == 3) P = Math.round(P * 3);
+	if (InfiltrationDifficulty == 4) P = Math.round(P * 4);
 	SkillProgress("Infiltration", P);
 }
 
@@ -689,10 +691,10 @@ function PandoraBribeInfo(Amount, Type) {
 }
 
 /**
- * When an activity is done on a slave, it gives a 5% boost in odds to recruit her later, works up to 5 fives
+ * Some dialog activities can boost the recruitment odds
  * @returns {void} - Nothing
  */
-function PandoraSlaveActivity() {
+function PandoraRecruitBoost() {
 	if (CurrentCharacter.RecruitOdds >= 0.75)
 		CurrentCharacter.RecruitOdds = CurrentCharacter.RecruitOdds - 0.05;
 }
