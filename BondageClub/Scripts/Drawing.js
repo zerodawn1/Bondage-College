@@ -1079,14 +1079,21 @@ function DrawRect(Left, Top, Width, Height, Color) {
  * @param {number} Radius - Radius of the circle to draw
  * @param {number} LineWidth - Width of the line
  * @param {string} LineColor - Color of the circle's line
+ * @param {string} FillColor - Color of the space inside the circle
+ * @param {HTMLCanvasElement} Canvas - The canvas element to draw onto, defaults to MainCanvas
  * @returns {void} - Nothing
  */
-function DrawCircle(CenterX, CenterY, Radius, LineWidth, LineColor) {
-	MainCanvas.beginPath();
-	MainCanvas.arc(CenterX, CenterY, Radius, 0, 2 * Math.PI, false);
-	MainCanvas.lineWidth = LineWidth;
-	MainCanvas.strokeStyle = LineColor;
-	MainCanvas.stroke();
+function DrawCircle(CenterX, CenterY, Radius, LineWidth, LineColor, FillColor, Canvas) {
+	if (!Canvas) Canvas = MainCanvas;
+	Canvas.beginPath();
+	Canvas.arc(CenterX, CenterY, Radius, 0, 2 * Math.PI, false);
+	if (FillColor) {
+		Canvas.fillStyle = FillColor;
+		Canvas.fill();
+	}
+	Canvas.lineWidth = LineWidth;
+	Canvas.strokeStyle = LineColor;
+	Canvas.stroke();
 }
 
 /**
