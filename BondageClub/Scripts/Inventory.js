@@ -935,7 +935,7 @@ function InventoryCheckLimitedPermission(C, Item, ItemType) {
  * Returns TRUE if a specific item / asset is blocked or limited for the player by the character item permissions
  * @param {Character} C - The character on which we check the permissions
  * @param {Item} Item - The item being interacted with
- * @param {String} ItemType - The asset type to scan
+ * @param {String} [ItemType] - The asset type to scan
  * @returns {Boolean} - Returns TRUE if the item cannot be used
  */
 function InventoryBlockedOrLimited(C, Item, ItemType) {
