@@ -10,7 +10,7 @@ var PandoraSeachSquare = null;
 var PandoraMessage = null;
 var PandoraParty = [];
 var PandoraFightCharacter = null;
-var PandoraRandomNPCList = ["Member", "Mistress", "Slave", "Maid"];
+var PandoraRandomNPCList = ["Member", "Mistress", "Slave", "Maid", "Guard"];
 var PandoraMoveDirectionTimer = { Direction: "", Timer: 0 };
 var PandoraTargetRoom = null;
 var PandoraClothes = "Random";
@@ -359,6 +359,7 @@ function PandoraGenerateRoom(EntryRoom, DirectionFrom, RoomLevel) {
 		while (!Continue) {
 			RoomBack = "Cell";
 			let DeadEndOdds = (RoomLevel - InfiltrationDifficulty) * 0.2;
+			if (RoomLevel <= 2) DeadEndOdds = 0;
 			let TunnelOdds = 0.25 + (RoomLevel * 0.1);			
 			if (TunnelOdds > 0.75) TunnelOdds = 0.75;
 			if (Math.random() >= DeadEndOdds) RoomBack = (Math.random() >= TunnelOdds) ? "Fork" : "Tunnel";
