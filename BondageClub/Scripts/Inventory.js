@@ -1,5 +1,7 @@
 "use strict";
 
+var lastdarkfactor = 0;
+
 /**
 * Add a new item by group & name to character inventory
 * @param {Character} C - The character that gets the new item added to her inventory
@@ -498,6 +500,9 @@ function InventoryGetRandom(C, GroupName, AllowedAssets) {
 */
 function InventoryRemove(C, AssetGroup, Refresh) {
 
+	const lastblindlevel = Player.GetBlindLevel();
+	lastdarkfactor = CharacterGetDarkFactor(Player);
+
 	// First loop to find the item and any sub item to remove with it
 	for (var E = 0; E < C.Appearance.length; E++)
 		if (C.Appearance[E].Asset.Group.Name == AssetGroup) {
@@ -528,6 +533,13 @@ function InventoryRemove(C, AssetGroup, Refresh) {
 		if (C.Appearance[E].Asset.Group.Name == AssetGroup) {
 			C.Appearance.splice(E, 1);
 			if (Refresh || Refresh == null) CharacterRefresh(C);
+
+			if (Player.GraphicsSettings && Player.GraphicsSettings.DoBlindFlash) {
+				if (lastblindlevel > 0 && Player.GetBlindLevel() === 0) {
+					DrawBlindFlash(lastblindlevel);
+				}
+			}
+			
 			return;
 		}
 

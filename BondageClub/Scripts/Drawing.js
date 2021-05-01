@@ -15,6 +15,9 @@ let DrawRun = () => { };
 let DrawScreen;
 var DialogLeaveDueToItem = false;
 
+var BlindFlash = false;
+var DrawingBlindFlashTimer = 0;
+
 // A bank of all the chached images
 /** @type {Map<string, HTMLImageElement>} */
 const DrawCacheImage = new Map;
@@ -1148,6 +1151,11 @@ function DrawGetCustomBackground() {
 	}
 
 	return customBG;
+}
+
+function DrawBlindFlash(intensity) {
+	DrawingBlindFlashTimer = CurrentTime + 2000 * intensity;
+	BlindFlash = true;
 }
 
 
