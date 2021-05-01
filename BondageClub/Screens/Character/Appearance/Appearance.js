@@ -299,7 +299,7 @@ function CharacterAppearanceStripLayer(C) {
  * Builds a filtered and sorted set of appearance layers, each representing a drawable layer of a character's current appearance. Layers
  * that will not be drawn (because their asset is not visible or they do not permit the current asset type) are filtered out at this stage.
  * @param {Character} C - The character to build the layers for
- * @return {Layer[]} - A sorted set of layers, sorted by layer drawing priority
+ * @return {AssetLayer[]} - A sorted set of layers, sorted by layer drawing priority
  */
 function CharacterAppearanceSortLayers(C) {
 	var groupAlphas = {};

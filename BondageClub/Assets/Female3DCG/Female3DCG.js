@@ -4224,7 +4224,9 @@ var AssetFemale3DCG = [
 ];
 
 /* eslint-disable */
-// 3D Custom Girl based pose
+/** 3D Custom Girl based pose
+ * @type {Pose[]}
+ */
 var PoseFemale3DCG = [
 	{
 		Name: "BaseUpper",
