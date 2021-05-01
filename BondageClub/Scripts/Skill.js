@@ -45,7 +45,7 @@ function SkillChange(SkillType, SkillLevel, SkillProgress, Push) {
 	}
 
 	else {
-		throw new Error("trying to change invalid skill");
+		console.warn(`Invalid skill type "${SkillType}"`);
 	}
 
 }

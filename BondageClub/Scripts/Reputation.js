@@ -41,9 +41,8 @@ function ReputationChange(RepType, RepValue, Push) {
 	}
 
 	else {
-		throw new Error("trying to change invalid reputation")
+		console.warn(`Invalid reputation type "${RepType}"`);
 	}
-
 }
 
 /**
