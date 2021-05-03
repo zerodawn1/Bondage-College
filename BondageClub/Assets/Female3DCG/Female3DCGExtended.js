@@ -107,7 +107,28 @@ var AssetFemale3DCGExtended = {
 		LatexSleevelessLeotard: {
 			Archetype: ExtendedArchetype.TYPED,
 			CopyConfig: { AssetName: "LatexButterflyLeotard" },
-		}
+		},
+		BitchSuit: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				Options: [
+					{
+						Name: "Latex",
+						Property: {
+							Type: null,
+							Block: ["ItemBreast", "ItemNipples", "ItemNipplesPiercings", "ItemVulva", "ItemVulvaPiercings", "ItemButt"],				
+						},
+					},
+					{
+						Name: "UnZip",
+						Property: {
+							Type: "UnZip",
+							Block: [],
+						},
+					},
+				],
+			},
+		}, // BitchSuit
 	}, // ItemArms
 	ItemHood: {
 		KirugumiMask: {
@@ -229,11 +250,11 @@ var AssetFemale3DCGExtended = {
  * An object containing extended item definitions for a group. Maps asset names within the group to their extended item
  * configuration
  * @typedef ExtendedItemGroupConfig
- * @type {object.<string, ExtendedItemAssetConfig>}
+ * @type {Object.<string, ExtendedItemAssetConfig>}
  * @see {@link ExtendedItemAssetConfig}
  *
  * An object containing extended item configurations keyed by group name.
  * @typedef ExtendedItemConfig
- * @type {object.<string, ExtendedItemGroupConfig>}
+ * @type {Object.<string, ExtendedItemGroupConfig>}
  * @see {@link ExtendedItemAssetConfig}
  */
