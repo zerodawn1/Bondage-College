@@ -281,17 +281,11 @@ var AssetFemale3DCGExtended = {
 				Options: [
 					{
 						Name: "Normal",
-						Property: {
-							Type: null,
-							Effect: ["BlockMouth", "GagNormal"],
-						},
+						Property: { Type: null },
 					},
 					{
 						Name: "Tight",
-						Property: {
-							Type: "Tight",
-							Effect: ["BlockMouth", "GagNormal"],
-						},
+						Property: { Type: "Tight" },
 					},
 				],
 				Dialog: {
@@ -307,24 +301,15 @@ var AssetFemale3DCGExtended = {
 				Options: [
 					{
 						Name: "Normal",
-						Property: {
-							Type: null,
-							Effect: ["BlockMouth", "GagMedium"],
-						},
+						Property: { Type: null },
 					},
 					{
 						Name: "Shiny",
-						Property: {
-							Type: "Shiny",
-							Effect: ["BlockMouth", "GagMedium"],
-						},
+						Property: { Type: "Shiny" },
 					},
 					{
 						Name: "Tight",
-						Property: {
-							Type: "Tight",
-							Effect: ["BlockMouth", "GagMedium"],
-						},
+						Property: { Type: "Tight" },
 					},
 				],
 				Dialog: {
