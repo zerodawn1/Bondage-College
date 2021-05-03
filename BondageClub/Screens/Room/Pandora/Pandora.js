@@ -738,3 +738,11 @@ function PandoraBuyMaidDrink(Money) {
 		CurrentCharacter.DrinkValue = Money;
 	}
 }
+
+/**
+ * Generates new random odds for a character, based on Pandora's difficulty
+ * @returns {void} - Nothing
+ */
+function PandoraCharacterGenerateRandomOdds() {
+	CurrentCharacter.RandomOdds = Math.random() + 0.2 - (InfiltrationDifficulty * 0.1);
+}
