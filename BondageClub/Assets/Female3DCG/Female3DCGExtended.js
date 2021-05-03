@@ -108,6 +108,32 @@ var AssetFemale3DCGExtended = {
 			Archetype: ExtendedArchetype.TYPED,
 			CopyConfig: { AssetName: "LatexButterflyLeotard" },
 		},
+		CeilingShackles: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				ChatSetting: TypedItemChatSetting.FROM_TO,
+				ChatTags: [CommonChatTags.SOURCE_CHAR, CommonChatTags.TARGET_CHAR],
+				Options: [
+					{
+						Name: "HeadLevel",
+						Property: {
+							Type: null,
+							SetPose: ["Yoked"]
+						},
+					},
+					{
+						Name: "Overhead",
+						Property: {
+							Type: "Overhead",
+							SetPose: ["OverTheHead"]
+						},
+					},
+				],
+				Dialog: {
+					Load: "SelectBondagePosition",
+				},
+			},
+		}, // CeilingShackles
 		BitchSuit: {
 			Archetype: ExtendedArchetype.TYPED,
 			Config: {
