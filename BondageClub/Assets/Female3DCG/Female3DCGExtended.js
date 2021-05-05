@@ -178,6 +178,22 @@ var AssetFemale3DCGExtended = {
 						Name: "Brows", Key: "br",
 						Options: [{}, {}, {}, {}], // All options are merely cosmetic,
 					},
+					{
+						Name: "Opacity", Key: "op",
+						Options: [
+								{},
+								{
+									Property: {
+										Effect: ["BlindLight"],
+									},
+								},
+								{
+									Property: {
+										Effect: ["BlindHeavy", "Prone"],
+									},
+								}
+							], // Opacity
+					},
 				],
 			},
 		}, // KirugumiMask
