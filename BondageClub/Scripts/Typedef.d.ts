@@ -84,6 +84,9 @@ interface AssetLayer {
 	AllowModuleTypes?: string[];
 	/** The coloring index for this layer */
 	ColorIndex: number;
+	/** Any group-specific alpha masks that should be applied when drawing the layer. Only available on layers that have
+    been created prior to drawing */
+	GroupAlpha?: AlphaDefinition[];
 }
 
 /** An object defining a group of alpha masks to be applied when drawing an asset layer */
@@ -336,4 +339,7 @@ interface Character {
 	IsInverted: () => boolean;
 	CanChangeToPose: (Pose: string) => boolean;
 	GetClumsiness: () => number;
+    DrawPose?: string[];
+    DrawAppearance?: Item[];
+    AppearanceLayers?: AssetLayer[];
 }
