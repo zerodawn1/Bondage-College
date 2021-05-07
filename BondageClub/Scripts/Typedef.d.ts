@@ -183,7 +183,7 @@ interface Asset {
 	DynamicPreviewIcon: () => string;
 	DynamicAllowInventoryAdd: () => boolean;
 	DynamicExpressionTrigger: () => ExpressionTrigger;
-	DynamicName: () => string;
+	DynamicName: (C?: Character) => string;
 	DynamicGroupName: string;
 	DynamicActivity: () => string[] | string | undefined;
 	DynamicAudio: (() => string) | null;
