@@ -228,6 +228,7 @@ function PandoraDress(C, Type) {
 
 	// The maids have a red outfit
 	if (Type == "Maid") {
+		InventoryRemove(C, "Gloves");
 		InventoryRemove(C, "ClothAccessory");
 		InventoryWear(C, "MaidOutfit2", "Cloth", "#804040");
 		InventoryWear(C, "MaidHairband1", "Hat", "#804040");
@@ -246,6 +247,7 @@ function PandoraDress(C, Type) {
 
 	// The guards are wearing a police hat and latex
 	if (Type == "Guard") {
+		InventoryRemove(C, "Gloves");
 		InventoryRemove(C, "ClothAccessory");
 		InventoryWear(C, "PoliceWomanHat", "Hat", "Default");
 		InventoryWear(C, "CorsetShirt", "Cloth", "Default");
@@ -347,7 +349,8 @@ function PandoraEnterRoom(Room, Direction) {
 	if ((PandoraCurrentRoom.Character.length == 1) && (PandoraCurrentRoom.Character[0].AccountName.indexOf("RandomMistress") >= 0) && PandoraCurrentRoom.Character[0].CanInteract()) {
 		let MistressDialog = "";
 		if (!PandoraCurrentRoom.Character[0].AllowMove && (SkillGetLevel(Player, "Infiltration") >= Math.floor(Math.random() * 10))) MistressDialog = "50";
-		if ((PandoraParty.length == 1) && (PandoraParty[0].AccountName.indexOf("RandomMistress") >= 0)) ArrestDialog = "60";
+		if (PandoraClothes == "Mistress") MistressDialog = "60";
+		if ((PandoraParty.length == 1) && (PandoraParty[0].AccountName.indexOf("RandomMistress") >= 0)) MistressDialog = "70";
 		if (MistressDialog != "") {
 			CharacterRelease(PandoraCurrentRoom.Character[0]);
 			PandoraCurrentRoom.Character[0].RandomOdds = Math.random() - (SkillGetLevel(Player, "Infiltration") / 10);
@@ -864,4 +867,13 @@ function PandoraPunishmentStart() {
 	ServerSend("AccountUpdate", { Infiltration: Player.Infiltration });
 	DialogLeave();
 	CommonSetScreen("Room", "PandoraPrison");
+}
+
+/**
+ * When an NPC pays the player for a service
+ * @param {string} Amount - The paid amount
+ * @returns {void} - Nothing
+ */
+function PandoraPlayerPay(Amount) {
+	CharacterChangeMoney(Player, parseInt(Amount));
 }
