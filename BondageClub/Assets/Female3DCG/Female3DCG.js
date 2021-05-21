@@ -3925,6 +3925,7 @@ var AssetFemale3DCG = [
 					{ Name: "Text" },
 				]
 			},
+			{ Name: "ServingTray", Value: -1, Time: 5, Extended: true },
 		],
 		Color: ["Default"]
 	},
