@@ -545,8 +545,8 @@ function CommonThrottle(func, wait) {
 	return function () {
 		context = this;
 		args = arguments;
-		const last = CommonTime() - timestamp;
 		if (!timeout) {
+			const last = CommonTime() - timestamp;
 			if (last >= 0 && last < wait) {
 				timeout = setTimeout(run, wait - last);
 			} else {
