@@ -2038,6 +2038,11 @@ RibbonsArmsCross,,,Cross,,
 RibbonsArmsHeavy,,,Heavy,,
 ArmsRibbonsSetCross,,,SourceCharacter uses some ribbons on DestinationCharacter arms.,,
 ArmsRibbonsSetHeavy,,,SourceCharacter uses some more ribbons on DestinationCharacter arms.,,
+ItemMouthHarnessPonyBitsSelect,,,Select where the bit will be,,
+ItemMouthHarnessPonyBitsDetached,,,Detached,,
+ItemMouthHarnessPonyBitsAttached,,,Attached,,
+ItemMouthHarnessPonyBitsSetDetached,,,SourceCharacter unclips the bit from DestinationCharacter harness.,,
+ItemMouthHarnessPonyBitsSetAttached,,,SourceCharacter clips the bit onto DestinationCharacter harness.,,
 ItemMiscServingTraySelect,,,Add or remove drinks from the tray,,
 ItemMiscServingTrayEmpty,,,Empty
 ItemMiscServingTrayFull,,,Full
