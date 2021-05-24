@@ -4447,6 +4447,12 @@ var PoseFemale3DCG = [
 	},
 ];
 
+/**
+ * List of all available pose names in the game
+ * @constant {string[]}
+ */
+var PoseFemale3DCGNames = PoseFemale3DCG.map(pose => pose.Name);
+
 // 3D Custom Girl based activities
 var ActivityFemale3DCG = [
 	{
