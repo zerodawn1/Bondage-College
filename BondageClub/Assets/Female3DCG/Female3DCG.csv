@@ -61,6 +61,7 @@ ClothAccessory,FrillyApron,Frilly Apron
 ClothAccessory,BunnyCollarCuffs,Bunny Girl Accessories
 ClothAccessory,Camera1,Camera
 ClothAccessory,Cape,Cape
+ClothAccessory,LeatherStraps,Leather Straps
 Necklace,,Necklace
 Necklace,Necklace1,Fancy Necklace
 Necklace,Necklace2,Beaded Necklace
@@ -159,6 +160,7 @@ Bra,CowPrintedBra,Cow Printed Bra
 Bra,StuddedHarness,Studded Harness
 Bra,Camisole,Camisole
 Bra,Ribbons,Ribbons
+Bra,LeatherBreastBinder,Leather Breast Binder
 Corset,,Corset
 Corset,Corset1,Corset + Garters
 Corset,Corset2,Corset
@@ -250,6 +252,8 @@ Shoes,BarefootSandals1,Barefoot Sandals
 Shoes,LatexAnkleShoes, Latex Ankle Shoes
 Shoes,Flippers,Flippers
 Shoes,DeluxeBoots,Deluxe Mistress Boots
+Shoes,AnkleStrapShoes,Ankle Strap Shoes
+Shoes,Shoes5,Style 4
 Hat,,Hat
 Hat,Band1,Hair Band
 Hat,Band2,Jeweled Band
@@ -775,6 +779,7 @@ ItemBreast,OrnateChastityBra,Ornate Chastity Bra
 ItemBreast,LeatherCrop,Leather Crop
 ItemBreast,LeatherWhip,Leather Whip
 ItemBreast,Ribbons,Ribbons
+ItemBreast,LeatherBreastBinder,Leather Breast Binder
 ItemArms,,Arms
 ItemArms,NylonRope,Nylon Rope
 ItemArms,HempRope,Hemp Rope
