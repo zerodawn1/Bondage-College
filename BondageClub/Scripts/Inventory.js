@@ -588,7 +588,7 @@ function InventoryGroupIsBlockedForCharacter(C, GroupName, Activity) {
 * Similar to InventoryGroupIsBlockedForCharacter but also blocks groups on all characters if the player is enclosed.
 * @param {Character} C - The character on which we validate the group
 * @param {String} GroupName - The name of the asset group (body area)
-* @param {Boolean} Activity - if TRUE check if activity is allowed on the asset group
+* @param {Boolean} [Activity] - if TRUE check if activity is allowed on the asset group
 * @returns {Boolean} - TRUE if the group is blocked
 */
 function InventoryGroupIsBlocked(C, GroupName, Activity) {
@@ -811,7 +811,7 @@ function InventoryLock(C, Item, Lock, MemberNumber, Update = true) {
 /**
 * Unlocks an item and removes all related properties
 * @param {Character} C - The character on which the item must be unlocked
-* @param {Item} Item - The item from appearance to unlock
+* @param {Item|string} Item - The item from appearance to unlock
 */
 function InventoryUnlock(C, Item) {
 	if (typeof Item === 'string') Item = InventoryGet(C, Item);
