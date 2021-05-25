@@ -324,6 +324,7 @@ function PandoraEnterRoom(Room, Direction) {
 		if ((InfiltrationMission == "Retrieve") && (InfiltrationTarget.Found)) StartDialog = InfiltrationMission + ((PandoraClothes == "Maid") ? "Maid" : "Random") + "0";
 		if ((InfiltrationMission == "Rescue") && (PandoraParty.length == 1) && (PandoraParty[0].Name == InfiltrationTarget.Name)) StartDialog = InfiltrationMission + ((PandoraClothes == "Guard") ? "Guard" : "Random") + "0";
 		if ((InfiltrationMission == "Kidnap") && (PandoraParty.length == 1) && (PandoraParty[0].Name == InfiltrationTarget.Name) && PandoraParty[0].CanTalk()) StartDialog = InfiltrationMission + "Random" + "0";
+		if ((PandoraCurrentRoom.Character[0].AccountName.indexOf("EntranceMaid") >= 0) && (PandoraParty.length == 1) && (PandoraParty[0].AccountName.indexOf("RandomMistress") >= 0) && (InventoryGet(PandoraCurrentRoom.Character[0], "ItemHood") == null)) StartDialog = "MistressArrest0";
 		if (StartDialog != "") {
 			CharacterRelease(PandoraCurrentRoom.Character[0]);
 			PandoraCurrentRoom.Character[0].RandomOdds = Math.random() + 0.2 - (InfiltrationDifficulty * 0.1);
@@ -338,6 +339,7 @@ function PandoraEnterRoom(Room, Direction) {
 		if (!PandoraCurrentRoom.Character[0].AllowMove && (SkillGetLevel(Player, "Infiltration") >= Math.floor(Math.random() * 10))) ArrestDialog = "InfiltrationArrest";
 		if ((InfiltrationMission == "Kidnap") && (PandoraParty.length == 1) && (PandoraParty[0].Name == InfiltrationTarget.Name) && PandoraParty[0].CanTalk()) ArrestDialog = "KidnapArrest";
 		if ((PandoraParty.length == 1) && (PandoraParty[0].AccountName.indexOf("RandomGuard") >= 0)) ArrestDialog = "GuardArrest";
+		if ((PandoraParty.length == 1) && (PandoraParty[0].AccountName.indexOf("RandomMistress") >= 0) && PandoraParty[0].CanTalk()) ArrestDialog = "MistressArrest";
 		if (ArrestDialog != "") {
 			CharacterRelease(PandoraCurrentRoom.Character[0]);
 			PandoraCurrentRoom.Character[0].AllowMove = false;
