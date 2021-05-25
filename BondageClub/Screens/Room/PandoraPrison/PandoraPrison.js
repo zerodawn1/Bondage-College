@@ -103,6 +103,7 @@ function PandoraPrisonReleasePlayer() {
  * @returns {void} - Nothing
  */
 function PandoraPrisonExitPrison() {
+	CharacterRelease(Player);
 	CharacterRelease(PandoraPrisonGuard);
 	PandoraDress(PandoraPrisonGuard, "Guard");	
 	PandoraPrisonGuard.AllowItem = false;
