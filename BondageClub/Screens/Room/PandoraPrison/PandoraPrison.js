@@ -12,6 +12,7 @@ var PandoraPrisonEscaped = false;
  * @returns {void} - Nothing
  */
 function PandoraPrisonLoad() {
+	PandoraParty = [];
 	if (!PandoraPrisonEscaped) PandoraPrisonCharacter = null;
 	if (PandoraPrisonMaid == null) {
 		PandoraPrisonMaid = CharacterLoadNPC("NPC_PandoraPrison_Maid");
