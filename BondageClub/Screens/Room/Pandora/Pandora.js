@@ -143,9 +143,6 @@ function PandoraClick() {
 	let Pos = 690 - (PandoraCurrentRoom.Character.length + PandoraParty.length) * 230;
 	if (MouseIn(Pos, 0, 500, 1000)) return CharacterSetCurrent(Player);
 	let AllowMove = true;
-	for (let C = 0; C < PandoraParty.length; C++)
-		if (MouseIn(Pos + ((C + 1) * 460), 0, 500, 1000))
-			return CharacterSetCurrent(PandoraParty[C]);
 	for (let C = 0; C < PandoraCurrentRoom.Character.length; C++) {
 		if (MouseIn(Pos + ((C + 1 + PandoraParty.length) * 460), 0, 500, 1000)) return CharacterSetCurrent(PandoraCurrentRoom.Character[C]);
 		if ((PandoraCurrentRoom.Character[C].AllowMove != null) && (PandoraCurrentRoom.Character[C].AllowMove == false)) AllowMove = false;
@@ -153,6 +150,9 @@ function PandoraClick() {
 
 	// If we allow moving, we can switch room
 	if (AllowMove) {
+		for (let C = 0; C < PandoraParty.length; C++)
+			if (MouseIn(Pos + ((C + 1) * 460), 0, 500, 1000))
+				return CharacterSetCurrent(PandoraParty[C]);
 		for (let P = 0; P < PandoraCurrentRoom.Path.length; P++)
 			if (MouseIn(1900, 25 + P * 115, 90, 90)) {
 				if (PandoraCurrentRoom.Path[P].Floor == "Exit") return CommonSetScreen("Room", "Infiltration");
@@ -618,6 +618,7 @@ function PandoraCharacterFightEnd() {
 	CharacterRelease(KidnapVictory ? Player : CurrentCharacter);
 	CurrentCharacter.AllowItem = KidnapVictory;
 	if (KidnapVictory) CurrentCharacter.AllowMove = true;
+	if (KidnapVictory && (PandoraClothes != "Random")) PandoraDress(Player, PandoraClothes);
 	CommonSetScreen("Room", "Pandora");
 	CurrentCharacter.CurrentDialog = DialogFind(CurrentCharacter, (KidnapVictory) ? "FightVictory" : "FightDefeat");
 }
