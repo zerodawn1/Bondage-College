@@ -78,6 +78,7 @@ var AssetFemale3DCGExtended = {
 						],
 					},
 				],
+				ChangeWhenLocked: false,
 			},
 		}, // HighSecurityStraitJacket
 		LatexButterflyLeotard: {
@@ -229,6 +230,7 @@ var AssetFemale3DCGExtended = {
 						], // Opacity
 					},
 				],
+				ChangeWhenLocked: false,
 			},
 		}, // KirugumiMask
 	}, // ItemHood
