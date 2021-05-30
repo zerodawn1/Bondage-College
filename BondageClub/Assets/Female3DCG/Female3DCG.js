@@ -1938,6 +1938,7 @@ var AssetFemale3DCG = [
 			},
 			{ Name: "HeavyLatexCorset", Fetish: ["Lingerie", "Latex"], Priority: 22, Value: 60, Difficulty: 10, Time: 20, RemoveTime: 15, AllowLock: true, Prerequisite: "AccessTorso", AllowType: ["Straps"], AllowPose: ["OverTheHead"], HideForPose: ["AllFours", "Hogtied"], Extended: true},
 			{ Name: "Ribbons", Fetish: ["Lingerie"], Value: 30, Difficulty: 3, Time: 10, RemoveTime: 5, BuyGroup: "Ribbon", Prerequisite: "AccessTorso", AllowType: ["Harness1", "Harness2"],  AllowPose: ["AllFours", "Hogtied"], Extended: true, AllowEffect: ["CrotchRope"] },
+			{ Name: "SilkStraps", Value: 40, BuyGroup: "SilkStraps", DefaultColor: "#E8E8E8", Difficulty: 3, Time: 10, RemoveTime: 5, Prerequisite: "AccessTorso", Extended: true},
 			AssetSpankingToys
 		],
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"]
