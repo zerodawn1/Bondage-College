@@ -351,7 +351,19 @@ var AssetFemale3DCGExtended = {
 		LatexCorset1: {
 			Archetype: ExtendedArchetype.TYPED,
 			CopyConfig: { GroupName: "Corset", AssetName: "LatexCorset1" },
-		},
+		}, //LatexCorset1
+		SilkStraps: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				Options: [
+					{ Name: "Crotch", Property: { Type: null } },
+					{ Name: "Waist", Property: { Type: "Waist" } },
+					{ Name: "Harness", Property: { Type: "Harness" } },
+					{ Name: "Star", Property: { Type: "Star" } },
+					{ Name: "Diamond", Property: { Type: "Diamond" } },
+				]				
+			},
+		}, // SilkStraps
 	}, // ItemTorso
 	HairAccessory1: {
 		ElfEars: {
