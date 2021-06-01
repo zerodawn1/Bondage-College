@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Female3DCGExtended.js
+ * Female3	CGExtended.js
  * ---------------------
  * This file contains definitions and configuration for extended items. Items which are marked as Extended in
  * `Female3DCG.js` and which have an extended item definition here will have their load/draw/click functions
@@ -153,28 +153,6 @@ var AssetFemale3DCGExtended = {
 				},
 			},
 		}, // CeilingShackles
-		SteelCuffs: {
-			Archetype: ExtendedArchetype.TYPED,
-			Config: {
-				Options: [
-					{
-						Name: "None",
-						Property: { Type: null }
-					},
-					{
-						Name: "Wrist",
-						Property: {
-							Type: "Wrist",
-							Effect: ["Block", "Prone"],
-							SetPose: ["BackBoxTie"]
-						}
-					}
-				],
-				Dialog: {
-					Load: "SelectBondagePosition"
-				}
-			}
-		}, // SteelCuffs
 		BitchSuit: {
 			Archetype: ExtendedArchetype.TYPED,
 			Config: {
@@ -220,32 +198,194 @@ var AssetFemale3DCGExtended = {
 				},
 			},
 		}, // LeatherArmbinder
-		SturdyLeatherBelts: {
+		WristShackles: {
 			Archetype: ExtendedArchetype.TYPED,
 			Config: {
-				ChatTags: [CommonChatTags.SOURCE_CHAR, CommonChatTags.TARGET_CHAR],
-				ChangeWhenLocked: false,
-				Dialog: {
-					Load: "SturdyLeatherBeltsSelectTightness",
-					TypePrefix: "SturdyLeatherBeltsPose",
-					ChatPrefix: "SturdyLeatherBeltsRestrain",
-				},
 				Options: [
 					{
-						Name: "One",
-						Property: { Type: null, },
+						Name: "InFront",
+						Property: {
+							Type: null
+						},
 					},
 					{
-						Name: "Two",
-						Property: { Type: "Two", Difficulty: 2, },
+						Name: "Behind",
+						Property: {
+							Type: "Behind",
+							SetPose: ["BackCuffs"],
+							Effect: ["Block", "Prone"],
+							Difficulty: 3
+						},
 					},
 					{
-						Name: "Three",
-						Property: { Type: "Three", Difficulty: 4, },
+						Name: "Overhead",
+						Property: {
+							Type: "Overhead",
+							SetPose: ["OverTheHead"],
+							Effect: ["Block", "Prone"],
+							Difficulty: 3
+						},
 					},
 				],
-			}
-		}, // SturdyLeatherBelts
+				Dialog: {
+					Load: "SelectBondagePosition",
+				}
+			},
+		}, // WristShackles
+		LeatherCuffs: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				Options: [
+					{
+						Name: "None",
+						Property: {
+							Type: null,
+							Difficulty: 0,
+							Effect: [],
+							SetPose: null,
+							SelfUnlock: true,
+						},
+					},
+					{
+						Name: "Wrist",
+						Property: {
+							Type: "Wrist",
+							Difficulty: 2,
+							Effect: ["Block", "Prone"],
+							SetPose: ["BackBoxTie"],
+							SelfUnlock: true,
+						},
+					},
+					{
+						Name: "Elbow",
+						Property: {
+							Type: "Elbow",
+							Difficulty: 4,
+							Effect: ["Block", "Prone", "NotSelfPickable"],
+							SetPose: ["BackElbowTouch"],
+							SelfUnlock: false,
+						},
+					},
+					{
+						Name: "Both",
+						Property: {
+							Type: "Both",
+							Difficulty: 6,
+							Effect: ["Block", "Prone", "NotSelfPickable"],
+							SetPose: ["BackElbowTouch"],
+							SelfUnlock: false,
+						},
+					},
+				],
+				Dialog: {
+					Load: "SelectBondagePosition",
+					TypePrefix: "ItemArmsCuffs",
+				},
+			},
+		}, // LeatherCuffs
+		OrnateCuffs: {
+			Archetype: ExtendedArchetype.TYPED,
+			CopyConfig: { AssetName: "LeatherCuffs" },
+		}, // OrnateCuffs
+		SteelCuffs: {
+			Archetype: ExtendedArchetype.TYPED,
+			CopyConfig: { AssetName: "LeatherCuffs" },
+			Config: {
+				Options: [
+					{
+						Name: "None",
+						Property: { Type: null }
+					},
+					{
+						Name: "Wrist",
+						Property: {
+							Type: "Wrist",
+							Effect: ["Block", "Prone"],
+							SetPose: ["BackBoxTie"]
+						}
+					}
+				],
+			},
+		}, // SteelCuffs	
+		StraitJacket: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				Options: [
+					{
+						Name: "Loose",
+						Property: {
+							Type: null,
+							Difficulty: 0,
+						},
+					},
+					{
+						Name: "Normal",
+						Property: {
+							Type: "Normal",
+							Difficulty: 3,
+						},
+					},
+					{
+						Name: "Snug",
+						Property: {
+							Type: "Snug",
+							Difficulty: 6,
+						},
+					},
+					{
+						Name: "Tight",
+						Property: {
+							Type: "Tight",
+							Difficulty: 9,
+						},
+					},
+				],
+				Dialog: {
+					Load: "ItemArmsStraitJacketSelect",
+					TypePrefix: "ItemArmsStraitJacket",
+				},
+			},
+		}, // StraitJacket
+		LeatherStraitJacket: {
+			Archetype: ExtendedArchetype.TYPED,
+			CopyConfig: { AssetName: "StraitJacket" },
+		}, // LeatherStraitJacket
+		CollarCuffs: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				Options: [
+					{
+						Name: "Loose",
+						Property: {
+							Type: null,
+							Difficulty: 0,
+						},
+					},
+					{
+						Name: "Normal",
+						Property: {
+							Type: "Normal",
+							Difficulty: 3,
+						},
+					},
+					{
+						Name: "Snug",
+						Property: {
+							Type: "Snug",
+							Difficulty: 6,
+						},
+					},
+					{
+						Name: "Tight",
+						Property: {
+							Type: "Tight",
+							Difficulty: 9,
+						},
+					},
+				],
+				DrawImages: false,
+			},
+		}, // CollarCuffs
 	}, // ItemArms
 	ItemNeck: {
 		ShinySteelCollar: {
