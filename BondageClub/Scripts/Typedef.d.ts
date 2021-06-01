@@ -408,7 +408,7 @@ interface Character {
 		GameVersion: string;
 	};
 	Game?: any;
-	BlackList?: number[];
+	BlackList: number[];
 	RunScripts?: boolean;
 	HasScriptedAssets?: boolean;
 	Cage?: true | null;
