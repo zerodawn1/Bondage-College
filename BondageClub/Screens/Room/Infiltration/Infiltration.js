@@ -7,6 +7,7 @@ var InfiltrationMissionType = ["Rescue", "Kidnap", "Retrieve"];
 var InfiltrationObjectType = ["USBKey", "BDSMPainting", "GoldCollar", "GeneralLedger", "SilverVibrator", "DiamondRing", "SignedPhoto"];
 var InfiltrationTarget = {};
 var InfiltrationCollectRansom = false;
+var InfiltrationKidnapper = null;
 
 /**
  * Returns TRUE if the mission can complete as a success
@@ -33,6 +34,7 @@ function InfiltrationCanGoBack() { return (((InfiltrationTarget == null) || (Inf
 function InfiltrationLoad() {
 
 	// If there's a party coming with the player, it can complete the mission or trigger a ransom
+	InfiltrationBackground = "Infiltration";
 	InfiltrationCollectRansom = false;
 	if ((PandoraParty != null) && (PandoraParty.length > 0)) {
 		for (let P = 0; P < PandoraParty.length; P++) {
@@ -182,4 +184,34 @@ function InfiltrationPayRansom(Type) {
 		if (InfiltrationDifficulty == 3) SkillProgress("Infiltration", 300);
 		if (InfiltrationDifficulty == 4) SkillProgress("Infiltration", 400);
 	}
+}
+
+/**
+ * The revenge kidnapping can happen when infiltration level is at 4 or more, in that case, a Pandora girl can try to kidnap the player from the club and bring her to a Pandora's Box prison
+ * @returns {void} - Nothing
+ */
+function InfiltrationStartKidnapping() {
+	let IntroText = TextGet("PandoraKidnapperIntro" + Math.floor(Math.random() * 5));
+	IntroText = IntroText.replace("DialogPlayerName", Player.Name);
+	CommonSetScreen("Room", "Infiltration");
+	InfiltrationBackground = MainHallBackground;
+	CharacterDelete("NPC_Infiltration_Kidnapper");
+	delete CommonCSVCache["Screens/Room/Infiltration/NPC_Infiltration_Kidnapper.csv"];
+	InfiltrationKidnapper = CharacterLoadNPC("NPC_Infiltration_Kidnapper");
+	CharacterRandomName(InfiltrationKidnapper);
+	CharacterRelease(InfiltrationKidnapper);
+	InfiltrationKidnapper.Stage = "0";
+	CharacterAppearanceFullRandom(InfiltrationKidnapper);
+	CharacterRefresh(InfiltrationKidnapper, false);
+	CharacterSetCurrent(InfiltrationKidnapper);
+	InfiltrationKidnapper.CurrentDialog = IntroText;
+}
+
+/**
+ * Ends the revenge kidnapping scenario and goes back to the main hall
+ * @returns {void} - Nothing
+ */
+function InfiltrationEndKidnapping() {
+	DialogLeave();
+	CommonSetScreen("Room", "MainHall");
 }
