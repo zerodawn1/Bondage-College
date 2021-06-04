@@ -586,8 +586,8 @@ var AssetFemale3DCGExtended = {
 			Archetype: ExtendedArchetype.TYPED,
 			Config: {
 				Options: [
-					{ Name: "Wrist", Property: { Type: null, SetPose: ["BackBoxTie"] } },
-					{ Name: "Boxtie", Property: { Type: "Boxtie", SetPose: ["BackBoxTie"] } },
+					{ Name: "Wrist", Property: { Type: "Wrist", SetPose: ["BackBoxTie"] } },
+					{ Name: "Boxtie", Property: { Type: null, SetPose: ["BackBoxTie"] } },
 					{ Name: "WristElbow", Property: { Type: "WristElbow", SetPose: ["BackElbowTouch"] } },
 					{ Name: "WristElbowHarness", Property: { Type: "WristElbowHarness", SetPose: ["BackElbowTouch"] } },
 					{ Name: "Hogtie", Property: { Type: "Hogtie", SetPose: ["Hogtied"], Effect: ["Block", "Freeze", "Prone"] } }
@@ -712,6 +712,16 @@ var AssetFemale3DCGExtended = {
 				]				
 			},
 		}, // SilkStraps
+		ThinLeatherStraps: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				Options: [
+					{ Name: "Crotch", Property: { Type: null } },
+					{ Name: "Waist", Property: { Type: "Waist" } },
+					{ Name: "Harness", Property: { Type: "Harness" } },
+				]				
+			},
+		}, // ThinLeatherStraps
 	}, // ItemTorso
 	HairAccessory1: {
 		ElfEars: {
