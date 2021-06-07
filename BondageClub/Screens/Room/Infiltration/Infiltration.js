@@ -211,9 +211,19 @@ function InfiltrationStartKidnapping() {
  * Ends the revenge kidnapping scenario and goes back to the main hall
  * @returns {void} - Nothing
  */
-function InfiltrationEndKidnapping() {
-	DialogLeave();
+function InfiltrationEndKidnapping(Reward) {
+	if ((Reward != null) && (Reward == "Money")) CharacterChangeMoney(Player, 18);
+	if ((Reward != null) && (Reward == "Skill")) SkillProgress("Infiltration", 400);
+	if ((Reward != null) && (Reward == "Private")) {
+		CurrentScreen = "Private";
+		PrivateAddCharacter(CurrentCharacter);
+		CommonSetScreen("Room", "Private");
+		PrivateCharacter[PrivateCharacter.length - 1].Love = -80;
+		DialogLeave();
+		return;
+	}
 	CommonSetScreen("Room", "MainHall");
+	DialogLeave();
 }
 
 /**
@@ -257,4 +267,25 @@ function InfiltrationKidnapperEndFight() {
 function InfiltrationKidnapperEnterPandora() {
 	CommonSetScreen("Room", "Pandora");
 	PandoraPunishmentIntro(true);
+}
+
+/**
+ * Removes the gag from the kidnapper
+ * @returns {void} - Nothing
+ */
+function InfiltrationKidnapperUngag() {
+	InventoryRemove(CurrentCharacter, "ItemHead");
+	InventoryRemove(CurrentCharacter, "ItemHood");
+	InventoryRemove(CurrentCharacter, "ItemNose");
+	InventoryRemove(CurrentCharacter, "ItemMouth");
+	InventoryRemove(CurrentCharacter, "ItemMouth2");
+	InventoryRemove(CurrentCharacter, "ItemMouth3");
+}
+
+/**
+ * Returns TRUE if the player can bring the current NPC to her room
+ * @returns {boolean} - TRUE if it's possible
+ */
+function InfiltrationCanBringToRoom() {
+	return (LogQuery("RentRoom", "PrivateRoom") && (PrivateCharacter.length < PrivateCharacterMax));
 }
