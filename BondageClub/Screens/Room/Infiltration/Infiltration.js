@@ -215,3 +215,46 @@ function InfiltrationEndKidnapping() {
 	DialogLeave();
 	CommonSetScreen("Room", "MainHall");
 }
+
+/**
+ * When the player surrenders to her kidnapper
+ * @returns {void} - Nothing
+ */
+function InfiltrationKidnapperSurrender() {
+	CharacterFullRandomRestrain(Player, "ALL", true);
+}
+
+/**
+ * Starts the fight with the NPC kidnapper
+ * @returns {void} - Nothing
+ */
+function InfiltrationKidnapperStartFight() {
+	let Difficulty = SkillGetLevel(Player, "Infiltration") - 3 + Math.floor(Math.random() * 7);
+	if (Difficulty < 0) Difficulty = 0;
+	if (Difficulty > 10) Difficulty = 10;
+	KidnapStart(CurrentCharacter, InfiltrationBackground, Difficulty, "InfiltrationKidnapperEndFight()");
+}
+
+/**
+ * Ends the fight with the NPC kidnapper
+ * @returns {void} - Nothing
+ */
+function InfiltrationKidnapperEndFight() {
+	CharacterSetCurrent(InfiltrationKidnapper);
+	SkillProgress("Willpower", ((Player.KidnapMaxWillpower - Player.KidnapWillpower) + (CurrentCharacter.KidnapMaxWillpower - CurrentCharacter.KidnapWillpower)));
+	CurrentCharacter.Stage = (KidnapVictory) ? "100" : "200";
+	CharacterRelease(KidnapVictory ? Player : CurrentCharacter);
+	CurrentCharacter.AllowItem = KidnapVictory;
+	CommonSetScreen("Room", "Infiltration");
+	InfiltrationBackground = MainHallBackground;
+	CurrentCharacter.CurrentDialog = DialogFind(CurrentCharacter, (KidnapVictory) ? "FightVictory" : "FightDefeat");
+}
+
+/**
+ * Enter Pandora's Box as the kidnapper victim
+ * @returns {void} - Nothing
+ */
+function InfiltrationKidnapperEnterPandora() {
+	CommonSetScreen("Room", "Pandora");
+	PandoraPunishmentIntro(true);
+}
