@@ -20,6 +20,11 @@ ClothBodice1Pattern,Pattern
 ClothAdmiralTopJacket,Jacket
 ClothAdmiralTopTrim,Trim
 ClothAdmiralTopShirt,Shirt
+ClothSummerDressLayer1,Chest
+ClothSummerDressLayer2,Buttons
+ClothSummerDressLayer3,Arm Puffs
+ClothSummerDressLayer4,Trim
+ClothSummerDressBase,Dress
 ClothAccessoryBouquetBase,Holder
 ClothAccessoryBouquetFlowers,Flowers
 ClothAccessoryCapeFront,Front

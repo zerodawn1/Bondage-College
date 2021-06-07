@@ -164,6 +164,16 @@ var AssetFemale3DCG = [
 					{ Name: "Pattern" }
 				]
 			},
+			{
+				Name: "SummerDress", Value: 75, Hide: ["ItemNipples", "ItemNipplesPiercings"],
+				Layer: [
+					{ Name: "Base" },
+					{ Name: "Layer4" },
+					{ Name: "Layer2" },
+					{ Name: "Layer3" },
+					{ Name: "Layer1" }
+				]
+			},
 		],
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"]
 	},
