@@ -163,9 +163,6 @@ function InventoryItemDevicesVacBedDeluxeSetOpacity(property, opacity) {
  * @returns {void} - Nothing
  */
 const InventoryItemDevicesVacBedDeluxeOpacityChange = CommonLimitFunction((character, item, opacity) => {
-	console.log(character);
-	console.log(item);
-	console.log(opacity);
 	item = DialogFocusItem || item;
 	item.Property.Opacity = Number(opacity);
 	CharacterRefresh(character, false);
