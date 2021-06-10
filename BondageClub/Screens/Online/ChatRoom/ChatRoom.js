@@ -2560,9 +2560,10 @@ function DialogCallMaids() {
 	ChatRoomClearAllElements();
 	ChatRoomSetLastChatRoom("");
 	ServerSend("ChatRoomLeave", "");
-	if (!Player.RestrictionSettings || !Player.RestrictionSettings.BypassNPCPunishments)
-		MainHallPunishFromChatroom();
 	CommonSetScreen("Room", "MainHall");
+	if (!Player.RestrictionSettings || !Player.RestrictionSettings.BypassNPCPunishments) {
+		MainHallPunishFromChatroom();
+	}
 }
 
 
