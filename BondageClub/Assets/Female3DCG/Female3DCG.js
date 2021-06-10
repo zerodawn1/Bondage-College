@@ -4218,6 +4218,27 @@ var AssetFemale3DCG = [
 				Alpha: [{ Masks: [[1, 1, 70, 999], [420, 1, 80, 999]] }], 
 				Block: ["ItemArms", "ItemBoots", "ItemBreast", "ItemButt", "ItemFeet", "ItemHands", "ItemLegs", "ItemMisc", "ItemAddon", "ItemNeck", "ItemNeckAccessories", "ItemNeckRestraints", "ItemNipples", "ItemNipplesPiercings", "ItemPelvis", "ItemTorso", "ItemVulva", "ItemVulvaPiercings"], 
 				AllowActivityOn: ["ItemNeck", "ItemArms", "ItemHands", "ItemBreast", "ItemNipples", "ItemPelvis", "ItemLegs", "ItemFeet", "ItemBoots", "ItemButt"],
+				RemoveAtLogin: true
+			},
+			{
+				Name: "VacBedDeluxe", Fetish: ["Latex"], Priority: 36, Value: 250, Difficulty: 50, SelfBondage: 3, Time: 10, RemoveTime: 10, AllowLock: true, RemoveAtLogin: true, DefaultColor: ["#808080", "#808080", "#808080"], Extended: true, MinOpacity: 0.25, MaxOpacity: 1, Opacity: 1, FixedPosition: true,
+				Hide: ["Hands", "HairBack", "Cloth", "ClothLower", "ClothAccessory", "Necklace", "Suit", "SuitLower", "Bra", "Panties", "Socks", "RightAnklet", "LeftAnklet", "Shoes", "Gloves", "TailStraps", "Wings", "ItemFeet", "ItemLegs", "ItemVulva", "ItemVulvaPiercings", "ItemButt", "ItemPelvis", "ItemTorso", "ItemNipples", "ItemNipplesPiercings", "ItemBreast", "ItemArms", "ItemHands", "ItemBoots", "Pussy", "Corset"],
+				Prerequisite: ["NotKneeling", "AllFours", "NotSuspended", "NotHogtied", "NotKneelingSpread", "NoItemArms", "LegsOpen", "NoItemHands", "NoItemLegs", "NoHorse", "NoItemFeet"],
+				Block: ["ItemArms", "ItemBoots", "ItemBreast", "ItemButt", "ItemFeet", "ItemHands", "ItemLegs", "ItemMisc", "ItemAddon", "ItemNeck", "ItemNeckAccessories", "ItemNeckRestraints", "ItemNipples", "ItemNipplesPiercings", "ItemPelvis", "ItemTorso", "ItemVulva", "ItemVulvaPiercings"],
+				AllowActivityOn: ["ItemArms", "ItemFeet", "ItemLegs", "ItemBoots"],
+				SetPose: ["BaseUpper"],
+				Effect: ["Prone", "Freeze", "Block", "Mounted"],
+				/*FreezeActivePose: ["BodyUpper", "BodyLower"],*/
+				AllowType: ["ArmsDownLegsTogether","ArmsUpLegsSpread","ArmsUpLegsTogether"],
+				AllowPose: ["Yoked","BaseLower","LegsClosed"],
+				AllowEffect: ["Prone", "Freeze", "Block", "Mounted"],
+				Layer: [
+					{ Name: "SheetBack", ColorGroup:"Sheet", Priority: 1 },
+					{ Name: "SheetFront", ColorGroup:"Sheet", Priority: 2 },
+					{ Name: "Upper", ColorGroup:"Body", ParentGroup: "BodyUpper" },
+					{ Name: "Lower", ColorGroup:"Body", ParentGroup: "BodyLower" },
+					{ Name: "Frame", MinOpacity: 1, Priority: 3 }
+				],
 				RemoveAtLogin: true 
 			},
 			{ 
