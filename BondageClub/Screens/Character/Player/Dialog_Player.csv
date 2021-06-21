@@ -2127,3 +2127,6 @@ ItemTorsoThinLeatherStrapsHarness,,,Harness,,
 ItemTorsoThinLeatherStrapsSetCrotch,,,SourceCharacter uses the straps on DestinationCharacter to create a crotch strap.,,
 ItemTorsoThinLeatherStrapsSetWaist,,,SourceCharacter uses the straps on DestinationCharacter to create a waist strap.,,
 ItemTorsoThinLeatherStrapsSetHarness,,,SourceCharacter uses the straps on DestinationCharacter to create a harness.,,
+SelectBikiniType,,,Select a bikini style.
+BikiniTypeOpen,,,Open,,
+BikiniTypeClosed,,,Closed,,
