@@ -4276,6 +4276,7 @@ var AssetFemale3DCG = [
 			},
 			{
 				Name: "Bed", Value: 100, Priority: 1, Difficulty: -20, SelfBondage: 0, Time: 5, RemoveTime: 5, RemoveAtLogin: true, DefaultColor: ["#523629", "#888990", "#808284"], BuyGroup: "Bed",
+				OverrideHeight: { Height: 0, HeightRatioProportion: 1, Priority: 21 },
 				RemoveItemOnRemove: [
 					{ Group: "ItemAddon", Name: "Covers" },
 					{ Group: "ItemAddon", Name: "BedRopes" },
