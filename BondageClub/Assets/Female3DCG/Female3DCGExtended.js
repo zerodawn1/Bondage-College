@@ -832,6 +832,25 @@ var AssetFemale3DCGExtended = {
 							}
 						], // Opacity
 					},
+					{
+						Name: "MaskStyle", Key: "ms",
+						Options: [
+							{
+								Property: { 
+									Effect: ["BlockMouth"],
+									Hide: ["Glasses", "ItemMouth", "ItemMouth2", "ItemMouth3", "Mask"],
+									HideItem: ["ItemHeadSnorkel"],
+									Block: ["ItemMouth", "ItemMouth2", "ItemMouth3", "ItemHead", "ItemNose", "ItemEars"]
+								}
+							},
+							{
+								Property: { 
+									OverridePriority: 35,
+									Hide: ["Head"],
+								}
+							},
+						],
+					},
 				],
 				ChangeWhenLocked: false,
 			},
