@@ -34,6 +34,9 @@ PlayerGagged,,,(You can use or remove items by selecting specific body regions o
 92,0,"(Yes, I want to be released.)",,DialogChatRoomSafewordRelease(),
 92,0,"(No, don't release me.)",(You can use or remove items by selecting specific body regions on yourself.),,
 0,,(Play Kinky Dungeon),,DialogStartKinkyDungeon(),DialogHasGamingHeadset()
+OrgasmFailPassive0,,,"The stimulation ends just before you go over the edge."
+OrgasmFailPassive1,,,"The vibrators cut off right before you reach climax."
+OrgasmFailPassive2,,,"The vibrators deny you a chance to finish, stopping abruptly."
 KinkyDungeonExit,,,"SourceCharacter quit a game of Kinky Dungeon at level KinkyDungeonLevel",,
 KinkyDungeonLose,,,"SourceCharacter met her defeat in Kinky Dungeon! She made it to level KinkyDungeonLevel before succumbing.",,
 SavedExpressionsSave,,,Save,,
@@ -1500,10 +1503,12 @@ SciFiPleasurePantiesShockTrigger1,,,DestinationCharacterName sci-fi pleasure pan
 SciFiPleasurePantiesShockTrigger2,,,DestinationCharacterName sci-fi pleasure panties delivers an intense shock!,,
 SciFiPleasurePantiesActionRemoveShield,,,The crotch chastity shield on DestinationCharacterName sci-fi pleasure panties opens.,,
 SciFiPleasurePantiesActionAddShield,,,The crotch chastity shield on DestinationCharacterName sci-fi pleasure panties closes.,,
-SciFiPleasurePantiesBeepDenialModeActivate,,,The denial mode on DestinationCharacterName sci-fi pleasure panties activates. Preventing them from cumming no matter what.,,
-SciFiPleasurePantiesBeepDenialModeDeactivate,,,The denial mode on DestinationCharacterName sci-fi pleasure panties deactivates. Allowing them to cum again.,,
-UnlockOrgasm,,,Denial Mode Off,,
-LockOrgasm,,,Denial Mode On,,
+SciFiPleasurePantiesBeepDenialModeActivate,,,"The denial mode on DestinationCharacterName sci-fi pleasure panties activates, teasing them endlessly.",,
+SciFiPleasurePantiesBeepEdgeModeActivate,,,"The edging mode on DestinationCharacterName sci-fi pleasure panties activates, preventing orgasms no matter what.",,
+SciFiPleasurePantiesBeepDenialModeDeactivate,,,"The special mode on DestinationCharacterName sci-fi pleasure panties deactivates, allowing orgasms again.",,
+UnlockOrgasm,,,Normal Mode,,
+LockOrgasm,,,Edge Mode,,
+DenyOrgasm,,,Deny Mode,,
 CustomTagColor,,,Save text color,,
 CustomTagText,,,Save text,,
 CustomTagBoth,,,Save both,,
