@@ -757,6 +757,30 @@ var AssetFemale3DCGExtended = {
 				],
 			}
 		}, // SturdyLeatherBelts
+		StraitLeotard: {
+			Archetype: ExtendedArchetype.MODULAR,
+			Config: {
+				Modules: [
+					{
+						Name: "Cloth", Key: "cl",
+						Options: [{Property: { Hide: ["Cloth"] }}, {}],
+					},
+					{
+						Name: "Corset", Key: "co",
+						Options: [{Property: { Hide: ["Corset"] }}, {}],
+					},
+					{
+						Name: "NipplesPiercings", Key: "np",
+						Options: [{Property: { Hide: ["ItemNipplesPiercings"] }}, {}],
+					},
+					{
+						Name: "VulvaPiercings", Key: "vp",
+						Options: [{Property: { Hide: ["ItemVulvaPiercings"] }}, {}],
+					},
+				],
+				ChangeWhenLocked: false,
+			},
+		}, // StraitLeotard
 	}, // ItemArms
 	ItemNeck: {
 		ShinySteelCollar: {
