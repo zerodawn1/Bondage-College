@@ -397,9 +397,12 @@ function InventoryItemMouthFuturisticPanelGagTrigger(C, Item, Reset, Options) {
 			InventoryItemMouthFuturisticPanelGagPublishActionTrigger(C, Item, Options[OptionLevel], Reset);
 		Item.Property.OriginalSetting = OriginalItemSetting; // After automatically changing it, we put it back to original setting
 
-		CharacterSetFacialExpression(C, "Eyebrows", "Soft", 10);
-		CharacterSetFacialExpression(C, "Blush", "Extreme", 15);
-		CharacterSetFacialExpression(C, "Eyes", "Lewd", 5);
+		const expressions = [
+			{ Group: "Eyebrows", Name: "Soft", Timer: 10 },
+			{ Group: "Blush", Name: "Extreme", Timer: 15 },
+			{ Group: "Eyes", Name: "Lewd", Timer: 5 },
+		];
+		InventoryExpressionTriggerApply(C, expressions);
 
 		/*var vol = 1
 		if (Player.AudioSettings && Player.AudioSettings.Volume) {

@@ -172,9 +172,7 @@ function InventoryItemNeckAccessoriesCollarAutoShockUnitTriggerAutomatic(data) {
 		ChatRoomCharacterItemUpdate(C, data.Item.Asset.Group.Name);
 	}
 
-    CharacterSetFacialExpression(C, "Eyebrows", "Soft", 10);
-    CharacterSetFacialExpression(C, "Blush", "Soft", 15);
-    CharacterSetFacialExpression(C, "Eyes", "Closed", 5);
+	InventoryShockExpression(C);
 }
 
 // Trigger a shock from the dialog menu
@@ -203,9 +201,7 @@ function InventoryItemNeckAccessoriesCollarAutoShockUnitTrigger(data) {
 
 	ChatRoomPublishCustomAction("TriggerShock" + DialogFocusItem.Property.Intensity, true, Dictionary);
 
-    CharacterSetFacialExpression(C, "Eyebrows", "Soft", 10);
-    CharacterSetFacialExpression(C, "Blush", "Soft", 15);
-    CharacterSetFacialExpression(C, "Eyes", "Closed", 5);
+	InventoryShockExpression(C);
 }
 
 function AssetsItemNeckAccessoriesCollarAutoShockUnitBeforeDraw(data) {

@@ -314,9 +314,7 @@ function AssetsItemPelvisFuturisticChastityBeltScriptTrigger(C, Item, ShockType,
 			ChatRoomMessage({ Content: "FuturisticChastityBelt" + ShockPhrase + ShockType, Type: "Action", Sender: Player.MemberNumber, Dictionary: Dictionary  });
 		}
 	}
-    CharacterSetFacialExpression(C, "Eyebrows", "Soft", 10);
-    CharacterSetFacialExpression(C, "Blush", "Soft", 15);
-    CharacterSetFacialExpression(C, "Eyes", "Closed", 5);
+	InventoryShockExpression(C);
 }
 
 
