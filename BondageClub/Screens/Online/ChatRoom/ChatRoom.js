@@ -3240,10 +3240,10 @@ function ChatRoomNotificationRaiseChatJoin(C) {
 	if (!document.hasFocus()) {
 		const settings = Player.NotificationSettings.ChatJoin;
 		if (settings.AlertType === NotificationAlertType.NONE) raise = false;
-		else if (!settings.Owner && !settings.Lovers && !settings.FriendList && !settings.Subs) raise = true;
+		else if (!settings.Owner && !settings.Lovers && !settings.Friendlist && !settings.Subs) raise = true;
 		else if (settings.Owner && C.IsOwner()) raise = true;
 		else if (settings.Lovers && C.IsLoverOfPlayer()) raise = true;
-		else if (settings.FriendList && Player.FriendList.contains(C.MemberNumber)) raise = true;
+		else if (settings.Friendlist && Player.FriendList.includes(C.MemberNumber)) raise = true;
 		else if (settings.Subs && C.IsOwnedByPlayer()) raise = true;
 	}
 	return raise;
