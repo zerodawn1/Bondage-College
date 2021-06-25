@@ -438,6 +438,7 @@ interface PlayerCharacter extends Character {
 	};
 	VisualSettings?: {
 		ForceFullHeight: boolean;
+		UseCharacterInPreviews: boolean;
 	};
 	AudioSettings?: {
 		Volume: number;

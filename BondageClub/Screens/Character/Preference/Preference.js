@@ -312,10 +312,10 @@ function PreferenceInitPlayer() {
 	if (typeof C.ChatSettings.ShrinkNonDialogue !== "boolean") C.ChatSettings.ShrinkNonDialogue = false;
 	if (typeof C.ChatSettings.MuStylePoses !== "boolean") C.ChatSettings.MuStylePoses = false;
 
-
 	// Visual settings
 	if (!C.VisualSettings) C.VisualSettings = {};
 	if (typeof C.VisualSettings.ForceFullHeight !== "boolean") C.VisualSettings.ForceFullHeight = false;
+	if (typeof C.VisualSettings.UseCharacterInPreviews !== "boolean") C.VisualSettings.UseCharacterInPreviews = false;
 
 	// Audio settings
 	if (!C.AudioSettings) C.AudioSettings = {};
