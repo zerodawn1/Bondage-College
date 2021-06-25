@@ -1493,11 +1493,11 @@ function ChatRoomSendChat() {
 			Dictionary.push({ Tag: "CoinResult", TextToLookUp: Heads ? "Heads" : "Tails" });
 			if (msg != "") ServerSend("ChatRoomChat", { Content: msg, Type: "Action", Dictionary: Dictionary });
 
-		} else if ((m.indexOf("*") == 0) || (m.indexOf("/me ") == 0) || (m.indexOf("/action ") == 0)) {
+		} else if ((m.indexOf("*") == 0) || (m.indexOf("/me ") == 0) || (m.indexOf("/action ") == 0) || (Player.ChatSettings.MuStylePoses && m.indexOf(":") == 0 && m.length > 3)) {
 
-
-			// The player can emote an action using * or /me (for those IRC or Skype users), it doesn't garble
+			// The player can emote an action using :, * or /me (for those IRC, MU* or Skype users), it doesn't garble
 			// The command /action or ** does not add the player's name to it
+			if (Player.ChatSettings.MuStylePoses) msg = msg.replace(":", "");
 			msg = msg.replace("*", "");
 			msg = msg.replace(/\/me /g, "");
 			msg = msg.replace(/\/action /g, "*");

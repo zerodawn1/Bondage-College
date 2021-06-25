@@ -434,6 +434,7 @@ interface PlayerCharacter extends Character {
 		WhiteSpace: string;
 		ColorActivities: boolean;
 		ShrinkNonDialogue: boolean;
+		MuStylePoses: boolean;
 	};
 	VisualSettings?: {
 		ForceFullHeight: boolean;
