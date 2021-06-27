@@ -75,11 +75,18 @@ const ChatRoomArousalMsg_ChanceGagMod = {
 var ChatRoomPinkFlashTime = 0;
 var ChatRoomHideIconState = 0;
 var ChatRoomMenuButtons = [];
+let ChatRoomFontSize = 30;
+const ChatRoomFontSizes = {
+	Small: 24,
+	Medium: 30,
+	Large: 36,
+};
 
 /**
  * Chat room resize manager object: Handles resize events for the chat log.
  * @constant
- * @type {object} - The chat room resize manager object. Contains the functions and properties required to handle resize events.
+ * @type {object} - The chat room resize manager object. Contains the functions and properties required to handle
+ *     resize events.
  */
  let ChatRoomResizeManager = {
 	atStart : true, // Is this the first event in a chain of resize events?
@@ -450,7 +457,7 @@ function ChatRoomCreateElement() {
 
 		// Sets the size and position
 		ElementCreateDiv("TextAreaChatLog");
-		ElementPositionFix("TextAreaChatLog", 36, 1005, 5, 988, 859);
+		ElementPositionFix("TextAreaChatLog", ChatRoomFontSize, 1005, 5, 988, 859);
 		ElementScrollToEnd("TextAreaChatLog");
 		ChatRoomRefreshChatSettings();
 
@@ -482,6 +489,7 @@ function ChatRoomLoad() {
 	ElementRemove("InputName");
 	ElementRemove("InputDescription");
 	ElementRemove("InputSize");
+	ChatRoomRefreshFontSize();
 	ChatRoomCreateElement();
 	ChatRoomCharacterUpdate(Player);
 	ActivityChatRoomArousalSync(Player);
@@ -578,7 +586,8 @@ function ChatRoomOwnerInside() {
 
 
 /**
- * Updates the temporary drawing arrays for characters, to handle things that are dependent on the drawn chat room characters rather than the ones actually present
+ * Updates the temporary drawing arrays for characters, to handle things that are dependent on the drawn chat room
+ * characters rather than the ones actually present
  * @returns {void} - Nothing
  */
  
@@ -1107,7 +1116,7 @@ function ChatRoomRun() {
 	ChatRoomBackground = "";
 	DrawRect(0, 0, 2000, 1000, "Black");
 	ChatRoomDrawCharacter(false);
-	ElementPositionFix("TextAreaChatLog", 36, 1005, 66, 988, 835);
+	ElementPositionFix("TextAreaChatLog", ChatRoomFontSize, 1005, 66, 988, 835);
 	ElementPosition("InputChat", 1456, 950, 900, 82);
 	DrawButton(1905, 908, 90, 90, "", "White", "Icons/Chat.png");
 	if (!ChatRoomCanLeave() && ChatRoomSlowtimer != 0){//Player got interrupted while trying to leave. (Via a bind)
@@ -1633,10 +1642,12 @@ function ChatRoomPublishAction(C, StruggleProgressPrevItem, StruggleProgressNext
 function ChatRoomCharacterItemUpdate(C, Group) {
 	if ((Group == null) && (C.FocusGroup != null)) Group = C.FocusGroup.Name;
 	if ((CurrentScreen == "ChatRoom") && (Group != null)) {
-		// Single item updates aren't sent back to the source member, so update the ChatRoomData accordingly
-		const characterIndex = ChatRoomData.Character.findIndex((char) => char.MemberNumber === C.MemberNumber);
-		if (characterIndex !== -1) {
-			ChatRoomData.Character[characterIndex] = C;
+		if (ChatRoomData && ChatRoomData.Character) {
+			// Single item updates aren't sent back to the source member, so update the ChatRoomData accordingly
+			const characterIndex = ChatRoomData.Character.findIndex((char) => char.MemberNumber === C.MemberNumber);
+			if (characterIndex !== -1) {
+				ChatRoomData.Character[characterIndex] = C;
+			}
 		}
 
 		const Item = InventoryGet(C, Group);
@@ -3345,4 +3356,8 @@ function ChatRoomDataChanged() {
 		ChatRoomLastPrivate != ChatRoomData.Private ||
 		ChatRoomLastDesc != ChatRoomData.Description ||
 		!CommonArraysEqual(ChatRoomLastAdmin, ChatRoomData.Admin);
+}
+
+function ChatRoomRefreshFontSize() {
+	ChatRoomFontSize = ChatRoomFontSizes[Player.ChatSettings.FontSize || "Medium"];
 }

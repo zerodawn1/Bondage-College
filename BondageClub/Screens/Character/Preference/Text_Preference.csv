@@ -89,6 +89,10 @@ DisplayMemberNumbers,Display member numbers:
 Always,Always
 Never,Never
 OnMouseover,On Mouseover
+FontSize,Font size
+Small,Small
+Medium,Medium
+Large,Large
 DisplayTimestamps,Display timestamps
 ColorNames,Color names
 ColorActions,Color actions
