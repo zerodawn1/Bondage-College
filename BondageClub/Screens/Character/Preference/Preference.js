@@ -378,6 +378,7 @@ function PreferenceInitPlayer() {
 	if (typeof C.ImmersionSettings.ReturnToChatRoomAdmin !== "boolean") C.ImmersionSettings.ReturnToChatRoomAdmin = false;
 	if (typeof C.ImmersionSettings.SenseDepMessages !== "boolean") C.ImmersionSettings.SenseDepMessages = false;
 	if (typeof C.ImmersionSettings.ChatRoomMuffle !== "boolean") C.ImmersionSettings.ChatRoomMuffle = false;
+	if (typeof C.ImmersionSettings.BlindAdjacent !== "boolean") C.ImmersionSettings.BlindAdjacent = false;
 
 	// Misc
 	if (typeof C.LastChatRoom !== "string") C.LastChatRoom = "";
@@ -491,6 +492,7 @@ function PreferenceInitPlayer() {
 		C.ImmersionSettings.ReturnToChatRoomAdmin = true;
 		C.ImmersionSettings.SenseDepMessages = true;
 		C.ImmersionSettings.ChatRoomMuffle = true;
+		C.ImmersionSettings.BlindAdjacent = true;
 		C.OnlineSharedSettings.AllowPlayerLeashing = true;
 	}
 
@@ -847,32 +849,40 @@ function PreferenceSubscreenImmersionRun() {
 	DrawCharacter(Player, 50, 50, 0.9);
 	DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png");
 	if (PreferenceMessage != "") DrawText(TextGet(PreferenceMessage), 865, 125, "Red", "Black");
-	//PreferencePageChangeDraw(1595, 75, 2); // Uncomment when adding a 2nd page
+	PreferencePageChangeDraw(1595, 75, 2); // Uncomment when adding a 2nd page
 	MainCanvas.textAlign = "left";
 	DrawText(TextGet("ImmersionPreferences"), 500, 125, "Black", "Gray");
 
 	const disableButtons = Player.GetDifficulty() > 2 || (Player.GameplaySettings.ImmersionLockSetting && Player.IsRestrained());
 	if (Player.GetDifficulty() <= 2) {
-		DrawCheckbox(500, 172, 64, 64, TextGet("ImmersionLockSetting"), Player.GameplaySettings.ImmersionLockSetting, disableButtons);
+		let CheckImage = disableButtons ? "Icons/CheckLocked.png" : "Icons/CheckUnlocked.png";
+		DrawCheckbox(500, 172, 64, 64, TextGet("ImmersionLockSetting"), Player.GameplaySettings.ImmersionLockSetting, disableButtons, "Black", CheckImage);
 	} else {
 		// Cannot change any value under the Extreme difficulty mode
 		DrawText(TextGet("ImmersionLocked"), 500, 205, "Red", "Gray");
 	}
+	
+	
 	DrawEmptyRect(500, 255, 1400, 0, "Black", 1);
+	
+	let CheckHeight = 272;
+	let CheckSpacing = 80;
 
 	if (PreferencePageCurrent === 1) {
-		DrawText(TextGet("SensDepSetting"), 800, 308, "Black", "Gray");
-		DrawCheckbox(500, 352, 64, 64, TextGet("BlindDisableExamine"), Player.GameplaySettings.BlindDisableExamine, disableButtons);
-		DrawCheckbox(500, 432, 64, 64, TextGet("DisableAutoRemoveLogin"), Player.GameplaySettings.DisableAutoRemoveLogin, disableButtons);
-		DrawCheckbox(500, 512, 64, 64, TextGet("BlockGaggedOOC"), Player.ImmersionSettings.BlockGaggedOOC, disableButtons);
-		DrawCheckbox(500, 592, 64, 64, TextGet("AllowPlayerLeashing"), Player.OnlineSharedSettings.AllowPlayerLeashing, disableButtons);
-		DrawCheckbox(500, 672, 64, 64, TextGet("ReturnToChatRoom"), Player.ImmersionSettings.ReturnToChatRoom, disableButtons);
+		DrawText(TextGet("SensDepSetting"), 800, 308, "Black", "Gray"); CheckHeight += CheckSpacing;
+		DrawCheckbox(500, CheckHeight, 64, 64, TextGet("BlindDisableExamine"), Player.GameplaySettings.BlindDisableExamine, disableButtons); CheckHeight += CheckSpacing;
+		DrawCheckbox(500, CheckHeight, 64, 64, TextGet("BlindAdjacent"), Player.ImmersionSettings.BlindAdjacent, disableButtons); CheckHeight += CheckSpacing;
+		DrawCheckbox(500, CheckHeight, 64, 64, TextGet("ChatRoomMuffle"), Player.ImmersionSettings.ChatRoomMuffle, disableButtons);	CheckHeight += CheckSpacing;
+		DrawCheckbox(500, CheckHeight, 64, 64, TextGet("DisableAutoRemoveLogin"), Player.GameplaySettings.DisableAutoRemoveLogin, disableButtons); CheckHeight += CheckSpacing;
+		DrawCheckbox(500, CheckHeight, 64, 64, TextGet("BlockGaggedOOC"), Player.ImmersionSettings.BlockGaggedOOC, disableButtons); CheckHeight += CheckSpacing;
+		DrawCheckbox(500, CheckHeight, 64, 64, TextGet("AllowPlayerLeashing"), Player.OnlineSharedSettings.AllowPlayerLeashing, disableButtons); CheckHeight += CheckSpacing;
+		DrawCheckbox(500, CheckHeight, 64, 64, TextGet("ReturnToChatRoom"), Player.ImmersionSettings.ReturnToChatRoom, disableButtons);
 		const returnToRoomEnabled = Player.ImmersionSettings.ReturnToChatRoom;
-		DrawCheckbox(1300, 672, 64, 64, TextGet("ReturnToChatRoomAdmin"), returnToRoomEnabled && Player.ImmersionSettings.ReturnToChatRoomAdmin, !returnToRoomEnabled || disableButtons);
-		DrawCheckbox(500, 752, 64, 64, TextGet("StimulationEvents"), Player.ImmersionSettings.StimulationEvents, disableButtons);
-		DrawCheckbox(500, 832, 64, 64, TextGet("ChatRoomMuffle"), Player.ImmersionSettings.ChatRoomMuffle, disableButtons);
+		DrawCheckbox(1300, CheckHeight, 64, 64, TextGet("ReturnToChatRoomAdmin"), returnToRoomEnabled && Player.ImmersionSettings.ReturnToChatRoomAdmin, !returnToRoomEnabled || disableButtons);
+		CheckHeight += CheckSpacing;
 		const canHideMessages = Player.GameplaySettings.SensDepChatLog !== "SensDepLight";
 		DrawCheckbox(1300, 272, 64, 64, TextGet("SenseDepMessages"), canHideMessages && Player.ImmersionSettings.SenseDepMessages, !canHideMessages || disableButtons);
+				
 		MainCanvas.textAlign = "center";
 
 		DrawBackNextButton(500, 272, 250, 64, TextGet(Player.GameplaySettings.SensDepChatLog), "White", "",
@@ -880,7 +890,7 @@ function PreferenceSubscreenImmersionRun() {
 			() => disableButtons ? "" : TextGet(PreferenceSettingsSensDepList[(PreferenceSettingsSensDepIndex + 1) % PreferenceSettingsSensDepList.length]));
 	}
 	else if (PreferencePageCurrent === 2) {
-		// New settings here
+		DrawCheckbox(500, CheckHeight, 64, 64, TextGet("StimulationEvents"), Player.ImmersionSettings.StimulationEvents, disableButtons); CheckHeight += CheckSpacing;
 	}
 
 	MainCanvas.textAlign = "center";
@@ -895,38 +905,55 @@ function PreferenceSubscreenImmersionClick() {
 	// If the user clicks on "Exit"
 	if (MouseIn(1815, 75, 90, 90)) PreferenceSubscreen = "";
 	// Change page
-	//PreferencePageChangeClick(1595, 75, 2); // Uncomment when adding a 2nd page
+	PreferencePageChangeClick(1595, 75, 2); // Uncomment when adding a 2nd page
 
 	// Cannot change any value under the Extreme difficulty mode
 	if (Player.GetDifficulty() <= 2 && (!Player.GameplaySettings.ImmersionLockSetting || (!Player.IsRestrained()))) {
+		let CheckHeight = 272;
+		let CheckSpacing = 80;
+		
+		// Preference check boxes
+		if (MouseIn(500, 172, 64, 64)) Player.GameplaySettings.ImmersionLockSetting = !Player.GameplaySettings.ImmersionLockSetting;
+		
 		if (PreferencePageCurrent === 1) {
 			// If we must change sens dep settings
-			if (MouseIn(500, 272, 250, 64)) {
+			if (MouseIn(500, CheckHeight, 250, 64)) {
 				if (MouseX <= 625) PreferenceSettingsSensDepIndex = (PreferenceSettingsSensDepList.length + PreferenceSettingsSensDepIndex - 1) % PreferenceSettingsSensDepList.length;
 				else PreferenceSettingsSensDepIndex = (PreferenceSettingsSensDepIndex + 1) % PreferenceSettingsSensDepList.length;
 				Player.GameplaySettings.SensDepChatLog = PreferenceSettingsSensDepList[PreferenceSettingsSensDepIndex];
 				if (Player.GameplaySettings.SensDepChatLog == "SensDepExtreme") ChatRoomSetTarget(null);
 			}
-
-			// Preference check boxes
-			if (MouseIn(500, 172, 64, 64)) Player.GameplaySettings.ImmersionLockSetting = !Player.GameplaySettings.ImmersionLockSetting;
-			if (MouseIn(500, 352, 64, 64)) Player.GameplaySettings.BlindDisableExamine = !Player.GameplaySettings.BlindDisableExamine;
-			if (MouseIn(500, 432, 64, 64)) Player.GameplaySettings.DisableAutoRemoveLogin = !Player.GameplaySettings.DisableAutoRemoveLogin;
-			if (MouseIn(500, 512, 64, 64)) {
+			CheckHeight += CheckSpacing;
+			// Sensory Deprivation
+			if (MouseIn(500, CheckHeight, 64, 64)) Player.GameplaySettings.BlindDisableExamine = !Player.GameplaySettings.BlindDisableExamine;
+			CheckHeight += CheckSpacing;
+			if (MouseIn(500, CheckHeight, 64, 64)) Player.ImmersionSettings.BlindAdjacent = !Player.ImmersionSettings.BlindAdjacent; 
+			CheckHeight += CheckSpacing;
+			if (MouseIn(500, CheckHeight, 64, 64)) Player.ImmersionSettings.ChatRoomMuffle = !Player.ImmersionSettings.ChatRoomMuffle; 
+			CheckHeight += CheckSpacing;
+			
+			// Room control
+			if (MouseIn(500, CheckHeight, 64, 64)) Player.GameplaySettings.DisableAutoRemoveLogin = !Player.GameplaySettings.DisableAutoRemoveLogin; 
+			CheckHeight += CheckSpacing;
+			if (MouseIn(500, CheckHeight, 64, 64)) {
 				Player.ImmersionSettings.BlockGaggedOOC = !Player.ImmersionSettings.BlockGaggedOOC;
 				if (Player.ImmersionSettings.BlockGaggedOOC) ChatRoomSetTarget(null);
 			}
-			if (MouseIn(500, 592, 64, 64)) Player.OnlineSharedSettings.AllowPlayerLeashing = !Player.OnlineSharedSettings.AllowPlayerLeashing;
-			if (MouseIn(500, 672, 64, 64)) Player.ImmersionSettings.ReturnToChatRoom = !Player.ImmersionSettings.ReturnToChatRoom;
-			if (MouseIn(1300, 672, 64, 64) && Player.ImmersionSettings.ReturnToChatRoom)
+			CheckHeight += CheckSpacing;
+			if (MouseIn(500, CheckHeight, 64, 64)) Player.OnlineSharedSettings.AllowPlayerLeashing = !Player.OnlineSharedSettings.AllowPlayerLeashing; 
+			CheckHeight += CheckSpacing;
+			if (MouseIn(500, CheckHeight, 64, 64)) Player.ImmersionSettings.ReturnToChatRoom = !Player.ImmersionSettings.ReturnToChatRoom;
+			if (MouseIn(1300, CheckHeight, 64, 64) && Player.ImmersionSettings.ReturnToChatRoom)
 				Player.ImmersionSettings.ReturnToChatRoomAdmin = !Player.ImmersionSettings.ReturnToChatRoomAdmin;
-			if (MouseIn(500, 752, 64, 64)) Player.ImmersionSettings.StimulationEvents = !Player.ImmersionSettings.StimulationEvents;
-			if (MouseIn(500, 832, 64, 64)) Player.ImmersionSettings.ChatRoomMuffle = !Player.ImmersionSettings.ChatRoomMuffle;
+			CheckHeight += CheckSpacing;
+			
 			if (MouseIn(1300, 272, 64, 64) && Player.GameplaySettings.SensDepChatLog !== "SensDepLight")
 				Player.ImmersionSettings.SenseDepMessages = !Player.ImmersionSettings.SenseDepMessages;
 		}
 		else if (PreferencePageCurrent === 2) {
-			// New settings here
+			// Stimulation
+			if (MouseIn(500, CheckHeight, 64, 64)) Player.ImmersionSettings.StimulationEvents = !Player.ImmersionSettings.StimulationEvents;
+			CheckHeight += CheckSpacing;
 		}
 	}
 
