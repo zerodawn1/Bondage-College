@@ -1649,9 +1649,11 @@ function ChatRoomCharacterItemUpdate(C, Group) {
 	if ((CurrentScreen == "ChatRoom") && (Group != null)) {
 		if (ChatRoomData && ChatRoomData.Character) {
 			// Single item updates aren't sent back to the source member, so update the ChatRoomData accordingly
+		if (ChatRoomData && ChatRoomData.Character) {
 			const characterIndex = ChatRoomData.Character.findIndex((char) => char.MemberNumber === C.MemberNumber);
 			if (characterIndex !== -1) {
 				ChatRoomData.Character[characterIndex] = C;
+			}
 			}
 		}
 
