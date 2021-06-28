@@ -41,6 +41,7 @@ function CharacterReset(CharacterID, CharacterAssetFamily) {
 		AllowItem: true,
 		BlockItems: [],
 		LimitedItems: [],
+		FavoriteItems: [],
 		HiddenItems: [],
 		WhiteList: [],
 		BlackList: [],
@@ -531,6 +532,7 @@ function CharacterOnlineRefresh(Char, data, SourceMemberNumber) {
 	Char.Reputation = (data.Reputation != null) ? data.Reputation : [];
 	Char.BlockItems = Array.isArray(data.BlockItems) ? data.BlockItems : [];
 	Char.LimitedItems = Array.isArray(data.LimitedItems) ? data.LimitedItems : [];
+	Char.FavoriteItems = Array.isArray(data.FavoriteItems) ? data.FavoriteItems : [];
 	if (Char.ID != 0 && Array.isArray(data.WhiteList)) Char.WhiteList = data.WhiteList;
 	if (Char.ID != 0 && Array.isArray(data.BlackList)) Char.BlackList = data.BlackList;
 	ServerAppearanceLoadFromBundle(Char, "Female3DCG", data.Appearance, SourceMemberNumber);
@@ -566,6 +568,9 @@ function CharacterLoadOnline(data, SourceMemberNumber) {
 	}
 	if (data.LimitedItems && typeof data.LimitedItems === "object" && !Array.isArray(data.LimitedItems)) {
 		data.LimitedItems = CommonUnpackItemArray(data.LimitedItems);
+	}
+	if (data.FavoriteItems && typeof data.FavoriteItems === "object" && !Array.isArray(data.FavoriteItems)) {
+		data.FavoriteItems = CommonUnpackItemArray(data.FavoriteItems);
 	}
 	if (Array.isArray(data.WhiteList)) {
 		data.WhiteList.sort((a, b) => a - b);
@@ -637,6 +642,7 @@ function CharacterLoadOnline(data, SourceMemberNumber) {
 		if (!Refresh && Array.isArray(data.BlackList) && (JSON.stringify(Char.BlackList) !== JSON.stringify(data.BlackList))) Refresh = true;
 		if (!Refresh && (data.BlockItems != null) && (Char.BlockItems.length != data.BlockItems.length)) Refresh = true;
 		if (!Refresh && (data.LimitedItems != null) && (Char.LimitedItems.length != data.LimitedItems.length)) Refresh = true;
+		if (!Refresh && (data.FavoriteItems != null) && (Char.FavoriteItems.length != data.FavoriteItems.length)) Refresh = true;
 
 		// If we must refresh
 		if (Refresh) CharacterOnlineRefresh(Char, data, SourceMemberNumber);
@@ -969,7 +975,7 @@ function CharacterRefreshDialog(C) {
 			DialogInventory = [];
 			for (let A = 0; A < Player.Inventory.length; A++)
 				if ((Player.Inventory[A].Asset != null) && Player.Inventory[A].Asset.IsLock)
-					DialogInventoryAdd(C, Player.Inventory[A], false, DialogSortOrderUsable);
+					DialogInventoryAdd(C, Player.Inventory[A], false, DialogSortOrder.Usable);
 			DialogInventorySort();
 			DialogMenuButtonBuild(C);
 		} else {
