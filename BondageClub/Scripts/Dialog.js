@@ -113,7 +113,7 @@ function DialogSetReputation(RepType, Value) { ReputationChange(RepType, (parseI
 /**
  * Change the player's reputation progressively through dialog options (a reputation is easier to break than to build)
  * @param {string} RepType - The name of the reputation to change
- * @param {string} Value - The value, the player's reputation should be altered by
+ * @param {number|string} Value - The value, the player's reputation should be altered by
  * @returns {void} - Nothing
  */
 function DialogChangeReputation(RepType, Value) { ReputationProgress(RepType, Value); }
@@ -743,7 +743,7 @@ function DialogMenuButtonBuild(C) {
 			if ((Item != null) && Item.Asset.Extended && ((Player.CanInteract()) || DialogAlwaysAllowRestraint() || Item.Asset.AlwaysInteract) && (!IsGroupBlocked || Item.Asset.AlwaysExtend) && (!Item.Asset.OwnerOnly || (C.IsOwnedByPlayer())) && (!Item.Asset.LoverOnly || (C.IsLoverOfPlayer()))) DialogMenuButton.push(ItemBlockedOrLimited ? "UseDisabled" : "Use");
 			// Extended icon doesnt show up if remote works
 			if (!DialogMenuButton.includes("Use") && DialogCanUseRemote(C, Item)) DialogMenuButton.push(ItemBlockedOrLimited ? "RemoteDisabled" : "Remote");
-			
+
 			if (DialogCanColor(C, Item)) DialogMenuButton.push(ItemBlockedOrLimited ? "ColorPickDisabled" : "ColorPick");
 
 			// Make sure the target player zone is allowed for an activity

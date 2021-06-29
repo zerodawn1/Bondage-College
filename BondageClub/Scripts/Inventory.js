@@ -32,7 +32,7 @@ function InventoryAdd(C, NewItemName, NewItemGroup, Push) {
 * Adds multiple new items by group & name to the character inventory
 * @param {Character} C - The character that gets the new items added to her inventory
 * @param {Array.<{ Name: string, Group: string }>} NewItems - The new items to add
-* @param {Boolean} Push - Set to TRUE to push to the server, pushed by default
+* @param {Boolean} [Push=true] - Set to TRUE to push to the server, pushed by default
 */
 function InventoryAddMany(C, NewItems, Push) {
 
@@ -198,7 +198,7 @@ function InventoryPrerequisiteMessage(C, Prerequisite) {
 			|| !InventoryDoesItemExposeGroup(C, "Panties", "ItemVulva")
 			|| InventoryDoesItemBlockGroup(C, "Socks", "ItemVulva")
 			? "RemoveClothesForItem" : "";
-			
+
 		// Ensure crotch is empty
 		case "VulvaEmpty": return ((InventoryGet(C, "ItemVulva") != null)) ? "MustFreeVulvaFirst" : "";
 		case "ClitEmpty": return ((InventoryGet(C, "ItemVulvaPiercings") != null)) ? "MustFreeClitFirst" : "";
@@ -924,8 +924,8 @@ function InventoryTogglePermission(Item, Type) {
 		Player.LimitedItems = Player.LimitedItems.filter(removeFromPermissions);
 	} else if (InventoryIsFavorite(Player, Item.Asset.Name, Item.Asset.Group.Name, Type)) {
 		if (Player.GetDifficulty() >= 3)
-			Player.LimitedItems.push(permissionItem) 
-		else 
+			Player.LimitedItems.push(permissionItem);
+		else
 			Player.BlockItems.push(permissionItem);
 		Player.FavoriteItems = Player.FavoriteItems.filter(removeFromPermissions);
 	} else {
