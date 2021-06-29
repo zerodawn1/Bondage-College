@@ -2250,3 +2250,13 @@ ItemTorsoThinLeatherStrapsSetHarness,,,SourceCharacter uses the straps on Destin
 SelectBikiniType,,,Select a bikini style.
 BikiniTypeOpen,,,Open,,
 BikiniTypeClosed,,,Closed,,
+ClothTShirt2Select,,,Select your design
+ClothTShirt2Plain,,,Plain
+ClothTShirt2BCLogo,,,Club Logo
+ClothTShirt2BDSM,,,BD-SM
+ClothTShirt2Gag,,,The Moaning Groans
+ClothTShirt2Knot,,,Rope Knot
+ClothTShirt2Nazuko,,,Nazuko
+ClothTShirt2Rock,,,Rock
+ClothTShirt2Smile,,,Smiley
+ClothTShirt2Tick,,,Check
