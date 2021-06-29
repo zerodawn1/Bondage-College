@@ -858,7 +858,10 @@ type TypedItemChatCallback = (
  * @param {ExtendedItemOption} Option - The newly selected type option
  * @returns {string} - Returns a non-empty message string if the item failed validation, or an empty string otherwise
  */
-type TypedItemValidateCallback = (C: Character, Option: ExtendedItemOption) => string;
+type TypedItemValidateCallback = (C: Character,
+                                  Item: Item,
+                                  Option: ExtendedItemOption,
+                                  CurrentOption?: ExtendedItemOption) => string;
 
 /**
  * A parameter object containing information used to validate and sanitize character appearance update diffs. An
