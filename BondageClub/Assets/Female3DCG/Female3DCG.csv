@@ -109,6 +109,7 @@ ClothLower,Leggings2,Long Leggings
 ClothLower,PleatedSkirt,Pleated Skirt
 ClothLower,LongSkirt1,Long Skirt
 ClothLower,ShortPencilSkirt,Short Pencil Skirt
+ClothLower,HaremPants,Harem Pants
 SuitLower,,Suit Lower
 SuitLower,Catsuit,Catsuit
 SuitLower,SeamlessCatsuit, Seamless Catsuit
@@ -164,6 +165,7 @@ Bra,Ribbons,Ribbons
 Bra,LeatherBreastBinder,Leather Breast Binder
 Bra,SilkStraps,Silk Straps
 Bra,FullLatexBra,Full Latex Bra
+Bra,HaremBra,Harem Bra
 Corset,,Corset
 Corset,Corset1,Corset + Garters
 Corset,Corset2,Corset
@@ -397,6 +399,7 @@ Mask,LaceMask1,Bat Mask
 Mask,LaceMask2,Venice Festival Mask
 Mask,FuturisticVisor,Futuristic Visor
 Mask,OpenFaceHood,Open Face Hood
+Mask,FaceVeil,Face Veil
 TailStraps,,Tail Strap
 TailStraps,TailStrap,Kitty Tail Strap
 TailStraps,HorseTailStrap,Horse Tail Strap

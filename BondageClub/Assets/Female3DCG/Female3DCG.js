@@ -393,6 +393,13 @@ var AssetFemale3DCG = [
 				],
 			},
 			{ Name: "ShortPencilSkirt", Fetish: ["Leather"], Value: 50, Left: 105, Top: 380, HideItem: ["ItemDevicesStrapOnSmooth", "ItemDevicesStrapOnStuds", "ItemFeetSpreaderMetal", "ItemFeetSpreaderDildoBar", "ItemFeetSpreaderVibratingDildoBar"], SetPose: ["LegsClosed"], AllowActivePose: ["Kneel"], WhitelistActivePose: ["BaseLower", "Kneel"], Attribute: ["Skirt"],  },
+			{
+				Name: "HaremPants", Fetish: ["Lingerie"], Value: 20, Left: 0, Top: 0, Hide: ["Panties"], Layer: [
+					{ Name: "Panty", Priority: 15 },
+					{ Name: "Veil" },
+					{ Name: "PantyLine" },
+				],
+			},
 		],
 		Color: ["Default", "#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"]
 	},
@@ -511,6 +518,13 @@ var AssetFemale3DCG = [
 			{ Name: "LeatherBreastBinder", Fetish: ["Leather"], Value: 30, BuyGroup: "BreastBinder" },
 			{ Name: "SilkStraps", Value: 40, DefaultColor: "#E8E8E8", BuyGroup: "SilkStraps", Extended: true,},
 			{ Name: "FullLatexBra", Fetish: ["Lingerie", "Latex"], Value: 45, Hide: ["ItemNipples", "ItemNipplesPiercings"] },
+			{
+				Name: "HaremBra", Fetish: ["Lingerie"], Value: 25, Left: 0, Top: 0, Hide: ["ItemNipples","ItemNipplesPiercings"], Layer:[
+					{ Name: "Fabric" },
+					{ Name: "Straps" },
+					{ Name: "Jewel" }
+				]
+			},
 		],
 		Color: ["Default", "#cccccc", "#aaaaaa", "#888888", "#666666", "#444444", "#222222", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"]
 	},
@@ -1130,6 +1144,12 @@ var AssetFemale3DCG = [
 			{ Name: "LaceMask2", Fetish: ["Lingerie"], Value: 25, Left: 150, Top: 20, HideItem: ["ItemNoseNoseRing", "HatVeil1", "HatVeil2"], Hide: ["Glasses"] },
 			{ Name: "FuturisticVisor", Category: ["SciFi"], BuyGroup: "FuturisticVisor", Value: 35, Priority: 27, Random: false, HideItem: ["ItemNoseNoseRing"] },
 			{ Name: "OpenFaceHood", Fetish: ["Latex"], Value: -1, Priority: 40, Left: 150, Top: 20, DefaultColor: "#404040", BuyGroup: "OpenFace", Hide: ["HairFront", "HairBack"] },
+			{
+				Name: "FaceVeil", Fetish: ["Lingerie"], Value: 20, Priority: 51, Left: 150, Top: 20, Layer: [
+					{ Name: "Fabric" },
+					{ Name: "String" },
+				]
+			},
 		],
 		Color: ["Default", "#303030", "#808080", "#e0e0e0", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"],
 	},
