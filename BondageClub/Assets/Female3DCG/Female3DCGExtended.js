@@ -66,13 +66,6 @@ var AssetFemale3DCGExtended = {
 						},
 					},
 					{
-						Name: "Nazuko",
-						Property: { 
-							Type: "Nazuko", 
-							DefaultColor: "#440088", 
-						},
-					},
-					{
 						Name: "Rock",
 						Property: { 
 							Type: "Rock", 

@@ -88,7 +88,7 @@ var AssetFemale3DCG = [
 				Name: "TShirt2", Value: 25, DefaultColor: ["#333", "Default"], Hide: ["Bra"], HideItem: ["ItemNipplesPiercingsRoundPiercing", "ItemNipplesPiercingsWeightedPiercing", "ItemNipplesLactationPump", "ItemBreastRibbons"], Require: ["ClothLower"], Extended: true,
 				Layer: [
 					{ Name: "Shirt", AllowColorize: true, HasType: false },
-					{ Name: "Print", AllowTypes: ["BCLogo","BDSM","Gag","Knot","Nazuko","Rock","Smile","Tick"], AllowColorize: true, ParentGroup: null },
+					{ Name: "Print", AllowTypes: ["BCLogo","BDSM","Gag","Knot","Rock","Smile","Tick"], AllowColorize: true, ParentGroup: null },
 				]
 			},
 			{ Name: "TennisShirt1", Hide: ["ItemHidden"], HideItem: ["ItemNipplesPiercingsRoundPiercing", "ItemNipplesPiercingsWeightedPiercing", "ItemNipplesLactationPump"], Require: ["ClothLower"] },
