@@ -1628,4 +1628,91 @@ var AssetFemale3DCGExtended = {
 			},
 		}, // SilkStraps
 	}, // Panties
+	ItemHead: {
+		DuctTape: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				Options: [
+					{
+						Name: "Double",
+						Property: {
+							Type: null,
+							Block: ["ItemNose"],
+							Effect: ["BlindNormal", "Prone"],
+						},
+					},
+					{
+						Name: "Wrap",
+						Property: {
+							Type: "Wrap",
+							Block: ["ItemNose"],
+							Effect: ["BlindNormal", "Prone"],
+						},
+					},
+					{
+						Name: "Mummy",
+						Property: {
+							Type: "Mummy",
+							Hide: ["ItemMouth", "ItemMouth2", "ItemMouth3", "HairFront", "HairBack"],
+							Block: ["ItemMouth", "ItemMouth2", "ItemMouth3", "ItemEars", "ItemHood", "ItemNose"],
+							Effect: ["GagNormal", "BlindNormal", "Prone", "BlockMouth"],
+						},
+					}
+				]
+			}
+		}, // DuctTape
+		Ribbons: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				Options: [
+					{
+						Name: "Basic",
+						Property: {
+							Type: null,
+							Effect: ["BlindLight", "Prone"],
+						},
+					},
+					{
+						Name: "Wrap",
+						Property: {
+							Type: "Wrap",
+							Effect: ["BlindNormal", "Prone"],
+						},
+					},
+				],
+				Dialog: {
+					Load: "SelectRibbonType",
+				},
+			},
+		}, // Ribbons
+		WebBlindfold: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				Options: [
+					{
+						Name: "Blindfold",
+						Property: {
+							Type: null,
+							Difficulty: 0,
+							Block: ["ItemNose"],
+						},
+					},
+					{
+						Name: "Cocoon",
+						Property: {
+							Type: "Cocoon",
+							Difficulty: 30,
+							Hide: ["HairFront", "HairBack", "Glasses", "Hat", "ItemMouth", "ItemMouth2", "ItemMouth3"],
+							Block: ["ItemMouth", "ItemMouth2", "ItemMouth3", "ItemEars", "ItemHood", "ItemNose"],
+							Effect: ["BlindHeavy", "Prone", "GagNormal", "BlockMouth"],
+						},
+					},
+				],
+				ChatTags: [CommonChatTags.SOURCE_CHAR, CommonChatTags.TARGET_CHAR],
+				Dialog: {
+					Load: "WebBondageSelect",
+				},
+			},
+		}, // WebBlindfold
+	}, // ItemHead
 };
