@@ -191,18 +191,22 @@ function InfiltrationPayRansom(Type) {
  * @returns {void} - Nothing
  */
 function InfiltrationStartKidnapping() {
-	let IntroText = TextGet("PandoraKidnapperIntro" + Math.floor(Math.random() * 5));
+	let Type = "Kidnapper";
+	if ((InventoryAvailable(Player, "PandoraPadlock", "ItemMisc") || InventoryAvailable(Player, "PandoraPadlockKey", "ItemMisc")) && (Math.random() >= 0.5)) Type = "Dominatrix";
+	let IntroText = TextGet("Pandora" + Type + "Intro" + Math.floor(Math.random() * 5));
 	IntroText = IntroText.replace("DialogPlayerName", Player.Name);
 	CommonSetScreen("Room", "Infiltration");
 	InfiltrationBackground = MainHallBackground;
-	CharacterDelete("NPC_Infiltration_Kidnapper");
-	delete CommonCSVCache["Screens/Room/Infiltration/NPC_Infiltration_Kidnapper.csv"];
-	InfiltrationKidnapper = CharacterLoadNPC("NPC_Infiltration_Kidnapper");
+	CharacterDelete("NPC_Infiltration_" + Type);
+	delete CommonCSVCache["Screens/Room/Infiltration/NPC_Infiltration_" + Type + ".csv"];
+	InfiltrationKidnapper = CharacterLoadNPC("NPC_Infiltration_" + Type);
 	CharacterRandomName(InfiltrationKidnapper);
 	CharacterRelease(InfiltrationKidnapper);
 	InfiltrationKidnapper.Stage = "0";
-	CharacterAppearanceFullRandom(InfiltrationKidnapper);
-	CharacterRefresh(InfiltrationKidnapper, false);
+	if (Type == "Kidnapper") {
+		CharacterAppearanceFullRandom(InfiltrationKidnapper);
+		CharacterRefresh(InfiltrationKidnapper, false);
+	} else PandoraDress(InfiltrationKidnapper, "Mistress");
 	CharacterSetCurrent(InfiltrationKidnapper);
 	InfiltrationKidnapper.CurrentDialog = IntroText;
 }
@@ -288,4 +292,14 @@ function InfiltrationKidnapperUngag() {
  */
 function InfiltrationCanBringToRoom() {
 	return (LogQuery("RentRoom", "PrivateRoom") && (PrivateCharacter.length < PrivateCharacterMax));
+}
+
+/**
+ * Removes the Pandora Locks and Keys from the player inventory, ends the scene
+ * @returns {void} - Nothing
+ */
+function InfiltrationStealItems() {
+	InventoryDelete(Player, "PandoraPadlock", "ItemMisc");
+	InventoryDelete(Player, "PandoraPadlockKey", "ItemMisc");
+	InfiltrationEndKidnapping();
 }
