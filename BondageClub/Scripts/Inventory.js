@@ -228,8 +228,8 @@ function InventoryPrerequisiteMessage(C, Prerequisite) {
 		case "RemotesAllowed": return LogQuery("BlockRemoteSelf", "OwnerRule") && C.ID === 0 ? "OwnerBlockedRemotes" : "";
 
 		// Layered Gags, prevent gags from being equipped over other gags they are incompatible with
-		case "GagUnique": return C.FocusGroup && InventoryPrerequisiteConflictingGags(C, ["GagFlat", "GagCorset", "GagUnique"]);
-		case "GagCorset": return C.FocusGroup && InventoryPrerequisiteConflictingGags(C, ["GagCorset"]);
+		case "GagUnique": return InventoryPrerequisiteConflictingGags(C, ["GagFlat", "GagCorset", "GagUnique"]);
+		case "GagCorset": return InventoryPrerequisiteConflictingGags(C, ["GagCorset"]);
 
 		// Returns no message, indicating that all prerequisites are fine
 		default: return "";
@@ -311,12 +311,16 @@ function InventoryHasItemInAnyGroup(C, GroupList) {
  */
 function InventoryPrerequisiteConflictingGags(C, BlockingPrereqs) {
 	// Index of the gag we're trying to add (1-indexed)
-	var GagIndex = Number(C.FocusGroup.Name.replace("ItemMouth", "") || 1);
-	var MouthItems = [InventoryGet(C, "ItemMouth"), InventoryGet(C, "ItemMouth2"), InventoryGet(C, "ItemMouth3")];
-	var MinBlockingIndex = 0;
+	let GagIndex = 4; // By default, assume no gag slots are allowed to conflict
+	if (C.FocusGroup && C.FocusGroup.Name.startsWith("ItemMouth")) {
+		// If there's a focus group, calculate the gag index
+		GagIndex = Number(C.FocusGroup.Name.replace("ItemMouth", "") || 4);
+	}
+	const MouthItems = [InventoryGet(C, "ItemMouth"), InventoryGet(C, "ItemMouth2"), InventoryGet(C, "ItemMouth3")];
+	let MinBlockingIndex = 0;
 	for (let i = 0; i < MouthItems.length && !MinBlockingIndex; i++) {
 		// Find the lowest indexed slot in which there is a gag with a prerequisite that blocks the new gag
-		var AssetPrerequisite = MouthItems[i] && MouthItems[i].Asset.Prerequisite;
+		const AssetPrerequisite = MouthItems[i] && MouthItems[i].Asset.Prerequisite;
 		if (BlockingPrereqs.indexOf(AssetPrerequisite) >= 0) MinBlockingIndex = i + 1;
 	}
 	// Not allowed to add the new gag if there is a blocking gag anywhere below it
