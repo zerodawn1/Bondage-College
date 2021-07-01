@@ -1,11 +1,11 @@
 "use strict";
 
 // Loads the item extension properties
-function InventoryItemMiscMistressPadlockLoad() {
+function InventoryItemMiscPandoraPadlockLoad() {
 }
 
 // Draw the extension screen
-function InventoryItemMiscMistressPadlockDraw() {
+function InventoryItemMiscPandoraPadlockDraw() {
 	DrawAssetPreview(1387, 225, DialogFocusItem.Asset);
 	DrawText(DialogFindPlayer(DialogFocusItem.Asset.Group.Name + DialogFocusItem.Asset.Name + "Intro"), 1500, 600, "white", "gray");
 	if ((DialogFocusSourceItem != null) && (DialogFocusSourceItem.Property != null) && (DialogFocusSourceItem.Property.LockMemberNumber != null) && (DialogFocusSourceItem.Property.LockMemberNumber >= 0))
@@ -13,6 +13,6 @@ function InventoryItemMiscMistressPadlockDraw() {
 }
 
 // Catches the item extension clicks
-function InventoryItemMiscMistressPadlockClick() {
+function InventoryItemMiscPandoraPadlockClick() {
 	if ((MouseX >= 1885) && (MouseX <= 1975) && (MouseY >= 25) && (MouseY <= 110)) DialogFocusItem = null;
 }

@@ -1220,6 +1220,7 @@ ItemMisc,OwnerTimerPadlock,Owner Timer Padlock
 ItemMisc,LoversPadlock,Lovers Padlock
 ItemMisc,LoversTimerPadlock,Lovers Timer Padlock
 ItemMisc,MistressPadlock,Mistress Padlock
+ItemMisc,PandoraPadlock,Pandora's Box Padlock
 ItemMisc,MistressTimerPadlock,Mistress Timer Padlock
 ItemMisc,ExclusivePadlock,Exclusive Padlock
 ItemMisc,SafewordPadlock,Safeword Padlock
@@ -1227,6 +1228,7 @@ ItemMisc,MetalPadlockKey,Metal Padlock Key
 ItemMisc,OwnerPadlockKey,Owner Padlock Key
 ItemMisc,LoversPadlockKey,Lovers Padlock Key
 ItemMisc,MistressPadlockKey,Mistress Padlock Key
+ItemMisc,PandoraPadlockKey,Pandora's Box Padlock Key
 ItemMisc,MetalCuffsKey,Metal Cuffs Key
 ItemMisc,Lockpicks,Lockpicks
 ItemMisc,WoodenMaidTray,Wooden Maid Tray
