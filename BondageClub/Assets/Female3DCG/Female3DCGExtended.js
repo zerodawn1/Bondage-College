@@ -1749,6 +1749,85 @@ var AssetFemale3DCGExtended = {
 				],
 			}
 		}, // SturdyLeatherBelts
+		LeatherLegCuffs: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				ChatTags: [CommonChatTags.SOURCE_CHAR, CommonChatTags.DEST_CHAR],
+				Options: [
+					{
+						Name: "None",
+						Property: { Type: null },
+					},
+					{
+						Name: "Closed",
+						Property: {
+							Type: "Closed",
+							SetPose: ["LegsClosed"],
+							Effect: ["Prone", "KneelFreeze", "Slow"],
+							FreezeActivePose: ["BodyLower"],
+							Difficulty: 6,
+						},
+					},
+				],
+				Dialog: {
+					Load: "SelectBondagePosition",
+				}
+			}
+		}, // LeatherLegCuffs
+		Ribbons: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				ChatTags: [CommonChatTags.SOURCE_CHAR, CommonChatTags.DEST_CHAR],
+				Options: [
+					{
+						Name: "Messystyle",
+						Property: { Type: null, Difficulty: 3 },
+					},
+					{
+						Name: "MessyWrap",
+						Property: { Type: "MessyWrap", Difficulty: 4 },
+					},
+					{
+						Name: "Cross",
+						Property: { Type: "Cross", Difficulty: 5 },
+					},
+				],
+				Dialog: {
+					Load: "SelectRibbonType",
+				}
+			}
+		}, // Ribbons
+		OrnateLegCuffs: {
+			Archetype: ExtendedArchetype.TYPED,
+			CopyConfig: { AssetName: "LeatherLegCuffs" },
+		}, // OrnateLegCuffs
+		Zipties: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				ChatTags: [CommonChatTags.SOURCE_CHAR, CommonChatTags.TARGET_CHAR],
+				Options: [
+					{
+						Name: "ZipLegLight",
+						Property: { Type: null, SetPose: ["LegsClosed"], Difficulty: 1 }
+					}, {
+						Name: "ZipLegMedium",
+						Property: { Type: "ZipLegMedium", SetPose: ["LegsClosed"], Difficulty: 2 }
+					}, {
+						Name: "ZipLegFull",
+						Property: { Type: "ZipLegFull", SetPose: ["LegsClosed"], Difficulty: 2 }
+					}, {
+						Name: "ZipFrogtie",
+						Property: { Type: "ZipFrogtie", SetPose: ["Kneel"], Block: ["ItemFeet"], Effect: ["ForceKneel"], Difficulty: 3 },
+						Prerequisite: ["NotSuspended", "CanKneel"]
+					}
+				],
+				Dialog: {
+					Load: "SelectZipTie",
+					TypePrefix: "ZipBondage",
+					NpcPrefix: "Zip",
+				}
+			}
+		}, // Zipties
 	}, // ItemLegs
 	ItemFeet: {
 		SteelAnkleCuffs: {

@@ -1566,7 +1566,7 @@ var AssetFemale3DCG = [
 			{ Name: "LeatherBelt", Fetish: ["Leather"], Value: 25, Difficulty: 2, Time: 5, AllowLock: true, SetPose: ["LegsClosed"], AllowActivePose: ["Kneel"] },
 			{ Name: "SturdyLeatherBelts", Fetish: ["Leather"], Value: 50, Time: 5, AllowLock: true, BuyGroup: "SturdyLeatherBelts", SetPose: ["LegsClosed"], AllowType: ["Two"], Extended: true, AllowActivePose: ["Kneel"] },
 			{ Name: "DuctTape", Fetish: ["Tape"], Value: 50, Time: 15, RemoveTime: 10, BuyGroup: "DuctTape", Audio: "DuctTape", HideItem: ["ItemBootsThighHighLatexHeels", "ShoesThighHighLatexHeels"], SetPose: ["LegsClosed"], AllowType: ["HalfLegs", "MostLegs", "CompleteLegs"], Extended: true, AllowActivePose: ["Kneel"] },
-			{ Name: "LeatherLegCuffs", Fetish: ["Leather"], Priority: 24, Value: 45, Difficulty: 3, Time: 10, Random: false, AllowLock: true, AllowPose: ["Kneel", "LegsClosed"], Effect: [], AllowEffect: ["Prone", "KneelFreeze", "Slow"], AllowType: ["Closed"], Extended: true, AllowActivePose: ["Kneel"], FreezeActivePose: [], HasType: false,
+			{ Name: "LeatherLegCuffs", Fetish: ["Leather"], Priority: 24, Value: 45, Difficulty: 3, Time: 10, Random: false, AllowLock: true, AllowPose: ["Kneel", "LegsClosed"], Effect: [], Extended: true, AllowActivePose: ["Kneel"], FreezeActivePose: [], HasType: false,
 				DefaultColor: ["#2E2E2E", "Default"],
 				Layer: [
 					{ Name: "Cuffs" },
@@ -1581,7 +1581,7 @@ var AssetFemale3DCG = [
 				]
 			},
 			{
-				Name: "OrnateLegCuffs", Fetish: ["Metal"], Priority: 24, Value: 90, Difficulty: 3, Time: 10, Random: false, AllowLock: true, Audio: "CuffsMetal", AllowPose: ["Kneel", "LegsClosed"], Effect: [], AllowEffect: ["Prone", "KneelFreeze", "Slow"], AllowType: ["Closed"], Extended: true, AllowActivePose: ["Kneel"], FreezeActivePose: [], HasType: false,
+				Name: "OrnateLegCuffs", Fetish: ["Metal"], Priority: 24, Value: 90, Difficulty: 3, Time: 10, Random: false, AllowLock: true, Audio: "CuffsMetal", AllowPose: ["Kneel", "LegsClosed"], Effect: [], Extended: true, AllowActivePose: ["Kneel"], FreezeActivePose: [], HasType: false,
 				Layer: [
 					{ Name: "Cuffs" },
 					{ Name: "Gems" }
@@ -1610,7 +1610,7 @@ var AssetFemale3DCG = [
 					{ Name: "Wood" }
 				]
 			},
-			{ Name: "Zipties", Value: 20, Difficulty: 6, Time: 5, RemoveTime: 6, BuyGroup: "Zipties", Audio: "ZipTie", SetPose: ["LegsClosed"], Extended: true, AllowBlock: ["ItemFeet"], AllowEffect: ["ForceKneel"], AllowType: ["ZipLegMedium", "ZipLegFull", "ZipFrogtie"] },
+			{ Name: "Zipties", Value: 20, Difficulty: 6, Time: 5, RemoveTime: 6, BuyGroup: "Zipties", Audio: "ZipTie", SetPose: ["LegsClosed"], Extended: true },
 			{ Name: "Chains", Fetish: ["Metal"], Value: 90, Difficulty: 5, Time: 20, RemoveTime: 15, AllowLock: true, BuyGroup: "Chains", Audio: "ChainLong", SetPose: ["LegsClosed"], AllowType: ["Strict"], Extended: true, AllowActivePose: ["Kneel"] },
 			{ Name: "PlasticWrap", Value: 100, Difficulty: 7, Time: 30, RemoveTime: 25, BuyGroup: "PlasticWrap", SetPose: ["LegsClosed"], Hide: ["ClothLower"]},
 			{ Name: "FrogtieStraps", Fetish: ["Leather"], Value: 25, Difficulty: 3, Time: 5, Random: false, AllowLock: true, Prerequisite: ["NotSuspended", "CanKneel"], SetPose: ["Kneel"], Effect: ["ForceKneel", "Slow"] },
@@ -1635,7 +1635,7 @@ var AssetFemale3DCG = [
 					{ Name: "Straps", Priority: 26 },
 				],
 			},
-			{ Name: "Ribbons", Fetish: ["Lingerie"], Value: 30, Difficulty: 3, Time: 10, RemoveTime: 5, Hide: ["ClothLower"], BuyGroup: "Ribbon", AllowType: ["MessyWrap", "Cross"], Extended: true, SetPose: ["LegsClosed"], AllowActivePose: ["Kneel"] },
+			{ Name: "Ribbons", Fetish: ["Lingerie"], Value: 30, Difficulty: 3, Time: 10, RemoveTime: 5, Hide: ["ClothLower"], BuyGroup: "Ribbon", Extended: true, SetPose: ["LegsClosed"], AllowActivePose: ["Kneel"] },
 			AssetSpankingToys
 		],
 		Color: ["Default", "#202020", "#808080", "#bbbbbb", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"]
