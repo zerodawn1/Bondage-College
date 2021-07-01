@@ -89,6 +89,25 @@ var AssetFemale3DCGExtended = {
 				],		
 			},
 		}, // TShirt2
+		ChineseDress2: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				Options: [
+					{
+						Name: "Red",
+						Property: { Type: null},
+					},
+					{
+						Name: "Purple",
+						Property: { Type: "Purple"},
+					},
+					{
+						Name: "Pink",
+						Property: { Type: "Pink"},
+					},
+				],		
+			},
+		}, // ChineseDress2
 	}, // Cloth
 	ClothAccessory: {
 		LeatherStraps: {
