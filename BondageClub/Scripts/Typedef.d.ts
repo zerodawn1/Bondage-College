@@ -698,11 +698,13 @@ interface ExtendedItemOption {
 	/**
 	 * Trigger this expression when changing to this option
 	 *
-	 * **Curretnly broken!**
+	 * FIXME: **Currently broken!**
 	 */
 	Expression?: ExpressionTrigger[];
 	/** Whether or not the option should open a subscreen in the extended item menu */
 	HasSubscreen?: boolean;
+	/** Whether or not this option can be selected randomly */
+	Random?: boolean;
 }
 
 //#endregion

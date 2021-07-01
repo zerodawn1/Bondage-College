@@ -391,6 +391,7 @@ Yacht1,,,Yacht Chill Room
 Yacht2,,,Yacht Main Hall
 Yacht3,,,Yacht Deck
 ExtendedItemUnlockBeforeChange,,,Remove locks before changing,,
+ExtendedItemNoItemPermission,,,Blocked due to item permissions,,
 IntroductionMaidGreetings,,,"(As you enter the luxurious hallway, a maid comes to greet you.)  Welcome to the Bondage Club, is this your first visit?",,
 ServerMessageOfferStartTrial,,,"SourceCharacter is offering you to start a trial period as her submissive.  Click on her and manage your relationship to accept, don't do anything to refuse.",,
 ServerMessageStartTrial,,,The Bondage Club is pleased to announce that SourceCharacter is starting a 7 days minimum trial period as a submissive.,,

@@ -408,41 +408,73 @@ function InventoryLocked(C, AssetGroup, CheckProperties) {
 }
 
 /**
-* Makes the character wear a random item from a body area
-* @param {Character} C - The character that must wear the item
-* @param {string} GroupName - The name of the asset group (body area)
-* @param {number} [Difficulty] - The difficulty, on top of the base asset difficulty, to assign to the item
-* @param {boolean} [Refresh] - Do not call CharacterRefresh if false
-* @param {boolean} [MustOwn=false] - If TRUE, only assets that the character owns can be worn. Otherwise any asset can be used
-* @returns {void} - Nothing
-*/
-function InventoryWearRandom(C, GroupName, Difficulty, Refresh, MustOwn=false) {
-	if (!InventoryLocked(C, GroupName, true)) {
-		var IsClothes = false;
+ * Makes the character wear a random item from a body area
+ * @param {Character} C - The character that must wear the item
+ * @param {string} GroupName - The name of the asset group (body area)
+ * @param {number} [Difficulty] - The difficulty, on top of the base asset difficulty, to assign to the item
+ * @param {boolean} [Refresh] - Do not call CharacterRefresh if false
+ * @param {boolean} [MustOwn=false] - If TRUE, only assets that the character owns can be worn. Otherwise any asset can
+ * be used
+ * @param {boolean} [Extend=true] - Whether or not to randomly extend the item (i.e. set the item type), provided it has
+ * an archetype that supports random extension
+ * @returns {void} - Nothing
+ */
+function InventoryWearRandom(C, GroupName, Difficulty, Refresh, MustOwn = false, Extend = true) {
+	if (InventoryLocked(C, GroupName, true)) {
+		return;
+	}
 
-		// Finds the asset group and make sure it's not blocked
-		for (let A = 0; A < AssetGroup.length; A++)
-			if (AssetGroup[A].Name == GroupName) {
-				IsClothes = AssetGroup[A].Clothing;
-				var IsBlocked = InventoryGroupIsBlocked(C, GroupName);
-				if (IsBlocked) return;
-				break;
-			}
+	// Finds the asset group and make sure it's not blocked
+	const Group = AssetGroupGet(C.AssetFamily, GroupName);
+	if (!Group || InventoryGroupIsBlocked(C, GroupName)) {
+		return;
+	}
+	const IsClothes = Group.Clothing;
 
-		// Restrict the options to assets owned by the character if required
-		var AssetList = null;
-		if (MustOwn) {
-			CharacterAppearanceBuildAssets(C);
-			AssetList = CharacterAppearanceAssets;
-		}
+	// Restrict the options to assets owned by the character if required
+	let AssetList = null;
+	if (MustOwn) {
+		CharacterAppearanceBuildAssets(C);
+		AssetList = CharacterAppearanceAssets;
+	}
 
-		// Get and apply a random asset
-		var SelectedAsset = InventoryGetRandom(C, GroupName, AssetList);
+	// Get and apply a random asset
+	const SelectedAsset = InventoryGetRandom(C, GroupName, AssetList);
 
-		// Pick a random color for clothes from their schema
-		var SelectedColor = IsClothes ? SelectedAsset.Group.ColorSchema[Math.floor(Math.random() * SelectedAsset.Group.ColorSchema.length)] : null;
+	// Pick a random color for clothes from their schema
+	const SelectedColor = IsClothes ? SelectedAsset.Group.ColorSchema[Math.floor(Math.random() * SelectedAsset.Group.ColorSchema.length)] : null;
 
-		CharacterAppearanceSetItem(C, GroupName, SelectedAsset, SelectedColor, Difficulty, null, Refresh);
+	CharacterAppearanceSetItem(C, GroupName, SelectedAsset, SelectedColor, Difficulty, null, false);
+
+	if (Extend) {
+		InventoryRandomExtend(C, GroupName);
+	}
+
+	if (Refresh) {
+		CharacterRefresh(C);
+	}
+}
+
+/**
+ * Randomly extends an item (sets an item type, etc.) on a character
+ * @param {Character} C - The character wearing the item
+ * @param {string} GroupName - The name of the item's group
+ * @returns {void} - Nothing
+ */
+function InventoryRandomExtend(C, GroupName) {
+	const Item = InventoryGet(C, GroupName);
+
+	if (!Item || !Item.Asset.Archetype) {
+		return;
+	}
+
+	switch (Item.Asset.Archetype) {
+		case ExtendedArchetype.TYPED:
+			TypedItemSetRandomOption(C, Item);
+			break;
+		default:
+			// Archetype does not yet support random extension
+			break;
 	}
 }
 
