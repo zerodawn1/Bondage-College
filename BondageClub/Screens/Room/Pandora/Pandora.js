@@ -70,11 +70,13 @@ function PandoraRun() {
 	if ((PandoraRoom.length == 0) || (PandoraCurrentRoom == null)) return;
 	PandoraBackground = "Pandora/" + PandoraCurrentRoom.Floor + "/" + PandoraCurrentRoom.Background;
 
+	// The search square are drawn even out of search mode
+	if (PandoraCurrentRoom.SearchSquare != null)
+		for (let S = 0; S < PandoraCurrentRoom.SearchSquare.length; S++)
+			DrawRect(PandoraCurrentRoom.SearchSquare[S].X, PandoraCurrentRoom.SearchSquare[S].Y, PandoraCurrentRoom.SearchSquare[S].W, PandoraCurrentRoom.SearchSquare[S].H, "#00FFFF7F");
+	
 	// In search mode, we draw all previous searches done in that area
 	if (PandoraMode == "Search") {
-		if (PandoraCurrentRoom.SearchSquare != null)
-			for (let S = 0; S < PandoraCurrentRoom.SearchSquare.length; S++)
-				DrawRect(PandoraCurrentRoom.SearchSquare[S].X, PandoraCurrentRoom.SearchSquare[S].Y, PandoraCurrentRoom.SearchSquare[S].W, PandoraCurrentRoom.SearchSquare[S].H, "#00FFFF7F");
 		DrawButton(1885, 885, 90, 90, "", "White", "Icons/Search.png", TextGet("SearchStop"));
 		return;
 	}
@@ -116,9 +118,9 @@ function PandoraRun() {
 
 	// If we must draw a message in the middle of the screen
 	if ((PandoraMessage != null) && (PandoraMessage.Timer != null) && (PandoraMessage.Text != null) && (PandoraMessage.Timer >= CommonTime())) {
-		DrawRect(500, 465, 1000, 70, "black");
-		DrawRect(502, 467, 996, 66, "white");
-		DrawTextWrap(PandoraMessage.Text, 500, 465, 1000, 70, "black");
+		DrawRect(450, 465, 1100, 70, "black");
+		DrawRect(452, 467, 1096, 66, "white");
+		DrawTextWrap(PandoraMessage.Text, 450, 465, 1100, 70, "black");
 	}
 
 	// Draw the willpower / max
@@ -177,7 +179,7 @@ function PandoraClick() {
 	if (PandoraMode == "Search") {
 		if (MouseIn(0, 0, 1850, 1000)) {
 			if (PandoraCurrentRoom.SearchSquare == null) PandoraCurrentRoom.SearchSquare = [];
-			let Radius = InfiltrationPerksActive("Investigation") ? 300 : 200;
+			let Radius = InfiltrationPerksActive("Investigation") ? 250 : 175;
 			PandoraCurrentRoom.SearchSquare.push({ X: MouseX - Radius, Y: MouseY - Radius, W: Radius * 2, H: Radius * 2 });
 			if ((PandoraCurrentRoom.ItemX != null) && (PandoraCurrentRoom.ItemY != null) && MouseIn(PandoraCurrentRoom.ItemX - Radius, PandoraCurrentRoom.ItemY - Radius, Radius * 2, Radius * 2)) {
 				InfiltrationTarget.Found = true;

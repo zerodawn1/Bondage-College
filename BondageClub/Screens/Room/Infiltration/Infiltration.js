@@ -28,6 +28,18 @@ function InfiltrationCanFail() { return ((InfiltrationTarget == null) || (Infilt
 function InfiltrationCanGoBack() { return (((InfiltrationTarget == null) || (InfiltrationTarget.Fail == null) || (InfiltrationTarget.Fail == false)) && !InfiltrationCanSuccess()); }
 
 /**
+ * Returns TRUE if the player can start the Pandora Padlock Mission, needs to be missing the item and infiltration 6 or more
+ * @returns {boolean} - TRUE if successful
+ */
+function InfiltrationCanGetPandoraLock() { return (DialogSkillGreater("Infiltration", 6) && (!InventoryAvailable(Player, "PandoraPadlock", "ItemMisc") || !InventoryAvailable(Player, "PandoraPadlockKey", "ItemMisc"))); }
+
+/**
+ * Returns TRUE if the player can ask to get Pandora's locks as a reward for the mission
+ * @returns {boolean} - TRUE if successful
+ */
+function InfiltrationCanAskForPandoraLock() { return ((InfiltrationMission == "Retrieve") && (InfiltrationTarget.Type = "PandoraPadlockKeys")); }
+
+/**
  * Loads the infiltration screen by generating the supervisor.
  * @returns {void} - Nothing
  */
@@ -222,7 +234,13 @@ function InfiltrationEndKidnapping(Reward) {
 		CurrentScreen = "Private";
 		PrivateAddCharacter(CurrentCharacter);
 		CommonSetScreen("Room", "Private");
-		PrivateCharacter[PrivateCharacter.length - 1].Love = -80;
+		let C = PrivateCharacter[PrivateCharacter.length - 1];
+		C.Love = -80;
+		if (InventoryIsWorn(C, "MistressBoots", "Shoes")) {
+			C.Title = "Dominatrix";
+			NPCTraitSet(C, "Dominant", 50 + Math.floor(Math.random() * 51));
+		}
+		ServerPrivateCharacterSync();
 		DialogLeave();
 		return;
 	}
@@ -302,4 +320,26 @@ function InfiltrationStealItems() {
 	InventoryDelete(Player, "PandoraPadlock", "ItemMisc");
 	InventoryDelete(Player, "PandoraPadlockKey", "ItemMisc");
 	InfiltrationEndKidnapping();
+}
+
+/**
+ * Starts the Pandora's padlock special mission, cannot be given randomly
+ * @returns {void} - Nothing
+ */
+function InfiltrationStartPandoraLock() {
+	InfiltrationMission	= "Retrieve";
+	InfiltrationTarget.Type = "PandoraPadlockKeys";
+	InfiltrationTarget.Name = DialogFind(InfiltrationSupervisor, "Object" + InfiltrationTarget.Type);
+	InfiltrationTarget.Found = false;
+	InfiltrationDifficulty = 4;
+	InfiltrationRandomClothes();
+}
+
+/**
+ * Add the Pandora locks and keys to the player inventory
+ * @returns {void} - Nothing
+ */
+function InfiltrationGetPandoraLock() {
+	InventoryAdd(Player, "PandoraPadlock", "ItemMisc");
+	InventoryAdd(Player, "PandoraPadlockKey", "ItemMisc");
 }
