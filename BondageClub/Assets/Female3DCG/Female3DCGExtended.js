@@ -959,6 +959,192 @@ var AssetFemale3DCGExtended = {
 				],
 			},
 		}, // Crib
+		TeddyBear: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				ChatTags: [CommonChatTags.SOURCE_CHAR, CommonChatTags.TARGET_CHAR],
+				Options: [
+					{
+						Name: "Bear",
+						Property: { Type: null },
+					},
+					{
+						Name: "Fox",
+						Property: { Type: "Fox" },
+					},
+					{
+						Name: "Pup",
+						Property: { Type: "Pup" },
+					},
+					{
+						Name: "Pony",
+						Property: { Type: "Pony" },
+					},
+					{
+						Name: "Kitty",
+						Property: { Type: "Kitty" },
+					},
+					{
+						Name: "Bunny",
+						Property: { Type: "Bunny" },
+					},
+				],
+			},
+		}, // TeddyBear
+		PetBed: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				ChatTags: [CommonChatTags.SOURCE_CHAR, CommonChatTags.TARGET_CHAR],
+				Options: [
+					{
+						Name: "NoBlanket",
+						Property: {
+							Type: null
+						},
+					},
+					{
+						Name: "Blanket",
+						Property: {
+							Type: "Blanket",
+							SetPose: ["AllFours"],
+							Hide: ["ItemArms", "ItemButt", "TailStraps", "Wings"],
+							Block: [
+								"ItemArms", "ItemBreast", "ItemButt", "ItemFeet", "ItemBoots",
+								"ItemLegs", "ItemMisc", "ItemNipples", "ItemNipplesPiercings",
+								"ItemPelvis", "ItemTorso", "ItemVulva", "ItemVulvaPiercings"
+							]
+						},
+					},
+				],
+			},
+		}, // PetBed
+		Vacbed: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				ChatTags: [CommonChatTags.SOURCE_CHAR, CommonChatTags.DEST_CHAR],
+				Options: [
+					{
+						Name: "Normal",
+						Property: { Type: null }
+					},
+					{
+						Name: "Nohair",
+						Property: {
+							Type: "Nohair",
+							Hide: ["HairFront", "HairAccessory1", "HairAccessory2", "HairAccessory3", "Hat"],
+						},
+					},
+				],
+			},
+		}, // Vacbed
+		Familiar: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				ChatTags: [CommonChatTags.SOURCE_CHAR, CommonChatTags.TARGET_CHAR],
+				Options: [
+					{
+						Name: "Bat",
+						Property: { Type: null },
+					},
+					{
+						Name: "Cat",
+						Property: { Type: "Cat" },
+					},
+					{
+						Name: "Skeleton",
+						Property: { Type: "Skeleton" },
+					},
+					{
+						Name: "Parrot",
+						Property: { Type: "Parrot" },
+					},
+				],
+			},
+		}, // Familiar
+		LittleMonster: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				ChatTags: [CommonChatTags.SOURCE_CHAR, CommonChatTags.TARGET_CHAR],
+				Options: [
+					{
+						Name: "Black",
+						Property: { Type: null },
+					},
+					{
+						Name: "Red",
+						Property: { Type: "Red" },
+					},
+					{
+						Name: "Green",
+						Property: { Type: "Green" },
+					},
+					{
+						Name: "Blue",
+						Property: { Type: "Blue" },
+					},
+				],
+			},
+		}, //LitteMonster
+		InflatableBodyBag: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				ChatTags: [CommonChatTags.SOURCE_CHAR, CommonChatTags.DEST_CHAR],
+				Options: [
+					{
+						Name: "Light",
+						Property: {
+							Type: null,
+							Difficulty: 0,
+						},
+					},
+					{
+						Name: "Inflated",
+						Property: {
+							Type: "Inflated",
+							Difficulty: 3,
+						},
+					},
+					{
+						Name: "Bloated",
+						Property: {
+							Type: "Bloated",
+							Difficulty: 6,
+						},
+					},
+					{
+						Name: "Max",
+						Property: {
+							Type: "Max",
+							Difficulty: 9,
+						},
+					},
+				],
+			},
+		}, //InflatableBodyBag
+		Pole: {
+			Archetype: ExtendedArchetype.TYPED,
+			Config: {
+				ChatTags: [CommonChatTags.SOURCE_CHAR, CommonChatTags.TARGET_CHAR],
+				Options: [
+					{
+						Name: "Untied",
+						Property: {
+							Type: null,
+						}
+					},
+					{
+						Name: "Tied",
+						SelfBondageLevel: 2,
+						Property: {
+							Type: "Tied",
+							Difficulty: 8,
+							SetPose: ["BackBoxTie"],
+							Effect: ["Block", "Freeze", "Prone"],
+						}
+					},
+				],
+			},
+		}, //Pole
 	}, // ItemDevices
 	Corset: {
 		LatexCorset1: {
