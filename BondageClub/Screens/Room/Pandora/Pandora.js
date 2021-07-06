@@ -762,6 +762,9 @@ function PandoraCanJoinPrivateRoom() { return (LogQuery("RentRoom", "PrivateRoom
 function PandoraCharacterJoinPrivateRoom() {
 	CurrentScreen = "Private";
 	PrivateAddCharacter(CurrentCharacter, (CurrentCharacter.Type === "Slave") ? "Submissive" : null);
+	let C = PrivateCharacter[PrivateCharacter.length - 1];
+	C.FromPandora = true;
+	ServerPrivateCharacterSync();
 	CurrentScreen = "Pandora";
 	PandoraRemoveCurrentCharacter();
 }
