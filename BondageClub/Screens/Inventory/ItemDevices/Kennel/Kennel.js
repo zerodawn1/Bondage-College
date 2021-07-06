@@ -14,14 +14,14 @@ const InventoryItemDevicesKennelOptions = [
         ItemValue: { Door: true, Padding: false},
 		Property: { 
 			Type: "Closed",
-			Effect: ["OneWayEnclose"],
+			Effect: ["OneWayEnclose", "Prone", "Freeze"],
 		}
     }, {
 		Name: "ClosedPadding",
         ItemValue: { Door: true, Padding: true},
 		Property: { 
 			Type: "ClosedPadding",
-			Effect: ["OneWayEnclose"],
+			Effect: ["OneWayEnclose", "Prone", "Freeze"],
 		}
     }
 ];
@@ -63,4 +63,42 @@ function InventoryItemDevicesKennelValidate(C, Item, Option) {
         Allowed = DialogFind(Player, "CantChangeWhileLocked");
 	}
 	return Allowed;
+}
+
+function AssetsItemDevicesKennelBeforeDraw({ PersistentData, L, Property }) {
+	if (L !== "_Door") return;
+	
+	const Data = PersistentData();
+	const Properties = Property || {};
+	const Type = Properties.Type ? Properties.Type : "Open";
+
+	if (Data.DoorState >= 11 || Data.DoorState <= 1) Data.MustChange = false;
+
+	if ((Data.DoorState < 10 && Type.startsWith("Closed")) || (Data.DoorState > 2 && !Type.startsWith("Closed"))) {
+		if (Data.DrawRequested) Data.DoorState += Type.startsWith("Closed") ? 1 : -1;
+		Data.MustChange = true;
+		Data.DrawRequested = false;
+		if (Data.DoorState < 11 && Data.DoorState > 1) return { LayerType: "A" + Data.DoorState };
+	}
+}
+
+function AssetsItemDevicesKennelScriptDraw({ C, PersistentData, Item }) {
+	const Data = PersistentData();
+	const Properties = Item.Property || {};
+	const Type = Properties.Type ? Properties.Type : "Open";
+	const FrameTime = 200;
+
+	if (typeof Data.DoorState !== "number") Data.DoorState = Type.startsWith("Closed") ? 11 : 1;
+	if (typeof Data.ChangeTime !== "number") Data.ChangeTime = CommonTime() + FrameTime;
+
+	if (Data.MustChange && Data.ChangeTime < CommonTime()) {
+		Data.ChangeTime = CommonTime() + FrameTime;
+		Data.DrawRequested = true;
+		AnimationRequestRefreshRate(C, FrameTime);
+		AnimationRequestDraw(C);
+	}
+}
+
+function InventoryItemDevicesKennelGetAudio(C) {
+	return InventoryGet(C, "ItemDevices") && InventoryGet(C, "ItemDevices").Asset.Name === "Kennel" ? "CageStruggle" : "CageEquip";
 }

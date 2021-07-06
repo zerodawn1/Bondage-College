@@ -4505,14 +4505,15 @@ var AssetFemale3DCG = [
 				]
 			},
 			{
-                Name: "Kennel", Fetish: ["Metal", "Pet"], Top: 0, Value: 150, Difficulty: 6, Time: 15, RemoveTime: 10, AllowLock: true, Audio: "CageEquip", RemoveAtLogin: true, Extended: true, FixedPosition: true,
+				Name: "Kennel", Fetish: ["Metal", "Pet"], Top: 0, Value: 150, Difficulty: 6, Time: 15, RemoveTime: 10, AllowLock: true, RemoveAtLogin: true, Extended: true, FixedPosition: true, DynamicBeforeDraw: true, DynamicScriptDraw: true,
+				DynamicAudio: (C) => InventoryItemDevicesKennelGetAudio(C),
                 DefaultColor: ["#2E2E29", "#780E0E", "#2E2E29", "#2E2E29"],
-                Prerequisite: ["NotLifted", "NotSuspended", "NotMounted", "NotKneelingSpread", "NoFeetSpreader"],
+                Prerequisite: ["NotLifted", "NotSuspended", "NotMounted", "NotKneelingSpread", "NoFeetSpreader", "CanKneel"],
                 SetPose: ["Kneel"],
 				Block: ["ItemAddon"],
                 AllowType: ["OpenPadding", "Closed", "ClosedPadding"],
-                AllowEffect: ["OneWayEnclose"],
-                Effect: ["ForceKneel", "Prone", "Freeze"],
+                AllowEffect: ["OneWayEnclose", "Prone", "Freeze"],
+                Effect: ["ForceKneel", "Tethered"],
                 Layer: [
                     { Name: "Kennel", Priority: 1, HasType: false },
                     { Name: "Padding", Priority: 1, AllowTypes: ["OpenPadding", "ClosedPadding"], HasType: false },
