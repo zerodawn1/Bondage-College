@@ -747,7 +747,13 @@ var AssetFemale3DCG = [
 		AllowPose: ["LegsClosed", "Spread", "Horse", "Kneel", "KneelingSpread"],
 		PreviewZone: [100, 450, 300, 300],
 		Asset: [
-			{ Name: "GarterBelt", Value: 10 },
+			{
+				Name: "GarterBelt", Value: 10, Extended: true,
+				Layer: [
+					{ Name: "Left", HasType: false, AllowTypes: ["", "Left"] },
+					{ Name: "Right", HasType: false, AllowTypes: ["", "Right"] },
+				] 
+			},
 			{ Name: "GarterBelt2", Value: 10 }
 		],
 		Color: ["Default", "#bbbbbb", "#808080", "#202020", "#aa8080", "#80aa80", "#8080aa", "#aaaa80", "#80aaaa", "#aa80aa", "#cc3333", "#33cc33", "#3333cc", "#cccc33", "#33cccc", "#cc33cc"]
@@ -4512,7 +4518,7 @@ var AssetFemale3DCG = [
 				]
 			},
 			{
-				Name: "Kennel", Fetish: ["Metal", "Pet"], Top: 0, Value: 150, Difficulty: 6, Time: 15, RemoveTime: 10, AllowLock: true, RemoveAtLogin: true, Extended: true, FixedPosition: true, DynamicBeforeDraw: true, DynamicScriptDraw: true,
+				Name: "Kennel", Fetish: ["Metal", "Pet"], Top: 0, Value: 150, Time: 15, RemoveTime: 10, AllowLock: true, RemoveAtLogin: true, Extended: true, FixedPosition: true, DynamicBeforeDraw: true, DynamicScriptDraw: true,
 				DynamicAudio: (C) => InventoryItemDevicesKennelGetAudio(C),
                 DefaultColor: ["#2E2E29", "#780E0E", "#2E2E29", "#2E2E29"],
                 Prerequisite: ["NotLifted", "NotSuspended", "NotMounted", "NotKneelingSpread", "NoFeetSpreader", "CanKneel"],
@@ -4525,12 +4531,12 @@ var AssetFemale3DCG = [
                     { Name: "Kennel", Priority: 1, HasType: false },
                     { Name: "Padding", Priority: 1, AllowTypes: ["OpenPadding", "ClosedPadding"], HasType: false },
                     {
-                        Name: "Frame", HasType: false,
+                        Name: "Frame", HasType: false, Priority: 58,
                         Alpha: [{
                             Masks: [[0, 0, 500, 270], [0, 1000, 500, 250], AssetUpperOverflowAlpha, AssetLowerOverflowAlpha]
                         }]
                     },
-                    { Name: "Door" },
+                    { Name: "Door", Priority: 58 },
                 ]
             },
 			{
